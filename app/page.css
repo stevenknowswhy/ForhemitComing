@@ -399,6 +399,27 @@ body {
   color: var(--light-text);
 }
 
+/* Modal Header */
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem 1.5rem 0;
+}
+
+.modal-header .modal-close {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 /* Modal Grid - Image on top for mobile */
 .modal-grid {
   display: flex;
@@ -1056,6 +1077,20 @@ body {
   
   #email-input {
     width: 100%;
+  }
+  
+  .modal-header {
+    padding: 0.75rem 1rem 0;
+  }
+  
+  .modal-header .modal-close {
+    padding: 0.4rem 0.625rem;
+    font-size: 0.75rem;
+  }
+  
+  .modal-header .modal-close svg {
+    width: 16px;
+    height: 16px;
   }
   
   .modal-overlay {
