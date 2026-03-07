@@ -20,6 +20,7 @@ export default function Home() {
     resumeUrl: ""
   });
   const [isUploading, setIsUploading] = useState(false);
+  const [submitWithoutResume, setSubmitWithoutResume] = useState(false);
 
   const positions = [
     "Investment Analyst",
@@ -40,6 +41,7 @@ export default function Home() {
     setStep(1);
     setFormData({ firstName: "", lastName: "", phone: "", email: "", position: "", otherPosition: "", resumeUrl: "" });
     setIsUploading(false);
+    setSubmitWithoutResume(false);
   };
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -75,6 +77,10 @@ export default function Home() {
       case 5: return formData.position && (formData.position !== "Other" || formData.otherPosition.trim());
       default: return true;
     }
+  };
+
+  const canSubmit = () => {
+    return canProceed() && (submitWithoutResume || formData.resumeUrl);
   };
 
   return (
@@ -156,9 +162,23 @@ export default function Home() {
           <div className="modal-content">
             <button className="modal-close" onClick={closeModal}>&times;</button>
             
-            {/* Progress Bar */}
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}></div>
+            {/* Progress Bar with Steps */}
+            <div className="progress-container">
+              <div className="progress-header">
+                <span className="progress-step">Step {step} of {totalSteps}</span>
+                <span className="progress-percent">{Math.round(((step - 1) / (totalSteps - 1)) * 100)}%</span>
+              </div>
+              <div className="progress-bar">
+                <div className="progress-fill" style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}></div>
+              </div>
+              <div className="progress-dots">
+                {Array.from({ length: totalSteps }).map((_, i) => (
+                  <div 
+                    key={i} 
+                    className={`progress-dot ${i + 1 <= step ? 'active' : ''} ${i + 1 === step ? 'current' : ''}`}
+                  />
+                ))}
+              </div>
             </div>
 
             <div className="modal-grid">
@@ -396,6 +416,25 @@ export default function Home() {
                             )}
                           </div>
                         )}
+                        
+                        {/* Toggle for submitting without resume */}
+                        {!formData.resumeUrl && !isUploading && (
+                          <div className="resume-toggle">
+                            <label className="toggle-label">
+                              <input 
+                                type="checkbox"
+                                checked={submitWithoutResume}
+                                onChange={(e) => setSubmitWithoutResume(e.target.checked)}
+                                className="toggle-input"
+                              />
+                              <span className="toggle-slider"></span>
+                              <span className="toggle-text">Submit without resume</span>
+                            </label>
+                            {submitWithoutResume && (
+                              <p className="toggle-hint">You can share your resume later via email</p>
+                            )}
+                          </div>
+                        )}
                       </div>
                     </div>
                     <div className="button-row">
@@ -408,7 +447,7 @@ export default function Home() {
                       <button 
                         className="nav-link-btn continue-link" 
                         onClick={nextStep}
-                        disabled={!canProceed() || !formData.resumeUrl}
+                        disabled={!canSubmit()}
                       >
                         Submit Application
                       </button>
