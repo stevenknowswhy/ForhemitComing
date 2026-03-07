@@ -129,44 +129,56 @@ body {
 .cta-group {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
 }
 
+/* Link-style buttons */
 .btn {
   font-family: 'Inter', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 1rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  padding: 0;
   border: none;
-  border-radius: 8px;
+  background: none;
   cursor: pointer;
   transition: all 0.3s ease;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.15em;
+  color: var(--light-text);
+  text-decoration: none;
+  position: relative;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-orange);
+  transition: width 0.3s ease;
+}
+
+.btn:hover::after {
+  width: 100%;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-red) 100%);
   color: var(--light-text);
-  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 30px rgba(255, 107, 0, 0.4);
+  color: var(--primary-orange);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--light-text);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(10px);
+  color: var(--muted-text);
 }
 
 .btn-secondary:hover {
-  background: var(--glass-bg);
-  border-color: var(--primary-orange);
+  color: var(--light-text);
 }
 
 /* Early Access Email Input */
@@ -366,6 +378,48 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Modal buttons - keep as actual buttons */
+.modal-form-side .btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: inline-block;
+}
+
+.modal-form-side .btn::after {
+  display: none;
+}
+
+.modal-form-side .btn-primary {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-red) 100%);
+  color: var(--light-text);
+  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.3);
+}
+
+.modal-form-side .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(255, 107, 0, 0.4);
+}
+
+.modal-form-side .btn-secondary {
+  background: transparent;
+  color: var(--light-text);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(10px);
+}
+
+.modal-form-side .btn-secondary:hover {
+  background: var(--glass-bg);
+  border-color: var(--primary-orange);
+}
+
 /* Input Groups */
 .input-group {
   margin-bottom: 1.25rem;
@@ -440,8 +494,8 @@ body {
     gap: 1.5rem;
   }
   
-  .btn {
-    width: 100%;
+  .cta-group {
+    gap: 1.25rem;
   }
   
   .email-reveal {
