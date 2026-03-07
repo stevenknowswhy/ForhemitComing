@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { UploadButton } from "@/utils/uploadthing";
 import "./page.css";
 
 export default function Home() {
@@ -14,8 +15,10 @@ export default function Home() {
     phone: "",
     email: "",
     position: "",
-    otherPosition: ""
+    otherPosition: "",
+    resumeUrl: ""
   });
+  const [isUploading, setIsUploading] = useState(false);
 
   const positions = [
     "Investment Analyst",
@@ -26,24 +29,44 @@ export default function Home() {
     "Other"
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStep(3);
-  };
+  const totalSteps = 5;
+
+  const nextStep = () => setStep(s => Math.min(s + 1, totalSteps));
+  const prevStep = () => setStep(s => Math.max(s - 1, 1));
 
   const closeModal = () => {
     setShowModal(false);
     setStep(1);
-    setFormData({ fullName: "", phone: "", email: "", position: "", otherPosition: "" });
+    setFormData({ fullName: "", phone: "", email: "", position: "", otherPosition: "", resumeUrl: "" });
+    setIsUploading(false);
   };
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Enter" && step >= 2 && step <= 4) {
+      e.preventDefault();
+      nextStep();
+    }
+  }, [step]);
 
   useEffect(() => {
     if (showModal) {
       document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
-  }, [showModal]);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [showModal, handleKeyDown]);
+
+  const canProceed = () => {
+    switch (step) {
+      case 2: return formData.fullName.trim().length > 0;
+      case 3: return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+      case 4: return formData.phone.trim().length >= 10;
+      case 5: return formData.position && (formData.position !== "Other" || formData.otherPosition.trim());
+      default: return true;
+    }
+  };
 
   return (
     <div className="home-wrapper">
@@ -120,111 +143,227 @@ export default function Home() {
 
       {/* Modal Overlay */}
       {showModal && (
-        <div id="modal-overlay" className="modal-overlay">
+        <div id="modal-overlay" className="modal-overlay" onClick={(e) => e.target === e.currentTarget && closeModal()}>
           <div className="modal-content">
             <button className="modal-close" onClick={closeModal}>&times;</button>
+            
+            {/* Progress Bar */}
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${((step - 1) / (totalSteps - 1)) * 100}%` }}></div>
+            </div>
+
             <div className="modal-grid">
+              {/* Image - shows at top on mobile, right on desktop */}
+              <div className="modal-image-side">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
+              </div>
+
               <div className="modal-form-side">
-                {/* Step 1 */}
+                {/* Back Button */}
+                {step > 1 && step < totalSteps && (
+                  <button className="back-button" onClick={prevStep}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
+                  </button>
+                )}
+
+                {/* Step 1 - Intro */}
                 {step === 1 && (
-                  <div id="step-1" className="form-step active">
-                    <h2>Join the Movement</h2>
-                    <p>We are looking for visionary minds to reshape the landscape of private equity. Are you ready to lead?</p>
-                    <button 
-                      className="btn btn-primary next-step"
-                      onClick={() => setStep(2)}
-                    >
-                      Continue
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <h2>Join the Movement</h2>
+                      <p className="step-description">
+                        We&apos;re looking for visionary minds to reshape the landscape of private equity. 
+                        Ready to lead?
+                      </p>
+                    </div>
+                    <button className="typeform-btn btn-primary" onClick={nextStep}>
+                      Let&apos;s begin
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
                     </button>
                   </div>
                 )}
                 
-                {/* Step 2 */}
+                {/* Step 2 - Full Name */}
                 {step === 2 && (
-                  <div id="step-2" className="form-step active">
-                    <h2>Personal Details</h2>
-                    <form id="recruitment-form" onSubmit={handleSubmit}>
-                      <div className="input-group">
-                        <label htmlFor="full-name">Full Name</label>
-                        <input 
-                          type="text" 
-                          id="full-name" 
-                          required 
-                          placeholder="John Doe"
-                          value={formData.fullName}
-                          onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-                        />
-                      </div>
-                      <div className="input-group">
-                        <label htmlFor="phone">Phone Number</label>
-                        <input 
-                          type="tel" 
-                          id="phone" 
-                          required 
-                          placeholder="+1 (555) 000-0000"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        />
-                      </div>
-                      <div className="input-group">
-                        <label htmlFor="email">Email Address</label>
-                        <input 
-                          type="email" 
-                          id="email" 
-                          required 
-                          placeholder="john@example.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        />
-                      </div>
-                      <div className="input-group">
-                        <label htmlFor="position">Position Interest</label>
-                        <select 
-                          id="position" 
-                          required
-                          value={formData.position}
-                          onChange={(e) => setFormData({...formData, position: e.target.value})}
-                        >
-                          <option value="" disabled>Select a position</option>
-                          {positions.map(pos => (
-                            <option key={pos} value={pos}>{pos}</option>
-                          ))}
-                        </select>
-                      </div>
-                      {formData.position === "Other" && (
-                        <div id="other-position-wrapper" className="input-group">
-                          <label htmlFor="other-position">Specify Position</label>
-                          <input 
-                            type="text" 
-                            id="other-position" 
-                            placeholder="Please specify"
-                            value={formData.otherPosition}
-                            onChange={(e) => setFormData({...formData, otherPosition: e.target.value})}
-                          />
-                        </div>
-                      )}
-                      <button type="submit" className="btn btn-primary">Submit Application</button>
-                    </form>
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <label className="typeform-label">What&apos;s your full name?</label>
+                      <input 
+                        type="text" 
+                        className="typeform-input"
+                        placeholder="John Doe"
+                        autoFocus
+                        value={formData.fullName}
+                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                      />
+                      <p className="hint">Press Enter to continue</p>
+                    </div>
+                    <button 
+                      className="typeform-btn btn-primary" 
+                      onClick={nextStep}
+                      disabled={!canProceed()}
+                    >
+                      Continue
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                  </div>
+                )}
+
+                {/* Step 3 - Email */}
+                {step === 3 && (
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <label className="typeform-label">What&apos;s your email address?</label>
+                      <input 
+                        type="email" 
+                        className="typeform-input"
+                        placeholder="john@example.com"
+                        autoFocus
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      />
+                      <p className="hint">Press Enter to continue</p>
+                    </div>
+                    <button 
+                      className="typeform-btn btn-primary" 
+                      onClick={nextStep}
+                      disabled={!canProceed()}
+                    >
+                      Continue
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                  </div>
+                )}
+
+                {/* Step 4 - Phone */}
+                {step === 4 && (
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <label className="typeform-label">What&apos;s your phone number?</label>
+                      <input 
+                        type="tel" 
+                        className="typeform-input"
+                        placeholder="+1 (555) 000-0000"
+                        autoFocus
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                      />
+                      <p className="hint">Press Enter to continue</p>
+                    </div>
+                    <button 
+                      className="typeform-btn btn-primary" 
+                      onClick={nextStep}
+                      disabled={!canProceed()}
+                    >
+                      Continue
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
                   </div>
                 )}
                 
-                {/* Step 3 */}
-                {step === 3 && (
-                  <div id="step-3" className="form-step active">
+                {/* Step 5 - Position & Resume */}
+                {step === 5 && (
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <label className="typeform-label">What position interests you?</label>
+                      <select 
+                        className="typeform-input typeform-select"
+                        value={formData.position}
+                        onChange={(e) => setFormData({...formData, position: e.target.value})}
+                      >
+                        <option value="" disabled>Select a position</option>
+                        {positions.map(pos => (
+                          <option key={pos} value={pos}>{pos}</option>
+                        ))}
+                      </select>
+                      
+                      {formData.position === "Other" && (
+                        <input 
+                          type="text" 
+                          className="typeform-input"
+                          placeholder="Please specify your position"
+                          value={formData.otherPosition}
+                          onChange={(e) => setFormData({...formData, otherPosition: e.target.value})}
+                        />
+                      )}
+
+                      <div className="upload-section">
+                        <label className="typeform-label">Upload your resume</label>
+                        {formData.resumeUrl ? (
+                          <div className="upload-success">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10B981" strokeWidth="2">
+                              <path d="M20 6L9 17l-5-5"/>
+                            </svg>
+                            <span>Resume uploaded successfully</span>
+                          </div>
+                        ) : (
+                          <UploadButton
+                            endpoint="resumeUploader"
+                            onUploadBegin={() => setIsUploading(true)}
+                            onClientUploadComplete={(res) => {
+                              setIsUploading(false);
+                              if (res?.[0]) {
+                                setFormData({...formData, resumeUrl: res[0].url});
+                              }
+                            }}
+                            onUploadError={(error: Error) => {
+                              setIsUploading(false);
+                              alert(`ERROR! ${error.message}`);
+                            }}
+                            appearance={{
+                              button: `upload-btn ${isUploading ? 'uploading' : ''}`,
+                              allowedContent: "upload-hint"
+                            }}
+                            content={{
+                              button: isUploading ? "Uploading..." : "Choose file",
+                              allowedContent: "PDF, DOC, DOCX up to 8MB"
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+                    <button 
+                      className="typeform-btn btn-primary" 
+                      onClick={nextStep}
+                      disabled={!canProceed() || !formData.resumeUrl}
+                    >
+                      Submit Application
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                  </div>
+                )}
+                
+                {/* Step 6 - Thank You */}
+                {step === 6 && (
+                  <div className="form-step active success-step">
                     <div className="success-icon">
                       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" strokeWidth="2">
                         <path d="M20 6L9 17l-5-5"/>
                       </svg>
                     </div>
                     <h2>Thank You!</h2>
-                    <p>Your application has been received. Our team will review your profile and get back to you shortly.</p>
-                    <button className="btn btn-secondary" onClick={closeModal}>Close</button>
+                    <p className="step-description">
+                      Your application has been received. Our team will review your profile and get back to you shortly.
+                    </p>
+                    <button className="typeform-btn btn-secondary" onClick={closeModal}>
+                      Close
+                    </button>
                   </div>
                 )}
-              </div>
-              <div className="modal-image-side">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
               </div>
             </div>
           </div>
