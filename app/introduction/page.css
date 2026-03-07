@@ -38,7 +38,7 @@
   display: flex;
   justify-content: flex-end;
   gap: 2.5rem;
-  padding: 1.5rem 4rem;
+  padding: 1.5rem 8rem;
 }
 
 .nav-link {
@@ -117,7 +117,7 @@
 /* Responsive */
 @media (max-width: 768px) {
   .minimal-nav {
-    padding: 1.5rem 2.5rem;
+    padding: 1.5rem 4rem;
     gap: 2rem;
   }
 }
