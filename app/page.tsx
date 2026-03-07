@@ -59,11 +59,19 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [showModal, handleKeyDown]);
 
+  const formatPhoneNumber = (value: string) => {
+    const numbers = value.replace(/\D/g, "");
+    if (numbers.length === 0) return "";
+    if (numbers.length <= 3) return `(${numbers}`;
+    if (numbers.length <= 6) return `(${numbers.slice(0, 3)}) ${numbers.slice(3)}`;
+    return `(${numbers.slice(0, 3)}) ${numbers.slice(3, 6)}-${numbers.slice(6, 10)}`;
+  };
+
   const canProceed = () => {
     switch (step) {
       case 2: return formData.firstName.trim().length > 0 && formData.lastName.trim().length > 0;
       case 3: return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
-      case 4: return formData.phone.trim().length >= 10;
+      case 4: return formData.phone.replace(/\D/g, "").length === 10;
       case 5: return formData.position && (formData.position !== "Other" || formData.otherPosition.trim());
       default: return true;
     }
@@ -258,13 +266,14 @@ export default function Home() {
                   <div className="form-step active">
                     <div className="step-content">
                       <label className="typeform-label">What&apos;s your phone number?</label>
+                      <p className="input-subtext">US phone numbers only</p>
                       <input 
                         type="tel" 
                         className="typeform-input"
-                        placeholder="+1 (555) 000-0000"
+                        placeholder="(555) 555-5555"
                         autoFocus
                         value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        onChange={(e) => setFormData({...formData, phone: formatPhoneNumber(e.target.value)})}
                       />
                       <p className="hint">Press Enter to continue</p>
                     </div>

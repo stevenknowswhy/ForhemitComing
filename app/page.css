@@ -584,6 +584,14 @@ body {
   margin-top: 0.5rem;
 }
 
+/* Input Subtext */
+.input-subtext {
+  color: var(--muted-text);
+  font-size: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+}
+
 /* Upload Section */
 .upload-section {
   margin-top: 2rem;
