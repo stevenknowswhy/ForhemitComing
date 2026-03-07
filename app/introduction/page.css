@@ -36,9 +36,9 @@
   right: 0;
   z-index: 100;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   gap: 2.5rem;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 4rem;
 }
 
 .nav-link {
@@ -115,9 +115,16 @@
 }
 
 /* Responsive */
+@media (max-width: 768px) {
+  .minimal-nav {
+    padding: 1.5rem 2.5rem;
+    gap: 2rem;
+  }
+}
+
 @media (max-width: 480px) {
   .minimal-nav {
-    gap: 2rem;
+    gap: 1.5rem;
     padding: 1.25rem 1.5rem;
   }
   
