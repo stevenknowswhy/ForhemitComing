@@ -11,7 +11,8 @@ export default function Home() {
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     phone: "",
     email: "",
     position: "",
@@ -37,7 +38,7 @@ export default function Home() {
   const closeModal = () => {
     setShowModal(false);
     setStep(1);
-    setFormData({ fullName: "", phone: "", email: "", position: "", otherPosition: "", resumeUrl: "" });
+    setFormData({ firstName: "", lastName: "", phone: "", email: "", position: "", otherPosition: "", resumeUrl: "" });
     setIsUploading(false);
   };
 
@@ -60,7 +61,7 @@ export default function Home() {
 
   const canProceed = () => {
     switch (step) {
-      case 2: return formData.fullName.trim().length > 0;
+      case 2: return formData.firstName.trim().length > 0 && formData.lastName.trim().length > 0;
       case 3: return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
       case 4: return formData.phone.trim().length >= 10;
       case 5: return formData.position && (formData.position !== "Other" || formData.otherPosition.trim());
@@ -189,18 +190,25 @@ export default function Home() {
                   </div>
                 )}
                 
-                {/* Step 2 - Full Name */}
+                {/* Step 2 - First & Last Name */}
                 {step === 2 && (
                   <div className="form-step active">
                     <div className="step-content">
-                      <label className="typeform-label">What&apos;s your full name?</label>
+                      <label className="typeform-label">What&apos;s your name?</label>
                       <input 
                         type="text" 
                         className="typeform-input"
-                        placeholder="John Doe"
+                        placeholder="First name"
                         autoFocus
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                        value={formData.firstName}
+                        onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+                      />
+                      <input 
+                        type="text" 
+                        className="typeform-input"
+                        placeholder="Last name"
+                        value={formData.lastName}
+                        onChange={(e) => setFormData({...formData, lastName: e.target.value})}
                       />
                       <p className="hint">Press Enter to continue</p>
                     </div>
