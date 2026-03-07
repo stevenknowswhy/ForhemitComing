@@ -904,6 +904,75 @@ body {
   margin-left: 3.25rem;
 }
 
+/* Preview Card */
+.preview-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+}
+
+.preview-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.875rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.preview-section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.preview-section:first-child {
+  padding-top: 0;
+}
+
+.preview-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+}
+
+.preview-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: var(--light-text);
+  text-align: right;
+  max-width: 60%;
+  word-break: break-word;
+}
+
+.preview-status {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-weight: 500;
+}
+
+.preview-status.uploaded {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+}
+
+.preview-status.pending {
+  background: rgba(255, 107, 0, 0.15);
+  color: var(--primary-orange);
+}
+
+.preview-hint {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted-text);
+  margin-top: 1rem;
+  text-align: center;
+}
+
 /* Typeform Button */
 .typeform-btn {
   display: inline-flex;
@@ -1099,5 +1168,28 @@ body {
   .toggle-hint {
     font-size: 0.7rem;
     margin-left: 3rem;
+  }
+  
+  /* Preview responsive */
+  .preview-card {
+    padding: 1.25rem;
+    margin-top: 0.75rem;
+  }
+  
+  .preview-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.75rem 0;
+  }
+  
+  .preview-value {
+    max-width: 100%;
+    text-align: left;
+    font-size: 0.9rem;
+  }
+  
+  .preview-hint {
+    font-size: 0.75rem;
   }
 }

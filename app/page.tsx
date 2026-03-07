@@ -31,9 +31,9 @@ export default function Home() {
     "Other"
   ];
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
-  const nextStep = () => setStep(s => Math.min(s + 1, totalSteps));
+  const nextStep = () => setStep(s => Math.min(s + 1, totalSteps + 1));
   const prevStep = () => setStep(s => Math.max(s - 1, 1));
 
   const closeModal = () => {
@@ -80,7 +80,7 @@ export default function Home() {
   };
 
   const canSubmit = () => {
-    return canProceed() && (submitWithoutResume || formData.resumeUrl);
+    return formData.position && (formData.position !== "Other" || formData.otherPosition.trim()) && (submitWithoutResume || formData.resumeUrl);
   };
 
   return (
@@ -449,14 +449,66 @@ export default function Home() {
                         onClick={nextStep}
                         disabled={!canSubmit()}
                       >
+                        Review Application
+                      </button>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Step 6 - Preview */}
+                {step === 6 && (
+                  <div className="form-step active">
+                    <div className="step-content">
+                      <label className="typeform-label">Review your application</label>
+                      <div className="preview-card">
+                        <div className="preview-section">
+                          <span className="preview-label">Name</span>
+                          <span className="preview-value">{formData.firstName} {formData.lastName}</span>
+                        </div>
+                        <div className="preview-section">
+                          <span className="preview-label">Email</span>
+                          <span className="preview-value">{formData.email}</span>
+                        </div>
+                        <div className="preview-section">
+                          <span className="preview-label">Phone</span>
+                          <span className="preview-value">{formData.phone}</span>
+                        </div>
+                        <div className="preview-section">
+                          <span className="preview-label">Position</span>
+                          <span className="preview-value">{formData.position === "Other" ? formData.otherPosition : formData.position}</span>
+                        </div>
+                        <div className="preview-section">
+                          <span className="preview-label">Resume</span>
+                          <span className="preview-value">
+                            {formData.resumeUrl ? (
+                              <span className="preview-status uploaded">Uploaded</span>
+                            ) : (
+                              <span className="preview-status pending">Will send later</span>
+                            )}
+                          </span>
+                        </div>
+                      </div>
+                      <p className="preview-hint">Please review your information before submitting</p>
+                    </div>
+                    <div className="button-row">
+                      <button className="nav-link-btn back-link" onClick={prevStep}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                      <button 
+                        className="nav-link-btn continue-link" 
+                        onClick={nextStep}
+                      >
                         Submit Application
                       </button>
                     </div>
                   </div>
                 )}
                 
-                {/* Step 6 - Thank You */}
-                {step === 6 && (
+                {/* Step 7 - Thank You */}
+                {step === 7 && (
                   <div className="form-step active success-step">
                     <div className="success-icon">
                       <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FF6B00" strokeWidth="2">
