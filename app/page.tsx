@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import "./page.css";
 
 export default function Home() {
@@ -47,6 +48,11 @@ export default function Home() {
   return (
     <div className="home-wrapper">
       <div className="background-mesh"></div>
+      
+      <nav className="minimal-nav">
+        <Link href="/about" className="nav-link">About</Link>
+        <Link href="/introduction" className="nav-link">Introduction</Link>
+      </nav>
       
       <main className="hero">
         <div className="container">
