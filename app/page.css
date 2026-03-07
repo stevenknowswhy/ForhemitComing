@@ -293,6 +293,11 @@ body {
   flex-direction: column;
 }
 
+/* Ensure modal content can scroll */
+.modal-content > .modal-grid {
+  overflow: hidden;
+}
+
 @keyframes slideUp {
   from {
     opacity: 0;
@@ -469,16 +474,18 @@ body {
   padding: 2rem 2rem 2.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   overflow-y: auto;
+  overflow-x: hidden;
   flex: 1;
   position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 @media (min-width: 768px) {
   .modal-form-side {
     padding: 2.5rem 3rem 3rem;
-    max-height: 90vh;
+    justify-content: center;
   }
 }
 
@@ -561,9 +568,9 @@ body {
 .form-step {
   display: none;
   flex-direction: column;
-  height: 100%;
+  flex: 1;
   justify-content: space-between;
-  min-height: 300px;
+  min-height: auto;
 }
 
 .form-step.active {
@@ -576,6 +583,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .form-step h2 {
@@ -1110,11 +1119,17 @@ body {
   
   .modal-form-side {
     padding: 1.25rem 1.25rem 1.5rem;
-    max-height: calc(100vh - 220px);
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
   }
   
   .form-step {
     min-height: auto;
+    height: auto;
+  }
+  
+  .step-content {
+    overflow-y: visible;
   }
   
   .typeform-input {
