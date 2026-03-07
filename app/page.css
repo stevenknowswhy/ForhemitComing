@@ -406,33 +406,79 @@ body {
   }
 }
 
-/* Back Button */
-.back-button {
-  position: absolute;
-  top: 1.5rem;
-  left: 1.5rem;
+/* Button Row */
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Navigation Link Buttons */
+.nav-link-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   background: none;
   border: none;
-  color: var(--muted-text);
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   cursor: pointer;
-  transition: color 0.3s ease;
-  padding: 0.5rem;
+  transition: all 0.3s ease;
+  padding: 0.5rem 0;
+  position: relative;
 }
 
-.back-button:hover {
+.nav-link-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  transition: width 0.3s ease;
+}
+
+.nav-link-btn:hover::after {
+  width: 100%;
+}
+
+.back-link {
+  color: var(--muted-text);
+}
+
+.back-link::after {
+  background: var(--muted-text);
+}
+
+.back-link:hover {
   color: var(--light-text);
 }
 
-@media (min-width: 768px) {
-  .back-button {
-    top: 2rem;
-    left: 2rem;
-  }
+.continue-link {
+  color: var(--primary-orange);
+  margin-left: auto;
+}
+
+.continue-link::after {
+  background: var(--primary-orange);
+}
+
+.continue-link:hover {
+  color: var(--primary-red);
+}
+
+.continue-link:disabled {
+  color: var(--muted-text);
+  cursor: not-allowed;
+}
+
+.continue-link:disabled::after {
+  display: none;
 }
 
 /* ── TYPEFORM STYLES ── */

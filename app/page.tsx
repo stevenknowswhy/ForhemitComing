@@ -161,16 +161,6 @@ export default function Home() {
               </div>
 
               <div className="modal-form-side">
-                {/* Back Button */}
-                {step > 1 && step < totalSteps && (
-                  <button className="back-button" onClick={prevStep}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M19 12H5M12 19l-7-7 7-7"/>
-                    </svg>
-                    Back
-                  </button>
-                )}
-
                 {/* Step 1 - Intro */}
                 {step === 1 && (
                   <div className="form-step active">
@@ -181,12 +171,12 @@ export default function Home() {
                         Ready to lead?
                       </p>
                     </div>
-                    <button className="typeform-btn btn-primary" onClick={nextStep}>
-                      Let&apos;s begin
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
+                    <div className="button-row">
+                      <div></div>
+                      <button className="nav-link-btn continue-link" onClick={nextStep}>
+                        Let&apos;s begin
+                      </button>
+                    </div>
                   </div>
                 )}
                 
@@ -212,16 +202,21 @@ export default function Home() {
                       />
                       <p className="hint">Press Enter to continue</p>
                     </div>
-                    <button 
-                      className="typeform-btn btn-primary" 
-                      onClick={nextStep}
-                      disabled={!canProceed()}
-                    >
-                      Continue
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
+                    <div className="button-row">
+                      <button className="nav-link-btn back-link" onClick={prevStep}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                      <button 
+                        className="nav-link-btn continue-link" 
+                        onClick={nextStep}
+                        disabled={!canProceed()}
+                      >
+                        Continue
+                      </button>
+                    </div>
                   </div>
                 )}
 
@@ -240,16 +235,21 @@ export default function Home() {
                       />
                       <p className="hint">Press Enter to continue</p>
                     </div>
-                    <button 
-                      className="typeform-btn btn-primary" 
-                      onClick={nextStep}
-                      disabled={!canProceed()}
-                    >
-                      Continue
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
+                    <div className="button-row">
+                      <button className="nav-link-btn back-link" onClick={prevStep}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                      <button 
+                        className="nav-link-btn continue-link" 
+                        onClick={nextStep}
+                        disabled={!canProceed()}
+                      >
+                        Continue
+                      </button>
+                    </div>
                   </div>
                 )}
 
@@ -268,16 +268,21 @@ export default function Home() {
                       />
                       <p className="hint">Press Enter to continue</p>
                     </div>
-                    <button 
-                      className="typeform-btn btn-primary" 
-                      onClick={nextStep}
-                      disabled={!canProceed()}
-                    >
-                      Continue
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
+                    <div className="button-row">
+                      <button className="nav-link-btn back-link" onClick={prevStep}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                      <button 
+                        className="nav-link-btn continue-link" 
+                        onClick={nextStep}
+                        disabled={!canProceed()}
+                      >
+                        Continue
+                      </button>
+                    </div>
                   </div>
                 )}
                 
@@ -342,16 +347,21 @@ export default function Home() {
                         )}
                       </div>
                     </div>
-                    <button 
-                      className="typeform-btn btn-primary" 
-                      onClick={nextStep}
-                      disabled={!canProceed() || !formData.resumeUrl}
-                    >
-                      Submit Application
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </button>
+                    <div className="button-row">
+                      <button className="nav-link-btn back-link" onClick={prevStep}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                      <button 
+                        className="nav-link-btn continue-link" 
+                        onClick={nextStep}
+                        disabled={!canProceed() || !formData.resumeUrl}
+                      >
+                        Submit Application
+                      </button>
+                    </div>
                   </div>
                 )}
                 
