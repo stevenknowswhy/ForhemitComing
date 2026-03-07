@@ -306,13 +306,10 @@ body {
 
 /* Progress Container */
 .progress-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   padding: 1.25rem 1.5rem 0.75rem;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.8) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
   z-index: 10;
+  flex-shrink: 0;
 }
 
 .progress-header {
@@ -406,8 +403,9 @@ body {
 .modal-grid {
   display: flex;
   flex-direction: column;
-  min-height: 500px;
-  max-height: 90vh;
+  min-height: 600px;
+  max-height: calc(90vh - 80px);
+  overflow: hidden;
 }
 
 @media (min-width: 768px) {
@@ -415,22 +413,23 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-direction: row;
+    min-height: 550px;
+    max-height: 90vh;
   }
 }
 
 /* Modal Image - Mobile: top, Desktop: right */
 .modal-image-side {
-  order: -1;
   background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 61, 0, 0.05) 100%);
   position: relative;
   overflow: hidden;
-  min-height: 180px;
-  max-height: 200px;
+  min-height: 160px;
+  max-height: 180px;
+  flex-shrink: 0;
 }
 
 @media (min-width: 768px) {
   .modal-image-side {
-    order: 1;
     min-height: auto;
     max-height: none;
   }
@@ -446,18 +445,18 @@ body {
 
 /* Modal Form Side */
 .modal-form-side {
-  padding: 6rem 2rem 2.5rem;
+  padding: 2rem 2rem 2.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow-y: auto;
-  max-height: calc(90vh - 200px);
+  flex: 1;
   position: relative;
 }
 
 @media (min-width: 768px) {
   .modal-form-side {
-    padding: 6rem 3rem 3rem;
+    padding: 2.5rem 3rem 3rem;
     max-height: 90vh;
   }
 }
@@ -1069,9 +1068,13 @@ body {
     height: 100vh;
   }
   
+  .modal-grid {
+    max-height: calc(100vh - 80px);
+  }
+  
   .modal-form-side {
-    padding: 5rem 1.5rem 2rem;
-    max-height: calc(100vh - 180px);
+    padding: 1.5rem 1.5rem 2rem;
+    max-height: calc(100vh - 260px);
   }
   
   .form-step {
