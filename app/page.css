@@ -128,9 +128,10 @@ body {
 /* CTA Group */
 .cta-group {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  flex-direction: row;
+  gap: 3rem;
   align-items: center;
+  justify-content: center;
 }
 
 /* Link-style buttons */
@@ -166,11 +167,11 @@ body {
 }
 
 .btn-primary {
-  color: var(--light-text);
+  color: var(--primary-orange);
 }
 
 .btn-primary:hover {
-  color: var(--primary-orange);
+  color: var(--primary-red);
 }
 
 .btn-secondary {
@@ -495,7 +496,7 @@ body {
   }
   
   .cta-group {
-    gap: 1.25rem;
+    gap: 2rem;
   }
   
   .email-reveal {
