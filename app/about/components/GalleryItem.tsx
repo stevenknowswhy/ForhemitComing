@@ -127,8 +127,7 @@ export function GalleryItem({
         style={{
           width: "100%",
           maxWidth: "1200px",
-          height: "100%",
-          maxHeight: "80vh",
+          maxHeight: "min(80vh, 900px)",
           display: "flex",
           flexDirection: "column",
           borderRadius: "16px",
@@ -137,16 +136,18 @@ export function GalleryItem({
           boxShadow: isActive
             ? "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 90, 43, 0.2)"
             : "0 10px 30px -10px rgba(0, 0, 0, 0.3)",
+          contain: "layout style paint",
         }}
       >
-        {/* Image Container - 16:9 Aspect Ratio */}
+        {/* Image Container - Fixed 16:9 Aspect Ratio */}
         <div
           className="gallery-image-wrapper"
           style={{
             position: "relative",
             width: "100%",
-            flex: "1 1 auto",
-            minHeight: 0,
+            aspectRatio: "16 / 9",
+            flexShrink: 0,
+            overflow: "hidden",
             background: `linear-gradient(135deg, ${galleryTheme.colors.muted}20 0%, ${galleryTheme.colors.backgroundSecondary}40 100%)`,
           }}
         >

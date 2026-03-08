@@ -105,17 +105,29 @@
 /* ── Gallery Item ── */
 .gallery-item {
   will-change: transform, opacity;
+  isolation: isolate;
 }
 
 .gallery-card {
   will-change: transform, filter;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  isolation: isolate;
+  contain: layout style paint;
 }
 
 .gallery-image-wrapper {
   position: relative;
   overflow: hidden;
+  contain: strict;
+}
+
+.gallery-image-wrapper img {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
 }
 
 .gallery-image-wrapper::after {
@@ -139,6 +151,14 @@
 
 .gallery-image-wrapper img[src]:not([src=""]) {
   opacity: 1;
+}
+
+/* Content area containment */
+.gallery-content {
+  position: relative;
+  z-index: 2;
+  background: var(--gallery-bg);
+  flex-shrink: 0;
 }
 
 /* ── Gallery Navigation Arrows ── */
