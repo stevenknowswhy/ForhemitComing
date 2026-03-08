@@ -255,34 +255,9 @@ export function GalleryItem({
             initial="hidden"
             animate={isActive ? "visible" : "hidden"}
             custom={3}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "1.5rem",
-              padding: "0.875rem 2rem",
-              fontFamily: galleryTheme.fonts.mono,
-              fontSize: "0.7rem",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: galleryTheme.colors.textPrimary,
-              background: "transparent",
-              border: `1px solid ${galleryTheme.colors.accent}`,
-              borderRadius: "4px",
-              textDecoration: "none",
-              cursor: "pointer",
-              transition: "all 0.3s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = galleryTheme.colors.accent;
-              e.currentTarget.style.color = "#0e0e0c";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = galleryTheme.colors.textPrimary;
-            }}
+            className="gallery-cta-button"
           >
-            Schedule a discussion today
+            <span className="gallery-cta-text">Schedule a discussion today</span>
           </motion.a>
         </div>
       </motion.div>
