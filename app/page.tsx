@@ -32,33 +32,17 @@ function HomeContent() {
       <main className="hero">
         <div className="container">
           <h1 className="brand-title">FORHEMIT</h1>
+          <p className="brand-corporation">Private Benefit Corporation</p>
           <p className="brand-subtitle">PRIVATE EQUITY</p>
-          
-          <div className="cta-group">
-            <button 
-              id="join-btn" 
-              className="btn btn-primary"
-              onClick={() => setShowApplicationModal(true)}
-            >
-              Join the Movement
-            </button>
-            <div className="early-access-wrapper">
-              {!showEmailInput ? (
-                <button 
-                  id="early-access-btn" 
-                  className="btn btn-secondary"
-                  onClick={() => setShowEmailInput(true)}
-                >
-                  Get Early Access
-                </button>
-              ) : (
-                <EarlyAccessForm 
-                  variant="inline" 
-                  onClose={() => setShowEmailInput(false)}
-                />
-              )}
-            </div>
-          </div>
+
+          {showEmailInput && (
+            <EarlyAccessForm
+              variant="inline"
+              onClose={() => {
+                setShowEmailInput(false);
+              }}
+            />
+          )}
         </div>
       </main>
 
