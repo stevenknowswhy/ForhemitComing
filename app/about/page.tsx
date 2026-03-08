@@ -75,6 +75,7 @@ export default function About() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          gap: "3rem",
         }}
       >
         <a
@@ -101,7 +102,33 @@ export default function About() {
             e.currentTarget.style.transform = "scale(1)";
           }}
         >
-          Schedule a discussion today
+          Instant Offer
+        </a>
+        <a
+          href="/introduction?contact=true"
+          className="nav-link"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.75rem",
+            fontWeight: 400,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--muted-text)",
+            textDecoration: "none",
+            transition: "filter 0.4s ease, transform 0.4s ease",
+            position: "relative",
+            display: "inline-block",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.15)";
+            e.currentTarget.style.transform = "scale(1.03)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          Contact Us
         </a>
       </div>
 
