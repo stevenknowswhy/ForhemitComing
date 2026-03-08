@@ -240,6 +240,113 @@
   color: var(--muted-text);
 }
 
+/* Early Access Email Reveal */
+.early-access-wrapper {
+  position: relative;
+}
+
+.email-reveal-card {
+  animation: fadeInReveal 0.3s ease;
+}
+
+@keyframes fadeInReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.email-reveal-card .card-text {
+  gap: 1rem;
+}
+
+.email-reveal-card .card-badge {
+  background: rgba(255, 107, 0, 0.15);
+  border-color: rgba(255, 107, 0, 0.3);
+  color: var(--primary-orange);
+}
+
+/* Email Input Container */
+.email-input-container {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Email Input Wrapper */
+.email-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.email-input-wrapper input {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.75rem 2.75rem 0.75rem 0.5rem;
+  color: var(--light-text);
+  font-size: 0.8rem;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.3s ease;
+  font-family: 'Inter', sans-serif;
+}
+
+.email-input-wrapper input::placeholder {
+  color: var(--muted-text);
+}
+
+.email-input-wrapper input:focus {
+  border-color: var(--primary-orange);
+}
+
+/* Email Clear Button */
+.email-clear-btn {
+  position: absolute;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--muted-text);
+}
+
+.email-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--light-text);
+}
+
+/* Email Submit Button */
+.email-submit-btn {
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-red) 100%);
+  border: none;
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--light-text);
+}
+
+.email-submit-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+
 /* Responsive - Tablet */
 @media (max-width: 768px) {
   .intro-content {
@@ -337,5 +444,19 @@
   .card-badge {
     font-size: 0.65rem;
     padding: 0.3rem 0.65rem;
+  }
+
+  .email-input-container {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .email-input-wrapper input {
+    width: 100%;
+  }
+
+  .email-submit-btn {
+    width: 100%;
   }
 }
