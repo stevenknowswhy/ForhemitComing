@@ -12,7 +12,6 @@ import { galleryTheme, getImageCredit } from "../lib/galleryData";
 export function GalleryItem({
   slide,
   isActive,
-  isAdjacent,
   direction,
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -42,44 +41,17 @@ export function GalleryItem({
     }),
   };
 
-  // Scale variants for the card itself (Netflix-style)
-  const getCardTransition = () => {
-    if (prefersReducedMotion) return { duration: 0 };
-    return {
-      type: "tween" as const,
-      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-      duration: 0.4,
-    };
-  };
-
+  // Card animation - only active state, clean transitions
   const cardVariants = {
     active: {
       scale: 1,
-      filter: "blur(0px)",
       opacity: 1,
-      zIndex: 10,
-      transition: getCardTransition(),
+      transition: {
+        type: "spring" as const,
+        stiffness: 300,
+        damping: 30,
+      },
     },
-    adjacent: {
-      scale: 0.92,
-      filter: prefersReducedMotion ? "blur(0px)" : "blur(2px)",
-      opacity: 0.4,
-      zIndex: 5,
-      transition: getCardTransition(),
-    },
-    inactive: {
-      scale: 0.85,
-      filter: prefersReducedMotion ? "blur(0px)" : "blur(4px)",
-      opacity: 0,
-      zIndex: 0,
-      transition: getCardTransition(),
-    },
-  };
-
-  const getCardState = () => {
-    if (isActive) return "active";
-    if (isAdjacent) return "adjacent";
-    return "inactive";
   };
 
   // Text animation variants
@@ -123,7 +95,10 @@ export function GalleryItem({
       <motion.div
         className="gallery-card"
         variants={cardVariants}
-        animate={getCardState()}
+        initial={{ scale: 0.95, opacity: 0 }}
+        animate="active"
+        exit={{ scale: 0.95, opacity: 0 }}
+        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
         style={{
           width: "100%",
           height: "100%",

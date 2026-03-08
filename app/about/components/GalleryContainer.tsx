@@ -156,19 +156,18 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
           height: "100%",
         }}
       >
-        <AnimatePresence initial={false} custom={state.direction} mode="popLayout">
+        <AnimatePresence initial={false} custom={state.direction} mode="wait">
           {slides.map((slide, index) => {
-            const { isActive, isAdjacent } = getSlideState(index);
+            const { isActive } = getSlideState(index);
 
-            // Only render active and adjacent slides for performance
-            if (!isActive && !isAdjacent) return null;
+            // Only render active slide - no adjacent slides to prevent bleeding
+            if (!isActive) return null;
 
             return (
               <GalleryItem
                 key={slide.id}
                 slide={slide}
-                isActive={isActive}
-                isAdjacent={isAdjacent}
+                isActive={true}
                 direction={state.direction}
                 index={index}
               />
