@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { GalleryItemProps } from "../types/gallery";
@@ -248,21 +247,6 @@ export function GalleryItem({
           >
             {slide.subtitle}
           </motion.p>
-
-          {/* CTA Button with Show/Hide Hover Effect */}
-          <motion.div
-            variants={textVariants}
-            initial="hidden"
-            animate={isActive ? "visible" : "hidden"}
-            custom={3}
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              marginTop: "1.5rem",
-            }}
-          >
-            <CTAButton />
-          </motion.div>
         </div>
       </motion.div>
     </motion.article>
@@ -311,89 +295,5 @@ function ImageCredit({ slideId, isActive }: { slideId: string; isActive: boolean
     >
       Photo by {credit.photographer}
     </motion.a>
-  );
-}
-
-/**
- * CTA Button with Show/Hide Hover Effect
- * Button hides on hover, animated underline appears
- */
-function CTAButton() {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <a
-      href="/introduction?join=true"
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "0.75rem 1.5rem",
-        fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-        fontSize: "0.65rem",
-        letterSpacing: "0.15em",
-        textTransform: "uppercase",
-        textDecoration: "none",
-        cursor: "pointer",
-        position: "relative",
-        minWidth: "200px",
-        height: "40px",
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Default State - Button with border */}
-      <span
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: isHovered ? "transparent" : "#a09a90",
-          border: isHovered ? "1px solid transparent" : "1px solid #5a544a",
-          borderRadius: "4px",
-          background: "transparent",
-          transition: "all 0.3s ease",
-          opacity: isHovered ? 0 : 1,
-        }}
-      >
-        Schedule a discussion today
-      </span>
-
-      {/* Hover State - Animated underline */}
-      <span
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          color: "#f5f0e8",
-          opacity: isHovered ? 1 : 0,
-          transition: "opacity 0.3s ease",
-        }}
-      >
-        <span
-          style={{
-            position: "relative",
-            display: "inline-block",
-          }}
-        >
-          Schedule a discussion today
-          <span
-            style={{
-              position: "absolute",
-              bottom: "-2px",
-              left: 0,
-              height: "1px",
-              background: "#8b5a2b",
-              width: isHovered ? "100%" : "0%",
-              transition: "width 0.4s ease",
-            }}
-          />
-        </span>
-      </span>
-    </a>
   );
 }

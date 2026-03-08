@@ -64,6 +64,47 @@ export default function About() {
         </motion.div>
       </main>
 
+      {/* CTA Link Row - Above Footer */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "50px",
+          left: 0,
+          right: 0,
+          zIndex: 35,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <a
+          href="/introduction?join=true"
+          className="nav-link"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.75rem",
+            fontWeight: 400,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "var(--muted-text)",
+            textDecoration: "none",
+            transition: "filter 0.4s ease, transform 0.4s ease",
+            position: "relative",
+            display: "inline-block",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.filter = "brightness(1.15)";
+            e.currentTarget.style.transform = "scale(1.03)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.filter = "brightness(1)";
+            e.currentTarget.style.transform = "scale(1)";
+          }}
+        >
+          Schedule a discussion today
+        </a>
+      </div>
+
       {/* Footer */}
       <AboutFooter />
 

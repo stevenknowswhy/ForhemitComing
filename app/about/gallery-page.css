@@ -10,6 +10,7 @@
   --gallery-bg-secondary: #1a1209;
   --gallery-text-primary: #f5f0e8;
   --gallery-text-secondary: #a09a90;
+  --primary-orange: #FF6B00; /* Match home page */
   --gallery-accent: #8b5a2b;
   --gallery-accent-light: #c9a86c;
   --gallery-muted: #5a544a;
@@ -180,10 +181,63 @@
 
 .about-logo {
   position: relative;
+  text-decoration: none;
+  color: var(--gallery-text-primary);
+  transition: color 0.3s ease;
 }
 
 .about-logo:hover .logo-underline {
   width: 100% !important;
+}
+
+.logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #909090 0%, #e0e0e0 25%, #ffffff 50%, #c0c0c0 75%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease;
+  display: inline-block;
+}
+
+.about-logo:hover .logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-orange);
+  transition: width 0.3s ease;
+}
+
+/* ── CTA Link (Schedule a discussion today) - Same as home page nav links ── */
+.nav-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gallery-text-secondary) !important;
+  text-decoration: none;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease, border-bottom-width 0.3s ease;
+  position: relative;
+  pointer-events: auto !important;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+}
+
+.nav-link:hover {
+  color: var(--gallery-text-primary) !important;
+  border-bottom-color: var(--primary-orange) !important;
 }
 
 /* ── Gallery Navigation Arrows ── */
