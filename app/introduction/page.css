@@ -136,9 +136,9 @@
 
 /* Individual Card */
 .intro-card {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem 1.25rem 0.5rem;
   padding: 1.25rem 1.5rem;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
@@ -148,6 +148,7 @@
   transition: all 0.3s ease;
   position: relative;
   text-align: left;
+  align-items: center;
 }
 
 .intro-card:not(.disabled):hover {
@@ -181,13 +182,20 @@
   color: var(--muted-text);
 }
 
+/* Card Text Container */
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 /* Card Title */
 .card-title {
   font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 0.02em;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0;
 }
 
 /* Card Description */
@@ -196,13 +204,18 @@
   font-size: 0.8rem;
   color: var(--muted-text);
   line-height: 1.4;
+  margin-bottom: 0;
 }
 
 /* Card Arrow */
 .card-arrow {
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--primary-orange);
   transition: all 0.3s ease;
+  width: 32px;
+  height: 32px;
 }
 
 .intro-card:not(.disabled):hover .card-arrow {
@@ -212,7 +225,9 @@
 
 /* Card Badge (Coming Soon) */
 .card-badge {
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Inter', sans-serif;
   font-size: 0.7rem;
   font-weight: 600;

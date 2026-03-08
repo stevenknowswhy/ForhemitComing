@@ -10,10 +10,11 @@ export default function Home() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const joinParam = searchParams?.get("join");
+  const earlyParam = searchParams?.get("early");
 
   const [showModal, setShowModal] = useState(joinParam === "true");
   const [step, setStep] = useState(1);
-  const [showEmailInput, setShowEmailInput] = useState(false);
+  const [showEmailInput, setShowEmailInput] = useState(earlyParam === "true");
   const [showLegalModal, setShowLegalModal] = useState(false);
   const [legalTab, setLegalTab] = useState("privacy");
   const [email, setEmail] = useState("");
@@ -59,13 +60,20 @@ export default function Home() {
       if (showEmailInput) {
         setShowEmailInput(false);
         setEmail("");
+        router.push("/", { scroll: false });
       }
     }
     if (e.key === "Enter" && step >= 2 && step <= 4) {
       e.preventDefault();
       nextStep();
     }
-  }, [showEmailInput, step, showLegalModal]);
+  }, [showEmailInput, step, showLegalModal, router]);
+
+  const closeEmailInput = () => {
+    setEmail("");
+    setShowEmailInput(false);
+    router.push("/", { scroll: false });
+  };
 
   useEffect(() => {
     if (showModal || showEmailInput || showLegalModal) {
@@ -142,10 +150,7 @@ export default function Home() {
                     />
                     <button
                       className="email-clear-btn"
-                      onClick={() => {
-                        setEmail("");
-                        setShowEmailInput(false);
-                      }}
+                      onClick={closeEmailInput}
                       aria-label="Close"
                     >
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -158,8 +163,7 @@ export default function Home() {
                     className="btn-icon"
                     onClick={() => {
                       alert("Thank you! We'll be in touch soon.");
-                      setEmail("");
-                      setShowEmailInput(false);
+                      closeEmailInput();
                     }}
                   >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

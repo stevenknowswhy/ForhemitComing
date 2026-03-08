@@ -33,6 +33,43 @@ export default function Introduction() {
 
           {/* Action Cards */}
           <div className="intro-cards">
+            <div className="intro-card disabled">
+              <div className="card-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+              </div>
+              <div className="card-text">
+                <h2 className="card-title">Business Introductions</h2>
+                <p className="card-description">
+                  Connect with us for partnership and business opportunities
+                </p>
+              </div>
+              <span className="card-badge">Coming Soon</span>
+            </div>
+
+            <Link href="/?early=true" className="intro-card">
+              <div className="card-icon">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M3 8l7.89 5.26a2 2 0 0 1 2.22 0L21 8M5 19h14M5 19l6.5-6.5M17 19l-6.5-6.5"/>
+                  <circle cx="12" cy="9" r="2"/>
+                </svg>
+              </div>
+              <div className="card-text">
+                <h2 className="card-title">Get Early Access</h2>
+                <p className="card-description">
+                  Stay updated on our launch and get exclusive early access
+                </p>
+              </div>
+              <span className="card-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </span>
+            </Link>
+
             <Link href="/?join=true" className="intro-card">
               <div className="card-icon">
                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -42,31 +79,18 @@ export default function Introduction() {
                   <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                 </svg>
               </div>
-              <h2 className="card-title">Join the Movement</h2>
-              <p className="card-description">
-                Become part of our team and help shape the future of private equity
-              </p>
+              <div className="card-text">
+                <h2 className="card-title">Join the Movement</h2>
+                <p className="card-description">
+                  Become part of our team and help shape the future of private equity
+                </p>
+              </div>
               <span className="card-arrow">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </span>
             </Link>
-
-            <div className="intro-card disabled">
-              <div className="card-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                  <line x1="12" y1="22.08" x2="12" y2="12"/>
-                </svg>
-              </div>
-              <h2 className="card-title">Business Introductions</h2>
-              <p className="card-description">
-                Connect with us for partnership and business opportunities
-              </p>
-              <span className="card-badge">Coming Soon</span>
-            </div>
           </div>
         </div>
       </div>
