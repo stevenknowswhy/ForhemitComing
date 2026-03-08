@@ -1,0 +1,11 @@
+/* ── CSS VARIABLES ── */
+:root {
+  /* Home Page Colors */
+  --primary-orange: #FF6B00;
+  --primary-red: #FF3D00;
+  --dark-bg: #1a1209;
+  --light-text: #ffffff;
+  --muted-text: #a0a0a0;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}

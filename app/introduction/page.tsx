@@ -3,31 +3,30 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
 import "./page.css";
 
 export default function Introduction() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
-  const [email, setEmail] = useState("");
 
   useEffect(() => {
     setIsVisible(true);
   }, []);
 
-  const closeEmailInput = () => {
-    setEmail("");
+  const handleCloseEmail = () => {
     setShowEmailInput(false);
     router.push("/introduction", { scroll: false });
   };
 
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Escape" && showEmailInput) {
-      closeEmailInput();
-    }
-  };
-
   useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && showEmailInput) {
+        handleCloseEmail();
+      }
+    };
+
     if (showEmailInput) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
@@ -35,29 +34,25 @@ export default function Introduction() {
       document.body.style.overflow = "unset";
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showEmailInput, handleKeyDown]);
+  }, [showEmailInput]);
 
   return (
     <div className="intro-wrapper">
       <div className="intro-background"></div>
 
-      {/* Slide-up Panel */}
       <div className={`intro-panel ${isVisible ? "visible" : ""}`}>
-        {/* Close Button */}
         <Link href="/" className="intro-close">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M18 6L6 18M6 6l12 12"/>
           </svg>
         </Link>
 
-        {/* Content */}
         <div className="intro-content">
           <h1 className="intro-title">Select Your Path</h1>
           <p className="intro-subtitle">
-            Choose how you'd like to connect with Forhemit
+            Choose how you&apos;d like to connect with Forhemit
           </p>
 
-          {/* Action Cards */}
           <div className="intro-cards">
             <div className="intro-card disabled">
               <div className="card-icon">
@@ -107,38 +102,8 @@ export default function Introduction() {
                   </div>
                   <div className="card-text">
                     <h2 className="card-title">Get Early Access</h2>
-                    <div className="email-input-container">
-                      <div className="email-input-wrapper">
-                        <input
-                          type="email"
-                          placeholder="Your email address"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                        />
-                        <button
-                          className="email-clear-btn"
-                          onClick={closeEmailInput}
-                          aria-label="Close"
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M18 6L6 18M6 6l12 12"/>
-                          </svg>
-                        </button>
-                      </div>
-                      <button
-                        className="email-submit-btn"
-                        onClick={() => {
-                          alert("Thank you! We'll be in touch soon.");
-                          closeEmailInput();
-                        }}
-                      >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                      </button>
-                    </div>
+                    <EarlyAccessForm variant="card" onClose={handleCloseEmail} />
                   </div>
-                  <span className="card-badge">Add Email</span>
                 </div>
               )}
             </div>
