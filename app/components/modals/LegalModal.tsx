@@ -30,7 +30,7 @@ export function LegalModal({ isOpen, onClose }: LegalModalProps) {
             className={`legal-tab ${activeTab === "terms" ? "active" : ""}`}
             onClick={() => setActiveTab("terms")}
           >
-            Terms of Use
+            Terms
           </button>
           <button
             className={`legal-tab ${activeTab === "accessibility" ? "active" : ""}`}

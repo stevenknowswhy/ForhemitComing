@@ -64,8 +64,8 @@ export const galleryTheme = {
     backgroundSecondary: "#0e0e0c",
     textPrimary: "#f5f0e8",
     textSecondary: "#a09a90",
-    accent: "#8b5a2b",
-    accentLight: "#c9a86c",
+    accent: "#FF6B00",
+    accentLight: "#ff8c33",
     muted: "#5a544a",
   },
   fonts: {
