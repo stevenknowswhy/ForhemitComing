@@ -50,6 +50,14 @@ export function AboutHeader() {
           position: "relative",
           transition: "color 0.3s ease",
         }}
+        onMouseEnter={(e) => {
+          const underline = e.currentTarget.querySelector('.logo-underline') as HTMLElement;
+          if (underline) underline.style.width = '100%';
+        }}
+        onMouseLeave={(e) => {
+          const underline = e.currentTarget.querySelector('.logo-underline') as HTMLElement;
+          if (underline) underline.style.width = '0';
+        }}
       >
         <span
           style={{
