@@ -314,7 +314,7 @@ body {
   pointer-events: auto;
 }
 
-.footer button {
+.footer-legal-btn {
   font-family: 'Inter', sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
@@ -329,7 +329,7 @@ body {
   position: relative;
 }
 
-.footer button::after {
+.footer-legal-btn::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -340,12 +340,40 @@ body {
   transition: width 0.3s ease;
 }
 
-.footer button:hover {
+.footer-legal-btn:hover {
   color: var(--light-text);
 }
 
-.footer button:hover::after {
+.footer-legal-btn:hover::after {
   width: 100%;
+}
+
+/* Footer responsive */
+@media (max-width: 600px) {
+  .footer-content {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 0 1rem;
+  }
+
+  .footer-content {
+    gap: 0.75rem;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .footer-content {
+    gap: 0.5rem;
+  }
+
+  .footer-legal-btn {
+    font-size: 0.6rem;
+  }
 }
 
 /* ── LEGAL MODAL ── */

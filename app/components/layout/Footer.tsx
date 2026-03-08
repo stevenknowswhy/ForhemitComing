@@ -47,6 +47,7 @@ export function Footer({ onLegalClick }: FooterProps) {
           }}
         />
         <button
+          className="footer-legal-btn"
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: "0.65rem",
