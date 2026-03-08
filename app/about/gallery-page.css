@@ -170,7 +170,7 @@
 }
 
 /* CTA Button */
-.gallery-cta-button {
+.gallery-content .gallery-cta-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -186,12 +186,13 @@
   text-decoration: none;
   cursor: pointer;
   position: relative;
-  transition: all 0.3s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
 }
 
-.gallery-cta-button:hover {
-  color: var(--gallery-text-primary);
-  border-color: var(--gallery-accent);
+.gallery-content .gallery-cta-button:hover {
+  color: var(--gallery-text-primary) !important;
+  border-color: var(--gallery-accent) !important;
+  background: rgba(139, 90, 43, 0.1);
 }
 
 /* ── Gallery Navigation Arrows ── */
