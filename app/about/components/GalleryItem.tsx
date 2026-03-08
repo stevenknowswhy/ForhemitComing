@@ -249,18 +249,51 @@ export function GalleryItem({
           </motion.p>
 
           {/* CTA Button */}
-          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "1.5rem" }}>
-            <motion.a
+          <motion.div
+            variants={textVariants}
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            custom={3}
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "1.5rem",
+            }}
+          >
+            <a
               href="/introduction?join=true"
-              className="gallery-cta-button"
-              variants={textVariants}
-              initial="hidden"
-              animate={isActive ? "visible" : "hidden"}
-              custom={3}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                padding: "0.75rem 1.5rem",
+                fontFamily: galleryTheme.fonts.mono,
+                fontSize: "0.65rem",
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: galleryTheme.colors.textSecondary,
+                background: "transparent",
+                border: `1px solid ${galleryTheme.colors.muted}`,
+                borderRadius: "4px",
+                textDecoration: "none",
+                cursor: "pointer",
+                position: "relative",
+                transition: "color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = galleryTheme.colors.textPrimary;
+                e.currentTarget.style.borderColor = galleryTheme.colors.accent;
+                e.currentTarget.style.background = "rgba(139, 90, 43, 0.1)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = galleryTheme.colors.textSecondary;
+                e.currentTarget.style.borderColor = galleryTheme.colors.muted;
+                e.currentTarget.style.background = "transparent";
+              }}
             >
               Schedule a discussion today
-            </motion.a>
-          </div>
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     </motion.article>
