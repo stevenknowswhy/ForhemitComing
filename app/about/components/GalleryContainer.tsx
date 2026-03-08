@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { GalleryContainerProps, GalleryState } from "../types/gallery";
+import { GalleryContainerProps } from "../types/gallery";
 import { GalleryItem } from "./GalleryItem";
 import { useKeyboardNav, useFocusTrap } from "../hooks/useKeyboardNav";
 import { useGalleryGestures, useWheelNav } from "../hooks/useGalleryGestures";
@@ -12,14 +12,9 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
  * Gallery Container - Manages gallery state, gestures, and layout
  * Handles swipe, drag, keyboard, and wheel navigation
  */
-export function GalleryContainer({ slides }: GalleryContainerProps) {
-  const [state, setState] = useState<GalleryState>({
-    currentIndex: 0,
-    direction: 0,
-    isDragging: false,
-    dragOffset: 0,
-    isTransitioning: false,
-  });
+export function GalleryContainer({ slides, currentIndex, onSlideChange }: GalleryContainerProps) {
+  const [direction, setDirection] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -31,42 +26,38 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
   const goToSlide = useCallback(
     (index: number) => {
       if (
-        index === state.currentIndex ||
+        index === currentIndex ||
         index < 0 ||
         index >= totalSlides ||
-        state.isTransitioning
+        isTransitioning
       ) {
         return;
       }
 
-      const direction = index > state.currentIndex ? 1 : -1;
-
-      setState((prev) => ({
-        ...prev,
-        direction,
-        currentIndex: index,
-        isTransitioning: true,
-      }));
+      const newDirection = index > currentIndex ? 1 : -1;
+      setDirection(newDirection);
+      setIsTransitioning(true);
+      onSlideChange(index);
 
       // Reset transition state after animation
       setTimeout(() => {
-        setState((prev) => ({ ...prev, isTransitioning: false }));
+        setIsTransitioning(false);
       }, prefersReducedMotion ? 0 : 500);
     },
-    [state.currentIndex, state.isTransitioning, totalSlides, prefersReducedMotion]
+    [currentIndex, isTransitioning, totalSlides, onSlideChange, prefersReducedMotion]
   );
 
   const goToNext = useCallback(() => {
-    if (state.currentIndex < totalSlides - 1) {
-      goToSlide(state.currentIndex + 1);
+    if (currentIndex < totalSlides - 1) {
+      goToSlide(currentIndex + 1);
     }
-  }, [state.currentIndex, totalSlides, goToSlide]);
+  }, [currentIndex, totalSlides, goToSlide]);
 
   const goToPrevious = useCallback(() => {
-    if (state.currentIndex > 0) {
-      goToSlide(state.currentIndex - 1);
+    if (currentIndex > 0) {
+      goToSlide(currentIndex - 1);
     }
-  }, [state.currentIndex, goToSlide]);
+  }, [currentIndex, goToSlide]);
 
   // Keyboard navigation
   useKeyboardNav({
@@ -83,10 +74,6 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
   const { containerStyle, dragProps } = useGalleryGestures({
     onSwipeLeft: goToNext,
     onSwipeRight: goToPrevious,
-    onDragStart: () =>
-      setState((prev) => ({ ...prev, isDragging: true })),
-    onDragEnd: () =>
-      setState((prev) => ({ ...prev, isDragging: false })),
     enabled: !isSingleSlide,
   });
 
@@ -109,16 +96,16 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
 
   // Preload next image
   useEffect(() => {
-    const preloadIndex = state.currentIndex + 1;
+    const preloadIndex = currentIndex + 1;
     if (preloadIndex < totalSlides) {
       const img = new Image();
       img.src = slides[preloadIndex].image;
     }
-  }, [state.currentIndex, slides, totalSlides]);
+  }, [currentIndex, slides, totalSlides]);
 
   // Determine visible slides for animation
   const getSlideState = (index: number) => {
-    const diff = index - state.currentIndex;
+    const diff = index - currentIndex;
     return {
       isActive: diff === 0,
       isAdjacent: Math.abs(diff) === 1,
@@ -156,7 +143,7 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
           height: "100%",
         }}
       >
-        <AnimatePresence initial={false} custom={state.direction} mode="popLayout">
+        <AnimatePresence initial={false} custom={direction} mode="popLayout">
           {slides.map((slide, index) => {
             const { isActive, isAdjacent } = getSlideState(index);
 
@@ -169,11 +156,8 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
                 slide={slide}
                 isActive={isActive}
                 isAdjacent={isAdjacent}
-                direction={state.direction}
+                direction={direction}
                 index={index}
-                totalSlides={totalSlides}
-                currentIndex={state.currentIndex}
-                onSelect={goToSlide}
               />
             );
           })}
@@ -186,13 +170,13 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
           <NavigationArrow
             direction="left"
             onClick={goToPrevious}
-            disabled={state.currentIndex === 0}
+            disabled={currentIndex === 0}
             ariaLabel="Previous slide"
           />
           <NavigationArrow
             direction="right"
             onClick={goToNext}
-            disabled={state.currentIndex === totalSlides - 1}
+            disabled={currentIndex === totalSlides - 1}
             ariaLabel="Next slide"
           />
         </>
@@ -215,7 +199,7 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
           border: 0,
         }}
       >
-        Slide {state.currentIndex + 1} of {totalSlides}: {slides[state.currentIndex]?.title}
+        Slide {currentIndex + 1} of {totalSlides}: {slides[currentIndex]?.title}
       </div>
     </div>
   );

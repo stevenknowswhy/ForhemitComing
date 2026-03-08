@@ -1,13 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   AboutHeader,
   AboutFooter,
   GalleryContainer,
 } from "./components";
-import { gallerySlides } from "./lib";
+import { gallerySlides, galleryTheme } from "./lib";
 import "./gallery-page.css";
 
 /**
@@ -15,7 +15,12 @@ import "./gallery-page.css";
  * Premium gallery experience with swipe, drag, and keyboard navigation
  */
 export default function About() {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const prefersReducedMotion = useReducedMotion();
+
+  const handleSlideSelect = useCallback((index: number) => {
+    setCurrentIndex(index);
+  }, []);
 
   return (
     <div className="about-gallery-wrapper">
@@ -44,7 +49,18 @@ export default function About() {
               : { duration: 0.6, delay: 0.2 }
           }
         >
-          <GalleryContainer slides={gallerySlides} />
+          <GalleryContainer 
+            slides={gallerySlides} 
+            currentIndex={currentIndex}
+            onSlideChange={setCurrentIndex}
+          />
+          
+          {/* Navigation Dots - Fixed under image area */}
+          <SlideDots
+            total={gallerySlides.length}
+            current={currentIndex}
+            onSelect={handleSlideSelect}
+          />
         </motion.div>
       </main>
 
@@ -122,5 +138,77 @@ function KeyboardHint() {
         to navigate
       </span>
     </motion.div>
+  );
+}
+
+/**
+ * Slide Dots Component - Fixed navigation dots under image
+ */
+function SlideDots({
+  total,
+  current,
+  onSelect,
+}: {
+  total: number;
+  current: number;
+  onSelect: (index: number) => void;
+}) {
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: "calc(40% + 1rem)",
+        left: "50%",
+        transform: "translateX(-50%)",
+        zIndex: 25,
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        padding: "0.5rem 1rem",
+        background: "rgba(14, 14, 12, 0.8)",
+        backdropFilter: "blur(8px)",
+        borderRadius: "20px",
+        border: `1px solid ${galleryTheme.colors.muted}30`,
+      }}
+    >
+      {Array.from({ length: total }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => onSelect(index)}
+          aria-label={`Go to slide ${index + 1}`}
+          aria-current={index === current ? "true" : undefined}
+          style={{
+            width: index === current ? "24px" : "8px",
+            height: "8px",
+            borderRadius: "4px",
+            background:
+              index === current
+                ? galleryTheme.colors.accent
+                : `${galleryTheme.colors.muted}80`,
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+            transition: "all 0.3s ease",
+            outline: "none",
+          }}
+          onMouseEnter={(e) => {
+            if (index !== current) {
+              e.currentTarget.style.background = galleryTheme.colors.accentLight;
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (index !== current) {
+              e.currentTarget.style.background = `${galleryTheme.colors.muted}80`;
+            }
+          }}
+          onFocus={(e) => {
+            e.currentTarget.style.boxShadow = `0 0 0 2px ${galleryTheme.colors.accent}60`;
+          }}
+          onBlur={(e) => {
+            e.currentTarget.style.boxShadow = "none";
+          }}
+        />
+      ))}
+    </div>
   );
 }

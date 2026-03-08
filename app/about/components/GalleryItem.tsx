@@ -14,9 +14,6 @@ export function GalleryItem({
   isActive,
   isAdjacent,
   direction,
-  totalSlides,
-  currentIndex,
-  onSelect,
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
 
@@ -176,14 +173,6 @@ export function GalleryItem({
           {/* Image credit */}
           <ImageCredit slideId={slide.id} isActive={isActive} />
 
-          {/* Navigation Dots - Under the image */}
-          <SlideDots
-            total={totalSlides}
-            current={currentIndex}
-            onSelect={onSelect}
-            isActive={isActive}
-          />
-
           {/* Accent tag overlay */}
           {slide.accent && (
             <motion.span
@@ -281,7 +270,7 @@ function ImageCredit({ slideId, isActive }: { slideId: string; isActive: boolean
       transition={{ delay: 0.5, duration: 0.3 }}
       style={{
         position: "absolute",
-        bottom: "3.5rem",
+        bottom: "1rem",
         right: "1rem",
         fontFamily: galleryTheme.fonts.mono,
         fontSize: "0.6rem",
@@ -306,83 +295,5 @@ function ImageCredit({ slideId, isActive }: { slideId: string; isActive: boolean
     >
       Photo by {credit.photographer}
     </motion.a>
-  );
-}
-
-/**
- * Slide Dots Component - Navigation dots under the image
- */
-function SlideDots({
-  total,
-  current,
-  onSelect,
-  isActive,
-}: {
-  total: number;
-  current: number;
-  onSelect: (index: number) => void;
-  isActive: boolean;
-}) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 10 }}
-      transition={{ delay: 0.3, duration: 0.4 }}
-      style={{
-        position: "absolute",
-        bottom: "1rem",
-        left: "50%",
-        transform: "translateX(-50%)",
-        display: "flex",
-        alignItems: "center",
-        gap: "0.5rem",
-        padding: "0.5rem 1rem",
-        background: "rgba(14, 14, 12, 0.7)",
-        backdropFilter: "blur(8px)",
-        borderRadius: "20px",
-        border: `1px solid ${galleryTheme.colors.muted}30`,
-        zIndex: 15,
-        pointerEvents: isActive ? "auto" : "none",
-      }}
-    >
-      {Array.from({ length: total }).map((_, index) => (
-        <button
-          key={index}
-          onClick={() => onSelect(index)}
-          aria-label={`Go to slide ${index + 1}`}
-          aria-current={index === current ? "true" : undefined}
-          style={{
-            width: index === current ? "24px" : "8px",
-            height: "8px",
-            borderRadius: "4px",
-            background:
-              index === current
-                ? galleryTheme.colors.accent
-                : `${galleryTheme.colors.muted}80`,
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            transition: "all 0.3s ease",
-            outline: "none",
-          }}
-          onMouseEnter={(e) => {
-            if (index !== current) {
-              e.currentTarget.style.background = galleryTheme.colors.accentLight;
-            }
-          }}
-          onMouseLeave={(e) => {
-            if (index !== current) {
-              e.currentTarget.style.background = `${galleryTheme.colors.muted}80`;
-            }
-          }}
-          onFocus={(e) => {
-            e.currentTarget.style.boxShadow = `0 0 0 2px ${galleryTheme.colors.accent}60`;
-          }}
-          onBlur={(e) => {
-            e.currentTarget.style.boxShadow = "none";
-          }}
-        />
-      ))}
-    </motion.div>
   );
 }
