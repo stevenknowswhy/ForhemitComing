@@ -218,11 +218,18 @@ body {
   }
 }
 
+.email-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 #email-input {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   border-radius: 8px;
   padding: 0.875rem 1rem;
+  padding-right: 2.5rem;
   color: var(--light-text);
   font-size: 0.9rem;
   width: 250px;
@@ -236,6 +243,27 @@ body {
 
 #email-input:focus {
   border-color: var(--primary-orange);
+}
+
+.email-clear-btn {
+  position: absolute;
+  right: 0.625rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--muted-text);
+}
+
+.email-clear-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--light-text);
 }
 
 .btn-icon {
@@ -1083,7 +1111,11 @@ body {
     flex-direction: column;
     width: 100%;
   }
-  
+
+  .email-input-wrapper {
+    width: 100%;
+  }
+
   #email-input {
     width: 100%;
   }

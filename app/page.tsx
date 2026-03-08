@@ -45,21 +45,25 @@ export default function Home() {
   };
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape" && showEmailInput) {
+      setShowEmailInput(false);
+      setEmail("");
+    }
     if (e.key === "Enter" && step >= 2 && step <= 4) {
       e.preventDefault();
       nextStep();
     }
-  }, [step]);
+  }, [showEmailInput, step]);
 
   useEffect(() => {
-    if (showModal) {
+    if (showModal || showEmailInput) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showModal, handleKeyDown]);
+  }, [showModal, showEmailInput, handleKeyDown]);
 
   const formatPhoneNumber = (value: string) => {
     const numbers = value.replace(/\D/g, "");
@@ -129,15 +133,29 @@ export default function Home() {
                 </button>
               ) : (
                 <div id="email-reveal" className="email-reveal">
-                  <input 
-                    type="email" 
-                    id="email-input" 
-                    placeholder="Your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-                  <button 
-                    id="submit-email" 
+                  <div className="email-input-wrapper">
+                    <input
+                      type="email"
+                      id="email-input"
+                      placeholder="Your email address"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <button
+                      className="email-clear-btn"
+                      onClick={() => {
+                        setEmail("");
+                        setShowEmailInput(false);
+                      }}
+                      aria-label="Close"
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <button
+                    id="submit-email"
                     className="btn-icon"
                     onClick={() => {
                       alert("Thank you! We'll be in touch soon.");
