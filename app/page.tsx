@@ -2,11 +2,16 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 import { UploadButton } from "@/utils/uploadthing";
 import "./page.css";
 
 export default function Home() {
-  const [showModal, setShowModal] = useState(false);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const joinParam = searchParams?.get("join");
+
+  const [showModal, setShowModal] = useState(joinParam === "true");
   const [step, setStep] = useState(1);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showLegalModal, setShowLegalModal] = useState(false);
@@ -44,6 +49,8 @@ export default function Home() {
     setFormData({ firstName: "", lastName: "", phone: "", email: "", position: "", otherPosition: "", resumeUrl: "" });
     setIsUploading(false);
     setSubmitWithoutResume(false);
+    // Clear the join parameter from URL
+    router.push("/", { scroll: false });
   };
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -256,8 +263,8 @@ export default function Home() {
       {/* Modal Overlay */}
       {showModal && (
         <div id="modal-overlay" className="modal-overlay" onClick={(e) => e.target === e.currentTarget && closeModal()}>
+          <button className="modal-close" onClick={closeModal}>&times;</button>
           <div className="modal-content">
-            <button className="modal-close" onClick={closeModal}>&times;</button>
             
             {/* Progress Bar with Steps */}
             <div className="progress-container">

@@ -621,26 +621,48 @@ body {
 /* Modal Close */
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 6vh;
+  right: max(calc(50% - 460px), 2rem);
   background: none;
   border: none;
   color: var(--muted-text);
-  font-size: 2rem;
+  font-size: 1.5rem;
+  font-weight: 200;
   cursor: pointer;
-  z-index: 10;
-  width: 40px;
-  height: 40px;
+  z-index: 1010;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   transition: all 0.3s ease;
 }
 
+.modal-close::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--primary-orange);
+  transition: width 0.3s ease;
+}
+
 .modal-close:hover {
-  background: var(--glass-bg);
   color: var(--light-text);
+}
+
+.modal-close:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .modal-close {
+    top: 1.25rem;
+    right: 1.5rem;
+  }
 }
 
 /* Modal Header */
