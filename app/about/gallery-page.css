@@ -1,0 +1,420 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ABOUT GALLERY PAGE STYLES
+   Premium full-screen interactive gallery with dark theme
+   Matching home page aesthetic
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── CSS Variables ── */
+:root {
+  --gallery-bg: #0e0e0c;
+  --gallery-bg-secondary: #1a1209;
+  --gallery-text-primary: #f5f0e8;
+  --gallery-text-secondary: #a09a90;
+  --gallery-accent: #8b5a2b;
+  --gallery-accent-light: #c9a86c;
+  --gallery-muted: #5a544a;
+  --gallery-border: rgba(139, 90, 43, 0.2);
+}
+
+/* ── Base Reset ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ── Gallery Wrapper ── */
+.about-gallery-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  background: var(--gallery-bg);
+  color: var(--gallery-text-primary);
+  overflow: hidden;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+}
+
+/* ── Background Effects ── */
+.gallery-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.gallery-gradient-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Bronze/copper radial gradients */
+    radial-gradient(ellipse at 20% 20%, rgba(139, 90, 43, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(101, 67, 33, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 90, 43, 0.08) 0%, transparent 70%),
+    /* Base dark gradient */
+    linear-gradient(180deg, rgba(14, 14, 12, 0.98) 0%, rgba(26, 18, 9, 0.95) 50%, rgba(14, 14, 12, 0.98) 100%);
+}
+
+.gallery-noise-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* ── Main Gallery Area ── */
+.gallery-main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px; /* Space for fixed header */
+  padding-bottom: 60px; /* Space for footer */
+}
+
+.gallery-viewport {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Gallery Container ── */
+.gallery-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  outline: none;
+}
+
+.gallery-container:focus-visible {
+  outline: 2px solid var(--gallery-accent);
+  outline-offset: -4px;
+}
+
+.gallery-slides {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Gallery Item ── */
+.gallery-item {
+  will-change: transform, opacity;
+}
+
+.gallery-card {
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.gallery-image-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-image-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    transparent 60%,
+    rgba(14, 14, 12, 0.3) 100%
+  );
+  pointer-events: none;
+}
+
+/* Image loading state */
+.gallery-image-wrapper img {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.gallery-image-wrapper img[src]:not([src=""]) {
+  opacity: 1;
+}
+
+/* ── Gallery Navigation Arrows ── */
+.gallery-nav-arrow {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-nav-arrow:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.gallery-nav-arrow:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.gallery-nav-arrow:focus-visible {
+  outline: 2px solid var(--gallery-accent);
+  outline-offset: 2px;
+}
+
+/* Hide arrows on touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .gallery-nav-arrow {
+    display: none;
+  }
+}
+
+/* ── Progress Indicator ── */
+.progress-indicator {
+  transition: opacity 0.3s ease;
+}
+
+.progress-dot {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--gallery-accent),
+    var(--gallery-accent-light)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.progress-dot-active::before {
+  opacity: 1;
+}
+
+.progress-dot:focus-visible {
+  outline: 2px solid var(--gallery-accent);
+  outline-offset: 2px;
+}
+
+/* ── Keyboard Hint ── */
+.keyboard-hint {
+  animation: fadeOutHint 0.5s ease 4s forwards;
+}
+
+@keyframes fadeOutHint {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+    pointer-events: none;
+  }
+}
+
+/* ── Header ── */
+.about-header {
+  transition: opacity 0.3s ease;
+}
+
+.about-header:hover {
+  opacity: 1 !important;
+}
+
+.about-logo {
+  position: relative;
+}
+
+.about-logo::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--gallery-accent),
+    var(--gallery-accent-light)
+  );
+  transition: width 0.3s ease;
+}
+
+.about-logo:hover::after {
+  width: 100%;
+}
+
+/* ── Footer ── */
+.about-footer {
+  pointer-events: none;
+}
+
+.about-footer-content {
+  pointer-events: auto;
+}
+
+/* ── Responsive Design ── */
+
+/* Mobile First (default) */
+@media (max-width: 768px) {
+  .gallery-main {
+    padding-top: 72px;
+    padding-bottom: 80px;
+  }
+
+  .gallery-card {
+    max-height: 75vh !important;
+    max-height: 75dvh !important;
+    margin: 0 0.5rem;
+  }
+
+  .gallery-content {
+    padding: 1.5rem !important;
+  }
+
+  .progress-indicator {
+    bottom: 5rem !important;
+    padding: 0.625rem 1rem !important;
+  }
+
+  .progress-counter {
+    display: none; /* Hide counter on small screens */
+  }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .gallery-card {
+    max-height: 78vh !important;
+    max-height: 78dvh !important;
+  }
+
+  .gallery-content {
+    padding: 2rem !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .gallery-main {
+    padding-top: 88px;
+  }
+
+  .gallery-card {
+    max-height: 82vh !important;
+    max-height: 82dvh !important;
+  }
+
+  .gallery-nav-arrow {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .gallery-nav-arrow-left {
+    left: 2rem !important;
+  }
+
+  .gallery-nav-arrow-right {
+    right: 2rem !important;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .gallery-card {
+    max-width: 1400px !important;
+  }
+}
+
+/* ── Accessibility ── */
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item,
+  .gallery-card,
+  .gallery-nav-arrow,
+  .progress-indicator,
+  .progress-dot,
+  .keyboard-hint {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .keyboard-hint {
+    display: none !important;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .gallery-card {
+    border: 2px solid var(--gallery-text-primary) !important;
+  }
+
+  .progress-dot-active {
+    background: var(--gallery-text-primary) !important;
+  }
+
+  .gallery-nav-arrow {
+    border: 2px solid var(--gallery-text-primary) !important;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--gallery-accent);
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Touch Device Optimizations ── */
+@media (hover: none) and (pointer: coarse) {
+  .gallery-container {
+    cursor: default !important;
+  }
+
+  .gallery-card {
+    /* Slightly larger touch targets */
+    transform: scale(0.98);
+  }
+}
+
+/* ── Print Styles ── */
+@media print {
+  .gallery-background,
+  .gallery-nav-arrow,
+  .progress-indicator,
+  .keyboard-hint,
+  .about-header,
+  .about-footer {
+    display: none !important;
+  }
+
+  .gallery-main {
+    height: auto;
+    padding: 0;
+  }
+
+  .gallery-item {
+    position: relative !important;
+    page-break-after: always;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
