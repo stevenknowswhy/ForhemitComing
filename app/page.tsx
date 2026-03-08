@@ -9,6 +9,8 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false);
   const [step, setStep] = useState(1);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [showLegalModal, setShowLegalModal] = useState(false);
+  const [legalTab, setLegalTab] = useState("privacy");
   const [email, setEmail] = useState("");
   const [formData, setFormData] = useState({
     firstName: "",
@@ -45,25 +47,28 @@ export default function Home() {
   };
 
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape" && showEmailInput) {
-      setShowEmailInput(false);
-      setEmail("");
+    if (e.key === "Escape") {
+      if (showLegalModal) setShowLegalModal(false);
+      if (showEmailInput) {
+        setShowEmailInput(false);
+        setEmail("");
+      }
     }
     if (e.key === "Enter" && step >= 2 && step <= 4) {
       e.preventDefault();
       nextStep();
     }
-  }, [showEmailInput, step]);
+  }, [showEmailInput, step, showLegalModal]);
 
   useEffect(() => {
-    if (showModal || showEmailInput) {
+    if (showModal || showEmailInput || showLegalModal) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
     } else {
       document.body.style.overflow = "unset";
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showModal, showEmailInput, handleKeyDown]);
+  }, [showModal, showEmailInput, showLegalModal, handleKeyDown]);
 
   const formatPhoneNumber = (value: string) => {
     const numbers = value.replace(/\D/g, "");
@@ -160,6 +165,93 @@ export default function Home() {
           </div>
         </div>
       </main>
+
+      <footer className="footer">
+        <button className="footer-link" onClick={() => setShowLegalModal(true)}>Legal</button>
+      </footer>
+
+      {/* Legal Modal */}
+      {showLegalModal && (
+        <div className="legal-modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowLegalModal(false)}>
+          <div className="legal-modal-content">
+            <button className="legal-modal-close" onClick={() => setShowLegalModal(false)}>&times;</button>
+
+            <div className="legal-tabs">
+              <button
+                className={`legal-tab ${legalTab === "privacy" ? "active" : ""}`}
+                onClick={() => setLegalTab("privacy")}
+              >
+                Privacy
+              </button>
+              <button
+                className={`legal-tab ${legalTab === "terms" ? "active" : ""}`}
+                onClick={() => setLegalTab("terms")}
+              >
+                Terms of Use
+              </button>
+              <button
+                className={`legal-tab ${legalTab === "accessibility" ? "active" : ""}`}
+                onClick={() => setLegalTab("accessibility")}
+              >
+                Accessibility
+              </button>
+            </div>
+
+            <div className="legal-content">
+              {legalTab === "privacy" && (
+                <div className="legal-section active">
+                  <h2>Privacy Policy</h2>
+                  <p>Last updated: March 2026</p>
+                  <div className="legal-text">
+                    <h3>Information We Collect</h3>
+                    <p>We collect information you provide directly to us, such as when you fill out our application form. This may include your name, email address, phone number, and resume.</p>
+
+                    <h3>How We Use Your Information</h3>
+                    <p>We use the information we collect to evaluate your application, communicate with you about your application status, and improve our services.</p>
+
+                    <h3>Information Sharing</h3>
+                    <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only as required by law or to protect our rights.</p>
+                  </div>
+                </div>
+              )}
+
+              {legalTab === "terms" && (
+                <div className="legal-section active">
+                  <h2>Terms of Use</h2>
+                  <p>Last updated: March 2026</p>
+                  <div className="legal-text">
+                    <h3>Acceptance of Terms</h3>
+                    <p>By accessing and using Forhemit's website and services, you accept and agree to be bound by these Terms of Use.</p>
+
+                    <h3>Use of Services</h3>
+                    <p>Our services are intended for individuals seeking employment or partnership opportunities with Forhemit. You agree to provide accurate and complete information.</p>
+
+                    <h3>Intellectual Property</h3>
+                    <p>All content, trademarks, and materials on this website are owned by Forhemit and protected by intellectual property laws.</p>
+                  </div>
+                </div>
+              )}
+
+              {legalTab === "accessibility" && (
+                <div className="legal-section active">
+                  <h2>Accessibility Statement</h2>
+                  <p>Last updated: March 2026</p>
+                  <div className="legal-text">
+                    <h3>Our Commitment</h3>
+                    <p>Forhemit is committed to ensuring digital accessibility for all users, including those with disabilities.</p>
+
+                    <h3>Measures to Support Accessibility</h3>
+                    <p>We continually work to improve accessibility through proper HTML structure, keyboard navigation support, and screen reader compatibility.</p>
+
+                    <h3>Contact Us</h3>
+                    <p>If you encounter any accessibility issues, please contact us at accessibility@forhemit.com.</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Modal Overlay */}
       {showModal && (
