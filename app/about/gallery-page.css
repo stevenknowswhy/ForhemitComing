@@ -65,22 +65,23 @@
 
 /* ── Main Gallery Area ── */
 .gallery-main {
-  position: relative;
+  position: fixed;
+  top: 64px; /* Height of header */
+  bottom: 48px; /* Height of footer */
+  left: 0;
+  right: 0;
   z-index: 1;
-  width: 100%;
-  height: 100vh;
-  height: 100dvh;
   display: flex;
   flex-direction: column;
-  padding-top: 80px; /* Space for fixed header */
-  padding-bottom: 60px; /* Space for footer */
 }
 
 .gallery-viewport {
   position: relative;
   flex: 1;
   width: 100%;
+  height: 100%;
   overflow: hidden;
+  padding: 1rem;
 }
 
 /* ── Gallery Container ── */
@@ -106,6 +107,12 @@
 .gallery-item {
   will-change: transform, opacity;
   isolation: isolate;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
 }
 
 .gallery-card {
@@ -114,12 +121,14 @@
   -webkit-backface-visibility: hidden;
   isolation: isolate;
   contain: layout style paint;
+  width: 100%;
+  height: 100%;
 }
 
 .gallery-image-wrapper {
   position: relative;
   overflow: hidden;
-  contain: strict;
+  flex: 1 1 auto;
 }
 
 .gallery-image-wrapper img {
@@ -282,51 +291,60 @@
 /* Mobile First (default) */
 @media (max-width: 768px) {
   .gallery-main {
-    padding-top: 72px;
-    padding-bottom: 80px;
+    top: 60px;
+    bottom: 44px;
   }
 
-  .gallery-card {
-    max-height: 75vh !important;
-    max-height: 75dvh !important;
-    margin: 0 0.5rem;
+  .gallery-viewport {
+    padding: 0.5rem;
+  }
+
+  .gallery-item {
+    padding: 0.25rem;
   }
 
   .gallery-content {
-    padding: 1.5rem !important;
+    padding: 1.25rem !important;
   }
 
   .progress-indicator {
-    bottom: 5rem !important;
-    padding: 0.625rem 1rem !important;
+    bottom: 0.5rem !important;
+    padding: 0.5rem 1rem !important;
   }
 
   .progress-counter {
-    display: none; /* Hide counter on small screens */
+    display: none;
   }
 }
 
 /* Tablet */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .gallery-card {
-    max-height: 78vh !important;
-    max-height: 78dvh !important;
+  .gallery-viewport {
+    padding: 1.5rem;
+  }
+
+  .gallery-item {
+    padding: 0.75rem;
   }
 
   .gallery-content {
-    padding: 2rem !important;
+    padding: 1.75rem !important;
   }
 }
 
 /* Desktop */
 @media (min-width: 1025px) {
   .gallery-main {
-    padding-top: 88px;
+    top: 72px;
+    bottom: 52px;
   }
 
-  .gallery-card {
-    max-height: 82vh !important;
-    max-height: 82dvh !important;
+  .gallery-viewport {
+    padding: 2rem;
+  }
+
+  .gallery-item {
+    padding: 1rem;
   }
 
   .gallery-nav-arrow {
@@ -346,7 +364,7 @@
 /* Large Desktop */
 @media (min-width: 1440px) {
   .gallery-card {
-    max-width: 1400px !important;
+    max-width: 1600px;
   }
 }
 

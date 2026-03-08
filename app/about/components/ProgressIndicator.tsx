@@ -21,16 +21,16 @@ export function ProgressIndicator({
       role="tablist"
       aria-label="Gallery navigation"
       style={{
-        position: "absolute",
-        bottom: "2rem",
+        position: "fixed",
+        bottom: "60px",
         left: "50%",
         transform: "translateX(-50%)",
-        zIndex: 20,
+        zIndex: 40,
         display: "flex",
         alignItems: "center",
         gap: "0.75rem",
         padding: "0.75rem 1.25rem",
-        background: "rgba(14, 14, 12, 0.6)",
+        background: "rgba(14, 14, 12, 0.7)",
         backdropFilter: "blur(12px)",
         borderRadius: "24px",
         border: `1px solid ${galleryTheme.colors.muted}30`,

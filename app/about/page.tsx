@@ -91,10 +91,10 @@ function KeyboardHint() {
       transition={prefersReducedMotion ? { duration: 0 } : { delay: 1, duration: 0.5 }}
       style={{
         position: "fixed",
-        bottom: "6rem",
+        bottom: "110px",
         left: "50%",
         transform: "translateX(-50%)",
-        zIndex: 30,
+        zIndex: 35,
         display: "flex",
         alignItems: "center",
         gap: "1rem",

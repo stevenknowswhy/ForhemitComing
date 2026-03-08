@@ -126,27 +126,27 @@ export function GalleryItem({
         animate={getCardState()}
         style={{
           width: "100%",
-          maxWidth: "1200px",
-          maxHeight: "min(80vh, 900px)",
+          height: "100%",
+          maxWidth: "1400px",
           display: "flex",
           flexDirection: "column",
-          borderRadius: "16px",
+          borderRadius: "12px",
           overflow: "hidden",
-          background: "rgba(26, 18, 9, 0.8)",
+          background: "rgba(26, 18, 9, 0.9)",
           boxShadow: isActive
-            ? "0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(139, 90, 43, 0.2)"
-            : "0 10px 30px -10px rgba(0, 0, 0, 0.3)",
+            ? "0 25px 80px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(139, 90, 43, 0.15)"
+            : "0 10px 40px -15px rgba(0, 0, 0, 0.4)",
           contain: "layout style paint",
         }}
       >
-        {/* Image Container - Fixed 16:9 Aspect Ratio */}
+        {/* Image Container - Fills available space */}
         <div
           className="gallery-image-wrapper"
           style={{
             position: "relative",
             width: "100%",
-            aspectRatio: "16 / 9",
-            flexShrink: 0,
+            flex: "1 1 auto",
+            minHeight: 0,
             overflow: "hidden",
             background: `linear-gradient(135deg, ${galleryTheme.colors.muted}20 0%, ${galleryTheme.colors.backgroundSecondary}40 100%)`,
           }}
