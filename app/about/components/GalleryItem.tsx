@@ -247,6 +247,43 @@ export function GalleryItem({
           >
             {slide.subtitle}
           </motion.p>
+
+          {/* CTA Button */}
+          <motion.a
+            href="/introduction?join=true"
+            variants={textVariants}
+            initial="hidden"
+            animate={isActive ? "visible" : "hidden"}
+            custom={3}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: "1.5rem",
+              padding: "0.875rem 2rem",
+              fontFamily: galleryTheme.fonts.mono,
+              fontSize: "0.7rem",
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              color: galleryTheme.colors.textPrimary,
+              background: "transparent",
+              border: `1px solid ${galleryTheme.colors.accent}`,
+              borderRadius: "4px",
+              textDecoration: "none",
+              cursor: "pointer",
+              transition: "all 0.3s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = galleryTheme.colors.accent;
+              e.currentTarget.style.color = "#0e0e0c";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = galleryTheme.colors.textPrimary;
+            }}
+          >
+            Schedule a discussion today
+          </motion.a>
         </div>
       </motion.div>
     </motion.article>
