@@ -17,52 +17,42 @@ export function GalleryItem({
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  // Smooth slide animation variants - slower and more elegant
+  // Smooth slide animation - entering slides over exiting
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? "100%" : "-100%",
-      opacity: 0.5,
-      scale: 0.9,
     }),
     center: {
       x: 0,
-      opacity: 1,
-      scale: 1,
       transition: {
-        x: { type: "spring" as const, stiffness: 120, damping: 25, mass: 1 },
-        opacity: { duration: prefersReducedMotion ? 0 : 0.5 },
-        scale: { duration: prefersReducedMotion ? 0 : 0.5 },
+        x: { type: "spring" as const, stiffness: 100, damping: 28, mass: 1.2 },
       },
     },
     exit: (direction: number) => ({
       x: direction < 0 ? "100%" : "-100%",
-      opacity: 0.3,
-      scale: 0.9,
       transition: {
-        x: { type: "spring" as const, stiffness: 120, damping: 25, mass: 1 },
-        opacity: { duration: prefersReducedMotion ? 0 : 0.4 },
-        scale: { duration: prefersReducedMotion ? 0 : 0.4 },
+        x: { type: "spring" as const, stiffness: 100, damping: 28, mass: 1.2 },
       },
     }),
   };
 
-  // Card scale variants - subtle depth effect
+  // Card scale variants with z-index layering
   const cardVariants = {
     active: {
       scale: 1,
       opacity: 1,
-      filter: "brightness(1)",
+      zIndex: 10,
       transition: {
-        duration: prefersReducedMotion ? 0 : 0.6,
+        duration: prefersReducedMotion ? 0 : 0.5,
         ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
     adjacent: {
-      scale: 0.95,
-      opacity: 0.4,
-      filter: "brightness(0.6)",
+      scale: 0.92,
+      opacity: 0,
+      zIndex: 1,
       transition: {
-        duration: prefersReducedMotion ? 0 : 0.6,
+        duration: prefersReducedMotion ? 0 : 0.4,
         ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
@@ -117,8 +107,8 @@ export function GalleryItem({
           display: "flex",
           flexDirection: "column",
           overflow: "hidden",
-          background: "rgba(26, 18, 9, 0.95)",
-          contain: "layout style paint",
+          background: "#0e0e0c",
+          isolation: "isolate",
         }}
       >
         {/* Image Container - Fills available space */}
