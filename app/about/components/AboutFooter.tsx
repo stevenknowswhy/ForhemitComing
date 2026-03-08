@@ -12,12 +12,13 @@ export function AboutFooter() {
     <footer
       className="about-footer"
       style={{
-        position: "absolute",
+        position: "fixed",
         bottom: 0,
         left: 0,
         right: 0,
-        zIndex: 10,
-        padding: "1.5rem",
+        zIndex: 30,
+        height: "40px",
+        padding: "0 1.5rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

@@ -127,15 +127,11 @@ export function GalleryItem({
         style={{
           width: "100%",
           height: "100%",
-          maxWidth: "1400px",
+          maxWidth: "1600px",
           display: "flex",
           flexDirection: "column",
-          borderRadius: "12px",
           overflow: "hidden",
-          background: "rgba(26, 18, 9, 0.9)",
-          boxShadow: isActive
-            ? "0 25px 80px -20px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(139, 90, 43, 0.15)"
-            : "0 10px 40px -15px rgba(0, 0, 0, 0.4)",
+          background: "rgba(26, 18, 9, 0.95)",
           contain: "layout style paint",
         }}
       >
