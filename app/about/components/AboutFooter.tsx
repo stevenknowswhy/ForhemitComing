@@ -24,8 +24,8 @@ export function AboutFooter() {
         alignItems: "center",
         justifyContent: "center",
         gap: "0.75rem",
-        background: `linear-gradient(to top, ${galleryTheme.colors.background} 0%, transparent 100%)`,
-        pointerEvents: "none", // Let clicks pass through to gallery
+        background: "rgba(14, 14, 12, 0.95)",
+        borderTop: `1px solid ${galleryTheme.colors.muted}20`,
       }}
     >
       <div

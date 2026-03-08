@@ -112,7 +112,7 @@ export function GalleryItem({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "2rem",
+        padding: 0,
         willChange: isActive ? "transform, opacity" : "auto",
       }}
       aria-hidden={!isActive}

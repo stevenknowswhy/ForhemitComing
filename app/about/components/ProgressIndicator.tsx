@@ -22,7 +22,7 @@ export function ProgressIndicator({
       aria-label="Gallery navigation"
       style={{
         position: "fixed",
-        bottom: "48px",
+        bottom: "52px",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 40,
