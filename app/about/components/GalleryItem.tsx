@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { GalleryItemProps } from "../types/gallery";
-import { galleryTheme } from "../lib/galleryData";
+import { galleryTheme, getImageCredit } from "../lib/galleryData";
 
 /**
  * Individual gallery slide component
@@ -192,10 +192,13 @@ export function GalleryItem({
             onLoad={(e) => {
               // Fade in image when loaded
               const img = e.currentTarget as HTMLImageElement;
-              img.style.transition = "opacity 0.5s ease";
+              img.style.transition = "opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
               img.style.opacity = "1";
             }}
           />
+
+          {/* Image credit */}
+          <ImageCredit slideId={slide.id} isActive={isActive} />
 
           {/* Accent tag overlay */}
           {slide.accent && (
@@ -274,5 +277,50 @@ export function GalleryItem({
         </div>
       </motion.div>
     </motion.article>
+  );
+}
+
+/**
+ * Image Credit Component - Shows Unsplash photographer attribution
+ */
+function ImageCredit({ slideId, isActive }: { slideId: string; isActive: boolean }) {
+  const credit = getImageCredit(slideId);
+
+  return (
+    <motion.a
+      href={credit.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="image-credit"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: isActive ? 0.7 : 0 }}
+      transition={{ delay: 0.5, duration: 0.3 }}
+      style={{
+        position: "absolute",
+        bottom: "1rem",
+        right: "1rem",
+        fontFamily: galleryTheme.fonts.mono,
+        fontSize: "0.6rem",
+        letterSpacing: "0.05em",
+        color: "#f5f0e8",
+        textDecoration: "none",
+        padding: "0.35rem 0.75rem",
+        background: "rgba(14, 14, 12, 0.6)",
+        backdropFilter: "blur(4px)",
+        borderRadius: "4px",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        transition: "opacity 0.3s ease",
+        pointerEvents: isActive ? "auto" : "none",
+        zIndex: 10,
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.opacity = "1";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.opacity = "0.7";
+      }}
+    >
+      Photo by {credit.photographer}
+    </motion.a>
   );
 }

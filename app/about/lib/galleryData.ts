@@ -1,17 +1,17 @@
 /**
  * Gallery Data - Content configuration for About page slides
- * Phase 1: Placeholder content (colored divs with text)
- * Phase 2: Replace with actual storytelling content
+ * Uses curated Unsplash images for premium visual experience
  */
 
 import { GallerySlide } from "../types/gallery";
+import { curatedGalleryImages, getGalleryImage, getImageCredit } from "./unsplash";
 
 export const gallerySlides: GallerySlide[] = [
   {
     id: "origin",
     index: 0,
-    image: "/gallery/placeholder-1.jpg",
-    imageAlt: "Our origin story",
+    image: curatedGalleryImages[0].url,
+    imageAlt: curatedGalleryImages[0].alt,
     title: "Where It Began",
     subtitle: "A vision to transform how exceptional talent connects with purpose-driven capital. Every great movement starts with a single insight.",
     accent: "Chapter One",
@@ -19,8 +19,8 @@ export const gallerySlides: GallerySlide[] = [
   {
     id: "philosophy",
     index: 1,
-    image: "/gallery/placeholder-2.jpg",
-    imageAlt: "Our investment philosophy",
+    image: curatedGalleryImages[1].url,
+    imageAlt: curatedGalleryImages[1].alt,
     title: "The Philosophy",
     subtitle: "We don't just invest in companies. We invest in people who see what others don't. Conviction over consensus, always.",
     accent: "Our Approach",
@@ -28,8 +28,8 @@ export const gallerySlides: GallerySlide[] = [
   {
     id: "process",
     index: 2,
-    image: "/gallery/placeholder-3.jpg",
-    imageAlt: "Our selection process",
+    image: curatedGalleryImages[2].url,
+    imageAlt: curatedGalleryImages[2].alt,
     title: "Rigorous Selection",
     subtitle: "Less than 3% of applicants make it through. We seek the exceptional—the outliers who redefine what's possible.",
     accent: "The Standard",
@@ -37,8 +37,8 @@ export const gallerySlides: GallerySlide[] = [
   {
     id: "partnership",
     index: 3,
-    image: "/gallery/placeholder-4.jpg",
-    imageAlt: "Partnership model",
+    image: curatedGalleryImages[3].url,
+    imageAlt: curatedGalleryImages[3].alt,
     title: "True Partnership",
     subtitle: "Capital is just the beginning. We provide strategic guidance, operational expertise, and a network built over decades.",
     accent: "Beyond Capital",
@@ -46,13 +46,16 @@ export const gallerySlides: GallerySlide[] = [
   {
     id: "future",
     index: 4,
-    image: "/gallery/placeholder-5.jpg",
-    imageAlt: "Looking forward",
+    image: curatedGalleryImages[4].url,
+    imageAlt: curatedGalleryImages[4].alt,
     title: "The Future",
     subtitle: "We're building something that lasts. A new model where talent and capital create value that extends far beyond returns.",
     accent: "What's Next",
   },
 ];
+
+// Export helper functions for image handling
+export { getGalleryImage, getImageCredit };
 
 // Theme configuration matching home page aesthetic
 export const galleryTheme = {
