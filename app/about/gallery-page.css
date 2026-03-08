@@ -178,6 +178,10 @@
   opacity: 1 !important;
 }
 
+.about-logo {
+  position: relative;
+}
+
 .about-logo:hover .logo-underline {
   width: 100% !important;
 }
@@ -255,23 +259,6 @@
     transform: translateX(-50%) translateY(10px);
     pointer-events: none;
   }
-}
-
-/* ── Header ── */
-.about-header {
-  transition: opacity 0.3s ease;
-}
-
-.about-header:hover {
-  opacity: 1 !important;
-}
-
-.about-logo {
-  position: relative;
-}
-
-.about-logo:hover .logo-underline {
-  width: 100% !important;
 }
 
 /* ── Footer ── */
