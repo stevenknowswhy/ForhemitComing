@@ -127,7 +127,7 @@
 .gallery-image-wrapper {
   position: relative;
   overflow: hidden;
-  flex: 1 1 auto;
+  flex-shrink: 0;
 }
 
 .gallery-image-wrapper img {
