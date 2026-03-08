@@ -12,44 +12,58 @@ import { galleryTheme, getImageCredit } from "../lib/galleryData";
 export function GalleryItem({
   slide,
   isActive,
+  isAdjacent,
   direction,
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
 
-  // Animation variants for slide transitions
+  // Smooth slide animation variants - slower and more elegant
   const slideVariants = {
     enter: (direction: number) => ({
       x: direction > 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 0.85,
+      opacity: 0.5,
+      scale: 0.9,
     }),
     center: {
       x: 0,
       opacity: 1,
       scale: 1,
-      transition: prefersReducedMotion
-        ? { duration: 0 }
-        : galleryTheme.animation.slideTransition,
+      transition: {
+        x: { type: "spring" as const, stiffness: 120, damping: 25, mass: 1 },
+        opacity: { duration: prefersReducedMotion ? 0 : 0.5 },
+        scale: { duration: prefersReducedMotion ? 0 : 0.5 },
+      },
     },
     exit: (direction: number) => ({
       x: direction < 0 ? "100%" : "-100%",
-      opacity: 0,
-      scale: 0.85,
-      transition: prefersReducedMotion
-        ? { duration: 0 }
-        : { ...galleryTheme.animation.slideTransition, stiffness: 400 },
+      opacity: 0.3,
+      scale: 0.9,
+      transition: {
+        x: { type: "spring" as const, stiffness: 120, damping: 25, mass: 1 },
+        opacity: { duration: prefersReducedMotion ? 0 : 0.4 },
+        scale: { duration: prefersReducedMotion ? 0 : 0.4 },
+      },
     }),
   };
 
-  // Card animation - only active state, clean transitions
+  // Card scale variants - subtle depth effect
   const cardVariants = {
     active: {
       scale: 1,
       opacity: 1,
+      filter: "brightness(1)",
       transition: {
-        type: "spring" as const,
-        stiffness: 300,
-        damping: 30,
+        duration: prefersReducedMotion ? 0 : 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      },
+    },
+    adjacent: {
+      scale: 0.95,
+      opacity: 0.4,
+      filter: "brightness(0.6)",
+      transition: {
+        duration: prefersReducedMotion ? 0 : 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
       },
     },
   };
@@ -95,10 +109,7 @@ export function GalleryItem({
       <motion.div
         className="gallery-card"
         variants={cardVariants}
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate="active"
-        exit={{ scale: 0.95, opacity: 0 }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.4 }}
+        animate={isActive ? "active" : "adjacent"}
         style={{
           width: "100%",
           height: "100%",

@@ -34,6 +34,7 @@ export interface GalleryContextValue {
 export interface GalleryItemProps {
   slide: GallerySlide;
   isActive: boolean;
+  isAdjacent: boolean;
   direction: number;
   index: number;
 }
