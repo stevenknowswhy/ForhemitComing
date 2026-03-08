@@ -156,8 +156,8 @@ function SlideDots({
   return (
     <div
       style={{
-        position: "absolute",
-        bottom: "calc(40% + 1rem)",
+        position: "fixed",
+        bottom: "140px",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 25,
