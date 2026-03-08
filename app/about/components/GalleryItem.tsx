@@ -111,14 +111,14 @@ export function GalleryItem({
           isolation: "isolate",
         }}
       >
-        {/* Image Container - Fills available space */}
+        {/* Image Container - 55% of card height */}
         <div
           className="gallery-image-wrapper"
           style={{
             position: "relative",
             width: "100%",
-            flex: "1 1 auto",
-            minHeight: 0,
+            height: "55%",
+            flexShrink: 0,
             overflow: "hidden",
             background: `linear-gradient(135deg, ${galleryTheme.colors.muted}20 0%, ${galleryTheme.colors.backgroundSecondary}40 100%)`,
           }}

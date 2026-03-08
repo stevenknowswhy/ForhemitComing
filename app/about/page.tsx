@@ -157,7 +157,7 @@ function SlideDots({
     <div
       style={{
         position: "fixed",
-        bottom: "140px",
+        bottom: "42%",
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: 25,
