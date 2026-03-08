@@ -171,6 +171,9 @@ export function GalleryContainer({ slides }: GalleryContainerProps) {
                 isAdjacent={isAdjacent}
                 direction={state.direction}
                 index={index}
+                totalSlides={totalSlides}
+                currentIndex={state.currentIndex}
+                onSelect={goToSlide}
               />
             );
           })}

@@ -37,6 +37,9 @@ export interface GalleryItemProps {
   isAdjacent: boolean;
   direction: number;
   index: number;
+  totalSlides: number;
+  currentIndex: number;
+  onSelect: (index: number) => void;
 }
 
 export interface GalleryContainerProps {

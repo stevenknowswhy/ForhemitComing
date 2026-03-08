@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import {
   AboutHeader,
   AboutFooter,
   GalleryContainer,
-  ProgressIndicator,
 } from "./components";
 import { gallerySlides } from "./lib";
 import "./gallery-page.css";
@@ -16,18 +15,7 @@ import "./gallery-page.css";
  * Premium gallery experience with swipe, drag, and keyboard navigation
  */
 export default function About() {
-  const [currentIndex, setCurrentIndex] = useState(0);
   const prefersReducedMotion = useReducedMotion();
-
-  // Handle slide changes from progress indicator
-  const handleSlideSelect = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
-
-  // Update current index when gallery changes
-  const handleGalleryChange = useCallback((index: number) => {
-    setCurrentIndex(index);
-  }, []);
 
   return (
     <div className="about-gallery-wrapper">
@@ -57,13 +45,6 @@ export default function About() {
           }
         >
           <GalleryContainer slides={gallerySlides} />
-
-          {/* Progress Indicator */}
-          <ProgressIndicator
-            total={gallerySlides.length}
-            current={currentIndex}
-            onSelect={handleSlideSelect}
-          />
         </motion.div>
       </main>
 
