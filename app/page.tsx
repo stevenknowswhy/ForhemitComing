@@ -98,19 +98,6 @@ export default function Home() {
       
       <main className="hero">
         <div className="container">
-          <div className="logo-wrapper">
-            <svg width="80" height="80" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" id="logo">
-              <rect width="100" height="100" rx="20" fill="url(#logo-gradient)"/>
-              <path d="M35 75V25H65V35H45V45H60V55H45V75H35Z" fill="white"/>
-              <defs>
-                <linearGradient id="logo-gradient" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#FF6B00"/>
-                  <stop offset="1" stopColor="#FF3D00"/>
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-          
           <h1 className="brand-title">FORHEMIT</h1>
           <p className="brand-subtitle">PRIVATE EQUITY</p>
           
