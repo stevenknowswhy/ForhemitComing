@@ -249,16 +249,24 @@ export function GalleryItem({
           </motion.p>
 
           {/* CTA Button */}
-          <motion.a
-            href="/introduction?join=true"
+          <motion.div
             variants={textVariants}
             initial="hidden"
             animate={isActive ? "visible" : "hidden"}
             custom={3}
-            className="gallery-cta-button"
+            style={{
+              display: "flex",
+              justifyContent: "flex-end",
+              marginTop: "1.5rem",
+            }}
           >
-            <span className="gallery-cta-text">Schedule a discussion today</span>
-          </motion.a>
+            <a
+              href="/introduction?join=true"
+              className="gallery-cta-button"
+            >
+              Schedule a discussion today
+            </a>
+          </motion.div>
         </div>
       </motion.div>
     </motion.article>
