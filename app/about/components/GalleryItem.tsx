@@ -264,6 +264,7 @@ export function GalleryItem({
               lineHeight: 1.7,
               color: galleryTheme.colors.textSecondary,
               width: "100%",
+              whiteSpace: "pre-line",
             }}
           >
             {slide.subtitle}

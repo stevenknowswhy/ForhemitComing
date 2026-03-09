@@ -54,7 +54,7 @@ export const gallerySlides: GallerySlide[] = [
     imageAlt: curatedGalleryImages[4].alt,
     title: "Who Benefits",
     subtitleAccent: "Aligned Success",
-    subtitle: "Sellers preserve their name and legacy. Employees gain ownership and long-term security. Investors earn reliable returns from healthy companies. Communities keep the businesses they depend on.",
+    subtitle: "Sellers preserve their name and legacy.\nEmployees gain ownership and long-term security.\nInvestors earn reliable returns from healthy companies.\nMid-market businesses, the backbone in most neighborhoods, stays in the community.",
     accent: "What's Next",
   },
 ];
