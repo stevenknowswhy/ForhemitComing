@@ -10,6 +10,16 @@ import {
 import { gallerySlides, galleryTheme } from "./lib";
 import "./gallery-page.css";
 
+// PDF data for each slide
+const slidePDFs = [
+  { title: "The COOP Standard for Business Continuity", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { title: "Our PBC Charter & Social Impact Framework", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { title: "The AI Perfect Storm: Why Ownership is the Ultimate Hedge", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { title: "The Investor Thesis: Resilience as an Asset Class", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { title: "The Employee Ownership Transition Framework", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { title: "The Continuity Pledge: Our Commitment to Community", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+];
+
 /**
  * About Page - Full-screen interactive gallery
  * Premium gallery experience with swipe, drag, and keyboard navigation
@@ -132,12 +142,82 @@ export default function About() {
         </a>
       </div>
 
+      {/* PDF Download Button - Outside gallery, based on current slide */}
+      <PDFDownloadButton currentIndex={currentIndex} />
+
       {/* Footer */}
       <AboutFooter />
 
       {/* Keyboard Navigation Hint - Shows briefly on load */}
       <KeyboardHint />
     </div>
+  );
+}
+
+/**
+ * PDF Download Button - Displays based on current slide, positioned outside gallery
+ */
+function PDFDownloadButton({ currentIndex }: { currentIndex: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+  const pdf = slidePDFs[currentIndex];
+
+  if (!pdf) return null;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      key={currentIndex}
+      transition={{ duration: 0.3 }}
+      style={{
+        position: "fixed",
+        bottom: "90px",
+        right: "2rem",
+        zIndex: 40,
+      }}
+    >
+      <button
+        onClick={() => window.open(pdf.url, "_blank")}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{
+          fontFamily: galleryTheme.fonts.mono,
+          fontSize: "0.65rem",
+          fontWeight: 500,
+          letterSpacing: "0.08em",
+          textTransform: "uppercase",
+          color: isHovered ? "#ffffff" : galleryTheme.colors.textPrimary,
+          background: isHovered
+            ? `linear-gradient(135deg, ${galleryTheme.colors.accent} 0%, ${galleryTheme.colors.accentLight} 100%)`
+            : `linear-gradient(135deg, ${galleryTheme.colors.muted}30 0%, ${galleryTheme.colors.muted}20 100%)`,
+          border: `1px solid ${isHovered ? galleryTheme.colors.accent : galleryTheme.colors.muted}40`,
+          borderRadius: "8px",
+          padding: "0.75rem 1.25rem",
+          cursor: "pointer",
+          display: "inline-flex",
+          alignItems: "center",
+          gap: "0.5rem",
+          transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+          boxShadow: isHovered
+            ? `0 4px 20px rgba(255, 107, 0, 0.3)`
+            : "0 2px 8px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        <span>Download PDF</span>
+      </button>
+    </motion.div>
   );
 }
 
