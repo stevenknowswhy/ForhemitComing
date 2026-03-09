@@ -10,36 +10,36 @@ import {
 import { gallerySlides, galleryTheme } from "./lib";
 import "./gallery-page.css";
 
-// PDF data for each slide
+// PDF data for each slide - matches gallery titles
 const slidePDFs = [
   { 
-    cardTitle: "Protecting Your Referral Reputation",
-    buttonText: "Download PDF: The Broker's Guide to PBC Stewardship",
+    cardTitle: "From Disaster Response to Business Resilience",
+    buttonText: "Download PDF: The COOP Standard for Business Continuity",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
   { 
-    cardTitle: "Certainty of Execution: The 24-Hour Folder",
-    buttonText: "Download PDF: The Forhemit Diligence & Closing Protocol",
+    cardTitle: "The Public Benefit Mandate",
+    buttonText: "Download PDF: Our PBC Charter & Social Impact Framework",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
   { 
-    cardTitle: "Solving the \"Reluctant Seller\" Problem",
-    buttonText: "Download PDF: Navigating the Emotional Exit: A Toolkit for Brokers",
+    cardTitle: "The AI Shield: Ownership as Defense",
+    buttonText: "Download PDF: The AI Perfect Storm: Why Ownership is the Ultimate Hedge",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
   { 
-    cardTitle: "Pre-Vetted Structural Alpha",
-    buttonText: "Download PDF: Technical Memo: SBA 50 10 8 & ESOP Compliance",
+    cardTitle: "For the Investors: The Stewardship Alpha",
+    buttonText: "Download PDF: The Investor Thesis: Resilience as an Asset Class",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
   { 
-    cardTitle: "Future-Proofing the Asset: The AI Shield",
-    buttonText: "Download PDF: The AI Shield: Protecting Lower-Middle Market Assets",
+    cardTitle: "For the Employees: The IKEA Effect of Equity",
+    buttonText: "Download PDF: The Employee Ownership Transition Framework",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
   { 
-    cardTitle: "Respectable Returns, Rooted in Reality",
-    buttonText: "Download PDF: The Stewardship Dividend: ROI through Resilience",
+    cardTitle: "For the Community: The Continuity Pledge",
+    buttonText: "Download PDF: The Continuity Pledge: Our Commitment to Community",
     url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
   },
 ];
