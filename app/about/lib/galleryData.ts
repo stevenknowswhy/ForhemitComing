@@ -57,6 +57,16 @@ export const gallerySlides: GallerySlide[] = [
     subtitle: "Sellers preserve their name and legacy.\nEmployees gain ownership and long-term security.\nInvestors earn reliable returns from healthy companies.\nMid-market businesses, the backbone in most neighborhoods, stays in the community.",
     accent: "What's Next",
   },
+  {
+    id: "disaster",
+    index: 5,
+    image: curatedGalleryImages[5].url,
+    imageAlt: curatedGalleryImages[5].alt,
+    title: "Built by Disaster Planners",
+    subtitleAccent: "Patience Forged in Crisis",
+    subtitle: "Our founder spent years in Disaster Planning and Policy, identifying systemic vulnerabilities and creating mitigation strategies to save lives. That same pattern-recognition powers our approach: a demographic cliff, tightening credit markets, AI disruption, is a disaster not waiting to happen but IS happening right now. Our approach is a systematic process for mitigating that disaster using private equity as the life boat that will save millions of jobs.",
+    accent: "Our Foundation",
+  },
 ];
 
 // Export helper functions for image handling

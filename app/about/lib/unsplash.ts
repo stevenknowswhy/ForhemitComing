@@ -35,6 +35,12 @@ export const galleryImageQueries = [
     orientation: "landscape" as const,
     fallback: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1200&q=80",
   },
+  {
+    id: "disaster",
+    query: "storm preparation crisis management planning",
+    orientation: "landscape" as const,
+    fallback: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=1200&q=80",
+  },
 ];
 
 // Curated Unsplash image URLs that match our premium aesthetic
@@ -79,6 +85,14 @@ export const curatedGalleryImages = [
     alt: "City skyline at sunset representing future vision",
     credit: "Ben O'Bro",
     creditUrl: "https://unsplash.com/@benobro",
+  },
+  {
+    id: "disaster",
+    url: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=200&q=60&auto=format&fit=crop",
+    alt: "Storm approaching with dark moody atmosphere",
+    credit: "Dennis M",
+    creditUrl: "https://unsplash.com/@dennis_m",
   },
 ];
 
