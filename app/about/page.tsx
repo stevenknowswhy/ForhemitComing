@@ -232,24 +232,37 @@ function PDFDownloadRow({ currentIndex }: { currentIndex: number }) {
           letterSpacing: "0.08em",
           textTransform: "uppercase",
           color: isHovered ? "#ffffff" : galleryTheme.colors.textPrimary,
-          background: isHovered
-            ? `linear-gradient(135deg, ${galleryTheme.colors.accent} 0%, ${galleryTheme.colors.accentLight} 100%)`
-            : `linear-gradient(135deg, ${galleryTheme.colors.muted}30 0%, ${galleryTheme.colors.muted}20 100%)`,
-          border: `1px solid ${isHovered ? galleryTheme.colors.accent : galleryTheme.colors.muted}40`,
+          background: `linear-gradient(135deg, ${galleryTheme.colors.muted}30 0%, ${galleryTheme.colors.muted}20 100%)`,
+          border: `1px solid ${galleryTheme.colors.muted}40`,
           borderRadius: "8px",
           padding: "0.75rem 1.25rem",
           cursor: "pointer",
           display: "inline-flex",
           alignItems: "center",
           gap: "0.5rem",
-          transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-          boxShadow: isHovered
-            ? `0 4px 20px rgba(255, 107, 0, 0.3)`
-            : "0 2px 8px rgba(0, 0, 0, 0.1)",
+          transition: "color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease",
+          position: "relative",
+          overflow: "hidden",
           maxWidth: "90%",
           textAlign: "center",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
         }}
       >
+        {/* Sliding gradient overlay */}
+        <span
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: isHovered ? "100%" : "0%",
+            background: `linear-gradient(90deg, #FF6B00 0%, #FF8C33 50%, #FF6B00 100%)`,
+            backgroundSize: "200% 100%",
+            transition: "width 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+            zIndex: 0,
+          }}
+        />
+        {/* Icon and text with higher z-index */}
         <svg
           width="16"
           height="16"
@@ -257,13 +270,17 @@ function PDFDownloadRow({ currentIndex }: { currentIndex: number }) {
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
-          style={{ flexShrink: 0 }}
+          style={{
+            flexShrink: 0,
+            position: "relative",
+            zIndex: 1,
+          }}
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v4" />
           <polyline points="7 10 12 15 17 10" />
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
-        <span>{pdf.buttonText}</span>
+        <span style={{ position: "relative", zIndex: 1 }}>{pdf.buttonText}</span>
       </button>
     </motion.div>
   );
