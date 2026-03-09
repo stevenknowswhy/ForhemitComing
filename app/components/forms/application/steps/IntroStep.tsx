@@ -17,7 +17,7 @@ export function IntroStep({ onContinue }: IntroStepProps) {
       <div className="button-row">
         <div></div>
         <button className="nav-link-btn continue-link" onClick={onContinue}>
-          Let&apos;s begin
+          View Open Positions
         </button>
       </div>
     </div>
