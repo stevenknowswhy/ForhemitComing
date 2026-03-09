@@ -1,10 +1,16 @@
 /**
  * Unsplash API Integration
- * Fetches high-quality images for the gallery
+ * Fetches high-quality images for gallery
  */
 
 // Gallery image configuration with search queries for each slide
 export const galleryImageQueries = [
+  {
+    id: "saving-jobs",
+    query: "community workers collaborating business team",
+    orientation: "landscape" as const,
+    fallback: "https://images.unsplash.com/photo-1531487518136-9191d7a9a9af?w=1200&q=80",
+  },
   {
     id: "origin",
     query: "modern architecture interior luxury minimal",
@@ -39,7 +45,7 @@ export const galleryImageQueries = [
     id: "disaster",
     query: "storm preparation crisis management planning",
     orientation: "landscape" as const,
-    fallback: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=1200&q=80",
+    fallback: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
   },
 ];
 
@@ -47,15 +53,23 @@ export const galleryImageQueries = [
 // Using direct URLs with specific photo IDs for reliability
 export const curatedGalleryImages = [
   {
-    id: "origin",
-    url: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=85&auto=format&fit=crop",
-    thumb: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=200&q=60&auto=format&fit=crop",
-    alt: "Luxury modern interior with warm lighting",
-    credit: "R architecture",
-    creditUrl: "https://unsplash.com/@rarchitecture",
+    id: "saving-jobs",
+    url: "https://images.unsplash.com/photo-1531487518136-9191d7a9a9af?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1531487518136-9191d7a9a9af?w=200&q=60&auto=format&fit=crop",
+    alt: "Community of workers collaborating together",
+    credit: "Antenna",
+    creditUrl: "https://unsplash.com/@antenna",
   },
   {
-    id: "philosophy",
+    id: "disaster-response",
+    url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&q=60&auto=format&fit=crop",
+    alt: "Strategic planning with analytical approach",
+    credit: "Jorge Diaz",
+    creditUrl: "https://unsplash.com/@jorge_diaz",
+  },
+  {
+    id: "public-benefit",
     url: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=60&auto=format&fit=crop",
     alt: "Abstract bronze and gold geometric forms",
@@ -63,15 +77,15 @@ export const curatedGalleryImages = [
     creditUrl: "https://unsplash.com/@pawel_czerwinski",
   },
   {
-    id: "process",
-    url: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=1600&q=85&auto=format&fit=crop",
-    thumb: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?w=200&q=60&auto=format&fit=crop",
-    alt: "Precision craftsmanship and attention to detail",
-    credit: "Daniel von Appen",
-    creditUrl: "https://unsplash.com/@dvna",
+    id: "ai-shield",
+    url: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=200&q=60&auto=format&fit=crop",
+    alt: "Technology and security concept",
+    credit: "Towfiqu barbhuiya",
+    creditUrl: "https://unsplash.com/@towfiqu99999999",
   },
   {
-    id: "partnership",
+    id: "investor-thesis",
     url: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=200&q=60&auto=format&fit=crop",
     alt: "Professional partnership and collaboration",
@@ -79,20 +93,20 @@ export const curatedGalleryImages = [
     creditUrl: "https://unsplash.com/@linkedinsalesnavigator",
   },
   {
-    id: "future",
+    id: "employee-equity",
+    url: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&q=60&auto=format&fit=crop",
+    alt: "Team building and collaboration",
+    credit: "Christina @ wocintechchat",
+    creditUrl: "https://unsplash.com/@wocintech",
+  },
+  {
+    id: "community-pledge",
     url: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1600&q=85&auto=format&fit=crop",
     thumb: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=200&q=60&auto=format&fit=crop",
     alt: "City skyline at sunset representing future vision",
-    credit: "Ben O'Bro",
+    credit: "Ben O\'Bro",
     creditUrl: "https://unsplash.com/@benobro",
-  },
-  {
-    id: "disaster",
-    url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=85&auto=format&fit=crop",
-    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&q=60&auto=format&fit=crop",
-    alt: "Strategic planning with analytical approach",
-    credit: "Jorge Diaz",
-    creditUrl: "https://unsplash.com/@jorge_diaz",
   },
 ];
 
@@ -166,7 +180,7 @@ interface UnsplashPhoto {
 
 /**
  * Fetch photos from Unsplash API
- * Note: This requires the access key to be set in environment variables
+ * Note: This requires an access key to be set in environment variables
  */
 export async function fetchUnsplashPhotos(
   query: string,

@@ -2,8 +2,9 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 import { GalleryItemProps } from "../types/gallery";
-import { galleryTheme, getImageCredit } from "../lib/galleryData";
+import { galleryTheme, getImageCredit, gallerySlides } from "../lib/galleryData";
 
 /**
  * Individual gallery slide component
@@ -16,6 +17,8 @@ export function GalleryItem({
   direction,
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   // Smooth slide animation - entering slides over exiting
   const slideVariants = {
@@ -94,7 +97,7 @@ export function GalleryItem({
       aria-hidden={!isActive}
       role="group"
       aria-roledescription="slide"
-      aria-label={`${slide.index + 1} of ${5}: ${slide.title}`}
+      aria-label={`${slide.index + 1} of ${gallerySlides.length}: ${slide.title}`}
     >
       <motion.div
         className="gallery-card"
@@ -118,6 +121,7 @@ export function GalleryItem({
             position: "relative",
             width: "100%",
             height: "55%",
+            minHeight: "300px",
             flexShrink: 0,
             overflow: "hidden",
             background: `linear-gradient(135deg, ${galleryTheme.colors.muted}20 0%, ${galleryTheme.colors.backgroundSecondary}40 100%)`,
@@ -160,14 +164,11 @@ export function GalleryItem({
             sizes="(max-width: 768px) 100vw, 80vw"
             style={{
               objectFit: "cover",
-              opacity: 0, // Hide until loaded - placeholder shows through
+              opacity: imageLoaded && !imageError ? 1 : 0,
+              transition: "opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
             }}
-            onLoad={(e) => {
-              // Fade in image when loaded
-              const img = e.currentTarget as HTMLImageElement;
-              img.style.transition = "opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-              img.style.opacity = "1";
-            }}
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageError(true)}
           />
 
           {/* Image credit */}

@@ -152,15 +152,7 @@
   pointer-events: none;
 }
 
-/* Image loading state */
-.gallery-image-wrapper img {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-
-.gallery-image-wrapper img[src]:not([src=""]) {
-  opacity: 1;
-}
+/* Image loading state - controlled by React state in GalleryItem.tsx */
 
 /* Content area containment */
 .gallery-content {
