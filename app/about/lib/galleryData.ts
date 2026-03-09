@@ -52,8 +52,9 @@ export const gallerySlides: GallerySlide[] = [
     index: 4,
     image: curatedGalleryImages[4].url,
     imageAlt: curatedGalleryImages[4].alt,
-    title: "The Future",
-    subtitle: "We're building something that lasts. A new model where talent and capital create value that extends far beyond returns.",
+    title: "Who Benefits",
+    subtitleAccent: "Aligned Success",
+    subtitle: "Sellers preserve their name and legacy. Employees gain ownership and long-term security. Investors earn reliable returns from healthy companies. Communities keep the businesses they depend on.",
     accent: "What's Next",
   },
 ];
