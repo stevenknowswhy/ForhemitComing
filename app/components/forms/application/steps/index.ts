@@ -1,4 +1,5 @@
 export { IntroStep } from "./IntroStep";
+export { PositionsStep } from "./PositionsStep";
 export { NameStep } from "./NameStep";
 export { EmailStep } from "./EmailStep";
 export { PhoneStep } from "./PhoneStep";

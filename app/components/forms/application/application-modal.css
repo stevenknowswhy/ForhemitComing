@@ -108,6 +108,24 @@
     min-height: 550px;
     max-height: 90vh;
   }
+
+  .modal-grid.image-top {
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: none;
+  }
+
+  .modal-grid.image-top .modal-image-side {
+    min-height: 200px;
+    max-height: 200px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .modal-grid.image-top .modal-form-side {
+    padding: 2rem 3rem 2.5rem;
+  }
 }
 
 /* Modal Image */
@@ -275,6 +293,132 @@
   text-transform: uppercase;
   color: var(--primary-orange);
   margin-bottom: 1.5rem;
+}
+
+/* Positions Table */
+.positions-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.positions-table thead {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.positions-table th {
+  text-align: left;
+  padding: 1rem 0.75rem 0.5rem;
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted-text);
+}
+
+.positions-table td {
+  padding: 1rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: top;
+}
+
+.positions-table tr:last-child td {
+  border-bottom: none;
+}
+
+.position-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--light-text);
+  min-width: 200px;
+}
+
+.position-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--muted-text);
+  line-height: 1.5;
+}
+
+.position-status {
+  text-align: center;
+  min-width: 100px;
+}
+
+.status-link {
+  background: none;
+  border: none;
+  color: var(--primary-orange);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.status-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--primary-orange);
+  transition: width 0.3s ease;
+}
+
+.status-link:hover::after {
+  width: 100%;
+}
+
+.status-link:hover {
+  color: var(--primary-red);
+}
+
+.status-closed {
+  color: var(--muted-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .positions-table thead {
+    display: none;
+  }
+
+  .positions-table tbody tr {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .positions-table td {
+    border-bottom: none;
+    padding: 0.25rem 0;
+  }
+
+  .position-title {
+    font-size: 1rem;
+    font-weight: 600;
+    min-width: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .position-description {
+    font-size: 0.875rem;
+  }
+
+  .position-status {
+    text-align: left;
+    min-width: auto;
+    padding-top: 0.75rem;
+  }
 }
 
 .step-description {

@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { ProgressBar } from "./components/ProgressBar";
-import { IntroStep, NameStep, EmailStep, PhoneStep, PositionStep, PreviewStep, SuccessStep } from "./steps";
+import { IntroStep, PositionsStep, NameStep, EmailStep, PhoneStep, PositionStep, PreviewStep, SuccessStep } from "./steps";
 import { ApplicationData, TOTAL_STEPS } from "./types";
 
 interface ApplicationModalProps {
@@ -24,6 +24,7 @@ const INITIAL_FORM_DATA: ApplicationData = {
 export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
   const router = useRouter();
   const [step, setStep] = useState(1);
+  const [selectedPosition, setSelectedPosition] = useState<string>("");
   const [formData, setFormData] = useState<ApplicationData>(INITIAL_FORM_DATA);
   const [submitWithoutResume, setSubmitWithoutResume] = useState(false);
 
@@ -32,6 +33,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
 
   const handleClose = () => {
     setStep(1);
+    setSelectedPosition("");
     setFormData(INITIAL_FORM_DATA);
     setSubmitWithoutResume(false);
     onClose();
@@ -44,9 +46,9 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
 
   const canProceed = useCallback(() => {
     switch (step) {
-      case 2: return !!(formData.firstName.trim() && formData.lastName.trim());
-      case 3: return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
-      case 4: return formData.phone.replace(/\D/g, "").length === 10;
+      case 3: return !!(formData.firstName.trim() && formData.lastName.trim());
+      case 4: return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email);
+      case 5: return formData.phone.replace(/\D/g, "").length === 10;
       default: return true;
     }
   }, [step, formData]);
@@ -61,7 +63,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
     if (e.key === "Escape") {
       handleClose();
     }
-    if (e.key === "Enter" && step >= 2 && step <= 4) {
+    if (e.key === "Enter" && step >= 3 && step <= 5) {
       e.preventDefault();
       if (canProceed()) nextStep();
     }
@@ -85,7 +87,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
       <div className="modal-content">
         <ProgressBar currentStep={step} />
 
-        <div className="modal-grid">
+        <div className={`modal-grid ${step === 2 ? 'image-top' : ''}`}>
           <div className="modal-image-side">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
@@ -93,8 +95,22 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
 
           <div className="modal-form-side">
             {step === 1 && <IntroStep onContinue={nextStep} />}
-            
+
             {step === 2 && (
+              <PositionsStep
+                onBack={prevStep}
+                onContinue={nextStep}
+                onSelectPosition={(position) => {
+                  setSelectedPosition(position);
+                  // Map position names to match POSITIONS array
+                  const mappedPosition = position.replace(" (COO)", "");
+                  setFormData(prev => ({ ...prev, position: mappedPosition }));
+                  nextStep();
+                }}
+              />
+            )}
+
+            {step === 3 && (
               <NameStep
                 firstName={formData.firstName}
                 lastName={formData.lastName}
@@ -105,7 +121,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 3 && (
+            {step === 4 && (
               <EmailStep
                 email={formData.email}
                 onChange={(value) => updateFormField("email", value)}
@@ -115,7 +131,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 4 && (
+            {step === 5 && (
               <PhoneStep
                 phone={formData.phone}
                 onChange={(value) => updateFormField("phone", value)}
@@ -125,7 +141,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 5 && (
+            {step === 6 && (
               <PositionStep
                 position={formData.position}
                 otherPosition={formData.otherPosition}
@@ -142,7 +158,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 6 && (
+            {step === 7 && (
               <PreviewStep
                 formData={formData}
                 onSubmit={nextStep}
@@ -150,7 +166,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 7 && <SuccessStep onClose={handleClose} />}
+            {step === 8 && <SuccessStep onClose={handleClose} />}
           </div>
         </div>
       </div>
