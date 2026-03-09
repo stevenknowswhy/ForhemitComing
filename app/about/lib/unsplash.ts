@@ -88,11 +88,11 @@ export const curatedGalleryImages = [
   },
   {
     id: "disaster",
-    url: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=1600&q=85&auto=format&fit=crop",
-    thumb: "https://images.unsplash.com/photo-1533578442541-5c4645232ca0?w=200&q=60&auto=format&fit=crop",
-    alt: "Storm approaching with dark moody atmosphere",
-    credit: "Dennis M",
-    creditUrl: "https://unsplash.com/@dennis_m",
+    url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=85&auto=format&fit=crop",
+    thumb: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=200&q=60&auto=format&fit=crop",
+    alt: "Strategic planning with analytical approach",
+    credit: "Jorge Diaz",
+    creditUrl: "https://unsplash.com/@jorge_diaz",
   },
 ];
 
