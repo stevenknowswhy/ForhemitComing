@@ -23,7 +23,8 @@ export const gallerySlides: GallerySlide[] = [
     image: curatedGalleryImages[1].url,
     imageAlt: curatedGalleryImages[1].alt,
     title: "The Philosophy",
-    subtitle: "We don't just invest in companies. We invest in people who see what others don't. Conviction over consensus, always.",
+    subtitleAccent: "The AI Disruption Is Already Here",
+    subtitle: "Artificial intelligence isn't a future problem — it's a present reality reshaping every industry. In the coming years, millions of jobs will be transformed or eliminated. Workers without equity, without ownership, without a stake in companies they serve will be most vulnerable. A paycheck is no longer a safety net.",
     accent: "Our Approach",
   },
   {
