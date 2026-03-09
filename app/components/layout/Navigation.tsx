@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 interface NavigationProps {
@@ -7,16 +8,76 @@ interface NavigationProps {
 }
 
 export function Navigation({ variant = "dark" }: NavigationProps) {
-  const isDark = variant === "dark";
+  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Close menu on escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("keydown", handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen]);
 
   return (
-    <nav className={`minimal-nav ${isDark ? "" : "light-nav"}`}>
-      <Link href="/about" className="nav-link">
-        About
-      </Link>
-      <Link href="/introduction" className="nav-link">
-        Introduction
-      </Link>
+    <nav className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`} ref={menuRef}>
+      {/* Hamburger Menu Button */}
+      <button
+        className={`hamburger-btn ${isOpen ? "open" : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label="Toggle menu"
+        aria-expanded={isOpen}
+      >
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+        <span className="hamburger-line"></span>
+      </button>
+
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div className="nav-dropdown">
+          <Link
+            href="/about"
+            className="nav-dropdown-item"
+            onClick={() => setIsOpen(false)}
+          >
+            About
+          </Link>
+          <Link
+            href="/introduction"
+            className="nav-dropdown-item"
+            onClick={() => setIsOpen(false)}
+          >
+            Introduction
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
