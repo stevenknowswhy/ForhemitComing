@@ -32,7 +32,7 @@ function HomeContent() {
       <main className="hero">
         <div className="container">
           <h1 className="brand-title">FORHEMIT</h1>
-          <p className="brand-corporation">A Private Benefit Corporation</p>
+          <p className="brand-corporation">A Public Benefit Corporation</p>
           <p className="brand-subtitle">PRIVATE EQUITY</p>
 
           {showEmailInput && (
