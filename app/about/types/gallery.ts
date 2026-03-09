@@ -9,6 +9,7 @@ export interface GallerySlide {
   imageAlt: string;
   title: string;
   subtitle: string;
+  subtitleAccent?: string;
   accent?: string;
 }
 

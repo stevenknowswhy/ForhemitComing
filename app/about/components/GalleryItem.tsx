@@ -230,19 +230,40 @@ export function GalleryItem({
             {slide.title}
           </motion.h2>
 
+          {slide.subtitleAccent && (
+            <motion.p
+              className="gallery-subtitle-accent"
+              variants={textVariants}
+              initial="hidden"
+              animate={isActive ? "visible" : "hidden"}
+              custom={2}
+              style={{
+                fontFamily: galleryTheme.fonts.mono,
+                fontSize: "0.75rem",
+                fontWeight: 400,
+                letterSpacing: "0.15em",
+                textTransform: "uppercase",
+                color: galleryTheme.colors.accent,
+                marginBottom: "1rem",
+              }}
+            >
+              {slide.subtitleAccent}
+            </motion.p>
+          )}
+
           <motion.p
             className="gallery-subtitle"
             variants={textVariants}
             initial="hidden"
             animate={isActive ? "visible" : "hidden"}
-            custom={2}
+            custom={slide.subtitleAccent ? 3 : 2}
             style={{
               fontFamily: galleryTheme.fonts.body,
               fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
               fontWeight: 300,
               lineHeight: 1.7,
               color: galleryTheme.colors.textSecondary,
-              maxWidth: "600px",
+              width: "100%",
             }}
           >
             {slide.subtitle}

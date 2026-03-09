@@ -8,12 +8,13 @@ import { curatedGalleryImages, getGalleryImage, getImageCredit } from "./unsplas
 
 export const gallerySlides: GallerySlide[] = [
   {
-    id: "origin",
+    id: "tidal-wave",
     index: 0,
     image: curatedGalleryImages[0].url,
     imageAlt: curatedGalleryImages[0].alt,
-    title: "Where It Began",
-    subtitle: "A vision to transform how exceptional talent connects with purpose-driven capital. Every great movement starts with a single insight.",
+    title: "The $10 Trillion Tidal Wave",
+    subtitleAccent: "The Transfer No One Is Ready For",
+    subtitle: "A generational transfer of ownership is coming. Most founder led companies have no clear succession plan or exit. Without Buyers, trillions in value with millions of jobs will simply disappear. There are not enough Buyers to take over the number of businesses coming up for sale.",
     accent: "Chapter One",
   },
   {
