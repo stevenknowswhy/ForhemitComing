@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
+import { useState } from "react";
 import { GalleryItemProps } from "../types/gallery";
 import { galleryTheme, getImageCredit } from "../lib/galleryData";
 
@@ -16,6 +17,24 @@ export function GalleryItem({
   direction,
 }: GalleryItemProps) {
   const prefersReducedMotion = useReducedMotion();
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Parse subtitle to extract PDF download text
+  const parseSubtitle = (subtitle: string) => {
+    const pdfMatch = subtitle.match(/\[Download PDF: (.+?)\]/);
+    if (pdfMatch) {
+      return {
+        content: subtitle.replace(/\[Download PDF: .+?\]/, "").trim(),
+        pdfText: pdfMatch[1],
+      };
+    }
+    return {
+      content: subtitle,
+      pdfText: null,
+    };
+  };
+
+  const parsedSubtitle = parseSubtitle(slide.subtitle);
 
   // Smooth slide animation - entering slides over exiting
   const slideVariants = {
@@ -209,6 +228,9 @@ export function GalleryItem({
             padding: "2rem",
             background: galleryTheme.colors.backgroundSecondary,
             borderTop: `1px solid ${galleryTheme.colors.muted}40`,
+            flex: "1",
+            display: "flex",
+            flexDirection: "column",
           }}
         >
           <motion.h2
@@ -265,10 +287,67 @@ export function GalleryItem({
               color: galleryTheme.colors.textSecondary,
               width: "100%",
               whiteSpace: "pre-line",
+              marginBottom: parsedSubtitle.pdfText ? "1.5rem" : "0",
             }}
           >
-            {slide.subtitle}
+            {parsedSubtitle.content}
           </motion.p>
+
+          {/* PDF Download Button */}
+          {parsedSubtitle.pdfText && isActive && (
+            <motion.button
+              className="pdf-download-btn"
+              variants={textVariants}
+              initial="hidden"
+              animate="visible"
+              custom={4}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={() => {
+                window.open("https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS", "_blank");
+              }}
+              style={{
+                fontFamily: galleryTheme.fonts.mono,
+                fontSize: "0.65rem",
+                fontWeight: 500,
+                letterSpacing: "0.08em",
+                textTransform: "uppercase",
+                color: isHovered ? "#ffffff" : galleryTheme.colors.textPrimary,
+                background: isHovered
+                  ? `linear-gradient(135deg, ${galleryTheme.colors.accent} 0%, ${galleryTheme.colors.accentLight} 100%)`
+                  : `linear-gradient(135deg, ${galleryTheme.colors.muted}30 0%, ${galleryTheme.colors.muted}20 100%)`,
+                border: `1px solid ${isHovered ? galleryTheme.colors.accent : galleryTheme.colors.muted}40`,
+                borderRadius: "8px",
+                padding: "0.75rem 1.25rem",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                boxShadow: isHovered
+                  ? `0 4px 20px rgba(255, 107, 0, 0.3)`
+                  : "0 2px 8px rgba(0, 0, 0, 0.1)",
+                maxWidth: "100%",
+              }}
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                style={{
+                  flexShrink: 0,
+                }}
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+              <span>Download PDF</span>
+            </motion.button>
+          )}
         </div>
       </motion.div>
     </motion.article>
