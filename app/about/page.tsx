@@ -12,12 +12,36 @@ import "./gallery-page.css";
 
 // PDF data for each slide
 const slidePDFs = [
-  { title: "The COOP Standard for Business Continuity", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
-  { title: "Our PBC Charter & Social Impact Framework", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
-  { title: "The AI Perfect Storm: Why Ownership is the Ultimate Hedge", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
-  { title: "The Investor Thesis: Resilience as an Asset Class", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
-  { title: "The Employee Ownership Transition Framework", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
-  { title: "The Continuity Pledge: Our Commitment to Community", url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" },
+  { 
+    cardTitle: "Protecting Your Referral Reputation",
+    buttonText: "Download PDF: The Broker's Guide to PBC Stewardship",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
+  { 
+    cardTitle: "Certainty of Execution: The 24-Hour Folder",
+    buttonText: "Download PDF: The Forhemit Diligence & Closing Protocol",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
+  { 
+    cardTitle: "Solving the \"Reluctant Seller\" Problem",
+    buttonText: "Download PDF: Navigating the Emotional Exit: A Toolkit for Brokers",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
+  { 
+    cardTitle: "Pre-Vetted Structural Alpha",
+    buttonText: "Download PDF: Technical Memo: SBA 50 10 8 & ESOP Compliance",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
+  { 
+    cardTitle: "Future-Proofing the Asset: The AI Shield",
+    buttonText: "Download PDF: The AI Shield: Protecting Lower-Middle Market Assets",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
+  { 
+    cardTitle: "Respectable Returns, Rooted in Reality",
+    buttonText: "Download PDF: The Stewardship Dividend: ROI through Resilience",
+    url: "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+  },
 ];
 
 /**
@@ -73,6 +97,9 @@ export default function About() {
           />
         </motion.div>
       </main>
+
+      {/* PDF Download Button Row - Above CTA links, centered */}
+      <PDFDownloadRow currentIndex={currentIndex} />
 
       {/* CTA Link Row - Above Footer */}
       <div
@@ -142,9 +169,6 @@ export default function About() {
         </a>
       </div>
 
-      {/* PDF Download Button - Outside gallery, based on current slide */}
-      <PDFDownloadButton currentIndex={currentIndex} />
-
       {/* Footer */}
       <AboutFooter />
 
@@ -155,9 +179,9 @@ export default function About() {
 }
 
 /**
- * PDF Download Button - Displays based on current slide, positioned outside gallery
+ * PDF Download Row - Centered above CTA links, displays card title and download button
  */
-function PDFDownloadButton({ currentIndex }: { currentIndex: number }) {
+function PDFDownloadRow({ currentIndex }: { currentIndex: number }) {
   const [isHovered, setIsHovered] = useState(false);
   const pdf = slidePDFs[currentIndex];
 
@@ -172,10 +196,31 @@ function PDFDownloadButton({ currentIndex }: { currentIndex: number }) {
       style={{
         position: "fixed",
         bottom: "90px",
-        right: "2rem",
+        left: 0,
+        right: 0,
         zIndex: 40,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "0.5rem",
       }}
     >
+      {/* Card Title */}
+      <span
+        style={{
+          fontFamily: galleryTheme.fonts.heading,
+          fontSize: "0.7rem",
+          fontWeight: 500,
+          letterSpacing: "0.1em",
+          textTransform: "uppercase",
+          color: galleryTheme.colors.textSecondary,
+        }}
+      >
+        {pdf.cardTitle}
+      </span>
+      
+      {/* Download Button */}
       <button
         onClick={() => window.open(pdf.url, "_blank")}
         onMouseEnter={() => setIsHovered(true)}
@@ -201,6 +246,8 @@ function PDFDownloadButton({ currentIndex }: { currentIndex: number }) {
           boxShadow: isHovered
             ? `0 4px 20px rgba(255, 107, 0, 0.3)`
             : "0 2px 8px rgba(0, 0, 0, 0.1)",
+          maxWidth: "90%",
+          textAlign: "center",
         }}
       >
         <svg
@@ -210,12 +257,13 @@ function PDFDownloadButton({ currentIndex }: { currentIndex: number }) {
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
+          style={{ flexShrink: 0 }}
         >
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v4" />
           <polyline points="7 10 12 15 17 10" />
           <line x1="12" y1="15" x2="12" y2="3" />
         </svg>
-        <span>Download PDF</span>
+        <span>{pdf.buttonText}</span>
       </button>
     </motion.div>
   );
