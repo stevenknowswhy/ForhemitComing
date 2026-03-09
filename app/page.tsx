@@ -33,7 +33,7 @@ function HomeContent() {
         <div className="container">
           <h1 className="brand-title">FORHEMIT</h1>
           <p className="brand-corporation">A Public Benefit Corporation</p>
-          <p className="brand-subtitle">PRIVATE EQUITY</p>
+          <p className="brand-subtitle">STEWARDSHIP MANAGEMENT</p>
 
           {showEmailInput && (
             <EarlyAccessForm

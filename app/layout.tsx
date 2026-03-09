@@ -30,7 +30,7 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'Forhemit Capital',
-  description: 'Private Equity Built for Continuity, Not Extraction',
+  description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
 }
 
 export default function RootLayout({

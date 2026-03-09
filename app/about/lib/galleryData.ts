@@ -34,7 +34,7 @@ export const gallerySlides: GallerySlide[] = [
     imageAlt: curatedGalleryImages[2].alt,
     title: "The Public Benefit Mandate",
     subtitleAccent: "Legacy is Our Legal Requirement",
-    subtitle: "We are not a traditional private equity firm; we are a Public Benefit Corporation. This means we are legally chartered to prioritize the health of our businesses, the welfare of their employees, and the stability of their communities. We don't \"strip and flip\"—we inherit and improve. Our mandate is to build healthy businesses that stay rooted exactly where they were built.\n\n[Download PDF: Our PBC Charter & Social Impact Framework]",
+    subtitle: "We are not a traditional stewardship management organization; we are a Public Benefit Corporation. This means we are legally chartered to prioritize the health of our businesses, the welfare of their employees, and the stability of their communities. We don't \"strip and flip\"—we inherit and improve. Our mandate is to build healthy businesses that stay rooted exactly where they were built.\n\n[Download PDF: Our PBC Charter & Social Impact Framework]",
     accent: "Our Approach",
   },
   {
@@ -74,7 +74,7 @@ export const gallerySlides: GallerySlide[] = [
     imageAlt: curatedGalleryImages[6].alt,
     title: "For Community: The Continuity Pledge",
     subtitleAccent: "Protecting Local Engine",
-    subtitle: "When a local business is sold to traditional private equity, jobs and taxes often leave the community. Our Continuity Pledge is a commitment to keeping businesses rooted in their neighborhoods. We preserve \"tribal knowledge\" of the founder and ensure that that business remains an anchor of the local economy for the next twenty years and beyond.\n\n[Download PDF: The Continuity Pledge: Our Commitment to Community]",
+    subtitle: "When a local business is sold to traditional buyers, jobs and taxes often leave the community. Our Continuity Pledge is a commitment to keeping businesses rooted in their neighborhoods. We preserve \"tribal knowledge\" of the founder and ensure that that business remains an anchor of the local economy for the next twenty years and beyond.\n\n[Download PDF: The Continuity Pledge: Our Commitment to Community]",
     accent: "Our Foundation",
   },
 ];
