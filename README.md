@@ -54,7 +54,7 @@ uploadthing.ts            # UploadThing file router config
 ### Homepage
 - Animated mesh gradient background (dark brown theme)
 - Minimalist navigation (About, Introduction)
-- "Join the Movement" recruitment modal
+- "Join Our Movement" recruitment modal
 - "Get Early Access" email capture
 - Responsive design optimized for mobile-first
 

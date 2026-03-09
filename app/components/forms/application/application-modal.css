@@ -267,6 +267,16 @@
   }
 }
 
+.step-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary-orange);
+  margin-bottom: 1.5rem;
+}
+
 .step-description {
   color: var(--muted-text);
   line-height: 1.6;

@@ -118,7 +118,7 @@ export default function Introduction() {
                 </svg>
               </div>
               <div className="card-text">
-                <h2 className="card-title">Join the Movement</h2>
+                <h2 className="card-title">Join Our Movement</h2>
                 <p className="card-description">
                   Become part of our team and help shape the future of private equity
                 </p>
