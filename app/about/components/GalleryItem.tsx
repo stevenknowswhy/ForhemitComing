@@ -303,7 +303,8 @@ export function GalleryItem({
               custom={4}
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 window.open("https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdj8XYzeLAZPcI2XFHu8ORonq6MaQyfrGUBxS", "_blank");
               }}
               style={{
@@ -328,6 +329,9 @@ export function GalleryItem({
                   ? `0 4px 20px rgba(255, 107, 0, 0.3)`
                   : "0 2px 8px rgba(0, 0, 0, 0.1)",
                 maxWidth: "100%",
+                pointerEvents: "auto",
+                position: "relative",
+                zIndex: 100,
               }}
             >
               <svg

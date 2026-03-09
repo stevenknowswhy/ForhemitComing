@@ -136,11 +136,13 @@ export function GalleryContainer({ slides, currentIndex, onSlideChange }: Galler
         drag={isSingleSlide ? false : "x"}
         dragConstraints={{ left: 0, right: 0 }}
         dragElastic={0.1}
+        dragListener={true}
         {...dragProps}
         style={{
           position: "relative",
           width: "100%",
           height: "100%",
+          pointerEvents: "auto",
         }}
       >
         <AnimatePresence initial={false} custom={direction} mode="popLayout">
