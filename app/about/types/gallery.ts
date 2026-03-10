@@ -11,6 +11,7 @@ export interface GallerySlide {
   subtitle: string;
   subtitleAccent?: string;
   accent?: string;
+  extendedContent?: string; // Full content for "Read More" modal
 }
 
 export interface GalleryState {

@@ -1,8 +1,8 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useState } from "react";
+import React, { useState } from "react";
 import { GalleryItemProps } from "../types/gallery";
 import { galleryTheme, getImageCredit, gallerySlides } from "../lib/galleryData";
 
@@ -19,6 +19,7 @@ export function GalleryItem({
   const prefersReducedMotion = useReducedMotion();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Smooth slide animation - entering slides over exiting
   const slideVariants = {
@@ -269,14 +270,264 @@ export function GalleryItem({
               color: galleryTheme.colors.textSecondary,
               width: "100%",
               whiteSpace: "pre-line",
-              marginBottom: 0,
+              marginBottom: slide.extendedContent ? "1rem" : 0,
             }}
           >
             {slide.subtitle.replace(/\[Download PDF: .+?\]/, "").trim()}
           </motion.p>
+
+          {/* Read More Button */}
+          {slide.extendedContent && (
+            <motion.button
+              variants={textVariants}
+              initial="hidden"
+              animate={isActive ? "visible" : "hidden"}
+              custom={slide.subtitleAccent ? 4 : 3}
+              onClick={() => setIsModalOpen(true)}
+              style={{
+                fontFamily: galleryTheme.fonts.mono,
+                fontSize: "0.7rem",
+                fontWeight: 500,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: galleryTheme.colors.accent,
+                background: "transparent",
+                border: `1px solid ${galleryTheme.colors.accent}50`,
+                borderRadius: "4px",
+                padding: "0.6rem 1.2rem",
+                cursor: "pointer",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                transition: "all 0.3s ease",
+                alignSelf: "flex-start",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = `${galleryTheme.colors.accent}15`;
+                e.currentTarget.style.borderColor = galleryTheme.colors.accent;
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.borderColor = `${galleryTheme.colors.accent}50`;
+              }}
+            >
+              Read More
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </motion.button>
+          )}
         </div>
+
+        {/* Extended Content Modal */}
+        <AnimatePresence>
+          {isModalOpen && slide.extendedContent && (
+            <ExtendedContentModal
+              title={slide.title}
+              content={slide.extendedContent}
+              onClose={() => setIsModalOpen(false)}
+            />
+          )}
+        </AnimatePresence>
       </motion.div>
     </motion.article>
+  );
+}
+
+/**
+ * Extended Content Modal - Displays full article content
+ */
+function ExtendedContentModal({
+  title,
+  content,
+  onClose,
+}: {
+  title: string;
+  content: string;
+  onClose: () => void;
+}) {
+  // Parse markdown-like content
+  const parseContent = (text: string) => {
+    const lines = text.split("\n");
+    const elements: React.ReactElement[] = [];
+    let key = 0;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed) {
+        elements.push(<div key={key++} style={{ height: "1rem" }} />);
+      } else if (trimmed.startsWith("## ")) {
+        elements.push(
+          <h3
+            key={key++}
+            style={{
+              fontFamily: galleryTheme.fonts.heading,
+              fontSize: "1.1rem",
+              fontWeight: 600,
+              color: galleryTheme.colors.textPrimary,
+              marginTop: "1.5rem",
+              marginBottom: "0.75rem",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            {trimmed.replace("## ", "")}
+          </h3>
+        );
+      } else if (trimmed.startsWith("### ")) {
+        elements.push(
+          <h4
+            key={key++}
+            style={{
+              fontFamily: galleryTheme.fonts.heading,
+              fontSize: "0.95rem",
+              fontWeight: 600,
+              color: galleryTheme.colors.accent,
+              marginTop: "1.25rem",
+              marginBottom: "0.5rem",
+            }}
+          >
+            {trimmed.replace("### ", "")}
+          </h4>
+        );
+      } else if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
+        elements.push(
+          <p
+            key={key++}
+            style={{
+              fontFamily: galleryTheme.fonts.body,
+              fontSize: "0.9rem",
+              fontWeight: 600,
+              color: galleryTheme.colors.textPrimary,
+              marginBottom: "0.5rem",
+              lineHeight: 1.5,
+            }}
+          >
+            {trimmed.replace(/\*\*/g, "")}
+          </p>
+        );
+      } else {
+        elements.push(
+          <p
+            key={key++}
+            style={{
+              fontFamily: galleryTheme.fonts.body,
+              fontSize: "0.9rem",
+              fontWeight: 300,
+              color: galleryTheme.colors.textSecondary,
+              marginBottom: "0.75rem",
+              lineHeight: 1.7,
+            }}
+          >
+            {trimmed}
+          </p>
+        );
+      }
+    }
+    return elements;
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      style={{
+        position: "fixed",
+        inset: 0,
+        zIndex: 100,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem",
+        background: "rgba(14, 14, 12, 0.85)",
+        backdropFilter: "blur(12px)",
+      }}
+      onClick={onClose}
+    >
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 20 }}
+        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+        style={{
+          width: "100%",
+          maxWidth: "700px",
+          maxHeight: "80vh",
+          background: "#0e0e0c",
+          borderRadius: "12px",
+          border: `1px solid ${galleryTheme.colors.muted}40`,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header */}
+        <div
+          style={{
+            padding: "1.5rem 2rem",
+            borderBottom: `1px solid ${galleryTheme.colors.muted}30`,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            flexShrink: 0,
+          }}
+        >
+          <h2
+            style={{
+              fontFamily: galleryTheme.fonts.heading,
+              fontSize: "1.25rem",
+              fontWeight: 600,
+              color: galleryTheme.colors.textPrimary,
+              letterSpacing: "-0.01em",
+              margin: 0,
+            }}
+          >
+            {title}
+          </h2>
+          <button
+            onClick={onClose}
+            style={{
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              background: "transparent",
+              border: `1px solid ${galleryTheme.colors.muted}50`,
+              color: galleryTheme.colors.textSecondary,
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = `${galleryTheme.colors.muted}30`;
+              e.currentTarget.style.color = galleryTheme.colors.textPrimary;
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "transparent";
+              e.currentTarget.style.color = galleryTheme.colors.textSecondary;
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
+
+        {/* Modal Content */}
+        <div
+          style={{
+            padding: "2rem",
+            overflowY: "auto",
+            flex: 1,
+          }}
+        >
+          {parseContent(content)}
+        </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
