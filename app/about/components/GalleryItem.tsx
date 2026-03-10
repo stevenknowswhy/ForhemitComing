@@ -2,7 +2,8 @@
 
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { GalleryItemProps } from "../types/gallery";
 import { galleryTheme, getImageCredit, gallerySlides } from "../lib/galleryData";
 
@@ -319,18 +320,41 @@ export function GalleryItem({
           )}
         </div>
 
-        {/* Extended Content Modal */}
-        <AnimatePresence>
-          {isModalOpen && slide.extendedContent && (
-            <ExtendedContentModal
-              title={slide.title}
-              content={slide.extendedContent}
-              onClose={() => setIsModalOpen(false)}
-            />
-          )}
-        </AnimatePresence>
+        {/* Extended Content Modal - Rendered via Portal */}
+        <ModalPortal isOpen={isModalOpen && !!slide.extendedContent}>
+          <ExtendedContentModal
+            title={slide.title}
+            content={slide.extendedContent || ""}
+            onClose={() => setIsModalOpen(false)}
+          />
+        </ModalPortal>
       </motion.div>
     </motion.article>
+  );
+}
+
+/**
+ * Modal Portal - Renders modal outside the gallery container
+ * This is needed because position:fixed doesn't work inside transformed elements
+ */
+function ModalPortal({
+  children,
+  isOpen,
+}: {
+  children: React.ReactNode;
+  isOpen: boolean;
+}) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted || !isOpen) return null;
+
+  return createPortal(
+    <AnimatePresence>{children}</AnimatePresence>,
+    document.body
   );
 }
 
