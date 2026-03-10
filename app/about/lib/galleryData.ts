@@ -14,7 +14,7 @@ export const gallerySlides: GallerySlide[] = [
     imageAlt: curatedGalleryImages[0].alt,
     title: "Your Legacy Deserves Better",
     subtitleAccent: "The real risk isn't choosing the wrong option. It's assuming you'll even get one.",
-    subtitle: "You have built something special. We ensure it stays that way. We help business owners move to their next chapter by turning their trusted team into new owners. It's best way to ensure that business—and your legacy—stays strong for long haul.",
+    subtitle: "Here's what your broker probably won't tell you: 80% of businesses that go to market never sell. Not because the business wasn't good enough — but because for every 50 businesses listed for sale, there's only one qualified buyer. And with Baby Boomers retiring in record numbers over the next decade, that gap is about to get dramatically worse.\n\nFor most owners that means one thing: you wait for a buyer who never comes. Then you close the doors. Your employees lose their jobs. Your culture disappears. And everything you spent your life building — gone.\n\nBut the most qualified buyer you'll ever find is already in the building. You see them every day. Your employees know this business, believe in it, and have a stake in its future — and we help you sell it to them. All of it. 100% employee owned. Their jobs are protected. The culture you built survives. And instead of walking away hoping for the best, you leave knowing you gave the people who helped build it a real future.\n\nIt's an option you may not have known existed. We'd love to talk about whether it's the right one for you.",
     accent: "Our Mission",
   },
   {
