@@ -263,7 +263,7 @@ export function GalleryItem({
             custom={slide.subtitleAccent ? 3 : 2}
             style={{
               fontFamily: galleryTheme.fonts.body,
-              fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
+              fontSize: "clamp(0.8rem, 1.5vw, 0.95rem)",
               fontWeight: 300,
               lineHeight: 1.7,
               color: galleryTheme.colors.textSecondary,
