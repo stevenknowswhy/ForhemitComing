@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import "../components/layout/navigation.css";
@@ -10,6 +11,14 @@ export default function AboutPage() {
   return (
     <div className="about-wrapper">
       <div className="about-background"></div>
+      
+      {/* Logo Header */}
+      <header className="about-logo-header">
+        <Link href="/" className="about-logo-link">
+          <span className="about-logo-text">Forhemit</span>
+          <span className="about-logo-underline"></span>
+        </Link>
+      </header>
       
       <Navigation />
       
