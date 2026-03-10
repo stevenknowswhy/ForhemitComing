@@ -108,20 +108,19 @@ export function GalleryItem({
           height: "100%",
           maxWidth: "1600px",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           overflow: "hidden",
           background: "#0e0e0c",
           isolation: "isolate",
         }}
       >
-        {/* Image Container - 55% of card height */}
+        {/* Image Container - Left column */}
         <div
           className="gallery-image-wrapper"
           style={{
             position: "relative",
-            width: "100%",
-            height: "55%",
-            minHeight: "300px",
+            width: "50%",
+            height: "100%",
             flexShrink: 0,
             overflow: "hidden",
             background: `linear-gradient(135deg, ${galleryTheme.colors.muted}20 0%, ${galleryTheme.colors.backgroundSecondary}40 100%)`,
@@ -203,16 +202,17 @@ export function GalleryItem({
           )}
         </div>
 
-        {/* Content Area */}
+        {/* Content Area - Right column */}
         <div
           className="gallery-content"
           style={{
-            padding: "2rem",
+            padding: "2.5rem",
             background: galleryTheme.colors.backgroundSecondary,
-            borderTop: `1px solid ${galleryTheme.colors.muted}40`,
-            flex: "1",
+            borderLeft: `1px solid ${galleryTheme.colors.muted}40`,
+            width: "50%",
             display: "flex",
             flexDirection: "column",
+            justifyContent: "center",
           }}
         >
           <motion.h2

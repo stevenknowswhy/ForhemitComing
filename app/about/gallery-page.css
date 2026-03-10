@@ -115,6 +115,25 @@
   justify-content: center;
 }
 
+/* Two-column layout: vertical stack on mobile, side-by-side on desktop */
+@media (max-width: 900px) {
+  .gallery-card {
+    flex-direction: column !important;
+  }
+  
+  .gallery-image-wrapper {
+    width: 100% !important;
+    height: 45% !important;
+  }
+  
+  .gallery-content {
+    width: 100% !important;
+    height: 55% !important;
+    border-left: none !important;
+    border-top: 1px solid var(--gallery-muted) !important;
+  }
+}
+
 .gallery-card {
   will-change: transform, filter;
   backface-visibility: hidden;
@@ -343,6 +362,7 @@
 
   .gallery-content {
     padding: 1.25rem !important;
+    justify-content: flex-start !important;
   }
 
   .progress-indicator {

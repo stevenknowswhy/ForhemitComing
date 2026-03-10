@@ -13,7 +13,7 @@ import "./gallery-page.css";
 // PDF data for each slide - matches gallery titles
 const slidePDFs = [
   { 
-    cardTitle: "We help business owners who built something worth protecting hand it to the people who helped build it",
+    cardTitle: "Your Legacy Deserves Better",
     buttonText: "More about us",
     url: "#" 
   },
