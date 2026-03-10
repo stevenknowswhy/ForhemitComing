@@ -223,7 +223,7 @@ export function GalleryItem({
             custom={1}
             style={{
               fontFamily: galleryTheme.fonts.heading,
-              fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
+              fontSize: "clamp(1.4rem, 3vw, 2rem)",
               fontWeight: 600,
               letterSpacing: "-0.02em",
               color: galleryTheme.colors.textPrimary,
