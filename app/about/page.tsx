@@ -2,6 +2,8 @@
 
 import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
+import "../components/layout/navigation.css";
+import "../components/layout/footer.css";
 import "./about-page.css";
 
 export default function AboutPage() {
