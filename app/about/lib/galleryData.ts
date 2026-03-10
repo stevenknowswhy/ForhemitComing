@@ -13,7 +13,7 @@ export const gallerySlides: GallerySlide[] = [
     image: curatedGalleryImages[0].url,
     imageAlt: curatedGalleryImages[0].alt,
     title: "Your Legacy Deserves Better",
-    subtitleAccent: "The real risk isn't choosing the wrong option. It's assuming you'll even get one.",
+    subtitleAccent: "The real risk isn't choosing the wrong option. It's assuming you have one.",
     subtitle: "Here's a secret your broker won't tell you: today, 70-80% of businesses that go to market never sell. Not because they were bad. It's because for every 50 businesses for sale, there is roughly one qualified buyer. And with millions of Baby Boomers retiring over the next decade, that ratio is about to get much worse.\n\nDo the math. What happens when you're ready to retire, and there is no buyer waiting? Your employees lose their jobs. Your business vanishes from the community. Everything you've spent decades building ends with a \"Closed\" sign on the door.\n\nBut there is a better option.\n\nA buyer who already knows your business, your customers, and your culture. Because you hired them.\n\nWe help you transition your company to 100% employee ownership. You get the payout you've earned. They get the future they deserve.\n\nAnd the company you spent your life building doesn't end with a \"Closed\" sign. It begins your legacy.",
     accent: "Our Mission",
   },
