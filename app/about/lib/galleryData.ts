@@ -13,7 +13,7 @@ export const gallerySlides: GallerySlide[] = [
     image: curatedGalleryImages[0].url,
     imageAlt: curatedGalleryImages[0].alt,
     title: "Your Legacy Deserves Better",
-    subtitleAccent: "Putting Your Business in Hands You Trust Most",
+    subtitleAccent: "The real risk isn't choosing the wrong option. It's assuming you'll even get one.",
     subtitle: "You have built something special. We ensure it stays that way. We help business owners move to their next chapter by turning their trusted team into new owners. It's best way to ensure that business—and your legacy—stays strong for long haul.",
     accent: "Our Mission",
   },
