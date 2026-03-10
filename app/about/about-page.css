@@ -26,6 +26,11 @@
   font-family: var(--font-inter), 'Inter', sans-serif;
 }
 
+/* Ensure navigation is visible */
+.about-wrapper .minimal-nav {
+  z-index: 1000;
+}
+
 .about-background {
   position: fixed;
   inset: 0;
@@ -52,7 +57,7 @@
 .about-main {
   position: relative;
   z-index: 1;
-  padding-top: 56px; /* Height of navigation */
+  padding-top: 80px; /* Space for navigation */
 }
 
 /* ── Hero Section ── */
@@ -259,6 +264,13 @@
   text-align: center;
   background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 9, 0.6) 100%);
   border-top: 1px solid var(--about-border);
+}
+
+/* ── Footer Override (non-fixed for about page) ── */
+.about-wrapper .footer {
+  position: relative;
+  background: var(--about-bg);
+  border-top: 1px solid rgba(90, 84, 74, 0.3);
 }
 
 .about-cta h2 {
