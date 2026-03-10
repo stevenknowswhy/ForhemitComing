@@ -2,8 +2,7 @@
 
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import React, { useState, useEffect } from "react";
-import { createPortal } from "react-dom";
+import React, { useState } from "react";
 import { GalleryItemProps } from "../types/gallery";
 import { galleryTheme, getImageCredit, gallerySlides } from "../lib/galleryData";
 
@@ -20,7 +19,7 @@ export function GalleryItem({
   const prefersReducedMotion = useReducedMotion();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   // Smooth slide animation - entering slides over exiting
   const slideVariants = {
@@ -277,14 +276,14 @@ export function GalleryItem({
             {slide.subtitle.replace(/\[Download PDF: .+?\]/, "").trim()}
           </motion.p>
 
-          {/* Read More Button */}
+          {/* Read More / Show Less Button */}
           {slide.extendedContent && (
             <motion.button
               variants={textVariants}
               initial="hidden"
               animate={isActive ? "visible" : "hidden"}
               custom={slide.subtitleAccent ? 4 : 3}
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsExpanded(!isExpanded)}
               style={{
                 fontFamily: galleryTheme.fonts.mono,
                 fontSize: "0.7rem",
@@ -302,6 +301,7 @@ export function GalleryItem({
                 gap: "0.5rem",
                 transition: "all 0.3s ease",
                 alignSelf: "flex-start",
+                marginTop: "0.5rem",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.background = `${galleryTheme.colors.accent}15`;
@@ -312,63 +312,49 @@ export function GalleryItem({
                 e.currentTarget.style.borderColor = `${galleryTheme.colors.accent}50`;
               }}
             >
-              Read More
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+              {isExpanded ? "Show Less" : "Read More"}
+              <svg 
+                width="14" 
+                height="14" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2"
+                style={{
+                  transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                  transition: "transform 0.3s ease",
+                }}
+              >
+                <path d="M6 9l6 6 6-6"/>
               </svg>
             </motion.button>
           )}
-        </div>
 
-        {/* Extended Content Modal - Rendered via Portal */}
-        <ModalPortal isOpen={isModalOpen && !!slide.extendedContent}>
-          <ExtendedContentModal
-            title={slide.title}
-            content={slide.extendedContent || ""}
-            onClose={() => setIsModalOpen(false)}
-          />
-        </ModalPortal>
+          {/* Extended Content - Accordion Style */}
+          <AnimatePresence>
+            {isExpanded && slide.extendedContent && (
+              <ExtendedContentAccordion
+                content={slide.extendedContent}
+                onCollapse={() => setIsExpanded(false)}
+              />
+            )}
+          </AnimatePresence>
+        </div>
       </motion.div>
     </motion.article>
   );
 }
 
 /**
- * Modal Portal - Renders modal outside the gallery container
- * This is needed because position:fixed doesn't work inside transformed elements
+ * Extended Content Accordion - Displays full article content inline
+ * Expands within the gallery card instead of using a modal
  */
-function ModalPortal({
-  children,
-  isOpen,
-}: {
-  children: React.ReactNode;
-  isOpen: boolean;
-}) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted || !isOpen) return null;
-
-  return createPortal(
-    <AnimatePresence>{children}</AnimatePresence>,
-    document.body
-  );
-}
-
-/**
- * Extended Content Modal - Displays full article content
- */
-function ExtendedContentModal({
-  title,
+function ExtendedContentAccordion({
   content,
-  onClose,
+  onCollapse,
 }: {
-  title: string;
   content: string;
-  onClose: () => void;
+  onCollapse: () => void;
 }) {
   // Parse markdown-like content
   const parseContent = (text: string) => {
@@ -379,18 +365,18 @@ function ExtendedContentModal({
     for (const line of lines) {
       const trimmed = line.trim();
       if (!trimmed) {
-        elements.push(<div key={key++} style={{ height: "1rem" }} />);
+        elements.push(<div key={key++} style={{ height: "0.75rem" }} />);
       } else if (trimmed.startsWith("## ")) {
         elements.push(
           <h3
             key={key++}
             style={{
               fontFamily: galleryTheme.fonts.heading,
-              fontSize: "1.1rem",
+              fontSize: "1rem",
               fontWeight: 600,
               color: galleryTheme.colors.textPrimary,
-              marginTop: "1.5rem",
-              marginBottom: "0.75rem",
+              marginTop: "1.25rem",
+              marginBottom: "0.5rem",
               letterSpacing: "-0.01em",
             }}
           >
@@ -403,11 +389,11 @@ function ExtendedContentModal({
             key={key++}
             style={{
               fontFamily: galleryTheme.fonts.heading,
-              fontSize: "0.95rem",
+              fontSize: "0.85rem",
               fontWeight: 600,
               color: galleryTheme.colors.accent,
-              marginTop: "1.25rem",
-              marginBottom: "0.5rem",
+              marginTop: "1rem",
+              marginBottom: "0.4rem",
             }}
           >
             {trimmed.replace("### ", "")}
@@ -419,10 +405,10 @@ function ExtendedContentModal({
             key={key++}
             style={{
               fontFamily: galleryTheme.fonts.body,
-              fontSize: "0.9rem",
+              fontSize: "0.8rem",
               fontWeight: 600,
               color: galleryTheme.colors.textPrimary,
-              marginBottom: "0.5rem",
+              marginBottom: "0.4rem",
               lineHeight: 1.5,
             }}
           >
@@ -435,11 +421,11 @@ function ExtendedContentModal({
             key={key++}
             style={{
               fontFamily: galleryTheme.fonts.body,
-              fontSize: "0.9rem",
+              fontSize: "0.8rem",
               fontWeight: 300,
               color: galleryTheme.colors.textSecondary,
-              marginBottom: "0.75rem",
-              lineHeight: 1.7,
+              marginBottom: "0.6rem",
+              lineHeight: 1.6,
             }}
           >
             {trimmed}
@@ -452,105 +438,28 @@ function ExtendedContentModal({
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.2 }}
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
       style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 100,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem",
-        background: "rgba(14, 14, 12, 0.85)",
-        backdropFilter: "blur(12px)",
+        marginTop: "1rem",
+        padding: "1.25rem",
+        background: "rgba(14, 14, 12, 0.6)",
+        borderRadius: "8px",
+        border: `1px solid ${galleryTheme.colors.muted}30`,
+        overflow: "hidden",
       }}
-      onClick={onClose}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.95, y: 20 }}
-        transition={{ duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }}
+      <div
         style={{
-          width: "100%",
-          maxWidth: "700px",
-          maxHeight: "80vh",
-          background: "#0e0e0c",
-          borderRadius: "12px",
-          border: `1px solid ${galleryTheme.colors.muted}40`,
-          overflow: "hidden",
-          display: "flex",
-          flexDirection: "column",
+          maxHeight: "300px",
+          overflowY: "auto",
+          paddingRight: "0.5rem",
         }}
-        onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header */}
-        <div
-          style={{
-            padding: "1.5rem 2rem",
-            borderBottom: `1px solid ${galleryTheme.colors.muted}30`,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexShrink: 0,
-          }}
-        >
-          <h2
-            style={{
-              fontFamily: galleryTheme.fonts.heading,
-              fontSize: "1.25rem",
-              fontWeight: 600,
-              color: galleryTheme.colors.textPrimary,
-              letterSpacing: "-0.01em",
-              margin: 0,
-            }}
-          >
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            style={{
-              width: "36px",
-              height: "36px",
-              borderRadius: "50%",
-              background: "transparent",
-              border: `1px solid ${galleryTheme.colors.muted}50`,
-              color: galleryTheme.colors.textSecondary,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              transition: "all 0.2s ease",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = `${galleryTheme.colors.muted}30`;
-              e.currentTarget.style.color = galleryTheme.colors.textPrimary;
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.color = galleryTheme.colors.textSecondary;
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M18 6L6 18M6 6l12 12"/>
-            </svg>
-          </button>
-        </div>
-
-        {/* Modal Content */}
-        <div
-          style={{
-            padding: "2rem",
-            overflowY: "auto",
-            flex: 1,
-          }}
-        >
-          {parseContent(content)}
-        </div>
-      </motion.div>
+        {parseContent(content)}
+      </div>
     </motion.div>
   );
 }
