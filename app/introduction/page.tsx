@@ -10,7 +10,7 @@ import "./page.css";
 const businessSubOptions = [
   {
     id: "accounting",
-    title: "Accounting Firm",
+    title: "Accounting Firms",
     description: "Connect with us to explore partnership opportunities for financial and accounting services",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -20,7 +20,7 @@ const businessSubOptions = [
   },
   {
     id: "legal",
-    title: "Legal Practice",
+    title: "Legal Practices",
     description: "Connect with us to explore how we can work together on legal and advisory services",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -31,7 +31,7 @@ const businessSubOptions = [
   },
   {
     id: "lending",
-    title: "Lending Institution",
+    title: "Lending Institutions",
     description: "Connect with us to explore financing partnerships and collaborative opportunities",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
