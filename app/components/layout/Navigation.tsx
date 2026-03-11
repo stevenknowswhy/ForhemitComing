@@ -70,6 +70,13 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
             About
           </Link>
           <Link
+            href="/business-owners"
+            className="nav-dropdown-item"
+            onClick={() => setIsOpen(false)}
+          >
+            For Business Owners
+          </Link>
+          <Link
             href="/introduction"
             className="nav-dropdown-item"
             onClick={() => setIsOpen(false)}

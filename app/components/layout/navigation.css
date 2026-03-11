@@ -8,6 +8,10 @@
   display: flex;
   justify-content: flex-end;
   padding: 1.5rem 3rem;
+  --nav-muted: #a0a0a0;
+  --nav-accent: #FF6B00;
+  --nav-light: #ffffff;
+  --nav-dark: #0e0e0c;
 }
 
 /* Hamburger Button */
@@ -30,13 +34,13 @@
   display: block;
   width: 20px;
   height: 1px;
-  background: var(--muted-text);
+  background: var(--muted-text, var(--nav-muted));
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   transform-origin: center;
 }
 
 .hamburger-btn:hover .hamburger-line {
-  background: var(--primary-orange);
+  background: var(--primary-orange, var(--nav-accent));
   filter: brightness(1.2);
   box-shadow: 0 0 12px rgba(255, 107, 0, 0.5);
 }
@@ -44,7 +48,7 @@
 /* Hamburger Animation - Open State */
 .hamburger-btn.open .hamburger-line:nth-child(1) {
   transform: translateY(6px) rotate(45deg);
-  background: var(--primary-orange);
+  background: var(--primary-orange, var(--nav-accent));
   filter: brightness(1.2);
   box-shadow: 0 0 12px rgba(255, 107, 0, 0.5);
 }
@@ -56,7 +60,7 @@
 
 .hamburger-btn.open .hamburger-line:nth-child(3) {
   transform: translateY(-6px) rotate(-45deg);
-  background: var(--primary-orange);
+  background: var(--primary-orange, var(--nav-accent));
   filter: brightness(1.2);
   box-shadow: 0 0 12px rgba(255, 107, 0, 0.5);
 }
@@ -95,7 +99,7 @@
   font-weight: 400;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--muted-text);
+  color: var(--muted-text, var(--nav-muted));
   text-decoration: none;
   padding: 0.75rem 1rem;
   padding-bottom: 0.6rem;
@@ -113,12 +117,12 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--primary-orange);
+  background: var(--primary-orange, var(--nav-accent));
   transition: width 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .nav-dropdown-item:hover {
-  color: var(--light-text);
+  color: var(--light-text, var(--nav-light));
 }
 
 .nav-dropdown-item:hover::after {
@@ -131,7 +135,7 @@
 }
 
 .light-nav .hamburger-btn:hover .hamburger-line {
-  background: var(--primary-orange);
+  background: var(--primary-orange, var(--nav-accent));
   filter: brightness(1.2);
   box-shadow: 0 0 12px rgba(255, 107, 0, 0.5);
 }

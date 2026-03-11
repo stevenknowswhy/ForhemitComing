@@ -1,5 +1,6 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
+import './globals.css'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -31,6 +32,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Forhemit Capital',
   description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
 }
 
 export default function RootLayout({
