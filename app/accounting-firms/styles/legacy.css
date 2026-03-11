@@ -1,0 +1,99 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - LEGACY SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.legacy-section {
+  background: linear-gradient(180deg, rgba(74, 124, 89, 0.08) 0%, transparent 100%);
+  border-top: 1px solid var(--af-border-sage);
+  border-bottom: 1px solid var(--af-border-sage);
+}
+
+.legacy-content {
+  text-align: center;
+}
+
+.legacy-content h2 {
+  color: var(--af-accent-sage);
+}
+
+.legacy-lead {
+  font-size: var(--text-lg);
+  max-width: 600px;
+  margin: 0 auto var(--space-xl);
+}
+
+/* ── Legacy Value Prop ── */
+.legacy-value-prop {
+  background: var(--af-bg-secondary);
+  border-radius: 24px;
+  padding: var(--space-xl) var(--space-lg);
+  margin-bottom: var(--space-xl);
+  border: 1px solid var(--af-border);
+}
+
+.continuity-impl {
+  font-size: var(--text-xl);
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-lg);
+}
+
+.continuity-impl strong {
+  color: var(--af-accent-sage);
+}
+
+/* ── Legacy Benefits ── */
+.legacy-benefits {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--af-bg-card);
+  border-radius: 12px;
+  font-size: var(--text-base);
+  color: var(--af-text-secondary);
+}
+
+.benefit-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--af-accent-sage);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+/* ── Legacy Bond ── */
+.legacy-bond {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  background: var(--af-sage-subtle);
+  border: 1px solid var(--af-border-sage);
+  border-radius: 20px;
+}
+
+.legacy-bond h3 {
+  color: var(--af-accent-sage);
+  margin-bottom: var(--space-sm);
+}
+
+.legacy-bond p {
+  margin: 0;
+  font-size: var(--text-base);
+}
+
+.legacy-bond strong {
+  color: var(--af-accent-sage);
+}

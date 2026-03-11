@@ -1,0 +1,229 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - BASE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── CSS Variables ── */
+:root {
+  /* Core Colors - Accounting theme with sage green accent */
+  --af-bg: #0d0c0a;
+  --af-bg-secondary: #151310;
+  --af-bg-tertiary: #1c1914;
+  --af-bg-card: rgba(255, 255, 255, 0.03);
+  
+  /* Text Colors */
+  --af-text-primary: #f5f2ed;
+  --af-text-secondary: #a8a39a;
+  --af-text-muted: #6b655e;
+  
+  /* Accent Colors - Orange to Sage transition */
+  --af-accent: #FF6B00;
+  --af-accent-light: #ff8533;
+  --af-accent-sage: #4a7c59;
+  --af-accent-sage-light: #5a9b6e;
+  --af-accent-glow: rgba(255, 107, 0, 0.4);
+  --af-accent-subtle: rgba(255, 107, 0, 0.1);
+  --af-sage-subtle: rgba(74, 124, 89, 0.15);
+  
+  /* Borders */
+  --af-border: rgba(255, 255, 255, 0.08);
+  --af-border-accent: rgba(255, 107, 0, 0.3);
+  --af-border-sage: rgba(74, 124, 89, 0.4);
+  
+  /* Spacing Scale */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  
+  /* Typography Scale */
+  --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+  --text-base: clamp(1rem, 2vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 2.5vw, 1.35rem);
+  --text-xl: clamp(1.5rem, 4vw, 2rem);
+  --text-2xl: clamp(2rem, 6vw, 3rem);
+  --text-3xl: clamp(2.5rem, 8vw, 4rem);
+  
+  /* Animation Timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Shadows */
+  --shadow-glow: 0 0 40px rgba(255, 107, 0, 0.15);
+  --shadow-sage: 0 0 40px rgba(74, 124, 89, 0.2);
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Base Reset ── */
+.accounting-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--af-bg);
+  color: var(--af-text-primary);
+  font-family: var(--font-inter), 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+.accounting-wrapper * {
+  box-sizing: border-box;
+}
+
+/* ── Background ── */
+.accounting-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    /* Orange glow - top left (urgency) */
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(255, 107, 0, 0.12) 0%, transparent 60%),
+    /* Sage glow - bottom right (stability) */
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(74, 124, 89, 0.1) 0%, transparent 50%),
+    /* Subtle center glow */
+    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255, 107, 0, 0.03) 0%, transparent 60%),
+    /* Base gradient */
+    linear-gradient(180deg, 
+      rgba(13, 12, 10, 0.98) 0%, 
+      rgba(21, 19, 16, 0.95) 30%,
+      rgba(13, 12, 10, 0.98) 70%,
+      rgba(21, 19, 16, 0.95) 100%);
+}
+
+/* ── Container ── */
+.accounting-wrapper .container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* ── Main Content ── */
+.accounting-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+}
+
+/* ── Common Section Styles ── */
+.accounting-section {
+  position: relative;
+  padding: var(--space-2xl) 0;
+}
+
+.accounting-section h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-lg);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.accounting-section h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.accounting-section p {
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--af-text-secondary);
+  line-height: 1.8;
+  margin-bottom: var(--space-sm);
+}
+
+.accounting-section strong {
+  color: var(--af-text-primary);
+  font-weight: 500;
+}
+
+/* ── Highlight Text ── */
+.highlight {
+  color: var(--af-accent);
+  position: relative;
+}
+
+/* ── CTA Button Base ── */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--af-accent);
+  color: #fff;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.6s var(--ease-out-expo);
+}
+
+.cta-button:hover {
+  background: var(--af-accent-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.cta-button:hover::before {
+  transform: translateX(100%);
+}
+
+/* ── Section Dividers ── */
+.accounting-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(180deg, transparent 0%, var(--af-border) 50%, transparent 100%);
+  opacity: 0.5;
+}
+
+.accounting-section:first-of-type::before {
+  display: none;
+}
+
+/* ── Blockquote Styling ── */
+blockquote {
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  border-left: 3px solid var(--af-accent);
+  background: var(--af-bg-card);
+  border-radius: 0 12px 12px 0;
+}
+
+blockquote p {
+  font-size: var(--text-lg);
+  font-style: italic;
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-xs);
+}

@@ -1,0 +1,145 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - PIVOT SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.pivot-section {
+  background: linear-gradient(180deg, rgba(74, 124, 89, 0.05) 0%, transparent 50%);
+}
+
+.pivot-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--space-xl);
+}
+
+.pivot-subtitle {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-xl);
+  font-weight: 500;
+  color: var(--af-accent-sage);
+  margin: 0;
+}
+
+/* ── Comparison Blocks ── */
+.comparison-blocks {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.comparison-block {
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 20px;
+  padding: var(--space-lg);
+}
+
+.comparison-block.negative {
+  border-left: 4px solid var(--af-text-muted);
+}
+
+.comparison-block.negative h3 {
+  color: var(--af-text-muted);
+}
+
+.comparison-block.positive {
+  border-left: 4px solid var(--af-accent-sage);
+  background: linear-gradient(135deg, var(--af-bg-card) 0%, var(--af-sage-subtle) 100%);
+}
+
+.comparison-block.positive h3 {
+  color: var(--af-accent-sage);
+}
+
+.comparison-block h3 {
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
+}
+
+.comparison-block ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--space-md);
+}
+
+.comparison-block li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+}
+
+.comparison-block.negative li::before {
+  content: '✕';
+  position: absolute;
+  left: 0;
+  color: var(--af-text-muted);
+}
+
+.comparison-block.positive li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--af-accent-sage);
+}
+
+.comparison-result {
+  display: inline-block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border-radius: 100px;
+}
+
+.comparison-block.negative .comparison-result {
+  background: rgba(107, 101, 94, 0.2);
+  color: var(--af-text-muted);
+}
+
+.comparison-block.positive .comparison-result {
+  background: var(--af-sage-subtle);
+  color: var(--af-accent-sage);
+  border: 1px solid var(--af-border-sage);
+}
+
+.comparison-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--af-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* ── Pivot Mission ── */
+.pivot-mission {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  background: var(--af-bg-secondary);
+  border-radius: 24px;
+  border: 1px solid var(--af-border);
+}
+
+.mission-statement {
+  font-size: var(--text-xl);
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.mission-statement strong {
+  color: var(--af-accent-sage);
+}
+
+.pivot-mission p:last-child {
+  margin: 0;
+  max-width: 600px;
+  margin: 0 auto;
+}

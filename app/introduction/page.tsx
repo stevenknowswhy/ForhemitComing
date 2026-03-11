@@ -19,6 +19,7 @@ const businessSubOptions = [
       </svg>
     ),
     hasSubMenu: false,
+    href: "/accounting-firms",
   },
   {
     id: "legal",

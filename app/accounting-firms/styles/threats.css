@@ -1,0 +1,163 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - THREATS SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.threats-section {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.03) 50%, transparent 100%);
+}
+
+.section-context {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-xl);
+  font-size: var(--text-lg);
+}
+
+/* ── Threats Grid ── */
+.threats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.threats-grid.visible .threat-card {
+  animation: slideUp 0.7s var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.threats-grid.visible .threat-card:nth-child(1) { animation-delay: 0.1s; }
+.threats-grid.visible .threat-card:nth-child(2) { animation-delay: 0.2s; }
+.threats-grid.visible .threat-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Threat Cards ── */
+.threat-card {
+  background: linear-gradient(135deg, var(--af-bg-secondary) 0%, var(--af-bg-tertiary) 100%);
+  border: 1px solid var(--af-border);
+  border-radius: 20px;
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.threat-card:hover {
+  border-color: var(--af-border-accent);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.threat-card.accent {
+  border-color: var(--af-border-accent);
+  background: linear-gradient(135deg, var(--af-bg-secondary) 0%, rgba(255, 107, 0, 0.05) 100%);
+}
+
+.threat-card.accent:hover {
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
+}
+
+.threat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--af-accent) 0%, transparent 100%);
+}
+
+/* ── Threat Icon ── */
+.threat-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Threat Stats ── */
+.threat-stats {
+  margin-bottom: var(--space-sm);
+}
+
+.threat-stats .stat {
+  display: block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 700;
+  color: var(--af-accent);
+  line-height: 1;
+}
+
+.threat-stats .stat-label {
+  font-size: var(--text-xs);
+  color: var(--af-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ── Threat Title ── */
+.threat-card h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Threat Quote ── */
+.threat-quote {
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--af-text-primary);
+  padding: var(--space-sm);
+  background: var(--af-bg-card);
+  border-left: 3px solid var(--af-accent);
+  border-radius: 0 8px 8px 0;
+  margin: var(--space-sm) 0;
+}
+
+/* ── Threat Consequences ── */
+.threat-consequences {
+  list-style: none;
+  padding: 0;
+  margin: var(--space-md) 0 0;
+}
+
+.threat-consequences li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+}
+
+.threat-consequences li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--af-accent);
+  font-weight: bold;
+}
+
+/* ── Threats Conclusion ── */
+.threats-conclusion {
+  text-align: center;
+  padding: var(--space-lg);
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.threats-conclusion p {
+  margin: 0;
+  font-size: var(--text-base);
+}
