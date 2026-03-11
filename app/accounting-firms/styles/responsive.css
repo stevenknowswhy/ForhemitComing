@@ -31,9 +31,9 @@
     font-size: var(--text-xl);
   }
 
-  /* Threats Grid - 3 columns */
+  /* Threats Grid - keep as rows for breathing room */
   .threats-grid {
-    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
   }
 
   .threat-card {
@@ -51,9 +51,9 @@
     text-orientation: mixed;
   }
 
-  /* Solution Pillars - 3 columns */
+  /* Solution Pillars - keep as rows for breathing room */
   .solution-pillars {
-    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xl);
   }
 
   /* Legacy Benefits - horizontal */

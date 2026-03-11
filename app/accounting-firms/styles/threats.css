@@ -16,9 +16,9 @@
 
 /* ── Threats Grid ── */
 .threats-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
   margin-bottom: var(--space-xl);
 }
 
@@ -47,10 +47,44 @@
   background: linear-gradient(135deg, var(--af-bg-secondary) 0%, var(--af-bg-tertiary) 100%);
   border: 1px solid var(--af-border);
   border-radius: 20px;
-  padding: var(--space-lg);
+  padding: var(--space-xl);
   position: relative;
   overflow: hidden;
   transition: all 0.4s var(--ease-out-expo);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 0 var(--space-lg);
+  align-items: start;
+}
+
+.threat-card .threat-icon {
+  grid-row: 1 / -1;
+  font-size: 3rem;
+  margin: 0;
+  align-self: center;
+}
+
+.threat-card .threat-stats {
+  grid-column: 2;
+  margin-bottom: var(--space-sm);
+}
+
+.threat-card h3 {
+  grid-column: 2;
+}
+
+.threat-card .threat-quote {
+  grid-column: 2;
+}
+
+.threat-card > p {
+  grid-column: 2;
+}
+
+.threat-card .threat-consequences {
+  grid-column: 2;
+  margin-top: var(--space-md);
 }
 
 .threat-card:hover {
