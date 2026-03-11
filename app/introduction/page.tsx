@@ -218,7 +218,7 @@ export default function Introduction() {
             </>
           ) : (
             // Business Sub-Options View
-            <div className={`business-options ${!isAnimating ? "options-rise" : ""}`}>
+            <div className={`business-options options-wide ${!isAnimating ? "options-rise" : ""}`}>
               {/* Back Button */}
               <button className="back-button" onClick={handleBackClick}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
