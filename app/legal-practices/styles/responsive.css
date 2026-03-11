@@ -178,6 +178,16 @@
     align-items: stretch;
   }
   
+  /* CTA Bottom Row */
+  .cta-bottom-row {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  
+  .who-we-are-card {
+    text-align: left;
+  }
+  
   /* Stats */
   .stat-card {
     padding: var(--space-lg);

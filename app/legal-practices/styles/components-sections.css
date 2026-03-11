@@ -681,13 +681,46 @@
   font-style: italic;
 }
 
+/* CTA Bottom Row - Who we are + Closing */
+.cta-bottom-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin-top: var(--space-2xl);
+}
+
+.who-we-are-card {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  background: var(--lp-bg-secondary);
+  border-radius: 20px;
+  border: 1px solid var(--lp-border);
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.who-we-are-card:hover {
+  border-color: var(--lp-border-accent);
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.05);
+}
+
+.who-we-are-card h3 {
+  margin-bottom: var(--space-sm);
+}
+
 .cta-closing {
-  max-width: 700px;
-  margin: 0 auto;
   padding: var(--space-xl) var(--space-md);
   background: var(--lp-bg-card);
   border-radius: 20px;
   border: 1px solid var(--lp-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.cta-closing:hover {
+  border-color: var(--lp-border-accent);
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.05);
 }
 
 .cta-closing p {

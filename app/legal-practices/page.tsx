@@ -620,20 +620,6 @@ export default function LegalPractices() {
                 </div>
               </div>
             </div>
-
-            <div className="who-we-are" data-animate="fade-up">
-              <h3>Who we are</h3>
-              <p className="pbc-badge">California Public Benefit Corporation</p>
-              <p className="stewardship-desc">
-                We partner with law firms to convert closely held businesses into employee-owned companies, 
-                investing capital and expertise as a <strong>long-term owner, not a short-term flipper</strong>.
-              </p>
-              <div className="key-points">
-                <span className="key-point">Not a law firm</span>
-                <span className="key-point">Don&apos;t compete for legal work</span>
-                <span className="key-point accent">Your role is protected</span>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -933,9 +919,25 @@ export default function LegalPractices() {
                 </div>
               </div>
 
-              <div className="cta-closing" data-animate="fade-up">
-                <p>You&apos;ve spent a career earning your clients&apos; trust.</p>
-                <p className="cta-final">Let&apos;s make sure that when they finally decide how to exit, <strong>you are still the one they call first — and the one who helps write the next chapter.</strong></p>
+              <div className="cta-bottom-row">
+                <div className="who-we-are-card" data-animate="slide-right">
+                  <h3>Who we are</h3>
+                  <p className="pbc-badge">California Public Benefit Corporation</p>
+                  <p className="stewardship-desc">
+                    We partner with law firms to convert closely held businesses into employee-owned companies, 
+                    investing capital and expertise as a <strong>long-term owner, not a short-term flipper</strong>.
+                  </p>
+                  <div className="key-points">
+                    <span className="key-point">Not a law firm</span>
+                    <span className="key-point">Don&apos;t compete for legal work</span>
+                    <span className="key-point accent">Your role is protected</span>
+                  </div>
+                </div>
+
+                <div className="cta-closing" data-animate="slide-left">
+                  <p>You&apos;ve spent a career earning your clients&apos; trust.</p>
+                  <p className="cta-final">Let&apos;s make sure that when they finally decide how to exit, <strong>you are still the one they call first — and the one who helps write the next chapter.</strong></p>
+                </div>
               </div>
             </div>
           </div>
