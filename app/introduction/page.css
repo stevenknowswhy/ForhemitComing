@@ -255,6 +255,10 @@
   animation: cardFall3 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.1s forwards;
 }
 
+.intro-cards.cards-fall .intro-card:nth-child(4) {
+  animation: cardFall4 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.15s forwards;
+}
+
 @keyframes cardFall1 {
   0% {
     opacity: 1;
@@ -297,6 +301,21 @@
   100% {
     opacity: 0;
     transform: translateY(150px) rotate(-5deg);
+  }
+}
+
+@keyframes cardFall4 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(7deg);
   }
 }
 

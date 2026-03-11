@@ -305,12 +305,13 @@ export default function Introduction() {
                 Select the area you&apos;d like to explore
               </p>
 
-              <div className="intro-cards sub-options">
+              <div className={`intro-cards sub-options ${isAnimating ? "cards-fall" : ""}`}>
                 {businessSubOptions.map((option) => (
                   <button 
                     key={option.id} 
                     className="intro-card sub-option-card"
                     onClick={option.hasSubMenu ? handleOtherServicesClick : undefined}
+                    disabled={isAnimating}
                   >
                     <div className="card-icon">{option.icon}</div>
                     <div className="card-text">
@@ -343,11 +344,10 @@ export default function Introduction() {
               </p>
 
               <div className="intro-cards sub-options">
-                {otherServicesSubOptions.map((option, index) => (
+                {otherServicesSubOptions.map((option) => (
                   <button 
                     key={option.id} 
                     className="intro-card sub-option-card"
-                    style={{ animationDelay: `${0.3 + index * 0.1}s` }}
                   >
                     <div className="card-icon">{option.icon}</div>
                     <div className="card-text">
