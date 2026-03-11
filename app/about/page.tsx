@@ -115,6 +115,14 @@ export default function AboutPage() {
                   <span className="about-eyebrow">The Alternative</span>
                   <h2>A Better Option</h2>
                 </div>
+                <div className="about-highlight">
+                  <img 
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
+                    alt="Employee ownership collaboration" 
+                    className="highlight-image"
+                  />
+                  <span className="highlight-text">100% Employee Owned</span>
+                </div>
                 <div className="solution-content">
                   <p>
                     But there is a better option. A buyer who already knows your business, 
@@ -128,14 +136,6 @@ export default function AboutPage() {
                     And the company you spent your life building doesn&apos;t end with a &quot;Closed&quot; 
                     sign. It begins your legacy.
                   </p>
-                </div>
-                <div className="about-highlight">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
-                    alt="Employee ownership collaboration" 
-                    className="highlight-image"
-                  />
-                  <span className="highlight-text">100% Employee Owned</span>
                 </div>
               </div>
             </div>
