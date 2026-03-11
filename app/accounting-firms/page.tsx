@@ -95,9 +95,11 @@ export default function AccountingFirms() {
                   Over the next decade, a historic transfer of wealth will take place as the majority of owners over 55 exit their companies.
                 </p>
                 <p className="tsunami-question">
-                  The question isn&apos;t <em>if</em> your clients will transition, but <strong>who will control the outcome</strong>. 
-                  Will you be left behind, or will you become the architect of their legacy?
+                  The question isn&apos;t <em>if</em> your clients will transition, but <strong>who will control the outcome</strong>.
                 </p>
+                <Link href="#contact" className="tsunami-cta-link">
+                  Will you be left behind, or will you become the architect of their legacy?
+                </Link>
               </div>
               <div className="tsunami-image">
                 <img 
