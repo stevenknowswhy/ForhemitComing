@@ -73,16 +73,25 @@
 /* ── Main Title ── */
 .accounting-title {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: var(--text-3xl);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   color: var(--af-text-primary);
   margin-bottom: var(--space-lg);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title-line-1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+.title-line-2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
 }
 
 .accounting-title .highlight {
-  display: inline;
   background: linear-gradient(135deg, var(--af-accent) 0%, var(--af-accent-light) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

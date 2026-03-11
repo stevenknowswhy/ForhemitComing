@@ -63,8 +63,8 @@ export default function AccountingFirms() {
                 The Partner-Centric Approach
               </span>
               <h1 className="accounting-title" data-animate="fade-up" data-delay="100">
-                The Retention Crisis: Are You at Risk of{" "}
-                <span className="highlight">Losing Your Best Clients?</span>
+                <span className="title-line-1">The Retention Crisis:</span>
+                <span className="title-line-2">Are You at Risk of <span className="highlight">Losing Your Best Clients?</span></span>
               </h1>
               <p className="accounting-lead" data-animate="fade-up" data-delay="200">
                 How to Defend Your AUM and Billable Hours Against the Silver Tsunami.
