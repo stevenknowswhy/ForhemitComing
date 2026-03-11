@@ -1,0 +1,345 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   LEGAL PRACTICES PAGE - MICRO-INTERACTIONS & ANIMATIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Scroll-Triggered Animations ── */
+[data-animate] {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+[data-animate="fade-up"].animate-in {
+  animation: fadeInUp 0.8s var(--ease-out-expo) forwards;
+}
+
+[data-animate="slide-right"].animate-in {
+  animation: slideInRight 0.8s var(--ease-out-expo) forwards;
+}
+
+[data-animate="slide-left"].animate-in {
+  animation: slideInLeft 0.8s var(--ease-out-expo) forwards;
+}
+
+[data-animate="slide-up"].animate-in {
+  animation: slideInUp 0.7s var(--ease-out-expo) forwards;
+}
+
+[data-animate="scale-up"].animate-in {
+  animation: scaleIn 0.6s var(--ease-out-back) forwards;
+}
+
+[data-animate="fade-in"].animate-in {
+  animation: fadeIn 0.6s var(--ease-out-expo) forwards;
+}
+
+/* Animation Keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Stagger Delay Classes */
+[data-delay="0"].animate-in { animation-delay: 0ms; }
+[data-delay="100"].animate-in { animation-delay: 100ms; }
+[data-delay="200"].animate-in { animation-delay: 200ms; }
+[data-delay="300"].animate-in { animation-delay: 300ms; }
+[data-delay="400"].animate-in { animation-delay: 400ms; }
+
+/* ── Magnetic Button Effect ── */
+.cta-button.magnetic {
+  position: relative;
+  transition: transform 0.3s var(--ease-out-expo);
+}
+
+.cta-button.magnetic:hover {
+  transform: translateY(-3px) scale(1.02);
+}
+
+.cta-button.magnetic:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+/* ── Card Hover Effects ── */
+.risk-card,
+.benefit-card,
+.differentiator-card,
+.stat-card,
+.cost-card {
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+/* ── FAQ Item Animations ── */
+.faq-item {
+  animation: fadeInUp 0.5s var(--ease-out-expo) backwards;
+}
+
+/* ── Process Step Animations ── */
+.process-step {
+  animation: slideInUp 0.6s var(--ease-out-expo) backwards;
+}
+
+.process-step .step-badge {
+  animation: pulse 2s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.5s);
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 0, 0);
+  }
+}
+
+/* ── Glow Effects on Hover ── */
+.question-card:hover,
+.the-wait:hover,
+.cost-evaporating:hover,
+.who-we-are:hover,
+.fit-column:hover,
+.the-choice:hover,
+.cta-closing:hover {
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.05);
+}
+
+/* ── Text Reveal Animation ── */
+.legal-title .highlight {
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ── Scroll Indicator Animation ── */
+.scroll-indicator {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+/* ── Stat Card Counter Animation ── */
+.stat-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Link Hover Underline Animation ── */
+.legal-section a:not(.cta-button) {
+  position: relative;
+  color: var(--lp-accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.legal-section a:not(.cta-button)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--lp-accent);
+  transition: width 0.3s var(--ease-out-expo);
+}
+
+.legal-section a:not(.cta-button):hover::after {
+  width: 100%;
+}
+
+/* ── Comparison Block Hover ── */
+.comparison-block {
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.comparison-block.stewardship:hover {
+  box-shadow: 0 0 40px rgba(255, 107, 0, 0.1);
+}
+
+/* ── Wait Actions Stagger Animation ── */
+.wait-actions span {
+  animation: popIn 0.5s var(--ease-out-back) backwards;
+}
+
+.wait-actions span:nth-child(1) { animation-delay: 0.1s; }
+.wait-actions span:nth-child(2) { animation-delay: 0.2s; }
+.wait-actions span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ── Evap Item Hover ── */
+.evap-item {
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.evap-item:hover {
+  background: var(--lp-accent-subtle);
+  transform: translateX(4px);
+}
+
+/* ── Phase Hover Effect ── */
+.phase {
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.phase:hover {
+  background: var(--lp-accent-subtle);
+}
+
+/* ── CTA Option Hover ── */
+.cta-option {
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.cta-option:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-glow);
+}
+
+.cta-option.primary:hover {
+  box-shadow: 0 0 60px rgba(255, 107, 0, 0.2);
+}
+
+/* ── Key Points Animation ── */
+.key-point {
+  animation: fadeInUp 0.5s var(--ease-out-expo) backwards;
+}
+
+.key-point:nth-child(1) { animation-delay: 0.1s; }
+.key-point:nth-child(2) { animation-delay: 0.2s; }
+.key-point:nth-child(3) { animation-delay: 0.3s; }
+
+/* ── Wave Point Hover ── */
+.wave-point {
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.wave-point:hover {
+  transform: translateX(8px);
+  background: var(--lp-accent-subtle);
+}
+
+/* ── Limited Partnerships Pulse ── */
+.limited-partnerships {
+  animation: subtlePulse 3s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+  0%, 100% {
+    border-color: var(--lp-border-accent);
+  }
+  50% {
+    border-color: rgba(255, 107, 0, 0.5);
+  }
+}
+
+/* ── Smooth Scroll Behavior ── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Focus States for Accessibility ── */
+.cta-button:focus-visible,
+.faq-question:focus-visible {
+  outline: 2px solid var(--lp-accent);
+  outline-offset: 2px;
+}
+
+/* ── Reduced Motion ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .scroll-indicator,
+  .scroll-wheel,
+  .legal-title .highlight,
+  .limited-partnerships {
+    animation: none !important;
+  }
+}

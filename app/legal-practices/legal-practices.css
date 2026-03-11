@@ -1,0 +1,10 @@
+/* Legal Practices Page - Main CSS Entry Point */
+/* Imports modular CSS files following project architecture */
+/* All files under 800 lines as per AGENTS.md standards */
+
+@import './styles/base.css';
+@import './styles/hero.css';
+@import './styles/content-sections.css';
+@import './styles/components-sections.css';
+@import './styles/interactions.css';
+@import './styles/responsive.css';

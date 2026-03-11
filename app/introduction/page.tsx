@@ -30,6 +30,7 @@ const businessSubOptions = [
       </svg>
     ),
     hasSubMenu: false,
+    href: "/legal-practices",
   },
   {
     id: "lending",
@@ -307,25 +308,47 @@ export default function Introduction() {
               </p>
 
               <div className={`intro-cards sub-options ${isAnimating ? "cards-fall" : ""}`}>
-                {businessSubOptions.map((option) => (
-                  <button 
-                    key={option.id} 
-                    className="intro-card sub-option-card"
-                    onClick={option.hasSubMenu ? handleOtherServicesClick : undefined}
-                    disabled={isAnimating}
-                  >
-                    <div className="card-icon">{option.icon}</div>
-                    <div className="card-text">
-                      <h2 className="card-title">{option.title}</h2>
-                      <p className="card-description">{option.description}</p>
-                    </div>
-                    <span className="card-arrow">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </span>
-                  </button>
-                ))}
+                {businessSubOptions.map((option) => {
+                  const cardContent = (
+                    <>
+                      <div className="card-icon">{option.icon}</div>
+                      <div className="card-text">
+                        <h2 className="card-title">{option.title}</h2>
+                        <p className="card-description">{option.description}</p>
+                      </div>
+                      <span className="card-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </span>
+                    </>
+                  );
+
+                  // If option has href, render as Link
+                  if (option.href) {
+                    return (
+                      <Link
+                        key={option.id}
+                        href={option.href}
+                        className="intro-card sub-option-card"
+                      >
+                        {cardContent}
+                      </Link>
+                    );
+                  }
+
+                  // Otherwise render as button with click handler
+                  return (
+                    <button 
+                      key={option.id} 
+                      className="intro-card sub-option-card"
+                      onClick={option.hasSubMenu ? handleOtherServicesClick : undefined}
+                      disabled={isAnimating}
+                    >
+                      {cardContent}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           ) : (
