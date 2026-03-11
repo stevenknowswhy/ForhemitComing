@@ -93,6 +93,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  text-align: left;
 }
 
 .deliverable-benefits li {
@@ -101,6 +102,7 @@
   font-size: var(--text-sm);
   color: var(--af-text-secondary);
   line-height: 1.6;
+  text-align: left;
 }
 
 .deliverable-benefits li::before {
@@ -115,6 +117,7 @@
   color: var(--af-text-primary);
   display: block;
   margin-bottom: 0.25rem;
+  text-align: left;
 }
 
 /* ── Mobile Adjustments ── */
