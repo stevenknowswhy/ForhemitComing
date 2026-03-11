@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import "./legal-practices.css";
 
@@ -267,8 +266,6 @@ export default function LegalPractices() {
   return (
     <div className="legal-wrapper">
       <div className="legal-background"></div>
-      
-      <Navigation />
 
       <main className="legal-main">
         {/* Hero Section */}

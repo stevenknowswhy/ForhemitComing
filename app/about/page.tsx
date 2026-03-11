@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Footer } from "../components/layout/Footer";
 import "./about-page.css";
 
 export default function AboutPage() {
@@ -908,6 +909,8 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
+      
+      <Footer variant="static" />
     </div>
   );
 }

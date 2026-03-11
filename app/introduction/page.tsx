@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
+import { Footer } from "../components/layout/Footer";
 import "./page.css";
 
 // Sub-options for Business Introductions
@@ -390,6 +391,8 @@ export default function Introduction() {
           )}
         </div>
       </div>
+      
+      <Footer variant="static" />
     </div>
   );
 }

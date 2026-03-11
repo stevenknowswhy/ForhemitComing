@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Footer } from "../components/layout/Footer";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
@@ -323,6 +324,8 @@ export default function BusinessOwnersPage() {
           </div>
         </section>
       </main>
+
+      <Footer variant="static" />
     </div>
   );
 }

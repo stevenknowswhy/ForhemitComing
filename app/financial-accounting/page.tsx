@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Navigation } from "../components/layout/Navigation";
 import { Footer } from "../components/layout/Footer";
 import "./financial-accounting.css";
 
@@ -14,8 +13,6 @@ export default function FinancialAccounting() {
   return (
     <div className="financial-wrapper">
       <div className="financial-background"></div>
-      
-      <Navigation />
 
       <main className="financial-main">
         {/* Hero Section */}
