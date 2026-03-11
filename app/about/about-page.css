@@ -116,7 +116,10 @@
 /* ── Hero Section ── */
 .about-hero {
   position: relative;
-  padding: 10rem 0 8rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 6rem;
   text-align: center;
   border-bottom: 1px solid var(--about-border);
   background-image: url('/images/about/about-1.webp');
