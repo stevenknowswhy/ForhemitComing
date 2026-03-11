@@ -516,7 +516,7 @@
 
 .cost-value {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-size: clamp(0.75rem, 2.5vw, 1rem);
   font-weight: 700;
   color: var(--lp-accent);
   line-height: 1.2;
