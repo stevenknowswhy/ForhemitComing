@@ -218,8 +218,12 @@
 
   .risk-step-header {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.5rem;
+  }
+  
+  .risk-step-header h3 {
+    width: 100%;
     text-align: center;
   }
 
