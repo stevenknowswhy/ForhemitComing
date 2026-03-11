@@ -8,11 +8,16 @@ interface NavigationProps {
   variant?: "dark" | "light";
 }
 
-// Navigation items - max 3 shown at a time (excluding current page)
+// Primary navigation items (hide current page)
 const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/business-owners", label: "For Business Owners" },
+];
+
+// Always show this link
+const permanentLinks = [
+  { href: "/introduction", label: "Introductions" },
 ];
 
 export function Navigation({ variant = "dark" }: NavigationProps) {
@@ -20,7 +25,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  // Filter out current page from navigation
+  // Filter out current page from primary navigation
   const visibleNavItems = navItems.filter((item) => {
     // Exact match for home, startsWith for others
     if (item.href === "/") {
@@ -28,6 +33,9 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     }
     return !pathname?.startsWith(item.href);
   });
+
+  // Combine with permanent links (always show Introductions)
+  const allNavItems = [...visibleNavItems, ...permanentLinks];
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -68,11 +76,6 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     setIsOpen(false);
   }, [pathname]);
 
-  // Don't show navigation if on Introduction page (accessed via cards)
-  if (pathname?.startsWith("/introduction")) {
-    return null;
-  }
-
   return (
     <nav
       className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`}
@@ -93,7 +96,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="nav-dropdown">
-          {visibleNavItems.map((item) => (
+          {allNavItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
