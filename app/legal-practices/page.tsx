@@ -337,6 +337,13 @@ export default function LegalPractices() {
         {/* Hard Questions Section */}
         <section className="legal-section questions-section">
           <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>Two Scenarios Worth Considering</h2>
+              <p className="section-intro">
+                Hard questions about continuity, control, and your firm&apos;s future.
+              </p>
+            </div>
+            
             <div className="questions-visual">
               {/* Question 1 - Image Left, Text Right */}
               <div className="question-row" data-animate="fade-up">
