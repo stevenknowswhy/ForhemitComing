@@ -1,0 +1,134 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - STAKEHOLDER CARDS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Stakeholders Grid ── */
+.stakeholders-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.stakeholder-card {
+  background: rgba(14, 14, 12, 0.6);
+  border: 1px solid rgba(90, 84, 74, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.stakeholder-card:hover {
+  border-color: var(--bo-border);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Hover Reveal Cards */
+.stakeholder-card.hover-reveal {
+  height: 320px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stakeholder-card.hover-reveal:hover {
+  height: 480px;
+}
+
+.stakeholder-card.hover-reveal .stakeholder-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.stakeholder-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stakeholder-card:hover .stakeholder-image img {
+  transform: scale(1.08);
+}
+
+.stakeholder-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 140, 51, 0.05) 100%);
+}
+
+.stakeholder-placeholder.employees {
+  background: linear-gradient(135deg, rgba(100, 200, 100, 0.1) 0%, rgba(100, 200, 100, 0.05) 100%);
+}
+
+.stakeholder-placeholder.advisors {
+  background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(100, 150, 255, 0.05) 100%);
+}
+
+.stakeholder-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 14, 12, 0.2) 0%,
+    rgba(14, 14, 12, 0.5) 40%,
+    rgba(14, 14, 12, 0.9) 100%
+  );
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stakeholder-card:hover .stakeholder-overlay {
+  background: linear-gradient(
+    180deg,
+    rgba(14, 14, 12, 0.4) 0%,
+    rgba(14, 14, 12, 0.7) 50%,
+    rgba(14, 14, 12, 0.95) 100%
+  );
+  padding-bottom: 2rem;
+}
+
+.stakeholder-overlay h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin: 0 0 0.75rem;
+  transition: all 0.4s ease;
+}
+
+.stakeholder-card:hover .stakeholder-overlay h3 {
+  font-size: 1.35rem;
+  margin-bottom: 1rem;
+}
+
+.stakeholder-description {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stakeholder-card:hover .stakeholder-description {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stakeholder-description p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}

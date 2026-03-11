@@ -1,0 +1,314 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - TIMELINE / STEPS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Steps Container ── */
+.steps-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 3rem;
+}
+
+/* Timeline Line */
+.timeline-line {
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--bo-accent) 0%,
+    rgba(255, 107, 0, 0.5) 50%,
+    rgba(255, 107, 0, 0.2) 100%
+  );
+  border-radius: 1px;
+}
+
+.timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--bo-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 107, 0, 0.6);
+}
+
+/* Step Item */
+.step-item {
+  position: relative;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: stepReveal 0.6s ease forwards;
+}
+
+.step-item[data-step="1"] { animation-delay: 0.1s; }
+.step-item[data-step="2"] { animation-delay: 0.2s; }
+.step-item[data-step="3"] { animation-delay: 0.3s; }
+.step-item[data-step="4"] { animation-delay: 0.4s; }
+
+@keyframes stepReveal {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Step Badge */
+.step-badge {
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bo-bg-dark);
+  border: 2px solid var(--bo-accent);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.2);
+}
+
+.step-item:hover .step-badge {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.step-num {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--bo-accent);
+  letter-spacing: 0.1em;
+}
+
+.step-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* Step Card */
+.step-card {
+  padding: 1.75rem 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 14, 12, 0.7) 0%,
+    rgba(26, 18, 9, 0.5) 100%
+  );
+  border: 1px solid rgba(90, 84, 74, 0.3);
+  border-radius: 12px;
+  margin-left: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--bo-accent);
+  transition: height 0.4s ease;
+}
+
+.step-item:hover .step-card::before {
+  height: 100%;
+}
+
+.step-card:hover {
+  border-color: var(--bo-border);
+  transform: translateX(8px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.step-card.final {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 0, 0.1) 0%,
+    rgba(14, 14, 12, 0.7) 50%,
+    rgba(26, 18, 9, 0.5) 100%
+  );
+  border-color: rgba(255, 107, 0, 0.3);
+}
+
+/* Step Header */
+.step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.step-header h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.step-item:hover .step-header h3 {
+  color: var(--bo-accent);
+}
+
+.step-tag {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bo-text-secondary);
+  padding: 0.35rem 0.75rem;
+  background: rgba(90, 84, 74, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.step-tag.highlight {
+  background: rgba(255, 107, 0, 0.2);
+  color: var(--bo-accent);
+}
+
+.step-tag.success {
+  background: rgba(144, 238, 144, 0.15);
+  color: #90ee90;
+}
+
+.step-item:hover .step-tag {
+  background: rgba(255, 107, 0, 0.2);
+  color: var(--bo-accent);
+}
+
+/* Step Objective */
+.step-objective {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bo-text-secondary);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Step Body */
+.step-body p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Step Connector */
+.step-connector {
+  position: absolute;
+  left: -2rem;
+  top: 3rem;
+  width: 2rem;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--bo-accent) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.step-item:hover .step-connector {
+  opacity: 1;
+}
+
+/* Step Benefits */
+.step-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+}
+
+.step-benefits li {
+  font-size: 0.9rem;
+  color: var(--bo-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.step-benefits li:hover {
+  transform: translateX(4px);
+}
+
+.step-benefits li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--bo-accent);
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+
+.step-benefits li:hover::before {
+  transform: translateX(4px);
+}
+
+.step-benefits li strong {
+  color: var(--bo-text-primary);
+  font-weight: 500;
+}
+
+/* Step Complete */
+.step-complete {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 107, 0, 0.3);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bo-accent);
+}
+
+.complete-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bo-accent);
+  color: var(--bo-bg);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 0, 0);
+  }
+}

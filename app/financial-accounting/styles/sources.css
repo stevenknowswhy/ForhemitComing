@@ -1,0 +1,70 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   FINANCIAL/ACCOUNTING PAGE - SOURCES SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Sources Section */
+.sources-section {
+  padding: 4rem 0 5rem;
+  border-top: 1px solid rgba(90, 84, 74, 0.3);
+  background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 9, 0.5) 100%);
+}
+
+.sources-section h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fa-text-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.sources-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  counter-reset: source-num;
+}
+
+.sources-list li {
+  position: relative;
+  padding-left: 2.5rem;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.85rem;
+  color: var(--fa-text-secondary);
+  line-height: 1.6;
+  border-bottom: 1px solid rgba(90, 84, 74, 0.15);
+}
+
+.sources-list li:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.sources-list li::before {
+  counter-increment: source-num;
+  content: counter(source-num);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 107, 0, 0.15);
+  border-radius: 50%;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--fa-accent);
+}
+
+.disclaimer {
+  font-size: 0.8rem;
+  color: var(--fa-muted);
+  text-align: center;
+  font-style: italic;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(90, 84, 74, 0.2);
+}

@@ -1,0 +1,119 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   FINANCIAL/ACCOUNTING PAGE - RESPONSIVE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Tablet Styles */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .financial-hero {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .financial-title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  /* Tabs */
+  .tabs-nav {
+    flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: none;
+  }
+
+  .tab-button {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(90, 84, 74, 0.3);
+    border-radius: 8px;
+  }
+
+  .tab-button.active {
+    border-color: var(--fa-accent);
+    background: rgba(255, 107, 0, 0.08);
+  }
+
+  .tab-icon {
+    font-size: 1.5rem;
+  }
+
+  .tab-label {
+    font-size: 0.95rem;
+    text-align: left;
+  }
+
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem 1rem;
+  }
+
+  /* Comparison Boxes */
+  .comparison-boxes {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* Content Blocks */
+  .content-block.highlight-block,
+  .content-block.warning-block {
+    padding: 1.5rem;
+  }
+
+  /* CTA Block */
+  .cta-block {
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  .financial-hero {
+    padding: 3.5rem 0 2rem;
+  }
+
+  .financial-eyebrow {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.875rem;
+  }
+
+  .panel-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .panel-lead {
+    font-size: 1rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  .process-list li {
+    padding-left: 2.5rem;
+  }
+
+  .process-list li::before {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+    left: -0.875rem;
+  }
+
+  .cta-button {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,102 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - HERO SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Hero Section ── */
+.business-owners-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--bo-border);
+  background: var(--bo-bg);
+  padding: 6rem 0 4rem;
+}
+
+.business-owners-hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-content {
+  text-align: left;
+}
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-image img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.business-owners-eyebrow {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--bo-accent);
+  margin-bottom: 1rem;
+}
+
+.business-owners-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--bo-text-primary);
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.business-owners-title .highlight {
+  color: var(--bo-accent);
+}
+
+.business-owners-subtitle {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 400;
+  color: var(--bo-text-primary);
+  margin-bottom: 1.25rem;
+  line-height: 1.4;
+}
+
+.business-owners-intro {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  margin: 0 0 2rem;
+  line-height: 1.7;
+}
+
+.hero-cta-button {
+  display: inline-block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bo-text-primary);
+  background: var(--bo-accent);
+  padding: 1.25rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.hero-cta-button:hover {
+  background: var(--bo-accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(255, 107, 0, 0.3);
+}

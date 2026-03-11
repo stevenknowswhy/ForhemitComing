@@ -1,0 +1,105 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   FINANCIAL/ACCOUNTING PAGE - BASE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+:root {
+  --fa-bg: #0e0e0c;
+  --fa-bg-secondary: #1a1209;
+  --fa-bg-dark: #0a0a08;
+  --fa-text-primary: #f5f0e8;
+  --fa-text-secondary: #a09a90;
+  --fa-accent: #FF6B00;
+  --fa-accent-light: #ff8c33;
+  --fa-muted: #5a544a;
+  --fa-border: rgba(255, 107, 0, 0.2);
+  --fa-card-bg: rgba(255, 255, 255, 0.03);
+}
+
+/* ── Base ── */
+.financial-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--fa-bg);
+  color: var(--fa-text-primary);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.financial-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 80%, rgba(255, 140, 51, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(255, 107, 0, 0.04) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(14, 14, 12, 0.98) 0%, rgba(26, 18, 9, 0.95) 50%, rgba(14, 14, 12, 0.98) 100%);
+}
+
+/* ── Container ── */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Main Content ── */
+.financial-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+}
+
+/* ── Common Typography ── */
+h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--fa-text-primary);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 600;
+  color: var(--fa-text-primary);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+h4 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fa-text-primary);
+  margin-bottom: 0.75rem;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--fa-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+strong {
+  color: var(--fa-text-primary);
+  font-weight: 500;
+}
+
+.note {
+  font-size: 0.9rem;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 107, 0, 0.08);
+  border-left: 3px solid var(--fa-accent);
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+}
