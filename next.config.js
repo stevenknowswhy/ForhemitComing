@@ -11,6 +11,7 @@ const nextConfig = {
       },
     ],
   },
+  // Trigger redeploy: v1
 }
 
 module.exports = nextConfig
