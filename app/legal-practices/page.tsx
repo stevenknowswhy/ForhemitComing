@@ -914,10 +914,6 @@ export default function LegalPractices() {
                   </div>
                 </div>
 
-                <div className="cta-closing" data-animate="slide-left">
-                  <p>You&apos;ve spent a career earning your clients&apos; trust.</p>
-                  <p className="cta-final">Let&apos;s make sure that when they finally decide how to exit, <strong>you are still the one they call first — and the one who helps write the next chapter.</strong></p>
-                </div>
               </div>
             </div>
           </div>
