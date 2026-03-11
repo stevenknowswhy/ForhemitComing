@@ -233,7 +233,7 @@ export default function LegalPractices() {
           <p>In practice, the opposite.</p>
           <p>Without a stewardship alternative, many founder-led businesses either:</p>
           <ul>
-            <li><strong>Never transact</strong>, leaving the succession problem unsolved, or</li>
+            <li><strong>Never find a qualified buyer</strong>, or</li>
             <li><strong>Sell to PE or a strategic buyer</strong>, where you often <em>don&apos;t</em> lead the deal and <em>do</em> lose ongoing work</li>
           </ul>
           <p>A Stewardship ESOP gives you a transaction you are much more likely to help lead, and a stronger, longer-lived post-transaction client.</p>
