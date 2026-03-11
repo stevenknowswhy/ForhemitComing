@@ -12,7 +12,8 @@
   }
   
   .stats-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
   }
   
   .stat-card {
@@ -176,11 +177,15 @@
   
   /* Stats */
   .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-md);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .stat-number {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
   
   /* Risk Cards - 3 columns */
@@ -254,7 +259,11 @@
   
   /* Stats */
   .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-lg);
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   /* CTA Options */
