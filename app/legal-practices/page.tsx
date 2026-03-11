@@ -377,13 +377,16 @@ export default function LegalPractices() {
 
             <div className="questions-conclusion" data-animate="fade-up">
               <p className="data-blunt">Most firms don&apos;t want to dwell on those questions. But the data is blunt:</p>
+              
               <ul className="data-points">
                 <li>A majority of firms report <strong>losing clients or key matters because of continuity and handover failures</strong></li>
                 <li>When a strategic or PE buyer takes over, firms routinely see <strong>80–90% of ongoing work migrate to buyer-aligned counsel</strong></li>
               </ul>
+              
               <p className="structural-truth">
-                You don&apos;t lose that work because you did anything wrong. You lose it because traditional M&A is structurally designed to <span className="highlight-text">replace</span> you.
+                You don&apos;t lose that work because you did anything wrong. You lose it because traditional M&amp;A is structurally designed to <span className="highlight-text">replace</span> you.
               </p>
+              
               <p className="our-purpose">Our work exists to change that.</p>
             </div>
           </div>

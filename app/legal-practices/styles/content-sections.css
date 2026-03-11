@@ -95,35 +95,57 @@
 
 .questions-conclusion {
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
+  padding: var(--space-xl) var(--space-md);
 }
 
 .data-blunt {
   font-size: var(--text-lg);
-  color: var(--lp-text-primary);
-  margin-bottom: var(--space-md);
+  color: var(--lp-text-secondary);
+  margin-bottom: var(--space-lg);
+  font-style: italic;
 }
 
 .data-points {
   text-align: left;
   background: var(--lp-bg-card);
-  border-radius: 12px;
-  padding: var(--space-md);
-  margin-bottom: var(--space-md);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-lg);
+  border: 1px solid var(--lp-border);
+  list-style: none;
 }
 
 .data-points li {
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-md);
+  padding-left: 2rem;
+  position: relative;
+  font-size: var(--text-md);
+  line-height: 1.6;
+}
+
+.data-points li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--lp-accent);
+  font-weight: 700;
 }
 
 .data-points li:last-child {
   margin-bottom: 0;
 }
 
-.structural-truth {
-  font-size: var(--text-lg);
+.data-points li strong {
   color: var(--lp-text-primary);
+}
+
+.structural-truth {
+  font-size: var(--text-md);
+  color: var(--lp-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
 }
 
 .our-purpose {
@@ -131,7 +153,10 @@
   font-size: var(--text-xl);
   font-weight: 600;
   color: var(--lp-accent);
-  margin-top: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  border: 2px solid var(--lp-accent);
+  border-radius: 8px;
+  display: inline-block;
 }
 
 /* ── Risk Section ── */
