@@ -131,6 +131,24 @@
 /* ── Stats Section ── */
 .stats-section {
   padding-top: var(--space-xl);
+  position: relative;
+  background-image: url('https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDbdmjVzNs7zlB4DN0AXrqKUZxkECvyp1aoTMI');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.stats-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(26, 24, 21, 0.92) 0%, rgba(26, 24, 21, 0.85) 100%);
+  z-index: 0;
+}
+
+.stats-section .container {
+  position: relative;
+  z-index: 1;
 }
 
 .stats-context {
@@ -149,12 +167,13 @@
 }
 
 .stat-card {
-  background: var(--lp-bg-card);
+  background: rgba(26, 24, 21, 0.95);
   border: 1px solid var(--lp-border);
   border-radius: 16px;
   padding: var(--space-md);
   text-align: center;
   transition: all 0.4s var(--ease-out-expo);
+  backdrop-filter: blur(8px);
 }
 
 .stat-card:hover {
@@ -164,8 +183,8 @@
 }
 
 .stat-card.warning {
-  border-color: rgba(255, 107, 0, 0.2);
-  background: linear-gradient(135deg, var(--lp-bg-card) 0%, rgba(255, 107, 0, 0.05) 100%);
+  border-color: rgba(255, 107, 0, 0.4);
+  background: linear-gradient(135deg, rgba(26, 24, 21, 0.95) 0%, rgba(45, 30, 20, 0.95) 100%);
 }
 
 .stat-card.warning:hover {
@@ -196,9 +215,10 @@
 .stats-realization {
   text-align: center;
   padding: var(--space-md);
-  background: var(--lp-bg-tertiary);
+  background: rgba(26, 24, 21, 0.95);
   border-radius: 12px;
   border: 1px solid var(--lp-border);
+  backdrop-filter: blur(8px);
 }
 
 .stats-realization p {
