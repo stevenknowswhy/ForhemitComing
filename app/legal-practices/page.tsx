@@ -713,45 +713,50 @@ export default function LegalPractices() {
           <div className="container">
             <h2 data-animate="fade-up">Why Stewardship is different</h2>
             
-            <div className="differentiators">
-              {[
-                { 
-                  icon: "🏛️", 
-                  title: "Public Benefit Corporation", 
-                  desc: "Our charter legally requires us to consider employees, communities, and long-term resilience — not just financial returns.",
-                  highlight: "Hardwired to care about the same stakeholders your client does."
-                },
-                { 
-                  icon: "💰", 
-                  title: "Principal investor, not just advisor", 
-                  desc: "We put capital at risk and become a long-term owner. That aligns us with the company's future, not just the closing date.",
-                  highlight: "Your client isn't a test case."
-                },
-                { 
-                  icon: "🛡️", 
-                  title: "Deep resilience expertise", 
-                  desc: "Our founder's background is in disaster planning and continuity of operations. We've adapted those frameworks to mid-market businesses.",
-                  highlight: "Proprietary stress-testing systems for multi-threat events."
-                },
-                { 
-                  icon: "🤝", 
-                  title: "Designed to preserve YOUR role", 
-                  desc: "Most ESOP specialists view existing counsel as a variable. We designed our model so that you are a constant.",
-                  highlight: "We actively expand your engagement scope."
-                },
-              ].map((diff, i) => (
-                <div 
-                  key={i} 
-                  className="differentiator-card" 
-                  data-animate="fade-up"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div className="diff-icon">{diff.icon}</div>
-                  <h3>{diff.title}</h3>
-                  <p>{diff.desc}</p>
-                  <div className="diff-highlight">{diff.highlight}</div>
+            <div className="differentiator-rows">
+              <div className="differentiator-row" data-animate="fade-up" data-delay="0">
+                <div className="diff-row-icon">🏛️</div>
+                <div className="diff-row-content">
+                  <h3>Public Benefit Corporation</h3>
+                  <p>Our charter legally requires us to consider employees, communities, and long-term resilience — not just financial returns.</p>
                 </div>
-              ))}
+                <div className="diff-row-highlight">
+                  Hardwired to care about the same stakeholders your client does.
+                </div>
+              </div>
+
+              <div className="differentiator-row" data-animate="fade-up" data-delay="100">
+                <div className="diff-row-icon">💰</div>
+                <div className="diff-row-content">
+                  <h3>Principal investor, not just advisor</h3>
+                  <p>We put capital at risk and become a long-term owner. That aligns us with the company&apos;s future, not just the closing date.</p>
+                </div>
+                <div className="diff-row-highlight">
+                  Your client isn&apos;t a test case.
+                </div>
+              </div>
+
+              <div className="differentiator-row" data-animate="fade-up" data-delay="200">
+                <div className="diff-row-icon">🛡️</div>
+                <div className="diff-row-content">
+                  <h3>Deep resilience expertise</h3>
+                  <p>Our founder&apos;s background is in disaster planning and continuity of operations. We&apos;ve adapted those frameworks to mid-market businesses.</p>
+                </div>
+                <div className="diff-row-highlight">
+                  Proprietary stress-testing systems for multi-threat events.
+                </div>
+              </div>
+
+              <div className="differentiator-row" data-animate="fade-up" data-delay="300">
+                <div className="diff-row-icon">🤝</div>
+                <div className="diff-row-content">
+                  <h3>Designed to preserve YOUR role</h3>
+                  <p>Most ESOP specialists view existing counsel as a variable. We designed our model so that you are a constant.</p>
+                </div>
+                <div className="diff-row-highlight">
+                  We actively expand your engagement scope.
+                </div>
+              </div>
             </div>
           </div>
         </section>

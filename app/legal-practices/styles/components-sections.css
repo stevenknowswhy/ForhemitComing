@@ -197,48 +197,76 @@
   background: linear-gradient(180deg, transparent 0%, var(--lp-bg-secondary) 50%, transparent 100%);
 }
 
-.differentiators {
-  display: grid;
-  grid-template-columns: 1fr;
+/* Differentiator Rows */
+.differentiator-rows {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-md);
 }
 
-.differentiator-card {
+.differentiator-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
   background: var(--lp-bg-card);
   border: 1px solid var(--lp-border);
-  border-radius: 20px;
-  padding: var(--space-lg);
+  border-radius: 16px;
+  padding: var(--space-md);
   transition: all 0.4s var(--ease-out-expo);
+  position: relative;
+  overflow: hidden;
 }
 
-.differentiator-card:hover {
+.differentiator-row:hover {
   border-color: var(--lp-border-accent);
-  transform: translateY(-4px);
+  transform: translateX(8px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }
 
-.diff-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
+.differentiator-row::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--lp-accent);
+  transition: height 0.4s ease;
 }
 
-.differentiator-card h3 {
+.differentiator-row:hover::before {
+  height: 100%;
+}
+
+.diff-row-icon {
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: var(--space-xs);
+}
+
+.diff-row-content h3 {
   font-size: var(--text-base);
-  margin-bottom: var(--space-sm);
+  font-weight: 600;
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--lp-text-primary);
 }
 
-.differentiator-card p {
+.diff-row-content p {
   font-size: var(--text-sm);
-  margin-bottom: var(--space-md);
+  color: var(--lp-text-secondary);
+  margin: 0;
+  line-height: 1.6;
 }
 
-.diff-highlight {
-  font-size: var(--text-xs);
+.diff-row-highlight {
+  font-size: var(--text-sm);
   font-weight: 500;
   color: var(--lp-accent);
-  padding: 0.75rem 1rem;
+  padding: var(--space-sm);
   background: var(--lp-accent-subtle);
-  border-radius: 12px;
+  border-radius: 8px;
   border-left: 3px solid var(--lp-accent);
+  line-height: 1.5;
 }
 
 /* ── Process Section ── */

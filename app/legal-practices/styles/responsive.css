@@ -154,9 +154,16 @@
     font-size: var(--text-lg);
   }
   
-  /* Differentiators */
-  .differentiators {
-    grid-template-columns: repeat(2, 1fr);
+  /* Differentiator Rows */
+  .differentiator-row {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .diff-row-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0;
   }
   
   /* Fit Grid */
@@ -310,9 +317,15 @@
     gap: var(--space-md);
   }
   
-  /* Differentiators - 4 columns */
-  .differentiators {
-    grid-template-columns: repeat(4, 1fr);
+  /* Differentiator Rows Desktop */
+  .differentiator-row {
+    grid-template-columns: 80px 1fr 280px;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+  
+  .diff-row-icon {
+    font-size: 3rem;
   }
   
   /* Process */
@@ -411,7 +424,7 @@
   /* Remove hover effects on touch devices */
   .risk-card:hover,
   .benefit-card:hover,
-  .differentiator-card:hover,
+  .differentiator-row:hover,
   .stat-card:hover,
   .cost-card:hover,
   .question-row:hover,
