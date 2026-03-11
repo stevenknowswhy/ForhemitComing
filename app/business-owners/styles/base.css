@@ -170,3 +170,14 @@
   line-height: 1.8;
   margin-bottom: 0.75rem;
 }
+
+/* ── Footer Override ── */
+/* Make footer static instead of fixed on Business Owners page */
+.business-owners-wrapper .footer {
+  position: static;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--bo-border);
+  text-align: center;
+  background: var(--bo-bg);
+}
