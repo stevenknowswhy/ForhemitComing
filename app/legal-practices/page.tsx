@@ -549,23 +549,6 @@ export default function LegalPractices() {
               ))}
             </div>
 
-            <div className="cost-evaporating" data-animate="fade-up">
-              <p className="not-just">This isn&apos;t just about this year&apos;s billings.</p>
-              <div className="evaporating-list">
-                <div className="evap-item">
-                  <span className="evap-icon">📅</span>
-                  <span><strong>Multi-decade estate planning work</strong> you&apos;ll never see</span>
-                </div>
-                <div className="evap-item">
-                  <span className="evap-icon">🌐</span>
-                  <span><strong>Cross-referrals and network effects</strong> that quietly disappear</span>
-                </div>
-                <div className="evap-item">
-                  <span className="evap-icon">🎓</span>
-                  <span><strong>The training ground for your next generation of partners</strong> evaporating with no equivalent pipeline</span>
-                </div>
-              </div>
-            </div>
           </div>
         </section>
 
