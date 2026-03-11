@@ -6,10 +6,60 @@ import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
 import "./page.css";
 
+// Sub-options for Business Introductions
+const businessSubOptions = [
+  {
+    id: "accounting",
+    title: "Accounting",
+    description: "Connect with our financial partners and accounting services",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    ),
+  },
+  {
+    id: "legal",
+    title: "Legal",
+    description: "Access our network of legal professionals and advisors",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <path d="m9 12 2 2 4-4"/>
+      </svg>
+    ),
+  },
+  {
+    id: "lending",
+    title: "Lending",
+    description: "Explore financing options and lending partnerships",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <line x1="12" y1="1" x2="12" y2="23"/>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    ),
+  },
+  {
+    id: "other",
+    title: "Other",
+    description: "Have something else in mind? Let's discuss your needs",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+        <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    ),
+  },
+];
+
 export default function Introduction() {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
+  const [showBusinessOptions, setShowBusinessOptions] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -20,21 +70,42 @@ export default function Introduction() {
     router.push("/introduction", { scroll: false });
   };
 
+  const handleBusinessClick = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    
+    // Small delay to allow the fall animation to start
+    setTimeout(() => {
+      setShowBusinessOptions(true);
+      setIsAnimating(false);
+    }, 300);
+  };
+
+  const handleBackClick = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    
+    setTimeout(() => {
+      setShowBusinessOptions(false);
+      setIsAnimating(false);
+    }, 300);
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape" && showEmailInput) {
         handleCloseEmail();
       }
+      if (e.key === "Escape" && showBusinessOptions) {
+        handleBackClick();
+      }
     };
 
-    if (showEmailInput) {
-      document.body.style.overflow = "hidden";
+    if (showEmailInput || showBusinessOptions) {
       window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "unset";
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showEmailInput]);
+  }, [showEmailInput, showBusinessOptions]);
 
   return (
     <div className="intro-wrapper">
@@ -48,42 +119,32 @@ export default function Introduction() {
         </Link>
 
         <div className="intro-content">
-          <h1 className="intro-title">Select Your Path</h1>
-          <p className="intro-subtitle">
-            Choose how you&apos;d like to connect with Forhemit
-          </p>
+          {!showBusinessOptions ? (
+            // Main Selection View
+            <>
+              <h1 className="intro-title">Select Your Path</h1>
+              <p className="intro-subtitle">
+                Choose how you&apos;d like to connect with Forhemit
+              </p>
 
-          <div className="intro-cards">
-            <div className="intro-card disabled">
-              <div className="card-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                  <line x1="12" y1="22.08" x2="12" y2="12"/>
-                </svg>
-              </div>
-              <div className="card-text">
-                <h2 className="card-title">Business Introductions</h2>
-                <p className="card-description">
-                  Connect with us for partnership and business opportunities
-                </p>
-              </div>
-              <span className="card-badge">Coming Soon</span>
-            </div>
-
-            <div className="early-access-wrapper">
-              {!showEmailInput ? (
-                <button className="intro-card" onClick={() => setShowEmailInput(true)}>
+              <div className={`intro-cards ${isAnimating ? "cards-fall" : ""}`}>
+                {/* Business Introductions - Now Clickable */}
+                <button 
+                  className="intro-card" 
+                  onClick={handleBusinessClick}
+                  disabled={isAnimating}
+                >
                   <div className="card-icon">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M3 8l7.89 5.26a2 2 0 0 1 2.22 0L21 8M5 19h14M5 19l6.5-6.5M17 19l-6.5-6.5"/>
-                      <circle cx="12" cy="9" r="2"/>
+                      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                      <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                      <line x1="12" y1="22.08" x2="12" y2="12"/>
                     </svg>
                   </div>
                   <div className="card-text">
-                    <h2 className="card-title">Get Early Access</h2>
+                    <h2 className="card-title">Business Introductions</h2>
                     <p className="card-description">
-                      Stay updated on our launch and get exclusive early access
+                      Connect with us for partnership and business opportunities
                     </p>
                   </div>
                   <span className="card-arrow">
@@ -92,44 +153,103 @@ export default function Introduction() {
                     </svg>
                   </span>
                 </button>
-              ) : (
-                <div className="intro-card email-reveal-card">
+
+                {/* Early Access */}
+                <div className="early-access-wrapper">
+                  {!showEmailInput ? (
+                    <button className="intro-card" onClick={() => setShowEmailInput(true)}>
+                      <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path d="M3 8l7.89 5.26a2 2 0 0 1 2.22 0L21 8M5 19h14M5 19l6.5-6.5M17 19l-6.5-6.5"/>
+                          <circle cx="12" cy="9" r="2"/>
+                        </svg>
+                      </div>
+                      <div className="card-text">
+                        <h2 className="card-title">Get Early Access</h2>
+                        <p className="card-description">
+                          Stay updated on our launch and get exclusive early access
+                        </p>
+                      </div>
+                      <span className="card-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </span>
+                    </button>
+                  ) : (
+                    <div className="intro-card email-reveal-card">
+                      <div className="card-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                          <path d="M3 8l7.89 5.26a2 2 0 0 1 2.22 0L21 8M5 19h14M5 19l6.5-6.5M17 19l-6.5-6.5"/>
+                          <circle cx="12" cy="9" r="2"/>
+                        </svg>
+                      </div>
+                      <div className="card-text">
+                        <h2 className="card-title">Get Early Access</h2>
+                        <EarlyAccessForm variant="card" onClose={handleCloseEmail} />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Join Our Movement */}
+                <Link href="/?join=true" className="intro-card">
                   <div className="card-icon">
                     <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M3 8l7.89 5.26a2 2 0 0 1 2.22 0L21 8M5 19h14M5 19l6.5-6.5M17 19l-6.5-6.5"/>
-                      <circle cx="12" cy="9" r="2"/>
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                      <circle cx="9" cy="7" r="4"/>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
                   </div>
                   <div className="card-text">
-                    <h2 className="card-title">Get Early Access</h2>
-                    <EarlyAccessForm variant="card" onClose={handleCloseEmail} />
+                    <h2 className="card-title">Join Our Movement</h2>
+                    <p className="card-description">
+                      Become part of our team and help shape the future of stewardship management
+                    </p>
                   </div>
-                </div>
-              )}
-            </div>
-
-            <Link href="/?join=true" className="intro-card">
-              <div className="card-icon">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                  <circle cx="9" cy="7" r="4"/>
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                </svg>
+                  <span className="card-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </Link>
               </div>
-              <div className="card-text">
-                <h2 className="card-title">Join Our Movement</h2>
-                <p className="card-description">
-                  Become part of our team and help shape the future of stewardship management
-                </p>
-              </div>
-              <span className="card-arrow">
+            </>
+          ) : (
+            // Business Sub-Options View
+            <div className={`business-options ${!isAnimating ? "options-rise" : ""}`}>
+              {/* Back Button */}
+              <button className="back-button" onClick={handleBackClick}>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
                 </svg>
-              </span>
-            </Link>
-          </div>
+                <span>Back to Selection</span>
+              </button>
+
+              <h1 className="intro-title">Business Introductions</h1>
+              <p className="intro-subtitle">
+                Select the area you&apos;d like to explore
+              </p>
+
+              <div className="intro-cards sub-options">
+                {businessSubOptions.map((option) => (
+                  <button key={option.id} className="intro-card sub-option-card">
+                    <div className="card-icon">{option.icon}</div>
+                    <div className="card-text">
+                      <h2 className="card-title">{option.title}</h2>
+                      <p className="card-description">{option.description}</p>
+                    </div>
+                    <span className="card-arrow">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -240,6 +240,160 @@
   color: var(--muted-text);
 }
 
+/* ── CARD FALL & RISE ANIMATIONS ── */
+
+/* Main cards falling animation */
+.intro-cards.cards-fall .intro-card:nth-child(1) {
+  animation: cardFall1 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+.intro-cards.cards-fall .intro-card:nth-child(2) {
+  animation: cardFall2 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.05s forwards;
+}
+
+.intro-cards.cards-fall .intro-card:nth-child(3) {
+  animation: cardFall3 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.1s forwards;
+}
+
+@keyframes cardFall1 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(-2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(-8deg);
+  }
+}
+
+@keyframes cardFall2 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(6deg);
+  }
+}
+
+@keyframes cardFall3 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(-1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(-5deg);
+  }
+}
+
+/* Business Options Container */
+.business-options {
+  opacity: 0;
+}
+
+.business-options.options-rise {
+  animation: optionsRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+@keyframes optionsRise {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Back Button */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--muted-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto 1.5rem;
+}
+
+.back-button:hover {
+  background: rgba(255, 107, 0, 0.1);
+  border-color: var(--primary-orange);
+  color: var(--primary-orange);
+  transform: translateX(-3px);
+}
+
+.back-button svg {
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: translateX(-3px);
+}
+
+/* Sub-options cards */
+.sub-options .sub-option-card {
+  opacity: 0;
+  animation: subCardRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.sub-options .sub-option-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.sub-options .sub-option-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.sub-options .sub-option-card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.sub-options .sub-option-card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes subCardRise {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Sub-option card hover effect */
+.sub-option-card:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 61, 0, 0.05) 100%);
+}
+
 /* Early Access Email Reveal */
 .early-access-wrapper {
   position: relative;
@@ -361,5 +515,12 @@
   .card-badge {
     font-size: 0.65rem;
     padding: 0.3rem 0.65rem;
+  }
+
+  /* Responsive Back Button */
+  .back-button {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.875rem;
+    margin-bottom: 1.25rem;
   }
 }
