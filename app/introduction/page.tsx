@@ -10,8 +10,8 @@ import "./page.css";
 const businessSubOptions = [
   {
     id: "accounting",
-    title: "Accounting",
-    description: "Connect with our financial partners and accounting services",
+    title: "Accounting Firm",
+    description: "Connect with us to explore partnership opportunities for financial and accounting services",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
@@ -20,8 +20,8 @@ const businessSubOptions = [
   },
   {
     id: "legal",
-    title: "Legal",
-    description: "Access our network of legal professionals and advisors",
+    title: "Legal Practice",
+    description: "Connect with us to explore how we can work together on legal and advisory services",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -31,8 +31,8 @@ const businessSubOptions = [
   },
   {
     id: "lending",
-    title: "Lending",
-    description: "Explore financing options and lending partnerships",
+    title: "Lending Institution",
+    description: "Connect with us to explore financing partnerships and collaborative opportunities",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <line x1="12" y1="1" x2="12" y2="23"/>
@@ -42,8 +42,8 @@ const businessSubOptions = [
   },
   {
     id: "other",
-    title: "Other",
-    description: "Have something else in mind? Let's discuss your needs",
+    title: "Other Services",
+    description: "Have a different service offering? Connect with us to explore how we can work together",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="10"/>
@@ -144,7 +144,7 @@ export default function Introduction() {
                   <div className="card-text">
                     <h2 className="card-title">Business Introductions</h2>
                     <p className="card-description">
-                      Connect with us for partnership and business opportunities
+                      Service providers: Connect with us to explore partnership opportunities
                     </p>
                   </div>
                   <span className="card-arrow">
