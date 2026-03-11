@@ -16,7 +16,7 @@
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-size: var(--text-xl);
   font-weight: 500;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   margin: 0;
 }
 
@@ -44,12 +44,12 @@
 }
 
 .comparison-block.positive {
-  border-left: 4px solid var(--af-accent-sage);
-  background: linear-gradient(135deg, var(--af-bg-card) 0%, var(--af-sage-subtle) 100%);
+  border-left: 4px solid var(--af-accent);
+  background: linear-gradient(135deg, var(--af-bg-card) 0%, var(--af-accent-subtle) 100%);
 }
 
 .comparison-block.positive h3 {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }
 
 .comparison-block h3 {
@@ -82,7 +82,7 @@
   content: '✓';
   position: absolute;
   left: 0;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }
 
 .comparison-result {
@@ -102,9 +102,9 @@
 }
 
 .comparison-block.positive .comparison-result {
-  background: var(--af-sage-subtle);
-  color: var(--af-accent-sage);
-  border: 1px solid var(--af-border-sage);
+  background: var(--af-accent-subtle);
+  color: var(--af-accent);
+  border: 1px solid var(--af-border-accent);
 }
 
 .comparison-connector {
@@ -135,7 +135,7 @@
 }
 
 .mission-statement strong {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }
 
 .pivot-mission p:last-child {

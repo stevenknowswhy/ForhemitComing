@@ -84,9 +84,9 @@
 }
 
 .pillar-card:hover {
-  border-color: var(--af-border-sage);
+  border-color: var(--af-border-accent);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-sage);
+  box-shadow: var(--shadow-glow);
 }
 
 .pillar-card::before {
@@ -96,7 +96,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, var(--af-accent-sage) 0%, transparent 80%);
+  background: linear-gradient(90deg, var(--af-accent) 0%, transparent 80%);
 }
 
 /* ── Pillar Number ── */
@@ -104,7 +104,7 @@
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-size: var(--text-2xl);
   font-weight: 700;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   opacity: 0.3;
   line-height: 1;
   margin-bottom: var(--space-xs);
@@ -146,7 +146,7 @@
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -163,16 +163,16 @@
   flex-direction: column;
   gap: 0.25rem;
   padding: var(--space-sm);
-  background: var(--af-sage-subtle);
+  background: var(--af-accent-subtle);
   border-radius: 12px;
-  border-left: 3px solid var(--af-accent-sage);
+  border-left: 3px solid var(--af-accent);
 }
 
 .outcome-label {
   font-size: var(--text-xs);
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   font-weight: 500;
 }
 

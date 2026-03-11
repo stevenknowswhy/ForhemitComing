@@ -56,17 +56,17 @@
 }
 
 .path-item:hover {
-  border-color: var(--af-border-sage);
+  border-color: var(--af-border-accent);
   transform: translateY(-2px);
 }
 
 .path-item.highlight {
-  background: var(--af-sage-subtle);
-  border-color: var(--af-border-sage);
+  background: var(--af-accent-subtle);
+  border-color: var(--af-border-accent);
 }
 
 .path-item.highlight:hover {
-  box-shadow: var(--shadow-sage);
+  box-shadow: var(--shadow-glow);
 }
 
 .path-check {
@@ -75,7 +75,7 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: var(--af-accent-sage);
+  background: var(--af-accent);
   color: white;
   border-radius: 50%;
   font-size: 0.875rem;

@@ -98,7 +98,7 @@
 }
 
 .benefit-item:hover {
-  background: var(--af-sage-subtle);
+  background: var(--af-accent-subtle);
   transform: translateX(4px);
 }
 

@@ -4,8 +4,8 @@
 
 .legacy-section {
   background: linear-gradient(180deg, rgba(74, 124, 89, 0.08) 0%, transparent 100%);
-  border-top: 1px solid var(--af-border-sage);
-  border-bottom: 1px solid var(--af-border-sage);
+  border-top: 1px solid var(--af-border-accent);
+  border-bottom: 1px solid var(--af-border-accent);
 }
 
 .legacy-content {
@@ -13,7 +13,7 @@
 }
 
 .legacy-content h2 {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }
 
 .legacy-lead {
@@ -42,7 +42,7 @@
   color: var(--af-text-primary);
   margin: 0;
   padding-right: var(--space-lg);
-  border-right: 2px solid var(--af-border-sage);
+  border-right: 2px solid var(--af-border-accent);
 }
 
 .legacy-benefits {
@@ -60,7 +60,7 @@
 }
 
 .continuity-impl strong {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }
 
 /* ── Legacy Benefits ── */
@@ -89,7 +89,7 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  background: var(--af-accent-sage);
+  background: var(--af-accent);
   color: white;
   border-radius: 50%;
   font-size: 0.875rem;
@@ -101,13 +101,13 @@
   max-width: 700px;
   margin: 0 auto;
   padding: var(--space-lg);
-  background: var(--af-sage-subtle);
-  border: 1px solid var(--af-border-sage);
+  background: var(--af-accent-subtle);
+  border: 1px solid var(--af-border-accent);
   border-radius: 20px;
 }
 
 .legacy-bond h3 {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   margin-bottom: var(--space-sm);
 }
 
@@ -117,5 +117,5 @@
 }
 
 .legacy-bond strong {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
 }

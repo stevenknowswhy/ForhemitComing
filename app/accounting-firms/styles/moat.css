@@ -15,7 +15,7 @@
 }
 
 .moat-header h2 {
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   margin-bottom: var(--space-md);
 }
 
@@ -53,8 +53,8 @@
 }
 
 .deliverable-card:hover {
-  border-color: var(--af-border-sage);
-  box-shadow: var(--shadow-sage);
+  border-color: var(--af-border-accent);
+  box-shadow: var(--shadow-glow);
 }
 
 /* ── Deliverable Number ── */
@@ -62,7 +62,7 @@
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   font-weight: 700;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   opacity: 0.4;
   line-height: 1;
   align-self: center;
@@ -80,8 +80,8 @@
   color: var(--af-text-secondary);
   margin-bottom: var(--space-md);
   padding: var(--space-sm);
-  background: var(--af-sage-subtle);
-  border-left: 3px solid var(--af-accent-sage);
+  background: var(--af-accent-subtle);
+  border-left: 3px solid var(--af-accent);
   border-radius: 0 8px 8px 0;
 }
 
@@ -107,7 +107,7 @@
   content: '→';
   position: absolute;
   left: 0;
-  color: var(--af-accent-sage);
+  color: var(--af-accent);
   font-weight: bold;
 }
 
