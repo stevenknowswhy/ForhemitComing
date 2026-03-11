@@ -29,6 +29,11 @@ export default function BusinessOwnersPage() {
       answer: "No. A core part of our fiduciary role is ensuring your day-to-day operations remain uninterrupted. We handle the complex financial structuring, the legal frameworks, and the heavy lifting. While we do help prepare key team members for an ownership mindset over time, we do it systematically so they remain focused on running a profitable business.\n\nOne of the biggest advantages of transitioning to employee ownership is the drastic reduction in due diligence. When you sell to a private equity firm or an outside buyer, they typically unleash an army of analysts to interrogate every aspect of your business, distracting your team and causing widespread anxiety."
     },
     {
+      id: "sell-later",
+      question: "Can I still sell to a private buyer at a later date?",
+      answer: "Absolutely. Stewardship and succession planning don't lock you in—they give you leverage.\n\nGoing through our readiness process actually makes your business more valuable to outside buyers. A company that has been operationally stress-tested, has a proven succession plan, and isn't solely dependent on its founder commands a much higher market multiple.\n\nBy building your blueprint today, you create the ultimate win-win scenario:\n\nIf a great buyer comes along: You have a highly optimized, turnkey business ready to sell at a premium.\n\nIf outside offers fall short (or demand too much control): You already have a fully engineered, peaceful rollover plan ready to execute with your employees.\n\nHaving a plan simply gives you the freedom to walk away on your own terms. You always retain the power to decide exactly what is best for you and your legacy."
+    },
+    {
       id: "advisors",
       question: "I already have a CPA and an Attorney. Do you replace them?",
       answer: "We don't replace your advisory team; we empower them. Traditional sales often put a founder's advisors in a frantic, reactive position, scrambling to respond to an external buyer's demands. We provide your existing team with a clear, compliant blueprint. This allows your CPA and attorney to facilitate a tax-efficient, seamless transition without the usual friction of an M&A deal."
