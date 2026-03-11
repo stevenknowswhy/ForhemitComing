@@ -55,13 +55,40 @@
     font-size: var(--text-xl);
   }
   
-  /* Questions */
-  .questions-grid {
-    grid-template-columns: repeat(2, 1fr);
+  /* Questions - Visual Layout */
+  .question-row {
+    grid-template-columns: 1fr 1fr;
+    min-height: 320px;
   }
   
-  .question-card {
+  .question-row.reverse {
+    direction: rtl;
+  }
+  
+  .question-row.reverse > * {
+    direction: ltr;
+  }
+  
+  .question-image {
+    height: 100%;
+    min-height: 320px;
+  }
+  
+  .question-image-overlay {
+    background: linear-gradient(90deg, transparent 30%, rgba(26, 24, 21, 0.95) 100%) !important;
+  }
+  
+  .question-row.reverse .question-image-overlay {
+    background: linear-gradient(270deg, transparent 30%, rgba(26, 24, 21, 0.95) 100%) !important;
+  }
+  
+  .question-content {
     padding: var(--space-xl);
+    justify-content: center;
+  }
+  
+  .question-text {
+    font-size: var(--text-xl);
   }
   
   /* Risk Cards */
@@ -283,7 +310,7 @@
   .differentiator-card:hover,
   .stat-card:hover,
   .cost-card:hover,
-  .question-card:hover,
+  .question-row:hover,
   .evap-item:hover,
   .phase:hover,
   .wave-point:hover,
@@ -320,7 +347,8 @@
     color: black !important;
   }
   
-  .legal-section {
+  .legal-section,
+  .question-row {
     padding: 2rem 0;
     page-break-inside: avoid;
   }
