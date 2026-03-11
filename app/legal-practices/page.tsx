@@ -205,7 +205,7 @@ export default function LegalPractices() {
       question: "Are you a law firm? Do you compete with us?",
       answer: (
         <>
-          <p>No. We&apos;re a <strong>public benefit holding company and investor</strong>, not a law practice.</p>
+          <p>No. We&apos;re a <strong>public benefit holding company and stewardship management firm</strong>, not a law practice.</p>
           <p>We do not draft corporate or estate documents for your clients, and we do not solicit their legal work. We rely on firms like yours as essential partners.</p>
         </>
       )
@@ -256,7 +256,7 @@ export default function LegalPractices() {
       question: "How are you compensated?",
       answer: (
         <>
-          <p>We earn our return primarily through <strong>our investment in the business</strong>, not by taking a cut of your legal fees.</p>
+          <p>We earn our return primarily through <strong>our stewardship management services</strong>, not by taking a cut of your legal fees.</p>
           <p>You bill your work to the client as you normally would. Where other specialists (ESOP valuation, independent trustees, etc.) are required, we help coordinate them.</p>
         </>
       )
@@ -681,9 +681,9 @@ export default function LegalPractices() {
                 </div>
                 <div className="benefit-row-content">
                   <blockquote className="benefit-quote">
-                    &quot;We offer a proven, investor-backed, employee-ownership transition path that preserves 
-                    client relationships and community jobs, with a Stewardship Holding Company as long-term 
-                    capital partner.&quot;
+                    &quot;We offer a proven, stewardship-managed, employee-ownership transition path that preserves
+                    client relationships and community jobs, with our Stewardship Management approach providing
+                    long-term fiduciary partnership.&quot;
                   </blockquote>
                 </div>
                 <div className="benefit-row-result">
@@ -730,8 +730,8 @@ export default function LegalPractices() {
                   </svg>
                 </div>
                 <div className="diff-row-content">
-                  <h3>Principal investor, not just advisor</h3>
-                  <p>We put capital at risk and become a long-term owner. That aligns us with the company&apos;s future, not just the closing date.</p>
+                  <h3>Principal steward, not just advisor</h3>
+                  <p>We provide fiduciary oversight and become a long-term partner. That aligns us with the company&apos;s future, not just the closing date.</p>
                 </div>
                 <div className="diff-row-highlight">
                   Your client isn&apos;t a test case.
@@ -785,9 +785,9 @@ export default function LegalPractices() {
               {[
                 { num: "01", title: "Confidential strategy session", desc: "We meet with your key partners to map out your highest-value, highest-risk clients and identify where a stewardship ESOP might be a serious alternative to traditional M&A." },
                 { num: "02", title: "Client risk mapping", desc: "Together we select 5–15 priority clients for exit-planning conversations in the next 12–36 months, developing a plan for how you will raise the topic naturally." },
-                { num: "03", title: "Joint client conversations", desc: "When appropriate, you introduce us as a specialized, values-aligned capital partner. We listen first. If there isn't a fit, your relationship is still stronger for having brought a thoughtful option." },
+                { num: "03", title: "Joint client conversations", desc: "When appropriate, you introduce us as a specialized, values-aligned fiduciary partner. We listen first. If there isn't a fit, your relationship is still stronger for having brought a thoughtful option." },
                 { num: "04", title: "Structuring and execution", desc: "If there's alignment, we move into feasibility analysis and structure design. Your firm plays the lead role on corporate and estate planning." },
-                { num: "05", title: "Long-term stewardship", desc: "Post-transaction, we serve as long-term owner and steward. Your firm maintains or expands its role as outside general counsel with recurring ESOP governance work." },
+                { num: "05", title: "Long-term stewardship", desc: "Post-transaction, we serve as long-term fiduciary and steward. Your firm maintains or expands its role as outside general counsel with recurring ESOP governance work." },
               ].map((step, i) => (
                 <div 
                   key={i} 
@@ -834,7 +834,7 @@ export default function LegalPractices() {
             </div>
 
             <div className="limited-partnerships" data-animate="fade-up">
-              <p>Because our stewardship model is hands-on and capital-intensive, we <strong>intentionally partner with only a small number of law firms</strong> each year.</p>
+              <p>Because our stewardship model is hands-on and resource-intensive, we <strong>intentionally partner with only a small number of law firms</strong> each year.</p>
             </div>
           </div>
         </section>
@@ -924,8 +924,8 @@ export default function LegalPractices() {
                   <h3>Who we are</h3>
                   <p className="pbc-badge">California Public Benefit Corporation</p>
                   <p className="stewardship-desc">
-                    We partner with law firms to convert closely held businesses into employee-owned companies, 
-                    investing capital and expertise as a <strong>long-term owner, not a short-term flipper</strong>.
+                    We partner with law firms to convert closely held businesses into employee-owned companies,
+                    providing stewardship management and expertise as a <strong>long-term fiduciary partner, not a short-term flipper</strong>.
                   </p>
                   <div className="key-points">
                     <span className="key-point">Not a law firm</span>

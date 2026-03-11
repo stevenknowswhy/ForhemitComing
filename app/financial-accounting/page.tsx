@@ -100,7 +100,7 @@ export default function FinancialAccounting() {
                   <div className="content-block highlight-block">
                     <h3>The Stewardship Model: A Better Path for Your Clients — and for You</h3>
                     <p>
-                      Stewardship Holding Company works with business owners to transition their companies into employee ownership through ESOPs (Employee Stock Ownership Plans). Our approach isn&apos;t just about closing a transaction. It&apos;s about building a transition that protects the seller&apos;s employees, preserves the company&apos;s independence, and — critically — unlocks a tax structure most advisors have never offered their clients.
+                      Stewardship Management Company works with business owners to transition their companies into employee ownership through ESOPs (Employee Stock Ownership Plans). Our approach isn&apos;t just about closing a transaction. It&apos;s about building a transition that protects the seller&apos;s employees, preserves the company&apos;s independence, and — critically — unlocks a tax structure most advisors have never offered their clients.
                     </p>
                   </div>
 

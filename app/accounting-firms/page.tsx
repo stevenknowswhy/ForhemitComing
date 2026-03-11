@@ -166,7 +166,7 @@ export default function AccountingFirms() {
             <div className="moat-header" data-animate="fade-up">
               <h2>Build a Moat Around Your Best Clients</h2>
               <p>
-                We are a <strong>Stewardship Holding Company</strong>. We acquire businesses and transition them into 
+                We are a <strong>Stewardship Management Company</strong>. We partner with businesses to transition them into 
                 Employee Ownership (ESOPs) using a framework designed for continuity. By introducing this model to your clients, 
                 you don&apos;t just facilitate a sale; you <strong>secure your future role as their indispensable advisor</strong>.
               </p>
