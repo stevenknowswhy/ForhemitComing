@@ -146,6 +146,123 @@
   z-index: 1;
 }
 
+/* ── Combined Hero Section (100vh Two-Column) ── */
+.about-hero-combined {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0 4rem;
+  border-bottom: 1px solid var(--about-border);
+  background-image: url('/images/about/about-1.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.about-hero-combined::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 14, 12, 0.85) 0%,
+    rgba(14, 14, 12, 0.75) 50%,
+    rgba(14, 14, 12, 0.9) 100%
+  );
+  z-index: 0;
+}
+
+.about-hero-combined .container {
+  position: relative;
+  z-index: 1;
+}
+
+.combined-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.combined-two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.combined-column {
+  background: rgba(14, 14, 12, 0.6);
+  border: 1px solid var(--about-border);
+  border-radius: 12px;
+  padding: 2rem;
+  backdrop-filter: blur(8px);
+}
+
+.combined-column-problem {
+  border-left: 3px solid rgba(255, 107, 0, 0.3);
+}
+
+.combined-column-solution {
+  border-right: 3px solid rgba(255, 107, 0, 0.5);
+}
+
+.combined-column .problem-section-header,
+.combined-column .solution-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.combined-column .problem-section-header h2,
+.combined-column .solution-header h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--about-text-primary);
+}
+
+.combined-column .about-stat.problem-stat {
+  margin: 0 auto 1.5rem;
+}
+
+.combined-column-solution .solution-content {
+  margin-bottom: 1.5rem;
+}
+
+.combined-column-solution .solution-content p {
+  color: var(--about-text-secondary);
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.combined-column-solution .solution-content p:last-child {
+  margin-bottom: 0;
+}
+
+.combined-column-solution .about-highlight {
+  margin-top: 0;
+}
+
+@media (max-width: 1024px) {
+  .combined-two-columns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .about-hero-combined {
+    padding: 5rem 0 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .combined-column {
+    padding: 1.5rem;
+  }
+  
+  .combined-header {
+    margin-bottom: 2rem;
+  }
+}
+
 .about-eyebrow {
   display: block;
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
