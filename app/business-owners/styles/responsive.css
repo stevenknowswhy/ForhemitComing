@@ -2,6 +2,20 @@
    BUSINESS OWNERS - RESPONSIVE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+/* ── Desktop Styles (min-width: 900px) ── */
+@media (min-width: 900px) {
+  /* Luxury Section Two Column */
+  .luxury-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  .luxury-image {
+    height: 100%;
+    min-height: 350px;
+  }
+}
+
 /* ── Tablet Styles ── */
 @media (max-width: 900px) {
   /* Hero */

@@ -45,24 +45,32 @@ export default function BusinessOwnersPage() {
         </section>
 
         {/* Timeline Section */}
-        <section className="business-owners-section">
+        <section className="business-owners-section luxury-section">
           <div className="container">
-            <div className="content-block">
-              <h2>The Ultimate Luxury: Leaving on Your Own Terms</h2>
-              <p>
-                One of the greatest advantages of an employee‑ownership path is control: you 
-                decide when and how you step away—gradually, all at once, or not at all for a 
-                while. You are not sitting around hoping the &quot;perfect buyer&quot; appears or forced 
-                to accept terms you do not like because time or health is running out.
-              </p>
-              <p>
-                Our model is built so you can:
-              </p>
-              <ul>
-                <li>Set your own timeline and adjust it as life changes.</li>
-                <li>Step back in stages—hours, responsibilities, and risk—while maintaining income.</li>
-                <li>Choose the moment your role truly ends, instead of having it chosen for you.</li>
-              </ul>
+            <div className="luxury-grid">
+              <div className="luxury-content">
+                <h2>The Ultimate Luxury: Leaving on Your Own Terms</h2>
+                <p>
+                  One of the greatest advantages of an employee‑ownership path is control: you 
+                  decide when and how you step away—gradually, all at once, or not at all for a 
+                  while. You are not sitting around hoping the &quot;perfect buyer&quot; appears or forced 
+                  to accept terms you do not like because time or health is running out.
+                </p>
+                <p>
+                  Our model is built so you can:
+                </p>
+                <ul>
+                  <li>Set your own timeline and adjust it as life changes.</li>
+                  <li>Step back in stages—hours, responsibilities, and risk—while maintaining income.</li>
+                  <li>Choose the moment your role truly ends, instead of having it chosen for you.</li>
+                </ul>
+              </div>
+              <div className="luxury-image">
+                <img 
+                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDZKoRg4zMdXfDn1J0ilT8SKbAWux5a7pqNCcH" 
+                  alt="Business owner enjoying freedom after succession planning" 
+                />
+              </div>
             </div>
           </div>
         </section>
