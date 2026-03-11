@@ -305,12 +305,10 @@
   opacity: 0;
 }
 
-/* Wide options view - break out of parent max-width constraint */
-.business-options.options-wide {
-  width: 90vw;
+/* Wide options view - override parent max-width constraint */
+.intro-content:has(.business-options.options-wide) {
   max-width: 800px;
-  margin-left: 50%;
-  transform: translateX(-50%);
+  width: 90vw;
 }
 
 .business-options.options-rise {
@@ -510,10 +508,10 @@
     font-size: 0.75rem;
   }
 
-  /* Sub-options wide view - tablet adjustment */
-  .business-options.options-wide {
-    width: 95vw;
+  /* Wide options view - tablet adjustment */
+  .intro-content:has(.business-options.options-wide) {
     max-width: 700px;
+    width: 95vw;
   }
 
   /* Sub-options grid - tablet adjustment */
@@ -616,12 +614,10 @@
     margin-bottom: 1.25rem;
   }
 
-  /* Sub-options wide view - mobile adjustment */
-  .business-options.options-wide {
+  /* Wide options view - mobile reset */
+  .intro-content:has(.business-options.options-wide) {
+    max-width: 500px;
     width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    transform: none;
     padding: 0 1rem;
   }
 
