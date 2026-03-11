@@ -21,7 +21,7 @@ export default function BusinessOwnersPage() {
     {
       id: "distracted",
       question: "Will my employees be distracted by the transition process?",
-      answer: "No. A core part of our fiduciary role is ensuring your day-to-day operations remain uninterrupted. We handle the complex financial structuring, the legal frameworks, and the heavy lifting. While we do help prepare key team members for an ownership mindset over time, we do it systematically so they remain focused on running a profitable business. One of the biggest advantages of transitioning to employee ownership is the drastic reduction in due diligence. When you sell to a private equity firm or an outside buyer, they typically unleash an army of analysts to interrogate every aspect of your business, distracting your team and causing widespread anxiety."
+      answer: "No. A core part of our fiduciary role is ensuring your day-to-day operations remain uninterrupted. We handle the complex financial structuring, the legal frameworks, and the heavy lifting. While we do help prepare key team members for an ownership mindset over time, we do it systematically so they remain focused on running a profitable business.\n\nOne of the biggest advantages of transitioning to employee ownership is the drastic reduction in due diligence. When you sell to a private equity firm or an outside buyer, they typically unleash an army of analysts to interrogate every aspect of your business, distracting your team and causing widespread anxiety."
     },
     {
       id: "advisors",
@@ -380,7 +380,9 @@ export default function BusinessOwnersPage() {
                   </button>
                   <div className="faq-answer">
                     <div className="faq-answer-content">
-                      <p>{faq.answer}</p>
+                      {faq.answer.split('\n\n').map((paragraph, idx) => (
+                        <p key={idx}>{paragraph}</p>
+                      ))}
                     </div>
                   </div>
                 </div>
