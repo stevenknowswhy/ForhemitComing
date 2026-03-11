@@ -2,10 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Navigation } from "../components/layout/Navigation";
-import { Footer } from "../components/layout/Footer";
-import "../components/layout/navigation.css";
-import "../components/layout/footer.css";
 import "./about-page.css";
 
 export default function AboutPage() {
@@ -26,8 +22,6 @@ export default function AboutPage() {
           <span className="about-logo-underline"></span>
         </Link>
       </header>
-      
-      <Navigation />
       
       <main className="about-main">
         {/* Hero Section */}
@@ -914,8 +908,6 @@ export default function AboutPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

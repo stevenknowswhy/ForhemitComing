@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
 import './globals.css'
+import { Navigation } from './components/layout/Navigation'
+import { Footer } from './components/layout/Footer'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -47,7 +49,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="auto">
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <Navigation />
+        {children}
+        <Footer />
+      </body>
     </html>
   )
 }

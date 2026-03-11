@@ -27,6 +27,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ── GLOBAL IMPORTS ── */
+@import "./components/layout/navigation.css";
+@import "./components/layout/footer.css";
+
 /* Responsive images */
 img {
   max-width: 100%;

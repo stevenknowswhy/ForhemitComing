@@ -2,10 +2,8 @@
 
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Navigation } from "./components/layout/Navigation";
-import { Footer } from "./components/layout/Footer";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
-import { LegalModal } from "./components/modals/LegalModal";
+import { LegalModal } from "./components/modals/legalModal";
 import { ApplicationModal } from "./components/forms/application/ApplicationModal";
 import "./styles/home-page.css";
 
@@ -26,9 +24,7 @@ function HomeContent() {
   return (
     <div className="home-wrapper">
       <div className="background-mesh"></div>
-      
-      <Navigation />
-      
+
       <main className="hero">
         <div className="container">
           <h1 className="brand-title">FORHEMIT</h1>
@@ -46,11 +42,9 @@ function HomeContent() {
         </div>
       </main>
 
-      <Footer onLegalClick={() => setShowLegalModal(true)} />
-
-      <LegalModal 
-        isOpen={showLegalModal} 
-        onClose={() => setShowLegalModal(false)} 
+      <LegalModal
+        isOpen={showLegalModal}
+        onClose={() => setShowLegalModal(false)}
       />
 
       <ApplicationModal 

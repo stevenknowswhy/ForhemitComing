@@ -1,10 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Navigation } from "../components/layout/Navigation";
-import { Footer } from "../components/layout/Footer";
-import "../components/layout/navigation.css";
-import "../components/layout/footer.css";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
@@ -19,8 +15,6 @@ export default function BusinessOwnersPage() {
           <span className="business-owners-logo-underline"></span>
         </Link>
       </header>
-      
-      <Navigation />
       
       <main className="business-owners-main">
         {/* Hero Section */}
@@ -329,8 +323,6 @@ export default function BusinessOwnersPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </div>
   );
 }

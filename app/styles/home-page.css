@@ -1,7 +1,5 @@
 /* ── HOME PAGE STYLES ── */
 @import "./variables.css";
-@import "../components/layout/navigation.css";
-@import "../components/layout/footer.css";
 @import "../components/forms/early-access-form.css";
 @import "../components/modals/legal-modal.css";
 @import "../components/forms/application/application-modal.css";
