@@ -944,7 +944,7 @@ export default function LegalPractices() {
         </section>
       </main>
 
-      <Footer />
+      <Footer variant="static" />
     </div>
   );
 }
