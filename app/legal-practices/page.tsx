@@ -258,7 +258,7 @@ export default function LegalPractices() {
       question: "How are you compensated?",
       answer: (
         <>
-          <p>We earn our return primarily through <strong>our stewardship management services</strong>, not by taking a cut of your legal fees.</p>
+          <p>We earn our return primarily through a <strong>stewardship management agreement around 2–3%</strong>, not by taking a cut of your legal fees.</p>
           <p>You bill your work to the client as you normally would. Where other specialists (ESOP valuation, independent trustees, etc.) are required, we help coordinate them.</p>
         </>
       )
