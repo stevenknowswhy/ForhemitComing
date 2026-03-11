@@ -25,22 +25,23 @@ export default function AboutPage() {
       </header>
       
       <main className="about-main">
-        {/* Combined Hero + Problem/Solution Section */}
-        <section className="about-hero-combined">
+        {/* Hero Section */}
+        <section className="about-hero">
           <div className="container">
-            {/* Header */}
-            <div className="combined-header">
-              <span className="about-eyebrow">Our Story</span>
-              <h1 className="about-title">Your Legacy Deserves Better</h1>
-              <p className="about-subtitle">
-                The real risk isn't choosing the wrong option. It's assuming you have one.
-              </p>
-            </div>
-            
-            {/* Two Column Content */}
-            <div className="combined-two-columns">
+            <span className="about-eyebrow">Our Story</span>
+            <h1 className="about-title">Your Legacy Deserves Better</h1>
+            <p className="about-subtitle">
+              The real risk isn't choosing the wrong option. It's assuming you have one.
+            </p>
+          </div>
+        </section>
+
+        {/* Combined Problem/Solution Section - Two Column 100vh */}
+        <section className="about-section-problem-solution">
+          <div className="container">
+            <div className="problem-solution-grid">
               {/* Left Column - The Problem */}
-              <div className="combined-column combined-column-problem">
+              <div className="problem-solution-column problem-column">
                 <div className="problem-section-header">
                   <span className="about-eyebrow">The Reality</span>
                   <h2>The Coming Disaster</h2>
@@ -109,7 +110,7 @@ export default function AboutPage() {
               </div>
               
               {/* Right Column - The Solution */}
-              <div className="combined-column combined-column-solution">
+              <div className="problem-solution-column solution-column">
                 <div className="solution-header">
                   <span className="about-eyebrow">The Alternative</span>
                   <h2>A Better Option</h2>
