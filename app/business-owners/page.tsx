@@ -75,7 +75,120 @@ export default function BusinessOwnersPage() {
           </div>
         </section>
 
-        {/* Comparison Section */}
+        {/* Journey Steps Section */}
+        <section className="business-owners-section section-dark">
+          <div className="container">
+            <div className="section-header">
+              <h2>The Readiness Journey: Step-by-Step</h2>
+              <p className="section-intro">
+                Here is exactly what the systematic transition looks like when you partner with us.
+              </p>
+            </div>
+
+            <div className="steps-container">
+              <div className="timeline-line"></div>
+              
+              <div className="step-item" data-step="1">
+                <div className="step-badge">
+                  <span className="step-num">01</span>
+                  <div className="step-icon">🔍</div>
+                </div>
+                <div className="step-card">
+                  <div className="step-header">
+                    <h3>The Assessment</h3>
+                    <span className="step-tag">Today</span>
+                  </div>
+                  <span className="step-objective">Mapping the Vulnerabilities and Vision</span>
+                  <div className="step-body">
+                    <p>
+                      Everything begins with a no-pressure assessment of your timeline, financial 
+                      needs, and the current health of the business. We identify any structural 
+                      gaps and lay out a preliminary roadmap for transitioning ownership.
+                    </p>
+                  </div>
+                  <div className="step-connector"></div>
+                </div>
+              </div>
+
+              <div className="step-item" data-step="2">
+                <div className="step-badge">
+                  <span className="step-num">02</span>
+                  <div className="step-icon">📐</div>
+                </div>
+                <div className="step-card">
+                  <div className="step-header">
+                    <h3>The Blueprint</h3>
+                    <span className="step-tag">Pre-Transition</span>
+                  </div>
+                  <span className="step-objective">Building the Framework</span>
+                  <div className="step-body">
+                    <p>
+                      We step into our role as your fiduciary guide. We align your accountants 
+                      and legal counsel to structure the exact financial frameworks required. 
+                      Simultaneously, we begin transparently communicating with your future 
+                      employee-owners, building their capacity and readiness for the transition ahead.
+                    </p>
+                  </div>
+                  <div className="step-connector"></div>
+                </div>
+              </div>
+
+              <div className="step-item" data-step="3">
+                <div className="step-badge">
+                  <span className="step-num">03</span>
+                  <div className="step-icon">⚡</div>
+                </div>
+                <div className="step-card">
+                  <div className="step-header">
+                    <h3>Execution & Handover</h3>
+                    <span className="step-tag highlight">Transition</span>
+                  </div>
+                  <span className="step-objective">A &quot;Boring&quot; and Seamless Transition</span>
+                  <div className="step-body">
+                    <p>
+                      Because we systematically prepared every stakeholder, this milestone is 
+                      simply the execution of a well-tested blueprint. The legal transition of 
+                      ownership takes place, employees calmly gain their stake, financial 
+                      obligations are secured, and the operational handover happens seamlessly.
+                    </p>
+                  </div>
+                  <div className="step-connector"></div>
+                </div>
+              </div>
+
+              <div className="step-item" data-step="4">
+                <div className="step-badge">
+                  <span className="step-num">04</span>
+                  <div className="step-icon">✨</div>
+                </div>
+                <div className="step-card final">
+                  <div className="step-header">
+                    <h3>Continuity & Legacy</h3>
+                    <span className="step-tag success">Post-Sale</span>
+                  </div>
+                  <span className="step-objective">Sustainable Success</span>
+                  <div className="step-body">
+                    <p>
+                      Post-sale, you transition from the primary operator to an invaluable mentor 
+                      or board advisor.
+                    </p>
+                    <ul className="step-benefits">
+                      <li><strong>Lose the stress:</strong> You no longer carry the weight of payroll, daily emergencies, or singular risk.</li>
+                      <li><strong>Watch them thrive:</strong> See the people you trained flourish as owners.</li>
+                      <li><strong>Stay protected:</strong> We remain in place as the fiduciary bridge, ensuring the company continues to honor the structural and financial principles agreed upon at closing.</li>
+                    </ul>
+                  </div>
+                  <div className="step-complete">
+                    <span className="complete-icon">✓</span>
+                    <span>Your Legacy Secured</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Comparison Section -->
         <section className="business-owners-section section-alt">
           <div className="container">
             <div className="comparison-grid">
@@ -194,119 +307,6 @@ export default function BusinessOwnersPage() {
                         transition without the usual M&A friction.
                       </p>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Journey Steps Section */}
-        <section className="business-owners-section section-dark">
-          <div className="container">
-            <div className="section-header">
-              <h2>The Readiness Journey: Step-by-Step</h2>
-              <p className="section-intro">
-                Here is exactly what the systematic transition looks like when you partner with us.
-              </p>
-            </div>
-
-            <div className="steps-container">
-              <div className="timeline-line"></div>
-              
-              <div className="step-item" data-step="1">
-                <div className="step-badge">
-                  <span className="step-num">01</span>
-                  <div className="step-icon">🔍</div>
-                </div>
-                <div className="step-card">
-                  <div className="step-header">
-                    <h3>The Assessment</h3>
-                    <span className="step-tag">Today</span>
-                  </div>
-                  <span className="step-objective">Mapping the Vulnerabilities and Vision</span>
-                  <div className="step-body">
-                    <p>
-                      Everything begins with a no-pressure assessment of your timeline, financial 
-                      needs, and the current health of the business. We identify any structural 
-                      gaps and lay out a preliminary roadmap for transitioning ownership.
-                    </p>
-                  </div>
-                  <div className="step-connector"></div>
-                </div>
-              </div>
-
-              <div className="step-item" data-step="2">
-                <div className="step-badge">
-                  <span className="step-num">02</span>
-                  <div className="step-icon">📐</div>
-                </div>
-                <div className="step-card">
-                  <div className="step-header">
-                    <h3>The Blueprint</h3>
-                    <span className="step-tag">Pre-Transition</span>
-                  </div>
-                  <span className="step-objective">Building the Framework</span>
-                  <div className="step-body">
-                    <p>
-                      We step into our role as your fiduciary guide. We align your accountants 
-                      and legal counsel to structure the exact financial frameworks required. 
-                      Simultaneously, we begin transparently communicating with your future 
-                      employee-owners, building their capacity and readiness for the transition ahead.
-                    </p>
-                  </div>
-                  <div className="step-connector"></div>
-                </div>
-              </div>
-
-              <div className="step-item" data-step="3">
-                <div className="step-badge">
-                  <span className="step-num">03</span>
-                  <div className="step-icon">⚡</div>
-                </div>
-                <div className="step-card">
-                  <div className="step-header">
-                    <h3>Execution & Handover</h3>
-                    <span className="step-tag highlight">Transition</span>
-                  </div>
-                  <span className="step-objective">A &quot;Boring&quot; and Seamless Transition</span>
-                  <div className="step-body">
-                    <p>
-                      Because we systematically prepared every stakeholder, this milestone is 
-                      simply the execution of a well-tested blueprint. The legal transition of 
-                      ownership takes place, employees calmly gain their stake, financial 
-                      obligations are secured, and the operational handover happens seamlessly.
-                    </p>
-                  </div>
-                  <div className="step-connector"></div>
-                </div>
-              </div>
-
-              <div className="step-item" data-step="4">
-                <div className="step-badge">
-                  <span className="step-num">04</span>
-                  <div className="step-icon">✨</div>
-                </div>
-                <div className="step-card final">
-                  <div className="step-header">
-                    <h3>Continuity & Legacy</h3>
-                    <span className="step-tag success">Post-Sale</span>
-                  </div>
-                  <span className="step-objective">Sustainable Success</span>
-                  <div className="step-body">
-                    <p>
-                      Post-sale, you transition from the primary operator to an invaluable mentor 
-                      or board advisor.
-                    </p>
-                    <ul className="step-benefits">
-                      <li><strong>Lose the stress:</strong> You no longer carry the weight of payroll, daily emergencies, or singular risk.</li>
-                      <li><strong>Watch them thrive:</strong> See the people you trained flourish as owners.</li>
-                      <li><strong>Stay protected:</strong> We remain in place as the fiduciary bridge, ensuring the company continues to honor the structural and financial principles agreed upon at closing.</li>
-                    </ul>
-                  </div>
-                  <div className="step-complete">
-                    <span className="complete-icon">✓</span>
-                    <span>Your Legacy Secured</span>
                   </div>
                 </div>
               </div>
