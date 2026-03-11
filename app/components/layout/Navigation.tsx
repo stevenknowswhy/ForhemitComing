@@ -2,14 +2,32 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface NavigationProps {
   variant?: "dark" | "light";
 }
 
+// Navigation items - max 3 shown at a time (excluding current page)
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
+  { href: "/business-owners", label: "For Business Owners" },
+];
+
 export function Navigation({ variant = "dark" }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  // Filter out current page from navigation
+  const visibleNavItems = navItems.filter((item) => {
+    // Exact match for home, startsWith for others
+    if (item.href === "/") {
+      return pathname !== "/";
+    }
+    return !pathname?.startsWith(item.href);
+  });
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -45,8 +63,21 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     };
   }, [isOpen]);
 
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
+  // Don't show navigation if on Introduction page (accessed via cards)
+  if (pathname?.startsWith("/introduction")) {
+    return null;
+  }
+
   return (
-    <nav className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`} ref={menuRef}>
+    <nav
+      className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`}
+      ref={menuRef}
+    >
       {/* Hamburger Menu Button */}
       <button
         className={`hamburger-btn ${isOpen ? "open" : ""}`}
@@ -62,34 +93,16 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="nav-dropdown">
-          <Link
-            href="/"
-            className="nav-dropdown-item"
-            onClick={() => setIsOpen(false)}
-          >
-            Home
-          </Link>
-          <Link
-            href="/about"
-            className="nav-dropdown-item"
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </Link>
-          <Link
-            href="/business-owners"
-            className="nav-dropdown-item"
-            onClick={() => setIsOpen(false)}
-          >
-            For Business Owners
-          </Link>
-          <Link
-            href="/introduction"
-            className="nav-dropdown-item"
-            onClick={() => setIsOpen(false)}
-          >
-            Introductions
-          </Link>
+          {visibleNavItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="nav-dropdown-item"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       )}
     </nav>
