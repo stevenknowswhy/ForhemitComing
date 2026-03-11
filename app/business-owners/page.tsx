@@ -1,10 +1,49 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
+  const [openFaq, setOpenFaq] = useState<string | null>(null);
+
+  const toggleFaq = (id: string) => {
+    setOpenFaq(openFaq === id ? null : id);
+  };
+
+  const faqs = [
+    {
+      id: "committed",
+      question: "If I start the planning process today, does that mean I'm committed to leaving soon?",
+      answer: "Absolutely not. Building your blueprint today is simply sound business continuity—like buying insurance before the storm hits. It means putting the framework in place so that whether you decide to transition in two years or ten years, the plan is ready to execute. You remain in total control of the timeline; we just make sure the vehicle is built and ready to drive when you are."
+    },
+    {
+      id: "distracted",
+      question: "Will my employees be distracted by the transition process?",
+      answer: "No. A core part of our fiduciary role is ensuring your day-to-day operations remain uninterrupted. We handle the complex financial structuring, the legal frameworks, and the heavy lifting. While we do help prepare key team members for an ownership mindset over time, we do it systematically so they remain focused on running a profitable business."
+    },
+    {
+      id: "advisors",
+      question: "I already have a CPA and an Attorney. Do you replace them?",
+      answer: "We don't replace your advisory team; we empower them. Traditional sales often put a founder's advisors in a frantic, reactive position, scrambling to respond to an external buyer's demands. We provide your existing team with a clear, compliant blueprint. This allows your CPA and attorney to facilitate a tax-efficient, seamless transition without the usual friction of an M&A deal."
+    },
+    {
+      id: "different",
+      question: "How is your approach different from selling to a competitor or Private Equity?",
+      answer: "When you sell to an outside buyer, you lose control. They dictate the timeline, they interrogate your business, and they often dismantle the culture you built to extract value. Our approach is the opposite. You sell to the people who helped build the business, on a timeline you control. We serve as the steward to ensure the company remains independent, your legacy is protected, and the transition is peaceful."
+    },
+    {
+      id: "buy",
+      question: 'How do the employees actually "buy" the company?',
+      answer: "This is a common misconception—your employees do not need to empty their savings accounts or take out second mortgages to buy the business. We help structure the transition using proven legal and financial frameworks (such as an ESOP or an Employee Ownership Trust) that allow the company itself to finance the buyout over time, paying you fair market value out of its future profits."
+    },
+    {
+      id: "after",
+      question: "What happens to me after the transition is complete?",
+      answer: "That is entirely up to you. Because the transition is gradual and planned, you don't have to vanish on day one. Most founders transition from the primary operator carrying all the stress into an invaluable mentor or board advisor. You get to watch your team thrive as owners while providing high-level wisdom and historical context."
+    }
+  ];
   return (
     <div className="business-owners-wrapper">
       <div className="business-owners-background"></div>
@@ -310,6 +349,42 @@ export default function BusinessOwnersPage() {
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="business-owners-section faq-section">
+          <div className="container">
+            <div className="section-header">
+              <h2>Frequently Asked Questions</h2>
+              <p className="section-intro">
+                Answers to the most common questions business owners ask about the transition process.
+              </p>
+            </div>
+
+            <div className="faq-list">
+              {faqs.map((faq) => (
+                <div key={faq.id} className={`faq-item ${openFaq === faq.id ? 'open' : ''}`}>
+                  <button 
+                    className="faq-question"
+                    onClick={() => toggleFaq(faq.id)}
+                  >
+                    <span>{faq.question}</span>
+                    <span className="faq-icon">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 5v14M5 12h14" className="faq-plus"/>
+                        <path d="M5 12h14" className="faq-minus"/>
+                      </svg>
+                    </span>
+                  </button>
+                  <div className="faq-answer">
+                    <div className="faq-answer-content">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
