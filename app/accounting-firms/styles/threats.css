@@ -44,7 +44,7 @@
 .tsunami-cta-link {
   display: inline-block;
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   font-weight: 600;
   color: #ffffff;
   text-decoration: none;
