@@ -368,12 +368,13 @@
 .sub-options .sub-option-card {
   opacity: 0;
   animation: subCardRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  display: flex;
   flex-direction: row;
   align-items: center;
   text-align: left;
   gap: 1rem;
-  padding: 1.5rem;
-  min-height: 100px;
+  padding: 1.25rem 1.5rem;
+  min-height: auto;
 }
 
 .sub-options .sub-option-card:nth-child(1) {
@@ -507,8 +508,8 @@
   }
 
   .sub-options .sub-option-card {
+    display: flex;
     padding: 1.25rem;
-    min-height: auto;
   }
 
   .sub-option-card .card-icon {
@@ -608,6 +609,7 @@
   }
 
   .sub-options .sub-option-card {
+    display: flex;
     flex-direction: row;
     align-items: center;
     padding: 1.25rem;
