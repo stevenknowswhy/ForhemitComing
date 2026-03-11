@@ -187,6 +187,13 @@
   background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 9, 0.4) 50%, transparent 100%);
 }
 
+.about-section-problem {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 6rem 0;
+}
+
 .about-section-dark {
   background: var(--about-bg-dark);
   border-bottom: 1px solid var(--about-border);

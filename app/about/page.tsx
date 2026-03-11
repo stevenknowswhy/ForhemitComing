@@ -37,7 +37,7 @@ export default function AboutPage() {
         </section>
 
         {/* The Problem Section */}
-        <section className="about-section">
+        <section className="about-section about-section-problem">
           <div className="container">
             <div className="problem-section-header">
               <span className="about-eyebrow">The Reality</span>
