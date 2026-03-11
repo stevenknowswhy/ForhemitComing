@@ -130,7 +130,7 @@
 
 /* ── Stats Section ── */
 .stats-section {
-  padding-top: var(--space-xl);
+  padding: var(--space-lg) 0;
   position: relative;
   background-image: url('https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDbdmjVzNs7zlB4DN0AXrqKUZxkECvyp1aoTMI');
   background-size: cover;
@@ -170,7 +170,7 @@
   background: rgba(26, 24, 21, 0.95);
   border: 1px solid var(--lp-border);
   border-radius: 16px;
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   text-align: center;
   transition: all 0.4s var(--ease-out-expo);
   backdrop-filter: blur(8px);
@@ -193,11 +193,11 @@
 
 .stat-number {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
   font-weight: 700;
   color: var(--lp-accent);
   line-height: 1;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 }
 
 .stat-number span {
@@ -214,7 +214,7 @@
 
 .stats-realization {
   text-align: center;
-  padding: var(--space-md);
+  padding: var(--space-sm) var(--space-md);
   background: rgba(26, 24, 21, 0.95);
   border-radius: 12px;
   border: 1px solid var(--lp-border);
