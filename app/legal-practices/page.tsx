@@ -259,7 +259,7 @@ export default function LegalPractices() {
       answer: (
         <>
           <p>We earn our return primarily through a <strong>stewardship management agreement around 2–3%</strong>, not by taking a cut of your legal fees.</p>
-          <p>You bill your work to the client as you normally would. Where other specialists (ESOP valuation, independent trustees, etc.) are required, we help coordinate them.</p>
+          <p>You bill your work to the client as you normally would. Where other specialists (ESOP valuation, independent trustees, etc.) are required, we help coordinate them. All fees for services are separate and independent of each other.</p>
         </>
       )
     }
