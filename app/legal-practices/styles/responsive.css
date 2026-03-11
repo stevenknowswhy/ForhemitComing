@@ -188,6 +188,48 @@
     font-size: 2rem;
   }
   
+  /* Risk Steps */
+  .risk-steps-container {
+    padding-left: 2rem;
+  }
+
+  .risk-timeline-line {
+    left: 1rem;
+  }
+
+  .risk-step-badge {
+    left: -1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .risk-step-num {
+    font-size: 0.6rem;
+  }
+
+  .risk-step-icon {
+    font-size: 0.9rem;
+  }
+
+  .risk-step-card {
+    margin-left: 1rem;
+    padding: 1.25rem;
+  }
+
+  .risk-step-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .risk-step-header h3 {
+    font-size: var(--text-base);
+  }
+
+  .risk-step-connector {
+    display: none;
+  }
+  
   /* Risk Cards - 3 columns */
   .risk-cards {
     grid-template-columns: repeat(3, 1fr);

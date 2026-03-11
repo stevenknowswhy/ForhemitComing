@@ -390,37 +390,132 @@ export default function LegalPractices() {
         {/* Risk Factors Section */}
         <section className="legal-section risk-section">
           <div className="container">
-            <h2 data-animate="fade-up">You&apos;re not just worried about one deal — you&apos;re worried about your entire book</h2>
-            
-            <div className="risk-cards">
-              {[
-                { icon: "📊", title: "Client concentration risk", desc: "A handful of privately held, founder-led companies drive a disproportionate share of your fees. Their owners are now 55–75." },
-                { icon: "👁️", title: "Limited visibility", desc: "Only a small leadership group truly knows which relationships are both aging and critical. Many are tied closely to one senior partner." },
-                { icon: "📋", title: "No real succession plan", desc: "The files are in order. The relationships are not. If that partner retires or a client suddenly sells, the firm is exposed." },
-                { icon: "💼", title: "Private equity courting your clients", desc: "Owners are getting regular outreach about exit options. By the time they call you, they may already be committed to a buyer." },
-                { icon: "🤔", title: "Expected to be proactive", desc: "You&apos;re not a PE fund. You&apos;re not an ESOP specialist. You don&apos;t want to spook the client, and you don&apos;t want to guess on complex structures." },
-              ].map((risk, i) => (
-                <div 
-                  key={i} 
-                  className="risk-card" 
-                  data-animate="fade-up" 
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <span className="risk-icon">{risk.icon}</span>
-                  <h3>{risk.title}</h3>
-                  <p>{risk.desc}</p>
+            <div className="section-header" data-animate="fade-up">
+              <h2>You&apos;re not just worried about one deal — you&apos;re worried about your entire book</h2>
+              <p className="section-intro">
+                Five critical vulnerabilities that put your firm&apos;s future at risk.
+              </p>
+            </div>
+
+            <div className="risk-steps-container">
+              <div className="risk-timeline-line"></div>
+              
+              <div className="risk-step-item" data-step="1" data-animate="fade-up">
+                <div className="risk-step-badge">
+                  <span className="risk-step-num">01</span>
+                  <div className="risk-step-icon">📊</div>
                 </div>
-              ))}
+                <div className="risk-step-card">
+                  <div className="risk-step-header">
+                    <h3>Client Concentration Risk</h3>
+                    <span className="risk-step-tag">Immediate</span>
+                  </div>
+                  <span className="risk-step-objective">Your Revenue is Tied to Aging Founders</span>
+                  <div className="risk-step-body">
+                    <p>
+                      A handful of privately held, founder-led companies drive a disproportionate 
+                      share of your fees. Their owners are now 55–75, and without warning, they 
+                      could decide to sell.
+                    </p>
+                  </div>
+                  <div className="risk-step-connector"></div>
+                </div>
+              </div>
+
+              <div className="risk-step-item" data-step="2" data-animate="fade-up" data-delay="100">
+                <div className="risk-step-badge">
+                  <span className="risk-step-num">02</span>
+                  <div className="risk-step-icon">👁️</div>
+                </div>
+                <div className="risk-step-card">
+                  <div className="risk-step-header">
+                    <h3>Limited Visibility</h3>
+                    <span className="risk-step-tag">Hidden</span>
+                  </div>
+                  <span className="risk-step-objective">Critical Relationships Are Uncatalogued</span>
+                  <div className="risk-step-body">
+                    <p>
+                      Only a small leadership group truly knows which relationships are both aging 
+                      and critical. Many are tied closely to one senior partner—creating 
+                      concentration risk within your own firm.
+                    </p>
+                  </div>
+                  <div className="risk-step-connector"></div>
+                </div>
+              </div>
+
+              <div className="risk-step-item" data-step="3" data-animate="fade-up" data-delay="200">
+                <div className="risk-step-badge">
+                  <span className="risk-step-num">03</span>
+                  <div className="risk-step-icon">📋</div>
+                </div>
+                <div className="risk-step-card">
+                  <div className="risk-step-header">
+                    <h3>No Real Succession Plan</h3>
+                    <span className="risk-step-tag warning">Critical</span>
+                  </div>
+                  <span className="risk-step-objective">Relationships Can&apos;t Be Inherited</span>
+                  <div className="risk-step-body">
+                    <p>
+                      The files are in order. The relationships are not. If that partner retires 
+                      or a client suddenly sells, the firm is exposed—with no clear path to 
+                      preserving decades of trust.
+                    </p>
+                  </div>
+                  <div className="risk-step-connector"></div>
+                </div>
+              </div>
+
+              <div className="risk-step-item" data-step="4" data-animate="fade-up" data-delay="300">
+                <div className="risk-step-badge">
+                  <span className="risk-step-num">04</span>
+                  <div className="risk-step-icon">💼</div>
+                </div>
+                <div className="risk-step-card">
+                  <div className="risk-step-header">
+                    <h3>Private Equity Outreach</h3>
+                    <span className="risk-step-tag">Active Threat</span>
+                  </div>
+                  <span className="risk-step-objective">Your Clients Are Being Courted Now</span>
+                  <div className="risk-step-body">
+                    <p>
+                      Owners are getting regular outreach about exit options. By the time they 
+                      call you, they may already be committed to a buyer—and that buyer is bringing 
+                      their own counsel.
+                    </p>
+                  </div>
+                  <div className="risk-step-connector"></div>
+                </div>
+              </div>
+
+              <div className="risk-step-item final" data-step="5" data-animate="fade-up" data-delay="400">
+                <div className="risk-step-badge">
+                  <span className="risk-step-num">05</span>
+                  <div className="risk-step-icon">🤔</div>
+                </div>
+                <div className="risk-step-card final">
+                  <div className="risk-step-header">
+                    <h3>The Expertise Gap</h3>
+                    <span className="risk-step-tag highlight">The Dilemma</span>
+                  </div>
+                  <span className="risk-step-objective">Expected to Guide, But Without Tools</span>
+                  <div className="risk-step-body">
+                    <p>
+                      You&apos;re not a PE fund. You&apos;re not an ESOP specialist. You don&apos;t want to spook 
+                      the client, and you don&apos;t want to guess on complex structures. So you wait—and 
+                      hope they call you first.
+                    </p>
+                  </div>
+                  <div className="risk-step-complete">
+                    <span className="risk-complete-icon">⚠</span>
+                    <span>So Most Firms Wait</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="the-wait" data-animate="fade-up">
-              <p className="wait-intro">So most firms do what feels safest:</p>
-              <div className="wait-actions">
-                <span>They wait.</span>
-                <span>They stay available.</span>
-                <span>They hope that when the client is &quot;ready,&quot; the phone will ring.</span>
-              </div>
-              <blockquote className="the-call" data-animate="fade-up">
+              <blockquote className="the-call">
                 <p>&quot;We&apos;ve just signed an LOI with a private equity group. They&apos;re bringing their own counsel, but we&apos;ll keep you looped in.&quot;</p>
                 <footer>You know how that story ends.</footer>
               </blockquote>

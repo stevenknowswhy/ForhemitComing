@@ -139,40 +139,292 @@
   background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.02) 50%, transparent 100%);
 }
 
-.risk-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--space-sm);
+.risk-section .section-header {
+  text-align: center;
   margin-bottom: var(--space-xl);
 }
 
-.risk-card {
-  background: var(--lp-bg-card);
-  border: 1px solid var(--lp-border);
-  border-radius: 16px;
-  padding: var(--space-md);
-  transition: all 0.4s var(--ease-out-expo);
+.risk-section .section-intro {
+  font-size: var(--text-lg);
+  color: var(--lp-text-secondary);
+  max-width: 600px;
+  margin: var(--space-sm) auto 0;
 }
 
-.risk-card:hover {
+/* Risk Steps Container */
+.risk-steps-container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: var(--space-xl);
+}
+
+/* Timeline Line */
+.risk-timeline-line {
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--lp-accent) 0%,
+    rgba(255, 107, 0, 0.5) 50%,
+    rgba(255, 107, 0, 0.2) 100%
+  );
+  border-radius: 1px;
+}
+
+.risk-timeline-line::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--lp-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 12px rgba(255, 107, 0, 0.6);
+}
+
+/* Risk Step Item */
+.risk-step-item {
+  position: relative;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  animation: stepReveal 0.6s ease forwards;
+}
+
+.risk-step-item[data-step="1"] { animation-delay: 0.1s; }
+.risk-step-item[data-step="2"] { animation-delay: 0.2s; }
+.risk-step-item[data-step="3"] { animation-delay: 0.3s; }
+.risk-step-item[data-step="4"] { animation-delay: 0.4s; }
+.risk-step-item[data-step="5"] { animation-delay: 0.5s; }
+
+@keyframes stepReveal {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Risk Step Badge */
+.risk-step-badge {
+  position: absolute;
+  left: -2.5rem;
+  top: 0;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--lp-bg-dark);
+  border: 2px solid var(--lp-accent);
+  border-radius: 50%;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(255, 107, 0, 0.2);
+}
+
+.risk-step-item:hover .risk-step-badge {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.risk-step-num {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--lp-accent);
+  letter-spacing: 0.1em;
+}
+
+.risk-step-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+/* Risk Step Card */
+.risk-step-card {
+  padding: 1.75rem 2rem;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 24, 21, 0.95) 0%,
+    rgba(35, 30, 25, 0.9) 100%
+  );
+  border: 1px solid var(--lp-border);
+  border-radius: 12px;
+  margin-left: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.risk-step-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 0;
+  background: var(--lp-accent);
+  transition: height 0.4s ease;
+}
+
+.risk-step-item:hover .risk-step-card::before {
+  height: 100%;
+}
+
+.risk-step-card:hover {
   border-color: var(--lp-border-accent);
   transform: translateX(8px);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
 }
 
-.risk-icon {
-  display: block;
-  font-size: 1.75rem;
-  margin-bottom: var(--space-xs);
+.risk-step-card.final {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 107, 0, 0.1) 0%,
+    rgba(26, 24, 21, 0.95) 50%,
+    rgba(35, 30, 25, 0.9) 100%
+  );
+  border-color: rgba(255, 107, 0, 0.3);
 }
 
-.risk-card h3 {
-  font-size: var(--text-base);
+/* Risk Step Header */
+.risk-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
 }
 
-.risk-card p {
-  font-size: var(--text-sm);
+.risk-step-header h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--lp-text-primary);
   margin: 0;
+  transition: color 0.3s ease;
+}
+
+.risk-step-item:hover .risk-step-header h3 {
+  color: var(--lp-accent);
+}
+
+.risk-step-tag {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lp-text-secondary);
+  padding: 0.35rem 0.75rem;
+  background: rgba(90, 84, 74, 0.3);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.risk-step-tag.warning {
+  background: rgba(255, 107, 0, 0.2);
+  color: var(--lp-accent);
+}
+
+.risk-step-tag.highlight {
+  background: rgba(255, 107, 0, 0.25);
+  color: var(--lp-accent);
+  border: 1px solid rgba(255, 107, 0, 0.4);
+}
+
+.risk-step-item:hover .risk-step-tag {
+  background: rgba(255, 107, 0, 0.2);
+  color: var(--lp-accent);
+}
+
+/* Risk Step Objective */
+.risk-step-objective {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lp-text-secondary);
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Risk Step Body */
+.risk-step-body p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--lp-text-secondary);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Risk Step Connector */
+.risk-step-connector {
+  position: absolute;
+  left: -2rem;
+  top: 3rem;
+  width: 2rem;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--lp-accent) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.risk-step-item:hover .risk-step-connector {
+  opacity: 1;
+}
+
+/* Risk Step Complete */
+.risk-step-complete {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 107, 0, 0.3);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--lp-accent);
+}
+
+.risk-complete-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lp-accent);
+  color: var(--lp-bg);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 107, 0, 0);
+  }
 }
 
 /* The Wait Block */
