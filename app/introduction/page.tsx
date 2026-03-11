@@ -156,10 +156,11 @@ export default function Introduction() {
     if (isAnimating) return;
     setIsAnimating(true);
     
+    // Wait for fall animation to complete before switching views
     setTimeout(() => {
       setShowOtherServices(true);
       setIsAnimating(false);
-    }, 300);
+    }, 500);
   };
 
   useEffect(() => {
