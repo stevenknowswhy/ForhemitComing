@@ -152,7 +152,7 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 6rem 0 4rem;
+  padding: 5rem 0 3rem;
   border-bottom: 1px solid var(--about-border);
   background-image: url('/images/about/about-1.webp');
   background-size: cover;
@@ -176,26 +176,42 @@
 .about-hero-combined .container {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: calc(100vh - 8rem);
 }
 
 .combined-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+
+.combined-header .about-title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 0.75rem;
+}
+
+.combined-header .about-subtitle {
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  max-width: 500px;
 }
 
 .combined-two-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: start;
+  gap: 2rem;
+  align-items: stretch;
 }
 
 .combined-column {
-  background: rgba(14, 14, 12, 0.6);
+  background: rgba(14, 14, 12, 0.5);
   border: 1px solid var(--about-border);
   border-radius: 12px;
-  padding: 2rem;
+  padding: 1.5rem;
   backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
 }
 
 .combined-column-problem {
@@ -209,29 +225,44 @@
 .combined-column .problem-section-header,
 .combined-column .solution-header {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .combined-column .problem-section-header h2,
 .combined-column .solution-header h2 {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--about-text-primary);
 }
 
 .combined-column .about-stat.problem-stat {
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1rem;
+  padding: 1rem;
+}
+
+.combined-column .stat-number {
+  font-size: 2.5rem;
+}
+
+.combined-column .problem-points-row {
+  gap: 0.75rem;
+}
+
+.combined-column .problem-point {
+  padding: 0.75rem;
 }
 
 .combined-column-solution .solution-content {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  flex: 1;
 }
 
 .combined-column-solution .solution-content p {
   color: var(--about-text-secondary);
-  margin-bottom: 1rem;
-  line-height: 1.6;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  font-size: 0.9rem;
 }
 
 .combined-column-solution .solution-content p:last-child {
@@ -242,24 +273,33 @@
   margin-top: 0;
 }
 
+.combined-column-solution .highlight-image {
+  height: 120px;
+}
+
 @media (max-width: 1024px) {
   .combined-two-columns {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.5rem;
   }
   
   .about-hero-combined {
-    padding: 5rem 0 3rem;
+    padding: 4rem 0 2rem;
+    min-height: auto;
+  }
+  
+  .about-hero-combined .container {
+    min-height: auto;
   }
 }
 
 @media (max-width: 768px) {
   .combined-column {
-    padding: 1.5rem;
+    padding: 1.25rem;
   }
   
   .combined-header {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
 }
 
