@@ -22,7 +22,7 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.15;
+  opacity: 0.35;
   z-index: 0;
 }
 
@@ -32,9 +32,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(13, 12, 10, 0.7) 0%,
-    rgba(13, 12, 10, 0.5) 50%,
-    rgba(13, 12, 10, 0.8) 100%
+    rgba(13, 12, 10, 0.6) 0%,
+    rgba(13, 12, 10, 0.4) 40%,
+    rgba(13, 12, 10, 0.7) 100%
   );
   z-index: 1;
 }
@@ -74,21 +74,23 @@
 .accounting-title {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   color: var(--af-text-primary);
   margin-bottom: var(--space-lg);
   letter-spacing: -0.02em;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.5rem;
 }
 
 .title-line-1 {
   font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
 }
 
 .title-line-2 {
   font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: -0.01em;
 }
 
 .accounting-title .highlight {
@@ -100,12 +102,14 @@
 
 /* ── Lead Paragraph ── */
 .accounting-lead {
-  font-size: var(--text-lg);
-  font-weight: 300;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 400;
   color: var(--af-text-secondary);
   max-width: 650px;
   margin: 0 auto var(--space-lg);
-  line-height: 1.7;
+  line-height: 1.6;
+  letter-spacing: 0.01em;
 }
 
 /* ── Hero CTA ── */
