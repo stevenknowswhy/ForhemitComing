@@ -81,7 +81,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
             className="nav-dropdown-item"
             onClick={() => setIsOpen(false)}
           >
-            Introduction
+            Introductions
           </Link>
         </div>
       )}
