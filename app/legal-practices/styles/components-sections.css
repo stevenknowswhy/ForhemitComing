@@ -499,7 +499,7 @@
 }
 
 .faq-answer {
-  padding: 0 var(--space-md) var(--space-md);
+  padding: var(--space-sm) var(--space-md) var(--space-md);
   font-size: var(--text-sm);
   color: var(--lp-text-secondary);
   line-height: 1.7;

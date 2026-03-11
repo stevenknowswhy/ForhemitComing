@@ -358,7 +358,7 @@
   }
   
   .faq-answer {
-    padding: 0 var(--space-lg) var(--space-md);
+    padding: var(--space-sm) var(--space-lg) var(--space-md);
   }
 }
 
