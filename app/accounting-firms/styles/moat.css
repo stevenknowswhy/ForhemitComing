@@ -1,0 +1,135 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - BUILD A MOAT SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.moat-section {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(180deg, rgba(74, 124, 89, 0.05) 0%, transparent 50%);
+}
+
+/* ── Moat Header ── */
+.moat-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-lg);
+}
+
+.moat-header h2 {
+  color: var(--af-accent-sage);
+  margin-bottom: var(--space-md);
+}
+
+.moat-header p {
+  font-size: var(--text-lg);
+  color: var(--af-text-secondary);
+}
+
+/* ── Moat Delivers Lead ── */
+.moat-delivers {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.delivers-lead {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--af-text-primary);
+  margin: 0;
+}
+
+/* ── Deliverable Cards ── */
+.deliverable-card {
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 16px;
+  padding: var(--space-lg);
+  margin-bottom: var(--space-md);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
+  align-items: start;
+  transition: all 0.4s var(--ease-out-expo);
+}
+
+.deliverable-card:hover {
+  border-color: var(--af-border-sage);
+  box-shadow: var(--shadow-sage);
+}
+
+/* ── Deliverable Number ── */
+.deliverable-number {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--af-accent-sage);
+  opacity: 0.4;
+  line-height: 1;
+  align-self: center;
+}
+
+/* ── Deliverable Content ── */
+.deliverable-content h3 {
+  font-size: var(--text-lg);
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.deliverable-hook {
+  font-size: var(--text-base);
+  color: var(--af-text-secondary);
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm);
+  background: var(--af-sage-subtle);
+  border-left: 3px solid var(--af-accent-sage);
+  border-radius: 0 8px 8px 0;
+}
+
+/* ── Deliverable Benefits ── */
+.deliverable-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.deliverable-benefits li {
+  position: relative;
+  padding-left: 1.25rem;
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+  line-height: 1.6;
+}
+
+.deliverable-benefits li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--af-accent-sage);
+  font-weight: bold;
+}
+
+.deliverable-benefits li strong {
+  color: var(--af-text-primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+/* ── Mobile Adjustments ── */
+@media (max-width: 640px) {
+  .deliverable-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .deliverable-number {
+    font-size: 2rem;
+  }
+
+  .deliverable-benefits {
+    text-align: left;
+  }
+}

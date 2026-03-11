@@ -1,40 +1,73 @@
 /* ─────────────────────────────────────────────────────────────────────────────
-   ACCOUNTING FIRMS PAGE - THREATS SECTION
+   ACCOUNTING FIRMS PAGE - SILVER TSUNAMI & STARK REALITY SECTIONS
    ───────────────────────────────────────────────────────────────────────────── */
 
-.threats-section {
-  padding: var(--space-2xl) 0;
+/* ── Silver Tsunami Section ── */
+.tsunami-section {
+  padding: var(--space-xl) 0;
   background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.03) 50%, transparent 100%);
+}
+
+.tsunami-content {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.tsunami-lead {
+  font-size: var(--text-lg);
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.tsunami-question {
+  font-size: var(--text-xl);
+  color: var(--af-text-secondary);
+}
+
+.tsunami-question em {
+  color: var(--af-text-muted);
+  font-style: italic;
+}
+
+.tsunami-question strong {
+  color: var(--af-accent);
+}
+
+/* ── Stark Reality Section ── */
+.reality-section {
+  padding: var(--space-2xl) 0;
 }
 
 .section-context {
   text-align: center;
   max-width: 600px;
   margin: 0 auto var(--space-xl);
-  font-size: var(--text-lg);
+  font-size: var(--text-base);
+  color: var(--af-text-muted);
 }
 
-/* ── Threats Grid ── */
-.threats-grid {
+/* ── Reality Grid ── */
+.reality-grid {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   margin-bottom: var(--space-xl);
 }
 
-.threats-grid.visible .threat-card {
-  animation: slideUp 0.7s var(--ease-out-expo) forwards;
+.reality-grid.visible .reality-card {
+  animation: slideUp 0.6s var(--ease-out-expo) forwards;
   opacity: 0;
 }
 
-.threats-grid.visible .threat-card:nth-child(1) { animation-delay: 0.1s; }
-.threats-grid.visible .threat-card:nth-child(2) { animation-delay: 0.2s; }
-.threats-grid.visible .threat-card:nth-child(3) { animation-delay: 0.3s; }
+.reality-grid.visible .reality-card:nth-child(1) { animation-delay: 0.1s; }
+.reality-grid.visible .reality-card:nth-child(2) { animation-delay: 0.2s; }
+.reality-grid.visible .reality-card:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes slideUp {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -42,172 +75,117 @@
   }
 }
 
-/* ── Threat Cards ── Compact 3-column layout */
-.threat-card {
-  background: linear-gradient(135deg, var(--af-bg-secondary) 0%, var(--af-bg-tertiary) 100%);
+/* ── Reality Cards ── Compact horizontal layout */
+.reality-card {
+  background: var(--af-bg-card);
   border: 1px solid var(--af-border);
-  border-radius: 16px;
+  border-radius: 12px;
   padding: var(--space-md) var(--space-lg);
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s var(--ease-out-expo);
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr auto;
-  gap: var(--space-md);
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
   align-items: center;
+  transition: all 0.3s var(--ease-out-expo);
 }
 
-.threat-card:hover {
+.reality-card:hover {
   border-color: var(--af-border-accent);
-  box-shadow: var(--shadow-glow);
+  background: rgba(255, 107, 0, 0.03);
 }
 
-.threat-card.accent {
-  border-color: var(--af-border-accent);
-  background: linear-gradient(135deg, var(--af-bg-secondary) 0%, rgba(255, 107, 0, 0.05) 100%);
+.reality-card:nth-child(2):hover {
+  border-color: var(--af-text-muted);
 }
 
-.threat-card.accent:hover {
-  box-shadow: 0 0 40px rgba(255, 107, 0, 0.1);
+.reality-card:nth-child(3):hover {
+  border-color: var(--af-accent-sage);
 }
 
-.threat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--af-accent) 0%, transparent 100%);
-}
-
-/* ── Column 1: Text (Quote + Description) ── */
-.threat-text-col {
+/* ── Reality Stat Column ── */
+.reality-stat {
   display: flex;
   flex-direction: column;
-  gap: var(--space-xs);
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  padding-right: var(--space-md);
+  border-right: 2px solid var(--af-border);
 }
 
-.threat-quote {
-  font-size: var(--text-base);
-  font-style: italic;
-  color: var(--af-text-primary);
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-  margin: 0;
-}
-
-.threat-desc {
-  font-size: var(--text-sm);
-  color: var(--af-text-secondary);
-  margin: 0;
-  line-height: 1.6;
-}
-
-/* ── Column 2: Bullet Points (Consequences) ── */
-.threat-consequences {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.threat-consequences li {
-  position: relative;
-  padding-left: 1rem;
-  font-size: var(--text-xs);
-  color: var(--af-text-secondary);
-  line-height: 1.5;
-}
-
-.threat-consequences li::before {
-  content: '→';
-  position: absolute;
-  left: 0;
-  color: var(--af-accent);
-  font-weight: bold;
-}
-
-/* ── Column 3: Stats (Number, Title, Subtitle) ── */
-.threat-stats-col {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  gap: 0.25rem;
-  padding-left: var(--space-md);
-  border-left: 1px solid var(--af-border);
-  min-width: 180px;
-}
-
-.threat-stats-col .stat {
+.stat-number {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
   color: var(--af-accent);
   line-height: 1;
 }
 
-.threat-stats-col h3 {
-  font-size: var(--text-sm);
-  font-weight: 600;
-  color: var(--af-text-primary);
-  margin: 0;
+.stat-icon {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--af-text-muted);
+  line-height: 1;
 }
 
-.threat-stats-col .stat-label {
-  font-size: 0.7rem;
+.stat-label {
+  font-size: 0.65rem;
   color: var(--af-text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 0.25rem;
 }
 
-/* ── Threats Conclusion ── */
-.threats-conclusion {
+/* ── Reality Content Column ── */
+.reality-content h3 {
+  font-size: var(--text-base);
+  margin-bottom: 0.25rem;
+  color: var(--af-text-primary);
+}
+
+.reality-content p {
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Reality Conclusion ── */
+.reality-conclusion {
   text-align: center;
   padding: var(--space-md) var(--space-lg);
-  background: var(--af-bg-card);
+  background: var(--af-bg-secondary);
   border: 1px solid var(--af-border);
   border-radius: 12px;
-  max-width: 700px;
+  max-width: 600px;
   margin: 0 auto;
 }
 
-.threats-conclusion p {
+.reality-conclusion p {
   margin: 0;
   font-size: var(--text-base);
 }
 
 /* ── Mobile: Stack columns ── */
-@media (max-width: 767px) {
-  .threat-card {
+@media (max-width: 640px) {
+  .reality-card {
     grid-template-columns: 1fr;
     gap: var(--space-sm);
-    padding: var(--space-md);
+    text-align: center;
   }
 
-  .threat-stats-col {
-    align-items: flex-start;
-    text-align: left;
-    border-left: none;
-    border-top: 1px solid var(--af-border);
-    padding-left: 0;
-    padding-top: var(--space-sm);
+  .reality-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--af-border);
+    padding-right: 0;
+    padding-bottom: var(--space-sm);
     flex-direction: row;
-    flex-wrap: wrap;
-    gap: var(--space-xs) var(--space-sm);
-    min-width: auto;
+    gap: var(--space-sm);
+    justify-content: center;
   }
 
-  .threat-stats-col .stat {
-    font-size: 1.5rem;
-  }
-
-  .threat-stats-col h3 {
-    flex: 1;
+  .stat-label {
+    margin-top: 0;
   }
 }
