@@ -9,6 +9,17 @@
   z-index: 10;
 }
 
+/* Static variant - positioned at bottom of content */
+.footer-static {
+  position: relative;
+  padding-bottom: 0;
+}
+
+/* Adjust z-index for static variant */
+.footer-static .minimal-nav {
+  z-index: 1;
+}
+
 .footer-link {
   font-family: 'Inter', sans-serif;
   font-size: 0.65rem;

@@ -63,6 +63,13 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       {isOpen && (
         <div className="nav-dropdown">
           <Link
+            href="/"
+            className="nav-dropdown-item"
+            onClick={() => setIsOpen(false)}
+          >
+            Home
+          </Link>
+          <Link
             href="/about"
             className="nav-dropdown-item"
             onClick={() => setIsOpen(false)}

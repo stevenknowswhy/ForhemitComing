@@ -3,8 +3,9 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
-import { LegalModal } from "./components/modals/legalModal";
+import { LegalModal } from "./components/modals/LegalModal";
 import { ApplicationModal } from "./components/forms/application/ApplicationModal";
+import { Footer } from "./components/layout/Footer";
 import "./styles/home-page.css";
 
 function HomeContent() {
@@ -41,6 +42,8 @@ function HomeContent() {
           )}
         </div>
       </main>
+
+      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} />
 
       <LegalModal
         isOpen={showLegalModal}

@@ -1,5 +1,9 @@
 /* ── GLOBAL STYLES ── */
 
+/* CSS Imports must come first */
+@import "./components/layout/navigation.css";
+@import "./components/layout/footer.css";
+
 /* Reset */
 *,
 *::before,
@@ -26,10 +30,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-/* ── GLOBAL IMPORTS ── */
-@import "./components/layout/navigation.css";
-@import "./components/layout/footer.css";
 
 /* Responsive images */
 img {

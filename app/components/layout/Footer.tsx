@@ -2,13 +2,14 @@
 
 interface FooterProps {
   onLegalClick?: () => void;
+  variant?: "sticky" | "static";
 }
 
-export function Footer({ onLegalClick }: FooterProps) {
+export function Footer({ onLegalClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="footer">
+    <footer className={`footer footer-${variant}`}>
       <div
         className="footer-content"
         style={{
@@ -46,33 +47,35 @@ export function Footer({ onLegalClick }: FooterProps) {
             flexShrink: 0,
           }}
         />
-        <button
-          className="footer-legal-btn"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.65rem",
-            fontWeight: 400,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--muted-text)",
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            padding: 0,
-            transition: "all 0.3s ease",
-            position: "relative",
-            whiteSpace: "nowrap",
-          }}
-          onClick={onLegalClick}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.color = "var(--light-text)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.color = "var(--muted-text)";
-          }}
-        >
-          Legal
-        </button>
+        {onLegalClick && (
+          <button
+            className="footer-legal-btn"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: "0.65rem",
+              fontWeight: 400,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "var(--muted-text)",
+              background: "none",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 0.3s ease",
+              position: "relative",
+              whiteSpace: "nowrap",
+            }}
+            onClick={onLegalClick}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = "var(--light-text)";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = "var(--muted-text)";
+            }}
+          >
+            Legal
+          </button>
+        )}
       </div>
     </footer>
   );
