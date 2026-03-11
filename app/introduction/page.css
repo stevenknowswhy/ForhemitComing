@@ -356,10 +356,21 @@
   transform: translateX(-3px);
 }
 
-/* Sub-options cards */
+/* Sub-options 2x2 Grid */
+.intro-cards.sub-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .sub-options .sub-option-card {
   opacity: 0;
   animation: subCardRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.75rem;
+  padding: 1.25rem;
 }
 
 .sub-options .sub-option-card:nth-child(1) {
@@ -387,6 +398,38 @@
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+}
+
+/* Sub-option card grid layout */
+.sub-option-card .card-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.sub-option-card .card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.sub-option-card .card-title {
+  font-size: 0.95rem;
+}
+
+.sub-option-card .card-description {
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+
+.sub-option-card .card-arrow {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 24px;
+  height: 24px;
+}
+
+.sub-option-card {
+  position: relative;
 }
 
 /* Sub-option card hover effect */
@@ -450,6 +493,23 @@
 
   .card-description {
     font-size: 0.75rem;
+  }
+
+  /* Sub-options grid - tablet adjustment */
+  .intro-cards.sub-options {
+    gap: 0.75rem;
+  }
+
+  .sub-options .sub-option-card {
+    padding: 1rem;
+  }
+
+  .sub-option-card .card-title {
+    font-size: 0.85rem;
+  }
+
+  .sub-option-card .card-description {
+    font-size: 0.7rem;
   }
 }
 
@@ -522,5 +582,20 @@
     font-size: 0.75rem;
     padding: 0.4rem 0.875rem;
     margin-bottom: 1.25rem;
+  }
+
+  /* Sub-options grid - mobile single column */
+  .intro-cards.sub-options {
+    grid-template-columns: 1fr;
+  }
+
+  .sub-options .sub-option-card {
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+  }
+
+  .sub-option-card .card-arrow {
+    position: static;
   }
 }
