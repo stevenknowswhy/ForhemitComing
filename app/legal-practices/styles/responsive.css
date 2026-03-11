@@ -129,13 +129,29 @@
     align-self: center;
   }
   
-  /* Benefits */
-  .benefit-cards {
+  /* Benefits - Row Layout */
+  .benefit-row {
+    grid-template-columns: 200px 1fr 200px;
+    align-items: center;
+  }
+  
+  .benefit-row.stacked {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .benefit-row-top {
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+  }
+  
+  .benefit-row-phases {
     grid-template-columns: repeat(3, 1fr);
   }
   
-  .benefit-card:first-child {
-    grid-column: span 3;
+  .benefit-row-header h3 {
+    font-size: var(--text-lg);
   }
   
   /* Differentiators */
@@ -274,13 +290,24 @@
     font-size: 1.25rem;
   }
   
-  /* Benefits - all equal */
-  .benefit-cards {
-    grid-template-columns: repeat(3, 1fr);
+  /* Benefits - Row Layout Desktop */
+  .benefit-row {
+    grid-template-columns: 220px 1fr 240px;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
   }
   
-  .benefit-card:first-child {
-    grid-column: span 1;
+  .benefit-row.stacked {
+    gap: var(--space-lg);
+  }
+  
+  .benefit-row-top {
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .benefit-row-phases {
+    gap: var(--space-md);
   }
   
   /* Differentiators - 4 columns */

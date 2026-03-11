@@ -642,52 +642,67 @@ export default function LegalPractices() {
           <div className="container">
             <h2 data-animate="fade-up">What partnering with us does for your firm</h2>
             
-            <div className="benefit-cards">
-              <div className="benefit-card" data-animate="fade-up" data-delay="0">
-                <div className="benefit-number">01</div>
-                <h3>You stop being replaceable</h3>
-                <p>
-                  Instead of waiting to find out about a sale, you become the one who brings a credible, 
-                  values-aligned exit alternative. You raise the succession conversation from a place of 
-                  <strong> insight, not fear</strong>.
-                </p>
-                <div className="benefit-outcome">
+            <div className="benefit-rows">
+              {/* Card 01 - 3 columns: Number/Title | Text | Outcome */}
+              <div className="benefit-row" data-animate="fade-up" data-delay="0">
+                <div className="benefit-row-header">
+                  <span className="benefit-row-number">01</span>
+                  <h3>You stop being replaceable</h3>
+                </div>
+                <div className="benefit-row-content">
+                  <p>
+                    Instead of waiting to find out about a sale, you become the one who brings a credible, 
+                    values-aligned exit alternative. You raise the succession conversation from a place of 
+                    <strong> insight, not fear</strong>.
+                  </p>
+                </div>
+                <div className="benefit-row-outcome">
                   <span className="outcome-label">Outcome</span>
                   <span className="outcome-text">Incredibly difficult for competing advisors to dislodge</span>
                 </div>
               </div>
 
-              <div className="benefit-card" data-animate="fade-up" data-delay="100">
-                <div className="benefit-number">02</div>
-                <h3>Convert risk into revenue streams</h3>
-                <p>A Stewardship ESOP creates work across three phases:</p>
-                <div className="phases">
-                  <div className="phase">
+              {/* Card 02 - 2 rows: Top (Number/Title/Text) | Bottom (Before/During/After) */}
+              <div className="benefit-row stacked" data-animate="fade-up" data-delay="100">
+                <div className="benefit-row-top">
+                  <div className="benefit-row-header">
+                    <span className="benefit-row-number">02</span>
+                    <h3>Convert risk into revenue streams</h3>
+                  </div>
+                  <p>A Stewardship ESOP creates work across three phases:</p>
+                </div>
+                <div className="benefit-row-phases">
+                  <div className="phase-card">
                     <span className="phase-label">Before</span>
                     <span>Exit strategy, restructuring, estate planning</span>
                   </div>
-                  <div className="phase">
+                  <div className="phase-card">
                     <span className="phase-label">During</span>
                     <span>Transaction structuring, corporate counsel</span>
                   </div>
-                  <div className="phase">
+                  <div className="phase-card">
                     <span className="phase-label">After</span>
                     <span>Ongoing governance, compliance, next-gen planning</span>
                   </div>
                 </div>
               </div>
 
-              <div className="benefit-card" data-animate="fade-up" data-delay="200">
-                <div className="benefit-number">03</div>
-                <h3>Differentiate in a way competitors can&apos;t copy</h3>
-                <blockquote className="differentiation-quote">
-                  &quot;We offer a proven, investor-backed, employee-ownership transition path that preserves 
-                  client relationships and community jobs, with a Stewardship Holding Company as long-term 
-                  capital partner.&quot;
-                </blockquote>
-                <p className="differentiation-result">
-                  Give your rainmakers a <strong>new, high-value conversation</strong> to have with aging founders.
-                </p>
+              {/* Card 03 - 3 columns: Number/Title | Text | Result */}
+              <div className="benefit-row" data-animate="fade-up" data-delay="200">
+                <div className="benefit-row-header">
+                  <span className="benefit-row-number">03</span>
+                  <h3>Differentiate in a way competitors can&apos;t copy</h3>
+                </div>
+                <div className="benefit-row-content">
+                  <blockquote className="benefit-quote">
+                    &quot;We offer a proven, investor-backed, employee-ownership transition path that preserves 
+                    client relationships and community jobs, with a Stewardship Holding Company as long-term 
+                    capital partner.&quot;
+                  </blockquote>
+                </div>
+                <div className="benefit-row-result">
+                  <p>Give your rainmakers a <strong>new, high-value conversation</strong> to have with aging founders.</p>
+                </div>
               </div>
             </div>
           </div>

@@ -7,29 +7,33 @@
   padding: var(--space-2xl) 0;
 }
 
-.benefit-cards {
-  display: grid;
-  grid-template-columns: 1fr;
+/* Benefit Rows Container */
+.benefit-rows {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-md);
 }
 
-.benefit-card {
+/* Base Benefit Row - 3 Column Layout */
+.benefit-row {
   background: linear-gradient(135deg, var(--lp-bg-secondary) 0%, var(--lp-bg-tertiary) 100%);
   border: 1px solid var(--lp-border);
-  border-radius: 20px;
-  padding: var(--space-lg);
+  border-radius: 16px;
+  padding: var(--space-md);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
   position: relative;
   overflow: hidden;
   transition: all 0.4s var(--ease-out-expo);
 }
 
-.benefit-card:hover {
+.benefit-row:hover {
   border-color: var(--lp-border-accent);
-  transform: translateY(-4px);
   box-shadow: var(--shadow-glow);
 }
 
-.benefit-card::before {
+.benefit-row::before {
   content: '';
   position: absolute;
   top: 0;
@@ -39,97 +43,153 @@
   background: linear-gradient(90deg, var(--lp-accent) 0%, transparent 80%);
 }
 
-.benefit-number {
+/* Benefit Row Header (Number + Title) */
+.benefit-row-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.benefit-row-number {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: var(--text-2xl);
+  font-size: var(--text-xl);
   font-weight: 700;
   color: var(--lp-accent);
-  opacity: 0.3;
+  opacity: 0.4;
   line-height: 1;
-  margin-bottom: var(--space-sm);
 }
 
-.benefit-card h3 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-sm);
+.benefit-row-header h3 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin: 0;
+  color: var(--lp-text-primary);
 }
 
-.benefit-card p {
-  margin-bottom: var(--space-md);
+/* Benefit Row Content */
+.benefit-row-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.benefit-outcome {
+.benefit-row-content p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--lp-text-secondary);
+  line-height: 1.6;
+}
+
+/* Benefit Quote */
+.benefit-quote {
+  font-size: var(--text-sm);
+  font-style: italic;
+  color: var(--lp-text-primary);
+  padding: var(--space-sm);
+  background: var(--lp-bg-card);
+  border-left: 3px solid var(--lp-accent);
+  border-radius: 0 8px 8px 0;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Benefit Row Outcome */
+.benefit-row-outcome {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   padding: var(--space-sm);
   background: var(--lp-accent-subtle);
-  border-radius: 12px;
+  border-radius: 8px;
   border-left: 3px solid var(--lp-accent);
 }
 
 .outcome-label {
-  font-size: var(--text-xs);
+  font-size: 0.65rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--lp-accent);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .outcome-text {
   font-size: var(--text-sm);
   color: var(--lp-text-primary);
+  line-height: 1.4;
 }
 
-.phases {
+/* Benefit Row Result */
+.benefit-row-result {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  margin-top: var(--space-md);
+  justify-content: center;
 }
 
-.phase {
+.benefit-row-result p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--lp-text-secondary);
+  line-height: 1.6;
+}
+
+/* Stacked Card (Card 02) */
+.benefit-row.stacked {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.benefit-row-top {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-sm);
+}
+
+.benefit-row-top p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--lp-text-secondary);
+}
+
+/* Phase Cards Row */
+.benefit-row-phases {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.phase-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   padding: var(--space-sm);
   background: var(--lp-bg-card);
-  border-radius: 12px;
+  border: 1px solid var(--lp-border);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.phase-card:hover {
+  border-color: var(--lp-border-accent);
 }
 
 .phase-label {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: var(--text-xs);
+  font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--lp-accent);
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.5rem;
   background: var(--lp-accent-subtle);
-  border-radius: 100px;
-  white-space: nowrap;
+  border-radius: 4px;
+  align-self: flex-start;
 }
 
-.phase span:last-child {
+.phase-card span:last-child {
   font-size: var(--text-sm);
   color: var(--lp-text-secondary);
   line-height: 1.5;
-}
-
-.differentiation-quote {
-  font-size: var(--text-base);
-  font-style: italic;
-  color: var(--lp-text-primary);
-  padding: var(--space-md);
-  background: var(--lp-bg-card);
-  border-left: 3px solid var(--lp-accent);
-  border-radius: 0 12px 12px 0;
-  margin: var(--space-md) 0;
-}
-
-.differentiation-result {
-  margin: 0;
-  font-size: var(--text-base);
 }
 
 /* ── Why Different Section ── */
