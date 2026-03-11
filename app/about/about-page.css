@@ -227,8 +227,23 @@
   text-align: left;
 }
 
+/* Number first - styled as a badge */
+.problem-solution-column .point-number {
+  font-size: 0.7rem;
+  color: var(--about-accent);
+  font-weight: 700;
+  min-width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--about-accent);
+  border-radius: 4px;
+  background: rgba(255, 107, 0, 0.1);
+}
+
 .problem-solution-column .problem-visual {
-  width: 50px;
+  width: 60px;
   height: 50px;
   flex-shrink: 0;
 }
@@ -262,13 +277,6 @@
 .problem-solution-column .problem-visual .closed-sign {
   transform: scale(0.6);
   transform-origin: center;
-}
-
-.problem-solution-column .point-number {
-  font-size: 0.75rem;
-  color: var(--about-accent);
-  font-weight: 600;
-  min-width: 24px;
 }
 
 .problem-solution-column .problem-point p {

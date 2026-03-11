@@ -52,15 +52,16 @@ export default function AboutPage() {
                 </div>
                 <div className="problem-points-row">
                   <div className="problem-point">
+                    <span className="point-number">01</span>
                     <div className="problem-visual ratio-visual">
                       <span className="ratio-number">50</span>
                       <span className="ratio-divider">:</span>
                       <span className="ratio-number highlight">1</span>
                     </div>
-                    <span className="point-number">01</span>
                     <p>For every 50 businesses for sale, there is roughly <strong>one qualified buyer</strong>.</p>
                   </div>
                   <div className="problem-point">
+                    <span className="point-number">02</span>
                     <div className="problem-visual crowd-visual">
                       <svg viewBox="0 0 140 70" className="crowd-icon">
                         {/* Row 1 - Back row (smaller, lighter) */}
@@ -90,10 +91,10 @@ export default function AboutPage() {
                         <path d="M70 8 L70 2 M70 8 L65 3 M70 8 L75 3" stroke="var(--about-accent)" strokeWidth="2" fill="none" opacity="0.9"/>
                       </svg>
                     </div>
-                    <span className="point-number">02</span>
                     <p>Millions of Baby Boomers retiring will make that ratio <strong>much worse</strong>.</p>
                   </div>
                   <div className="problem-point">
+                    <span className="point-number">03</span>
                     <div className="problem-visual">
                       <div className="closed-sign">
                         <div className="closed-chain left"></div>
@@ -103,7 +104,6 @@ export default function AboutPage() {
                         </div>
                       </div>
                     </div>
-                    <span className="point-number">03</span>
                     <p>No buyer means your employees lose jobs and your legacy ends with a &quot;Closed&quot; sign.</p>
                   </div>
                 </div>
