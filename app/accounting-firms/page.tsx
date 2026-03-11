@@ -88,15 +88,23 @@ export default function AccountingFirms() {
         {/* The Silver Tsunami Section */}
         <section className="accounting-section tsunami-section">
           <div className="container">
-            <div className="tsunami-content" data-animate="fade-up">
-              <p className="tsunami-lead">
-                If your practice serves baby-boomer business owners, your biggest asset—and your biggest risk—is sitting on your books right now. 
-                Over the next decade, a historic transfer of wealth will take place as the majority of owners over 55 exit their companies.
-              </p>
-              <p className="tsunami-question">
-                The question isn&apos;t <em>if</em> your clients will transition, but <strong>who will control the outcome</strong>. 
-                Will you be left behind, or will you become the architect of their legacy?
-              </p>
+            <div className="tsunami-grid" data-animate="fade-up">
+              <div className="tsunami-text">
+                <p className="tsunami-lead">
+                  If your practice serves baby-boomer business owners, your biggest asset—and your biggest risk—is sitting on your books right now. 
+                  Over the next decade, a historic transfer of wealth will take place as the majority of owners over 55 exit their companies.
+                </p>
+                <p className="tsunami-question">
+                  The question isn&apos;t <em>if</em> your clients will transition, but <strong>who will control the outcome</strong>. 
+                  Will you be left behind, or will you become the architect of their legacy?
+                </p>
+              </div>
+              <div className="tsunami-image">
+                <img 
+                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD836AM0RQkVahrcQmOXG3UgxiZ2BuI795jYpy" 
+                  alt="Business succession planning"
+                />
+              </div>
             </div>
           </div>
         </section>
