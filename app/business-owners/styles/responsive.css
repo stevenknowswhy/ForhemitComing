@@ -2,15 +2,6 @@
    BUSINESS OWNERS - RESPONSIVE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
-/* ── Desktop Styles ── */
-@media (min-width: 1024px) {
-  /* Journey Cards - 4 columns on desktop */
-  .journey-cards {
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-md);
-  }
-}
-
 /* ── Tablet Styles ── */
 @media (max-width: 900px) {
   /* Hero */
@@ -44,12 +35,6 @@
   /* Stakeholders */
   .stakeholders-grid {
     grid-template-columns: 1fr;
-  }
-
-  /* Journey Cards - 2 columns on tablet */
-  .journey-cards {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
   }
 
   /* Timeline */
@@ -153,16 +138,6 @@
 
   .stakeholder-description p {
     font-size: 0.85rem;
-  }
-
-  /* Journey Cards - stack on mobile */
-  .journey-cards {
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
-
-  .journey-card {
-    padding: var(--space-sm);
   }
 
   /* CTA */
