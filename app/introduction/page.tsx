@@ -17,6 +17,7 @@ const businessSubOptions = [
         <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
       </svg>
     ),
+    hasSubMenu: false,
   },
   {
     id: "legal",
@@ -28,6 +29,7 @@ const businessSubOptions = [
         <path d="m9 12 2 2 4-4"/>
       </svg>
     ),
+    hasSubMenu: false,
   },
   {
     id: "lending",
@@ -39,16 +41,70 @@ const businessSubOptions = [
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
       </svg>
     ),
+    hasSubMenu: false,
   },
   {
     id: "other",
     title: "Other Services",
-    description: "Have a different service offering? Connect with us to explore how we can work together",
+    description: "Business Appraisers, Business Brokers, Wealth Managers & more",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <circle cx="12" cy="12" r="10"/>
         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
         <line x1="12" y1="17" x2="12.01" y2="17"/>
+      </svg>
+    ),
+    hasSubMenu: true,
+  },
+];
+
+// Sub-options for Other Services
+const otherServicesSubOptions = [
+  {
+    id: "appraisers",
+    title: "Business Appraisers",
+    description: "Partner with us for valuation and business appraisal services",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+    ),
+  },
+  {
+    id: "brokers",
+    title: "Business Brokers",
+    description: "Collaborate with us on business sales and M&A transactions",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+        <circle cx="9" cy="7" r="4"/>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+      </svg>
+    ),
+  },
+  {
+    id: "wealth-managers",
+    title: "Wealth Managers",
+    description: "Work with us to serve business owners through ESOP transitions",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <line x1="12" y1="1" x2="12" y2="23"/>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+      </svg>
+    ),
+  },
+  {
+    id: "others",
+    title: "Others",
+    description: "Have a different professional service? Let's discuss how we can collaborate",
+    icon: (
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M12 16v-4"/>
+        <path d="M12 8h.01"/>
       </svg>
     ),
   },
@@ -59,6 +115,7 @@ export default function Introduction() {
   const [isVisible, setIsVisible] = useState(false);
   const [showEmailInput, setShowEmailInput] = useState(false);
   const [showBusinessOptions, setShowBusinessOptions] = useState(false);
+  const [showOtherServices, setShowOtherServices] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
@@ -86,7 +143,21 @@ export default function Introduction() {
     setIsAnimating(true);
     
     setTimeout(() => {
-      setShowBusinessOptions(false);
+      if (showOtherServices) {
+        setShowOtherServices(false);
+      } else {
+        setShowBusinessOptions(false);
+      }
+      setIsAnimating(false);
+    }, 300);
+  };
+
+  const handleOtherServicesClick = () => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    
+    setTimeout(() => {
+      setShowOtherServices(true);
       setIsAnimating(false);
     }, 300);
   };
@@ -96,16 +167,18 @@ export default function Introduction() {
       if (e.key === "Escape" && showEmailInput) {
         handleCloseEmail();
       }
-      if (e.key === "Escape" && showBusinessOptions) {
+      if (e.key === "Escape" && showOtherServices) {
+        handleBackClick();
+      } else if (e.key === "Escape" && showBusinessOptions) {
         handleBackClick();
       }
     };
 
-    if (showEmailInput || showBusinessOptions) {
+    if (showEmailInput || showBusinessOptions || showOtherServices) {
       window.addEventListener("keydown", handleKeyDown);
     }
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [showEmailInput, showBusinessOptions]);
+  }, [showEmailInput, showBusinessOptions, showOtherServices]);
 
   return (
     <div className="intro-wrapper">
@@ -216,7 +289,7 @@ export default function Introduction() {
                 </Link>
               </div>
             </>
-          ) : (
+          ) : !showOtherServices ? (
             // Business Sub-Options View
             <div className={`business-options options-wide ${!isAnimating ? "options-rise" : ""}`}>
               {/* Back Button */}
@@ -234,7 +307,48 @@ export default function Introduction() {
 
               <div className="intro-cards sub-options">
                 {businessSubOptions.map((option) => (
-                  <button key={option.id} className="intro-card sub-option-card">
+                  <button 
+                    key={option.id} 
+                    className="intro-card sub-option-card"
+                    onClick={option.hasSubMenu ? handleOtherServicesClick : undefined}
+                  >
+                    <div className="card-icon">{option.icon}</div>
+                    <div className="card-text">
+                      <h2 className="card-title">{option.title}</h2>
+                      <p className="card-description">{option.description}</p>
+                    </div>
+                    <span className="card-arrow">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Other Services Sub-Options View
+            <div className={`business-options options-wide ${!isAnimating ? "options-rise" : ""}`}>
+              {/* Back Button */}
+              <button className="back-button" onClick={handleBackClick}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Back to Business Introductions</span>
+              </button>
+
+              <h1 className="intro-title">Other Services</h1>
+              <p className="intro-subtitle">
+                Select your professional category
+              </p>
+
+              <div className="intro-cards sub-options">
+                {otherServicesSubOptions.map((option, index) => (
+                  <button 
+                    key={option.id} 
+                    className="intro-card sub-option-card"
+                    style={{ animationDelay: `${0.3 + index * 0.1}s` }}
+                  >
                     <div className="card-icon">{option.icon}</div>
                     <div className="card-text">
                       <h2 className="card-title">{option.title}</h2>
