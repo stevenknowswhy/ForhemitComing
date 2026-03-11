@@ -98,68 +98,68 @@ export default function AccountingFirms() {
             <div className={`threats-grid ${threatsVisible ? "visible" : ""}`}>
               {/* Threat 1: Talent Extinction */}
               <div className="threat-card" data-animate="slide-right">
-                <div className="threat-icon">👥</div>
-                <div className="threat-stats">
-                  <span className="stat">-17%</span>
-                  <span className="stat-label">Workforce decline since 2020</span>
+                <div className="threat-text-col">
+                  <blockquote className="threat-quote">
+                    &quot;We can&apos;t find people who can actually do the work.&quot;
+                  </blockquote>
+                  <p className="threat-desc">
+                    You are likely doing the jobs of three people, turning away clients, and watching your succession plan walk out the door.
+                  </p>
                 </div>
-                <h3>The Talent Extinction Event</h3>
-                <blockquote className="threat-quote">
-                  &quot;We can&apos;t find people who can actually do the work.&quot;
-                </blockquote>
-                <p>
-                  You are likely doing the jobs of three people, turning away clients, and watching your succession plan walk out the door. 
-                  Unemployment for accountants is at 2% — effectively zero.
-                </p>
                 <ul className="threat-consequences">
                   <li>Doing 3 jobs simultaneously</li>
                   <li>Turning away profitable clients</li>
                   <li>Watching succession plans evaporate</li>
                 </ul>
+                <div className="threat-stats-col">
+                  <span className="stat">-17%</span>
+                  <h3>The Talent Extinction Event</h3>
+                  <span className="stat-label">Workforce decline since 2020</span>
+                </div>
               </div>
 
               {/* Threat 2: Cyber Time Bomb */}
               <div className="threat-card accent" data-animate="fade-up">
-                <div className="threat-icon">🔒</div>
-                <div className="threat-stats">
-                  <span className="stat">+300%</span>
-                  <span className="stat-label">Surge in cyberattacks</span>
+                <div className="threat-text-col">
+                  <blockquote className="threat-quote">
+                    &quot;We&apos;re a sitting duck.&quot;
+                  </blockquote>
+                  <p className="threat-desc">
+                    You are managing highly sensitive financial data with infrastructure that is one phishing click away from a firm-ending disaster.
+                  </p>
                 </div>
-                <h3>The Cybersecurity Time Bomb</h3>
-                <blockquote className="threat-quote">
-                  &quot;We&apos;re a sitting duck.&quot;
-                </blockquote>
-                <p>
-                  You are managing highly sensitive financial data with infrastructure that is one phishing click away from a firm-ending disaster. 
-                  Cybercriminals know you have the keys to client kingdoms.
-                </p>
                 <ul className="threat-consequences">
                   <li>Sensitive client financial data at risk</li>
                   <li>One click from firm-ending disaster</li>
                   <li>No incident response plan in place</li>
                 </ul>
+                <div className="threat-stats-col">
+                  <span className="stat">+300%</span>
+                  <h3>The Cybersecurity Time Bomb</h3>
+                  <span className="stat-label">Surge in cyberattacks</span>
+                </div>
               </div>
 
               {/* Threat 3: Compliance Trap */}
               <div className="threat-card" data-animate="slide-left">
-                <div className="threat-icon">📋</div>
-                <div className="threat-stats">
-                  <span className="stat">+135%</span>
-                  <span className="stat-label">Increase in tax authority inspections</span>
+                <div className="threat-text-col">
+                  <blockquote className="threat-quote">
+                    &quot;The goalposts move every quarter.&quot;
+                  </blockquote>
+                  <p className="threat-desc">
+                    Your senior partners are drowning in compliance updates instead of advising clients, leaving junior staff to handle sensitive data.
+                  </p>
                 </div>
-                <h3>The Compliance Complexity Trap</h3>
-                <blockquote className="threat-quote">
-                  &quot;The goalposts move every quarter.&quot;
-                </blockquote>
-                <p>
-                  Your senior partners are drowning in compliance updates instead of advising clients, leaving junior staff to handle sensitive data. 
-                  Regulatory changes are moving faster than ever.
-                </p>
                 <ul className="threat-consequences">
                   <li>Senior partners buried in compliance</li>
                   <li>No time for high-margin advisory</li>
                   <li>Junior staff handling sensitive matters</li>
                 </ul>
+                <div className="threat-stats-col">
+                  <span className="stat">+135%</span>
+                  <h3>The Compliance Complexity Trap</h3>
+                  <span className="stat-label">Tax authority inspections up</span>
+                </div>
               </div>
             </div>
 

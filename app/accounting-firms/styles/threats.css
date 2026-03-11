@@ -18,7 +18,7 @@
 .threats-grid {
   display: flex;
   flex-direction: column;
-  gap: var(--space-lg);
+  gap: var(--space-md);
   margin-bottom: var(--space-xl);
 }
 
@@ -42,54 +42,23 @@
   }
 }
 
-/* ── Threat Cards ── */
+/* ── Threat Cards ── Compact 3-column layout */
 .threat-card {
   background: linear-gradient(135deg, var(--af-bg-secondary) 0%, var(--af-bg-tertiary) 100%);
   border: 1px solid var(--af-border);
-  border-radius: 20px;
-  padding: var(--space-xl);
+  border-radius: 16px;
+  padding: var(--space-md) var(--space-lg);
   position: relative;
   overflow: hidden;
   transition: all 0.4s var(--ease-out-expo);
   display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto auto auto 1fr;
-  gap: 0 var(--space-lg);
-  align-items: start;
-}
-
-.threat-card .threat-icon {
-  grid-row: 1 / -1;
-  font-size: 3rem;
-  margin: 0;
-  align-self: center;
-}
-
-.threat-card .threat-stats {
-  grid-column: 2;
-  margin-bottom: var(--space-sm);
-}
-
-.threat-card h3 {
-  grid-column: 2;
-}
-
-.threat-card .threat-quote {
-  grid-column: 2;
-}
-
-.threat-card > p {
-  grid-column: 2;
-}
-
-.threat-card .threat-consequences {
-  grid-column: 2;
-  margin-top: var(--space-md);
+  grid-template-columns: 1.2fr 0.8fr auto;
+  gap: var(--space-md);
+  align-items: center;
 }
 
 .threat-card:hover {
   border-color: var(--af-border-accent);
-  transform: translateY(-4px);
   box-shadow: var(--shadow-glow);
 }
 
@@ -99,7 +68,7 @@
 }
 
 .threat-card.accent:hover {
-  box-shadow: 0 0 60px rgba(255, 107, 0, 0.15);
+  box-shadow: 0 0 40px rgba(255, 107, 0, 0.1);
 }
 
 .threat-card::before {
@@ -107,69 +76,52 @@
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--af-accent) 0%, transparent 100%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--af-accent) 0%, transparent 100%);
 }
 
-/* ── Threat Icon ── */
-.threat-icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-sm);
+/* ── Column 1: Text (Quote + Description) ── */
+.threat-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
 }
 
-/* ── Threat Stats ── */
-.threat-stats {
-  margin-bottom: var(--space-sm);
-}
-
-.threat-stats .stat {
-  display: block;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(2rem, 6vw, 3rem);
-  font-weight: 700;
-  color: var(--af-accent);
-  line-height: 1;
-}
-
-.threat-stats .stat-label {
-  font-size: var(--text-xs);
-  color: var(--af-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* ── Threat Title ── */
-.threat-card h3 {
-  font-size: var(--text-lg);
-  margin-bottom: var(--space-sm);
-}
-
-/* ── Threat Quote ── */
 .threat-quote {
   font-size: var(--text-base);
   font-style: italic;
   color: var(--af-text-primary);
-  padding: var(--space-sm);
-  background: var(--af-bg-card);
-  border-left: 3px solid var(--af-accent);
-  border-radius: 0 8px 8px 0;
-  margin: var(--space-sm) 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  margin: 0;
 }
 
-/* ── Threat Consequences ── */
+.threat-desc {
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Column 2: Bullet Points (Consequences) ── */
 .threat-consequences {
   list-style: none;
   padding: 0;
-  margin: var(--space-md) 0 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .threat-consequences li {
   position: relative;
-  padding-left: 1.5rem;
-  margin-bottom: 0.5rem;
-  font-size: var(--text-sm);
+  padding-left: 1rem;
+  font-size: var(--text-xs);
   color: var(--af-text-secondary);
+  line-height: 1.5;
 }
 
 .threat-consequences li::before {
@@ -180,13 +132,47 @@
   font-weight: bold;
 }
 
+/* ── Column 3: Stats (Number, Title, Subtitle) ── */
+.threat-stats-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  gap: 0.25rem;
+  padding-left: var(--space-md);
+  border-left: 1px solid var(--af-border);
+  min-width: 180px;
+}
+
+.threat-stats-col .stat {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--af-accent);
+  line-height: 1;
+}
+
+.threat-stats-col h3 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--af-text-primary);
+  margin: 0;
+}
+
+.threat-stats-col .stat-label {
+  font-size: 0.7rem;
+  color: var(--af-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
 /* ── Threats Conclusion ── */
 .threats-conclusion {
   text-align: center;
-  padding: var(--space-lg);
+  padding: var(--space-md) var(--space-lg);
   background: var(--af-bg-card);
   border: 1px solid var(--af-border);
-  border-radius: 16px;
+  border-radius: 12px;
   max-width: 700px;
   margin: 0 auto;
 }
@@ -194,4 +180,34 @@
 .threats-conclusion p {
   margin: 0;
   font-size: var(--text-base);
+}
+
+/* ── Mobile: Stack columns ── */
+@media (max-width: 767px) {
+  .threat-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+  }
+
+  .threat-stats-col {
+    align-items: flex-start;
+    text-align: left;
+    border-left: none;
+    border-top: 1px solid var(--af-border);
+    padding-left: 0;
+    padding-top: var(--space-sm);
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--space-xs) var(--space-sm);
+    min-width: auto;
+  }
+
+  .threat-stats-col .stat {
+    font-size: 1.5rem;
+  }
+
+  .threat-stats-col h3 {
+    flex: 1;
+  }
 }
