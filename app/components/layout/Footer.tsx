@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 interface FooterProps {
   onLegalClick?: () => void;
   variant?: "sticky" | "static";
@@ -48,34 +50,73 @@ export function Footer({ onLegalClick, variant = "sticky" }: FooterProps) {
           }}
         />
         {onLegalClick && (
-          <button
-            className="footer-legal-btn"
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: "0.65rem",
-              fontWeight: 400,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--muted-text)",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              transition: "all 0.3s ease",
-              position: "relative",
-              whiteSpace: "nowrap",
-            }}
-            onClick={onLegalClick}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = "var(--light-text)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = "var(--muted-text)";
-            }}
-          >
-            Legal
-          </button>
+          <>
+            <span
+              style={{
+                width: "4px",
+                height: "4px",
+                borderRadius: "50%",
+                background: "var(--muted-text)",
+                opacity: 0.6,
+                flexShrink: 0,
+              }}
+            />
+            <button
+              className="footer-legal-btn"
+              style={{
+                fontFamily: "'Inter', sans-serif",
+                fontSize: "0.65rem",
+                fontWeight: 400,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                color: "var(--muted-text)",
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+                transition: "all 0.3s ease",
+                position: "relative",
+                whiteSpace: "nowrap",
+              }}
+              onClick={onLegalClick}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--light-text)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--muted-text)";
+              }}
+            >
+              Legal
+            </button>
+          </>
         )}
+        <span
+          style={{
+            width: "4px",
+            height: "4px",
+            borderRadius: "50%",
+            background: "var(--muted-text)",
+            opacity: 0.6,
+            flexShrink: 0,
+          }}
+        />
+        <Link
+          href="/admin"
+          className="footer-link"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: "0.65rem",
+            fontWeight: 400,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            color: "var(--muted-text)",
+            textDecoration: "none",
+            transition: "all 0.3s ease",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Admin
+        </Link>
       </div>
     </footer>
   );
