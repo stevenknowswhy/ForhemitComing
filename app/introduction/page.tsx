@@ -69,6 +69,7 @@ const otherServicesSubOptions = [
     id: "appraisers",
     title: "Business Appraisers",
     description: "Partner with us for valuation and business appraisal services",
+    href: "/appraisers",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M12 2L2 7l10 5 10-5-10-5z"/>
