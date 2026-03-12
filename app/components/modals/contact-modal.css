@@ -622,6 +622,21 @@
   font-size: 0.95rem;
   color: #a0a0a0;
   line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.form-btn-success-close {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  margin-top: 0.5rem;
+}
+
+.form-btn-success-close:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 /* Responsive - Tablet */

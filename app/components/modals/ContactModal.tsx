@@ -65,14 +65,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
-    // Reset after showing success
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setCurrentStep(1);
-      setFormData({ contactType: "", name: "", email: "", company: "", interest: "", message: "" });
-      onClose();
-    }, 2000);
+    // User can now review and manually close
+  };
+
+  const handleSuccessClose = () => {
+    setIsSubmitted(false);
+    setCurrentStep(1);
+    setFormData({ contactType: "", name: "", email: "", company: "", interest: "", message: "" });
+    onClose();
   };
 
   const getStepTitle = () => {
@@ -214,6 +214,9 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <p className="contact-success-message">
                   Thank you for reaching out. We&apos;ll get back to you shortly.
                 </p>
+                <button className="form-btn form-btn-success-close" onClick={handleSuccessClose}>
+                  Close
+                </button>
               </div>
             ) : (
               <div className="progressive-form">
