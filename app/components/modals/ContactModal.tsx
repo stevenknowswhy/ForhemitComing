@@ -73,7 +73,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </div>
                 <div className="contact-info-text">
                   <span className="contact-info-label">Email</span>
-                  <a href="mailto:hello@forhemit.com" className="contact-info-link">hello@forhemit.com</a>
+                  <a href="mailto:contact@forhemit.com" className="contact-info-link">contact@forhemit.com</a>
                 </div>
               </div>
 
@@ -86,20 +86,19 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </div>
                 <div className="contact-info-text">
                   <span className="contact-info-label">Location</span>
-                  <span className="contact-info-value">United States</span>
+                  <span className="contact-info-value">San Francisco, CA 94103</span>
                 </div>
               </div>
 
               <div className="contact-info-item">
                 <div className="contact-info-icon">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polyline points="12,6 12,12 16,14"/>
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                   </svg>
                 </div>
                 <div className="contact-info-text">
-                  <span className="contact-info-label">Response Time</span>
-                  <span className="contact-info-value">Within 24-48 hours</span>
+                  <span className="contact-info-label">Phone</span>
+                  <span className="contact-info-value">(415) XXX-XXXX</span>
                 </div>
               </div>
             </div>
