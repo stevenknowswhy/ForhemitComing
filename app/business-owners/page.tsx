@@ -57,6 +57,7 @@ export default function BusinessOwnersPage() {
     }
   ];
   return (
+    <>
     <div className="business-owners-wrapper">
       <div className="business-owners-background"></div>
       
@@ -427,5 +428,11 @@ export default function BusinessOwnersPage() {
 
       <Footer variant="static" />
     </div>
+
+    <InfrastructureAuditModal 
+      isOpen={isAuditOpen} 
+      onClose={() => setIsAuditOpen(false)} 
+    />
+    </>
   );
 }
