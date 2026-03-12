@@ -306,62 +306,38 @@ function TwentyFourHourFolder() {
   );
 }
 
-// Risk Matrix Component
-function RiskMatrix() {
+// Comparison Table Component
+function ComparisonTable() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
   
-  const metrics: RiskMetric[] = [
-    { label: "Reputation Risk", traditional: 85, forhemit: 15 },
-    { label: "Deal Certainty", traditional: 60, forhemit: 95 },
-    { label: "Employee Retention", traditional: 40, forhemit: 98 },
-    { label: "Structural Integrity", traditional: 55, forhemit: 92 },
-    { label: "AI Resilience", traditional: 30, forhemit: 88 },
+  const rows = [
+    { label: "Broker Commission", traditional: "Standard Fee (Paid at Close)", forhemit: "Standard Fee (Paid at Close)" },
+    { label: "Transaction Timeline", traditional: "12 – 24 Months (High uncertainty)", forhemit: "90 – 120 Days (Pre-underwritten)" },
+    { label: "Purchase Price", traditional: "Subject to aggressive negotiation", forhemit: "100% of Independent Fair Market Value" },
+    { label: "Capital Stack", traditional: "Buyer Cash + Bank Debt", forhemit: "SBA 7(a) Senior Debt (up to $5M) + Seller Note" },
+    { label: "Tax Advantages", traditional: "Standard Capital Gains", forhemit: "Potential $0 Cap Gains (Sec. 1042 Rollover)" },
+    { label: "Employee Outcome", traditional: "High risk of layoffs", forhemit: "100% Employee Ownership; Jobs preserved" },
   ];
 
   return (
-    <div className="risk-matrix">
-      <div className="matrix-header">
-        <span className="matrix-label">Risk Assessment Matrix</span>
-        <div className="matrix-legend">
-          <div className="legend-item">
-            <span className="legend-color traditional" />
-            <span>Traditional PE</span>
-          </div>
-          <div className="legend-item">
-            <span className="legend-color forhemit" />
-            <span>Forhemit</span>
-          </div>
+    <div className="comparison-table">
+      <div className="table-header">
+        <div className="table-cell metric-label">Metric</div>
+        <div className="table-cell traditional-header">Traditional External Buyer</div>
+        <div className="table-cell forhemit-header">The Forhemit ESOP Exit</div>
+      </div>
+      {rows.map((row, i) => (
+        <div 
+          key={row.label}
+          className={`table-row ${hoveredRow === i ? 'hovered' : ''}`}
+          onMouseEnter={() => setHoveredRow(i)}
+          onMouseLeave={() => setHoveredRow(null)}
+        >
+          <div className="table-cell metric-label">{row.label}</div>
+          <div className="table-cell traditional-cell">{row.traditional}</div>
+          <div className="table-cell forhemit-cell">{row.forhemit}</div>
         </div>
-      </div>
-      
-      <div className="matrix-grid">
-        {metrics.map((metric, i) => (
-          <div 
-            key={metric.label}
-            className={`matrix-row ${hoveredRow === i ? 'hovered' : ''}`}
-            onMouseEnter={() => setHoveredRow(i)}
-            onMouseLeave={() => setHoveredRow(null)}
-          >
-            <span className="row-label">{metric.label}</span>
-            <div className="row-bars">
-              <div className="bar-container">
-                <div 
-                  className="bar traditional-bar"
-                  style={{ width: `${metric.traditional}%` }}
-                />
-                <span className="bar-value">{metric.traditional}%</span>
-              </div>
-              <div className="bar-container">
-                <div 
-                  className="bar forhemit-bar"
-                  style={{ width: `${metric.forhemit}%` }}
-                />
-                <span className="bar-value">{metric.forhemit}%</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      ))}
     </div>
   );
 }
@@ -533,50 +509,50 @@ export default function BrokersPage() {
   const dossiers: Omit<DossierCardProps, 'delay'>[] = [
     {
       number: "01",
-      headline: "The Anti-Vulture Buyer",
-      title: "Protecting Your Referral Reputation",
-      copy: "Selling a client's life work to traditional private equity can be a gamble for your reputation. As a Public Benefit Corporation, we are legally mandated to preserve the health of the businesses we acquire. We don't engage in asset-stripping or mass layoffs.",
-      cta: "The Broker's Guide to PBC Stewardship",
-      icon: "🛡️"
+      headline: "Your Full Commission",
+      title: "100% Standard Fee at Closing",
+      copy: "You receive your standard, undiluted brokerage fee at closing, calculated on the total transaction value. We do not touch your commission. We exist to solve the single biggest bottleneck in your pipeline.",
+      cta: "Commission Structure Details",
+      icon: "💰"
     },
     {
       number: "02",
-      headline: "Municipal-Grade Diligence Speed",
-      title: "Certainty of Execution: The 24-Hour Folder",
-      copy: "We bring the rigor of municipal disaster preparedness to the M&A process. Our 'Continuity of Operations' (COOP) framework allows us to move through diligence with surgical precision. We don't stall deals with endless requests; we close with clarity.",
-      cta: "The Forhemit Diligence & Closing Protocol",
+      headline: "Accelerated Timeline",
+      title: "Close in 90–120 Days",
+      copy: "Fully financed ESOP transactions close in 90–120 days. No more waiting 12-24 months for deals to die in due diligence. We turn 'maybe next year' into 'closing this quarter.'",
+      cta: "Our Closing Timeline",
       icon: "⚡"
     },
     {
       number: "03",
-      headline: "Closing the Gap Between Price and Heart",
-      title: "Solving the 'Reluctant Seller' Problem",
-      copy: "Many high-quality deals stall because the founder is afraid of what happens to their 'family' of employees after the sale. We solve this emotional bottleneck by offering 100% employee ownership transitions. We turn 'Reluctant Sellers' into 'Legacy Stewards.'",
-      cta: "Navigating the Emotional Exit: A Toolkit",
-      icon: "💝"
+      headline: "Maximum Leverage",
+      title: "The Ultimate BATNA",
+      copy: "We provide a fully-funded 'Plan B' that acts as your ultimate BATNA. When an external buyer tries to re-trade down 30%, your seller can activate the ESOP. If they walk, you still get paid.",
+      cta: "Dual-Track Strategy Guide",
+      icon: "🎯"
     },
     {
       number: "04",
-      headline: "Sophisticated SBA & ESOP Architectures",
-      title: "Pre-Vetted Structural Alpha",
-      copy: "Our deals are built on a foundation of structural tax arbitrage. By utilizing S-Corp ESOP structures, we eliminate federal corporate tax, significantly improving the company's DSCR. We are experts in SOP 50 10 8 regulatory compliance.",
-      cta: "Technical Memo: SBA 50 10 8 & ESOP Compliance",
-      icon: "🏗️"
+      headline: "Guilt-Free Exits",
+      title: "Preserve the Legacy",
+      copy: "Your founder gets a clean exit, and their 20+ loyal employees get to own the company they helped build. No mass layoffs, no asset-stripping—just a clean transfer to the people who know the business best.",
+      cta: "Employee Ownership Benefits",
+      icon: "🛡️"
     },
     {
       number: "05",
-      headline: "Selling a Fortress, Not a Target",
-      title: "Future-Proofing the Asset: The AI Shield",
-      copy: "Buyers are increasingly wary of businesses vulnerable to AI disruption. We mitigate this risk by installing an 'AI Shield' through worker ownership. We ensure that AI is used to augment the workforce's productivity rather than replace it.",
-      cta: "The AI Shield: Protecting LMM Assets",
-      icon: "🤖"
+      headline: "Disaster-Proof Transition",
+      title: "Municipal-Grade COOP",
+      copy: "Before closing, we build a 90-Day Transition Blueprint. We map tribal knowledge, secure leadership succession from the 20+ employee pool, and implement financial safeguards. Your reputation stays pristine.",
+      cta: "Our COOP Framework",
+      icon: "🏗️"
     },
     {
       number: "06",
-      headline: "Aligned with Your Client's Philosophy",
-      title: "Respectable Returns, Rooted in Reality",
-      copy: "We deliver respectable market returns that align with the business requirements and long-term goals of the partners we work with. By staying rooted and giving employees ownership, we capture the 'Stewardship Dividend'—superior performance driven by motivated owner-operators.",
-      cta: "The Stewardship Dividend: ROI through Resilience",
+      headline: "Tax Arbitrage Advantage",
+      title: "Section 1042 Rollover",
+      copy: "By utilizing S-Corp ESOP structures, we eliminate federal corporate tax and offer sellers potential $0 capital gains via Section 1042. This significantly improves deal economics for your clients.",
+      cta: "Tax Strategy Memo",
       icon: "📈"
     }
   ];
@@ -608,25 +584,24 @@ export default function BrokersPage() {
                 <span>For Business Brokers & M&A Advisors</span>
               </div>
               <h1 className="hero-title">
-                The <span className="highlight">Safe Close</span>
+                Stop Losing Commissions in the <span className="highlight">$3M–$15M &quot;Dead Zone&quot;</span>
               </h1>
               <p className="hero-subtitle">
-                When you represent a founder whose primary concern is the survival of their 
-                legacy and the protection of their people, we are the buyer that eliminates 
-                the reputation risk of a traditional &quot;strip and flip&quot; exit.
+                We provide a fully financed, 90-day ESOP exit for your stalled 20+ employee listings. 
+                You keep 100% of your commission.
               </p>
               <div className="hero-stats">
                 <div className="hero-stat">
                   <span className="stat-value">100%</span>
-                  <span className="stat-label">Employee Ownership</span>
+                  <span className="stat-label">Commission Kept</span>
                 </div>
                 <div className="hero-stat">
-                  <span className="stat-value">24hr</span>
-                  <span className="stat-label">Diligence Ready</span>
+                  <span className="stat-value">90-120</span>
+                  <span className="stat-label">Days to Close</span>
                 </div>
                 <div className="hero-stat">
-                  <span className="stat-value">PBC</span>
-                  <span className="stat-label">Public Benefit Corp</span>
+                  <span className="stat-value">20+</span>
+                  <span className="stat-label">Employee Threshold</span>
                 </div>
               </div>
             </div>
@@ -642,18 +617,20 @@ export default function BrokersPage() {
           {/* Scroll indicator */}
           <div className="scroll-indicator" data-animate="fade-up">
             <div className="indicator-line" />
-            <span>Access Dossiers</span>
+            <span>The Bottom Line</span>
           </div>
         </section>
 
-        {/* Mission Briefing Section - Dossier Cards */}
+        {/* The Bottom Line Section */}
         <section className="briefing-section" id="dossiers">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">Mission Briefing</span>
-              <h2>The Reliable Partner for Legacy Transitions</h2>
+              <span className="section-eyebrow">The Bottom Line</span>
+              <h2>What&apos;s In It For You</h2>
               <p className="section-intro">
-                Six classified advantages that make Forhemit the buyer your clients can trust.
+                Let&apos;s be direct: We do not compete with you. We complement you. We exist to solve 
+                the single biggest bottleneck in your pipeline—the great business that sits on the 
+                market for 18 months because of the middle-market capital gap.
               </p>
             </div>
             
@@ -665,34 +642,30 @@ export default function BrokersPage() {
           </div>
         </section>
 
-        {/* 24-Hour Folder Section */}
+        {/* The Broker's Dilemma Section */}
         <section className="folder-section">
           <div className="container">
             <div className="folder-grid">
               <div className="folder-content" data-animate="slide-right">
-                <span className="section-eyebrow">Certainty of Execution</span>
-                <h2>The 24-Hour Investment Folder</h2>
+                <span className="section-eyebrow">The Broker&apos;s Dilemma</span>
+                <h2>The &quot;Dead Zone&quot;</h2>
                 <p className="lead-text">
-                  We bring the rigor of municipal disaster preparedness to the M&A process. 
-                  Our &quot;Continuity of Operations&quot; (COOP) framework allows us to move through 
-                  diligence with surgical precision.
+                  You know this segment better than anyone. A solid business with $750K–$3M in EBITDA, 
+                  20 to 75 employees, and a founder ready to retire. It should sell easily, but it is 
+                  trapped in the middle-market gap.
                 </p>
                 <ul className="folder-features">
                   <li>
-                    <span className="feature-icon">⚡</span>
-                    <span>Financials ready for immediate audit</span>
+                    <span className="feature-icon">⚠️</span>
+                    <span><strong>Too Big for Main Street:</strong> Individual buyers lack the $1M–$3M down payment required. They hit the collateral wall and fade away after wasting 90 days of your time.</span>
                   </li>
                   <li>
-                    <span className="feature-icon">📋</span>
-                    <span>SOPs documented and accessible</span>
+                    <span className="feature-icon">🏢</span>
+                    <span><strong>Too Small for Wall Street:</strong> Private Equity firms won&apos;t deploy capital for sub-$3M EBITDA deals. If they do, their &quot;synergy&quot; strategy usually involves terminating half of your seller&apos;s loyal staff.</span>
                   </li>
                   <li>
-                    <span className="feature-icon">🛡️</span>
-                    <span>Risk assessments pre-completed</span>
-                  </li>
-                  <li>
-                    <span className="feature-icon">✓</span>
-                    <span>No endless document requests</span>
+                    <span className="feature-icon">💸</span>
+                    <span><strong>The Result:</strong> The listing sits. The founder gets frustrated and distracted. The buyer pool evaporates. You earn zero commission on a great business.</span>
                   </li>
                 </ul>
               </div>
@@ -704,33 +677,33 @@ export default function BrokersPage() {
           </div>
         </section>
 
-        {/* Risk Matrix Section */}
+        {/* The Solution: Dual-Track Strategy */}
         <section className="matrix-section">
           <div className="container">
             <div className="matrix-grid-layout">
               <div className="matrix-visual" data-animate="slide-right">
-                <RiskMatrix />
+                <ComparisonTable />
               </div>
               
               <div className="matrix-content" data-animate="slide-left">
-                <span className="section-eyebrow">Comparative Analysis</span>
-                <h2>Risk Assessment Matrix</h2>
+                <span className="section-eyebrow">The Solution</span>
+                <h2>The Dual-Track Strategy</h2>
                 <p className="lead-text">
-                  Traditional private equity prioritizes short-term returns. We optimize for 
-                  long-term resilience—protecting your referral reputation and your client's legacy.
+                  We are not asking you to abandon the traditional M&A process; we are giving you 
+                  a parallel track that turns &quot;maybe next year&quot; into &quot;closing this quarter.&quot;
                 </p>
                 <div className="matrix-insights">
                   <div className="insight">
-                    <span className="insight-icon">🎯</span>
-                    <span>Lower reputation risk through ethical stewardship</span>
+                    <span className="insight-icon">🅰️</span>
+                    <span><strong>Track A (Traditional Search):</strong> You continue to market to strategic buyers and PE firms. You hunt for the unicorn buyer who will pay a premium.</span>
                   </div>
                   <div className="insight">
-                    <span className="insight-icon">🔒</span>
-                    <span>Higher deal certainty with pre-vetted structures</span>
+                    <span className="insight-icon">🅱️</span>
+                    <span><strong>Track B (The Forhemit ESOP):</strong> We simultaneously structure a 100% employee buyout backed by SBA financing. The company&apos;s existing 20+ employees become the buyers.</span>
                   </div>
                   <div className="insight">
-                    <span className="insight-icon">👥</span>
-                    <span>Superior employee retention protects value</span>
+                    <span className="insight-icon">⚡</span>
+                    <span><strong>The Leverage Effect:</strong> When an external buyer tries to re-trade the seller down 30%, your seller can say, &quot;I have a fully financed ESOP on the table. Meet the number, or we activate Track B.&quot;</span>
                   </div>
                 </div>
               </div>
@@ -738,14 +711,16 @@ export default function BrokersPage() {
           </div>
         </section>
 
-        {/* Deal Flow Section */}
+        {/* The Math & Mechanics Section */}
         <section className="flow-section">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">Partnership Protocol</span>
-              <h2>From Introduction to Close</h2>
+              <span className="section-eyebrow">The Math & Mechanics</span>
+              <h2>How It Works</h2>
               <p className="section-intro">
-                A streamlined process designed for certainty and speed.
+                We have industrialized the ESOP process for businesses with 20+ employees. Why 20? 
+                Because that is the critical mass where a viable internal management layer exists, 
+                making the business highly attractive for SBA lending.
               </p>
             </div>
             
@@ -762,49 +737,51 @@ export default function BrokersPage() {
               <div className="stage-detail">
                 <span className="stage-num">02</span>
                 <h4>Diligence</h4>
-                <p>Rapid assessment using our 24-Hour Folder methodology</p>
+                <p>Rapid 24-hour assessment using our COOP methodology</p>
               </div>
               <div className="stage-detail">
                 <span className="stage-num">03</span>
                 <h4>Structure</h4>
-                <p>Custom ESOP architecture with SBA compliance</p>
+                <p>Custom ESOP architecture with SBA 7(a) compliance</p>
               </div>
               <div className="stage-detail">
                 <span className="stage-num">04</span>
                 <h4>Close</h4>
-                <p>Clean execution with full legacy protection</p>
+                <p>Clean execution in 90-120 days with full legacy protection</p>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Safe Close Promise Section */}
+        {/* The Forhemit Difference Section */}
         <section className="promise-section">
           <div className="container">
             <div className="promise-grid">
               <div className="promise-content" data-animate="slide-right">
-                <span className="section-eyebrow">Our Commitment</span>
-                <h2>The Safe Close Promise</h2>
+                <span className="section-eyebrow">The Forhemit Difference</span>
+                <h2>Disaster-Proof Transitions</h2>
                 <p className="lead-text">
-                  When you bring a deal to Forhemit, you are recommending a buyer that keeps 
-                  the business in the community and keeps the founder's legacy intact.
+                  Most ESOP advisors hand you a valuation report and wish you luck. We engineer 
+                  operational continuity. Before founding Forhemit, our leadership spent a decade 
+                  managing Continuity of Operations (COOP) for the City and County of San Francisco, 
+                  ensuring critical infrastructure survived earthquakes, cyberattacks, and leadership vacuums.
                 </p>
                 <div className="promise-points">
                   <div className="promise-point">
                     <span className="point-check">✓</span>
-                    <span>No asset-stripping</span>
+                    <span><strong>System Documentation:</strong> We map &quot;tribal knowledge&quot; and formalize operational systems</span>
                   </div>
                   <div className="promise-point">
                     <span className="point-check">✓</span>
-                    <span>No mass layoffs</span>
+                    <span><strong>Leadership Succession:</strong> We identify, contractually secure, and cross-train 2–3 key internal managers</span>
                   </div>
                   <div className="promise-point">
                     <span className="point-check">✓</span>
-                    <span>Community retention</span>
+                    <span><strong>Financial Safeguards:</strong> We implement early-warning systems to guarantee DSCR remains above 1.25x</span>
                   </div>
                   <div className="promise-point">
                     <span className="point-check">✓</span>
-                    <span>Legacy preservation</span>
+                    <span><strong>Long-Term Stewardship:</strong> We stay engaged for up to 10 years post-close to monitor the business</span>
                   </div>
                 </div>
               </div>
@@ -820,21 +797,24 @@ export default function BrokersPage() {
         <section className="brokers-cta" id="contact">
           <div className="container">
             <div className="cta-content" data-animate="fade-up">
-              <span className="cta-eyebrow">Secure the Close</span>
-              <h2>Protect Your Reputation.<br/>Preserve Their Legacy.</h2>
+              <span className="cta-eyebrow">Next Steps</span>
+              <h2>Clearing Your Pipeline</h2>
               <p className="cta-subtitle">
-                Have a client who values their people as much as their purchase price? 
-                Let&apos;s discuss how we can work together to deliver the Safe Close.
+                Your time is your inventory. Every month spent on a dead deal is a month you can&apos;t 
+                spend closing new ones. Scan your CRM right now. Do you have a listing with $750K–$3M 
+                EBITDA, 20 to 75 employees, and strong recurring cash flow that has been stalled for 
+                more than 6 months?
+              </p>
+              <p className="cta-lead">
+                Let&apos;s schedule a brief call. I will provide a complimentary ESOP feasibility screen 
+                for your stalled listing. We don&apos;t need a commitment today; we just need a conversation 
+                about how to turn your unsellable inventory into closed commissions.
               </p>
               
               <div className="cta-actions">
                 <Link href="/introduction?join=true" className="cta-button primary">
-                  <span className="btn-icon">📋</span>
-                  <span>Submit a Deal Confidentially</span>
-                </Link>
-                <Link href="/introduction" className="cta-button secondary">
-                  <span className="btn-icon">📚</span>
-                  <span>Download Broker Dossier Pack</span>
+                  <span className="btn-icon">📅</span>
+                  <span>Schedule a 15-Minute Pipeline Review</span>
                 </Link>
               </div>
               
