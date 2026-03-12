@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { useToast } from "../../hooks/useToast";
+import { ToastContainer } from "../ui/Toast";
 import "./contact-modal.css";
 
 interface ContactModalProps {
@@ -25,7 +27,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { toasts, removeToast, success, error: showError } = useToast();
 
   const submitContact = useMutation(api.contactSubmissions.submit);
 
@@ -33,8 +35,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    // Clear error when user makes changes
-    if (error) setError(null);
   };
 
   const handleContactTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -67,24 +67,26 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
 
   const handleBackToForm = () => {
     setShowPreview(false);
-    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError(null);
 
     try {
       // Validate required fields
       if (!formData.contactType || !formData.firstName || !formData.lastName || !formData.email || !formData.message) {
-        throw new Error("Please fill in all required fields");
+        showError("Please fill in all required fields");
+        setIsSubmitting(false);
+        return;
       }
 
       // Validate email format
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
-        throw new Error("Please enter a valid email address");
+        showError("Please enter a valid email address");
+        setIsSubmitting(false);
+        return;
       }
 
       // Submit to Convex
@@ -103,9 +105,17 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
       setIsSubmitting(false);
       setShowPreview(false);
       setRevealedSection("success");
+      success("Message sent successfully! We'll get back to you shortly.");
     } catch (err) {
       setIsSubmitting(false);
-      setError(err instanceof Error ? err.message : "An error occurred. Please try again.");
+      const errorMessage = err instanceof Error ? err.message : "An error occurred. Please try again.";
+      
+      // Handle specific error messages with user-friendly versions
+      if (errorMessage.includes("Duplicate submission")) {
+        showError("You recently submitted a message. Please wait a moment before sending another.");
+      } else {
+        showError(errorMessage);
+      }
     }
   };
 
@@ -113,7 +123,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
     setRevealedSection("none");
     setShowPreview(false);
     setFormData({ contactType: "", firstName: "", lastName: "", email: "", phone: "", company: "", interest: "", message: "" });
-    setError(null);
     onClose();
   };
 
@@ -143,7 +152,9 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
   };
 
   return (
-    <div className="contact-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <>
+      <ToastContainer toasts={toasts} onRemove={removeToast} />
+      <div className="contact-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="contact-modal-content">
         <button className="contact-modal-close" onClick={onClose} aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -236,20 +247,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                   <h3 className="preview-title">Preview Your Message</h3>
                   <p className="preview-subtitle">Review before sending</p>
                 </div>
-
-                {error && (
-                  <div className="form-error" style={{ 
-                    background: "rgba(239, 68, 68, 0.1)", 
-                    border: "1px solid rgba(239, 68, 68, 0.3)",
-                    color: "#ef4444",
-                    padding: "12px 16px",
-                    borderRadius: "8px",
-                    marginBottom: "16px",
-                    fontSize: "14px"
-                  }}>
-                    {error}
-                  </div>
-                )}
 
                 <div className="form-review">
                   <div className="review-section">
@@ -456,5 +453,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
         </div>
       </div>
     </div>
+    </>
   );
 }
