@@ -928,13 +928,15 @@
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Exclude FAQ answer content from scroll animation */
-.faq-answer,
-.faq-answer-content,
-.faq-answer-content p {
+/* FAQ container animation - applied to container, not items */
+.faq-container[data-animate] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.faq-container[data-animate].animate-in {
   opacity: 1;
-  transform: none;
-  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 
 [data-animate="slide-right"] {

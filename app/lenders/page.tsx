@@ -60,12 +60,11 @@ function useCountUp(end: number, duration: number = 2000, startOnView: boolean =
 }
 
 // FAQ Accordion Component
-function FAQItem({ question, answer, isOpen, onClick, delay = 0 }: { 
+function FAQItem({ question, answer, isOpen, onClick }: { 
   question: string; 
   answer: string; 
   isOpen: boolean; 
   onClick: () => void;
-  delay?: number;
 }) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState(0);
@@ -77,11 +76,7 @@ function FAQItem({ question, answer, isOpen, onClick, delay = 0 }: {
   }, [isOpen]);
 
   return (
-    <div 
-      className={`faq-item ${isOpen ? 'open' : ''}`} 
-      data-animate="fade-up"
-      style={{ animationDelay: `${delay}ms` }}
-    >
+    <div className={`faq-item ${isOpen ? 'open' : ''}`}>
       <button className="faq-question" onClick={onClick}>
         <span>{question}</span>
         <span className="faq-icon">{isOpen ? '−' : '+'}</span>
@@ -498,7 +493,7 @@ export default function LendersPage() {
               <h2>Frequently Asked Questions</h2>
             </div>
 
-            <div className="faq-container">
+            <div className="faq-container" data-animate="fade-up">
               {faqs.map((faq, index) => (
                 <FAQItem
                   key={index}
@@ -506,7 +501,6 @@ export default function LendersPage() {
                   answer={faq.answer}
                   isOpen={openFaq === index}
                   onClick={() => toggleFaq(index)}
-                  delay={index * 100}
                 />
               ))}
             </div>
