@@ -30,6 +30,22 @@
   overflow-x: hidden;
 }
 
+/* Scanline effect for tactical feel */
+.brokers-wrapper::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 107, 0, 0.015) 2px,
+    rgba(255, 107, 0, 0.015) 4px
+  );
+  pointer-events: none;
+  z-index: 1000;
+}
+
 .brokers-bg {
   position: fixed;
   inset: 0;
@@ -67,6 +83,9 @@
   z-index: 100;
   padding: 1.5rem 2rem;
   background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .brokers-logo {
@@ -185,6 +204,18 @@
   right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--broker-orange), transparent);
+}
+
+/* Glitch effect on highlight hover */
+.hero-title .highlight:hover {
+  animation: glitch 0.3s ease;
+}
+
+@keyframes glitch {
+  0%, 100% { text-shadow: none; }
+  25% { text-shadow: -2px 0 #ff4444, 2px 0 var(--radar-green); }
+  50% { text-shadow: 2px 0 #ff4444, -2px 0 var(--radar-green); }
+  75% { text-shadow: -1px 0 #ff4444, 1px 0 var(--radar-green); }
 }
 
 .hero-subtitle {
@@ -478,9 +509,41 @@
 }
 
 .dossier-card.hovered {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.02);
   border-color: var(--broker-orange);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--broker-orange-dim);
+}
+
+/* Corner brackets for dossier cards */
+.dossier-card::before,
+.dossier-card::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-color: var(--broker-orange);
+  border-style: solid;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.dossier-card::before {
+  top: -1px;
+  left: -1px;
+  border-width: 2px 0 0 2px;
+}
+
+.dossier-card::after {
+  bottom: -1px;
+  right: -1px;
+  border-width: 0 2px 2px 0;
+}
+
+.dossier-card.hovered::before,
+.dossier-card.hovered::after {
+  opacity: 1;
+  width: 30px;
+  height: 30px;
 }
 
 .dossier-tab {
@@ -782,6 +845,26 @@
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer effect on folder documents */
+.folder-document::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 107, 0, 0.1), transparent);
+  animation: shimmer 3s ease-in-out infinite;
+  animation-delay: calc(var(--i, 0) * 0.5s);
+}
+
+@keyframes shimmer {
+  0%, 100% { left: -100%; }
+  50% { left: 150%; }
 }
 
 .folder.open .folder-document {
@@ -1042,6 +1125,22 @@
 .deal-flow {
   position: relative;
   padding: 2rem 0;
+}
+
+/* Connection lines between stages */
+.flow-stage:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 30px;
+  left: 60%;
+  width: 80%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(255, 107, 0, 0.3), rgba(255, 107, 0, 0.1));
+  z-index: 0;
+}
+
+.flow-stage.complete:not(:last-child)::after {
+  background: linear-gradient(90deg, var(--radar-green), rgba(0, 255, 136, 0.3));
 }
 
 .flow-track {

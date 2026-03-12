@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
+import { Navigation } from "../components/layout/Navigation";
 import { LegalModal } from "../components/modals/LegalModal";
 import "./brokers.css";
 
@@ -553,6 +554,7 @@ export default function BrokersPage() {
           <span className="logo-text">Forhemit</span>
           <span className="logo-underline" />
         </Link>
+        <Navigation variant="dark" />
       </header>
 
       <main className="brokers-main">
