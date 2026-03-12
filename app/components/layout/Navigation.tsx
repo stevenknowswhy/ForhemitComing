@@ -13,8 +13,6 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/business-owners", label: "For Business Owners" },
-  { href: "/lenders", label: "For Lenders" },
-  { href: "/wealth-managers", label: "For Wealth Managers" },
 ];
 
 // Always show this link
