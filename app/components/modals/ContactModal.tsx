@@ -13,7 +13,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({
     contactType: "",
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     company: "",
     interest: "",
@@ -36,11 +37,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   };
 
   const canShowMessage = () => {
-    return formData.name.trim() !== "" && formData.email.trim() !== "";
+    return formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.email.trim() !== "";
   };
 
   const canShowPreview = () => {
-    return formData.message.trim() !== "" && formData.name.trim() !== "" && formData.email.trim() !== "";
+    return formData.message.trim() !== "" && formData.firstName.trim() !== "" && formData.lastName.trim() !== "" && formData.email.trim() !== "";
   };
 
   const handleContactBlur = () => {
@@ -74,7 +75,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const handleSuccessClose = () => {
     setRevealedSection("none");
     setShowPreview(false);
-    setFormData({ contactType: "", name: "", email: "", company: "", interest: "", message: "" });
+    setFormData({ contactType: "", firstName: "", lastName: "", email: "", company: "", interest: "", message: "" });
     onClose();
   };
 
@@ -205,7 +206,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   </div>
                   <div className="review-section">
                     <span className="review-label">Name</span>
-                    <span className="review-value">{formData.name}</span>
+                    <span className="review-value">{formData.firstName} {formData.lastName}</span>
                   </div>
                   <div className="review-section">
                     <span className="review-label">Email</span>
@@ -281,19 +282,36 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 <div className={`form-step-simple reveal-section ${revealedSection !== "none" ? "revealed" : ""}`}>
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="contact-name" className="form-label">Name *</label>
+                      <label htmlFor="contact-firstName" className="form-label">First Name *</label>
                       <input
                         type="text"
-                        id="contact-name"
-                        name="name"
-                        value={formData.name}
+                        id="contact-firstName"
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleChange}
                         onBlur={handleContactBlur}
-                        placeholder="Your name"
+                        placeholder="First name"
                         required
                         className="form-input"
                       />
                     </div>
+                    <div className="form-group">
+                      <label htmlFor="contact-lastName" className="form-label">Last Name *</label>
+                      <input
+                        type="text"
+                        id="contact-lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        onBlur={handleContactBlur}
+                        placeholder="Last name"
+                        required
+                        className="form-input"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="contact-email" className="form-label">Email *</label>
                       <input
@@ -308,9 +326,6 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         className="form-input"
                       />
                     </div>
-                  </div>
-
-                  <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="contact-company" className="form-label">Company</label>
                       <input
@@ -323,26 +338,27 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                         className="form-input"
                       />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
-                      <select
-                        id="contact-interest"
-                        name="interest"
-                        value={formData.interest}
-                        onChange={handleChange}
-                        className="form-select"
-                      >
-                        <option value="">Select (optional)</option>
-                        <option value="esop-transition">ESOP Transition</option>
-                        <option value="accounting">Accounting Partnership</option>
-                        <option value="legal">Legal Partnership</option>
-                        <option value="lending">Lending Partnership</option>
-                        <option value="broker">Business Broker Partnership</option>
-                        <option value="wealth">Wealth Management Partnership</option>
-                        <option value="career">Career Opportunities</option>
-                        <option value="general">General Inquiry</option>
-                      </select>
-                    </div>
+                  </div>
+
+                  <div className="form-group form-group-full">
+                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
+                    <select
+                      id="contact-interest"
+                      name="interest"
+                      value={formData.interest}
+                      onChange={handleChange}
+                      className="form-select"
+                    >
+                      <option value="">Select an area of interest (optional)</option>
+                      <option value="esop-transition">ESOP Transition</option>
+                      <option value="accounting">Accounting Partnership</option>
+                      <option value="legal">Legal Partnership</option>
+                      <option value="lending">Lending Partnership</option>
+                      <option value="broker">Business Broker Partnership</option>
+                      <option value="wealth">Wealth Management Partnership</option>
+                      <option value="career">Career Opportunities</option>
+                      <option value="general">General Inquiry</option>
+                    </select>
                   </div>
                 </div>
 
