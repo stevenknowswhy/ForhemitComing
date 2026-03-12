@@ -96,7 +96,6 @@ function FAQItem({ question, answer, isOpen, onClick }: {
 export default function LendersPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [showLegalModal, setShowLegalModal] = useState(false);
-  const [navOpen, setNavOpen] = useState(false);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -161,27 +160,6 @@ export default function LendersPage() {
         </Link>
       </header>
 
-      {/* Navigation */}
-      <nav className={`minimal-nav ${navOpen ? 'open' : ''}`}>
-        <button 
-          className="nav-toggle" 
-          onClick={() => setNavOpen(!navOpen)}
-          aria-label="Toggle navigation"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        
-        <div className="nav-menu">
-          <Link href="/" onClick={() => setNavOpen(false)}>Home</Link>
-          <Link href="/about" onClick={() => setNavOpen(false)}>About</Link>
-          <Link href="/introduction" onClick={() => setNavOpen(false)}>Introductions</Link>
-          <Link href="/business-owners" onClick={() => setNavOpen(false)}>For Owners</Link>
-          <Link href="/lenders" onClick={() => setNavOpen(false)} className="active">For Lenders</Link>
-        </div>
-      </nav>
-      
       <main className="lenders-main">
         {/* Hero Section */}
         <section className="lenders-hero">
