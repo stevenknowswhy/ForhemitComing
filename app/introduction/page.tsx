@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
 import { Footer } from "../components/layout/Footer";
+import { ContactModal } from "../components/modals/ContactModal";
 import "./page.css";
 
 // Sub-options for Business Introductions
@@ -123,6 +124,7 @@ export default function Introduction() {
   const [showBusinessOptions, setShowBusinessOptions] = useState(false);
   const [showOtherServices, setShowOtherServices] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -187,6 +189,18 @@ export default function Introduction() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [showEmailInput, showBusinessOptions, showOtherServices]);
 
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (showContactModal) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showContactModal]);
+
   return (
     <div className="intro-wrapper">
       <div className="intro-background"></div>
@@ -202,12 +216,36 @@ export default function Introduction() {
           {!showBusinessOptions ? (
             // Main Selection View
             <>
-              <h1 className="intro-title">Select Your Path</h1>
+              <h1 className="intro-title">Contact Us</h1>
               <p className="intro-subtitle">
                 Choose how you&apos;d like to connect with Forhemit
               </p>
 
               <div className={`intro-cards ${isAnimating ? "cards-fall" : ""}`}>
+                {/* Contact Us - Opens Modal */}
+                <button 
+                  className="intro-card" 
+                  onClick={() => setShowContactModal(true)}
+                  disabled={isAnimating}
+                >
+                  <div className="card-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                    </svg>
+                  </div>
+                  <div className="card-text">
+                    <h2 className="card-title">Send Us a Message</h2>
+                    <p className="card-description">
+                      Reach out directly — we&apos;ll respond within 24-48 hours
+                    </p>
+                  </div>
+                  <span className="card-arrow">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </button>
+
                 {/* Business Introductions - Now Clickable */}
                 <button 
                   className="intro-card" 
@@ -419,6 +457,12 @@ export default function Introduction() {
       </div>
       
       <Footer variant="static" />
+      
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={showContactModal} 
+        onClose={() => setShowContactModal(false)} 
+      />
     </div>
   );
 }
