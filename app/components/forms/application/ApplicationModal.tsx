@@ -2,6 +2,8 @@
 
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useMutation } from "convex/react";
+import { api } from "../../../../convex/_generated/api";
 import { ProgressBar } from "./components/ProgressBar";
 import { IntroStep, PositionsStep, NameStep, EmailStep, PhoneStep, PositionStep, PreviewStep, SuccessStep } from "./steps";
 import { ApplicationData, TOTAL_STEPS } from "./types";
@@ -27,6 +29,10 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
   const [selectedPosition, setSelectedPosition] = useState<string>("");
   const [formData, setFormData] = useState<ApplicationData>(INITIAL_FORM_DATA);
   const [submitWithoutResume, setSubmitWithoutResume] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const submitApplication = useMutation(api.jobApplications.submit);
 
   const nextStep = () => setStep(s => Math.min(s + 1, TOTAL_STEPS + 1));
   const prevStep = () => setStep(s => Math.max(s - 1, 1));
@@ -36,12 +42,16 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
     setSelectedPosition("");
     setFormData(INITIAL_FORM_DATA);
     setSubmitWithoutResume(false);
+    setError(null);
+    setIsSubmitting(false);
     onClose();
     router.push("/", { scroll: false });
   };
 
   const updateFormField = <K extends keyof ApplicationData>(field: K, value: ApplicationData[K]) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    // Clear error when user makes changes
+    if (error) setError(null);
   };
 
   const canProceed = useCallback(() => {
@@ -79,6 +89,31 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen, handleKeyDown]);
 
+  const handleSubmit = async () => {
+    if (!canSubmit()) return;
+
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      await submitApplication({
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.replace(/\D/g, ""),
+        position: formData.position,
+        otherPosition: formData.position === "Other" ? formData.otherPosition.trim() : undefined,
+        resumeUrl: formData.resumeUrl || undefined,
+      });
+
+      setIsSubmitting(false);
+      nextStep(); // Go to success step
+    } catch (err) {
+      setIsSubmitting(false);
+      setError(err instanceof Error ? err.message : "An error occurred. Please try again.");
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -86,6 +121,24 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
       <button className="modal-close" onClick={handleClose}>&times;</button>
       <div className="modal-content">
         <ProgressBar currentStep={step} />
+
+        {error && step === 7 && (
+          <div 
+            className="form-error"
+            style={{
+              background: "rgba(239, 68, 68, 0.1)",
+              border: "1px solid rgba(239, 68, 68, 0.3)",
+              color: "#ef4444",
+              padding: "12px 16px",
+              borderRadius: "8px",
+              margin: "0 24px 16px",
+              fontSize: "14px",
+              textAlign: "center"
+            }}
+          >
+            {error}
+          </div>
+        )}
 
         <div className={`modal-grid ${step === 2 ? 'image-top' : ''}`}>
           <div className="modal-image-side">
@@ -161,8 +214,9 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
             {step === 7 && (
               <PreviewStep
                 formData={formData}
-                onSubmit={nextStep}
+                onSubmit={handleSubmit}
                 onBack={prevStep}
+                isSubmitting={isSubmitting}
               />
             )}
 

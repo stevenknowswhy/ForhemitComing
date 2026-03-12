@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import "./contact-modal.css";
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  source?: string;
 }
 
-export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export function ContactModal({ isOpen, onClose, source = "website" }: ContactModalProps) {
   const [revealedSection, setRevealedSection] = useState<"none" | "contact" | "message" | "success">("none");
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,11 +24,16 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const submitContact = useMutation(api.contactSubmissions.submit);
 
   if (!isOpen) return null;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    // Clear error when user makes changes
+    if (error) setError(null);
   };
 
   const handleContactTypeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -58,24 +66,52 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
   const handleBackToForm = () => {
     setShowPreview(false);
+    setError(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    setIsSubmitting(false);
-    setShowPreview(false);
-    setRevealedSection("success");
+    setError(null);
+
+    try {
+      // Validate required fields
+      if (!formData.contactType || !formData.firstName || !formData.lastName || !formData.email || !formData.message) {
+        throw new Error("Please fill in all required fields");
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        throw new Error("Please enter a valid email address");
+      }
+
+      // Submit to Convex
+      await submitContact({
+        contactType: formData.contactType as any,
+        firstName: formData.firstName.trim(),
+        lastName: formData.lastName.trim(),
+        email: formData.email.trim().toLowerCase(),
+        company: formData.company.trim() || undefined,
+        interest: formData.interest as any || undefined,
+        message: formData.message.trim(),
+        source,
+      });
+
+      setIsSubmitting(false);
+      setShowPreview(false);
+      setRevealedSection("success");
+    } catch (err) {
+      setIsSubmitting(false);
+      setError(err instanceof Error ? err.message : "An error occurred. Please try again.");
+    }
   };
 
   const handleSuccessClose = () => {
     setRevealedSection("none");
     setShowPreview(false);
     setFormData({ contactType: "", firstName: "", lastName: "", email: "", company: "", interest: "", message: "" });
+    setError(null);
     onClose();
   };
 
@@ -198,6 +234,20 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                   <h3 className="preview-title">Preview Your Message</h3>
                   <p className="preview-subtitle">Review before sending</p>
                 </div>
+
+                {error && (
+                  <div className="form-error" style={{ 
+                    background: "rgba(239, 68, 68, 0.1)", 
+                    border: "1px solid rgba(239, 68, 68, 0.3)",
+                    color: "#ef4444",
+                    padding: "12px 16px",
+                    borderRadius: "8px",
+                    marginBottom: "16px",
+                    fontSize: "14px"
+                  }}>
+                    {error}
+                  </div>
+                )}
 
                 <div className="form-review">
                   <div className="review-section">

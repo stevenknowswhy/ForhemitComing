@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from './components/layout/Navigation'
+import { ConvexClientProvider } from './components/providers/ConvexProvider'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -49,8 +50,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="auto">
       <body suppressHydrationWarning>
-        <Navigation />
-        {children}
+        <ConvexClientProvider>
+          <Navigation />
+          {children}
+        </ConvexClientProvider>
       </body>
     </html>
   )

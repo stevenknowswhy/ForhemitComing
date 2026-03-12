@@ -6,9 +6,10 @@ interface PreviewStepProps {
   formData: ApplicationData;
   onSubmit: () => void;
   onBack: () => void;
+  isSubmitting?: boolean;
 }
 
-export function PreviewStep({ formData, onSubmit, onBack }: PreviewStepProps) {
+export function PreviewStep({ formData, onSubmit, onBack, isSubmitting = false }: PreviewStepProps) {
   const displayPosition = formData.position === "Other" 
     ? formData.otherPosition 
     : formData.position;
@@ -57,8 +58,25 @@ export function PreviewStep({ formData, onSubmit, onBack }: PreviewStepProps) {
         <button 
           className="nav-link-btn continue-link" 
           onClick={onSubmit}
+          disabled={isSubmitting}
         >
-          Submit Application
+          {isSubmitting ? (
+            <>
+              <span className="btn-spinner" style={{ 
+                display: "inline-block", 
+                width: "16px", 
+                height: "16px",
+                marginRight: "8px",
+                border: "2px solid rgba(255,255,255,0.3)",
+                borderTopColor: "currentColor",
+                borderRadius: "50%",
+                animation: "spin 0.8s linear infinite"
+              }} />
+              Submitting...
+            </>
+          ) : (
+            "Submit Application"
+          )}
         </button>
       </div>
     </div>
