@@ -857,29 +857,25 @@
 }
 
 /* ── Animation ── */
+/* Elements are visible by default to prevent layout shift on load */
 [data-animate] {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
               transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* FAQ container animation - applied to container, not items */
-.faq-container[data-animate] {
+/* JS adds this class after observing - animation only plays once when scrolling into view */
+[data-animate]:not(.animate-in) {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.faq-container[data-animate].animate-in {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-[data-animate="slide-right"] {
+[data-animate="slide-right"]:not(.animate-in) {
   transform: translateX(-50px);
 }
 
-[data-animate="slide-left"] {
+[data-animate="slide-left"]:not(.animate-in) {
   transform: translateX(50px);
 }
 
