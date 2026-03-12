@@ -197,7 +197,18 @@
 .progressive-form-simple {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 2.5rem;
+}
+
+/* Step sections spacing */
+.reveal-section > .form-group,
+.reveal-section > .form-row {
+  margin-bottom: 1.5rem;
+}
+
+.reveal-section > .form-group:last-child,
+.reveal-section > .form-row:last-child {
+  margin-bottom: 0;
 }
 
 .form-step-simple {
@@ -232,13 +243,13 @@
 .form-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.25rem;
+  gap: 1.5rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 0;
 }
 
 .form-group-full {
