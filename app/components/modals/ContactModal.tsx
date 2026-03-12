@@ -8,7 +8,10 @@ interface ContactModalProps {
   onClose: () => void;
 }
 
+type FormStep = 1 | 2 | 3 | 4 | 5;
+
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
+  const [currentStep, setCurrentStep] = useState<FormStep>(1);
   const [formData, setFormData] = useState({
     contactType: "",
     name: "",
@@ -26,6 +29,33 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const canProceed = () => {
+    switch (currentStep) {
+      case 1:
+        return formData.contactType !== "";
+      case 2:
+        return formData.name.trim() !== "" && formData.email.trim() !== "";
+      case 3:
+        return true; // Optional step
+      case 4:
+        return formData.message.trim() !== "";
+      default:
+        return true;
+    }
+  };
+
+  const handleNext = () => {
+    if (currentStep < 5) {
+      setCurrentStep((prev) => (prev + 1) as FormStep);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep((prev) => (prev - 1) as FormStep);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -39,9 +69,65 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     // Reset after showing success
     setTimeout(() => {
       setIsSubmitted(false);
+      setCurrentStep(1);
       setFormData({ contactType: "", name: "", email: "", company: "", interest: "", message: "" });
       onClose();
     }, 2000);
+  };
+
+  const getStepTitle = () => {
+    switch (currentStep) {
+      case 1:
+        return "How can we help you?";
+      case 2:
+        return "Who should we contact?";
+      case 3:
+        return "Tell us more (Optional)";
+      case 4:
+        return "What's your message?";
+      case 5:
+        return "Ready to send?";
+    }
+  };
+
+  const getStepSubtitle = () => {
+    switch (currentStep) {
+      case 1:
+        return "Select the option that best describes you";
+      case 2:
+        return "We'll use this to get back to you";
+      case 3:
+        return "Share additional details about your company and interests";
+      case 4:
+        return "Tell us about your situation and how we can help";
+      case 5:
+        return "Review your information before sending";
+    }
+  };
+
+  const getContactTypeLabel = (value: string) => {
+    const labels: Record<string, string> = {
+      "business-owner": "Business Owner (ESOP Transition)",
+      "partner": "Partner (Accounting, Legal, Lending, etc.)",
+      "existing-business": "Existing Portfolio Business",
+      "website-visitor": "General Inquiry",
+      "marketing": "Marketing / Vendor Services",
+    };
+    return labels[value] || value;
+  };
+
+  const getInterestLabel = (value: string) => {
+    const labels: Record<string, string> = {
+      "esop-transition": "ESOP Transition",
+      "accounting": "Accounting Partnership",
+      "legal": "Legal Partnership",
+      "lending": "Lending Partnership",
+      "broker": "Business Broker Partnership",
+      "wealth": "Wealth Management Partnership",
+      "career": "Career Opportunities",
+      "general": "General Inquiry",
+    };
+    return labels[value] || value || "Not specified";
   };
 
   return (
@@ -114,7 +200,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             </div>
           </div>
 
-          {/* Right Side - Contact Form */}
+          {/* Right Side - Progressive Form */}
           <div className="contact-form-section">
             {isSubmitted ? (
               <div className="contact-success">
@@ -130,125 +216,249 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                 </p>
               </div>
             ) : (
-              <form className="contact-form" onSubmit={handleSubmit}>
-                {/* Contact Type - Moved to top */}
-                <div className="form-group form-group-full">
-                  <label htmlFor="contact-type" className="form-label">How can we help you?</label>
-                  <select
-                    id="contact-type"
-                    name="contactType"
-                    value={formData.contactType}
-                    onChange={handleChange}
-                    required
-                    className="form-select"
-                  >
-                    <option value="">Select who you are...</option>
-                    <option value="business-owner">Business Owner (ESOP Transition)</option>
-                    <option value="partner">Partner (Accounting, Legal, Lending, etc.)</option>
-                    <option value="existing-business">Existing Portfolio Business</option>
-                    <option value="website-visitor">General Inquiry</option>
-                    <option value="marketing">Marketing / Vendor Services</option>
-                  </select>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="contact-name" className="form-label">Name</label>
-                    <input
-                      type="text"
-                      id="contact-name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Your name"
-                      required
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="contact-email" className="form-label">Email</label>
-                    <input
-                      type="email"
-                      id="contact-email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="you@company.com"
-                      required
-                      className="form-input"
-                    />
+              <div className="progressive-form">
+                {/* Progress Indicator */}
+                <div className="form-progress">
+                  <div className="progress-steps">
+                    {[1, 2, 3, 4, 5].map((step) => (
+                      <div
+                        key={step}
+                        className={`progress-step ${
+                          step < currentStep ? "completed" : step === currentStep ? "active" : ""
+                        }`}
+                      >
+                        <div className="step-number">
+                          {step < currentStep ? (
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                              <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                          ) : (
+                            step
+                          )}
+                        </div>
+                        {step < 5 && <div className="step-line" />}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="contact-company" className="form-label">Company</label>
-                    <input
-                      type="text"
-                      id="contact-company"
-                      name="company"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Your company name"
-                      className="form-input"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
-                    <select
-                      id="contact-interest"
-                      name="interest"
-                      value={formData.interest}
-                      onChange={handleChange}
-                      className="form-select"
-                    >
-                      <option value="">Select an option</option>
-                      <option value="esop-transition">ESOP Transition</option>
-                      <option value="accounting">Accounting Partnership</option>
-                      <option value="legal">Legal Partnership</option>
-                      <option value="lending">Lending Partnership</option>
-                      <option value="broker">Business Broker Partnership</option>
-                      <option value="wealth">Wealth Management Partnership</option>
-                      <option value="career">Career Opportunities</option>
-                      <option value="general">General Inquiry</option>
-                    </select>
-                  </div>
+                {/* Step Title */}
+                <div className="step-header">
+                  <h3 className="step-title">{getStepTitle()}</h3>
+                  <p className="step-subtitle">{getStepSubtitle()}</p>
                 </div>
 
-                <div className="form-group form-group-full">
-                  <label htmlFor="contact-message" className="form-label">Message</label>
-                  <textarea
-                    id="contact-message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Tell us about your situation and how we can help..."
-                    rows={4}
-                    required
-                    className="form-textarea"
-                  />
-                </div>
+                {/* Form Steps */}
+                <form className="contact-form" onSubmit={handleSubmit}>
+                  {/* Step 1: Contact Type */}
+                  <div className={`form-step ${currentStep === 1 ? "active" : "hidden"}`}>
+                    <div className="contact-type-options">
+                      {[
+                        { value: "business-owner", label: "Business Owner", desc: "Exploring ESOP transition" },
+                        { value: "partner", label: "Partner", desc: "Accounting, Legal, Lending, etc." },
+                        { value: "existing-business", label: "Existing Business", desc: "Portfolio company" },
+                        { value: "website-visitor", label: "General Inquiry", desc: "Questions about Forhemit" },
+                        { value: "marketing", label: "Marketing / Vendor", desc: "Services & partnerships" },
+                      ].map((option) => (
+                        <label
+                          key={option.value}
+                          className={`contact-type-option ${formData.contactType === option.value ? "selected" : ""}`}
+                        >
+                          <input
+                            type="radio"
+                            name="contactType"
+                            value={option.value}
+                            checked={formData.contactType === option.value}
+                            onChange={handleChange}
+                            className="sr-only"
+                          />
+                          <div className="option-content">
+                            <span className="option-label">{option.label}</span>
+                            <span className="option-desc">{option.desc}</span>
+                          </div>
+                          <div className="option-check">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <polyline points="20,6 9,17 4,12"/>
+                            </svg>
+                          </div>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
 
-                <button
-                  type="submit"
-                  className="contact-submit-btn"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <span className="btn-spinner"></span>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      Send Message
-                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                      </svg>
-                    </>
-                  )}
-                </button>
-              </form>
+                  {/* Step 2: Name & Email */}
+                  <div className={`form-step ${currentStep === 2 ? "active" : "hidden"}`}>
+                    <div className="form-fields-stack">
+                      <div className="form-group">
+                        <label htmlFor="contact-name" className="form-label">Full Name *</label>
+                        <input
+                          type="text"
+                          id="contact-name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          placeholder="John Smith"
+                          required
+                          className="form-input"
+                          autoFocus
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="contact-email" className="form-label">Email Address *</label>
+                        <input
+                          type="email"
+                          id="contact-email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="john@company.com"
+                          required
+                          className="form-input"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 3: Company & Interest (Optional) */}
+                  <div className={`form-step ${currentStep === 3 ? "active" : "hidden"}`}>
+                    <div className="form-fields-stack">
+                      <div className="form-group">
+                        <label htmlFor="contact-company" className="form-label">Company</label>
+                        <input
+                          type="text"
+                          id="contact-company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleChange}
+                          placeholder="Acme Corp (optional)"
+                          className="form-input"
+                          autoFocus
+                        />
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
+                        <select
+                          id="contact-interest"
+                          name="interest"
+                          value={formData.interest}
+                          onChange={handleChange}
+                          className="form-select"
+                        >
+                          <option value="">Select an option (optional)</option>
+                          <option value="esop-transition">ESOP Transition</option>
+                          <option value="accounting">Accounting Partnership</option>
+                          <option value="legal">Legal Partnership</option>
+                          <option value="lending">Lending Partnership</option>
+                          <option value="broker">Business Broker Partnership</option>
+                          <option value="wealth">Wealth Management Partnership</option>
+                          <option value="career">Career Opportunities</option>
+                          <option value="general">General Inquiry</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4: Message */}
+                  <div className={`form-step ${currentStep === 4 ? "active" : "hidden"}`}>
+                    <div className="form-group form-group-full">
+                      <label htmlFor="contact-message" className="form-label">Your Message *</label>
+                      <textarea
+                        id="contact-message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        placeholder="Tell us about your situation and how we can help..."
+                        rows={5}
+                        required
+                        className="form-textarea"
+                        autoFocus
+                      />
+                    </div>
+                  </div>
+
+                  {/* Step 5: Review */}
+                  <div className={`form-step ${currentStep === 5 ? "active" : "hidden"}`}>
+                    <div className="form-review">
+                      <div className="review-section">
+                        <span className="review-label">Contact Type</span>
+                        <span className="review-value">{getContactTypeLabel(formData.contactType)}</span>
+                      </div>
+                      <div className="review-section">
+                        <span className="review-label">Name</span>
+                        <span className="review-value">{formData.name}</span>
+                      </div>
+                      <div className="review-section">
+                        <span className="review-label">Email</span>
+                        <span className="review-value">{formData.email}</span>
+                      </div>
+                      {(formData.company || formData.interest) && (
+                        <div className="review-section">
+                          <span className="review-label">Additional Info</span>
+                          <span className="review-value">
+                            {formData.company && `Company: ${formData.company}`}
+                            {formData.company && formData.interest && " • "}
+                            {formData.interest && `Interest: ${getInterestLabel(formData.interest)}`}
+                          </span>
+                        </div>
+                      )}
+                      <div className="review-section review-section-message">
+                        <span className="review-label">Message</span>
+                        <span className="review-value review-message">{formData.message}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Navigation Buttons */}
+                  <div className="form-navigation">
+                    {currentStep > 1 && (
+                      <button
+                        type="button"
+                        className="form-btn form-btn-secondary"
+                        onClick={handleBack}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        Back
+                      </button>
+                    )}
+                    
+                    {currentStep < 5 ? (
+                      <button
+                        type="button"
+                        className="form-btn form-btn-primary"
+                        onClick={handleNext}
+                        disabled={!canProceed()}
+                      >
+                        Continue
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </button>
+                    ) : (
+                      <button
+                        type="submit"
+                        className="form-btn form-btn-submit"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <span className="btn-spinner"></span>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            Send Message
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </form>
+              </div>
             )}
           </div>
         </div>
