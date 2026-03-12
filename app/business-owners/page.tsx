@@ -3,10 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
+import { InfrastructureAuditModal } from "../components/modals/InfrastructureAuditModal";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
   const [openFaq, setOpenFaq] = useState<string | null>(null);
+  const [isAuditOpen, setIsAuditOpen] = useState(false);
 
   const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id);
@@ -80,9 +82,12 @@ export default function BusinessOwnersPage() {
               <p className="business-owners-subtitle">
                 Protect your life&apos;s work with a comprehensive transition plan.
               </p>
-              <a href="/introduction" className="hero-cta-button">
+              <button 
+                className="hero-cta-button"
+                onClick={() => setIsAuditOpen(true)}
+              >
                 Start Your Readiness Plan
-              </a>
+              </button>
             </div>
             <div className="hero-image">
               <img 
