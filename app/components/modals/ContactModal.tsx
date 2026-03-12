@@ -314,7 +314,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
               <form className="progressive-form-simple" onSubmit={(e) => { e.preventDefault(); handleShowPreview(); }}>
                 {/* Step 1: Contact Type */}
                 <div className="form-step-simple">
-                  <label htmlFor="contact-type" className="form-label">How can we help you? *</label>
                   <select
                     id="contact-type"
                     name="contactType"
@@ -323,7 +322,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                     required
                     className="form-select"
                   >
-                    <option value="">Select who you are...</option>
+                    <option value="">How can we help you? *</option>
                     <option value="business-owner">Business Owner (ESOP Transition)</option>
                     <option value="partner">Partner (Accounting, Legal, Lending, etc.)</option>
                     <option value="existing-business">Existing Portfolio Business</option>
@@ -335,7 +334,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                 {/* Step 2: Contact Fields (revealed after selection) */}
                 <div className={`form-step-simple reveal-section ${revealedSection !== "none" ? "revealed" : ""}`}>
                   <div className="form-group form-group-full">
-                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
                     <select
                       id="contact-interest"
                       name="interest"
@@ -343,7 +341,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                       onChange={handleChange}
                       className="form-select"
                     >
-                      <option value="">Select an area of interest (optional)</option>
+                      <option value="">Area of Interest (optional)</option>
                       <option value="esop-transition">ESOP Transition</option>
                       <option value="accounting">Accounting Partnership</option>
                       <option value="legal">Legal Partnership</option>
@@ -357,7 +355,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="contact-firstName" className="form-label">First Name *</label>
                       <input
                         type="text"
                         id="contact-firstName"
@@ -365,13 +362,12 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                         value={formData.firstName}
                         onChange={handleChange}
                         onBlur={handleContactBlur}
-                        placeholder="First name"
+                        placeholder="First name *"
                         required
                         className="form-input"
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="contact-lastName" className="form-label">Last Name *</label>
                       <input
                         type="text"
                         id="contact-lastName"
@@ -379,7 +375,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                         value={formData.lastName}
                         onChange={handleChange}
                         onBlur={handleContactBlur}
-                        placeholder="Last name"
+                        placeholder="Last name *"
                         required
                         className="form-input"
                       />
@@ -388,7 +384,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
 
                   <div className="form-row">
                     <div className="form-group">
-                      <label htmlFor="contact-email" className="form-label">Email *</label>
                       <input
                         type="email"
                         id="contact-email"
@@ -396,13 +391,12 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                         value={formData.email}
                         onChange={handleChange}
                         onBlur={handleContactBlur}
-                        placeholder="you@company.com"
+                        placeholder="Email *"
                         required
                         className="form-input"
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="contact-phone" className="form-label">Phone</label>
                       <input
                         type="tel"
                         id="contact-phone"
@@ -410,21 +404,20 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                         value={formData.phone}
                         onChange={handleChange}
                         onBlur={handleContactBlur}
-                        placeholder="(555) 123-4567"
+                        placeholder="Phone"
                         className="form-input"
                       />
                     </div>
                   </div>
 
                   <div className="form-group form-group-full">
-                    <label htmlFor="contact-company" className="form-label">Company</label>
                     <input
                       type="text"
                       id="contact-company"
                       name="company"
                       value={formData.company}
                       onChange={handleChange}
-                      placeholder="Your company (optional)"
+                      placeholder="Company (optional)"
                       className="form-input"
                     />
                   </div>
@@ -433,13 +426,12 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                 {/* Step 3: Message (revealed after contact fields) */}
                 <div className={`form-step-simple reveal-section ${revealedSection === "message" ? "revealed" : ""}`}>
                   <div className="form-group form-group-full">
-                    <label htmlFor="contact-message" className="form-label">Message *</label>
                     <textarea
                       id="contact-message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Tell us about your situation and how we can help..."
+                      placeholder="Message *"
                       rows={4}
                       required
                       className="form-textarea"
