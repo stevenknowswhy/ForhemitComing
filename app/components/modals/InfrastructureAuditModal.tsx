@@ -22,7 +22,10 @@ interface Answers {
   q5: number | null;
 }
 
+const TOTAL_STEPS = 6; // Lane selection + 5 questions
+
 export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAuditModalProps) {
+  const [currentStep, setCurrentStep] = useState(0);
   const [lane, setLane] = useState<Lane>(null);
   const [answers, setAnswers] = useState<Answers>({
     q1: null,
@@ -40,7 +43,6 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
   if (!isOpen) return null;
 
   const currentScore = Object.values(answers).reduce((sum, val) => sum + (val || 0), 0);
-  const maxPossible = 100;
   const signalBars = Math.ceil(currentScore / 20);
 
   const handleLaneSelect = (selectedLane: Lane) => {
@@ -49,6 +51,28 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
 
   const handleAnswer = (question: keyof Answers, value: number) => {
     setAnswers((prev) => ({ ...prev, [question]: value }));
+  };
+
+  const canProceed = () => {
+    if (currentStep === 0) return lane !== null;
+    const qKey = `q${currentStep}` as keyof Answers;
+    return answers[qKey] !== null;
+  };
+
+  const handleNext = () => {
+    if (!canProceed()) {
+      showError("Please make a selection to continue");
+      return;
+    }
+    if (currentStep < TOTAL_STEPS) {
+      setCurrentStep((prev) => prev + 1);
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
+    }
   };
 
   const calculateResults = () => {
@@ -109,17 +133,6 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
   };
 
   const handleSubmit = async () => {
-    if (!lane) {
-      showError("Please select your Infrastructure Path (Lane 1, 2, or 3)");
-      return;
-    }
-
-    const unanswered = Object.entries(answers).filter(([_, val]) => val === null);
-    if (unanswered.length > 0) {
-      showError("Please answer all 5 questions to calculate your score");
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
@@ -160,6 +173,7 @@ Diagnostic: ${diagnostic}`,
   };
 
   const handleClose = () => {
+    setCurrentStep(0);
     setLane(null);
     setAnswers({ q1: null, q2: null, q3: null, q4: null, q5: null });
     setShowResults(false);
@@ -171,6 +185,67 @@ Diagnostic: ${diagnostic}`,
   };
 
   const results = calculateResults();
+
+  // Question configurations
+  const questions = [
+    {
+      key: "q1" as const,
+      number: 1,
+      title: "Cash Flow Structural Integrity",
+      description: "Does your business demonstrate 5+ years of structural integrity (consistent profitability with stable cash flow)?",
+      options: [
+        { value: 20, label: "Yes - 5+ years of consistent, stable profitability", points: "20 pts" },
+        { value: 10, label: "Partial - 3-5 years with minor volatility", points: "10 pts" },
+        { value: 0, label: "No - Less than 3 years or inconsistent cash flow", points: "0 pts" },
+      ],
+    },
+    {
+      key: "q2" as const,
+      number: 2,
+      title: "Personnel Grid Capacity",
+      description: "What is the current capacity of your Human Grid (total full-time employees)? ESOPs typically require critical mass for tax efficiency.",
+      options: [
+        { value: 20, label: "20+ FTEs (Optimal for ESOP mechanics)", points: "20 pts" },
+        { value: 10, label: "10-19 FTEs (Viable but less efficient)", points: "10 pts" },
+        { value: 5, label: "Under 10 FTEs (Below critical mass)", points: "5 pts" },
+      ],
+    },
+    {
+      key: "q3" as const,
+      number: 3,
+      title: "Autonomous Operations (The 3-Month Test)",
+      description: "If you initiated a 3-Month Controlled Shutdown (zero contact), would operational systems maintain autonomous function?",
+      options: [
+        { value: 20, label: "Yes - The business runs without my daily input", points: "20 pts" },
+        { value: 10, label: "Partial - Major decisions still require me, but operations continue", points: "10 pts" },
+        { value: 0, label: "No - I am the load-bearing wall; systems fail without me", points: "0 pts" },
+      ],
+    },
+    {
+      key: "q4" as const,
+      number: 4,
+      title: "Institutional Memory Depth",
+      description: "Does your average employee tenure exceed 5 years? (High tenure proves there is legacy worth protecting through ownership)",
+      options: [
+        { value: 20, label: "Yes - 5+ years average tenure", points: "20 pts" },
+        { value: 10, label: "Mixed - 3-5 years, some turnover", points: "10 pts" },
+        { value: 0, label: "No - High turnover, mostly under 3 years", points: "0 pts" },
+      ],
+    },
+    {
+      key: "q5" as const,
+      number: 5,
+      title: "Knowledge Documentation Status",
+      description: "Are critical business processes documented in SOPs, or do they exist only in your head (tribal knowledge)?",
+      options: [
+        { value: 20, label: "Documented - Critical knowledge is written, accessible, and trainable", points: "20 pts" },
+        { value: 10, label: "Partial - Some documentation, but gaps in key areas", points: "10 pts" },
+        { value: 0, label: "Tribal - I am the primary repository of critical business knowledge", points: "0 pts" },
+      ],
+    },
+  ];
+
+  const currentQuestion = currentStep > 0 && currentStep <= 5 ? questions[currentStep - 1] : null;
 
   return (
     <>
@@ -186,8 +261,7 @@ Diagnostic: ${diagnostic}`,
           <div className="audit-header">
             <h1 className="audit-title">The Infrastructure Audit</h1>
             <p className="audit-subtitle">
-              Determine if your business can support a succession event—whether you&apos;re staying, 
-              exiting to employees, or negotiating with buyers.
+              Determine if your business can support a succession event
             </p>
 
             <div className="signal-meter" style={{ opacity: currentScore > 0 ? 1 : 0.3 }}>
@@ -203,222 +277,146 @@ Diagnostic: ${diagnostic}`,
                 ))}
               </div>
             </div>
+
+            {/* Progress Bar */}
+            <div className="audit-progress">
+              <div className="audit-progress-bar">
+                <div 
+                  className="audit-progress-fill" 
+                  style={{ width: `${(currentStep / TOTAL_STEPS) * 100}%` }}
+                />
+              </div>
+              <span className="audit-progress-text">
+                Step {currentStep} of {TOTAL_STEPS}
+              </span>
+            </div>
           </div>
 
           <div className="audit-form-container">
             {!showResults ? (
               <div className="audit-form">
-                {/* Lane Selection */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">0</span>
-                    <h3 className="section-title">Select Your Infrastructure Path</h3>
-                  </div>
-                  <p className="section-description">
-                    This determines what we build together. Choose the lane that matches your current strategic position.
-                  </p>
+                {/* Step 0: Lane Selection */}
+                {currentStep === 0 && (
+                  <div className="audit-step">
+                    <div className="step-header-large">
+                      <span className="step-number-badge">START</span>
+                      <h3 className="step-title-large">Select Your Infrastructure Path</h3>
+                    </div>
+                    <p className="step-description-large">
+                      This determines what we build together. Choose the lane that matches your current strategic position.
+                    </p>
 
-                  <div className="lane-grid">
-                    <button
-                      type="button"
-                      className={`lane-card ${lane === "resilience" ? "selected" : ""}`}
-                      onClick={() => handleLaneSelect("resilience")}
-                    >
-                      <span className="lane-title">Lane 1: Resilience</span>
-                      <span className="lane-desc">
-                        I plan to keep running my business, but need a failsafe infrastructure 
-                        if I can no longer operate.
-                      </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      className={`lane-card ${lane === "stewardship" ? "selected" : ""}`}
-                      onClick={() => handleLaneSelect("stewardship")}
-                    >
-                      <span className="lane-title">Lane 2: Stewardship</span>
-                      <span className="lane-desc">
-                        I intend to exit completely and transfer 100% ownership to my employees 
-                        within 3–5 years.
-                      </span>
-                    </button>
-
-                    <button
-                      type="button"
-                      className={`lane-card ${lane === "competitive" ? "selected" : ""}`}
-                      onClick={() => handleLaneSelect("competitive")}
-                    >
-                      <span className="lane-title">Lane 3: Competitive</span>
-                      <span className="lane-desc">
-                        I intend to sell to a third party, but want a credible ESOP alternative 
-                        to maximize negotiating power.
-                      </span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Question 1 */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">1</span>
-                    <h3 className="section-title">Cash Flow Structural Integrity</h3>
-                  </div>
-                  <p className="section-description">
-                    Does your business demonstrate 5+ years of structural integrity 
-                    (consistent profitability with stable cash flow)?
-                  </p>
-
-                  <div className="options-grid">
-                    {[
-                      { value: 20, label: "Yes - 5+ years of consistent, stable profitability", points: "20 pts" },
-                      { value: 10, label: "Partial - 3-5 years with minor volatility", points: "10 pts" },
-                      { value: 0, label: "No - Less than 3 years or inconsistent cash flow", points: "0 pts" },
-                    ].map((opt) => (
+                    <div className="lane-grid-large">
                       <button
-                        key={opt.value}
                         type="button"
-                        className={`option-button ${answers.q1 === opt.value ? "selected" : ""}`}
-                        onClick={() => handleAnswer("q1", opt.value)}
+                        className={`lane-card-large ${lane === "resilience" ? "selected" : ""}`}
+                        onClick={() => handleLaneSelect("resilience")}
                       >
-                        <span className="option-label">{opt.label}</span>
-                        <span className="option-points">{opt.points}</span>
+                        <div className="lane-icon">🛡️</div>
+                        <span className="lane-title-large">Lane 1: Resilience</span>
+                        <span className="lane-desc-large">
+                          I plan to keep running my business, but need a failsafe infrastructure 
+                          if I can no longer operate.
+                        </span>
                       </button>
-                    ))}
-                  </div>
-                </div>
 
-                {/* Question 2 */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">2</span>
-                    <h3 className="section-title">Personnel Grid Capacity</h3>
-                  </div>
-                  <p className="section-description">
-                    What is the current capacity of your Human Grid (total full-time employees)? 
-                    ESOPs typically require critical mass for tax efficiency.
-                  </p>
-
-                  <div className="options-grid">
-                    {[
-                      { value: 20, label: "20+ FTEs (Optimal for ESOP mechanics)", points: "20 pts" },
-                      { value: 10, label: "10-19 FTEs (Viable but less efficient)", points: "10 pts" },
-                      { value: 5, label: "Under 10 FTEs (Below critical mass)", points: "5 pts" },
-                    ].map((opt) => (
                       <button
-                        key={opt.value}
                         type="button"
-                        className={`option-button ${answers.q2 === opt.value ? "selected" : ""}`}
-                        onClick={() => handleAnswer("q2", opt.value)}
+                        className={`lane-card-large ${lane === "stewardship" ? "selected" : ""}`}
+                        onClick={() => handleLaneSelect("stewardship")}
                       >
-                        <span className="option-label">{opt.label}</span>
-                        <span className="option-points">{opt.points}</span>
+                        <div className="lane-icon">🤝</div>
+                        <span className="lane-title-large">Lane 2: Stewardship</span>
+                        <span className="lane-desc-large">
+                          I intend to exit completely and transfer 100% ownership to my employees 
+                          within 3–5 years.
+                        </span>
                       </button>
-                    ))}
-                  </div>
-                </div>
 
-                {/* Question 3 */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">3</span>
-                    <h3 className="section-title">Autonomous Operations (The 3-Month Test)</h3>
-                  </div>
-                  <p className="section-description">
-                    If you initiated a 3-Month Controlled Shutdown (zero contact), 
-                    would operational systems maintain autonomous function?
-                  </p>
-
-                  <div className="options-grid">
-                    {[
-                      { value: 20, label: "Yes - The business runs without my daily input", points: "20 pts" },
-                      { value: 10, label: "Partial - Major decisions still require me, but operations continue", points: "10 pts" },
-                      { value: 0, label: "No - I am the load-bearing wall; systems fail without me", points: "0 pts" },
-                    ].map((opt) => (
                       <button
-                        key={opt.value}
                         type="button"
-                        className={`option-button ${answers.q3 === opt.value ? "selected" : ""}`}
-                        onClick={() => handleAnswer("q3", opt.value)}
+                        className={`lane-card-large ${lane === "competitive" ? "selected" : ""}`}
+                        onClick={() => handleLaneSelect("competitive")}
                       >
-                        <span className="option-label">{opt.label}</span>
-                        <span className="option-points">{opt.points}</span>
+                        <div className="lane-icon">⚡</div>
+                        <span className="lane-title-large">Lane 3: Competitive</span>
+                        <span className="lane-desc-large">
+                          I intend to sell to a third party, but want a credible ESOP alternative 
+                          to maximize negotiating power.
+                        </span>
                       </button>
-                    ))}
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Question 4 */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">4</span>
-                    <h3 className="section-title">Institutional Memory Depth</h3>
+                {/* Steps 1-5: Questions */}
+                {currentQuestion && (
+                  <div className="audit-step">
+                    <div className="step-header-large">
+                      <span className="step-number-badge">{currentQuestion.number}</span>
+                      <h3 className="step-title-large">{currentQuestion.title}</h3>
+                    </div>
+                    <p className="step-description-large">{currentQuestion.description}</p>
+
+                    <div className="options-grid-large">
+                      {currentQuestion.options.map((opt) => (
+                        <button
+                          key={opt.value}
+                          type="button"
+                          className={`option-button-large ${answers[currentQuestion.key] === opt.value ? "selected" : ""}`}
+                          onClick={() => handleAnswer(currentQuestion.key, opt.value)}
+                        >
+                          <div className="option-radio">
+                            <div className={`radio-dot ${answers[currentQuestion.key] === opt.value ? "active" : ""}`} />
+                          </div>
+                          <div className="option-content">
+                            <span className="option-label-large">{opt.label}</span>
+                          </div>
+                          <span className="option-points-large">{opt.points}</span>
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  <p className="section-description">
-                    Does your average employee tenure exceed 5 years? 
-                    (High tenure proves there is legacy worth protecting through ownership)
-                  </p>
+                )}
 
-                  <div className="options-grid">
-                    {[
-                      { value: 20, label: "Yes - 5+ years average tenure", points: "20 pts" },
-                      { value: 10, label: "Mixed - 3-5 years, some turnover", points: "10 pts" },
-                      { value: 0, label: "No - High turnover, mostly under 3 years", points: "0 pts" },
-                    ].map((opt) => (
-                      <button
-                        key={opt.value}
-                        type="button"
-                        className={`option-button ${answers.q4 === opt.value ? "selected" : ""}`}
-                        onClick={() => handleAnswer("q4", opt.value)}
-                      >
-                        <span className="option-label">{opt.label}</span>
-                        <span className="option-points">{opt.points}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Question 5 */}
-                <div className="audit-section">
-                  <div className="section-header">
-                    <span className="section-number">5</span>
-                    <h3 className="section-title">Knowledge Documentation Status</h3>
-                  </div>
-                  <p className="section-description">
-                    Are critical business processes documented in SOPs, 
-                    or do they exist only in your head (tribal knowledge)?
-                  </p>
-
-                  <div className="options-grid">
-                    {[
-                      { value: 20, label: "Documented - Critical knowledge is written, accessible, and trainable", points: "20 pts" },
-                      { value: 10, label: "Partial - Some documentation, but gaps in key areas", points: "10 pts" },
-                      { value: 0, label: "Tribal - I am the primary repository of critical business knowledge", points: "0 pts" },
-                    ].map((opt) => (
-                      <button
-                        key={opt.value}
-                        type="button"
-                        className={`option-button ${answers.q5 === opt.value ? "selected" : ""}`}
-                        onClick={() => handleAnswer("q5", opt.value)}
-                      >
-                        <span className="option-label">{opt.label}</span>
-                        <span className="option-points">{opt.points}</span>
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="audit-submit">
+                {/* Navigation */}
+                <div className="audit-navigation">
                   <button
                     type="button"
-                    className="audit-btn-primary"
-                    onClick={handleSubmit}
-                    disabled={isSubmitting}
+                    className="audit-nav-btn audit-nav-back"
+                    onClick={handleBack}
+                    disabled={currentStep === 0}
                   >
-                    {isSubmitting ? "Calculating..." : "Calculate My Infrastructure Score →"}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Back
                   </button>
-                  <p className="audit-footer-text">
-                    All roads lead to a build call. We don&apos;t do DIY guides—we do infrastructure.
-                  </p>
+
+                  {currentStep < TOTAL_STEPS ? (
+                    <button
+                      type="button"
+                      className="audit-nav-btn audit-nav-next"
+                      onClick={handleNext}
+                    >
+                      Continue
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      className="audit-nav-btn audit-nav-submit"
+                      onClick={handleSubmit}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Calculating..." : "View Results"}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
             ) : (
