@@ -10,6 +10,7 @@ interface ContactModalProps {
 
 export function ContactModal({ isOpen, onClose }: ContactModalProps) {
   const [formData, setFormData] = useState({
+    contactType: "",
     name: "",
     email: "",
     company: "",
@@ -38,7 +39,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     // Reset after showing success
     setTimeout(() => {
       setIsSubmitted(false);
-      setFormData({ name: "", email: "", company: "", interest: "", message: "" });
+      setFormData({ contactType: "", name: "", email: "", company: "", interest: "", message: "" });
       onClose();
     }, 2000);
   };
@@ -131,6 +132,26 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               </div>
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
+                {/* Contact Type - Moved to top */}
+                <div className="form-group form-group-full">
+                  <label htmlFor="contact-type" className="form-label">How can we help you?</label>
+                  <select
+                    id="contact-type"
+                    name="contactType"
+                    value={formData.contactType}
+                    onChange={handleChange}
+                    required
+                    className="form-select"
+                  >
+                    <option value="">Select who you are...</option>
+                    <option value="business-owner">Business Owner (ESOP Transition)</option>
+                    <option value="partner">Partner (Accounting, Legal, Lending, etc.)</option>
+                    <option value="existing-business">Existing Portfolio Business</option>
+                    <option value="website-visitor">General Inquiry</option>
+                    <option value="marketing">Marketing / Vendor Services</option>
+                  </select>
+                </div>
+
                 <div className="form-row">
                   <div className="form-group">
                     <label htmlFor="contact-name" className="form-label">Name</label>
@@ -174,7 +195,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="contact-interest" className="form-label">I&apos;m interested in</label>
+                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
                     <select
                       id="contact-interest"
                       name="interest"
@@ -183,14 +204,14 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
                       className="form-select"
                     >
                       <option value="">Select an option</option>
-                      <option value="business-owner">ESOP Transition (Business Owner)</option>
+                      <option value="esop-transition">ESOP Transition</option>
                       <option value="accounting">Accounting Partnership</option>
                       <option value="legal">Legal Partnership</option>
                       <option value="lending">Lending Partnership</option>
                       <option value="broker">Business Broker Partnership</option>
                       <option value="wealth">Wealth Management Partnership</option>
                       <option value="career">Career Opportunities</option>
-                      <option value="other">Other</option>
+                      <option value="general">General Inquiry</option>
                     </select>
                   </div>
                 </div>
