@@ -45,6 +45,7 @@ const businessSubOptions = [
       </svg>
     ),
     hasSubMenu: false,
+    href: "/lenders",
   },
   {
     id: "other",
