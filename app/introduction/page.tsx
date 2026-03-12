@@ -93,6 +93,7 @@ const otherServicesSubOptions = [
     id: "wealth-managers",
     title: "Wealth Managers",
     description: "Work with us to serve business owners through ESOP transitions",
+    href: "/wealth-managers",
     icon: (
       <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <line x1="12" y1="1" x2="12" y2="23"/>
@@ -371,23 +372,45 @@ export default function Introduction() {
               </p>
 
               <div className="intro-cards sub-options">
-                {otherServicesSubOptions.map((option) => (
-                  <button 
-                    key={option.id} 
-                    className="intro-card sub-option-card"
-                  >
-                    <div className="card-icon">{option.icon}</div>
-                    <div className="card-text">
-                      <h2 className="card-title">{option.title}</h2>
-                      <p className="card-description">{option.description}</p>
-                    </div>
-                    <span className="card-arrow">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                      </svg>
-                    </span>
-                  </button>
-                ))}
+                {otherServicesSubOptions.map((option) => {
+                  const cardContent = (
+                    <>
+                      <div className="card-icon">{option.icon}</div>
+                      <div className="card-text">
+                        <h2 className="card-title">{option.title}</h2>
+                        <p className="card-description">{option.description}</p>
+                      </div>
+                      <span className="card-arrow">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                      </span>
+                    </>
+                  );
+
+                  // If option has href, render as Link
+                  if (option.href) {
+                    return (
+                      <Link
+                        key={option.id}
+                        href={option.href}
+                        className="intro-card sub-option-card"
+                      >
+                        {cardContent}
+                      </Link>
+                    );
+                  }
+
+                  // Otherwise render as button
+                  return (
+                    <button 
+                      key={option.id} 
+                      className="intro-card sub-option-card"
+                    >
+                      {cardContent}
+                    </button>
+                  );
+                })}
               </div>
             </div>
           )}
