@@ -16,6 +16,7 @@ export default defineSchema({
     firstName: v.string(),
     lastName: v.string(),
     email: v.string(),
+    phone: v.optional(v.string()),
     company: v.optional(v.string()),
     // Area of interest
     interest: v.optional(v.union(

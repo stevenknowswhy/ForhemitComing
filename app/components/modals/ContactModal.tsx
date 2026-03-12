@@ -19,6 +19,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     company: "",
     interest: "",
     message: "",
@@ -92,6 +93,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
         email: formData.email.trim().toLowerCase(),
+        phone: formData.phone.trim() || undefined,
         company: formData.company.trim() || undefined,
         interest: formData.interest as any || undefined,
         message: formData.message.trim(),
@@ -110,7 +112,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
   const handleSuccessClose = () => {
     setRevealedSection("none");
     setShowPreview(false);
-    setFormData({ contactType: "", firstName: "", lastName: "", email: "", company: "", interest: "", message: "" });
+    setFormData({ contactType: "", firstName: "", lastName: "", email: "", phone: "", company: "", interest: "", message: "" });
     setError(null);
     onClose();
   };
@@ -262,12 +264,14 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                     <span className="review-label">Email</span>
                     <span className="review-value">{formData.email}</span>
                   </div>
-                  {(formData.company || formData.interest) && (
+                  {(formData.phone || formData.company || formData.interest) && (
                     <div className="review-section">
                       <span className="review-label">Additional Info</span>
                       <span className="review-value">
+                        {formData.phone && `Phone: ${formData.phone}`}
+                        {formData.phone && formData.company && " • "}
                         {formData.company && `Company: ${formData.company}`}
-                        {formData.company && formData.interest && " • "}
+                        {(formData.phone || formData.company) && formData.interest && " • "}
                         {formData.interest && `Interest: ${getInterestLabel(formData.interest)}`}
                       </span>
                     </div>
@@ -377,17 +381,31 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                       />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="contact-company" className="form-label">Company</label>
+                      <label htmlFor="contact-phone" className="form-label">Phone</label>
                       <input
-                        type="text"
-                        id="contact-company"
-                        name="company"
-                        value={formData.company}
+                        type="tel"
+                        id="contact-phone"
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleChange}
-                        placeholder="Your company (optional)"
+                        onBlur={handleContactBlur}
+                        placeholder="(555) 123-4567"
                         className="form-input"
                       />
                     </div>
+                  </div>
+
+                  <div className="form-group form-group-full">
+                    <label htmlFor="contact-company" className="form-label">Company</label>
+                    <input
+                      type="text"
+                      id="contact-company"
+                      name="company"
+                      value={formData.company}
+                      onChange={handleChange}
+                      placeholder="Your company (optional)"
+                      className="form-input"
+                    />
                   </div>
 
                   <div className="form-group form-group-full">
