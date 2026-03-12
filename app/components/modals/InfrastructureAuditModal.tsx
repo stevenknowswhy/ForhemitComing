@@ -312,7 +312,6 @@ Diagnostic: ${diagnostic}`,
                         className={`lane-card-large ${lane === "resilience" ? "selected" : ""}`}
                         onClick={() => handleLaneSelect("resilience")}
                       >
-                        <div className="lane-icon">🛡️</div>
                         <span className="lane-title-large">Lane 1: Resilience</span>
                         <span className="lane-desc-large">
                           I plan to keep running my business, but need a failsafe infrastructure 
@@ -325,7 +324,6 @@ Diagnostic: ${diagnostic}`,
                         className={`lane-card-large ${lane === "stewardship" ? "selected" : ""}`}
                         onClick={() => handleLaneSelect("stewardship")}
                       >
-                        <div className="lane-icon">🤝</div>
                         <span className="lane-title-large">Lane 2: Stewardship</span>
                         <span className="lane-desc-large">
                           I intend to exit completely and transfer 100% ownership to my employees 
@@ -338,7 +336,6 @@ Diagnostic: ${diagnostic}`,
                         className={`lane-card-large ${lane === "competitive" ? "selected" : ""}`}
                         onClick={() => handleLaneSelect("competitive")}
                       >
-                        <div className="lane-icon">⚡</div>
                         <span className="lane-title-large">Lane 3: Competitive</span>
                         <span className="lane-desc-large">
                           I intend to sell to a third party, but want a credible ESOP alternative 
