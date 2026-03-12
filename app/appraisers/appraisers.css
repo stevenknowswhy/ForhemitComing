@@ -1,0 +1,922 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   APPRAISERS PAGE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── CSS Variables ── */
+:root {
+  --appraisers-bg: #0a0a08;
+  --appraisers-bg-secondary: #141410;
+  --appraisers-bg-card: rgba(20, 20, 16, 0.8);
+  --appraisers-text-primary: #f5f0e8;
+  --appraisers-text-secondary: #a09a90;
+  --appraisers-accent: #FF6B00;
+  --appraisers-accent-light: #ff8c33;
+  --appraisers-border: rgba(245, 240, 232, 0.1);
+  --appraisers-border-accent: rgba(255, 107, 0, 0.3);
+  --appraisers-success: #22c55e;
+  --appraisers-gold: #fbbf24;
+}
+
+/* ── Base ── */
+.appraisers-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--appraisers-bg);
+  color: var(--appraisers-text-primary);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.appraisers-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, rgba(255, 107, 0, 0.05) 0%, transparent 40%),
+    linear-gradient(180deg, rgba(10, 10, 8, 0.98) 0%, rgba(20, 20, 16, 0.95) 100%);
+}
+
+/* ── Logo Header ── */
+.appraisers-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.appraisers-logo-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.appraisers-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(180deg, #909090 0%, #e0e0e0 25%, #ffffff 50%, #c0c0c0 75%, #a0a0a0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease;
+  display: inline-block;
+}
+
+.appraisers-logo-link:hover .appraisers-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.appraisers-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--appraisers-accent);
+  transition: width 0.3s ease;
+}
+
+.appraisers-logo-link:hover .appraisers-logo-underline {
+  width: 100%;
+}
+
+/* ── Main Content ── */
+.appraisers-main {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Hero Section ── */
+.appraisers-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 4rem;
+  text-align: center;
+}
+
+.appraisers-hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.appraisers-eyebrow {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--appraisers-accent);
+  margin-bottom: 1.5rem;
+}
+
+.appraisers-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.appraisers-title .highlight {
+  color: var(--appraisers-accent);
+}
+
+.appraisers-lead {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 300;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.appraisers-hero-cta {
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background: var(--appraisers-accent);
+  color: #fff;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  border: 2px solid var(--appraisers-accent);
+}
+
+.cta-button:hover {
+  background: transparent;
+  color: var(--appraisers-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--appraisers-accent);
+  border: 2px solid var(--appraisers-accent);
+}
+
+.cta-button.secondary:hover {
+  background: var(--appraisers-accent);
+  color: #fff;
+}
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--appraisers-text-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 36px;
+  border: 2px solid var(--appraisers-text-secondary);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-wheel {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: var(--appraisers-text-secondary);
+  border-radius: 2px;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(6px); opacity: 0.5; }
+}
+
+/* ── Sections ── */
+.appraisers-section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.appraisers-section.section-alt {
+  background: var(--appraisers-bg-secondary);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 4rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.section-intro {
+  font-size: 1.1rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+}
+
+/* ── Problem Section ── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.problem-card {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.problem-card:hover {
+  border-color: var(--appraisers-border-accent);
+  transform: translateY(-4px);
+}
+
+.problem-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.problem-card h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.problem-card p {
+  font-size: 0.95rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Solution Section ── */
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.solution-content h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.solution-lead {
+  font-size: 1.1rem;
+  color: var(--appraisers-text-primary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.solution-content p {
+  font-size: 1rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.solution-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(255, 107, 0, 0.1);
+  border-left: 3px solid var(--appraisers-accent);
+  padding: 1.25rem;
+  border-radius: 0 8px 8px 0;
+  margin-top: 1.5rem;
+}
+
+.highlight-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.solution-highlight p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--appraisers-text-primary);
+}
+
+/* ── Revenue Calculator ── */
+.revenue-calculator {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border-accent);
+  border-radius: 16px;
+  padding: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.revenue-calculator.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.calculator-label {
+  font-size: 0.85rem;
+  color: var(--appraisers-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.calculator-value {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--appraisers-accent);
+}
+
+.calculator-slider {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 2rem;
+  -webkit-appearance: none;
+}
+
+.calculator-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--appraisers-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 107, 0, 0.5);
+}
+
+.calculator-results {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.result-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  border-left: 3px solid var(--appraisers-accent);
+}
+
+.result-item.recurring {
+  border-left-color: var(--appraisers-success);
+}
+
+.result-item.total {
+  border-left-color: var(--appraisers-gold);
+  background: rgba(251, 191, 36, 0.05);
+}
+
+.result-label {
+  font-size: 0.8rem;
+  color: var(--appraisers-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.result-value {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--appraisers-text-primary);
+}
+
+.result-note {
+  font-size: 0.8rem;
+  color: var(--appraisers-text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* ── Partnership Steps ── */
+.partnership-steps {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.partnership-step {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.6s ease;
+}
+
+.partnership-step.right {
+  direction: rtl;
+}
+
+.partnership-step.right > * {
+  direction: ltr;
+}
+
+.partnership-step.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.step-content {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.step-number-badge {
+  display: inline-block;
+  background: var(--appraisers-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+}
+
+.step-content h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.step-details {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.step-details li {
+  font-size: 0.9rem;
+  color: var(--appraisers-text-secondary);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.step-details li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--appraisers-accent);
+  font-weight: 700;
+}
+
+.step-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.connector-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(180deg, var(--appraisers-accent), transparent);
+}
+
+.connector-node {
+  width: 40px;
+  height: 40px;
+  background: var(--appraisers-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Feature Cards ── */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.feature-card-interactive {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.feature-card-interactive:hover {
+  border-color: var(--appraisers-border-accent);
+  transform: translateY(-4px);
+}
+
+.feature-icon-wrapper {
+  width: 70px;
+  height: 70px;
+  background: rgba(255, 107, 0, 0.1);
+  border: 2px solid var(--appraisers-border-accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.feature-icon-wrapper.hovered {
+  background: rgba(255, 107, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.feature-icon {
+  font-size: 2rem;
+}
+
+.feature-card-interactive h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.feature-card-interactive p {
+  font-size: 0.95rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.feature-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(255, 107, 0, 0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.feature-glow.active {
+  opacity: 1;
+}
+
+/* ── COOP Highlight ── */
+.coop-highlight {
+  max-width: 800px;
+  margin: 0 auto;
+  background: rgba(255, 107, 0, 0.05);
+  border: 1px solid var(--appraisers-border-accent);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+}
+
+.coop-badge {
+  display: inline-block;
+  background: var(--appraisers-accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.coop-highlight p {
+  font-size: 1.05rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── FAQ Section ── */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+  border-color: var(--appraisers-border-accent);
+}
+
+.faq-item.open {
+  border-color: var(--appraisers-border-accent);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--appraisers-text-primary);
+  transition: color 0.3s ease;
+}
+
+.faq-question:hover {
+  color: var(--appraisers-accent);
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  color: var(--appraisers-accent);
+  flex-shrink: 0;
+}
+
+.faq-answer {
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-answer-content {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.faq-answer-content p {
+  font-size: 0.95rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+  text-align: left;
+}
+
+/* ── CTA Section ── */
+.cta-section {
+  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.05) 50%, transparent 100%);
+}
+
+.cta-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.cta-subtitle {
+  font-size: 1.1rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.cta-lead {
+  font-size: 1.05rem;
+  color: var(--appraisers-text-primary);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.cta-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.cta-option {
+  background: var(--appraisers-bg-card);
+  border: 1px solid var(--appraisers-border);
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.cta-option.primary {
+  border-color: var(--appraisers-border-accent);
+}
+
+.cta-option-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--appraisers-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+
+.cta-option h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cta-option p {
+  font-size: 0.95rem;
+  color: var(--appraisers-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.cta-contact {
+  text-align: center;
+}
+
+.cta-contact p {
+  font-size: 0.9rem;
+  color: var(--appraisers-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.cta-email {
+  font-size: 1.1rem;
+  color: var(--appraisers-accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cta-email:hover {
+  text-decoration: underline;
+}
+
+/* ── Animation ── */
+[data-animate] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-animate]:not(.animate-in) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-animate="slide-right"]:not(.animate-in) {
+  transform: translateX(-50px);
+}
+
+[data-animate="slide-left"]:not(.animate-in) {
+  transform: translateX(50px);
+}
+
+[data-animate].animate-in {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .solution-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .solution-visual {
+    order: -1;
+  }
+  
+  .partnership-step,
+  .partnership-step.right {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+  
+  .partnership-step.right > * {
+    direction: ltr;
+  }
+  
+  .step-connector {
+    display: none;
+  }
+  
+  .cta-options {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .appraisers-hero {
+    padding: 7rem 0 3rem;
+  }
+  
+  .appraisers-section {
+    padding: 4rem 0;
+  }
+  
+  .problem-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .calculator-results {
+    flex-direction: column;
+  }
+}
