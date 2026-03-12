@@ -365,6 +365,27 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                     </div>
                   </div>
 
+                  <div className="form-group form-group-full">
+                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
+                    <select
+                      id="contact-interest"
+                      name="interest"
+                      value={formData.interest}
+                      onChange={handleChange}
+                      className="form-select"
+                    >
+                      <option value="">Select an area of interest (optional)</option>
+                      <option value="esop-transition">ESOP Transition</option>
+                      <option value="accounting">Accounting Partnership</option>
+                      <option value="legal">Legal Partnership</option>
+                      <option value="lending">Lending Partnership</option>
+                      <option value="broker">Business Broker Partnership</option>
+                      <option value="wealth">Wealth Management Partnership</option>
+                      <option value="career">Career Opportunities</option>
+                      <option value="general">General Inquiry</option>
+                    </select>
+                  </div>
+
                   <div className="form-row">
                     <div className="form-group">
                       <label htmlFor="contact-email" className="form-label">Email *</label>
@@ -406,27 +427,6 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
                       placeholder="Your company (optional)"
                       className="form-input"
                     />
-                  </div>
-
-                  <div className="form-group form-group-full">
-                    <label htmlFor="contact-interest" className="form-label">Area of Interest</label>
-                    <select
-                      id="contact-interest"
-                      name="interest"
-                      value={formData.interest}
-                      onChange={handleChange}
-                      className="form-select"
-                    >
-                      <option value="">Select an area of interest (optional)</option>
-                      <option value="esop-transition">ESOP Transition</option>
-                      <option value="accounting">Accounting Partnership</option>
-                      <option value="legal">Legal Partnership</option>
-                      <option value="lending">Lending Partnership</option>
-                      <option value="broker">Business Broker Partnership</option>
-                      <option value="wealth">Wealth Management Partnership</option>
-                      <option value="career">Career Opportunities</option>
-                      <option value="general">General Inquiry</option>
-                    </select>
                   </div>
                 </div>
 
