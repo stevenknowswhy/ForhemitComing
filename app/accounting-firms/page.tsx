@@ -160,6 +160,126 @@ export default function AccountingFirms() {
           </div>
         </section>
 
+        {/* CPA Practice Multiplier Section */}
+        <section className="accounting-section multiplier-section">
+          <div className="container">
+            <div className="multiplier-header" data-animate="fade-up">
+              <span className="section-eyebrow">The Revenue Opportunity</span>
+              <h2>The CPA Practice Multiplier: 5-Year Revenue Comparison</h2>
+              <p className="multiplier-context">
+                Let&apos;s look at a typical 15-person business with $10M in revenue in the San Francisco market.
+              </p>
+            </div>
+
+            <div className="comparison-table-wrapper" data-animate="fade-up">
+              <div className="comparison-table">
+                <div className="table-header">
+                  <div className="table-col metric-col">Revenue Metric</div>
+                  <div className="table-col terminal-col">
+                    <span className="col-title">Terminal Scenario</span>
+                    <span className="col-subtitle">Business Closes / PE Sale</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="col-title">The Forhemit Transition</span>
+                    <span className="col-subtitle">ESOP + Resilience Model</span>
+                  </div>
+                  <div className="table-col why-col">Why It Explodes</div>
+                </div>
+
+                <div className="table-row">
+                  <div className="table-col metric-col">
+                    <span className="metric-name">Corporate Tax & Advisory</span>
+                  </div>
+                  <div className="table-col terminal-col">
+                    <span className="amount zero">$0</span>
+                    <span className="note">(Client Lost)</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="amount">$175,000</span>
+                    <span className="note">($35k/yr x 5)</span>
+                  </div>
+                  <div className="table-col why-col">
+                    <span className="why-text">The entity remains local and loyal to the CPA firm.</span>
+                  </div>
+                </div>
+
+                <div className="table-row">
+                  <div className="table-col metric-col">
+                    <span className="metric-name">New Individual Tax Revenue</span>
+                  </div>
+                  <div className="table-col terminal-col">
+                    <span className="amount zero">$0</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="amount">$112,500</span>
+                    <span className="note">(15 Owners x $1,500/yr x 5)</span>
+                  </div>
+                  <div className="table-col why-col">
+                    <span className="why-text">Employee-owners need complex K-1 tax filings.</span>
+                  </div>
+                </div>
+
+                <div className="table-row">
+                  <div className="table-col metric-col">
+                    <span className="metric-name">Advisory & Succession Fees</span>
+                  </div>
+                  <div className="table-col terminal-col">
+                    <span className="amount zero">$0</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="amount">$50,000</span>
+                    <span className="note">(One-time Transition Fee)</span>
+                  </div>
+                  <div className="table-col why-col">
+                    <span className="why-text">Strategic consulting shared with the CPA partner.</span>
+                  </div>
+                </div>
+
+                <div className="table-row">
+                  <div className="table-col metric-col">
+                    <span className="metric-name">Asset Management Referrals</span>
+                  </div>
+                  <div className="table-col terminal-col">
+                    <span className="amount zero">$0</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="amount highlight">High Potential</span>
+                    <span className="note">15 new HNW clients</span>
+                  </div>
+                  <div className="table-col why-col">
+                    <span className="why-text">15 new high-net-worth clients for the CPA&apos;s wealth arm.</span>
+                  </div>
+                </div>
+
+                <div className="table-row total-row">
+                  <div className="table-col metric-col">
+                    <span className="metric-name total">TOTAL 5-YEAR FIRM VALUE</span>
+                  </div>
+                  <div className="table-col terminal-col">
+                    <span className="amount total-zero">$0</span>
+                  </div>
+                  <div className="table-col stefano-col">
+                    <span className="amount total-amount">$337,500+</span>
+                  </div>
+                  <div className="table-col why-col">
+                    <span className="why-text total-why">A 100% Retention Rate vs. 0%.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="ghost-practice-callout" data-animate="fade-up">
+              <div className="callout-icon">👻</div>
+              <div className="callout-content">
+                <h3>The &quot;Ghost Practice&quot; Problem</h3>
+                <blockquote>
+                  &quot;Right now, your firm is facing a &apos;Ghost Practice&apos; problem. <strong>80% of your business-owner clients have no succession plan.</strong> When they retire, your billable revenue vanishes with them. I am offering you a way to lock in the Lifetime Value (LTV) of that business for the next 20 years. Instead of one aging client, I&apos;m giving you 15 new, younger clients who are just starting their journey as owners—and they will need you for decades.&quot;
+                </blockquote>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Build a Moat Section */}
         <section className="accounting-section moat-section">
           <div className="container">
@@ -260,6 +380,46 @@ export default function AccountingFirms() {
                     <strong>Your Security</strong>
                     <p>Their wealth stays under your management, and their corporate work stays in your firm.</p>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Key Hooks Section */}
+        <section className="accounting-section hooks-section">
+          <div className="container">
+            <div className="hooks-header" data-animate="fade-up">
+              <span className="section-eyebrow">Strategic Advantages</span>
+              <h2>Why Your Clients Stay With You</h2>
+            </div>
+
+            <div className="hooks-grid">
+              <div className="hook-card" data-animate="slide-right">
+                <div className="hook-number">01</div>
+                <div className="hook-icon">🔒</div>
+                <h3>The &quot;Accountant of Record&quot; Lock</h3>
+                <p>
+                  In a traditional sale (to PE or a competitor), the new buyer almost always fires the old CPA 
+                  and brings in their own &quot;Big 4&quot; or regional firm.
+                </p>
+                <div className="hook-difference">
+                  <span className="difference-arrow">→</span>
+                  <span className="difference-text">With our ESOP model, <strong>the CPA stays</strong> because the ownership stays local.</span>
+                </div>
+              </div>
+
+              <div className="hook-card" data-animate="slide-left">
+                <div className="hook-number">02</div>
+                <div className="hook-icon">⚡</div>
+                <h3>Capacity Control</h3>
+                <p className="capacity-quote">
+                  &quot;I only do three of these a quarter because I refuse to let a business fail due to poor structure. 
+                  I want those three to be your best clients so we can secure your firm&apos;s revenue while we save their legacy.&quot;
+                </p>
+                <div className="hook-benefit">
+                  <span className="benefit-tag">Exclusive Partnership</span>
+                  <span className="benefit-text">Limited quarterly capacity ensures quality and attention.</span>
                 </div>
               </div>
             </div>

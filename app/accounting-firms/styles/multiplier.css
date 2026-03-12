@@ -1,0 +1,304 @@
+/* ============================================
+   CPA PRACTICE MULTIPLIER SECTION
+   Revenue comparison table styling
+   ============================================ */
+
+.multiplier-section {
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, var(--accounting-bg), var(--accounting-bg-alt));
+}
+
+.multiplier-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.multiplier-header .section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  background: rgba(255, 107, 0, 0.05);
+}
+
+.multiplier-header h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 300;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.multiplier-context {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Comparison Table */
+.comparison-table-wrapper {
+  margin-bottom: 3rem;
+  overflow-x: auto;
+}
+
+.comparison-table {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--accounting-card-bg);
+  min-width: 800px;
+}
+
+.table-header {
+  display: flex;
+  background: rgba(255, 107, 0, 0.1);
+  border-bottom: 2px solid rgba(255, 107, 0, 0.3);
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease;
+}
+
+.table-row:hover {
+  background: rgba(255, 107, 0, 0.03);
+}
+
+.table-row:last-child {
+  border-bottom: none;
+}
+
+.table-col {
+  padding: 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.metric-col {
+  flex: 1.5;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.terminal-col {
+  flex: 1.2;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 68, 68, 0.03);
+}
+
+.stefano-col {
+  flex: 1.2;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 107, 0, 0.05);
+}
+
+.why-col {
+  flex: 1.5;
+}
+
+/* Header Styling */
+.table-header .table-col {
+  padding: 1rem;
+  font-weight: 600;
+}
+
+.col-title {
+  display: block;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.col-subtitle {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.table-header .terminal-col .col-title {
+  color: #ff6666;
+}
+
+.table-header .stefano-col .col-title {
+  color: var(--accent-color);
+}
+
+/* Metric Names */
+.metric-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.metric-name.total {
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Amount Styling */
+.amount {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.amount.zero {
+  color: #ff4444;
+  font-weight: 500;
+}
+
+.amount.highlight {
+  background: linear-gradient(90deg, var(--accent-color), #ff8533);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.amount.total-zero {
+  font-size: 1.5rem;
+  color: #ff4444;
+  font-weight: 700;
+}
+
+.amount.total-amount {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, var(--accent-color), #ff8533);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.note {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Why Column */
+.why-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.why-text.total-why {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Total Row Styling */
+.total-row {
+  background: rgba(255, 107, 0, 0.08) !important;
+  border-top: 2px solid rgba(255, 107, 0, 0.3);
+}
+
+.total-row .table-col {
+  padding: 1.5rem 1rem;
+}
+
+/* Ghost Practice Callout */
+.ghost-practice-callout {
+  display: flex;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08), rgba(255, 107, 0, 0.02));
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ghost-practice-callout::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-color), transparent);
+}
+
+.callout-icon {
+  font-size: 3rem;
+  flex-shrink: 0;
+  animation: ghost-float 3s ease-in-out infinite;
+}
+
+@keyframes ghost-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.callout-content h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: var(--accent-color);
+}
+
+.callout-content blockquote {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-style: italic;
+  color: var(--text-secondary);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.callout-content blockquote strong {
+  color: var(--text-primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .comparison-table {
+    font-size: 0.9rem;
+  }
+  
+  .table-col {
+    padding: 1rem 0.75rem;
+  }
+  
+  .amount {
+    font-size: 1.1rem;
+  }
+  
+  .amount.total-zero,
+  .amount.total-amount {
+    font-size: 1.25rem;
+  }
+  
+  .ghost-practice-callout {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .callout-icon {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .comparison-table-wrapper {
+    margin: 0 -1.5rem 2rem;
+    padding: 0 1.5rem;
+  }
+  
+  .ghost-practice-callout {
+    padding: 1.5rem;
+  }
+  
+  .callout-content blockquote {
+    font-size: 0.95rem;
+  }
+}
