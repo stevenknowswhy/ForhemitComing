@@ -272,7 +272,7 @@ export default function Introduction() {
                   </span>
                 </button>
 
-                {/* Early Access */}
+                {/* Early Access - Hidden for now
                 <div className="early-access-wrapper">
                   {!showEmailInput ? (
                     <button className="intro-card" onClick={() => setShowEmailInput(true)}>
@@ -309,6 +309,7 @@ export default function Introduction() {
                     </div>
                   )}
                 </div>
+                */}
 
                 {/* Join Our Movement */}
                 <Link href="/?join=true" className="intro-card">
