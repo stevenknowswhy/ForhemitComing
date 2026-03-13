@@ -35,16 +35,29 @@
 }
 
 /* Form Styles */
-.opt-in-form {
+.opt-in-form,
+.opt-out-form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group label {
@@ -177,6 +190,27 @@
   cursor: not-allowed;
 }
 
+/* SMS Disclosure */
+.sms-disclosure {
+  background: rgba(255, 107, 0, 0.08);
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0.5rem 0;
+}
+
+.sms-disclosure p {
+  font-size: 0.85rem;
+  color: #c0a080;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.sms-disclosure a {
+  color: #FF6B00;
+  text-decoration: underline;
+}
+
 /* Disclaimer */
 .opt-in-disclaimer {
   margin-top: 1.5rem;
@@ -201,10 +235,19 @@
   background: rgba(255, 255, 255, 0.02);
 }
 
-.opt-out-card p {
+.opt-out-card > p {
   color: #a0a0a0;
   margin-bottom: 1.5rem;
   line-height: 1.6;
+}
+
+.opt-out-label {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #888888;
+  margin-bottom: 0.75rem;
 }
 
 .opt-out-btn {
@@ -219,12 +262,62 @@
   letter-spacing: 0.1em;
   cursor: pointer;
   transition: all 0.3s ease;
+  width: 100%;
 }
 
-.opt-out-btn:hover {
+.opt-out-btn:hover:not(:disabled) {
   border-color: #ef4444;
   color: #ef4444;
   background: rgba(239, 68, 68, 0.05);
+}
+
+.opt-out-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Opt-Out Help Section */
+.opt-out-help {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.opt-out-help h4 {
+  font-family: 'Cinzel', serif;
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.opt-out-help ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.opt-out-help li {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.opt-out-help li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #FF6B00;
+}
+
+.opt-out-help p {
+  font-size: 0.85rem;
+  color: #666666;
+  font-style: italic;
 }
 
 /* Rights Section */
@@ -276,6 +369,14 @@
 
 .rights-contact a:hover {
   text-decoration: underline;
+}
+
+/* Responsive adjustments for phone links */
+@media (max-width: 768px) {
+  .opt-in-card,
+  .opt-out-card {
+    padding: 1.5rem;
+  }
 }
 
 /* Responsive */
