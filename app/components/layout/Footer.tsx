@@ -4,11 +4,37 @@ import Link from "next/link";
 
 interface FooterProps {
   onLegalClick?: () => void;
+  onSitemapClick?: () => void;
   variant?: "sticky" | "static";
 }
 
-export function Footer({ onLegalClick, variant = "sticky" }: FooterProps) {
+export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
+
+  const linkStyle = {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: "0.65rem",
+    fontWeight: 400,
+    letterSpacing: "0.1em",
+    textTransform: "uppercase",
+    color: "var(--muted-text)",
+    background: "none",
+    border: "none",
+    cursor: "pointer",
+    padding: 0,
+    transition: "all 0.3s ease",
+    position: "relative" as const,
+    whiteSpace: "nowrap" as const,
+  };
+
+  const dotStyle = {
+    width: "4px",
+    height: "4px",
+    borderRadius: "50%",
+    background: "var(--muted-text)",
+    opacity: 0.6,
+    flexShrink: 0,
+  };
 
   return (
     <footer className={`footer footer-${variant}`}>
@@ -28,56 +54,34 @@ export function Footer({ onLegalClick, variant = "sticky" }: FooterProps) {
         }}
       >
         <span>&copy; {currentYear} Forhemit Capital</span>
-        <span
-          style={{
-            width: "4px",
-            height: "4px",
-            borderRadius: "50%",
-            background: "var(--muted-text)",
-            opacity: 0.6,
-            flexShrink: 0,
-          }}
-        />
+        <span style={dotStyle} />
         <span style={{ whiteSpace: "nowrap" }}>All Rights Reserved</span>
-        <span
-          style={{
-            width: "4px",
-            height: "4px",
-            borderRadius: "50%",
-            background: "var(--muted-text)",
-            opacity: 0.6,
-            flexShrink: 0,
-          }}
-        />
+        
+        {onSitemapClick && (
+          <>
+            <span style={dotStyle} />
+            <button
+              className="footer-link"
+              style={linkStyle}
+              onClick={onSitemapClick}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = "var(--light-text)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = "var(--muted-text)";
+              }}
+            >
+              Sitemap
+            </button>
+          </>
+        )}
+        
         {onLegalClick && (
           <>
-            <span
-              style={{
-                width: "4px",
-                height: "4px",
-                borderRadius: "50%",
-                background: "var(--muted-text)",
-                opacity: 0.6,
-                flexShrink: 0,
-              }}
-            />
+            <span style={dotStyle} />
             <button
-              className="footer-legal-btn"
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: "0.65rem",
-                fontWeight: 400,
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-                color: "var(--muted-text)",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-                transition: "all 0.3s ease",
-                position: "relative",
-                whiteSpace: "nowrap",
-              }}
+              className="footer-link"
+              style={linkStyle}
               onClick={onLegalClick}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = "var(--light-text)";
@@ -90,29 +94,14 @@ export function Footer({ onLegalClick, variant = "sticky" }: FooterProps) {
             </button>
           </>
         )}
-        <span
-          style={{
-            width: "4px",
-            height: "4px",
-            borderRadius: "50%",
-            background: "var(--muted-text)",
-            opacity: 0.6,
-            flexShrink: 0,
-          }}
-        />
+        
+        <span style={dotStyle} />
         <Link
           href="/admin"
           className="footer-link"
           style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: "0.65rem",
-            fontWeight: 400,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            color: "var(--muted-text)",
+            ...linkStyle,
             textDecoration: "none",
-            transition: "all 0.3s ease",
-            whiteSpace: "nowrap",
           }}
         >
           Admin

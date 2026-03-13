@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
 import { Navigation } from "../components/layout/Navigation";
 import { LegalModal } from "../components/modals/LegalModal";
+import { SitemapModal } from "../components/modals/SitemapModal";
 import "./brokers.css";
 
 // Types
@@ -479,6 +480,7 @@ function SignatureAnimation() {
 
 export default function BrokersPage() {
   const [showLegalModal, setShowLegalModal] = useState(false);
+  const [showSitemapModal, setShowSitemapModal] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -827,12 +829,14 @@ export default function BrokersPage() {
         </section>
       </main>
 
-      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} />
+      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} onSitemapClick={() => setShowSitemapModal(true)} />
 
       <LegalModal
         isOpen={showLegalModal}
         onClose={() => setShowLegalModal(false)}
       />
+
+      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

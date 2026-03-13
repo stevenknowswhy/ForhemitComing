@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
 import { LegalModal } from "../components/modals/LegalModal";
+import { SitemapModal } from "../components/modals/SitemapModal";
 import "./lenders.css";
 
 // FAQ Accordion Component
@@ -43,6 +44,7 @@ function FAQItem({ question, answer, isOpen, onClick }: {
 export default function LendersPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [showLegalModal, setShowLegalModal] = useState(false);
+  const [showSitemapModal, setShowSitemapModal] = useState(false);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -413,12 +415,14 @@ export default function LendersPage() {
         </section>
       </main>
 
-      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} />
+      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} onSitemapClick={() => setShowSitemapModal(true)} />
 
       <LegalModal
         isOpen={showLegalModal}
         onClose={() => setShowLegalModal(false)}
       />
+
+      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

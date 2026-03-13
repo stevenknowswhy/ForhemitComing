@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
 import { LegalModal } from "./components/modals/LegalModal";
+import { SitemapModal } from "./components/modals/SitemapModal";
 import { ApplicationModal } from "./components/forms/application/ApplicationModal";
 import { Footer } from "./components/layout/Footer";
 import "./styles/home-page.css";
@@ -16,6 +17,7 @@ function HomeContent() {
   const [showApplicationModal, setShowApplicationModal] = useState(joinParam === "true");
   const [showEmailInput, setShowEmailInput] = useState(earlyParam === "true");
   const [showLegalModal, setShowLegalModal] = useState(false);
+  const [showSitemapModal, setShowSitemapModal] = useState(false);
 
   useEffect(() => {
     setShowApplicationModal(joinParam === "true");
@@ -43,11 +45,20 @@ function HomeContent() {
         </div>
       </main>
 
-      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} />
+      <Footer 
+        variant="static" 
+        onLegalClick={() => setShowLegalModal(true)} 
+        onSitemapClick={() => setShowSitemapModal(true)}
+      />
 
       <LegalModal
         isOpen={showLegalModal}
         onClose={() => setShowLegalModal(false)}
+      />
+
+      <SitemapModal
+        isOpen={showSitemapModal}
+        onClose={() => setShowSitemapModal(false)}
       />
 
       <ApplicationModal 

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Footer } from "../components/layout/Footer";
 import { LegalModal } from "../components/modals/LegalModal";
+import { SitemapModal } from "../components/modals/SitemapModal";
 import "./legal-practices.css";
 
 // Animated counter hook
@@ -159,6 +160,7 @@ function FAQItem({ question, answer, isOpen, onClick, index }: {
 export default function LegalPractices() {
   const [openFAQ, setOpenFAQ] = useState<number | null>(0);
   const [showLegalModal, setShowLegalModal] = useState(false);
+  const [showSitemapModal, setShowSitemapModal] = useState(false);
   const statsRef = useRef<HTMLDivElement>(null);
   const [statsVisible, setStatsVisible] = useState(false);
   
@@ -920,12 +922,14 @@ export default function LegalPractices() {
         </section>
       </main>
 
-      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} />
+      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} onSitemapClick={() => setShowSitemapModal(true)} />
 
       <LegalModal
         isOpen={showLegalModal}
         onClose={() => setShowLegalModal(false)}
       />
+
+      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }
