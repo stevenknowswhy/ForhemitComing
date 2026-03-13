@@ -26,6 +26,8 @@ const TOTAL_STEPS = 6; // Lane selection + 5 questions
 
 type ResultTab = "summary" | "diagnostic" | "scorecard";
 
+const RESULT_TABS: ResultTab[] = ["summary", "diagnostic", "scorecard"];
+
 export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAuditModalProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [lane, setLane] = useState<Lane>(null);
@@ -186,6 +188,13 @@ Diagnostic: ${diagnostic}`,
 
   const handleScheduleCall = () => {
     window.location.href = "/introduction";
+  };
+
+  const handleResultContinue = () => {
+    const currentIndex = RESULT_TABS.indexOf(activeResultTab);
+    if (currentIndex < RESULT_TABS.length - 1) {
+      setActiveResultTab(RESULT_TABS[currentIndex + 1]);
+    }
   };
 
   const results = calculateResults();
@@ -483,10 +492,6 @@ Diagnostic: ${diagnostic}`,
                               Your infrastructure score of <strong>{results.score}/100</strong> indicates 
                               <strong> {results.statusLabel}</strong>.
                             </p>
-                            <button className="build-cta" onClick={handleScheduleCall}>
-                              {results.ctaText}
-                              <span>20-minute infrastructure assessment to begin construction</span>
-                            </button>
                           </div>
                         </div>
                       )}
@@ -531,6 +536,33 @@ Diagnostic: ${diagnostic}`,
                             </div>
                           </div>
                         </div>
+                      )}
+                    </div>
+
+                    {/* Results Navigation */}
+                    <div className="results-navigation">
+                      {activeResultTab === "scorecard" ? (
+                        <button
+                          type="button"
+                          className="audit-nav-btn audit-nav-submit"
+                          onClick={handleScheduleCall}
+                        >
+                          Start the Retrofit Process
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="audit-nav-btn audit-nav-next"
+                          onClick={handleResultContinue}
+                        >
+                          Continue
+                          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                          </svg>
+                        </button>
                       )}
                     </div>
                   </>
