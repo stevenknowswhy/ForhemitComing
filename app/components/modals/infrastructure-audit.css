@@ -473,11 +473,108 @@
   }
 }
 
-.results-header {
-  text-align: center;
-  padding-bottom: 1.5rem;
+/* Compact Results Header */
+.results-header-compact {
+  padding-bottom: 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.results-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.results-score-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.results-score-row .signal-meter {
+  gap: 0.5rem;
+}
+
+.results-score-row .signal-bar {
+  width: 24px;
+  height: 14px;
+}
+
+/* Results Tabs */
+.results-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.result-tab {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a0a0a0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.result-tab:hover {
+  color: #ffffff;
+}
+
+.result-tab.active {
+  color: #FF6B00;
+  border-bottom-color: #FF6B00;
+}
+
+/* Tab Content */
+.results-tab-content {
+  min-height: 200px;
+}
+
+.tab-panel {
+  animation: panelFadeIn 0.3s ease;
+}
+
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.summary-panel {
+  text-align: center;
+}
+
+.summary-intro {
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-size: 0.95rem;
+  color: #d0d0d0;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.summary-intro strong {
+  color: #ffffff;
+}
+
+.summary-cta .build-cta {
+  margin-bottom: 0;
 }
 
 .lane-badge {
@@ -527,10 +624,9 @@
 
 .score-display {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
-  font-size: 4rem;
+  font-size: 3.5rem;
   font-weight: 300;
   line-height: 1;
-  margin-bottom: 0.5rem;
 }
 
 .score-display.optimal {

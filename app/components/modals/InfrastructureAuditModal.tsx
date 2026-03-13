@@ -24,6 +24,8 @@ interface Answers {
 
 const TOTAL_STEPS = 6; // Lane selection + 5 questions
 
+type ResultTab = "summary" | "diagnostic" | "scorecard";
+
 export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAuditModalProps) {
   const [currentStep, setCurrentStep] = useState(0);
   const [lane, setLane] = useState<Lane>(null);
@@ -35,6 +37,7 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
     q5: null,
   });
   const [showResults, setShowResults] = useState(false);
+  const [activeResultTab, setActiveResultTab] = useState<ResultTab>("summary");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toasts, removeToast, success, error: showError } = useToast();
 
@@ -177,6 +180,7 @@ Diagnostic: ${diagnostic}`,
     setLane(null);
     setAnswers({ q1: null, q2: null, q3: null, q4: null, q5: null });
     setShowResults(false);
+    setActiveResultTab("summary");
     onClose();
   };
 
@@ -420,67 +424,114 @@ Diagnostic: ${diagnostic}`,
               <div className="audit-results">
                 {results && (
                   <>
-                    <div className="results-header">
-                      <div className="lane-badge">
-                        {lane === "resilience" && "Lane 1: Resilience"}
-                        {lane === "stewardship" && "Lane 2: Stewardship"}
-                        {lane === "competitive" && "Lane 3: Competitive"}
+                    {/* Results Header - Always Visible */}
+                    <div className="results-header-compact">
+                      <div className="results-top-row">
+                        <div className="lane-badge">
+                          {lane === "resilience" && "Lane 1: Resilience"}
+                          {lane === "stewardship" && "Lane 2: Stewardship"}
+                          {lane === "competitive" && "Lane 3: Competitive"}
+                        </div>
+                        <div className={`status-badge ${results.status}`}>{results.statusLabel}</div>
                       </div>
-                      <div className={`status-badge ${results.status}`}>{results.statusLabel}</div>
-                      <div className={`score-display ${results.status}`}>{results.score}</div>
-                      <div className="signal-meter">
-                        <span>Infrastructure Signal:</span>
-                        <div className="signal-bars">
-                          {[1, 2, 3, 4, 5].map((bar) => (
-                            <div
-                              key={bar}
-                              className={`signal-bar ${bar <= Math.ceil(results.score / 20) ? "active" : ""} ${
-                                results.score < 40 ? "critical" : results.score < 60 ? "warning" : ""
-                              }`}
-                            />
-                          ))}
+                      <div className="results-score-row">
+                        <div className={`score-display ${results.status}`}>{results.score}</div>
+                        <div className="signal-meter">
+                          <span>Signal:</span>
+                          <div className="signal-bars">
+                            {[1, 2, 3, 4, 5].map((bar) => (
+                              <div
+                                key={bar}
+                                className={`signal-bar ${bar <= Math.ceil(results.score / 20) ? "active" : ""} ${
+                                  results.score < 40 ? "critical" : results.score < 60 ? "warning" : ""
+                                }`}
+                              />
+                            ))}
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div
-                      className="diagnostic-text"
-                      dangerouslySetInnerHTML={{
-                        __html: getDiagnosticText(lane, results.status),
-                      }}
-                    />
+                    {/* Results Tabs */}
+                    <div className="results-tabs">
+                      <button
+                        className={`result-tab ${activeResultTab === "summary" ? "active" : ""}`}
+                        onClick={() => setActiveResultTab("summary")}
+                      >
+                        Summary
+                      </button>
+                      <button
+                        className={`result-tab ${activeResultTab === "diagnostic" ? "active" : ""}`}
+                        onClick={() => setActiveResultTab("diagnostic")}
+                      >
+                        Diagnostic
+                      </button>
+                      <button
+                        className={`result-tab ${activeResultTab === "scorecard" ? "active" : ""}`}
+                        onClick={() => setActiveResultTab("scorecard")}
+                      >
+                        Scorecard
+                      </button>
+                    </div>
 
-                    <button className="build-cta" onClick={handleScheduleCall}>
-                      {results.ctaText}
-                      <span>20-minute infrastructure assessment to begin construction</span>
-                    </button>
+                    {/* Tab Content */}
+                    <div className="results-tab-content">
+                      {activeResultTab === "summary" && (
+                        <div className="tab-panel summary-panel">
+                          <div className="summary-cta">
+                            <p className="summary-intro">
+                              Your infrastructure score of <strong>{results.score}/100</strong> indicates 
+                              <strong> {results.statusLabel}</strong>.
+                            </p>
+                            <button className="build-cta" onClick={handleScheduleCall}>
+                              {results.ctaText}
+                              <span>20-minute infrastructure assessment to begin construction</span>
+                            </button>
+                          </div>
+                        </div>
+                      )}
 
-                    <div className="technical-breakdown">
-                      <div className="breakdown-title">Technical Scorecard:</div>
-                      <div className="breakdown-row">
-                        <span>Q1: Cash Flow Integrity:</span>
-                        <span>{answers.q1}/20</span>
-                      </div>
-                      <div className="breakdown-row">
-                        <span>Q2: Personnel Grid:</span>
-                        <span>{answers.q2}/20</span>
-                      </div>
-                      <div className="breakdown-row">
-                        <span>Q3: Operational Autonomy:</span>
-                        <span>{answers.q3}/20</span>
-                      </div>
-                      <div className="breakdown-row">
-                        <span>Q4: Institutional Memory:</span>
-                        <span>{answers.q4}/20</span>
-                      </div>
-                      <div className="breakdown-row">
-                        <span>Q5: Documentation Status:</span>
-                        <span>{answers.q5}/20</span>
-                      </div>
-                      <div className="breakdown-row total">
-                        <span>Total Infrastructure Score:</span>
-                        <span>{results.score}/100</span>
-                      </div>
+                      {activeResultTab === "diagnostic" && (
+                        <div className="tab-panel diagnostic-panel">
+                          <div
+                            className="diagnostic-text"
+                            dangerouslySetInnerHTML={{
+                              __html: getDiagnosticText(lane, results.status),
+                            }}
+                          />
+                        </div>
+                      )}
+
+                      {activeResultTab === "scorecard" && (
+                        <div className="tab-panel scorecard-panel">
+                          <div className="technical-breakdown">
+                            <div className="breakdown-row">
+                              <span>Q1: Cash Flow Integrity:</span>
+                              <span>{answers.q1}/20</span>
+                            </div>
+                            <div className="breakdown-row">
+                              <span>Q2: Personnel Grid:</span>
+                              <span>{answers.q2}/20</span>
+                            </div>
+                            <div className="breakdown-row">
+                              <span>Q3: Operational Autonomy:</span>
+                              <span>{answers.q3}/20</span>
+                            </div>
+                            <div className="breakdown-row">
+                              <span>Q4: Institutional Memory:</span>
+                              <span>{answers.q4}/20</span>
+                            </div>
+                            <div className="breakdown-row">
+                              <span>Q5: Documentation Status:</span>
+                              <span>{answers.q5}/20</span>
+                            </div>
+                            <div className="breakdown-row total">
+                              <span>Total Infrastructure Score:</span>
+                              <span>{results.score}/100</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </>
                 )}
