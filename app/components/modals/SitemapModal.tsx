@@ -19,6 +19,7 @@ const sitemapSections: SitemapSection[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Beyond the Balance Sheet", href: "/beyond-the-balance-sheet" },
       { label: "Contact / Introduction", href: "/introduction" },
     ],
   },
