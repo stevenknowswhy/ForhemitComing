@@ -1,6 +1,7 @@
 /* ── GLOBAL STYLES ── */
 
 /* CSS Imports must come first */
+@import "./styles/variables.css";
 @import "./components/layout/navigation.css";
 @import "./components/layout/footer.css";
 
