@@ -3,32 +3,18 @@
 import { ConvexProvider, ConvexReactClient } from "convex/react";
 import { ReactNode, useMemo } from "react";
 
-// Global client instance to ensure singleton
-let convexClient: ConvexReactClient | null = null;
+// We need to provide a client even during build to prevent errors
+// This dummy client won't actually connect to anything
+const DUMMY_URL = "https://dummy.convex.cloud";
 
-function getConvexClient(): ConvexReactClient | null {
-  if (typeof window === "undefined") return null;
-  
-  if (!convexClient) {
-    const url = process.env.NEXT_PUBLIC_CONVEX_URL;
-    if (!url) {
-      console.error("[Convex] NEXT_PUBLIC_CONVEX_URL not set");
-      return null;
-    }
-    convexClient = new ConvexReactClient(url);
-  }
-  
-  return convexClient;
+function createClient(): ConvexReactClient {
+  const url = process.env.NEXT_PUBLIC_CONVEX_URL || DUMMY_URL;
+  return new ConvexReactClient(url);
 }
 
 export function ConvexClientProvider({ children }: { children: ReactNode }) {
-  const client = useMemo(() => getConvexClient(), []);
+  const client = useMemo(() => createClient(), []);
 
-  // During SSR/build, client will be null - just render children
-  // The components using Convex hooks need to handle this gracefully
-  if (!client) {
-    return <>{children}</>;
-  }
-
+  // Always provide the client - even a dummy one prevents hook errors
   return <ConvexProvider client={client}>{children}</ConvexProvider>;
 }
