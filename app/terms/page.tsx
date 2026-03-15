@@ -1,14 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "../privacy/privacy-page.css";
 
 export default function TermsPage() {
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
-
   return (
     <div className="legal-page-wrapper">
       {/* Logo Header */}
@@ -150,9 +145,6 @@ export default function TermsPage() {
         </section>
       </main>
 
-      <Footer variant="static" onSitemapClick={() => setShowSitemapModal(true)} />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

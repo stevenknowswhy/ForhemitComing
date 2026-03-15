@@ -4,9 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
-import { Footer } from "../components/layout/Footer";
 import { ContactModal } from "../components/modals/ContactModal";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "./page.css";
 
 // Sub-options for Business Introductions
@@ -127,7 +125,6 @@ export default function Introduction() {
   const [showOtherServices, setShowOtherServices] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -460,15 +457,11 @@ export default function Introduction() {
         </div>
       </div>
       
-      <Footer variant="static" onSitemapClick={() => setShowSitemapModal(true)} />
-      
       {/* Contact Modal */}
       <ContactModal 
         isOpen={showContactModal} 
         onClose={() => setShowContactModal(false)} 
       />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

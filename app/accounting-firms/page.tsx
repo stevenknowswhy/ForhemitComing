@@ -2,8 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "./accounting-firms.css";
 
 // Scroll reveal hook
@@ -29,7 +27,6 @@ function useScrollReveal(threshold = 0.1) {
 }
 
 export default function AccountingFirms() {
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
   const { ref: realityRef, isVisible: realityVisible } = useScrollReveal(0.2);
 
   // Global scroll reveal
@@ -460,10 +457,6 @@ export default function AccountingFirms() {
           </div>
         </section>
       </main>
-
-      <Footer variant="static" onSitemapClick={() => setShowSitemapModal(true)} />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

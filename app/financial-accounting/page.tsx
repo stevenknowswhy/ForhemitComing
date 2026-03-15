@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
 import "./financial-accounting.css";
 
 type TabId = "wealth-managers" | "cpas";
@@ -314,7 +313,6 @@ export default function FinancialAccounting() {
         </section>
       </main>
 
-      <Footer />
     </div>
   );
 }

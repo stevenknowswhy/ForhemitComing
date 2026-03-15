@@ -2,15 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
 import { InfrastructureAuditModal } from "../components/modals/InfrastructureAuditModal";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
   const [openFaq, setOpenFaq] = useState<string | null>(null);
   const [isAuditOpen, setIsAuditOpen] = useState(false);
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
 
   const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id);
@@ -428,15 +425,12 @@ export default function BusinessOwnersPage() {
         </section>
       </main>
 
-      <Footer variant="static" onSitemapClick={() => setShowSitemapModal(true)} />
     </div>
 
     <InfrastructureAuditModal 
       isOpen={isAuditOpen} 
       onClose={() => setIsAuditOpen(false)} 
     />
-
-    <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </>
   );
 }

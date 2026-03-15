@@ -2,13 +2,10 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import { ContactModal } from "../components/modals/ContactModal";
 import "./beyond-balance-sheet.css";
 
 export default function BeyondBalanceSheetPage() {
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
 
@@ -370,12 +367,6 @@ export default function BeyondBalanceSheetPage() {
         </section>
       </main>
 
-      <Footer 
-        variant="static" 
-        onSitemapClick={() => setShowSitemapModal(true)} 
-      />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
       <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
     </div>
   );

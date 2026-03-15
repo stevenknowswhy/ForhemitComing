@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "./about-page.css";
 
 export default function AboutPage() {
   const [openFaq, setOpenFaq] = useState<string | null>(null);
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
 
   const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id);
@@ -914,9 +911,6 @@ export default function AboutPage() {
         </section>
       </main>
       
-      <Footer variant="static" onSitemapClick={() => setShowSitemapModal(true)} />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

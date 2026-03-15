@@ -2,9 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Footer } from "../components/layout/Footer";
-import { LegalModal } from "../components/modals/LegalModal";
-import { SitemapModal } from "../components/modals/SitemapModal";
 import "./wealth-managers.css";
 
 // Animated counter hook
@@ -223,8 +220,6 @@ function PartnershipStep({ step, title, description, side }: {
 
 export default function WealthManagersPage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [showLegalModal, setShowLegalModal] = useState(false);
-  const [showSitemapModal, setShowSitemapModal] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   const toggleFaq = (index: number) => {
@@ -672,14 +667,6 @@ export default function WealthManagersPage() {
         </section>
       </main>
 
-      <Footer variant="static" onLegalClick={() => setShowLegalModal(true)} onSitemapClick={() => setShowSitemapModal(true)} />
-
-      <LegalModal
-        isOpen={showLegalModal}
-        onClose={() => setShowLegalModal(false)}
-      />
-
-      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </div>
   );
 }

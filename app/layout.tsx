@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from './components/layout/Navigation'
+import { GlobalFooter } from './components/layout/GlobalFooter'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
 
 const cormorant = Cormorant_Garamond({
@@ -53,6 +54,7 @@ export default function RootLayout({
         <ConvexClientProvider>
           <Navigation />
           {children}
+          <GlobalFooter />
         </ConvexClientProvider>
       </body>
     </html>
