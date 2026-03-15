@@ -7,12 +7,15 @@
   padding: 1rem 2rem;
   text-align: right;
   z-index: 10;
+  background: rgba(14, 14, 12, 0.95);
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
 }
 
 /* Static variant - positioned at bottom of content */
 .footer-static {
   position: relative;
-  padding-bottom: 0;
+  padding-bottom: 1rem;
+  margin-top: auto;
 }
 
 /* Adjust z-index for static variant */
