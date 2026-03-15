@@ -201,11 +201,14 @@ export default function LendersPage() {
               <div className="bottom-line-content">
                 <span className="bottom-line-label">The Bottom Line: The Cure</span>
                 <p>
-                  It is a universal rule of both medicine and disaster response: <strong>the earlier you diagnose 
-                  the failure, the exponentially better the outcome.</strong> Traditional lending models wait for 
-                  the financial symptoms to show up months later. Forhemit acts as your early diagnostic system. 
-                  We catch the operational vulnerability the moment it happens, and we ensure the cure is applied 
-                  before your capital is ever put at risk.
+                  A fundamental principle holds true across business, medicine, and life: <strong>early engagement 
+                  with a problem preserves the greatest number of solutions.</strong> Most lending models are reactive, 
+                  triggered only when the event has impacted the balance sheet — this is frequently months after the cause.
+                </p>
+                <p style={{ marginTop: '1rem' }}>
+                  Forhemit engages at the operational level; we provide that critical advantage of an early warning system. 
+                  We help you handle the situation at Stage One with easy to manage adjustments, rather than being forced 
+                  to consider limited, high-stakes options at Stage Four.
                 </p>
               </div>
             </div>
