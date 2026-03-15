@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ContactModal } from "../components/modals/ContactModal";
+import { ClientOnly } from "@/components/ClientOnly";
 import "./beyond-balance-sheet.css";
 
 export default function BeyondBalanceSheetPage() {
@@ -367,7 +368,9 @@ export default function BeyondBalanceSheetPage() {
         </section>
       </main>
 
-      <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+      <ClientOnly>
+        <ContactModal isOpen={showContactModal} onClose={() => setShowContactModal(false)} />
+      </ClientOnly>
     </div>
   );
 }

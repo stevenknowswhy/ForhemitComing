@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
 import { ContactModal } from "../components/modals/ContactModal";
+import { ClientOnly } from "@/components/ClientOnly";
 import "./page.css";
 
 // Sub-options for Business Introductions
@@ -304,7 +305,9 @@ export default function Introduction() {
                       </div>
                       <div className="card-text">
                         <h2 className="card-title">Get Early Access</h2>
-                        <EarlyAccessForm variant="card" onClose={handleCloseEmail} />
+                        <ClientOnly>
+                          <EarlyAccessForm variant="card" onClose={handleCloseEmail} />
+                        </ClientOnly>
                       </div>
                     </div>
                   )}
@@ -458,10 +461,12 @@ export default function Introduction() {
       </div>
       
       {/* Contact Modal */}
-      <ContactModal 
-        isOpen={showContactModal} 
-        onClose={() => setShowContactModal(false)} 
-      />
+      <ClientOnly>
+        <ContactModal 
+          isOpen={showContactModal} 
+          onClose={() => setShowContactModal(false)} 
+        />
+      </ClientOnly>
     </div>
   );
 }

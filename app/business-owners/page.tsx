@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { InfrastructureAuditModal } from "../components/modals/InfrastructureAuditModal";
+import { ClientOnly } from "@/components/ClientOnly";
 import "./business-owners.css";
 
 export default function BusinessOwnersPage() {
@@ -427,10 +428,12 @@ export default function BusinessOwnersPage() {
 
     </div>
 
-    <InfrastructureAuditModal 
-      isOpen={isAuditOpen} 
-      onClose={() => setIsAuditOpen(false)} 
-    />
+    <ClientOnly>
+      <InfrastructureAuditModal 
+        isOpen={isAuditOpen} 
+        onClose={() => setIsAuditOpen(false)} 
+      />
+    </ClientOnly>
     </>
   );
 }

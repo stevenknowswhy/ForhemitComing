@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
 import { ApplicationModal } from "./components/forms/application/ApplicationModal";
+import { ClientOnly } from "@/components/ClientOnly";
 import "./styles/home-page.css";
 
 function HomeContent() {
@@ -30,20 +31,22 @@ function HomeContent() {
           <p className="brand-subtitle">STEWARDSHIP MANAGEMENT</p>
 
           {showEmailInput && (
-            <EarlyAccessForm
-              variant="inline"
-              onClose={() => {
-                setShowEmailInput(false);
-              }}
-            />
+            <ClientOnly fallback={<div style={{ height: "48px" }} />}>
+              <EarlyAccessForm
+                variant="inline"
+                onClose={() => setShowEmailInput(false)}
+              />
+            </ClientOnly>
           )}
         </div>
       </main>
 
-      <ApplicationModal 
-        isOpen={showApplicationModal} 
-        onClose={() => setShowApplicationModal(false)} 
-      />
+      <ClientOnly>
+        <ApplicationModal 
+          isOpen={showApplicationModal} 
+          onClose={() => setShowApplicationModal(false)} 
+        />
+      </ClientOnly>
     </div>
   );
 }
