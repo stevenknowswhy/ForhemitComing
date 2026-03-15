@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -20,12 +20,22 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
 
   const submitEarlyAccess = useMutation(api.earlyAccessSignups.submit);
 
-  const handleClose = () => {
+  const handleClose = React.useCallback(() => {
     setEmail("");
     setStatus("idle");
     setMessage("");
     onClose?.();
-  };
+  }, [onClose]);
+
+  // Auto-close modal after successful submission
+  useEffect(() => {
+    if (status === "success") {
+      const timer = setTimeout(() => {
+        handleClose();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [status, handleClose]);
 
   const handleSubmit = async () => {
     if (!email.trim()) {
@@ -66,9 +76,7 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
       setEmail("");
 
       // Auto-close after 2 seconds on success
-      setTimeout(() => {
-        handleClose();
-      }, 2000);
+      // Auto-close timer moved to useEffect
     } catch (err) {
       setIsSubmitting(false);
       setStatus("error");

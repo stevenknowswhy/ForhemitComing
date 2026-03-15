@@ -12,11 +12,13 @@
     "@uploadthing/react": "^7.3.3",
     "convex": "^1.33.0",
     "framer-motion": "^12.35.1",
+    "isomorphic-dompurify": "^3.3.0",
     "lucide-react": "^0.577.0",
     "next": "^16.1.6",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "uploadthing": "^7.7.4"
+    "uploadthing": "^7.7.4",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/node": "^20",
