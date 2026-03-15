@@ -47,8 +47,10 @@ export default function LendersPage() {
   };
 
   // Scroll reveal animation
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
   useEffect(() => {
-    const observer = new IntersectionObserver(
+    observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -60,10 +62,10 @@ export default function LendersPage() {
     );
 
     document.querySelectorAll('[data-animate]').forEach((el) => {
-      observer.observe(el);
+      observerRef.current?.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => observerRef.current?.disconnect();
   }, []);
 
   const faqs = [
