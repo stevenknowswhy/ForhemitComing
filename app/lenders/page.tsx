@@ -112,7 +112,7 @@ export default function LendersPage() {
             <div className="lenders-hero-content">
               <span className="lenders-eyebrow" data-animate="fade-up">For Lending Institutions</span>
               <h1 className="lenders-title" data-animate="fade-up" data-delay="100">
-                Securing the Transition
+                Earning Lenders Confidence
               </h1>
               <p className="lenders-lead" data-animate="fade-up" data-delay="200">
                 Protect your collateral with lender-compliant transition structures designed for operational continuity from day one.
