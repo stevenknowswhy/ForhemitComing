@@ -115,7 +115,7 @@ export default function LendersPage() {
                 Earning Lenders Confidence
               </h1>
               <p className="lenders-lead" data-animate="fade-up" data-delay="200">
-                Protect your collateral with lender-compliant transition structures designed for operational continuity from day one.
+                Secure your collateral with operational-level early warning systems that stop risk before it impacts your financials.
               </p>
               <div className="lenders-hero-cta" data-animate="fade-up" data-delay="300">
                 <a href="#contact" className="cta-button magnetic">
