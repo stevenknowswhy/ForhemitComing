@@ -9,6 +9,11 @@ const nextConfig = {
         hostname: 'images.unsplash.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: '618ukecvpc.ufs.sh',
+        pathname: '/**',
+      },
     ],
   },
   // Trigger redeploy: v1
