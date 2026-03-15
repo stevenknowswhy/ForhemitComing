@@ -115,8 +115,7 @@ export default function LendersPage() {
                 Securing the Transition
               </h1>
               <p className="lenders-lead" data-animate="fade-up" data-delay="200">
-                We structure resilient, fully SBA-compliant transitions that protect your collateral, 
-                empower successor management, and ensure operational continuity from day one.
+                Protect your collateral with lender-compliant transition structures designed for operational continuity from day one.
               </p>
               <div className="lenders-hero-cta" data-animate="fade-up" data-delay="300">
                 <a href="#contact" className="cta-button magnetic">
