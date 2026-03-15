@@ -134,6 +134,84 @@ export default function LendersPage() {
           </div>
         </section>
 
+        {/* The Friday 3 PM vs Tuesday Morning Pitch */}
+        <section className="lenders-section pitch-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>The &quot;Friday at 3 PM vs. Tuesday Morning&quot; Scenario</h2>
+            </div>
+            
+            <div className="pitch-grid">
+              {/* Status Quo - Friday 3 PM Crisis */}
+              <div className="pitch-card crisis" data-animate="slide-left">
+                <div className="pitch-visual">
+                  <div className="crisis-image">
+                    <div className="phone-icon">📞</div>
+                    <div className="crisis-overlay">
+                      <span className="time-badge">Fri 3:00 PM</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pitch-content">
+                  <span className="pitch-label crisis-label">The Status Quo</span>
+                  <h3>The Disease: Stage 4</h3>
+                  <p className="pitch-quote">
+                    &quot;Right now, in a traditional ESOP transition, how do you find out that a company is in trouble? 
+                    You get a phone call on a Friday at 3:00 PM. The CEO tells you they are going to miss Monday&apos;s 
+                    debt service payment.&quot;
+                  </p>
+                  <p className="pitch-detail">
+                    Why? Because you find out their CFO left 90 days ago, the accounting department has been 
+                    flying blind, and cash flow has seized up. By the time you get that phone call, the damage 
+                    is catastrophic. You aren&apos;t managing a transition; you are managing a crisis, and the loan 
+                    is headed straight to the workout group.
+                  </p>
+                </div>
+              </div>
+
+              {/* Forhemit Reality - Tuesday Morning Control */}
+              <div className="pitch-card solution" data-animate="slide-right">
+                <div className="pitch-visual">
+                  <div className="solution-image">
+                    <div className="report-icon">📋</div>
+                    <div className="solution-overlay">
+                      <span className="time-badge solution-time">Tue 9:00 AM</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pitch-content">
+                  <span className="pitch-label solution-label">The Forhemit Reality</span>
+                  <h3>The Early Diagnosis</h3>
+                  <p className="pitch-quote">
+                    &quot;With Forhemit&apos;s 24-month stewardship, that Friday afternoon call never happens. 
+                    Instead, you get an update from us on a Tuesday morning, 48 hours after that CFO resigns.&quot;
+                  </p>
+                  <p className="pitch-detail">
+                    But it&apos;s not a panic call; it&apos;s a status report. We tell you: &quot;The CFO has departed. 
+                    Per the COOP playbook we built prior to closing, the cross-trained Controller has already 
+                    stepped in as interim CFO. The books are stable, a search firm was engaged yesterday, 
+                    and there is zero threat to your debt service.&quot;
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* The Bottom Line */}
+            <div className="bottom-line" data-animate="fade-up">
+              <div className="bottom-line-content">
+                <span className="bottom-line-label">The Bottom Line: The Cure</span>
+                <p>
+                  It is a universal rule of both medicine and disaster response: <strong>the earlier you diagnose 
+                  the failure, the exponentially better the outcome.</strong> Traditional lending models wait for 
+                  the financial symptoms to show up months later. Forhemit acts as your early diagnostic system. 
+                  We catch the operational vulnerability the moment it happens, and we ensure the cure is applied 
+                  before your capital is ever put at risk.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* The Lender's Challenge Section */}
         <section className="lenders-section threat-section">
           <div className="container">
