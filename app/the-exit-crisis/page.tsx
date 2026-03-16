@@ -8,6 +8,7 @@ import "../about/about-page.css";
 
 // Section components
 import {
+  HeroSection,
   ProblemSolutionSection,
   CrisesSection,
   SolutionsSection,
@@ -30,6 +31,7 @@ export default function TheExitCrisisPage() {
       </header>
 
       <main className="about-main">
+        <HeroSection />
         <ProblemSolutionSection />
         <CrisesSection />
         <SolutionsSection />
