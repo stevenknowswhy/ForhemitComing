@@ -26,6 +26,11 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
+  // Hide navigation on coming-soon page
+  if (pathname === "/coming-soon") {
+    return null;
+  }
+
   // Filter out current page from primary navigation
   const visibleNavItems = navItems.filter((item) => {
     // Exact match for home, startsWith for others
