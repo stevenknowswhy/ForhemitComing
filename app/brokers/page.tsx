@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
 import "./brokers.css";
 
@@ -34,13 +33,6 @@ export default function BrokersPage() {
         <div className="blueprint-grid" style={{ transform: `translateY(${scrollY * 0.05}px)` }} />
         <div className="gradient-overlay" />
       </div>
-
-      <header className="brokers-logo-header">
-        <Link href="/" className="brokers-logo-link">
-          <span className="brokers-logo-text">Forhemit</span>
-          <span className="brokers-logo-underline"></span>
-        </Link>
-      </header>
 
       <main className="brokers-main">
         <HeroSection />

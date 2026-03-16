@@ -1,22 +1,11 @@
 "use client";
 
-import { Navigation } from "@/app/components/layout/Navigation";
 import { DealRadar } from "@/components/visualizations/DealRadar";
 import { DataTicker } from "@/components/visualizations/DataTicker";
-import Link from "next/link";
 
 export function HeroSection() {
   return (
     <>
-      {/* Logo Header */}
-      <header className="brokers-header">
-        <Link href="/" className="brokers-logo">
-          <span className="logo-text">Forhemit</span>
-          <span className="logo-underline" />
-        </Link>
-        <Navigation variant="dark" />
-      </header>
-
       <section className="brokers-hero">
         <div className="hero-grid">
           <div className="hero-content" data-animate="fade-up">
