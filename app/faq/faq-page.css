@@ -81,6 +81,10 @@
   box-shadow: 0 4px 20px rgba(255, 107, 0, 0.1);
 }
 
+.faq-accordion-item.open .faq-accordion-question {
+  color: var(--color-brand);
+}
+
 .faq-accordion-question {
   width: 100%;
   display: flex;
