@@ -217,6 +217,63 @@
   text-align: center;
 }
 
+/* Solution-only layout (single column, centered) */
+.solution-only-grid {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.solution-only {
+  border-left: 3px solid var(--border-accent);
+  border-right: 3px solid var(--border-accent);
+}
+
+/* Problem points row (for standalone Coming Disaster section) */
+.about-section-dark .problem-points-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+}
+
+.about-section-dark .problem-point {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+  background: var(--color-brand-subtle);
+  border-top: 3px solid var(--about-accent);
+  border-radius: 0 0 8px 8px;
+  transition: all 0.3s ease;
+}
+
+.about-section-dark .problem-point:hover {
+  background: rgba(255, 107, 0, 0.15);
+  transform: translateY(-4px);
+}
+
+.about-section-dark .problem-point .point-number {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--about-accent);
+  letter-spacing: 0.15em;
+}
+
+.about-section-dark .problem-point p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin: 0;
+  color: var(--about-text-secondary);
+}
+
+.about-section-dark .problem-point p strong {
+  color: var(--about-text-primary);
+  font-weight: 500;
+}
+
 /* Problem cards in rows (horizontal layout) for combined section */
 .problem-solution-column .problem-points-row {
   display: flex;
@@ -622,6 +679,48 @@
 
   .pbc-closing p {
     font-size: 0.95rem;
+  }
+}
+
+/* ── The Coming Disaster Section ── */
+.coming-disaster-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.coming-disaster-header .about-eyebrow {
+  margin-bottom: 0.75rem;
+}
+
+.about-section-dark .problem-stat {
+  text-align: center;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.about-section-dark .problem-stat .stat-number {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  color: var(--about-accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.about-section-dark .problem-stat .stat-label {
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--about-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 900px) {
+  .about-section-dark .problem-points-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 

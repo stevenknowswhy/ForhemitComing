@@ -9,8 +9,9 @@ import "../about/about-page.css";
 // Section components
 import {
   HeroSection,
-  ProblemSolutionSection,
   CrisesSection,
+  TheComingDisasterSection,
+  ProblemSolutionSection,
   SolutionsSection,
 } from "./_components/sections";
 
@@ -33,6 +34,7 @@ export default function TheExitCrisisPage() {
       <main className="about-main">
         <HeroSection />
         <CrisesSection />
+        <TheComingDisasterSection />
         <ProblemSolutionSection />
         <SolutionsSection />
       </main>
