@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { ChevronDown, X } from "lucide-react";
 import "./sitemap-modal.css";
 
 interface SitemapModalProps {
@@ -8,9 +10,14 @@ interface SitemapModalProps {
   onClose: () => void;
 }
 
+interface SitemapLink {
+  label: string;
+  href: string;
+}
+
 interface SitemapSection {
   title: string;
-  links: { label: string; href: string }[];
+  links: SitemapLink[];
 }
 
 const sitemapSections: SitemapSection[] = [
@@ -53,14 +60,80 @@ const sitemapSections: SitemapSection[] = [
   },
 ];
 
+function SitemapAccordionSection({
+  section,
+  onLinkClick,
+}: {
+  section: SitemapSection;
+  onLinkClick: () => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <div className="sitemap-accordion-item">
+      <button
+        className={`sitemap-accordion-trigger ${isExpanded ? "expanded" : ""}`}
+        onClick={() => setIsExpanded(!isExpanded)}
+        aria-expanded={isExpanded}
+      >
+        <span>{section.title}</span>
+        <ChevronDown className="sitemap-accordion-icon" size={20} />
+      </button>
+      <div
+        className={`sitemap-accordion-content ${isExpanded ? "expanded" : ""}`}
+      >
+        <ul>
+          {section.links.map((link) => (
+            <li key={link.href}>
+              <Link href={link.href} onClick={onLinkClick}>
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function SitemapDesktopSection({
+  section,
+  onLinkClick,
+}: {
+  section: SitemapSection;
+  onLinkClick: () => void;
+}) {
+  return (
+    <div className="sitemap-section">
+      <h3>{section.title}</h3>
+      <ul>
+        {section.links.map((link) => (
+          <li key={link.href}>
+            <Link href={link.href} onClick={onLinkClick}>
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 export function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="sitemap-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
+    <div
+      className="sitemap-modal-overlay"
+      onClick={(e) => e.target === e.currentTarget && onClose()}
+    >
       <div className="sitemap-modal-content">
-        <button className="sitemap-modal-close" onClick={onClose} aria-label="Close sitemap">
-          &times;
+        <button
+          className="sitemap-modal-close"
+          onClick={onClose}
+          aria-label="Close sitemap"
+        >
+          <X size={20} />
         </button>
 
         <div className="sitemap-header">
@@ -68,25 +141,33 @@ export function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
           <p>Navigate to any page on our website</p>
         </div>
 
-        <div className="sitemap-grid">
+        {/* Desktop Layout - Multi-column Grid */}
+        <div className="sitemap-grid-desktop">
           {sitemapSections.map((section) => (
-            <div key={section.title} className="sitemap-section">
-              <h3>{section.title}</h3>
-              <ul>
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} onClick={onClose}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <SitemapDesktopSection
+              key={section.title}
+              section={section}
+              onLinkClick={onClose}
+            />
+          ))}
+        </div>
+
+        {/* Mobile Layout - Accordion */}
+        <div className="sitemap-accordion-mobile">
+          {sitemapSections.map((section) => (
+            <SitemapAccordionSection
+              key={section.title}
+              section={section}
+              onLinkClick={onClose}
+            />
           ))}
         </div>
 
         <div className="sitemap-footer">
-          <p>&copy; {new Date().getFullYear()} Forhemit Capital. All Rights Reserved.</p>
+          <p>
+            &copy; {new Date().getFullYear()} Forhemit Capital. All Rights
+            Reserved.
+          </p>
         </div>
       </div>
     </div>
