@@ -12,7 +12,7 @@
   --bo-text-secondary: var(--text-secondary);
   --bo-accent: var(--color-brand);
   --bo-accent-light: var(--color-brand-hover);
-  --bo-muted: var(--text-muted);
+  --bo-muted: var(--text-secondary);
   --bo-border: var(--border-accent);
   /* Theme-aware colors */
   --bo-overlay-light: var(--shadow-color);

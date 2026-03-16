@@ -370,7 +370,7 @@
 .faq-gallery-tab-subtitle {
   font-size: 0.75rem;
   font-weight: 400;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   transition: all 0.3s ease;
 }
 
@@ -618,7 +618,7 @@
 
 .category-advantage-closing {
   font-size: 0.95rem;
-  color: var(--text-muted) !important;
+  color: var(--text-secondary) !important;
   margin-bottom: 0 !important;
   margin-top: 1.5rem;
   padding-top: 1.5rem;

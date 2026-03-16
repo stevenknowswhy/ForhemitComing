@@ -282,7 +282,7 @@
 
 .form-input::placeholder,
 .form-textarea::placeholder {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .form-input:focus,

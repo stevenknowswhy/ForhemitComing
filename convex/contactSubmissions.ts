@@ -1,6 +1,14 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+
+function requireAdmin(authToken: string | undefined): void {
+  if (!authToken || authToken !== ADMIN_TOKEN) {
+    throw new Error("Unauthorized: Admin access required");
+  }
+}
+
 // Submit a contact form
 export const submit = mutation({
   args: {
@@ -49,6 +57,14 @@ export const submit = mutation({
       ...args,
       status: "new",
       createdAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "create",
+      entityType: "contactSubmission",
+      entityId: submissionId,
+      timestamp: Date.now(),
     });
 
     // Update daily stats
@@ -113,9 +129,139 @@ export const updateStatus = mutation({
       v.literal("responded"),
       v.literal("closed")
     ),
+    adminToken: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, { status: args.status });
+    requireAdmin(args.adminToken);
+    
+    const existing = await ctx.db.get(args.id);
+    if (!existing) {
+      throw new Error("Submission not found");
+    }
+
+    const oldStatus = existing.status || "new";
+    
+    await ctx.db.patch(args.id, { 
+      status: args.status,
+      updatedAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "update",
+      entityType: "contactSubmission",
+      entityId: args.id,
+      changes: [{ field: "status", oldValue: oldStatus, newValue: args.status }],
+      timestamp: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
+// Update full submission
+export const update = mutation({
+  args: {
+    id: v.id("contactSubmissions"),
+    contactType: v.optional(v.union(
+      v.literal("business-owner"),
+      v.literal("partner"),
+      v.literal("existing-business"),
+      v.literal("website-visitor"),
+      v.literal("marketing")
+    )),
+    firstName: v.optional(v.string()),
+    lastName: v.optional(v.string()),
+    email: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    company: v.optional(v.string()),
+    interest: v.optional(v.union(
+      v.literal("esop-transition"),
+      v.literal("accounting"),
+      v.literal("legal"),
+      v.literal("lending"),
+      v.literal("broker"),
+      v.literal("wealth"),
+      v.literal("career"),
+      v.literal("general")
+    )),
+    message: v.optional(v.string()),
+    status: v.optional(v.union(
+      v.literal("new"),
+      v.literal("in-progress"),
+      v.literal("responded"),
+      v.literal("closed")
+    )),
+    adminToken: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    requireAdmin(args.adminToken);
+    
+    const { id, adminToken, ...updates } = args;
+    const existing = await ctx.db.get(id);
+    if (!existing) {
+      throw new Error("Submission not found");
+    }
+
+    // Track changes for audit log
+    const changes: { field: string; oldValue?: string; newValue?: string }[] = [];
+    
+    for (const [key, value] of Object.entries(updates)) {
+      if (value !== undefined && value !== (existing as Record<string, unknown>)[key]) {
+        changes.push({
+          field: key,
+          oldValue: String((existing as Record<string, unknown>)[key] ?? ""),
+          newValue: String(value),
+        });
+      }
+    }
+
+    if (changes.length === 0) {
+      return { success: true, message: "No changes detected" };
+    }
+
+    await ctx.db.patch(id, {
+      ...updates,
+      updatedAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "update",
+      entityType: "contactSubmission",
+      entityId: id,
+      changes,
+      timestamp: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
+// Delete submission
+export const remove = mutation({
+  args: {
+    id: v.id("contactSubmissions"),
+    adminToken: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    requireAdmin(args.adminToken);
+    
+    const existing = await ctx.db.get(args.id);
+    if (!existing) {
+      throw new Error("Submission not found");
+    }
+
+    await ctx.db.delete(args.id);
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "delete",
+      entityType: "contactSubmission",
+      entityId: args.id,
+      timestamp: Date.now(),
+    });
+
     return { success: true };
   },
 });

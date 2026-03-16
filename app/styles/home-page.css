@@ -72,7 +72,8 @@ body {
   font-family: 'Outfit', sans-serif;
   font-size: clamp(3rem, 10vw, 5rem);
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
   background: var(--metallic-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -169,6 +170,51 @@ body {
 /* Early Access Wrapper */
 .early-access-wrapper {
   position: relative;
+}
+
+/* ── HOME LOGO HEADER ── */
+.home-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.home-logo-link {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.home-logo-text {
+  font-family: var(--font-outfit);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--metallic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.home-logo-link:hover .home-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.home-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.3s ease;
+}
+
+.home-logo-link:hover .home-logo-underline {
+  width: 100%;
 }
 
 /* Responsive */

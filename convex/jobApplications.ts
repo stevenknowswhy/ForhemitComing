@@ -1,6 +1,14 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
+const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
+
+function requireAdmin(authToken: string | undefined): void {
+  if (!authToken || authToken !== ADMIN_TOKEN) {
+    throw new Error("Unauthorized: Admin access required");
+  }
+}
+
 // Submit job application
 export const submit = mutation({
   args: {
@@ -40,6 +48,14 @@ export const submit = mutation({
       email: normalizedEmail,
       status: "new",
       createdAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "create",
+      entityType: "jobApplication",
+      entityId: applicationId,
+      timestamp: Date.now(),
     });
 
     // Update daily stats
@@ -114,9 +130,120 @@ export const updateStatus = mutation({
       v.literal("rejected"),
       v.literal("hired")
     ),
+    adminToken: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, { status: args.status });
+    requireAdmin(args.adminToken);
+    
+    const existing = await ctx.db.get(args.id);
+    if (!existing) {
+      throw new Error("Application not found");
+    }
+
+    const oldStatus = existing.status || "new";
+
+    await ctx.db.patch(args.id, { 
+      status: args.status,
+      updatedAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "update",
+      entityType: "jobApplication",
+      entityId: args.id,
+      changes: [{ field: "status", oldValue: oldStatus, newValue: args.status }],
+      timestamp: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
+// Update full application
+export const update = mutation({
+  args: {
+    id: v.id("jobApplications"),
+    firstName: v.optional(v.string()),
+    lastName: v.optional(v.string()),
+    email: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    position: v.optional(v.string()),
+    otherPosition: v.optional(v.string()),
+    status: v.optional(v.union(
+      v.literal("new"),
+      v.literal("reviewing"),
+      v.literal("interview-scheduled"),
+      v.literal("rejected"),
+      v.literal("hired")
+    )),
+    adminToken: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    requireAdmin(args.adminToken);
+    
+    const { id, adminToken, ...updates } = args;
+    const existing = await ctx.db.get(id);
+    if (!existing) {
+      throw new Error("Application not found");
+    }
+
+    // Track changes for audit log
+    const changes: { field: string; oldValue?: string; newValue?: string }[] = [];
+    
+    for (const [key, value] of Object.entries(updates)) {
+      if (value !== undefined && value !== (existing as Record<string, unknown>)[key]) {
+        changes.push({
+          field: key,
+          oldValue: String((existing as Record<string, unknown>)[key] ?? ""),
+          newValue: String(value),
+        });
+      }
+    }
+
+    if (changes.length === 0) {
+      return { success: true, message: "No changes detected" };
+    }
+
+    await ctx.db.patch(id, {
+      ...updates,
+      updatedAt: Date.now(),
+    });
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "update",
+      entityType: "jobApplication",
+      entityId: id,
+      changes,
+      timestamp: Date.now(),
+    });
+
+    return { success: true };
+  },
+});
+
+// Delete application
+export const remove = mutation({
+  args: {
+    id: v.id("jobApplications"),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db.get(args.id);
+    if (!existing) {
+      throw new Error("Application not found");
+    }
+
+    await ctx.db.delete(args.id);
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "delete",
+      entityType: "jobApplication",
+      entityId: args.id,
+      timestamp: Date.now(),
+    });
+
     return { success: true };
   },
 });

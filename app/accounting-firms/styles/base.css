@@ -15,7 +15,7 @@
   /* Text Colors */
   --af-text-primary: var(--text-primary);
   --af-text-secondary: var(--text-secondary);
-  --af-text-muted: var(--text-muted);
+  --af-text-muted: var(--text-secondary);
   
   /* Accent Colors */
   --af-accent: var(--color-brand);
@@ -191,6 +191,54 @@
 
 .cta-button:hover::before {
   transform: translateX(100%);
+}
+
+/* ── Logo Header ── */
+.accounting-firms-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.accounting-firms-logo-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.accounting-firms-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--metallic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease, background 0.3s ease;
+  display: inline-block;
+}
+
+.accounting-firms-logo-link:hover .accounting-firms-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.accounting-firms-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--af-accent);
+  transition: width 0.3s ease;
+}
+
+.accounting-firms-logo-link:hover .accounting-firms-logo-underline {
+  width: 100%;
 }
 
 /* ── Section Dividers ── */

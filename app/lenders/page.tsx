@@ -98,8 +98,8 @@ export default function LendersPage() {
   return (
     <div className="lenders-wrapper">
       <div className="lenders-background"></div>
-      
-      {/* Logo Header */}
+
+      {/* Logo Header - matching About page */}
       <header className="lenders-logo-header">
         <Link href="/" className="lenders-logo-link">
           <span className="lenders-logo-text">Forhemit</span>
@@ -107,7 +107,7 @@ export default function LendersPage() {
         </Link>
       </header>
 
-      <main className="lenders-main">
+      <main className="lenders-main" id="main-content">
         {/* Hero Section */}
         <section className="lenders-hero">
           <div className="container">
@@ -250,31 +250,108 @@ export default function LendersPage() {
         </section>
 
         {/* Our Approach Section */}
-        <section className="lenders-section who-section section-alt">
+        <section className="lenders-section coop-section">
           <div className="container">
-            <div className="who-grid">
-              <div className="who-content" data-animate="slide-right">
-                <span className="lenders-eyebrow">Our Approach</span>
-                <h2>Disaster-Tested Continuity of Operations (COOP)</h2>
-                <p className="who-lead">
-                  At Forhemit Stewardship Management Co., we treat business transitions with the same 
-                  rigorous preparation required for crisis management.
-                </p>
-                <p>
-                  Drawing on over a decade of experience leading disaster preparedness and response 
-                  for the City and County of San Francisco, we apply specialized disciplines to protect 
-                  your collateral. We engineer operational continuity—not just financial restructuring.
-                </p>
-                <div className="who-highlight">
-                  <span className="highlight-icon">🛡️</span>
-                  <p>We don't just structure the deal; we ensure the business survives the transition so your credit memo remains accurate.</p>
+            <div className="coop-grid">
+              <div className="coop-content" data-animate="slide-right">
+                <span className="coop-eyebrow">Our Approach</span>
+                <h2 className="coop-title">Disaster-Tested Continuity of Operations (COOP)</h2>
+
+                <div className="coop-intro">
+                  <p>
+                    At Forhemit Stewardship Management Co., we treat business transitions with the same
+                    rigorous preparation required for crisis management.
+                  </p>
+                  <p>
+                    Drawing on over a decade of experience leading disaster preparedness and response
+                    for the City and County of San Francisco, we apply specialized disciplines to protect
+                    your collateral.
+                  </p>
+                </div>
+
+                <div className="coop-benefits">
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Operational Continuity</h3>
+                      <p>We engineer operational continuity—not just financial restructuring</p>
+                    </div>
+                  </div>
+
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Structured Playbooks</h3>
+                      <p>Pre-built operational frameworks for seamless transitions</p>
+                    </div>
+                  </div>
+
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Risk Mitigation</h3>
+                      <p>Proactive protection ensuring your credit memo remains accurate</p>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="who-image" data-animate="slide-left">
-                <img 
-                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
-                  alt="COOP operational continuity framework" 
-                />
+
+              <div className="coop-visual" data-animate="slide-left">
+                <div className="coop-image-container">
+                  <img
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
+                    alt="COOP operational continuity framework"
+                  />
+                  <div className="coop-overlay">
+                    <div className="coop-card-overlay">
+                      <div className="card-mock">
+                        <div className="card-header">
+                          <div className="card-title">Credit Memo</div>
+                          <div className="card-status">✓ Verified</div>
+                        </div>
+                        <div className="card-metrics">
+                          <div className="metric">
+                            <span className="metric-value">1.45x</span>
+                            <span className="metric-label">DSCR</span>
+                          </div>
+                          <div className="metric">
+                            <span className="metric-value">$2.8M</span>
+                            <span className="metric-label">EBITDA</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="coop-chart-overlay">
+                      <div className="mini-chart">
+                        <svg viewBox="0 0 100 40" className="chart-svg">
+                          <path d="M0,30 L20,25 L40,35 L60,20 L80,15 L100,10" stroke="var(--lenders-accent)" strokeWidth="2" fill="none"/>
+                          <circle cx="20" cy="25" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="40" cy="35" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="60" cy="20" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="80" cy="15" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="100" cy="10" r="2" fill="var(--lenders-accent)"/>
+                        </svg>
+                        <div className="chart-label">Operational Stability</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -468,18 +545,18 @@ export default function LendersPage() {
               <div className="cta-options">
                 <div className="cta-option primary" data-animate="slide-right">
                   <div className="cta-option-badge">Recommended</div>
-                  <h3>Schedule a Portfolio Risk Assessment</h3>
-                  <p>Get a comprehensive assessment of succession risks in your commercial portfolio and learn how our COOP framework protects your SBA guaranty.</p>
-                  <Link href="/introduction?join=true" className="cta-button magnetic">
-                    Book Your Assessment
+                  <h3>Have More Questions?</h3>
+                  <p>Browse our comprehensive FAQ section covering lender partnerships, SBA compliance, risk mitigation strategies, and operational continuity frameworks.</p>
+                  <Link href="/faq" className="cta-button magnetic">
+                    Visit FAQ Page
                   </Link>
                 </div>
-                
+
                 <div className="cta-option secondary" data-animate="slide-left">
-                  <h3>Learn More</h3>
-                  <p>Explore our approach to lender partnerships, SBA compliance, and risk mitigation through structured transitions.</p>
-                  <Link href="/introduction" className="cta-button secondary">
-                    View Introduction
+                  <h3>Schedule a Call</h3>
+                  <p>Speak directly with our stewardship experts to discuss your portfolio's succession risks and explore how our COOP framework can protect your SBA guaranty.</p>
+                  <Link href="/introduction?join=true" className="cta-button secondary">
+                    Book a Call
                   </Link>
                 </div>
               </div>

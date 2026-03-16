@@ -31,7 +31,7 @@
   --border-hover: rgba(255, 107, 0, 0.5);
 
   /* Effects */
-  --shadow-color: var(--shadow-color);
+  --shadow-color: rgba(0, 0, 0, 0.4);
   --shadow-soft: 0 10px 40px var(--shadow-color);
   --shadow-medium: 0 4px 20px var(--shadow-color);
   --glow-brand: 0 0 12px rgba(255, 107, 0, 0.5);
@@ -57,13 +57,13 @@
   --selection-text: #f5f0e8;
 
   /* Status Colors */
-  --color-success: var(--color-success);
-  --color-success-bg: var(--color-success);
-  --color-success-border: var(--color-success);
-  --color-success-subtle: var(--color-success);
-  --color-error: var(--color-error);
-  --color-error-bg: var(--color-error);
-  --color-error-border: var(--color-error);
+  --color-success: #00cc66;
+  --color-success-bg: rgba(0, 204, 102, 0.15);
+  --color-success-border: rgba(0, 204, 102, 0.3);
+  --color-success-subtle: rgba(0, 204, 102, 0.08);
+  --color-error: #ff4444;
+  --color-error-bg: rgba(255, 68, 68, 0.15);
+  --color-error-border: rgba(255, 68, 68, 0.3);
   
   /* Overlay Backgrounds */
   --overlay-heavy: rgba(0, 0, 0, 0.9);
@@ -103,9 +103,9 @@
   --border-hover: rgba(255, 107, 0, 0.6);
 
   /* Effects */
-  --shadow-color: rgba(0, 0, 0, 0.08);
-  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
-  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.04);
   --glow-brand: 0 0 12px rgba(255, 107, 0, 0.3);
   --glow-subtle: 0 0 20px rgba(255, 107, 0, 0.1);
 

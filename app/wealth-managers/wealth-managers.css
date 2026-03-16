@@ -13,7 +13,7 @@
   --wealth-bg-elevated: var(--bg-dropdown);
   --wealth-text-primary: var(--text-primary);
   --wealth-text-secondary: var(--text-secondary);
-  --wealth-text-muted: var(--text-muted);
+  --wealth-text-muted: var(--text-secondary);
   --wealth-accent: var(--color-brand);
   --wealth-accent-light: var(--color-brand-hover);
   --wealth-accent-dark: #cc5500;

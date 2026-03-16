@@ -22,6 +22,53 @@
    BASE & BACKGROUND
    ============================================ */
 
+/* Fixed Logo Header */
+.brokers-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.brokers-logo-link {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.brokers-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--metallic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.brokers-logo-link:hover .brokers-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.brokers-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.3s ease;
+}
+
+.brokers-logo-link:hover .brokers-logo-underline {
+  width: 100%;
+}
+
 .brokers-wrapper {
   min-height: 100vh;
   background: var(--broker-dark);
@@ -185,7 +232,7 @@
 .hero-title {
   font-size: clamp(3rem, 8vw, 5rem);
   font-weight: 200;
-  line-height: 1.1;
+  line-height: 1.15;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
 }
@@ -560,8 +607,9 @@
 .section-header h2 {
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 300;
+  line-height: 1.15;
   margin-bottom: 1rem;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .section-intro {
@@ -1599,6 +1647,14 @@
   background: #ff8533;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px var(--broker-orange-glow);
+}
+
+.cta-button.primary:disabled,
+.cta-button.primary[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .cta-button.secondary {

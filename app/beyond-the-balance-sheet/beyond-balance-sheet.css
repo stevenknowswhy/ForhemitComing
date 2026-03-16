@@ -12,7 +12,7 @@
   --bbs-bg-dark: var(--shadow-color);
   --bbs-text-primary: var(--text-primary);
   --bbs-text-secondary: var(--text-secondary);
-  --bbs-text-muted: var(--text-muted);
+  --bbs-text-muted: var(--text-secondary);
   --bbs-accent: var(--color-brand);
   --bbs-accent-light: var(--color-brand-hover);
   --bbs-accent-glow: var(--glow-subtle);

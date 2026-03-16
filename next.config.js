@@ -34,7 +34,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
               "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
               "img-src 'self' data: https: blob:",
-              "connect-src 'self' https://api.convex.dev https://uploadthing.com wss://uploadthing.com",
+              "connect-src 'self' https://api.convex.dev https://uploadthing.com wss://uploadthing.com https://striped-puma-587.convex.cloud wss://striped-puma-587.convex.cloud",
               "frame-src 'self' https://js.stripe.com",
               "object-src 'none'",
               "base-uri 'self'",

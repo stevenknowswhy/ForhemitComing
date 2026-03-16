@@ -4,18 +4,21 @@ import { useState, useEffect } from "react";
 import { useQuery } from "convex/react";
 import { api } from "../../convex/_generated/api";
 import { formatPhoneNumber } from "../lib/formatters";
+import { LogOut, Edit2, Trash2, FileText, History } from "lucide-react";
+import AdminLogin from "./login";
+import EditModal from "./components/EditModal";
+import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import { Id } from "../../convex/_generated/dataModel";
 import "./admin.css";
 
-type TabType = "contacts" | "early-access" | "applications" | "stats";
+type TabType = "contacts" | "early-access" | "applications" | "stats" | "audit";
 
 // Hook to check if Convex is ready
 function useConvexReady() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    // Check if we're in a browser and Convex client is available
     if (typeof window !== "undefined") {
-      // Give a small delay for the Convex client to initialize
       const timeout = setTimeout(() => setReady(true), 100);
       return () => clearTimeout(timeout);
     }
@@ -24,10 +27,20 @@ function useConvexReady() {
   return ready;
 }
 
-function AdminContent() {
+interface AdminContentProps {
+  onLogout: () => void;
+}
+
+function AdminContent({ onLogout }: AdminContentProps) {
   const [activeTab, setActiveTab] = useState<TabType>("contacts");
   const [contactStatus, setContactStatus] = useState<string>("");
   const [appStatus, setAppStatus] = useState<string>("");
+
+  // Modal states
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [selectedEntity, setSelectedEntity] = useState<any>(null);
+  const [selectedEntityType, setSelectedEntityType] = useState<"contactSubmission" | "jobApplication" | "earlyAccessSignup">("contactSubmission");
 
   // Fetch data based on active tab
   const contacts = useQuery(
@@ -48,6 +61,16 @@ function AdminContent() {
   const appStats = useQuery(
     api.jobApplications.getStats,
     activeTab === "stats" ? {} : "skip"
+  );
+
+  const auditLogs = useQuery(
+    (api as any).auditLogs?.list,
+    activeTab === "audit" ? { limit: 100 } : "skip"
+  );
+
+  const auditStats = useQuery(
+    (api as any).auditLogs?.getStats,
+    activeTab === "audit" ? {} : "skip"
   );
 
   const formatDate = (timestamp: number) => {
@@ -99,11 +122,65 @@ function AdminContent() {
     return labels[value] || value;
   };
 
+  const handleEdit = (entity: any, type: "contactSubmission" | "jobApplication") => {
+    setSelectedEntity(entity);
+    setSelectedEntityType(type);
+    setEditModalOpen(true);
+  };
+
+  const handleDelete = (entity: any, type: "contactSubmission" | "jobApplication" | "earlyAccessSignup") => {
+    setSelectedEntity(entity);
+    setSelectedEntityType(type);
+    setDeleteModalOpen(true);
+  };
+
+  const getEntityName = () => {
+    if (!selectedEntity) return "";
+    if (selectedEntityType === "earlyAccessSignup") {
+      return selectedEntity.email;
+    }
+    return `${selectedEntity.firstName} ${selectedEntity.lastName}`;
+  };
+
+  const isEdited = (item: any) => {
+    return item.updatedAt && item.updatedAt > item.createdAt;
+  };
+
+  const getActionIcon = (action: string) => {
+    switch (action) {
+      case "create":
+        return <FileText size={14} style={{ color: "#22c55e" }} />;
+      case "update":
+        return <Edit2 size={14} style={{ color: "#3b82f6" }} />;
+      case "delete":
+        return <Trash2 size={14} style={{ color: "#ef4444" }} />;
+      default:
+        return null;
+    }
+  };
+
+  const getEntityTypeLabel = (type: string) => {
+    const labels: Record<string, string> = {
+      contactSubmission: "Contact",
+      jobApplication: "Application",
+      earlyAccessSignup: "Early Access",
+    };
+    return labels[type] || type;
+  };
+
   return (
     <div className="admin-container">
       <header className="admin-header">
-        <h1 className="admin-title">Forhemit Admin</h1>
-        <p className="admin-subtitle">Form Submissions Dashboard</p>
+        <div className="admin-header-content">
+          <div>
+            <h1 className="admin-title">Forhemit Admin</h1>
+            <p className="admin-subtitle">Form Submissions Dashboard</p>
+          </div>
+          <button onClick={onLogout} className="admin-logout-button" title="Sign Out">
+            <LogOut size={18} />
+            <span>Sign Out</span>
+          </button>
+        </div>
       </header>
 
       <nav className="admin-tabs">
@@ -153,6 +230,13 @@ function AdminContent() {
           </svg>
           Statistics
         </button>
+        <button
+          className={`admin-tab ${activeTab === "audit" ? "active" : ""}`}
+          onClick={() => setActiveTab("audit")}
+        >
+          <History size={16} />
+          Audit Log
+        </button>
       </nav>
 
       <div className="admin-content">
@@ -183,8 +267,15 @@ function AdminContent() {
                 {contacts.map((contact) => (
                   <div key={contact._id} className="submission-card">
                     <div className="card-header">
-                      <div className="card-title">
-                        {contact.firstName} {contact.lastName}
+                      <div className="card-title-row">
+                        <span className="card-title">
+                          {contact.firstName} {contact.lastName}
+                        </span>
+                        {isEdited(contact) && (
+                          <span className="edited-badge" title={`Edited on ${formatDate(contact.updatedAt!)}`}>
+                            (edited)
+                          </span>
+                        )}
                       </div>
                       <span
                         className="status-badge"
@@ -224,6 +315,24 @@ function AdminContent() {
                     </div>
                     <div className="card-message">{contact.message}</div>
                     {contact.source && <div className="card-source">Source: {contact.source}</div>}
+                    <div className="card-actions">
+                      <button
+                        className="card-action-btn edit"
+                        onClick={() => handleEdit(contact, "contactSubmission")}
+                        title="Edit"
+                      >
+                        <Edit2 size={14} />
+                        Edit
+                      </button>
+                      <button
+                        className="card-action-btn delete"
+                        onClick={() => handleDelete(contact, "contactSubmission")}
+                        title="Delete"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -247,10 +356,27 @@ function AdminContent() {
                 {earlyAccess.map((signup) => (
                   <div key={signup._id} className="submission-card simple">
                     <div className="card-header">
-                      <div className="card-title">{signup.email}</div>
+                      <div className="card-title-row">
+                        <span className="card-title">{signup.email}</span>
+                        {isEdited(signup) && (
+                          <span className="edited-badge" title={`Edited on ${formatDate(signup.updatedAt!)}`}>
+                            (edited)
+                          </span>
+                        )}
+                      </div>
                       <span className="date-badge">{formatDate(signup.createdAt)}</span>
                     </div>
                     {signup.source && <div className="card-source">Source: {signup.source}</div>}
+                    <div className="card-actions">
+                      <button
+                        className="card-action-btn delete"
+                        onClick={() => handleDelete(signup, "earlyAccessSignup")}
+                        title="Delete"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -286,8 +412,15 @@ function AdminContent() {
                 {applications.map((app) => (
                   <div key={app._id} className="submission-card">
                     <div className="card-header">
-                      <div className="card-title">
-                        {app.firstName} {app.lastName}
+                      <div className="card-title-row">
+                        <span className="card-title">
+                          {app.firstName} {app.lastName}
+                        </span>
+                        {isEdited(app) && (
+                          <span className="edited-badge" title={`Edited on ${formatDate(app.updatedAt!)}`}>
+                            (edited)
+                          </span>
+                        )}
                       </div>
                       <span
                         className="status-badge"
@@ -326,6 +459,24 @@ function AdminContent() {
                       )}
                     </div>
                     <div className="card-date">Applied: {formatDate(app.createdAt)}</div>
+                    <div className="card-actions">
+                      <button
+                        className="card-action-btn edit"
+                        onClick={() => handleEdit(app, "jobApplication")}
+                        title="Edit"
+                      >
+                        <Edit2 size={14} />
+                        Edit
+                      </button>
+                      <button
+                        className="card-action-btn delete"
+                        onClick={() => handleDelete(app, "jobApplication")}
+                        title="Delete"
+                      >
+                        <Trash2 size={14} />
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -389,14 +540,167 @@ function AdminContent() {
             )}
           </div>
         )}
+
+        {/* Audit Log Tab */}
+        {activeTab === "audit" && (
+          <div className="admin-section">
+            <div className="section-header">
+              <h2>Audit Log</h2>
+            </div>
+
+            {!auditLogs ? (
+              <div className="loading-state">Loading...</div>
+            ) : (
+              <>
+                {auditStats && (
+                  <div className="audit-stats">
+                    <div className="audit-stat">
+                      <span className="audit-stat-value">{auditStats.total}</span>
+                      <span className="audit-stat-label">Total Actions</span>
+                    </div>
+                    <div className="audit-stat">
+                      <span className="audit-stat-value" style={{ color: "#22c55e" }}>
+                        {auditStats.byAction.create}
+                      </span>
+                      <span className="audit-stat-label">Created</span>
+                    </div>
+                    <div className="audit-stat">
+                      <span className="audit-stat-value" style={{ color: "#3b82f6" }}>
+                        {auditStats.byAction.update}
+                      </span>
+                      <span className="audit-stat-label">Updated</span>
+                    </div>
+                    <div className="audit-stat">
+                      <span className="audit-stat-value" style={{ color: "#ef4444" }}>
+                        {auditStats.byAction.delete}
+                      </span>
+                      <span className="audit-stat-label">Deleted</span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="audit-log-list">
+                  {auditLogs.length === 0 ? (
+                    <div className="empty-state">No audit logs found</div>
+                  ) : (
+                    auditLogs.map((log: any) => (
+                      <div key={log._id} className="audit-log-item">
+                        <div className="audit-log-header">
+                          <div className="audit-log-action">
+                            {getActionIcon(log.action)}
+                            <span className={`audit-action-${log.action}`}>{log.action}</span>
+                          </div>
+                          <span className="audit-log-entity">{getEntityTypeLabel(log.entityType)}</span>
+                          <span className="audit-log-time">{formatDate(log.timestamp)}</span>
+                        </div>
+                        {log.changes && log.changes.length > 0 && (
+                          <div className="audit-log-changes">
+                            {log.changes.map((change: any, idx: number) => (
+                              <div key={idx} className="audit-change">
+                                <span className="audit-field">{change.field}:</span>
+                                <span className="audit-old">{change.oldValue || "(empty)"}</span>
+                                <span className="audit-arrow">→</span>
+                                <span className="audit-new">{change.newValue || "(empty)"}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Edit Modal */}
+      <EditModal
+        isOpen={editModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        entity={selectedEntity}
+        entityType={selectedEntityType as "contactSubmission" | "jobApplication"}
+        onSuccess={() => {}}
+      />
+
+      {/* Delete Confirmation Modal */}
+      <DeleteConfirmModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        entityId={selectedEntity?._id || null}
+        entityType={selectedEntityType}
+        entityName={getEntityName()}
+        onSuccess={() => {}}
+      />
     </div>
   );
 }
 
 export default function AdminPage() {
   const convexReady = useConvexReady();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
 
+  // Check if already authenticated on mount
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const response = await fetch("/api/admin/verify", {
+          method: "GET",
+          credentials: "include",
+        });
+        if (response.ok) {
+          setIsAuthenticated(true);
+        }
+      } catch {
+        // Not authenticated
+      } finally {
+        setIsCheckingAuth(false);
+      }
+    };
+    checkAuth();
+  }, []);
+
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/admin/login", {
+        method: "DELETE",
+        credentials: "include",
+      });
+    } catch {
+      // Ignore errors
+    }
+    setIsAuthenticated(false);
+  };
+
+  // Show loading state while checking auth
+  if (isCheckingAuth) {
+    return (
+      <main className="admin-page">
+        <div className="admin-container">
+          <div className="loading-state" style={{ marginTop: "4rem" }}>
+            Checking authentication...
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // Show login if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <main className="admin-page">
+        <AdminLogin onLogin={handleLogin} />
+      </main>
+    );
+  }
+
+  // Show admin content if authenticated
   return (
     <main className="admin-page">
       {!convexReady ? (
@@ -406,7 +710,7 @@ export default function AdminPage() {
           </div>
         </div>
       ) : (
-        <AdminContent />
+        <AdminContent onLogout={handleLogout} />
       )}
     </main>
   );

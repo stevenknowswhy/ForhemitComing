@@ -17,7 +17,7 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
     fontWeight: 400,
     letterSpacing: "0.1em",
     textTransform: "uppercase",
-    color: "var(--muted-text)",
+    color: "var(--text-secondary)",
     background: "none",
     border: "none",
     cursor: "pointer",
@@ -31,7 +31,7 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
     width: "4px",
     height: "4px",
     borderRadius: "50%",
-    background: "var(--muted-text)",
+    background: "var(--text-secondary)",
     opacity: 0.6,
     flexShrink: 0,
   };
@@ -48,7 +48,7 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
           fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
           fontSize: "0.65rem",
           letterSpacing: "0.1em",
-          color: "var(--muted-text)",
+          color: "var(--text-secondary)",
           textTransform: "uppercase",
           whiteSpace: "nowrap",
         }}
@@ -65,10 +65,10 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
               style={linkStyle}
               onClick={onSitemapClick}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--light-text)";
+                e.currentTarget.style.color = "var(--text-primary)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--muted-text)";
+                e.currentTarget.style.color = "var(--text-secondary)";
               }}
             >
               Sitemap
@@ -84,10 +84,10 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
               style={linkStyle}
               onClick={onLegalClick}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--light-text)";
+                e.currentTarget.style.color = "var(--text-primary)";
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--muted-text)";
+                e.currentTarget.style.color = "var(--text-secondary)";
               }}
             >
               Legal

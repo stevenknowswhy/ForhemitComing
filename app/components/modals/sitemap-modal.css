@@ -58,7 +58,7 @@
   background: var(--bg-glass);
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 1.5rem;
   line-height: 1;
   cursor: pointer;
@@ -91,7 +91,7 @@
 .sitemap-header p {
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -163,7 +163,7 @@
 .sitemap-footer p {
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.7rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }

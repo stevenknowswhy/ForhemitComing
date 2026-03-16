@@ -29,7 +29,7 @@
   font-weight: 400;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--muted-text);
+  color: var(--text-secondary);
   text-decoration: none;
   transition: all 0.3s ease;
   position: relative;
@@ -46,12 +46,12 @@
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--primary-orange);
+  background: var(--color-brand);
   transition: width 0.3s ease;
 }
 
 .footer-link:hover {
-  color: var(--light-text);
+  color: var(--text-primary);
 }
 
 .footer-link:hover::after {

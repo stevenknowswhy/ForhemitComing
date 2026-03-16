@@ -33,6 +33,14 @@ export const submit = mutation({
       userAgent: args.userAgent,
     });
 
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "create",
+      entityType: "earlyAccessSignup",
+      entityId: signupId,
+      timestamp: Date.now(),
+    });
+
     // Update daily stats
     const today = new Date().toISOString().split("T")[0];
     const existingStats = await ctx.db
@@ -91,5 +99,30 @@ export const getById = query({
   args: { id: v.id("earlyAccessSignups") },
   handler: async (ctx, args) => {
     return await ctx.db.get(args.id);
+  },
+});
+
+// Delete signup
+export const remove = mutation({
+  args: {
+    id: v.id("earlyAccessSignups"),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db.get(args.id);
+    if (!existing) {
+      throw new Error("Signup not found");
+    }
+
+    await ctx.db.delete(args.id);
+
+    // Create audit log
+    await ctx.db.insert("auditLogs", {
+      action: "delete",
+      entityType: "earlyAccessSignup",
+      entityId: args.id,
+      timestamp: Date.now(),
+    });
+
+    return { success: true };
   },
 });

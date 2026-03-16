@@ -78,7 +78,7 @@
 .legal-subtitle {
   font-family: var(--font-inter), 'Inter', sans-serif;
   font-size: 0.9rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* Content Section */

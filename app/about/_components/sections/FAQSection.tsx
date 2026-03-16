@@ -89,7 +89,7 @@ export function FAQSection() {
         <div className="faq-container">
           <FAQSectionBlock
             title="The Vision & The Model"
-            subtitle='Defining the "Anti-Private Equity" Approach'
+            subtitle=""
             sectionNum="01"
             faqs={visionFaqs}
             openFaq={openFaq}
@@ -99,7 +99,7 @@ export function FAQSection() {
 
           <FAQSectionBlock
             title="Financials & Risk Mitigation"
-            subtitle='Removing the "deal-killers" and explaining the math'
+            subtitle=""
             sectionNum="02"
             faqs={financialsFaqs}
             openFaq={openFaq}
@@ -109,7 +109,7 @@ export function FAQSection() {
 
           <FAQSectionBlock
             title="Operational Resilience"
-            subtitle='Applying "Disaster Preparedness" principles to business continuity'
+            subtitle=""
             sectionNum="03"
             faqs={operationalFaqs}
             openFaq={openFaq}
@@ -119,7 +119,7 @@ export function FAQSection() {
 
           <FAQSectionBlock
             title="Legacy & The Transition"
-            subtitle='Managing the "Human Element" and the founder&apos;s exit'
+            subtitle=""
             sectionNum="04"
             faqs={legacyFaqs}
             openFaq={openFaq}

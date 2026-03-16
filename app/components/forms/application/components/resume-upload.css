@@ -15,7 +15,7 @@
 }
 
 .upload-dropzone:hover {
-  border-color: var(--primary-orange);
+  border-color: var(--color-brand);
   background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
 }
 

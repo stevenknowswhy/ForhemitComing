@@ -16,7 +16,7 @@
   /* Text Colors */
   --lp-text-primary: var(--text-primary);
   --lp-text-secondary: var(--text-secondary);
-  --lp-text-muted: var(--text-muted);
+  --lp-text-muted: var(--text-secondary);
   
   /* Accent Colors */
   --lp-accent: var(--color-brand);

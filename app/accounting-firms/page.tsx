@@ -53,6 +53,14 @@ export default function AccountingFirms() {
     <div className="accounting-wrapper">
       <div className="accounting-background"></div>
 
+      {/* Logo Header - matching About page */}
+      <header className="accounting-firms-logo-header">
+        <Link href="/" className="accounting-firms-logo-link">
+          <span className="accounting-firms-logo-text">Forhemit</span>
+          <span className="accounting-firms-logo-underline"></span>
+        </Link>
+      </header>
+
       <main className="accounting-main">
         {/* Hero Section */}
         <section className="accounting-hero">

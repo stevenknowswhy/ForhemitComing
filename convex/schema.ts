@@ -40,6 +40,7 @@ export default defineSchema({
       v.literal("closed")
     )),
     createdAt: v.number(), // timestamp
+    updatedAt: v.optional(v.number()), // timestamp when last edited
     ipAddress: v.optional(v.string()),
     userAgent: v.optional(v.string()),
   })
@@ -53,6 +54,7 @@ export default defineSchema({
     email: v.string(),
     source: v.optional(v.string()), // e.g., "hero-section", "footer", etc.
     createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
     ipAddress: v.optional(v.string()),
     userAgent: v.optional(v.string()),
   })
@@ -81,6 +83,7 @@ export default defineSchema({
     )),
     // Metadata
     createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
     ipAddress: v.optional(v.string()),
     userAgent: v.optional(v.string()),
   })
@@ -98,4 +101,29 @@ export default defineSchema({
     lastUpdated: v.number(),
   })
     .index("by_date", ["date"]),
+
+  // Audit log for tracking all admin changes
+  auditLogs: defineTable({
+    action: v.union(
+      v.literal("create"),
+      v.literal("update"),
+      v.literal("delete")
+    ),
+    entityType: v.union(
+      v.literal("contactSubmission"),
+      v.literal("earlyAccessSignup"),
+      v.literal("jobApplication")
+    ),
+    entityId: v.string(), // The ID of the affected entity
+    changes: v.optional(v.array(v.object({
+      field: v.string(),
+      oldValue: v.optional(v.string()),
+      newValue: v.optional(v.string()),
+    }))), // Track what fields changed
+    timestamp: v.number(),
+    performedBy: v.optional(v.string()), // Could be extended with admin user info
+  })
+    .index("by_entity", ["entityType", "entityId"])
+    .index("by_timestamp", ["timestamp"])
+    .index("by_action", ["action"]),
 });

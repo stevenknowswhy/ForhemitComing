@@ -241,7 +241,7 @@
 }
 
 .continue-link:disabled {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   cursor: not-allowed;
 }
 
@@ -381,7 +381,7 @@
 }
 
 .status-closed {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-family: 'Inter', sans-serif;
   font-size: 0.875rem;
   font-style: italic;
@@ -464,7 +464,7 @@
 }
 
 .typeform-input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* Typeform Select */

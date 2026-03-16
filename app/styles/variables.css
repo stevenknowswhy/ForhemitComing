@@ -1,11 +1,23 @@
 /* ── CSS VARIABLES ── */
+@import "./theme.css";
+
+/* 
+ * These are compatibility aliases for legacy page-specific variables.
+ * New code should use the semantic theme variables directly from theme.css
+ */
 :root {
-  /* Home Page Colors */
-  --primary-orange: #FF6B00;
+  /* Mapped to theme variables for dark/light mode compatibility */
+  --primary-orange: var(--color-brand);
   --primary-red: var(--color-brand-hover);
-  --dark-bg: #1a1209;
-  --light-text: #ffffff;
-  --muted-text: #a0a0a0;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --dark-bg: var(--bg-secondary);
+  --light-text: var(--text-primary);
+  --muted-text: var(--text-secondary);
+  --glass-bg: var(--bg-glass);
+  --glass-border: var(--border-subtle);
+}
+
+/* Light theme overrides */
+[data-theme="light"] {
+  /* Variables automatically update via the theme.css imports */
+  /* No need to redefine as they reference theme variables */
 }

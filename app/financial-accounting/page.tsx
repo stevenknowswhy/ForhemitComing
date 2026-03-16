@@ -13,6 +13,14 @@ export default function FinancialAccounting() {
     <div className="financial-wrapper">
       <div className="financial-background"></div>
 
+      {/* Logo Header */}
+      <header className="financial-accounting-logo-header">
+        <Link href="/" className="financial-logo-link">
+          <span className="financial-logo-text">Forhemit</span>
+          <span className="financial-logo-underline"></span>
+        </Link>
+      </header>
+
       <main className="financial-main">
         {/* Hero Section */}
         <section className="financial-hero">

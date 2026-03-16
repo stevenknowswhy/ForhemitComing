@@ -14,7 +14,7 @@
   --about-text-secondary: var(--text-secondary);
   --about-accent: var(--color-brand);
   --about-accent-light: var(--color-brand-hover);
-  --about-muted: var(--text-muted);
+  --about-muted: var(--text-secondary);
   --about-border: var(--border-accent);
   /* Theme-aware overlay and shadow colors */
   --about-overlay-dark: var(--bg-primary);

@@ -66,7 +66,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .form-group input {
@@ -86,7 +86,7 @@
 }
 
 .form-group input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 /* Consent Checkboxes */
@@ -218,7 +218,7 @@
   padding-top: 1.5rem;
   border-top: 1px solid var(--border-subtle);
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   text-align: center;
 }
 
@@ -247,7 +247,7 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin-bottom: 0.75rem;
 }
 
@@ -317,7 +317,7 @@
 
 .opt-out-help p {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-style: italic;
 }
 
@@ -352,14 +352,14 @@
 
 .right-item p {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   line-height: 1.5;
   margin: 0;
 }
 
 .rights-contact {
   text-align: center;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.9rem;
 }
 

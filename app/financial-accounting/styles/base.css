@@ -12,7 +12,7 @@
   --fa-text-secondary: var(--text-secondary);
   --fa-accent: var(--color-brand);
   --fa-accent-light: var(--color-brand-hover);
-  --fa-muted: var(--text-muted);
+  --fa-muted: var(--text-secondary);
   --fa-border: var(--border-accent);
   --fa-card-bg: var(--bg-glass);
 }

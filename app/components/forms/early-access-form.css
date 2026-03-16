@@ -38,7 +38,7 @@
 }
 
 #email-input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 #email-input:focus {
@@ -58,7 +58,7 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .email-clear-btn:hover {
@@ -85,6 +85,14 @@
   box-shadow: 0 4px 15px var(--color-brand-subtle);
 }
 
+.btn-icon:disabled,
+.btn-icon[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* Card variant styles */
 .email-input-container {
   display: flex;
@@ -105,7 +113,7 @@
 }
 
 .email-input-container .email-input-wrapper input::placeholder {
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .email-input-container .email-input-wrapper input:focus {
@@ -129,6 +137,14 @@
 .email-submit-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 15px var(--color-brand-subtle);
+}
+
+.email-submit-btn:disabled,
+.email-submit-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Responsive */
