@@ -133,32 +133,27 @@ export function WhyWeExistSection() {
               <span>How We Compare:</span>
             </div>
             <div className="comparison-grid">
-              <div className="comp-col comp-feature-col">
-                <div className="comp-header">Feature</div>
-                {comparisonData.map((row) => (
-                  <div key={row.feature} className="comp-cell comp-feature">
+              {/* Header Row */}
+              <div className="comp-header">Feature</div>
+              <div className="comp-header">Standard Post-Close Oversight</div>
+              <div className="comp-header">
+                <span className="comp-highlight">The Forhemit Stewardship Model</span>
+              </div>
+              
+              {/* Data Rows */}
+              {comparisonData.map((row) => (
+                <div key={row.feature} className="comp-row" style={{ display: 'contents' }}>
+                  <div className="comp-cell comp-feature">
                     {row.feature}
                   </div>
-                ))}
-              </div>
-              <div className="comp-col comp-standard-col">
-                <div className="comp-header">Standard Post-Close Oversight</div>
-                {comparisonData.map((row) => (
-                  <div key={row.feature} className="comp-cell">
+                  <div className="comp-cell">
                     {row.standard}
                   </div>
-                ))}
-              </div>
-              <div className="comp-col comp-forhemit-col">
-                <div className="comp-header">
-                  <span className="comp-highlight">The Forhemit Stewardship Model</span>
-                </div>
-                {comparisonData.map((row) => (
-                  <div key={row.feature} className="comp-cell">
+                  <div className="comp-cell">
                     {row.forhemit}
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
