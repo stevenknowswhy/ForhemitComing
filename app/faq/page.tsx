@@ -5,7 +5,7 @@ import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
 import "../about/about-page.css";
 import "./faq-page.css";
 
-import { HeroSection, IntroSection, FAQSections, CTASection } from "./_components/sections";
+import { HeroSection, IntroSection, ComparisonSection, FAQSections, CTASection } from "./_components/sections";
 
 export default function FAQPage() {
   useGlobalScrollReveal();
@@ -25,6 +25,7 @@ export default function FAQPage() {
       <main className="about-main">
         <HeroSection />
         <IntroSection />
+        <ComparisonSection />
         <FAQSections />
         <CTASection />
       </main>
