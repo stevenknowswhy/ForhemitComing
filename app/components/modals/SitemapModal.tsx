@@ -119,7 +119,7 @@ function SitemapDesktopSection({
   );
 }
 
-export function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
+export default function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
   if (!isOpen) return null;
 
   return (

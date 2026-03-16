@@ -8,9 +8,7 @@ import { Footer } from "./Footer";
 const LegalModal = lazy(() => import("../modals/LegalModal").then((mod) => ({ 
   default: mod.LegalModal 
 })));
-const SitemapModal = lazy(() => import("../modals/SitemapModal").then((mod) => ({ 
-  default: mod.SitemapModal 
-})));
+const SitemapModal = lazy(() => import("../modals/SitemapModal"));
 
 export function GlobalFooter() {
   const [showLegalModal, setShowLegalModal] = useState(false);

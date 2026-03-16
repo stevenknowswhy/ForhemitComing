@@ -5,15 +5,6 @@
 
 /* CSS Variables */
 :root {
-  --broker-orange: #FF6B00;
-  --broker-orange-glow: rgba(255, 107, 0, 0.4);
-  --broker-orange-dim: rgba(255, 107, 0, 0.1);
-  --broker-dark: #0a0a0a;
-  --broker-dark-2: #111111;
-  --broker-dark-3: #1a1a1a;
-  --broker-gray: #888888;
-  --broker-gray-light: #cccccc;
-  --broker-white: #ffffff;
   --grid-color: var(--color-brand-subtle);
   --radar-green: #00ff88;
 }
@@ -71,8 +62,8 @@
 
 .brokers-wrapper {
   min-height: 100vh;
-  background: var(--broker-dark);
-  color: var(--broker-white);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   position: relative;
   overflow-x: hidden;
 }
@@ -146,14 +137,14 @@
   font-size: 1.5rem;
   font-weight: 300;
   letter-spacing: 0.2em;
-  color: var(--broker-white);
+  color: var(--text-primary);
   text-transform: uppercase;
 }
 
 .logo-underline {
   height: 2px;
   width: 0;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   transition: width 0.4s ease;
   margin-top: 2px;
 }
@@ -211,7 +202,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   margin-bottom: 1.5rem;
   font-weight: 500;
 }
@@ -219,14 +210,14 @@
 .eyebrow-pulse {
   width: 8px;
   height: 8px;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   border-radius: 50%;
   animation: pulse-dot 2s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 var(--broker-orange-glow); }
-  50% { opacity: 0.7; transform: scale(1.1); box-shadow: 0 0 20px 5px var(--broker-orange-glow); }
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 var(--glow-brand); }
+  50% { opacity: 0.7; transform: scale(1.1); box-shadow: 0 0 20px 5px var(--glow-brand); }
 }
 
 .hero-title {
@@ -238,7 +229,7 @@
 }
 
 .hero-title .highlight {
-  color: var(--broker-orange);
+  color: var(--color-brand);
   font-weight: 400;
   position: relative;
 }
@@ -250,7 +241,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--broker-orange), transparent);
+  background: linear-gradient(90deg, var(--color-brand), transparent);
 }
 
 /* Glitch effect on highlight hover */
@@ -268,7 +259,7 @@
 .hero-subtitle {
   font-size: 1.125rem;
   line-height: 1.8;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   margin-bottom: 2.5rem;
   max-width: 540px;
 }
@@ -287,7 +278,7 @@
 .stat-value {
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   letter-spacing: -0.02em;
 }
 
@@ -295,7 +286,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--broker-gray);
+  color: var(--text-muted);
 }
 
 /* Deal Radar Visualization */
@@ -356,7 +347,7 @@
   position: absolute;
   width: 50%;
   height: 2px;
-  background: linear-gradient(90deg, transparent, var(--broker-orange), transparent);
+  background: linear-gradient(90deg, transparent, var(--color-brand), transparent);
   top: 50%;
   left: 50%;
   transform-origin: left center;
@@ -377,7 +368,7 @@
   position: absolute;
   width: 80px;
   height: 80px;
-  border: 2px solid var(--broker-orange);
+  border: 2px solid var(--color-brand);
   border-radius: 50%;
   animation: center-pulse 2s ease-out infinite;
 }
@@ -390,7 +381,7 @@
 .center-core {
   width: 70px;
   height: 70px;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -400,7 +391,7 @@
   letter-spacing: 0.1em;
   text-align: center;
   line-height: 1.2;
-  color: var(--broker-dark);
+  color: var(--bg-primary);
   position: relative;
   z-index: 1;
 }
@@ -420,7 +411,7 @@
   position: absolute;
   width: 30px;
   height: 30px;
-  border: 1px solid var(--broker-orange);
+  border: 1px solid var(--color-brand);
   border-radius: 50%;
   animation: blip-expand 2s ease-out infinite;
 }
@@ -429,7 +420,7 @@
   position: absolute;
   width: 8px;
   height: 8px;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   border-radius: 50%;
   top: 50%;
   left: 50%;
@@ -481,7 +472,7 @@
 .ticker-label {
   font-size: 0.65rem;
   letter-spacing: 0.2em;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   font-weight: 600;
   padding: 0.25rem 0.75rem;
   border: 1px solid rgba(255, 107, 0, 0.3);
@@ -516,7 +507,7 @@
 .ticker-label-sm {
   font-size: 0.55rem;
   letter-spacing: 0.15em;
-  color: var(--broker-gray);
+  color: var(--text-muted);
 }
 
 .ticker-value {
@@ -529,7 +520,7 @@
 .ticker-time {
   font-size: 0.7rem;
   letter-spacing: 0.1em;
-  color: var(--broker-gray);
+  color: var(--text-muted);
   font-family: monospace;
   padding: 0.25rem 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -565,7 +556,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
-  color: var(--broker-gray);
+  color: var(--text-muted);
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -574,7 +565,7 @@
 .indicator-line {
   width: 1px;
   height: 60px;
-  background: linear-gradient(to bottom, var(--broker-orange), transparent);
+  background: linear-gradient(to bottom, var(--color-brand), transparent);
   animation: line-pulse 2s ease-in-out infinite;
 }
 
@@ -597,7 +588,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   border: 1px solid rgba(255, 107, 0, 0.3);
@@ -614,7 +605,7 @@
 
 .section-intro {
   font-size: 1.1rem;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   max-width: 600px;
   margin: 0 auto;
   line-height: 1.7;
@@ -652,8 +643,8 @@
 
 .dossier-card.hovered {
   transform: translateY(-8px) scale(1.02);
-  border-color: var(--broker-orange);
-  box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px var(--broker-orange-dim);
+  border-color: var(--color-brand);
+  box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px var(--color-brand-subtle);
 }
 
 /* Corner brackets for dossier cards */
@@ -663,7 +654,7 @@
   position: absolute;
   width: 20px;
   height: 20px;
-  border-color: var(--broker-orange);
+  border-color: var(--color-brand);
   border-style: solid;
   transition: all 0.3s ease;
   opacity: 0;
@@ -694,7 +685,7 @@
   left: -1px;
   right: -1px;
   height: 32px;
-  background: linear-gradient(90deg, var(--broker-orange), #ff8533);
+  background: linear-gradient(90deg, var(--color-brand), #ff8533);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -705,13 +696,13 @@
 .dossier-number {
   font-size: 0.9rem;
   font-weight: 700;
-  color: var(--broker-dark);
+  color: var(--bg-primary);
 }
 
 .dossier-classification {
   font-size: 0.6rem;
   letter-spacing: 0.2em;
-  color: var(--broker-dark);
+  color: var(--bg-primary);
   font-weight: 600;
 }
 
@@ -743,7 +734,7 @@
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   margin-bottom: 0.5rem;
 }
 
@@ -757,7 +748,7 @@
 .dossier-content p {
   font-size: 0.9rem;
   line-height: 1.7;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   margin-bottom: 1.5rem;
 }
 
@@ -767,7 +758,7 @@
   gap: 0.5rem;
   background: transparent;
   border: 1px solid rgba(255, 107, 0, 0.3);
-  color: var(--broker-orange);
+  color: var(--color-brand);
   padding: 0.6rem 1rem;
   font-size: 0.75rem;
   cursor: pointer;
@@ -777,9 +768,9 @@
 }
 
 .dossier-cta:hover {
-  background: var(--broker-orange);
-  color: var(--broker-dark);
-  border-color: var(--broker-orange);
+  background: var(--color-brand);
+  color: var(--bg-primary);
+  border-color: var(--color-brand);
 }
 
 .cta-icon {
@@ -856,7 +847,7 @@
 .lead-text {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   margin-bottom: 2rem;
 }
 
@@ -900,7 +891,7 @@
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #2a2520 0%, #1a1815 100%);
-  border: 2px solid var(--broker-orange);
+  border: 2px solid var(--color-brand);
   border-radius: 0 8px 8px 8px;
   padding: 1.5rem;
   display: flex;
@@ -922,7 +913,7 @@
   position: absolute;
   top: -28px;
   left: -2px;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   padding: 0.4rem 1.5rem;
   border-radius: 4px 4px 0 0;
 }
@@ -931,7 +922,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.15em;
-  color: var(--broker-dark);
+  color: var(--bg-primary);
 }
 
 .folder-title {
@@ -949,7 +940,7 @@
   font-size: 1.1rem;
   letter-spacing: 0.15em;
   font-weight: 500;
-  color: var(--broker-orange);
+  color: var(--color-brand);
 }
 
 .folder-seal {
@@ -958,8 +949,8 @@
   right: 1rem;
   font-size: 0.55rem;
   letter-spacing: 0.1em;
-  color: var(--broker-gray);
-  border: 1px solid var(--broker-gray);
+  color: var(--text-muted);
+  border: 1px solid var(--text-muted);
   padding: 0.25rem 0.5rem;
   transform: rotate(-3deg);
 }
@@ -1056,7 +1047,7 @@
 .metric-label {
   font-size: 0.75rem;
   letter-spacing: 0.1em;
-  color: var(--broker-gray);
+  color: var(--text-muted);
   min-width: 80px;
 }
 
@@ -1070,7 +1061,7 @@
 
 .metric-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--broker-orange), #ff8533);
+  background: linear-gradient(90deg, var(--color-brand), #ff8533);
   border-radius: 3px;
   transition: width 0.1s linear;
 }
@@ -1078,7 +1069,7 @@
 .metric-value {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   min-width: 45px;
   text-align: right;
 }
@@ -1135,7 +1126,7 @@
   font-size: 0.75rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--broker-gray);
+  color: var(--text-muted);
 }
 
 .matrix-legend {
@@ -1161,7 +1152,7 @@
 }
 
 .legend-color.forhemit {
-  background: var(--broker-orange);
+  background: var(--color-brand);
 }
 
 .matrix-grid {
@@ -1212,7 +1203,7 @@
 }
 
 .forhemit-bar {
-  background: linear-gradient(90deg, var(--broker-orange), #ff8533);
+  background: linear-gradient(90deg, var(--color-brand), #ff8533);
 }
 
 .bar-value {
@@ -1316,9 +1307,9 @@
 }
 
 .flow-stage.active .stage-node {
-  border-color: var(--broker-orange);
+  border-color: var(--color-brand);
   background: rgba(255, 107, 0, 0.1);
-  box-shadow: 0 0 20px var(--broker-orange-dim);
+  box-shadow: 0 0 20px var(--color-brand-subtle);
 }
 
 .flow-stage.complete .stage-node {
@@ -1329,7 +1320,7 @@
 .stage-pulse {
   position: absolute;
   inset: -4px;
-  border: 2px solid var(--broker-orange);
+  border: 2px solid var(--color-brand);
   border-radius: 50%;
   animation: stage-pulse 1.5s ease-out infinite;
 }
@@ -1343,12 +1334,12 @@
   font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--broker-gray);
+  color: var(--text-muted);
   transition: color 0.3s ease;
 }
 
 .flow-stage.active .stage-name {
-  color: var(--broker-orange);
+  color: var(--color-brand);
 }
 
 .flow-stage.complete .stage-name {
@@ -1368,7 +1359,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--broker-orange), #ff8533);
+  background: linear-gradient(90deg, var(--color-brand), #ff8533);
   transition: width 0.5s ease;
 }
 
@@ -1398,7 +1389,7 @@
   display: block;
   font-size: 0.7rem;
   letter-spacing: 0.15em;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   margin-bottom: 0.75rem;
 }
 
@@ -1411,7 +1402,7 @@
 .stage-detail p {
   font-size: 0.85rem;
   line-height: 1.6;
-  color: var(--broker-gray);
+  color: var(--text-muted);
 }
 
 /* ============================================
@@ -1467,13 +1458,13 @@
 .point-check {
   width: 24px;
   height: 24px;
-  background: var(--broker-orange);
+  background: var(--color-brand);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.8rem;
-  color: var(--broker-dark);
+  color: var(--bg-primary);
   flex-shrink: 0;
 }
 
@@ -1548,7 +1539,7 @@
   right: 1.5rem;
   width: 70px;
   height: 70px;
-  border: 3px solid var(--broker-orange);
+  border: 3px solid var(--color-brand);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -1561,7 +1552,7 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   text-align: center;
   line-height: 1.2;
 }
@@ -1583,7 +1574,7 @@
 
 .brokers-cta {
   padding: 8rem 0;
-  background: linear-gradient(to bottom, var(--broker-dark-2), var(--broker-dark));
+  background: linear-gradient(to bottom, var(--broker-dark-2), var(--bg-primary));
 }
 
 .cta-content {
@@ -1597,10 +1588,10 @@
   font-size: 0.75rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--broker-orange);
+  color: var(--color-brand);
   margin-bottom: 1.5rem;
   padding: 0.5rem 1.5rem;
-  border: 1px solid var(--broker-orange);
+  border: 1px solid var(--color-brand);
 }
 
 .cta-content h2 {
@@ -1613,7 +1604,7 @@
 .cta-subtitle {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   margin-bottom: 2.5rem;
 }
 
@@ -1638,15 +1629,15 @@
 }
 
 .cta-button.primary {
-  background: var(--broker-orange);
-  color: var(--broker-dark);
+  background: var(--color-brand);
+  color: var(--bg-primary);
   font-weight: 500;
 }
 
 .cta-button.primary:hover {
   background: #ff8533;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px var(--broker-orange-glow);
+  box-shadow: 0 10px 30px var(--glow-brand);
 }
 
 .cta-button.primary:disabled,
@@ -1659,12 +1650,12 @@
 
 .cta-button.secondary {
   background: transparent;
-  color: var(--broker-white);
+  color: var(--text-primary);
   border: 1px solid rgba(255, 107, 0, 0.4);
 }
 
 .cta-button.secondary:hover {
-  border-color: var(--broker-orange);
+  border-color: var(--color-brand);
   background: rgba(255, 107, 0, 0.1);
 }
 
@@ -1674,11 +1665,11 @@
 
 .cta-contact {
   font-size: 0.9rem;
-  color: var(--broker-gray);
+  color: var(--text-muted);
 }
 
 .cta-contact a {
-  color: var(--broker-orange);
+  color: var(--color-brand);
   text-decoration: none;
   margin-left: 0.5rem;
   transition: color 0.3s ease;
@@ -1889,7 +1880,7 @@
 
 .comparison-table .table-cell.metric-label {
   font-weight: 600;
-  color: var(--broker-gray);
+  color: var(--text-muted);
   text-transform: uppercase;
 }
 
@@ -1900,7 +1891,7 @@
 }
 
 .comparison-table .forhemit-header {
-  color: var(--broker-orange);
+  color: var(--color-brand);
   font-weight: 500;
   border-left: 1px solid rgba(255, 107, 0, 0.1);
 }
@@ -1928,16 +1919,16 @@
 
 .comparison-table .table-row .metric-label {
   font-weight: 500;
-  color: var(--broker-white);
+  color: var(--text-primary);
 }
 
 .comparison-table .traditional-cell {
-  color: var(--broker-gray);
+  color: var(--text-muted);
   border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .comparison-table .forhemit-cell {
-  color: var(--broker-white);
+  color: var(--text-primary);
   border-left: 1px solid rgba(255, 255, 255, 0.05);
   background: rgba(0, 255, 136, 0.05);
 }
@@ -1968,7 +1959,7 @@
     content: attr(data-label);
     display: block;
     font-size: 0.7rem;
-    color: var(--broker-gray);
+    color: var(--text-muted);
     text-transform: uppercase;
     margin-bottom: 0.25rem;
   }
@@ -1978,7 +1969,7 @@
 .cta-lead {
   font-size: 1rem;
   line-height: 1.8;
-  color: var(--broker-gray-light);
+  color: var(--border-subtle);
   margin-bottom: 2.5rem;
   margin-top: 1.5rem;
 }

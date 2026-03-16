@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ThemeToggle } from "../ui/ThemeToggle";
+import "./navigation.css";
 
 interface NavigationProps {
   variant?: "dark" | "light";
@@ -30,6 +31,9 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
   if (pathname === "/coming-soon") {
     return null;
   }
+
+  // Check if we're on the home page
+  const isHomePage = pathname === "/";
 
   // Filter out current page from primary navigation
   const visibleNavItems = navItems.filter((item) => {
@@ -87,6 +91,14 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`}
       ref={menuRef}
     >
+      {/* Logo - hidden on home page */}
+      {!isHomePage && (
+        <Link href="/" className="nav-logo">
+          <span className="nav-logo-text">Forhemit</span>
+          <span className="nav-logo-underline" />
+        </Link>
+      )}
+
       {/* Theme Toggle */}
       <ThemeToggle />
 
