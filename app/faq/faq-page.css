@@ -2,6 +2,11 @@
    FAQ PAGE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+/* FAQ Hero - align background from top to show head */
+.faq-hero {
+  background-position: center top !important;
+}
+
 /* Three Column Layout */
 .faq-three-column-grid {
   display: grid;
