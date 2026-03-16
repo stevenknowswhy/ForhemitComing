@@ -76,7 +76,7 @@
 /* ── Desktop (1024px+) ── */
 @media (min-width: 1024px) {
   .accounting-wrapper .container {
-    max-width: 1000px;
+    max-width: 1400px;
   }
 
   /* Hero */
@@ -85,7 +85,12 @@
   }
 
   .accounting-hero-content {
-    max-width: 900px;
+    max-width: 1200px;
+  }
+
+  /* Allow full-width sections on desktop */
+  .accounting-section {
+    padding: var(--space-2xl) var(--space-xl);
   }
 
   /* Threats */
@@ -111,16 +116,21 @@
 /* ── Large Desktop (1280px+) ── */
 @media (min-width: 1280px) {
   .accounting-wrapper .container {
-    max-width: 1100px;
+    max-width: 1600px;
   }
 
   .accounting-title {
-    font-size: 4.5rem;
+    font-size: 5rem;
   }
 
   /* Section Spacing */
   .accounting-section {
-    padding: 8rem 0;
+    padding: 10rem 0;
+  }
+
+  /* Expand hero content further */
+  .accounting-hero-content {
+    max-width: 1400px;
   }
 }
 

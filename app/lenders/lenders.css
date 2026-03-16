@@ -212,9 +212,16 @@ a:focus-visible {
 
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Desktop expansion */
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1600px;
+  }
 }
 
 /* ── Sections ── */
@@ -229,7 +236,7 @@ a:focus-visible {
 
 .section-header {
   text-align: center;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto 4rem;
 }
 
@@ -259,7 +266,7 @@ a:focus-visible {
 
 .lenders-hero-content {
   text-align: center;
-  max-width: 900px;
+  max-width: 1400px;
 }
 
 .lenders-eyebrow {
@@ -540,7 +547,7 @@ a:focus-visible {
 }
 
 .bottom-line-content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1066,7 +1073,7 @@ a:focus-visible {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1.5rem;
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
@@ -1098,7 +1105,7 @@ a:focus-visible {
 
 .process-timeline {
   position: relative;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1173,7 +1180,7 @@ a:focus-visible {
 }
 
 .faq-list {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1560,7 +1567,7 @@ a:focus-visible {
 }
 
 .faq-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -1571,7 +1578,7 @@ a:focus-visible {
 }
 
 .cta-content {
-  max-width: 900px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
