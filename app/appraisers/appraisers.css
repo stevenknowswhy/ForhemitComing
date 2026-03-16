@@ -645,7 +645,7 @@
 .coop-highlight {
   max-width: 800px;
   margin: 0 auto;
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
   border: 1px solid var(--appraisers-border-accent);
   border-radius: 12px;
   padding: 2rem;
@@ -745,7 +745,7 @@
 
 /* ── CTA Section ── */
 .cta-section {
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.05) 50%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-subtle) 50%, transparent 100%);
 }
 
 .cta-content {

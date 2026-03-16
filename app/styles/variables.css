@@ -2,7 +2,7 @@
 :root {
   /* Home Page Colors */
   --primary-orange: #FF6B00;
-  --primary-red: #FF3D00;
+  --primary-red: var(--color-brand-hover);
   --dark-bg: #1a1209;
   --light-text: #ffffff;
   --muted-text: #a0a0a0;

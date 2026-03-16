@@ -1,7 +1,7 @@
 /* ── PROGRESS BAR ── */
 .progress-container {
   padding: 1.25rem 1.5rem 0.75rem;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   z-index: 10;
   flex-shrink: 0;
 }
@@ -19,19 +19,19 @@
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--light-text);
+  color: var(--text-secondary);
 }
 
 .progress-percent {
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--primary-orange);
+  color: var(--color-brand);
 }
 
 .progress-bar {
   height: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--progress-bar-bg);
   border-radius: 2px;
   overflow: hidden;
   margin-bottom: 0.75rem;
@@ -39,7 +39,7 @@
 
 .progress-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--primary-orange), var(--primary-red));
+  background: linear-gradient(90deg, var(--color-brand), var(--color-brand-hover));
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 2px;
 }
@@ -53,19 +53,19 @@
 .progress-dot {
   flex: 1;
   height: 3px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--progress-bar-bg);
   border-radius: 2px;
   transition: all 0.3s ease;
 }
 
 .progress-dot.active {
-  background: linear-gradient(90deg, var(--primary-orange), var(--primary-red));
+  background: linear-gradient(90deg, var(--color-brand), var(--color-brand-hover));
   opacity: 0.5;
 }
 
 .progress-dot.current {
   opacity: 1;
-  box-shadow: 0 0 8px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 0 8px var(--color-brand-subtle);
 }
 
 /* Responsive */

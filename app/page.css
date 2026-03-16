@@ -1,7 +1,7 @@
 /* ── HOME PAGE STYLES ── */
 .home-wrapper {
   --primary-orange: #FF6B00;
-  --primary-red: #FF3D00;
+  --primary-red: var(--color-brand-hover);
   --dark-bg: #1a1209;
   --light-text: #ffffff;
   --muted-text: #a0a0a0;
@@ -137,7 +137,7 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   margin-bottom: 0.5rem;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  text-shadow: 0 4px 12px var(--shadow-color);
   transition: filter 0.4s ease, transform 0.4s ease;
   display: inline-block;
 }
@@ -295,7 +295,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(14, 14, 12, 0.95);
+  background: var(--bg-primary);
   border-top: 1px solid var(--muted-text);
   border-top-opacity: 0.2;
   z-index: 10;
@@ -432,7 +432,7 @@ body {
 .legal-tabs {
   display: flex;
   border-bottom: 1px solid var(--glass-border);
-  background: rgba(10, 10, 10, 0.5);
+  background: var(--bg-primary);
   padding-right: 2.5rem;
 }
 
@@ -597,7 +597,7 @@ body {
 /* Progress Container */
 .progress-container {
   padding: 1.25rem 1.5rem 0.75rem;
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+  background: linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-primary) 100%);
   z-index: 10;
   flex-shrink: 0;
 }
@@ -753,7 +753,7 @@ body {
 
 /* Modal Image - Mobile: top, Desktop: right */
 .modal-image-side {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 61, 0, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, var(--color-brand-hover) 100%);
   position: relative;
   overflow: hidden;
   min-height: 120px;
@@ -995,7 +995,7 @@ body {
   border: 2px dashed rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.03) 0%, rgba(255, 61, 0, 0.02) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-hover) 100%);
   transition: all 0.3s ease;
   cursor: pointer;
   overflow: hidden;
@@ -1003,7 +1003,7 @@ body {
 
 .upload-dropzone:hover {
   border-color: var(--primary-orange);
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.06) 0%, rgba(255, 61, 0, 0.04) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-hover) 100%);
 }
 
 .upload-dropzone-content {
@@ -1090,7 +1090,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 1rem;
-  background: rgba(10, 10, 10, 0.9);
+  background: var(--bg-primary);
   backdrop-filter: blur(4px);
 }
 
@@ -1119,8 +1119,8 @@ body {
   align-items: center;
   gap: 1rem;
   padding: 1.25rem 1.5rem;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.04) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: linear-gradient(135deg, var(--color-success) 0%, var(--color-success) 100%);
+  border: 1px solid var(--color-success);
   border-radius: 12px;
 }
 
@@ -1130,9 +1130,9 @@ body {
   justify-content: center;
   width: 48px;
   height: 48px;
-  background: rgba(16, 185, 129, 0.15);
+  background: var(--color-success);
   border-radius: 12px;
-  color: #10B981;
+  color: var(--color-success);
   flex-shrink: 0;
 }
 
@@ -1147,7 +1147,7 @@ body {
   font-family: 'Inter', sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: #10B981;
+  color: var(--color-success);
 }
 
 .upload-success-subtitle {
@@ -1172,9 +1172,9 @@ body {
 }
 
 .upload-remove-btn:hover {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.3);
-  color: #ef4444;
+  background: var(--color-error);
+  border-color: var(--color-error);
+  color: var(--color-error);
 }
 
 /* Resume Toggle */
@@ -1215,7 +1215,7 @@ body {
   background: var(--light-text);
   border-radius: 50%;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px var(--shadow-color);
 }
 
 .toggle-input:checked + .toggle-slider {
@@ -1292,12 +1292,12 @@ body {
 }
 
 .preview-status.uploaded {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10B981;
+  background: var(--color-success);
+  color: var(--color-success);
 }
 
 .preview-status.pending {
-  background: rgba(255, 107, 0, 0.15);
+  background: var(--color-brand-subtle);
   color: var(--primary-orange);
 }
 

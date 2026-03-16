@@ -108,7 +108,7 @@
 }
 
 .assessment-item:hover {
-  background: rgba(255, 107, 0, 0.15);
+  background: var(--color-brand-subtle);
   transform: scale(1.05);
 }
 

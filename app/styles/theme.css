@@ -15,7 +15,7 @@
   --bg-tertiary: #141410;
   --bg-card: rgba(255, 255, 255, 0.03);
   --bg-glass: rgba(255, 255, 255, 0.05);
-  --bg-dropdown: rgba(14, 14, 12, 0.95);
+  --bg-dropdown: var(--bg-primary);
   --bg-input: rgba(255, 255, 255, 0.05);
   --bg-hover: rgba(255, 255, 255, 0.08);
 
@@ -31,11 +31,11 @@
   --border-hover: rgba(255, 107, 0, 0.5);
 
   /* Effects */
-  --shadow-color: rgba(0, 0, 0, 0.5);
-  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.5);
-  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --shadow-color: var(--shadow-color);
+  --shadow-soft: 0 10px 40px var(--shadow-color);
+  --shadow-medium: 0 4px 20px var(--shadow-color);
   --glow-brand: 0 0 12px rgba(255, 107, 0, 0.5);
-  --glow-subtle: 0 0 20px rgba(255, 107, 0, 0.15);
+  --glow-subtle: 0 0 20px var(--color-brand-subtle);
 
   /* Mesh Gradient - warm sepia tones */
   --mesh-color-1: rgba(139, 90, 43, 0.25);
@@ -55,6 +55,28 @@
   /* Selection */
   --selection-bg: rgba(255, 107, 0, 0.3);
   --selection-text: #f5f0e8;
+
+  /* Status Colors */
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success);
+  --color-success-border: var(--color-success);
+  --color-success-subtle: var(--color-success);
+  --color-error: var(--color-error);
+  --color-error-bg: var(--color-error);
+  --color-error-border: var(--color-error);
+  
+  /* Overlay Backgrounds */
+  --overlay-heavy: rgba(0, 0, 0, 0.9);
+  --overlay-medium: rgba(0, 0, 0, 0.8);
+  --overlay-light: var(--shadow-color);
+  
+  /* Component-specific */
+  --toggle-shadow: 0 2px 4px var(--shadow-color);
+  --progress-bar-bg: rgba(255, 255, 255, 0.1);
+  --dropzone-border: rgba(255, 255, 255, 0.2);
+  --dropzone-bg: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
+  --badge-bg: rgba(255, 255, 255, 0.08);
+  --badge-border: rgba(255, 255, 255, 0.15);
 }
 
 /* ========== LIGHT THEME ========== */
@@ -105,6 +127,28 @@
   /* Selection */
   --selection-bg: rgba(255, 107, 0, 0.2);
   --selection-text: #1A1612;
+
+  /* Status Colors */
+  --color-success: #059669;
+  --color-success-bg: rgba(5, 150, 105, 0.15);
+  --color-success-border: rgba(5, 150, 105, 0.25);
+  --color-success-subtle: rgba(5, 150, 105, 0.08);
+  --color-error: #dc2626;
+  --color-error-bg: rgba(220, 38, 38, 0.1);
+  --color-error-border: rgba(220, 38, 38, 0.25);
+  
+  /* Overlay Backgrounds */
+  --overlay-heavy: rgba(255, 255, 255, 0.95);
+  --overlay-medium: rgba(255, 255, 255, 0.8);
+  --overlay-light: var(--shadow-color);
+  
+  /* Component-specific */
+  --toggle-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --progress-bar-bg: rgba(0, 0, 0, 0.08);
+  --dropzone-border: rgba(0, 0, 0, 0.15);
+  --dropzone-bg: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
+  --badge-bg: rgba(0, 0, 0, 0.05);
+  --badge-border: var(--shadow-color);
 }
 
 /* ========== SMOOTH THEME TRANSITIONS ========== */

@@ -14,7 +14,7 @@
   --broker-gray: #888888;
   --broker-gray-light: #cccccc;
   --broker-white: #ffffff;
-  --grid-color: rgba(255, 107, 0, 0.08);
+  --grid-color: var(--color-brand-subtle);
   --radar-green: #00ff88;
 }
 
@@ -67,8 +67,8 @@
   position: absolute;
   inset: 0;
   background: 
-    radial-gradient(ellipse at 20% 30%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(255, 107, 0, 0.05) 0%, transparent 40%);
+    radial-gradient(ellipse at 20% 30%, var(--color-brand-subtle) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, var(--color-brand-subtle) 0%, transparent 40%);
 }
 
 /* ============================================
@@ -82,7 +82,7 @@
   right: 0;
   z-index: 100;
   padding: 1.5rem 2rem;
-  background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+  background: linear-gradient(to bottom, var(--bg-primary) 0%, transparent 100%);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -213,9 +213,9 @@
 
 @keyframes glitch {
   0%, 100% { text-shadow: none; }
-  25% { text-shadow: -2px 0 #ff4444, 2px 0 var(--radar-green); }
-  50% { text-shadow: 2px 0 #ff4444, -2px 0 var(--radar-green); }
-  75% { text-shadow: -1px 0 #ff4444, 1px 0 var(--radar-green); }
+  25% { text-shadow: -2px 0 var(--color-error), 2px 0 var(--radar-green); }
+  50% { text-shadow: 2px 0 var(--color-error), -2px 0 var(--radar-green); }
+  75% { text-shadow: -1px 0 var(--color-error), 1px 0 var(--radar-green); }
 }
 
 .hero-subtitle {
@@ -274,7 +274,7 @@
 
 .radar-ring {
   position: absolute;
-  border: 1px solid rgba(255, 107, 0, 0.15);
+  border: 1px solid var(--color-brand-subtle);
   border-radius: 50%;
   top: 50%;
   left: 50%;
@@ -405,7 +405,7 @@
 .zone-risk {
   top: 15%;
   left: 10%;
-  color: #ff4444;
+  color: var(--color-error);
 }
 
 .zone-safe {
@@ -425,7 +425,7 @@
   justify-content: center;
   gap: 2rem;
   padding: 1rem 2rem;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--shadow-color);
   border-top: 1px solid rgba(255, 107, 0, 0.2);
   border-bottom: 1px solid rgba(255, 107, 0, 0.2);
   backdrop-filter: blur(10px);
@@ -554,7 +554,7 @@
   margin-bottom: 1rem;
   padding: 0.5rem 1rem;
   border: 1px solid rgba(255, 107, 0, 0.3);
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
 }
 
 .section-header h2 {
@@ -578,7 +578,7 @@
 
 .briefing-section {
   padding: 8rem 0;
-  background: linear-gradient(to bottom, transparent, rgba(255, 107, 0, 0.02), transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-brand-subtle), transparent);
 }
 
 .dossier-grid {
@@ -590,7 +590,7 @@
 .dossier-card {
   position: relative;
   background: var(--broker-dark-2);
-  border: 1px solid rgba(255, 107, 0, 0.15);
+  border: 1px solid var(--color-brand-subtle);
   transform: translateY(40px);
   opacity: 0;
   transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -605,7 +605,7 @@
 .dossier-card.hovered {
   transform: translateY(-8px) scale(1.02);
   border-color: var(--broker-orange);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--broker-orange-dim);
+  box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px var(--broker-orange-dim);
 }
 
 /* Corner brackets for dossier cards */
@@ -769,7 +769,7 @@
 .dossier-highlight {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, transparent 40%, rgba(255, 107, 0, 0.05) 100%);
+  background: linear-gradient(135deg, transparent 40%, var(--color-brand-subtle) 100%);
   opacity: 0;
   transition: opacity 0.3s ease;
   pointer-events: none;
@@ -933,7 +933,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.6rem;
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
   border: 1px solid rgba(255, 107, 0, 0.1);
   border-radius: 4px;
   opacity: 0;
@@ -1109,7 +1109,7 @@
 }
 
 .legend-color.traditional {
-  background: #ff4444;
+  background: var(--color-error);
 }
 
 .legend-color.forhemit {
@@ -1132,7 +1132,7 @@
 }
 
 .matrix-row.hovered {
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
 }
 
 .row-label {
@@ -1160,7 +1160,7 @@
 }
 
 .traditional-bar {
-  background: linear-gradient(90deg, #ff4444, #ff6666);
+  background: linear-gradient(90deg, var(--color-error), #ff6666);
 }
 
 .forhemit-bar {
@@ -1208,7 +1208,7 @@
 
 .flow-section {
   padding: 8rem 0;
-  background: linear-gradient(to bottom, transparent, rgba(255, 107, 0, 0.02), transparent);
+  background: linear-gradient(to bottom, transparent, var(--color-brand-subtle), transparent);
 }
 
 .flow-wrapper {
@@ -1335,14 +1335,14 @@
 .stage-detail {
   text-align: center;
   padding: 1.5rem;
-  background: rgba(255, 107, 0, 0.03);
+  background: var(--color-brand-subtle);
   border: 1px solid rgba(255, 107, 0, 0.1);
   border-radius: 8px;
   transition: all 0.3s ease;
 }
 
 .stage-detail:hover {
-  background: rgba(255, 107, 0, 0.08);
+  background: var(--color-brand-subtle);
   border-color: rgba(255, 107, 0, 0.3);
 }
 
@@ -1404,7 +1404,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 1rem;
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
   border: 1px solid rgba(255, 107, 0, 0.1);
   border-radius: 4px;
   font-size: 0.9rem;
@@ -1442,7 +1442,7 @@
   border-radius: 4px;
   padding: 2rem;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px var(--shadow-color);
 }
 
 .contract-lines {
@@ -1861,7 +1861,7 @@
 }
 
 .comparison-table .table-row.hovered {
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
 }
 
 .comparison-table .table-row .table-cell {

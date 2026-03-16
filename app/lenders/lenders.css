@@ -15,21 +15,21 @@
   --lenders-accent-light: var(--color-brand-hover);
   --lenders-border: var(--border-subtle);
   --lenders-border-accent: var(--border-accent);
-  --lenders-alert: #ff4444;
+  --lenders-alert: var(--color-error);
   --lenders-success: #00cc66;
   --lenders-alert-light: #ff6666;
   --lenders-success-light: #66ff99;
   /* Theme-aware overlay colors */
-  --lenders-overlay-bg: rgba(20, 20, 16, 0.5);
-  --lenders-overlay-dark: rgba(20, 20, 16, 0.9);
-  --lenders-shadow-color: rgba(0, 0, 0, 0.3);
+  --lenders-overlay-bg: var(--bg-secondary);
+  --lenders-overlay-dark: var(--bg-secondary);
+  --lenders-shadow-color: var(--shadow-color);
 }
 
 /* Light Theme Overrides */
 [data-theme="light"] {
   --lenders-overlay-bg: rgba(245, 242, 238, 0.8);
   --lenders-overlay-dark: rgba(255, 255, 255, 0.95);
-  --lenders-shadow-color: rgba(0, 0, 0, 0.1);
+  --lenders-shadow-color: var(--shadow-color);
 }
 
 /* ── Base ── */
@@ -299,12 +299,12 @@
 }
 
 .pitch-card.crisis {
-  border-color: rgba(255, 68, 68, 0.3);
+  border-color: var(--color-error);
 }
 
 .pitch-card.crisis:hover {
-  border-color: rgba(255, 68, 68, 0.6);
-  box-shadow: 0 20px 40px rgba(255, 68, 68, 0.1);
+  border-color: var(--color-error);
+  box-shadow: 0 20px 40px var(--color-error);
 }
 
 .pitch-card.solution {
@@ -333,7 +333,7 @@
 }
 
 .crisis-image {
-  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, var(--lenders-overlay-dark) 100%);
+  background: linear-gradient(135deg, var(--color-error) 0%, var(--lenders-overlay-dark) 100%);
 }
 
 .solution-image {
@@ -357,8 +357,8 @@
   display: inline-flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  background: rgba(255, 68, 68, 0.2);
-  border: 1px solid rgba(255, 68, 68, 0.4);
+  background: var(--color-error);
+  border: 1px solid var(--color-error);
   border-radius: 4px;
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.75rem;
@@ -412,7 +412,7 @@
 }
 
 .pitch-card.crisis .pitch-quote {
-  border-left-color: rgba(255, 68, 68, 0.4);
+  border-left-color: var(--color-error);
 }
 
 .pitch-card.solution .pitch-quote {

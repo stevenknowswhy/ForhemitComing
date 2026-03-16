@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: var(--overlay-heavy);
   backdrop-filter: blur(10px);
   z-index: 1000;
   display: flex;
@@ -131,7 +131,7 @@
 
 /* Modal Image */
 .modal-image-side {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 61, 0, 0.05) 100%);
+  background: var(--dropzone-bg);
   position: relative;
   overflow: hidden;
   min-height: 120px;
@@ -536,11 +536,11 @@
   background: var(--text-primary);
   border-radius: 50%;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--toggle-shadow);
 }
 
 .toggle-input:checked + .toggle-slider {
-  background: linear-gradient(135deg, var(--color-brand), #FF3D00);
+  background: linear-gradient(135deg, var(--color-brand), var(--color-brand-hover));
 }
 
 .toggle-input:checked + .toggle-slider::before {
@@ -613,8 +613,8 @@
 }
 
 .preview-status.uploaded {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10B981;
+  background: var(--color-success-bg);
+  color: var(--color-success);
 }
 
 .preview-status.pending {

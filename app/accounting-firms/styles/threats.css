@@ -5,7 +5,7 @@
 /* ── Silver Tsunami Section ── */
 .tsunami-section {
   padding: var(--space-xl) 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.03) 50%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-subtle) 50%, transparent 100%);
 }
 
 .tsunami-grid {
@@ -62,7 +62,7 @@
 .tsunami-image {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px var(--shadow-color);
 }
 
 .tsunami-image img {
@@ -134,7 +134,7 @@
 
 .reality-card:hover {
   border-color: var(--af-border-accent);
-  background: rgba(255, 107, 0, 0.03);
+  background: var(--color-brand-subtle);
 }
 
 .reality-card:nth-child(2):hover {

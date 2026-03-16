@@ -3,7 +3,7 @@
 
 .intro-wrapper {
   --primary-orange: var(--color-brand);
-  --primary-red: #FF3D00;
+  --primary-red: var(--color-brand-hover);
   --dark-bg: var(--bg-secondary);
   --light-text: var(--text-primary);
   --muted-text: var(--text-secondary);
@@ -156,7 +156,7 @@
 }
 
 .intro-card:not(.disabled):hover {
-  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 61, 0, 0.03) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
   border-color: var(--primary-orange);
   transform: translateX(5px);
 }
@@ -470,7 +470,7 @@
 
 /* Sub-option card hover effect */
 .sub-option-card:hover {
-  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 61, 0, 0.03) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
 }
 
 /* Early Access Email Reveal */

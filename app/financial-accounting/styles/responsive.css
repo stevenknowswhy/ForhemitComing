@@ -34,7 +34,7 @@
 
   .tab-button.active {
     border-color: var(--fa-accent);
-    background: rgba(255, 107, 0, 0.08);
+    background: var(--color-brand-subtle);
   }
 
   .tab-icon {

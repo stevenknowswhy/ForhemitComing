@@ -22,7 +22,7 @@
   margin-bottom: 1rem;
   padding: 0.4rem 1rem;
   border: 1px solid rgba(255, 107, 0, 0.3);
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
 }
 
 .multiplier-header h2 {
@@ -68,7 +68,7 @@
 }
 
 .table-row:hover {
-  background: rgba(255, 107, 0, 0.03);
+  background: var(--color-brand-subtle);
 }
 
 .table-row:last-child {
@@ -90,13 +90,13 @@
 .terminal-col {
   flex: 1.2;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(255, 68, 68, 0.03);
+  background: var(--color-error);
 }
 
 .stefano-col {
   flex: 1.2;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(255, 107, 0, 0.05);
+  background: var(--color-brand-subtle);
 }
 
 .why-col {
@@ -151,7 +151,7 @@
 }
 
 .amount.zero {
-  color: #ff4444;
+  color: var(--color-error);
   font-weight: 500;
 }
 
@@ -164,7 +164,7 @@
 
 .amount.total-zero {
   font-size: 1.5rem;
-  color: #ff4444;
+  color: var(--color-error);
   font-weight: 700;
 }
 
@@ -197,7 +197,7 @@
 
 /* Total Row Styling */
 .total-row {
-  background: rgba(255, 107, 0, 0.08) !important;
+  background: var(--color-brand-subtle) !important;
   border-top: 2px solid rgba(255, 107, 0, 0.3);
 }
 
@@ -209,7 +209,7 @@
 .ghost-practice-callout {
   display: flex;
   gap: 1.5rem;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08), rgba(255, 107, 0, 0.02));
+  background: linear-gradient(135deg, var(--color-brand-subtle), var(--color-brand-subtle));
   border: 1px solid rgba(255, 107, 0, 0.2);
   border-radius: 12px;
   padding: 2rem;

@@ -22,7 +22,7 @@
   --wealth-border-accent: var(--border-accent);
   --wealth-success: #00cc66;
   --wealth-warning: #ffaa00;
-  --wealth-danger: #ff4444;
+  --wealth-danger: var(--color-error);
   
   /* Animation timing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -414,7 +414,7 @@
 .warning-path:hover {
   border-color: var(--wealth-border-accent);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--shadow-color);
 }
 
 .warning-path.traditional {
@@ -463,8 +463,8 @@
 }
 
 .flow-step.loss {
-  background: rgba(255, 68, 68, 0.15);
-  border: 1px solid rgba(255, 68, 68, 0.3);
+  background: var(--color-error);
+  border: 1px solid var(--color-error);
 }
 
 .flow-step.gain {
@@ -569,7 +569,7 @@
 .benefit-card-interactive:hover {
   border-color: var(--wealth-border-accent);
   transform: translateY(-6px);
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 25px 50px var(--shadow-color);
 }
 
 .benefit-icon-wrapper {
@@ -733,7 +733,7 @@
 }
 
 .result-item.traditional {
-  border: 1px solid rgba(255, 68, 68, 0.2);
+  border: 1px solid var(--color-error);
 }
 
 .result-item.esop {
@@ -1188,7 +1188,7 @@
 
 /* ── CTA Section ── */
 .cta-section {
-  background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 0, 0.03) 30%, rgba(255, 107, 0, 0.06) 70%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-subtle) 30%, var(--color-brand-subtle) 70%, transparent 100%);
 }
 
 .cta-content {
@@ -1242,12 +1242,12 @@
 .cta-option:hover {
   border-color: var(--wealth-border-accent);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--shadow-color);
 }
 
 .cta-option.primary {
   border-color: var(--wealth-border-accent);
-  background: linear-gradient(135deg, var(--wealth-bg-card) 0%, rgba(255, 107, 0, 0.05) 100%);
+  background: linear-gradient(135deg, var(--wealth-bg-card) 0%, var(--color-brand-subtle) 100%);
 }
 
 .cta-option-badge {

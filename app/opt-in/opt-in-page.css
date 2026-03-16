@@ -167,7 +167,7 @@
 /* Submit Button */
 .opt-in-submit {
   padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, var(--color-brand) 0%, #FF3D00 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-hover) 100%);
   border: none;
   border-radius: 8px;
   color: var(--text-inverse);
@@ -267,9 +267,9 @@
 }
 
 .opt-out-btn:hover:not(:disabled) {
-  border-color: #ef4444;
-  color: #ef4444;
-  background: rgba(239, 68, 68, 0.05);
+  border-color: var(--color-error);
+  color: var(--color-error);
+  background: var(--color-error);
 }
 
 .opt-out-btn:disabled {

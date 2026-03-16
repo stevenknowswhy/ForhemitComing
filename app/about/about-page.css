@@ -17,13 +17,13 @@
   --about-muted: var(--text-muted);
   --about-border: var(--border-accent);
   /* Theme-aware overlay and shadow colors */
-  --about-overlay-dark: rgba(14, 14, 12, 0.8);
-  --about-overlay-medium: rgba(14, 14, 12, 0.6);
-  --about-overlay-heavy: rgba(14, 14, 12, 0.9);
-  --about-shadow-color: rgba(0, 0, 0, 0.3);
+  --about-overlay-dark: var(--bg-primary);
+  --about-overlay-medium: var(--bg-primary);
+  --about-overlay-heavy: var(--bg-primary);
+  --about-shadow-color: var(--shadow-color);
   --about-shadow-light: rgba(0, 0, 0, 0.12);
   --about-shadow-medium: rgba(0, 0, 0, 0.15);
-  --about-shadow-heavy: rgba(0, 0, 0, 0.4);
+  --about-shadow-heavy: var(--shadow-color);
 }
 
 /* Light Theme Overrides */
@@ -31,7 +31,7 @@
   --about-overlay-dark: rgba(26, 22, 18, 0.7);
   --about-overlay-medium: rgba(26, 22, 18, 0.5);
   --about-overlay-heavy: rgba(26, 22, 18, 0.85);
-  --about-shadow-color: rgba(0, 0, 0, 0.1);
+  --about-shadow-color: var(--shadow-color);
   --about-shadow-light: rgba(0, 0, 0, 0.06);
   --about-shadow-medium: rgba(0, 0, 0, 0.08);
   --about-shadow-heavy: rgba(0, 0, 0, 0.15);
@@ -1318,7 +1318,7 @@
   height: 8px;
   background: radial-gradient(circle at 30% 30%, #aaa, #666);
   border-radius: 50%;
-  box-shadow: inset -1px -1px 2px rgba(0,0,0,0.5);
+  box-shadow: inset -1px -1px 2px var(--shadow-color);
 }
 
 .closed-plate {
@@ -1326,7 +1326,7 @@
   border: 2px solid #5c0011;
   border-radius: 4px;
   padding: 8px 14px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 2px 4px var(--shadow-color), inset 0 1px 0 rgba(255,255,255,0.2), inset 0 -1px 0 var(--shadow-color);
   transform: perspective(100px) rotateX(-2deg);
 }
 
@@ -1336,7 +1336,7 @@
   font-weight: 800;
   letter-spacing: 0.15em;
   color: #fff;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.5), 0 0 4px rgba(255,255,255,0.3);
+  text-shadow: 1px 1px 0 var(--shadow-color), 0 0 4px rgba(255,255,255,0.3);
 }
 
 /* ── Grid Layouts ── */

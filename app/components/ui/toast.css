@@ -23,7 +23,7 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 12px;
   box-shadow: 
-    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    0 10px 40px -10px var(--shadow-color),
     0 0 0 1px rgba(255, 255, 255, 0.02);
   animation: toastSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: auto;
@@ -67,11 +67,11 @@
 }
 
 .toast-error {
-  border-left: 3px solid #ef4444;
+  border-left: 3px solid var(--color-error);
 }
 
 .toast-error .toast-icon {
-  color: #ef4444;
+  color: var(--color-error);
 }
 
 .toast-info {
@@ -160,7 +160,7 @@
 }
 
 .toast-error .toast-progress-bar {
-  background: #ef4444;
+  background: var(--color-error);
 }
 
 .toast-info .toast-progress-bar {

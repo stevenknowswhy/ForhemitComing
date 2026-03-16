@@ -9,7 +9,7 @@
   --bbs-bg: var(--bg-primary);
   --bbs-bg-secondary: var(--bg-secondary);
   --bbs-bg-tertiary: var(--bg-tertiary);
-  --bbs-bg-dark: rgba(0, 0, 0, 0.3);
+  --bbs-bg-dark: var(--shadow-color);
   --bbs-text-primary: var(--text-primary);
   --bbs-text-secondary: var(--text-secondary);
   --bbs-text-muted: var(--text-muted);

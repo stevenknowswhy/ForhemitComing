@@ -15,8 +15,8 @@
   --bo-muted: var(--text-muted);
   --bo-border: var(--border-accent);
   /* Theme-aware colors */
-  --bo-overlay-light: rgba(0, 0, 0, 0.3);
-  --bo-overlay-medium: rgba(0, 0, 0, 0.5);
+  --bo-overlay-light: var(--shadow-color);
+  --bo-overlay-medium: var(--shadow-color);
   --bo-overlay-heavy: rgba(0, 0, 0, 0.7);
   --bo-overlay-darker: rgba(0, 0, 0, 0.8);
 }

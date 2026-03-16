@@ -33,7 +33,7 @@
   height: 80%;
   top: 10%;
   left: 10%;
-  border-top-color: var(--color-primary-red, #FF3D00);
+  border-top-color: var(--color-primary-red, var(--color-brand-hover));
   animation-duration: 1s;
   animation-direction: reverse;
 }

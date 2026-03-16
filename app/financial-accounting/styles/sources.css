@@ -52,7 +52,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 107, 0, 0.15);
+  background: var(--color-brand-subtle);
   border-radius: 50%;
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.7rem;

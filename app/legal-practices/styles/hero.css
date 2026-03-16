@@ -142,7 +142,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--lp-overlay-bg) 0%, rgba(26, 24, 21, 0.85) 100%);
+  background: linear-gradient(135deg, var(--lp-overlay-bg) 0%, var(--bg-tertiary) 100%);
   z-index: 0;
 }
 

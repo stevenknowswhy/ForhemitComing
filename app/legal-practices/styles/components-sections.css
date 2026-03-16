@@ -365,7 +365,7 @@
 }
 
 .fit-column.good-fit {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, var(--lp-bg-card) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--lp-bg-card) 100%);
   border: 1px solid var(--lp-border-accent);
 }
 
@@ -525,7 +525,7 @@
 
 /* ── Urgency Section ── */
 .urgency-section {
-  background: linear-gradient(180deg, rgba(255, 107, 0, 0.05) 0%, transparent 100%);
+  background: linear-gradient(180deg, var(--color-brand-subtle) 0%, transparent 100%);
   padding: var(--space-2xl) 0;
 }
 
@@ -639,7 +639,7 @@
 
 .cta-option.primary {
   border-color: var(--lp-border-accent);
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, var(--lp-bg-card) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--lp-bg-card) 100%);
 }
 
 .cta-option-badge {
@@ -700,7 +700,7 @@
 
 .who-we-are-card:hover {
   border-color: var(--lp-border-accent);
-  box-shadow: 0 0 60px rgba(255, 107, 0, 0.05);
+  box-shadow: 0 0 60px var(--color-brand-subtle);
 }
 
 .who-we-are-card h3 {
@@ -720,7 +720,7 @@
 
 .cta-closing:hover {
   border-color: var(--lp-border-accent);
-  box-shadow: 0 0 60px rgba(255, 107, 0, 0.05);
+  box-shadow: 0 0 60px var(--color-brand-subtle);
 }
 
 .cta-closing p {

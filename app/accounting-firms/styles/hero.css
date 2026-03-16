@@ -32,8 +32,8 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.6) 0%,
-    rgba(0, 0, 0, 0.4) 40%,
+    var(--shadow-color) 0%,
+    var(--shadow-color) 40%,
     rgba(0, 0, 0, 0.7) 100%
   );
   z-index: 1;
@@ -73,7 +73,7 @@
 /* Hero section text - fixed light for image background */
 .accounting-hero .accounting-eyebrow {
   color: #FF6B00;
-  background: rgba(255, 107, 0, 0.15);
+  background: var(--color-brand-subtle);
   border-color: rgba(255, 107, 0, 0.4);
 }
 

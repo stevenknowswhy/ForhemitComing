@@ -258,7 +258,7 @@
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.7rem;
   color: var(--light-text);
-  background: rgba(255, 107, 0, 0.15);
+  background: var(--color-brand-subtle);
   border: 1px solid rgba(255, 107, 0, 0.3);
   border-radius: 4px;
 }
@@ -297,7 +297,7 @@
   font-size: 0.875rem;
   line-height: 1.6;
   color: var(--body-text);
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--shadow-color);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 1rem;
@@ -481,7 +481,7 @@
 }
 
 .card-message::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--shadow-color);
   border-radius: 3px;
 }
 

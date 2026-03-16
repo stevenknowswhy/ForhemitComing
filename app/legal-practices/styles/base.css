@@ -30,12 +30,12 @@
   
   /* Page-specific semantic colors (adapt to theme) */
   --lp-overlay-bg: rgba(13, 12, 10, 0.95);
-  --lp-card-solid: rgba(26, 24, 21, 0.95);
-  --lp-card-gradient-start: rgba(26, 24, 21, 0.95);
+  --lp-card-solid: var(--bg-tertiary);
+  --lp-card-gradient-start: var(--bg-tertiary);
   --lp-card-gradient-end: rgba(35, 30, 25, 0.9);
   --lp-warning-gradient: rgba(45, 30, 20, 0.95);
-  --lp-image-overlay: rgba(26, 24, 21, 0.9);
-  --lp-shadow-color: rgba(0, 0, 0, 0.3);
+  --lp-image-overlay: var(--bg-tertiary);
+  --lp-shadow-color: var(--shadow-color);
   
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -71,7 +71,7 @@
   --lp-card-gradient-start: rgba(255, 255, 255, 0.95);
   --lp-card-gradient-end: rgba(245, 242, 238, 0.9);
   --lp-warning-gradient: rgba(255, 250, 245, 0.95);
-  --lp-image-overlay: rgba(26, 24, 21, 0.7);
+  --lp-image-overlay: var(--bg-tertiary);
   --lp-shadow-color: rgba(0, 0, 0, 0.15);
 }
 
@@ -99,11 +99,11 @@
   pointer-events: none;
   background:
     /* Primary orange glow - top left */
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(255, 107, 0, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 10% 0%, var(--color-brand-subtle) 0%, transparent 60%),
     /* Secondary glow - bottom right */
-    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, var(--color-brand-subtle) 0%, transparent 50%),
     /* Subtle center glow */
-    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255, 107, 0, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 50%, var(--color-brand-subtle) 0%, transparent 60%),
     /* Base gradient - uses theme-aware colors */
     linear-gradient(180deg, 
       var(--lp-bg) 0%, 
