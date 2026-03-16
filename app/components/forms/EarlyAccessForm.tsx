@@ -105,9 +105,9 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
               padding: "10px 14px",
               borderRadius: "8px",
               fontSize: "14px",
-              background: status === "success" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
-              border: status === "success" ? "1px solid rgba(34, 197, 94, 0.3)" : "1px solid rgba(239, 68, 68, 0.3)",
-              color: status === "success" ? "#22c55e" : "#ef4444",
+              background: status === "success" ? "var(--color-success-bg)" : "var(--color-error-bg)",
+              border: status === "success" ? "1px solid var(--color-success-border)" : "1px solid var(--color-error-border)",
+              color: status === "success" ? "var(--color-success)" : "var(--color-error)",
             }}
           >
             {message}
@@ -170,9 +170,9 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
             padding: "10px 14px",
             borderRadius: "8px",
             fontSize: "14px",
-            background: status === "success" ? "rgba(34, 197, 94, 0.1)" : "rgba(239, 68, 68, 0.1)",
-            border: status === "success" ? "1px solid rgba(34, 197, 94, 0.3)" : "1px solid rgba(239, 68, 68, 0.3)",
-            color: status === "success" ? "#22c55e" : "#ef4444",
+            background: status === "success" ? "var(--color-success-bg)" : "var(--color-error-bg)",
+            border: status === "success" ? "1px solid var(--color-success-border)" : "1px solid var(--color-error-border)",
+            color: status === "success" ? "var(--color-success)" : "var(--color-error)",
           }}
         >
           {message}

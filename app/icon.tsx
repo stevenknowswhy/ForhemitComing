@@ -19,7 +19,7 @@ export default function Icon() {
           alignItems: 'center',
           justifyContent: 'center',
           color: 'white',
-          background: 'linear-gradient(135deg, #FF6B00 0%, #FF3D00 100%)',
+          background: 'linear-gradient(135deg, #FF6B00 0%, #E65A00 100%)',
           borderRadius: 6,
         }}
       >

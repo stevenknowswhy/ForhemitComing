@@ -37,17 +37,17 @@ export class ErrorBoundary extends React.Component<Props, State> {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              background: "#0e0e0c",
-              color: "#f5f0e8",
+              background: "var(--bg-primary)",
+              color: "var(--text-primary)",
               fontFamily: "var(--font-inter), Inter, sans-serif",
               padding: "2rem",
               textAlign: "center",
             }}
           >
-            <h1 style={{ fontSize: "2rem", marginBottom: "1rem", color: "#FF6B00" }}>
+            <h1 style={{ fontSize: "2rem", marginBottom: "1rem", color: "var(--color-brand)" }}>
               Something went wrong
             </h1>
-            <p style={{ color: "#a0a0a0", marginBottom: "2rem", maxWidth: "500px" }}>
+            <p style={{ color: "var(--text-secondary)", marginBottom: "2rem", maxWidth: "500px" }}>
               We apologize for the inconvenience. Please try refreshing the page.
             </p>
             <button
@@ -55,8 +55,8 @@ export class ErrorBoundary extends React.Component<Props, State> {
               style={{
                 padding: "0.75rem 1.5rem",
                 background: "transparent",
-                border: "1px solid #FF6B00",
-                color: "#FF6B00",
+                border: "1px solid var(--color-brand)",
+                color: "var(--color-brand)",
                 cursor: "pointer",
                 fontSize: "0.875rem",
                 textTransform: "uppercase",

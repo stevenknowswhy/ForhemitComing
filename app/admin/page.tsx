@@ -149,11 +149,11 @@ function AdminContent({ onLogout }: AdminContentProps) {
   const getActionIcon = (action: string) => {
     switch (action) {
       case "create":
-        return <FileText size={14} style={{ color: "#22c55e" }} />;
+        return <FileText size={14} style={{ color: "var(--color-success)" }} />;
       case "update":
-        return <Edit2 size={14} style={{ color: "#3b82f6" }} />;
+        return <Edit2 size={14} style={{ color: "var(--color-info)" }} />;
       case "delete":
-        return <Trash2 size={14} style={{ color: "#ef4444" }} />;
+        return <Trash2 size={14} style={{ color: "var(--color-error)" }} />;
       default:
         return null;
     }
@@ -559,19 +559,19 @@ function AdminContent({ onLogout }: AdminContentProps) {
                       <span className="audit-stat-label">Total Actions</span>
                     </div>
                     <div className="audit-stat">
-                      <span className="audit-stat-value" style={{ color: "#22c55e" }}>
+                      <span className="audit-stat-value" style={{ color: "var(--color-success)" }}>
                         {auditStats.byAction.create}
                       </span>
                       <span className="audit-stat-label">Created</span>
                     </div>
                     <div className="audit-stat">
-                      <span className="audit-stat-value" style={{ color: "#3b82f6" }}>
+                      <span className="audit-stat-value" style={{ color: "var(--color-info)" }}>
                         {auditStats.byAction.update}
                       </span>
                       <span className="audit-stat-label">Updated</span>
                     </div>
                     <div className="audit-stat">
-                      <span className="audit-stat-value" style={{ color: "#ef4444" }}>
+                      <span className="audit-stat-value" style={{ color: "var(--color-error)" }}>
                         {auditStats.byAction.delete}
                       </span>
                       <span className="audit-stat-label">Deleted</span>
