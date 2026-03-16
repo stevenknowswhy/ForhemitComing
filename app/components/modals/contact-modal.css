@@ -294,6 +294,13 @@
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
 }
 
+.form-input:focus-visible,
+.form-select:focus-visible,
+.form-textarea:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
 .form-select {
   cursor: pointer;
   appearance: none;

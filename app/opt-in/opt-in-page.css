@@ -85,6 +85,11 @@
   background: var(--bg-hover);
 }
 
+.form-group input:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
 .form-group input::placeholder {
   color: var(--text-secondary);
 }

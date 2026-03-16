@@ -463,6 +463,11 @@
   border-bottom-color: var(--color-brand);
 }
 
+.typeform-input:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
 .typeform-input::placeholder {
   color: var(--text-secondary);
 }

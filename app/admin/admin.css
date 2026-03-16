@@ -82,6 +82,11 @@
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
 }
 
+.admin-login-input:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
 .admin-login-input::placeholder {
   color: var(--text-secondary);
 }
@@ -320,6 +325,11 @@
 .filter-select:focus {
   outline: none;
   border-color: var(--color-brand);
+}
+
+.filter-select:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 .filter-select option {
@@ -906,6 +916,13 @@
 .form-group textarea:focus {
   border-color: var(--color-brand);
   box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.1);
+}
+
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 .form-group input:disabled,

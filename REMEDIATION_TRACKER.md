@@ -17,12 +17,12 @@
 ### Focus Indicators
 | Issue | File | Status |
 |-------|------|--------|
-| Add focus styles to admin | `app/admin/admin.css` | [ ] |
-| Add focus styles to contact modal | `app/components/modals/contact-modal.css` | [ ] |
-| Add focus styles to application modal | `app/components/forms/application/application-modal.css` | [ ] |
-| Add focus styles to opt-in page | `app/opt-in/opt-in-page.css` | [ ] |
-| Add focus styles to wealth-managers | `app/wealth-managers/wealth-managers.css` | [ ] |
-| Add focus styles to appraisers | `app/appraisers/appraisers.css` | [ ] |
+| Add focus styles to admin | `app/admin/admin.css` | ✅ |
+| Add focus styles to contact modal | `app/components/modals/contact-modal.css` | ✅ |
+| Add focus styles to application modal | `app/components/forms/application/application-modal.css` | ✅ |
+| Add focus styles to opt-in page | `app/opt-in/opt-in-page.css` | ✅ |
+| Add focus styles to wealth-managers | `app/wealth-managers/wealth-managers.css` | ✅ |
+| Add focus styles to appraisers | `app/appraisers/appraisers.css` | ✅ |
 
 ### Animation Timing Variables
 | Issue | File | Status |
@@ -101,10 +101,10 @@
 
 | Phase | Total | Completed |
 |-------|-------|-----------|
-| Quick Wins | 13 | 0 |
+| Quick Wins | 13 | 6 |
 | Standard Fixes | 14 | 0 |
 | Architectural | 3 | 0 |
-| **Total** | **30** | **0** |
+| **Total** | **30** | **6** |
 
 ---
 
