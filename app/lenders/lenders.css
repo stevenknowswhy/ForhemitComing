@@ -17,6 +17,19 @@
   --lenders-border-accent: var(--border-accent);
   --lenders-alert: #ff4444;
   --lenders-success: #00cc66;
+  --lenders-alert-light: #ff6666;
+  --lenders-success-light: #66ff99;
+  /* Theme-aware overlay colors */
+  --lenders-overlay-bg: rgba(20, 20, 16, 0.5);
+  --lenders-overlay-dark: rgba(20, 20, 16, 0.9);
+  --lenders-shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+  --lenders-overlay-bg: rgba(245, 242, 238, 0.8);
+  --lenders-overlay-dark: rgba(255, 255, 255, 0.95);
+  --lenders-shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 /* ── Base ── */
@@ -257,7 +270,7 @@
 
 /* ── Friday vs Tuesday Pitch Section ── */
 .pitch-section {
-  background: linear-gradient(180deg, var(--lenders-bg) 0%, rgba(20, 20, 16, 0.5) 50%, var(--lenders-bg) 100%);
+  background: linear-gradient(180deg, var(--lenders-bg) 0%, var(--lenders-overlay-bg) 50%, var(--lenders-bg) 100%);
   padding: 5rem 0;
 }
 
@@ -282,7 +295,7 @@
 
 .pitch-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 40px var(--lenders-shadow-color);
 }
 
 .pitch-card.crisis {
@@ -320,11 +333,11 @@
 }
 
 .crisis-image {
-  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, rgba(20, 20, 16, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(255, 68, 68, 0.15) 0%, var(--lenders-overlay-dark) 100%);
 }
 
 .solution-image {
-  background: linear-gradient(135deg, rgba(0, 204, 102, 0.15) 0%, rgba(20, 20, 16, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(0, 204, 102, 0.15) 0%, var(--lenders-overlay-dark) 100%);
 }
 
 .phone-icon,
@@ -349,14 +362,14 @@
   border-radius: 4px;
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.75rem;
-  color: #ff6666;
+  color: var(--lenders-alert-light);
   letter-spacing: 0.05em;
 }
 
 .time-badge.solution-time {
   background: rgba(0, 204, 102, 0.2);
   border-color: rgba(0, 204, 102, 0.4);
-  color: #66ff99;
+  color: var(--lenders-success-light);
 }
 
 .pitch-content {
@@ -373,11 +386,11 @@
 }
 
 .pitch-label.crisis-label {
-  color: #ff6666;
+  color: var(--lenders-alert-light);
 }
 
 .pitch-label.solution-label {
-  color: #66ff99;
+  color: var(--lenders-success-light);
 }
 
 .pitch-content h3 {
@@ -415,7 +428,7 @@
 
 /* Bottom Line */
 .bottom-line {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(20, 20, 16, 0.8) 100%);
+  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, var(--lenders-overlay-bg) 100%);
   border: 1px solid var(--lenders-border-accent);
   border-radius: 12px;
   padding: 2rem;

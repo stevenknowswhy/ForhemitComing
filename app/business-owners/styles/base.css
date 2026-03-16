@@ -14,6 +14,19 @@
   --bo-accent-light: var(--color-brand-hover);
   --bo-muted: var(--text-muted);
   --bo-border: var(--border-accent);
+  /* Theme-aware colors */
+  --bo-overlay-light: rgba(0, 0, 0, 0.3);
+  --bo-overlay-medium: rgba(0, 0, 0, 0.5);
+  --bo-overlay-heavy: rgba(0, 0, 0, 0.7);
+  --bo-overlay-darker: rgba(0, 0, 0, 0.8);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+  --bo-overlay-light: rgba(26, 22, 18, 0.2);
+  --bo-overlay-medium: rgba(26, 22, 18, 0.4);
+  --bo-overlay-heavy: rgba(26, 22, 18, 0.6);
+  --bo-overlay-darker: rgba(26, 22, 18, 0.75);
 }
 
 /* ── Base ── */

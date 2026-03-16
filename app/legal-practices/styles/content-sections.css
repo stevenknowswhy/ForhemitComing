@@ -29,7 +29,7 @@
 .question-row:hover {
   border-color: var(--lp-border-accent);
   transform: translateY(-4px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 20px 60px var(--lp-shadow-color);
 }
 
 .question-image {
@@ -52,12 +52,12 @@
 .question-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 30%, rgba(26, 24, 21, 0.9) 100%);
+  background: linear-gradient(180deg, transparent 30%, var(--lp-image-overlay) 100%);
   pointer-events: none;
 }
 
 .question-row.reverse .question-image-overlay {
-  background: linear-gradient(180deg, transparent 30%, rgba(26, 24, 21, 0.9) 100%);
+  background: linear-gradient(180deg, transparent 30%, var(--lp-image-overlay) 100%);
 }
 
 .question-content {
@@ -247,7 +247,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--lp-bg-dark);
+  background: var(--lp-bg-secondary);
   border: 2px solid var(--lp-accent);
   border-radius: 50%;
   z-index: 2;
@@ -279,8 +279,8 @@
   padding: 1.75rem 2rem;
   background: linear-gradient(
     135deg,
-    rgba(26, 24, 21, 0.95) 0%,
-    rgba(35, 30, 25, 0.9) 100%
+    var(--lp-card-gradient-start) 0%,
+    var(--lp-card-gradient-end) 100%
   );
   border: 1px solid var(--lp-border);
   border-radius: 12px;
@@ -308,15 +308,15 @@
 .risk-step-card:hover {
   border-color: var(--lp-border-accent);
   transform: translateX(8px);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 40px var(--lp-shadow-color);
 }
 
 .risk-step-card.final {
   background: linear-gradient(
     135deg,
     rgba(255, 107, 0, 0.1) 0%,
-    rgba(26, 24, 21, 0.95) 50%,
-    rgba(35, 30, 25, 0.9) 100%
+    var(--lp-card-gradient-start) 50%,
+    var(--lp-card-gradient-end) 100%
   );
   border-color: rgba(255, 107, 0, 0.3);
 }
@@ -656,7 +656,7 @@
 .comparison-image-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(26, 24, 21, 0.9) 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--lp-image-overlay) 100%);
   pointer-events: none;
 }
 

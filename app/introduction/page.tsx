@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, lazy, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
-import { ContactModal } from "../components/modals/ContactModal";
+// Lazy load ContactModal for better performance
+const ContactModal = lazy(() => import("../components/modals/ContactModal").then((mod) => ({ default: mod.ContactModal })));
 import { ClientOnly } from "@/components/ClientOnly";
 import "./page.css";
 

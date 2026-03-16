@@ -6,6 +6,7 @@ import { GlobalFooter } from './components/layout/GlobalFooter'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
 import { ThemeProvider } from './components/providers/ThemeProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { SentryProvider } from './components/providers/SentryProvider'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -34,9 +35,64 @@ const inter = Inter({
   display: 'swap',
 })
 
+const baseUrl = 'https://forhemit.com';
+
 export const metadata: Metadata = {
-  title: 'Forhemit Capital',
-  description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
+  metadataBase: new URL(baseUrl),
+  title: {
+    default: 'Forhemit Capital | Stewardship Management',
+    template: '%s | Forhemit Capital',
+  },
+  description: 'Stewardship Management Organization Built for Continuity, Not Extraction. We acquire and operate small to mid-sized businesses with a long-term, employee-centered approach.',
+  keywords: ['private equity', 'business acquisition', 'ESOP', 'company stewardship', 'business continuity', 'employee ownership'],
+  authors: [{ name: 'Forhemit Capital' }],
+  creator: 'Forhemit Capital',
+  publisher: 'Forhemit Capital',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: baseUrl,
+    siteName: 'Forhemit Capital',
+    title: 'Forhemit Capital | Stewardship Management',
+    description: 'Stewardship Management Organization Built for Continuity, Not Extraction.',
+    images: [
+      {
+        url: `${baseUrl}/og-image.png`,
+        width: 1200,
+        height: 630,
+        alt: 'Forhemit Capital - Stewardship Management',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Forhemit Capital | Stewardship Management',
+    description: 'Stewardship Management Organization Built for Continuity, Not Extraction.',
+    images: [`${baseUrl}/og-image.png`],
+    creator: '@forhemit',
+  },
+  alternates: {
+    canonical: baseUrl,
+    languages: {
+      en: baseUrl,
+    },
+  },
 }
 
 export const viewport: Viewport = {
@@ -55,11 +111,13 @@ export default function RootLayout({
       <body suppressHydrationWarning>
         <ThemeProvider>
           <ErrorBoundary>
-            <ConvexClientProvider>
-              <Navigation />
-              {children}
-              <GlobalFooter />
-            </ConvexClientProvider>
+            <SentryProvider>
+              <ConvexClientProvider>
+                <Navigation />
+                {children}
+                <GlobalFooter />
+              </ConvexClientProvider>
+            </SentryProvider>
           </ErrorBoundary>
         </ThemeProvider>
       </body>

@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy } from "react";
 import Link from "next/link";
-import { ContactModal } from "../components/modals/ContactModal";
+// Lazy load ContactModal for better performance
+const ContactModal = lazy(() => import("../components/modals/ContactModal").then((mod) => ({ default: mod.ContactModal })));
 import { ClientOnly } from "@/components/ClientOnly";
 import "./beyond-balance-sheet.css";
 

@@ -142,8 +142,12 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(26, 24, 21, 0.92) 0%, rgba(26, 24, 21, 0.85) 100%);
+  background: linear-gradient(135deg, var(--lp-overlay-bg) 0%, rgba(26, 24, 21, 0.85) 100%);
   z-index: 0;
+}
+
+[data-theme="light"] .stats-section::before {
+  background: linear-gradient(135deg, var(--lp-overlay-bg) 0%, rgba(245, 242, 238, 0.85) 100%);
 }
 
 .stats-section .container {
@@ -167,7 +171,7 @@
 }
 
 .stat-card {
-  background: rgba(26, 24, 21, 0.95);
+  background: var(--lp-card-solid);
   border: 1px solid var(--lp-border);
   border-radius: 12px;
   padding: var(--space-md);
@@ -184,7 +188,7 @@
 
 .stat-card.warning {
   border-color: rgba(255, 107, 0, 0.4);
-  background: linear-gradient(135deg, rgba(26, 24, 21, 0.95) 0%, rgba(45, 30, 20, 0.95) 100%);
+  background: linear-gradient(135deg, var(--lp-card-gradient-start) 0%, var(--lp-warning-gradient) 100%);
 }
 
 .stat-card.warning:hover {
@@ -215,7 +219,7 @@
 .stats-realization {
   text-align: left;
   padding: var(--space-md);
-  background: rgba(26, 24, 21, 0.95);
+  background: var(--lp-card-solid);
   border-radius: 12px;
   border: 1px solid var(--lp-border);
   backdrop-filter: blur(8px);

@@ -11,6 +11,7 @@
   --lp-bg-secondary: var(--bg-secondary);
   --lp-bg-tertiary: var(--bg-tertiary);
   --lp-bg-card: var(--bg-glass);
+  --lp-bg-dark: var(--bg-secondary);
   
   /* Text Colors */
   --lp-text-primary: var(--text-primary);
@@ -26,6 +27,15 @@
   /* Borders */
   --lp-border: var(--border-subtle);
   --lp-border-accent: var(--border-accent);
+  
+  /* Page-specific semantic colors (adapt to theme) */
+  --lp-overlay-bg: rgba(13, 12, 10, 0.95);
+  --lp-card-solid: rgba(26, 24, 21, 0.95);
+  --lp-card-gradient-start: rgba(26, 24, 21, 0.95);
+  --lp-card-gradient-end: rgba(35, 30, 25, 0.9);
+  --lp-warning-gradient: rgba(45, 30, 20, 0.95);
+  --lp-image-overlay: rgba(26, 24, 21, 0.9);
+  --lp-shadow-color: rgba(0, 0, 0, 0.3);
   
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -52,6 +62,17 @@
   /* Shadows */
   --shadow-glow: var(--glow-subtle);
   --shadow-card: var(--shadow-soft);
+}
+
+/* Light Theme Overrides for Legal Practices Page */
+[data-theme="light"] {
+  --lp-overlay-bg: rgba(255, 255, 255, 0.95);
+  --lp-card-solid: rgba(255, 255, 255, 0.95);
+  --lp-card-gradient-start: rgba(255, 255, 255, 0.95);
+  --lp-card-gradient-end: rgba(245, 242, 238, 0.9);
+  --lp-warning-gradient: rgba(255, 250, 245, 0.95);
+  --lp-image-overlay: rgba(26, 24, 21, 0.7);
+  --lp-shadow-color: rgba(0, 0, 0, 0.15);
 }
 
 /* ── Base Reset ── */
@@ -83,12 +104,12 @@
     radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
     /* Subtle center glow */
     radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255, 107, 0, 0.03) 0%, transparent 60%),
-    /* Base gradient */
+    /* Base gradient - uses theme-aware colors */
     linear-gradient(180deg, 
-      rgba(13, 12, 10, 0.98) 0%, 
-      rgba(21, 19, 16, 0.95) 30%,
-      rgba(13, 12, 10, 0.98) 70%,
-      rgba(21, 19, 16, 0.95) 100%);
+      var(--lp-bg) 0%, 
+      var(--lp-bg-secondary) 30%,
+      var(--lp-bg) 70%,
+      var(--lp-bg-secondary) 100%);
 }
 
 /* ── Container ── */

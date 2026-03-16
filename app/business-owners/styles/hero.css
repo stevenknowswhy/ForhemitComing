@@ -100,5 +100,5 @@
 .hero-cta-button:hover {
   background: var(--bo-accent-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 107, 0, 0.3);
+  box-shadow: var(--glow-subtle);
 }

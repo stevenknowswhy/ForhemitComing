@@ -1,11 +1,17 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, lazy } from "react";
 import { useSearchParams } from "next/navigation";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
-import { ApplicationModal } from "./components/forms/application/ApplicationModal";
 import { ClientOnly } from "@/components/ClientOnly";
 import "./styles/home-page.css";
+
+// Lazy load the modal for better performance (code splitting)
+const ApplicationModal = lazy(() => 
+  import("./components/forms/application/ApplicationModal").then((mod) => ({ 
+    default: mod.ApplicationModal 
+  }))
+);
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -41,11 +47,15 @@ function HomeContent() {
         </div>
       </main>
 
-      <ClientOnly>
-        <ApplicationModal 
-          isOpen={showApplicationModal} 
-          onClose={() => setShowApplicationModal(false)} 
-        />
+      <ClientOnly fallback={null}>
+        {showApplicationModal && (
+          <Suspense fallback={null}>
+            <ApplicationModal 
+              isOpen={showApplicationModal} 
+              onClose={() => setShowApplicationModal(false)} 
+            />
+          </Suspense>
+        )}
       </ClientOnly>
     </div>
   );

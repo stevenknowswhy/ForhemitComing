@@ -60,15 +60,15 @@
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 140, 51, 0.03) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, transparent 100%);
 }
 
 .stakeholder-placeholder.employees {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, transparent 100%);
 }
 
 .stakeholder-placeholder.advisors {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.03) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, transparent 100%);
 }
 
 .stakeholder-overlay {
@@ -81,8 +81,8 @@
   background: linear-gradient(
     180deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.7) 100%
+    var(--bo-overlay-light) 40%,
+    var(--bo-overlay-heavy) 100%
   );
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -90,9 +90,9 @@
 .stakeholder-card:hover .stakeholder-overlay {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.5) 50%,
-    rgba(0, 0, 0, 0.8) 100%
+    var(--bo-overlay-light) 0%,
+    var(--bo-overlay-medium) 50%,
+    var(--bo-overlay-darker) 100%
   );
   padding-bottom: 2rem;
 }
