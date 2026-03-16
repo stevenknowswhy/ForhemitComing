@@ -78,11 +78,7 @@
 
 .faq-accordion-item.open {
   border-color: var(--color-brand);
-  box-shadow: 0 4px 20px rgba(255, 107, 0, 0.1);
-}
-
-.faq-accordion-item.open .faq-accordion-question {
-  color: var(--color-brand);
+  background: var(--color-brand-subtle);
 }
 
 .faq-accordion-question {
