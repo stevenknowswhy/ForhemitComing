@@ -2,17 +2,19 @@
    APPRAISERS PAGE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../styles/theme.css";
+
 /* ── CSS Variables ── */
 :root {
-  --appraisers-bg: #0a0a08;
-  --appraisers-bg-secondary: #141410;
-  --appraisers-bg-card: rgba(20, 20, 16, 0.8);
-  --appraisers-text-primary: #f5f0e8;
-  --appraisers-text-secondary: #a09a90;
-  --appraisers-accent: #FF6B00;
-  --appraisers-accent-light: #ff8c33;
-  --appraisers-border: rgba(245, 240, 232, 0.1);
-  --appraisers-border-accent: rgba(255, 107, 0, 0.3);
+  --appraisers-bg: var(--bg-primary);
+  --appraisers-bg-secondary: var(--bg-secondary);
+  --appraisers-bg-card: var(--bg-glass);
+  --appraisers-text-primary: var(--text-primary);
+  --appraisers-text-secondary: var(--text-secondary);
+  --appraisers-accent: var(--color-brand);
+  --appraisers-accent-light: var(--color-brand-hover);
+  --appraisers-border: var(--border-subtle);
+  --appraisers-border-accent: var(--border-accent);
   --appraisers-success: #22c55e;
   --appraisers-gold: #fbbf24;
 }
@@ -34,9 +36,10 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 20% 0%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(255, 107, 0, 0.05) 0%, transparent 40%),
-    linear-gradient(180deg, rgba(10, 10, 8, 0.98) 0%, rgba(20, 20, 16, 0.95) 100%);
+    radial-gradient(ellipse at 20% 0%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 100%, var(--mesh-color-2) 0%, transparent 40%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  transition: background 0.3s ease;
 }
 
 /* ── Logo Header ── */
@@ -60,11 +63,11 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #909090 0%, #e0e0e0 25%, #ffffff 50%, #c0c0c0 75%, #a0a0a0 100%);
+  background: var(--metallic-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: filter 0.4s ease, transform 0.4s ease;
+  transition: filter 0.4s ease, transform 0.4s ease, background 0.3s ease;
   display: inline-block;
 }
 

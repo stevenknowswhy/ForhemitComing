@@ -2,28 +2,30 @@
    ACCOUNTING FIRMS PAGE - BASE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../../styles/theme.css";
+
 /* ── CSS Variables ── */
 :root {
   /* Core Colors - Orange accent theme */
-  --af-bg: #0d0c0a;
-  --af-bg-secondary: #151310;
-  --af-bg-tertiary: #1c1914;
-  --af-bg-card: rgba(255, 255, 255, 0.03);
+  --af-bg: var(--bg-primary);
+  --af-bg-secondary: var(--bg-secondary);
+  --af-bg-tertiary: var(--bg-tertiary);
+  --af-bg-card: var(--bg-glass);
   
   /* Text Colors */
-  --af-text-primary: #f5f2ed;
-  --af-text-secondary: #a8a39a;
-  --af-text-muted: #6b655e;
+  --af-text-primary: var(--text-primary);
+  --af-text-secondary: var(--text-secondary);
+  --af-text-muted: var(--text-muted);
   
   /* Accent Colors */
-  --af-accent: #FF6B00;
-  --af-accent-light: #ff8533;
-  --af-accent-glow: rgba(255, 107, 0, 0.4);
-  --af-accent-subtle: rgba(255, 107, 0, 0.1);
+  --af-accent: var(--color-brand);
+  --af-accent-light: var(--color-brand-hover);
+  --af-accent-glow: var(--glow-brand);
+  --af-accent-subtle: var(--color-brand-subtle);
   
   /* Borders */
-  --af-border: rgba(255, 255, 255, 0.08);
-  --af-border-accent: rgba(255, 107, 0, 0.3);
+  --af-border: var(--border-subtle);
+  --af-border-accent: var(--border-accent);
   
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -48,8 +50,8 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Shadows */
-  --shadow-glow: 0 0 40px rgba(255, 107, 0, 0.15);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: var(--glow-subtle);
+  --shadow-card: var(--shadow-soft);
 }
 
 /* ── Base Reset ── */
@@ -76,17 +78,18 @@
   pointer-events: none;
   background:
     /* Orange glow - top left (urgency) */
-    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(255, 107, 0, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 50% at 10% 0%, var(--mesh-color-1) 0%, transparent 60%),
     /* Secondary orange glow - bottom right */
-    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(255, 140, 51, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, var(--mesh-color-2) 0%, transparent 50%),
     /* Subtle center glow */
-    radial-gradient(ellipse 50% 30% at 50% 50%, rgba(255, 107, 0, 0.03) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 50% 50%, var(--mesh-color-3) 0%, transparent 60%),
     /* Base gradient */
     linear-gradient(180deg, 
-      rgba(13, 12, 10, 0.98) 0%, 
-      rgba(21, 19, 16, 0.95) 30%,
-      rgba(13, 12, 10, 0.98) 70%,
-      rgba(21, 19, 16, 0.95) 100%);
+      var(--bg-primary) 0%, 
+      var(--bg-secondary) 30%,
+      var(--bg-primary) 70%,
+      var(--bg-secondary) 100%);
+  transition: background 0.3s ease;
 }
 
 /* ── Container ── */

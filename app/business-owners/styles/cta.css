@@ -6,7 +6,7 @@
 .business-owners-cta {
   padding: 6rem 0;
   text-align: center;
-  background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 9, 0.6) 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--bg-secondary) 100%);
   border-top: 1px solid var(--bo-border);
 }
 
@@ -51,5 +51,5 @@
 .cta-button:hover {
   background: var(--bo-accent-light);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(255, 107, 0, 0.3);
+  box-shadow: var(--glow-subtle);
 }

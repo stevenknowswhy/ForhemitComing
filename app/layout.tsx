@@ -4,6 +4,7 @@ import './globals.css'
 import { Navigation } from './components/layout/Navigation'
 import { GlobalFooter } from './components/layout/GlobalFooter'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
+import { ThemeProvider } from './components/providers/ThemeProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
 
 const cormorant = Cormorant_Garamond({
@@ -52,13 +53,15 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="auto">
       <body suppressHydrationWarning>
-        <ErrorBoundary>
-          <ConvexClientProvider>
-            <Navigation />
-            {children}
-            <GlobalFooter />
-          </ConvexClientProvider>
-        </ErrorBoundary>
+        <ThemeProvider>
+          <ErrorBoundary>
+            <ConvexClientProvider>
+              <Navigation />
+              {children}
+              <GlobalFooter />
+            </ConvexClientProvider>
+          </ErrorBoundary>
+        </ThemeProvider>
       </body>
     </html>
   )

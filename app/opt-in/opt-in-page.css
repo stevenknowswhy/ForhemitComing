@@ -1,4 +1,5 @@
 /* Opt-In Page Specific Styles */
+@import "../styles/theme.css";
 
 .opt-in-content {
   max-width: 600px;
@@ -9,8 +10,8 @@
 .opt-in-card,
 .opt-out-card,
 .rights-section {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 2rem;
   margin-bottom: 2rem;
@@ -22,14 +23,14 @@
   font-family: 'Cinzel', serif;
   font-size: 1.25rem;
   font-weight: 400;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
   letter-spacing: 0.02em;
 }
 
 /* Intro Text */
 .opt-in-intro {
-  color: #a0a0a0;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -65,27 +66,27 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #888888;
+  color: var(--text-muted);
 }
 
 .form-group input {
   padding: 0.875rem 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--text-primary);
   font-size: 0.95rem;
   transition: all 0.3s ease;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #FF6B00;
-  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-brand);
+  background: var(--bg-hover);
 }
 
 .form-group input::placeholder {
-  color: #666666;
+  color: var(--text-muted);
 }
 
 /* Consent Checkboxes */
@@ -106,7 +107,7 @@
 }
 
 .consent-checkbox:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-glass);
 }
 
 .consent-checkbox input {
@@ -117,7 +118,7 @@
   width: 20px;
   height: 20px;
   min-width: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid var(--border-subtle);
   border-radius: 4px;
   display: flex;
   align-items: center;
@@ -127,8 +128,8 @@
 }
 
 .consent-checkbox input:checked + .checkmark {
-  background: #FF6B00;
-  border-color: #FF6B00;
+  background: var(--color-brand);
+  border-color: var(--color-brand);
 }
 
 .checkmark::after {
@@ -166,10 +167,10 @@
 /* Submit Button */
 .opt-in-submit {
   padding: 1rem 1.5rem;
-  background: linear-gradient(135deg, #FF6B00 0%, #FF3D00 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, #FF3D00 100%);
   border: none;
   border-radius: 8px;
-  color: #ffffff;
+  color: var(--text-inverse);
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.8rem;
   font-weight: 500;
@@ -177,12 +178,12 @@
   letter-spacing: 0.1em;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px -5px rgba(255, 107, 0, 0.4);
+  box-shadow: 0 4px 15px -5px var(--color-brand-subtle);
 }
 
 .opt-in-submit:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -10px rgba(255, 107, 0, 0.5);
+  box-shadow: 0 8px 25px -10px var(--color-brand-subtle);
 }
 
 .opt-in-submit:disabled {
@@ -192,8 +193,8 @@
 
 /* SMS Disclosure */
 .sms-disclosure {
-  background: rgba(255, 107, 0, 0.08);
-  border: 1px solid rgba(255, 107, 0, 0.2);
+  background: var(--color-brand-subtle);
+  border: 1px solid var(--border-accent);
   border-radius: 8px;
   padding: 1rem 1.25rem;
   margin: 0.5rem 0;
@@ -201,13 +202,13 @@
 
 .sms-disclosure p {
   font-size: 0.85rem;
-  color: #c0a080;
+  color: var(--text-secondary);
   line-height: 1.6;
   margin: 0;
 }
 
 .sms-disclosure a {
-  color: #FF6B00;
+  color: var(--color-brand);
   text-decoration: underline;
 }
 
@@ -215,14 +216,14 @@
 .opt-in-disclaimer {
   margin-top: 1.5rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-subtle);
   font-size: 0.8rem;
-  color: #666666;
+  color: var(--text-muted);
   text-align: center;
 }
 
 .opt-in-disclaimer a {
-  color: #FF6B00;
+  color: var(--color-brand);
   text-decoration: none;
 }
 
@@ -232,11 +233,11 @@
 
 /* Opt-Out Section */
 .opt-out-card {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--bg-glass);
 }
 
 .opt-out-card > p {
-  color: #a0a0a0;
+  color: var(--text-secondary);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
@@ -246,16 +247,16 @@
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: #888888;
+  color: var(--text-muted);
   margin-bottom: 0.75rem;
 }
 
 .opt-out-btn {
   padding: 0.875rem 1.5rem;
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  color: #a0a0a0;
+  color: var(--text-secondary);
   font-family: var(--font-dm-mono), 'DM Mono', monospace;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -280,14 +281,14 @@
 .opt-out-help {
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .opt-out-help h4 {
   font-family: 'Cinzel', serif;
   font-size: 0.95rem;
   font-weight: 400;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 1rem;
 }
 
@@ -301,7 +302,7 @@
 }
 
 .opt-out-help li {
-  color: #a0a0a0;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   padding-left: 1rem;
   position: relative;
@@ -311,12 +312,12 @@
   content: '•';
   position: absolute;
   left: 0;
-  color: #FF6B00;
+  color: var(--color-brand);
 }
 
 .opt-out-help p {
   font-size: 0.85rem;
-  color: #666666;
+  color: var(--text-muted);
   font-style: italic;
 }
 
@@ -335,8 +336,8 @@
 }
 
 .right-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
   padding: 1.25rem;
 }
@@ -345,25 +346,25 @@
   font-family: 'Cinzel', serif;
   font-size: 0.9rem;
   font-weight: 400;
-  color: #FF6B00;
+  color: var(--color-brand);
   margin-bottom: 0.5rem;
 }
 
 .right-item p {
   font-size: 0.85rem;
-  color: #888888;
+  color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
 }
 
 .rights-contact {
   text-align: center;
-  color: #888888;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 
 .rights-contact a {
-  color: #FF6B00;
+  color: var(--color-brand);
   text-decoration: none;
 }
 

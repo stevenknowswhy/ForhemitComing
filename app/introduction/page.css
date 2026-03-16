@@ -1,12 +1,14 @@
 /* ── INTRODUCTION PAGE STYLES ── */
+@import "../styles/theme.css";
+
 .intro-wrapper {
-  --primary-orange: #FF6B00;
+  --primary-orange: var(--color-brand);
   --primary-red: #FF3D00;
-  --dark-bg: #1a1209;
-  --light-text: #ffffff;
-  --muted-text: #a0a0a0;
-  --glass-bg: rgba(255, 255, 255, 0.05);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --dark-bg: var(--bg-secondary);
+  --light-text: var(--text-primary);
+  --muted-text: var(--text-secondary);
+  --glass-bg: var(--bg-glass);
+  --glass-border: var(--border-subtle);
 
   min-height: 100vh;
   position: relative;
@@ -21,12 +23,13 @@
   width: 100%;
   height: 100%;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(139, 90, 43, 0.25) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(101, 67, 33, 0.2) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(139, 90, 43, 0.1) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(26, 18, 9, 0.95) 0%, rgba(26, 18, 9, 0.9) 50%, rgba(26, 18, 9, 0.95) 100%);
+    radial-gradient(ellipse at 20% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
   pointer-events: none;
   z-index: 0;
+  transition: background 0.3s ease;
 }
 
 /* Slide-up Panel */
@@ -35,7 +38,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(145deg, #1a1a1a 0%, #0f0f0f 100%);
+  background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
   border-top: 1px solid var(--glass-border);
   border-radius: 20px 20px 0 0;
   max-height: 90vh;
@@ -43,7 +46,8 @@
   z-index: 1000;
   transform: translateY(100%);
   animation: slideUpPanel 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 -10px 40px var(--shadow-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .intro-panel.visible {
@@ -79,7 +83,7 @@
 }
 
 .intro-close:hover {
-  background: rgba(255, 107, 0, 0.1);
+  background: var(--color-brand-subtle);
   border-color: var(--primary-orange);
   color: var(--primary-orange);
 }
@@ -152,7 +156,7 @@
 }
 
 .intro-card:not(.disabled):hover {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.08) 0%, rgba(255, 61, 0, 0.04) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 61, 0, 0.03) 100%);
   border-color: var(--primary-orange);
   transform: translateX(5px);
 }
@@ -169,16 +173,16 @@
   justify-content: center;
   width: 56px;
   height: 56px;
-  background: rgba(255, 107, 0, 0.1);
-  border: 1px solid rgba(255, 107, 0, 0.2);
+  background: var(--color-brand-subtle);
+  border: 1px solid var(--border-accent);
   border-radius: 12px;
   color: var(--primary-orange);
   flex-shrink: 0;
 }
 
 .intro-card.disabled .card-icon {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass);
+  border-color: var(--border-subtle);
   color: var(--muted-text);
 }
 
@@ -234,8 +238,8 @@
   letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 0.35rem 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
   border-radius: 20px;
   color: var(--muted-text);
 }
@@ -354,7 +358,7 @@
   align-items: center;
   gap: 0.5rem;
   background: transparent;
-  border: 1px solid rgba(255, 107, 0, 0.3);
+  border: 1px solid var(--border-accent);
   border-radius: 8px;
   padding: 0.5rem 1rem;
   color: var(--muted-text);
@@ -367,7 +371,7 @@
 }
 
 .back-button:hover {
-  background: rgba(255, 107, 0, 0.1);
+  background: var(--color-brand-subtle);
   border-color: var(--primary-orange);
   color: var(--primary-orange);
   transform: translateX(-3px);
@@ -466,7 +470,7 @@
 
 /* Sub-option card hover effect */
 .sub-option-card:hover {
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 61, 0, 0.05) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 61, 0, 0.03) 100%);
 }
 
 /* Early Access Email Reveal */

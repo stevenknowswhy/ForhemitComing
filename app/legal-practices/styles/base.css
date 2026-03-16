@@ -2,28 +2,30 @@
    LEGAL PRACTICES PAGE - BASE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../../styles/theme.css";
+
 /* ── CSS Variables ── */
 :root {
   /* Core Colors */
-  --lp-bg: #0d0c0a;
-  --lp-bg-secondary: #151310;
-  --lp-bg-tertiary: #1c1914;
-  --lp-bg-card: rgba(255, 255, 255, 0.03);
+  --lp-bg: var(--bg-primary);
+  --lp-bg-secondary: var(--bg-secondary);
+  --lp-bg-tertiary: var(--bg-tertiary);
+  --lp-bg-card: var(--bg-glass);
   
   /* Text Colors */
-  --lp-text-primary: #f5f2ed;
-  --lp-text-secondary: #a8a39a;
-  --lp-text-muted: #6b655e;
+  --lp-text-primary: var(--text-primary);
+  --lp-text-secondary: var(--text-secondary);
+  --lp-text-muted: var(--text-muted);
   
   /* Accent Colors */
-  --lp-accent: #FF6B00;
-  --lp-accent-light: #ff8533;
-  --lp-accent-glow: rgba(255, 107, 0, 0.4);
-  --lp-accent-subtle: rgba(255, 107, 0, 0.1);
+  --lp-accent: var(--color-brand);
+  --lp-accent-light: var(--color-brand-hover);
+  --lp-accent-glow: var(--glow-brand);
+  --lp-accent-subtle: var(--color-brand-subtle);
   
   /* Borders */
-  --lp-border: rgba(255, 255, 255, 0.08);
-  --lp-border-accent: rgba(255, 107, 0, 0.3);
+  --lp-border: var(--border-subtle);
+  --lp-border-accent: var(--border-accent);
   
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -48,8 +50,8 @@
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   
   /* Shadows */
-  --shadow-glow: 0 0 40px rgba(255, 107, 0, 0.15);
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-glow: var(--glow-subtle);
+  --shadow-card: var(--shadow-soft);
 }
 
 /* ── Base Reset ── */

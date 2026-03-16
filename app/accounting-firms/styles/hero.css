@@ -32,9 +32,9 @@
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(13, 12, 10, 0.6) 0%,
-    rgba(13, 12, 10, 0.4) 40%,
-    rgba(13, 12, 10, 0.7) 100%
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.4) 40%,
+    rgba(0, 0, 0, 0.7) 100%
   );
   z-index: 1;
 }
@@ -68,6 +68,13 @@
   background: var(--af-accent-subtle);
   border: 1px solid var(--af-border-accent);
   border-radius: 100px;
+}
+
+/* Hero section text - fixed light for image background */
+.accounting-hero .accounting-eyebrow {
+  color: #FF6B00;
+  background: rgba(255, 107, 0, 0.15);
+  border-color: rgba(255, 107, 0, 0.4);
 }
 
 /* ── Main Title ── */

@@ -2,20 +2,22 @@
    BEYOND THE BALANCE SHEET PAGE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../styles/theme.css";
+
 /* ── CSS Variables ── */
 :root {
-  --bbs-bg: #0e0e0c;
-  --bbs-bg-secondary: #1a1209;
-  --bbs-bg-tertiary: #151410;
-  --bbs-bg-dark: #0a0a08;
-  --bbs-text-primary: #f5f0e8;
-  --bbs-text-secondary: #a09a90;
-  --bbs-text-muted: #6a645a;
-  --bbs-accent: #FF6B00;
-  --bbs-accent-light: #ff8c33;
-  --bbs-accent-glow: rgba(255, 107, 0, 0.15);
-  --bbs-border: rgba(255, 107, 0, 0.2);
-  --bbs-card-bg: rgba(26, 18, 9, 0.6);
+  --bbs-bg: var(--bg-primary);
+  --bbs-bg-secondary: var(--bg-secondary);
+  --bbs-bg-tertiary: var(--bg-tertiary);
+  --bbs-bg-dark: rgba(0, 0, 0, 0.3);
+  --bbs-text-primary: var(--text-primary);
+  --bbs-text-secondary: var(--text-secondary);
+  --bbs-text-muted: var(--text-muted);
+  --bbs-accent: var(--color-brand);
+  --bbs-accent-light: var(--color-brand-hover);
+  --bbs-accent-glow: var(--glow-subtle);
+  --bbs-border: var(--border-accent);
+  --bbs-card-bg: var(--bg-glass);
   --bbs-danger-bg: rgba(139, 0, 0, 0.15);
   --bbs-danger-text: #ff6b6b;
   --bbs-success-bg: rgba(0, 107, 61, 0.2);
@@ -40,10 +42,11 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 140, 51, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 107, 0, 0.03) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(14, 14, 12, 0.98) 0%, rgba(26, 18, 9, 0.95) 50%, rgba(14, 14, 12, 0.98) 100%);
+    radial-gradient(ellipse at 20% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  transition: background 0.3s ease;
 }
 
 /* ── Logo Header ── */

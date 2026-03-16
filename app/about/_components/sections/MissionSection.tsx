@@ -9,32 +9,22 @@ export function MissionSection() {
             <span className="about-eyebrow">The Founder</span>
             <h2>Our Mission is Our Mandate</h2>
             <p className="lead">
-              Stefano&apos;s background isn&apos;t in traditional investment banking—it&apos;s in
-              disaster planning and mitigation. In that field, you don&apos;t wait for the
-              catastrophe to happen; you see the convergence of threats on the horizon and build a
-              strategy to stop the damage before it starts.
+              Stefano&apos;s background isn&apos;t traditional investment banking. It&apos;s disaster
+              planning and mitigation. And if there is one thing that defines that discipline, it is
+              this: there are no acceptable excuses for failure.
             </p>
             <p>
-              Looking at the current landscape, that convergence is here. We are facing a
-              three-pronged disaster that threatens to cripple the market:
+              Most people hear &quot;disaster planning&quot; and think earthquakes and floods. But in
+              Stefano&apos;s world, a disaster is anything that stops the business from operating. It
+              could be a cyber attack. It could be your three most senior people quitting on the same
+              day. It could be your biggest vendor going out of business. It could be all three at
+              once.
             </p>
-            <div className="crisis-list">
-              <div className="crisis-item">
-                <strong>The Retirement Cliff:</strong> There are simply not enough qualified buyers
-                to meet the demand of retiring owners. Even if a seller finds a buyer, the market
-                saturation is driving valuations down, threatening the payout owners deserve.
-              </div>
-              <div className="crisis-item">
-                <strong>The Workforce Crisis:</strong> Employees are facing a dual threat of
-                displacement. They fear losing their jobs either to a new, unknown owner or to the
-                rising tide of AI and automation.
-              </div>
-              <div className="crisis-item">
-                <strong>Community Collapse:</strong> When businesses close rather than transition,
-                the community loses its tax base, its history, and its economic heart.
-              </div>
-            </div>
-            <p className="mission-closing">Forhemit was created to mitigate that disaster.</p>
+            <p>
+              And none of them are an acceptable reason to miss a deadline. The checks still need to
+              go out on Friday. The applications still need to be processed. Investors, lenders, vendors get paid on time and on schedule.
+              That is disaster planning.
+            </p>
           </div>
           <div className="mission-image-wrapper">
             <img

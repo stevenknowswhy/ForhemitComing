@@ -8,6 +8,7 @@ import "./about-page.css";
 import { HeroSection } from "./_components/sections/HeroSection";
 import { ProblemSolutionSection } from "./_components/sections/ProblemSolutionSection";
 import { MissionSection } from "./_components/sections/MissionSection";
+import { WhyWeExistSection } from "./_components/sections/WhyWeExistSection";
 import { CrisesSection } from "./_components/sections/CrisesSection";
 import { SolutionsSection } from "./_components/sections/SolutionsSection";
 import { PBCSection } from "./_components/sections/PBCSection";
@@ -33,10 +34,11 @@ export default function AboutPage() {
       <main className="about-main">
         <HeroSection />
         <ProblemSolutionSection />
+        <PBCSection />
         <MissionSection />
+        <WhyWeExistSection />
         <CrisesSection />
         <SolutionsSection />
-        <PBCSection />
         <FAQSection />
         <CTASection />
       </main>

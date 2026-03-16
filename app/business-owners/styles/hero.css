@@ -35,7 +35,7 @@
   max-width: 650px;
   height: auto;
   border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-soft);
 }
 
 .business-owners-eyebrow {

@@ -14,7 +14,7 @@
 .comparison-card {
   padding: 2rem;
   border-radius: 12px;
-  border: 1px solid rgba(90, 84, 74, 0.3);
+  border: 1px solid var(--border-subtle);
 }
 
 .comparison-card.negative {
@@ -23,8 +23,8 @@
 }
 
 .comparison-card.positive {
-  background: rgba(144, 238, 144, 0.08);
-  border-color: rgba(144, 238, 144, 0.3);
+  background: rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.3);
 }
 
 .comparison-image {

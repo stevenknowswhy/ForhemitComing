@@ -1,0 +1,117 @@
+/* ── THEME SYSTEM ── */
+/* Dark theme is default; Light theme via [data-theme="light"] */
+
+:root {
+  /* ========== BRAND COLORS (Constant across themes) ========== */
+  --color-brand: #FF6B00;
+  --color-brand-hover: #ff8c33;
+  --color-brand-subtle: rgba(255, 107, 0, 0.1);
+  --color-brand-border: rgba(255, 107, 0, 0.3);
+
+  /* ========== DARK THEME (Default) ========== */
+  /* Backgrounds */
+  --bg-primary: #0e0e0c;
+  --bg-secondary: #1a1209;
+  --bg-tertiary: #141410;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-dropdown: rgba(14, 14, 12, 0.95);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #f5f0e8;
+  --text-secondary: #a09a90;
+  --text-muted: #5a544a;
+  --text-inverse: #1a1612;
+
+  /* Borders */
+  --border-subtle: rgba(245, 240, 232, 0.1);
+  --border-accent: rgba(255, 107, 0, 0.3);
+  --border-hover: rgba(255, 107, 0, 0.5);
+
+  /* Effects */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.5);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
+  --glow-brand: 0 0 12px rgba(255, 107, 0, 0.5);
+  --glow-subtle: 0 0 20px rgba(255, 107, 0, 0.15);
+
+  /* Mesh Gradient - warm sepia tones */
+  --mesh-color-1: rgba(139, 90, 43, 0.25);
+  --mesh-color-2: rgba(101, 67, 33, 0.2);
+  --mesh-color-3: rgba(139, 90, 43, 0.1);
+
+  /* Metallic Text Gradient - Silver */
+  --metallic-gradient: linear-gradient(
+    180deg,
+    #909090 0%,
+    #e0e0e0 25%,
+    #ffffff 50%,
+    #c0c0c0 75%,
+    #a0a0a0 100%
+  );
+
+  /* Selection */
+  --selection-bg: rgba(255, 107, 0, 0.3);
+  --selection-text: #f5f0e8;
+}
+
+/* ========== LIGHT THEME ========== */
+[data-theme="light"] {
+  /* Backgrounds */
+  --bg-primary: #FDFCFA;
+  --bg-secondary: #F5F2EE;
+  --bg-tertiary: #EDE9E4;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-glass: rgba(0, 0, 0, 0.03);
+  --bg-dropdown: rgba(253, 252, 250, 0.98);
+  --bg-input: rgba(0, 0, 0, 0.03);
+  --bg-hover: rgba(0, 0, 0, 0.05);
+
+  /* Text */
+  --text-primary: #1A1612;
+  --text-secondary: #6B6560;
+  --text-muted: #9B9590;
+  --text-inverse: #FDFCFA;
+
+  /* Borders */
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-accent: rgba(255, 107, 0, 0.4);
+  --border-hover: rgba(255, 107, 0, 0.6);
+
+  /* Effects */
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.08);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --glow-brand: 0 0 12px rgba(255, 107, 0, 0.3);
+  --glow-subtle: 0 0 20px rgba(255, 107, 0, 0.1);
+
+  /* Mesh Gradient - softer warm tones */
+  --mesh-color-1: rgba(210, 160, 100, 0.12);
+  --mesh-color-2: rgba(200, 150, 90, 0.1);
+  --mesh-color-3: rgba(180, 130, 70, 0.06);
+
+  /* Metallic Text Gradient - Bronze/Copper */
+  --metallic-gradient: linear-gradient(
+    180deg,
+    #8B6914 0%,
+    #B8860B 25%,
+    #DAA520 50%,
+    #B8860B 75%,
+    #8B6914 100%
+  );
+
+  /* Selection */
+  --selection-bg: rgba(255, 107, 0, 0.2);
+  --selection-text: #1A1612;
+}
+
+/* ========== SMOOTH THEME TRANSITIONS ========== */
+/* Apply to elements that should animate when theme changes */
+.theme-transition {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}

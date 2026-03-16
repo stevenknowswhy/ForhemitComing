@@ -3,21 +3,23 @@
    A carefully crafted experience with thoughtful interactions
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../styles/theme.css";
+
 /* ── CSS Variables ── */
 :root {
-  --wealth-bg: #0a0a08;
-  --wealth-bg-secondary: #141410;
-  --wealth-bg-card: rgba(20, 20, 16, 0.85);
-  --wealth-bg-elevated: rgba(30, 30, 26, 0.9);
-  --wealth-text-primary: #f5f0e8;
-  --wealth-text-secondary: #a09a90;
-  --wealth-text-muted: #6a6458;
-  --wealth-accent: #FF6B00;
-  --wealth-accent-light: #ff8c33;
+  --wealth-bg: var(--bg-primary);
+  --wealth-bg-secondary: var(--bg-secondary);
+  --wealth-bg-card: var(--bg-glass);
+  --wealth-bg-elevated: var(--bg-dropdown);
+  --wealth-text-primary: var(--text-primary);
+  --wealth-text-secondary: var(--text-secondary);
+  --wealth-text-muted: var(--text-muted);
+  --wealth-accent: var(--color-brand);
+  --wealth-accent-light: var(--color-brand-hover);
   --wealth-accent-dark: #cc5500;
-  --wealth-accent-glow: rgba(255, 107, 0, 0.3);
-  --wealth-border: rgba(245, 240, 232, 0.1);
-  --wealth-border-accent: rgba(255, 107, 0, 0.4);
+  --wealth-accent-glow: var(--glow-brand);
+  --wealth-border: var(--border-subtle);
+  --wealth-border-accent: var(--border-accent);
   --wealth-success: #00cc66;
   --wealth-warning: #ffaa00;
   --wealth-danger: #ff4444;
@@ -53,10 +55,11 @@
   position: absolute;
   inset: -20%;
   background:
-    radial-gradient(ellipse at 15% 20%, rgba(255, 107, 0, 0.06) 0%, transparent 40%),
-    radial-gradient(ellipse at 85% 60%, rgba(255, 107, 0, 0.04) 0%, transparent 35%),
-    radial-gradient(ellipse at 50% 100%, rgba(255, 107, 0, 0.03) 0%, transparent 30%);
+    radial-gradient(ellipse at 15% 20%, var(--mesh-color-1) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 60%, var(--mesh-color-2) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, var(--mesh-color-3) 0%, transparent 30%);
   will-change: transform;
+  transition: background 0.3s ease;
 }
 
 /* ── Logo Header ── */
@@ -80,11 +83,11 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #909090 0%, #e0e0e0 25%, #ffffff 50%, #c0c0c0 75%, #a0a0a0 100%);
+  background: var(--metallic-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: filter var(--duration-normal) ease, transform var(--duration-normal) ease;
+  transition: filter var(--duration-normal) ease, transform var(--duration-normal) ease, background 0.3s ease;
   display: inline-block;
 }
 

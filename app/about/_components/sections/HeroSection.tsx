@@ -4,10 +4,10 @@ export function HeroSection() {
   return (
     <section className="about-hero">
       <div className="container">
-        <span className="about-eyebrow">Our Story</span>
-        <h1 className="about-title">Your Legacy Deserves Better</h1>
+        <span className="about-eyebrow about-eyebrow-hero">We Believe</span>
+        <h1 className="about-title">Reacting is Expensive.<br />Planning is Not.</h1>
         <p className="about-subtitle">
-          The real risk isn&apos;t choosing the wrong option. It&apos;s assuming you have one.
+          Step into your next chapter with confidence.
         </p>
       </div>
     </section>

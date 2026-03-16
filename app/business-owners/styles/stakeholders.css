@@ -12,8 +12,8 @@
 }
 
 .stakeholder-card {
-  background: rgba(14, 14, 12, 0.6);
-  border: 1px solid rgba(90, 84, 74, 0.3);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -22,7 +22,7 @@
 .stakeholder-card:hover {
   border-color: var(--bo-border);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: var(--shadow-soft);
 }
 
 /* Hover Reveal Cards */
@@ -60,15 +60,15 @@
   align-items: center;
   justify-content: center;
   font-size: 4rem;
-  background: linear-gradient(135deg, rgba(255, 107, 0, 0.1) 0%, rgba(255, 140, 51, 0.05) 100%);
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, rgba(255, 140, 51, 0.03) 100%);
 }
 
 .stakeholder-placeholder.employees {
-  background: linear-gradient(135deg, rgba(100, 200, 100, 0.1) 0%, rgba(100, 200, 100, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.03) 100%);
 }
 
 .stakeholder-placeholder.advisors {
-  background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(100, 150, 255, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.03) 100%);
 }
 
 .stakeholder-overlay {
@@ -80,9 +80,9 @@
   padding: 1.5rem;
   background: linear-gradient(
     180deg,
-    rgba(14, 14, 12, 0.2) 0%,
-    rgba(14, 14, 12, 0.5) 40%,
-    rgba(14, 14, 12, 0.9) 100%
+    transparent 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0.7) 100%
   );
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -90,9 +90,9 @@
 .stakeholder-card:hover .stakeholder-overlay {
   background: linear-gradient(
     180deg,
-    rgba(14, 14, 12, 0.4) 0%,
-    rgba(14, 14, 12, 0.7) 50%,
-    rgba(14, 14, 12, 0.95) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.8) 100%
   );
   padding-bottom: 2rem;
 }

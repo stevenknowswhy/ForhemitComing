@@ -1,6 +1,7 @@
 /* ── GLOBAL STYLES ── */
 
 /* CSS Imports must come first */
+@import "./styles/theme.css";
 @import "./styles/variables.css";
 @import "./components/layout/navigation.css";
 @import "./components/layout/footer.css";
@@ -24,12 +25,13 @@ html {
 
 body {
   font-family: var(--font-inter), 'Inter', sans-serif;
-  background: #0e0e0c;
-  color: #f5f0e8;
+  background: var(--bg-primary);
+  color: var(--text-primary);
   min-height: 100vh;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Responsive images */
@@ -47,6 +49,6 @@ a {
 
 /* Selection */
 ::selection {
-  background: rgba(255, 107, 0, 0.3);
-  color: #f5f0e8;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }

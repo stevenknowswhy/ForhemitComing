@@ -2,16 +2,18 @@
    BUSINESS OWNERS - BASE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../../styles/theme.css";
+
 :root {
-  --bo-bg: #0e0e0c;
-  --bo-bg-secondary: #1a1209;
-  --bo-bg-dark: #0a0a08;
-  --bo-text-primary: #f5f0e8;
-  --bo-text-secondary: #a09a90;
-  --bo-accent: #FF6B00;
-  --bo-accent-light: #ff8c33;
-  --bo-muted: #5a544a;
-  --bo-border: rgba(255, 107, 0, 0.2);
+  --bo-bg: var(--bg-primary);
+  --bo-bg-secondary: var(--bg-secondary);
+  --bo-bg-dark: var(--bg-tertiary);
+  --bo-text-primary: var(--text-primary);
+  --bo-text-secondary: var(--text-secondary);
+  --bo-accent: var(--color-brand);
+  --bo-accent-light: var(--color-brand-hover);
+  --bo-muted: var(--text-muted);
+  --bo-border: var(--border-accent);
 }
 
 /* ── Base ── */
@@ -31,10 +33,11 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 20% 20%, rgba(255, 107, 0, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 80%, rgba(255, 140, 51, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 107, 0, 0.05) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(14, 14, 12, 0.98) 0%, rgba(26, 18, 9, 0.95) 50%, rgba(14, 14, 12, 0.98) 100%);
+    radial-gradient(ellipse at 20% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  transition: background 0.3s ease;
 }
 
 /* ── Logo Header ── */
@@ -58,11 +61,11 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  background: linear-gradient(180deg, #909090 0%, #e0e0e0 25%, #ffffff 50%, #c0c0c0 75%, #a0a0a0 100%);
+  background: var(--metallic-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transition: filter 0.4s ease, transform 0.4s ease;
+  transition: filter 0.4s ease, transform 0.4s ease, background 0.3s ease;
   display: inline-block;
 }
 
@@ -105,11 +108,11 @@
 /* ── Sections ── */
 .business-owners-section {
   padding: 5rem 0;
-  border-bottom: 1px solid rgba(90, 84, 74, 0.2);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .section-alt {
-  background: linear-gradient(180deg, transparent 0%, rgba(26, 18, 9, 0.4) 50%, transparent 100%);
+  background: linear-gradient(180deg, transparent 0%, var(--bg-card) 50%, transparent 100%);
 }
 
 .section-dark {
@@ -215,7 +218,7 @@
 .luxury-image {
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-medium);
 }
 
 .luxury-image img {
@@ -236,7 +239,7 @@
   position: static;
   padding: 2rem;
   margin-top: 2rem;
-  border-top: 1px solid var(--bo-border);
+  border-top: 1px solid var(--border-subtle);
   text-align: center;
   background: var(--bo-bg);
 }

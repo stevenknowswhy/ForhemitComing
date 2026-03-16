@@ -2,17 +2,19 @@
    FINANCIAL/ACCOUNTING PAGE - BASE STYLES
    ───────────────────────────────────────────────────────────────────────────── */
 
+@import "../../styles/theme.css";
+
 :root {
-  --fa-bg: #0e0e0c;
-  --fa-bg-secondary: #1a1209;
-  --fa-bg-dark: #0a0a08;
-  --fa-text-primary: #f5f0e8;
-  --fa-text-secondary: #a09a90;
-  --fa-accent: #FF6B00;
-  --fa-accent-light: #ff8c33;
-  --fa-muted: #5a544a;
-  --fa-border: rgba(255, 107, 0, 0.2);
-  --fa-card-bg: rgba(255, 255, 255, 0.03);
+  --fa-bg: var(--bg-primary);
+  --fa-bg-secondary: var(--bg-secondary);
+  --fa-bg-dark: var(--bg-tertiary);
+  --fa-text-primary: var(--text-primary);
+  --fa-text-secondary: var(--text-secondary);
+  --fa-accent: var(--color-brand);
+  --fa-accent-light: var(--color-brand-hover);
+  --fa-muted: var(--text-muted);
+  --fa-border: var(--border-accent);
+  --fa-card-bg: var(--bg-glass);
 }
 
 /* ── Base ── */
@@ -32,10 +34,11 @@
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse at 15% 20%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 80%, rgba(255, 140, 51, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 50%, rgba(255, 107, 0, 0.04) 0%, transparent 70%),
-    linear-gradient(180deg, rgba(14, 14, 12, 0.98) 0%, rgba(26, 18, 9, 0.95) 50%, rgba(14, 14, 12, 0.98) 100%);
+    radial-gradient(ellipse at 15% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  transition: background 0.3s ease;
 }
 
 /* ── Container ── */

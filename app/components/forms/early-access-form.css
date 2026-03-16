@@ -1,4 +1,5 @@
 /* ── EARLY ACCESS FORM ── */
+@import "../../styles/theme.css";
 .email-reveal {
   display: flex;
   gap: 0.5rem;
@@ -24,30 +25,30 @@
 }
 
 #email-input {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
   padding: 0.875rem 1rem;
   padding-right: 2.5rem;
-  color: var(--light-text);
+  color: var(--text-primary);
   font-size: 0.9rem;
   width: 250px;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 #email-input::placeholder {
-  color: var(--muted-text);
+  color: var(--text-muted);
 }
 
 #email-input:focus {
-  border-color: var(--primary-orange);
+  border-color: var(--color-brand);
 }
 
 .email-clear-btn {
   position: absolute;
   right: 0.625rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--bg-hover);
   border: none;
   border-radius: 50%;
   width: 20px;
@@ -57,16 +58,16 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  color: var(--muted-text);
+  color: var(--text-muted);
 }
 
 .email-clear-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: var(--light-text);
+  background: var(--border-subtle);
+  color: var(--text-primary);
 }
 
 .btn-icon {
-  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-red) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, #FF3D00 100%);
   border: none;
   border-radius: 8px;
   width: 44px;
@@ -76,12 +77,12 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: var(--light-text);
+  color: var(--text-inverse);
 }
 
 .btn-icon:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+  box-shadow: 0 4px 15px var(--color-brand-subtle);
 }
 
 /* Card variant styles */
@@ -92,27 +93,27 @@
 }
 
 .email-input-container .email-input-wrapper input {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
   padding: 0.75rem 2.75rem 0.75rem 0.5rem;
-  color: var(--light-text);
+  color: var(--text-primary);
   font-size: 0.8rem;
   width: 200px;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
 
 .email-input-container .email-input-wrapper input::placeholder {
-  color: var(--muted-text);
+  color: var(--text-muted);
 }
 
 .email-input-container .email-input-wrapper input:focus {
-  border-color: var(--primary-orange);
+  border-color: var(--color-brand);
 }
 
 .email-submit-btn {
-  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--primary-red) 100%);
+  background: linear-gradient(135deg, var(--color-brand) 0%, #FF3D00 100%);
   border: none;
   border-radius: 8px;
   width: 40px;
@@ -122,12 +123,12 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: var(--light-text);
+  color: var(--text-inverse);
 }
 
 .email-submit-btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+  box-shadow: 0 4px 15px var(--color-brand-subtle);
 }
 
 /* Responsive */
