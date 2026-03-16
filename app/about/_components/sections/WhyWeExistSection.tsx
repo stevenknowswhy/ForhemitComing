@@ -89,7 +89,8 @@ export function WhyWeExistSection() {
         <div className="why-header">
           <span className="about-eyebrow">Our Purpose</span>
           <h2>
-            Why We Exist: Eliminating the &quot;Transition Blind Spot&quot;
+            Why We Exist:<br />
+            Eliminating the &quot;Transition Blind Spot&quot;
           </h2>
           <div className="why-intro">
             <p>
