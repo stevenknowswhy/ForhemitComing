@@ -78,6 +78,9 @@
 
 .faq-accordion-item.open {
   border-color: var(--color-brand);
+}
+
+.faq-accordion-item.open .faq-accordion-question {
   background: var(--color-brand-subtle);
 }
 
@@ -101,6 +104,10 @@
 }
 
 .faq-accordion-question:hover {
+  background: var(--color-brand-subtle);
+}
+
+.faq-accordion-item.open .faq-accordion-question:hover {
   background: var(--color-brand-subtle);
 }
 
