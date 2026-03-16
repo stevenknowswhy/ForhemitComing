@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Users, Briefcase, Landmark, Lightbulb } from "lucide-react";
+import { Users, Briefcase, Landmark, Lightbulb, ChevronLeft, ChevronRight } from "lucide-react";
 
 const stakeholderGroups = [
   {
@@ -85,9 +85,17 @@ const stakeholderGroups = [
 ];
 
 export function ValuePropositionsSection() {
-  const [activeTab, setActiveTab] = useState("sellers");
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const activeGroup = stakeholderGroups.find((g) => g.id === activeTab)!;
+  const activeGroup = stakeholderGroups[activeIndex];
+
+  const goToNext = () => {
+    setActiveIndex((prev) => (prev + 1) % stakeholderGroups.length);
+  };
+
+  const goToPrev = () => {
+    setActiveIndex((prev) => (prev - 1 + stakeholderGroups.length) % stakeholderGroups.length);
+  };
 
   return (
     <section className="about-section faq-value-props-section">
@@ -102,17 +110,48 @@ export function ValuePropositionsSection() {
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="faq-value-props-tabs">
-          {stakeholderGroups.map((group) => (
+        {/* Gallery Navigation */}
+        <div className="faq-gallery-nav">
+          <button
+            className="faq-gallery-arrow"
+            onClick={goToPrev}
+            aria-label="Previous stakeholder"
+          >
+            <ChevronLeft size={24} />
+          </button>
+
+          <div className="faq-gallery-tabs">
+            {stakeholderGroups.map((group, index) => (
+              <button
+                key={group.id}
+                className={`faq-gallery-tab ${activeIndex === index ? "active" : ""}`}
+                onClick={() => setActiveIndex(index)}
+              >
+                <group.icon size={24} strokeWidth={1.5} />
+                <span className="faq-gallery-tab-title">{group.title}</span>
+                <span className="faq-gallery-tab-subtitle">{group.subtitle}</span>
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="faq-gallery-arrow"
+            onClick={goToNext}
+            aria-label="Next stakeholder"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+
+        {/* Dots Navigation */}
+        <div className="faq-gallery-dots">
+          {stakeholderGroups.map((_, index) => (
             <button
-              key={group.id}
-              className={`faq-value-prop-tab ${activeTab === group.id ? "active" : ""}`}
-              onClick={() => setActiveTab(group.id)}
-            >
-              <group.icon size={20} strokeWidth={1.5} />
-              <span>{group.title}</span>
-            </button>
+              key={index}
+              className={`faq-gallery-dot ${activeIndex === index ? "active" : ""}`}
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
           ))}
         </div>
 
@@ -130,7 +169,7 @@ export function ValuePropositionsSection() {
             </div>
 
             <div className="faq-value-prop-concern">
-              <span className="concern-label">Core Concerns:</span>
+              <span className="concern-label">Core Concerns</span>
               <p>{activeGroup.coreConcern}</p>
             </div>
 
