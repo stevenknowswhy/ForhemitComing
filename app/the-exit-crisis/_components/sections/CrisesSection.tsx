@@ -18,9 +18,9 @@ export function CrisesSection() {
           <div className="crisis-content">
             <h3>The Retirement Cliff</h3>
             <p>
-              A &quot;Silver Tsunami&quot; is hitting the market. With up to 100 sellers for every
-              one qualified buyer, the traditional market is saturated. For most owners, this math
-              means their payout—and their retirement—is at risk.
+              A &quot;Silver Tsunami&quot; is hitting the market. With as many as 50 sellers for
+              every one qualified buyer, the traditional market is saturated. For most owners, this
+              math means their payout—and their retirement—is at risk.
             </p>
           </div>
         </div>
