@@ -1980,6 +1980,7 @@
   border: 1px solid var(--border-subtle);
   border-radius: 8px;
   overflow: hidden;
+  background: var(--bg-card);
 }
 
 .table-row {
@@ -1989,6 +1990,7 @@
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--border-subtle);
   color: var(--about-text-secondary);
+  background: var(--bg-card);
 }
 
 .table-row:last-child {
@@ -2003,18 +2005,28 @@
 
 /* Ensure all table cells have proper theme-aware colors */
 .table-row span {
-  color: var(--about-text-secondary);
+  color: var(--about-text-secondary) !important;
 }
 
 /* Header cells should use primary text color */
 .table-row.table-header span {
-  color: var(--about-text-primary);
+  color: var(--about-text-primary) !important;
 }
 
 /* First column (Aspect) uses primary color and medium weight */
 .table-row span:first-child {
   font-weight: 500;
-  color: var(--about-text-primary);
+  color: var(--about-text-primary) !important;
+}
+
+/* Specific override for FAQ answer content tables */
+.faq-answer-content .comparison-table .table-row span {
+  color: var(--about-text-secondary) !important;
+}
+
+.faq-answer-content .comparison-table .table-row.table-header span,
+.faq-answer-content .comparison-table .table-row span:first-child {
+  color: var(--about-text-primary) !important;
 }
 
 .comparison-table.simple .table-row {
