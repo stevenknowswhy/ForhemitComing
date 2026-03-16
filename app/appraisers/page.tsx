@@ -287,14 +287,6 @@ export default function AppraisersPage() {
     <div className="appraisers-wrapper">
       <div className="appraisers-background"></div>
       
-      {/* Logo Header */}
-      <header className="appraisers-logo-header">
-        <Link href="/" className="appraisers-logo-link">
-          <span className="appraisers-logo-text">Forhemit</span>
-          <span className="appraisers-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="appraisers-main">
         {/* Hero Section */}
         <section className="appraisers-hero">

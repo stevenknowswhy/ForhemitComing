@@ -291,14 +291,6 @@ export default function WealthManagersPage() {
         />
       </div>
       
-      {/* Logo Header */}
-      <header className="wealth-logo-header">
-        <Link href="/" className="wealth-logo-link">
-          <span className="wealth-logo-text">Forhemit</span>
-          <span className="wealth-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="wealth-main">
         {/* Hero Section */}
         <section className="wealth-hero">

@@ -6,11 +6,6 @@ export default function Loading() {
   return (
     <div className="brokers-wrapper">
       <div className="brokers-background"></div>
-      <header className="brokers-logo-header">
-        <a href="/" className="brokers-logo-link">
-          <span className="brokers-logo-text">Forhemit</span>
-        </a>
-      </header>
       <main className="brokers-main">
         <div style={{ 
           display: 'flex', 

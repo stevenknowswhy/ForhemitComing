@@ -1,19 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import "../privacy/privacy-page.css";
 
 export default function TermsPage() {
   return (
     <div className="legal-page-wrapper">
-      {/* Logo Header */}
-      <header className="legal-logo-header">
-        <Link href="/" className="legal-logo-link">
-          <span className="legal-logo-text">Forhemit</span>
-          <span className="legal-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="legal-main">
         <section className="legal-hero">
           <div className="container">
@@ -138,7 +129,7 @@ export default function TermsPage() {
               </p>
               <p>
                 <strong>Email:</strong> legal@forhemit.com<br />
-                <strong>Website:</strong> <Link href="/introduction">Contact Form</Link>
+                <strong>Website:</strong> <a href="/introduction">Contact Form</a>
               </p>
             </div>
           </div>

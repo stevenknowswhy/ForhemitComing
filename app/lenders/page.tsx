@@ -99,14 +99,6 @@ export default function LendersPage() {
     <div className="lenders-wrapper">
       <div className="lenders-background"></div>
 
-      {/* Logo Header - matching About page */}
-      <header className="lenders-logo-header">
-        <Link href="/" className="lenders-logo-link">
-          <span className="lenders-logo-text">Forhemit</span>
-          <span className="lenders-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="lenders-main" id="main-content">
         {/* Hero Section */}
         <section className="lenders-hero">

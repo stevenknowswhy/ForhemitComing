@@ -1,7 +1,6 @@
 "use client";
 
 import "./legal-practices.css";
-import Link from "next/link";
 import { useLegalPageAnimations } from "./_hooks/useLegalPageAnimations";
 
 // Import section components
@@ -26,13 +25,6 @@ export default function LegalPractices() {
   return (
     <div className="legal-wrapper">
       <div className="legal-background"></div>
-
-      <header className="legal-practices-logo-header">
-        <Link href="/" className="legal-practices-logo-link">
-          <span className="legal-practices-logo-text">Forhemit</span>
-          <span className="legal-practices-logo-underline"></span>
-        </Link>
-      </header>
 
       <main className="legal-main">
         <HeroSection />

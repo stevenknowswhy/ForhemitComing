@@ -108,14 +108,6 @@ export default function OptInPage() {
     <div className="legal-page-wrapper">
       <ToastContainer toasts={toasts} onRemove={removeToast} />
       
-      {/* Logo Header */}
-      <header className="legal-logo-header">
-        <Link href="/" className="legal-logo-link">
-          <span className="legal-logo-text">Forhemit</span>
-          <span className="legal-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="legal-main">
         <section className="legal-hero">
           <div className="container">

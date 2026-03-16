@@ -1,19 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import "./privacy-page.css";
 
 export default function PrivacyPage() {
   return (
     <div className="legal-page-wrapper">
-      {/* Logo Header */}
-      <header className="legal-logo-header">
-        <Link href="/" className="legal-logo-link">
-          <span className="legal-logo-text">Forhemit</span>
-          <span className="legal-logo-underline"></span>
-        </Link>
-      </header>
-
       <main className="legal-main">
         <section className="legal-hero">
           <div className="container">

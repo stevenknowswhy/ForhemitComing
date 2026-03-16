@@ -32,9 +32,6 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     return null;
   }
 
-  // Check if we're on the home page
-  const isHomePage = pathname === "/";
-
   // Filter out current page from primary navigation
   const visibleNavItems = navItems.filter((item) => {
     // Exact match for home, startsWith for others
@@ -91,14 +88,6 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`}
       ref={menuRef}
     >
-      {/* Logo - hidden on home page */}
-      {!isHomePage && (
-        <Link href="/" className="nav-logo">
-          <span className="nav-logo-text">Forhemit</span>
-          <span className="nav-logo-underline" />
-        </Link>
-      )}
-
       {/* Theme Toggle */}
       <ThemeToggle />
 

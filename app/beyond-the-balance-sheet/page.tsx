@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect, lazy } from "react";
-import Link from "next/link";
 // Lazy load ContactModal for better performance
 const ContactModal = lazy(() => import("../components/modals/ContactModal").then((mod) => ({ default: mod.ContactModal })));
 import { ClientOnly } from "@/components/ClientOnly";
@@ -33,14 +32,6 @@ export default function BeyondBalanceSheetPage() {
   return (
     <div className="bbs-wrapper">
       <div className="bbs-background"></div>
-
-      {/* Logo Header */}
-      <header className="bbs-logo-header">
-        <Link href="/" className="bbs-logo-link">
-          <span className="bbs-logo-text">Forhemit</span>
-          <span className="bbs-logo-underline"></span>
-        </Link>
-      </header>
 
       <main className="bbs-main">
         {/* ① Hero Section */}

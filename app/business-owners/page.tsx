@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { InfrastructureAuditModal } from "../components/modals/InfrastructureAuditModal";
 import { ClientOnly } from "@/components/ClientOnly";
 import "./business-owners.css";
@@ -60,14 +59,6 @@ export default function BusinessOwnersPage() {
     <>
     <div className="business-owners-wrapper">
       <div className="business-owners-background"></div>
-      
-      {/* Logo Header */}
-      <header className="business-owners-logo-header">
-        <Link href="/" className="business-owners-logo-link">
-          <span className="business-owners-logo-text">Forhemit</span>
-          <span className="business-owners-logo-underline"></span>
-        </Link>
-      </header>
       
       <main className="business-owners-main">
         {/* Hero Section */}

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from './components/layout/Navigation'
+import { GlobalHeader } from './components/layout/GlobalHeader'
 import { GlobalFooter } from './components/layout/GlobalFooter'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
 import { ThemeProvider } from './components/providers/ThemeProvider'
@@ -129,6 +130,7 @@ export default function RootLayout({
           <ErrorBoundary>
             <SentryProvider>
               <ConvexClientProvider>
+                <GlobalHeader />
                 <Navigation />
                 {children}
                 <GlobalFooter />
