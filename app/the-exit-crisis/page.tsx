@@ -32,8 +32,8 @@ export default function TheExitCrisisPage() {
 
       <main className="about-main">
         <HeroSection />
-        <ProblemSolutionSection />
         <CrisesSection />
+        <ProblemSolutionSection />
         <SolutionsSection />
       </main>
     </div>
