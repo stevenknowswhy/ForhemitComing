@@ -11,6 +11,15 @@ interface FooterProps {
 export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
+  const dotStyle = {
+    width: "4px",
+    height: "4px",
+    borderRadius: "50%",
+    background: "var(--text-secondary)",
+    opacity: 0.6,
+    flexShrink: 0,
+  };
+
   const linkStyle = {
     fontFamily: "'Inter', sans-serif",
     fontSize: "0.65rem",
@@ -25,15 +34,6 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
     transition: "all 0.3s ease",
     position: "relative" as const,
     whiteSpace: "nowrap" as const,
-  };
-
-  const dotStyle = {
-    width: "4px",
-    height: "4px",
-    borderRadius: "50%",
-    background: "var(--text-secondary)",
-    opacity: 0.6,
-    flexShrink: 0,
   };
 
   return (
@@ -53,9 +53,9 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
           whiteSpace: "nowrap",
         }}
       >
-        <span>&copy; {currentYear} Forhemit Capital</span>
+        <span style={linkStyle}>&copy; {currentYear} Forhemit Capital</span>
         <span style={dotStyle} />
-        <span style={{ whiteSpace: "nowrap" }}>All Rights Reserved</span>
+        <span style={linkStyle}>All Rights Reserved</span>
         
         {onSitemapClick && (
           <>
