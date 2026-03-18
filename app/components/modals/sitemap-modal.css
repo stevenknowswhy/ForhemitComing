@@ -162,7 +162,7 @@
   margin: 0;
 }
 
-/* Links - Clear interactive states */
+/* Links - Clear interactive states with underline animation */
 .sitemap-section a {
   display: block;
   padding: 0.5rem 0.625rem;
@@ -173,12 +173,29 @@
   transition: all 0.15s ease;
   /* Micro-interaction: slight shift on hover */
   transform: translateX(0);
+  position: relative;
 }
 
 .sitemap-section a:hover {
   background: var(--color-brand-subtle);
   color: var(--color-brand);
   transform: translateX(4px);
+}
+
+/* Underline animation for sitemap links */
+.sitemap-section a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0.625rem;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sitemap-section a:hover::after {
+  width: calc(100% - 1.25rem);
 }
 
 .sitemap-section a:active {
@@ -274,12 +291,29 @@
   font-size: 0.9rem;
   border-radius: 6px;
   transition: all 0.15s ease;
+  position: relative;
 }
 
 .sitemap-accordion-content a:hover {
   background: var(--color-brand-subtle);
   color: var(--color-brand);
   padding-left: 1rem;
+}
+
+/* Underline animation for accordion links */
+.sitemap-accordion-content a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0.75rem;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sitemap-accordion-content a:hover::after {
+  width: calc(100% - 1.5rem);
 }
 
 /* Footer */

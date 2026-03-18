@@ -55,7 +55,7 @@
     #f4e5c2 50%,
     #c9a227 100%
   );
-  transition: width 0.3s ease;
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .global-logo-link:hover .global-logo-underline {

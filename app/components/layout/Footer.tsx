@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import "./footer.css";
 
 interface FooterProps {
   onLegalClick?: () => void;
@@ -11,66 +12,17 @@ interface FooterProps {
 export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
 
-  const dotStyle = {
-    width: "4px",
-    height: "4px",
-    borderRadius: "50%",
-    background: "var(--text-secondary)",
-    opacity: 0.6,
-    flexShrink: 0,
-  };
-
-  const linkStyle = {
-    fontFamily: "'Inter', sans-serif",
-    fontSize: "0.65rem",
-    fontWeight: 400,
-    letterSpacing: "0.1em",
-    textTransform: "uppercase",
-    color: "var(--text-secondary)",
-    background: "none",
-    border: "none",
-    cursor: "pointer",
-    padding: 0,
-    transition: "all 0.3s ease",
-    position: "relative" as const,
-    whiteSpace: "nowrap" as const,
-  };
-
   return (
     <footer className={`footer footer-${variant}`}>
-      <div
-        className="footer-content"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "2rem",
-          fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
-          fontSize: "0.65rem",
-          letterSpacing: "0.1em",
-          color: "var(--text-secondary)",
-          textTransform: "uppercase",
-          whiteSpace: "nowrap",
-        }}
-      >
-        <span style={linkStyle}>&copy; {currentYear} Forhemit Capital</span>
-        <span style={dotStyle} />
-        <span style={linkStyle}>All Rights Reserved</span>
+      <div className="footer-content">
+        <span className="footer-text">&copy; {currentYear} Forhemit Capital</span>
+        <span className="footer-dot" />
+        <span className="footer-text">All Rights Reserved</span>
         
         {onSitemapClick && (
           <>
-            <span style={dotStyle} />
-            <button
-              className="footer-link"
-              style={linkStyle}
-              onClick={onSitemapClick}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--text-primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--text-secondary)";
-              }}
-            >
+            <span className="footer-dot" />
+            <button className="footer-link" onClick={onSitemapClick}>
               Sitemap
             </button>
           </>
@@ -78,32 +30,15 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
         
         {onLegalClick && (
           <>
-            <span style={dotStyle} />
-            <button
-              className="footer-link"
-              style={linkStyle}
-              onClick={onLegalClick}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--text-primary)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--text-secondary)";
-              }}
-            >
+            <span className="footer-dot" />
+            <button className="footer-link" onClick={onLegalClick}>
               Legal
             </button>
           </>
         )}
         
-        <span style={dotStyle} />
-        <Link
-          href="/admin"
-          className="footer-link"
-          style={{
-            ...linkStyle,
-            textDecoration: "none",
-          }}
-        >
+        <span className="footer-dot" />
+        <Link href="/admin" className="footer-link">
           Admin
         </Link>
       </div>

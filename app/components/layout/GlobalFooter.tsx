@@ -20,10 +20,18 @@ export function GlobalFooter() {
     return null;
   }
 
+  // Hide footer on blog pages (blog has its own footer)
+  if (pathname?.startsWith("/blog")) {
+    return null;
+  }
+
+  // Use sticky footer on homepage to keep everything in viewport
+  const isHomePage = pathname === "/";
+
   return (
     <>
       <Footer
-        variant="static"
+        variant={isHomePage ? "sticky" : "static"}
         onLegalClick={() => setShowLegalModal(true)}
         onSitemapClick={() => setShowSitemapModal(true)}
       />

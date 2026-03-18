@@ -27,9 +27,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Home wrapper - flex layout to keep footer visible */
+/* Home wrapper - accounts for fixed header and footer */
 .home-wrapper {
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
 }
@@ -59,8 +59,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  min-height: 0; /* Allow flex to shrink */
+  /* Padding accounts for fixed nav (~80px) and fixed footer (~60px) */
+  padding: 6rem 2rem 5rem;
+  min-height: 100dvh;
+  box-sizing: border-box;
 }
 
 .container {
@@ -217,13 +219,50 @@ body {
   width: 100%;
 }
 
-/* Responsive */
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .brand-title {
+    font-size: clamp(2.5rem, 8vw, 4rem);
+  }
+  
+  .brand-subtitle {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    letter-spacing: 0.2em;
+  }
+  
+  .brand-corporation {
+    font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+  }
+}
+
+/* Mobile - fit everything on screen */
 @media (max-width: 480px) {
   .hero {
-    padding: 1.5rem;
+    /* Smaller padding for mobile: nav (~60px) + footer (~50px) */
+    padding: 4rem 1rem 3.5rem;
+  }
+  
+  .brand-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+    margin-bottom: 0.5rem;
+  }
+  
+  .brand-corporation {
+    font-size: 0.65rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .brand-subtitle {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.75rem;
   }
   
   .cta-group {
-    gap: 2rem;
+    gap: 1.5rem;
+  }
+  
+  .btn {
+    font-size: 0.75rem;
   }
 }
