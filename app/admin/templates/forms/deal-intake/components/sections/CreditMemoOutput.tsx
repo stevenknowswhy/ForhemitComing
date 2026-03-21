@@ -9,59 +9,6 @@ interface CreditMemoOutputProps {
   onBack: () => void;
 }
 
-function HighlightBadge({
-  highlight,
-}: {
-  highlight: "good" | "warn" | "danger" | "neutral";
-}) {
-  const styles = {
-    good: {
-      background: "#eaf3de",
-      color: "#3b6d11",
-      border: "1px solid #c4e0a0",
-    },
-    warn: {
-      background: "#fef6e6",
-      color: "#92400e",
-      border: "1px solid #fcd34d",
-    },
-    danger: {
-      background: "#fef2f2",
-      color: "#b91c1c",
-      border: "1px solid #fecaca",
-    },
-    neutral: {
-      background: "#f5f5f4",
-      color: "#57534e",
-      border: "1px solid #d6d3d1",
-    },
-  };
-
-  const labels = {
-    good: "PASS",
-    warn: "CAUTION",
-    danger: "FAIL",
-    neutral: "PENDING",
-  };
-
-  return (
-    <span
-      style={{
-        ...styles[highlight],
-        fontSize: "10px",
-        fontWeight: 600,
-        padding: "2px 8px",
-        borderRadius: "4px",
-        textTransform: "uppercase",
-        letterSpacing: "0.05em",
-        marginLeft: "8px",
-      }}
-    >
-      {labels[highlight]}
-    </span>
-  );
-}
-
 export function CreditMemoOutput({ data, onBack }: CreditMemoOutputProps) {
   const memo = generateStructuredCreditMemo({
     inputs: data.inputs,
@@ -70,196 +17,271 @@ export function CreditMemoOutput({ data, onBack }: CreditMemoOutputProps) {
     activeEbitda: data.activeEbitda,
   });
 
+  const containerStyle: React.CSSProperties = {
+    maxWidth: "900px",
+    margin: "0 auto",
+    padding: "32px",
+    fontFamily: 'system-ui, -apple-system, sans-serif',
+    backgroundColor: "#fafafa",
+    minHeight: "100vh",
+  };
+
+  const headerStyle: React.CSSProperties = {
+    backgroundColor: "#ffffff",
+    padding: "28px 32px",
+    borderRadius: "12px",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    marginBottom: "24px",
+    borderLeft: "6px solid #1e3a5f",
+  };
+
+  const titleStyle: React.CSSProperties = {
+    fontSize: "32px",
+    fontWeight: 800,
+    color: "#0f172a",
+    margin: "0 0 12px 0",
+    letterSpacing: "-0.5px",
+  };
+
+  const subtitleStyle: React.CSSProperties = {
+    fontSize: "18px",
+    fontWeight: 600,
+    color: "#334155",
+    margin: "0 0 8px 0",
+  };
+
+  const disclaimerStyle: React.CSSProperties = {
+    fontSize: "14px",
+    color: "#64748b",
+    margin: 0,
+    lineHeight: 1.5,
+  };
+
+  const cardStyle: React.CSSProperties = {
+    backgroundColor: "#ffffff",
+    borderRadius: "12px",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
+    marginBottom: "24px",
+    overflow: "hidden",
+  };
+
+  const cardHeaderStyle: React.CSSProperties = {
+    backgroundColor: "#1e3a5f",
+    color: "#ffffff",
+    padding: "16px 24px",
+    fontSize: "16px",
+    fontWeight: 700,
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.5px",
+  };
+
+  const tableStyle: React.CSSProperties = {
+    width: "100%",
+    borderCollapse: "collapse" as const,
+  };
+
+  const rowStyle: React.CSSProperties = {
+    borderBottom: "1px solid #e2e8f0",
+  };
+
+  const rowAlternateStyle: React.CSSProperties = {
+    borderBottom: "1px solid #e2e8f0",
+    backgroundColor: "#f8fafc",
+  };
+
+  const labelCellStyle: React.CSSProperties = {
+    padding: "16px 24px",
+    width: "45%",
+    fontSize: "15px",
+    color: "#475569",
+    fontWeight: 500,
+    verticalAlign: "top" as const,
+  };
+
+  const labelBoldStyle: React.CSSProperties = {
+    padding: "16px 24px",
+    width: "45%",
+    fontSize: "15px",
+    color: "#0f172a",
+    fontWeight: 700,
+    textTransform: "uppercase" as const,
+    letterSpacing: "0.3px",
+    verticalAlign: "top" as const,
+  };
+
+  const valueCellStyle: React.CSSProperties = {
+    padding: "16px 24px",
+    fontSize: "16px",
+    color: "#0f172a",
+    fontWeight: 600,
+    verticalAlign: "top" as const,
+    textAlign: "right" as const,
+  };
+
+  const valueMonoStyle: React.CSSProperties = {
+    padding: "16px 24px",
+    fontSize: "18px",
+    color: "#0f172a",
+    fontWeight: 700,
+    fontFamily: '"SF Mono", Monaco, "Cascadia Code", monospace',
+    verticalAlign: "top" as const,
+    textAlign: "right" as const,
+  };
+
+  const badgePassStyle: React.CSSProperties = {
+    display: "inline-block",
+    backgroundColor: "#dcfce7",
+    color: "#166534",
+    fontSize: "12px",
+    fontWeight: 700,
+    padding: "4px 12px",
+    borderRadius: "6px",
+    marginLeft: "12px",
+    border: "1px solid #86efac",
+  };
+
+  const badgeFailStyle: React.CSSProperties = {
+    display: "inline-block",
+    backgroundColor: "#fee2e2",
+    color: "#991b1b",
+    fontSize: "12px",
+    fontWeight: 700,
+    padding: "4px 12px",
+    borderRadius: "6px",
+    marginLeft: "12px",
+    border: "1px solid #fca5a5",
+  };
+
+  const badgeWarnStyle: React.CSSProperties = {
+    display: "inline-block",
+    backgroundColor: "#fef3c7",
+    color: "#92400e",
+    fontSize: "12px",
+    fontWeight: 700,
+    padding: "4px 12px",
+    borderRadius: "6px",
+    marginLeft: "12px",
+    border: "1px solid #fcd34d",
+  };
+
+  const badgePendingStyle: React.CSSProperties = {
+    display: "inline-block",
+    backgroundColor: "#f1f5f9",
+    color: "#475569",
+    fontSize: "12px",
+    fontWeight: 700,
+    padding: "4px 12px",
+    borderRadius: "6px",
+    marginLeft: "12px",
+    border: "1px solid #cbd5e1",
+  };
+
+  const footerStyle: React.CSSProperties = {
+    backgroundColor: "#fef9c3",
+    border: "2px solid #eab308",
+    borderRadius: "12px",
+    padding: "24px",
+    marginTop: "32px",
+  };
+
+  const footerTextStyle: React.CSSProperties = {
+    fontSize: "15px",
+    fontWeight: 700,
+    color: "#854d0e",
+    margin: 0,
+    textAlign: "center" as const,
+    lineHeight: 1.6,
+  };
+
+  const timestampStyle: React.CSSProperties = {
+    textAlign: "center" as const,
+    fontSize: "13px",
+    color: "#94a3b8",
+    marginTop: "20px",
+    fontWeight: 500,
+  };
+
+  const backButtonStyle: React.CSSProperties = {
+    padding: "12px 24px",
+    backgroundColor: "#ffffff",
+    border: "2px solid #cbd5e1",
+    borderRadius: "8px",
+    fontSize: "15px",
+    fontWeight: 600,
+    cursor: "pointer",
+    color: "#334155",
+  };
+
+  const getBadge = (highlight?: string) => {
+    if (highlight === "good") return <span style={badgePassStyle}>PASS</span>;
+    if (highlight === "danger") return <span style={badgeFailStyle}>FAIL</span>;
+    if (highlight === "warn") return <span style={badgeWarnStyle}>CAUTION</span>;
+    if (highlight === "neutral") return <span style={badgePendingStyle}>PENDING</span>;
+    return null;
+  };
+
+  const isMonospaceValue = (value: string) => {
+    return value.startsWith("$") || value.includes("x") || /^[\d.]+%$/.test(value);
+  };
+
   return (
-    <div
-      style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        padding: "24px",
-        fontFamily:
-          '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-      }}
-    >
+    <div style={containerStyle}>
       {/* Header */}
-      <div
-        style={{
-          borderBottom: "2px solid #1e3a5f",
-          paddingBottom: "20px",
-          marginBottom: "24px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
-        >
+      <div style={headerStyle}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "16px" }}>
           <div>
-            <h1
-              style={{
-                fontSize: "24px",
-                fontWeight: 700,
-                color: "#1e3a5f",
-                margin: "0 0 8px 0",
-              }}
-            >
-              {memo.header.title}
-            </h1>
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#475569",
-                margin: "0 0 4px 0",
-                fontWeight: 500,
-              }}
-            >
-              {memo.header.subtitle}
-            </p>
-            <p
-              style={{
-                fontSize: "12px",
-                color: "#64748b",
-                margin: 0,
-                fontStyle: "italic",
-              }}
-            >
-              {memo.header.disclaimer}
-            </p>
+            <h1 style={titleStyle}>{memo.header.title}</h1>
+            <p style={subtitleStyle}>{memo.header.subtitle}</p>
+            <p style={disclaimerStyle}>{memo.header.disclaimer}</p>
           </div>
-          <button
-            onClick={onBack}
-            style={{
-              padding: "8px 16px",
-              background: "#f8fafc",
-              border: "1px solid #e2e8f0",
-              borderRadius: "6px",
-              fontSize: "13px",
-              cursor: "pointer",
-              color: "#475569",
-              whiteSpace: "nowrap",
-            }}
-          >
+          <button style={backButtonStyle} onClick={onBack}>
             ← Back to Form
           </button>
         </div>
       </div>
 
       {/* Sections */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-        {memo.sections.map((section) => (
-          <div
-            key={section.id}
-            style={{
-              background: "#ffffff",
-              border: "1px solid #e2e8f0",
-              borderRadius: "8px",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                background: "#f8fafc",
-                padding: "12px 16px",
-                borderBottom: "1px solid #e2e8f0",
-              }}
-            >
-              <h2
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "#1e3a5f",
-                  margin: 0,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.05em",
-                }}
-              >
-                {section.title}
-              </h2>
-            </div>
-            <div style={{ padding: "8px 0" }}>
-              {section.rows.map((row, idx) =>
-                row.value || row.label ? (
-                  <div
-                    key={idx}
-                    style={{
-                      display: "flex",
-                      padding: "8px 16px",
-                      borderBottom:
-                        idx < section.rows.length - 1 ? "1px solid #f1f5f9" : "none",
-                      marginLeft: row.indent ? "16px" : 0,
-                    }}
-                  >
-                    <span
-                      style={{
-                        width: row.indent ? "200px" : "180px",
-                        flexShrink: 0,
-                        fontSize: "13px",
-                        color: row.label ? "#64748b" : "transparent",
-                        fontWeight: row.label.match(/^[A-Z\s]+$/) ? 600 : 400,
-                      }}
-                    >
-                      {row.label}
-                    </span>
-                    <span
-                      style={{
-                        flex: 1,
-                        fontSize: "13px",
-                        color: row.highlight === "danger" ? "#b91c1c" : "#1e293b",
-                        fontWeight: row.highlight ? 500 : 400,
-                        fontFamily:
-                          row.value.startsWith("$") || row.value.includes("x")
-                            ? '"SF Mono", Monaco, monospace'
-                            : "inherit",
-                      }}
-                    >
-                      {row.value}
-                      {row.highlight && <HighlightBadge highlight={row.highlight} />}
-                    </span>
-                  </div>
-                ) : null
-              )}
-            </div>
+      {memo.sections.map((section, sectionIdx) => {
+        const hasContent = section.rows.some(r => r.value || r.label);
+        if (!hasContent) return null;
+
+        return (
+          <div key={section.id} style={cardStyle}>
+            <div style={cardHeaderStyle}>{section.title}</div>
+            <table style={tableStyle}>
+              <tbody>
+                {section.rows.map((row, idx) => {
+                  if (!row.value && !row.label) return null;
+
+                  const isHeader = /^[A-Z\s&]+$/.test(row.label);
+                  const isMonospace = isMonospaceValue(row.value);
+                  const rowStyleToUse = idx % 2 === 0 ? rowStyle : rowAlternateStyle;
+
+                  return (
+                    <tr key={idx} style={rowStyleToUse}>
+                      <td style={isHeader ? labelBoldStyle : labelCellStyle}>
+                        {row.label}
+                      </td>
+                      <td style={isMonospace ? valueMonoStyle : valueCellStyle}>
+                        {row.value}
+                        {getBadge(row.highlight)}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
           </div>
-        ))}
-      </div>
+        );
+      })}
 
       {/* Footer */}
-      <div
-        style={{
-          marginTop: "24px",
-          padding: "16px",
-          background: "#fefce8",
-          border: "1px solid #fde047",
-          borderRadius: "8px",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "12px",
-            color: "#713f12",
-            margin: 0,
-            textAlign: "center",
-            fontWeight: 500,
-          }}
-        >
-          {memo.footer}
-        </p>
+      <div style={footerStyle}>
+        <p style={footerTextStyle}>{memo.footer}</p>
       </div>
 
-      {/* Generated timestamp */}
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: "11px",
-          color: "#94a3b8",
-          marginTop: "16px",
-        }}
-      >
-        Generated {new Date().toLocaleDateString()} at{" "}
-        {new Date().toLocaleTimeString()}
+      <p style={timestampStyle}>
+        Generated {new Date().toLocaleDateString()} at {new Date().toLocaleTimeString()}
       </p>
     </div>
   );
