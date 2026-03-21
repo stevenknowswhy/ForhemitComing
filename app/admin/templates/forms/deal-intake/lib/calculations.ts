@@ -48,16 +48,30 @@ export function calcGuarantyFee(sbaAmount: number): number {
   return Math.round(guaranteedPortion * feeRate);
 }
 
+// ── WORKING CAPITAL CALCULATION ───────────────────────────────────────────────
+
+/**
+ * Calculate working capital based on percentage of purchase price.
+ * User can override the calculated value.
+ */
+export function calculateWorkingCapital(
+  purchasePrice: number,
+  workingCapitalPct: number
+): number {
+  return Math.round(purchasePrice * (workingCapitalPct / 100));
+}
+
 // ── CORE CALCULATIONS ────────────────────────────────────────────────────────
 
 /**
  * Calculate all derived values from inputs
  */
 export function calculateValues(inputs: DealInputs): CalculatedValues {
-  const { purchasePrice, ebitda, closingCosts } = inputs.financial;
+  const { purchasePrice, ebitda, actualClosingCosts, workingCapital } = inputs.financial;
   const { sbaAmount, sellerNote } = inputs.capital;
 
-  const totalProjectCost = purchasePrice + closingCosts;
+  // Total uses = purchase price + actual closing costs + working capital
+  const totalProjectCost = purchasePrice + actualClosingCosts + workingCapital;
   const esopLoan = Math.max(0, totalProjectCost - sbaAmount - sellerNote);
   const impliedMultiple = ebitda > 0 ? purchasePrice / ebitda : 0;
 
@@ -66,7 +80,7 @@ export function calculateValues(inputs: DealInputs): CalculatedValues {
     totalProjectCost > 0 ? (sellerNote / totalProjectCost) * 100 : 0;
   const esopPct = totalProjectCost > 0 ? (esopLoan / totalProjectCost) * 100 : 0;
 
-  // NEW: Dynamic guaranty fee calculation
+  // Dynamic guaranty fee calculation
   const guarantyFee = calcGuarantyFee(sbaAmount);
 
   return {
@@ -98,10 +112,15 @@ export function calculateDSCR(
 ): DSCRResult {
   const { sbaAmount, sellerNote, standbyMode } = inputs.capital;
   const { loanTerm, interestRate, esopRate, esopTerm, taxRate } = inputs.dscr;
+  const { purchasePrice, actualClosingCosts, workingCapital } = inputs.financial;
 
   // Annual debt service calculations
   const sbaDS = pmt(interestRate, loanTerm, sbaAmount) * 12;
-  const esopDS = pmt(esopRate, esopTerm, inputs.financial.purchasePrice + inputs.financial.closingCosts - sbaAmount - sellerNote) * 12;
+  
+  // ESOP loan amount is the gap in the capital stack
+  const totalProjectCost = purchasePrice + actualClosingCosts + workingCapital;
+  const esopLoanAmount = Math.max(0, totalProjectCost - sbaAmount - sellerNote);
+  const esopDS = pmt(esopRate, esopTerm, esopLoanAmount) * 12;
 
   // Seller note debt service:
   // Full standby → $0 during SBA term (SOP 50 10 8 equity injection treatment)
@@ -110,11 +129,11 @@ export function calculateDSCR(
 
   const totalDS = sbaDS + esopDS + snDS;
 
-  // FIXED: Primary DSCR uses EBITDA directly (SBA standard metric)
+  // Primary DSCR uses EBITDA directly (SBA standard metric)
   // No tax or D&A adjustments applied
   const dscrEbitda = totalDS > 0 ? activeEbitda / totalDS : 0;
 
-  // FIXED: OCF calculation simplified and disclosed
+  // OCF calculation simplified and disclosed
   // OCF = EBITDA × (1 - effective tax rate)
   // Removed arbitrary D&A proxy (was: ebitda * 0.08)
   const ocf = activeEbitda * (1 - taxRate / 100);

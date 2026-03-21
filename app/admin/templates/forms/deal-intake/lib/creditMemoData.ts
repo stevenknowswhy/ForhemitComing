@@ -39,7 +39,7 @@ export function generateStructuredCreditMemo(
 ): StructuredCreditMemo {
   const { inputs, calculated, dscr, activeEbitda } = options;
   const { business, financial, capital, lenderNotes } = inputs;
-  const { purchasePrice, ebitda, closingCosts } = financial;
+  const { purchasePrice, ebitda, actualClosingCosts, workingCapital, workingCapitalPct } = financial;
   const { sbaAmount, sellerNote, standbyMode } = capital;
 
   const resolvedCount = inputs.openItems.filter((i) => i.resolved).length;
@@ -73,6 +73,12 @@ export function generateStructuredCreditMemo(
         : "Active payment — interest-only at 6% p.a."
       : "N/A (no seller note)";
 
+  // FIXED: Show business type (including "Other" text if applicable)
+  const businessTypeDisplay =
+    business.type === "Other" && business.typeOther
+      ? `Other: ${business.typeOther}`
+      : business.type || "N/A";
+
   const sections: CreditMemoSection[] = [
     // Section 1: Transaction Summary
     {
@@ -80,25 +86,25 @@ export function generateStructuredCreditMemo(
       title: "1. Transaction Summary",
       rows: [
         { label: "Business", value: business.name || "Target Company" },
-        { label: "Type", value: business.type || "N/A" },
+        { label: "Type", value: businessTypeDisplay },
         { label: "State", value: business.state || "N/A" },
         {
           label: "Employees",
           value: business.employeeCount?.toString() || "N/A",
         },
         { label: "Transaction Type", value: "100% ESOP acquisition" },
-        { label: "Purchase Price", value: fmt(purchasePrice) },
+        { label: "Purchase price", value: fmt(purchasePrice) },
         { label: "TTM EBITDA", value: fmt(ebitda) },
         {
-          label: "Implied Multiple",
+          label: "Implied multiple",
           value:
             purchasePrice && ebitda ? fmtX(purchasePrice / ebitda) : "N/A",
         },
-        { label: "Total Project Cost", value: fmt(calculated.totalProjectCost) },
+        { label: "Total project cost", value: fmt(calculated.totalProjectCost) },
       ],
     },
 
-    // Section 2: Sources & Uses
+    // Section 2: Sources & Uses (FIXED: split closing costs and working capital)
     {
       id: "sources-uses",
       title: "2. Sources & Uses",
@@ -106,8 +112,13 @@ export function generateStructuredCreditMemo(
         { label: "USES", value: "" },
         { label: "Purchase price", value: fmt(purchasePrice), indent: true },
         {
-          label: "Closing costs & working capital",
-          value: fmt(closingCosts),
+          label: "Actual closing costs",
+          value: fmt(actualClosingCosts),
+          indent: true,
+        },
+        {
+          label: `Working capital reserve (${workingCapitalPct}%)`,
+          value: fmt(workingCapital),
           indent: true,
         },
         { label: "Total uses", value: fmt(calculated.totalProjectCost), indent: true },
@@ -158,7 +169,7 @@ export function generateStructuredCreditMemo(
       ],
     },
 
-    // NEW: Section 3: Loan Assumptions
+    // Section 3: Loan Assumptions
     {
       id: "loan-assumptions",
       title: "3. Loan Assumptions",
@@ -189,7 +200,7 @@ export function generateStructuredCreditMemo(
       ],
     },
 
-    // FIXED: Section 4: DSCR Analysis (corrected formulas)
+    // Section 4: DSCR Analysis (corrected formulas)
     {
       id: "dscr",
       title: `4. DSCR Analysis (${
@@ -268,7 +279,7 @@ export function generateStructuredCreditMemo(
       ],
     },
 
-    // FIXED: Section 5: SBA Policy Compliance (removed Policy Notice 5000-876441)
+    // Section 5: SBA Policy Compliance
     {
       id: "sba-policy",
       title: "5. SBA Policy Compliance",

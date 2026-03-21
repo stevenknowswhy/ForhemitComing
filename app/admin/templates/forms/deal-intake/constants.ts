@@ -7,12 +7,17 @@ export const DEFAULT_INPUTS: DealInputs = {
     name: "",
     state: "",
     type: "",
+    // NEW: Text field for "Other" business type
+    typeOther: "",
     employeeCount: 0,
   },
   financial: {
     purchasePrice: 10_000_000,
     ebitda: 2_000_000,
-    closingCosts: 850_000,
+    // CHANGED: Split closing costs from working capital
+    actualClosingCosts: 350_000, // SBA fee, legal, appraisal, QofE
+    workingCapitalPct: 5, // 5% of purchase price (default)
+    workingCapital: 500_000, // 5% of $10M = $500K
   },
   capital: {
     sbaAmount: 5_000_000,
@@ -93,11 +98,10 @@ export const BUSINESS_TYPE_OPTIONS = [
 
 export const SBA_MAX_LOAN = 5_000_000;
 export const TARGET_DSCR = 1.25;
-// REMOVED: ESOP_LOAN_PREMIUM (now user-editable field)
-// REMOVED: ESOP_LOAN_TERM (now user-editable field)
-// REMOVED: D_AND_A_PCT (arbitrary proxy removed)
-// REMOVED: TAX_RATE (now user-editable field)
 export const SELLER_NOTE_RATE = 0.06; // 6% for active payment interest-only
+
+// NEW: Working capital calculation
+export const DEFAULT_WORKING_CAPITAL_PCT = 5; // 5% of purchase price
 
 // ── COLORS ────────────────────────────────────────────────────────────────────
 

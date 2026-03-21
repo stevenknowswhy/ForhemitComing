@@ -4,13 +4,18 @@ export interface BusinessInfo {
   name: string;
   state: string;
   type: string;
+  // NEW: Text field for when user selects "Other" business type
+  typeOther: string;
   employeeCount: number;
 }
 
 export interface FinancialInputs {
   purchasePrice: number;
   ebitda: number;
-  closingCosts: number;
+  // CHANGED: Split closingCosts into actualClosingCosts + workingCapital
+  actualClosingCosts: number;
+  workingCapitalPct: number;
+  workingCapital: number;
 }
 
 export interface CapitalStack {
