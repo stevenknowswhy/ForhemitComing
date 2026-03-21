@@ -53,7 +53,22 @@ export const templateFormRegistry: TemplateFormEntry[] = [
     label: "ESOP Cost Reference",
     component: () => import("./forms/ESOPCostReferenceForm"),
   },
-  // ───────── Add new forms below ─────────
+  {
+    formKey: "esop-head-to-head",
+    label: "ESOP Head-to-Head",
+    component: () => import("./forms/ESOPHeadToHeadForm"),
+  },
+   {
+     formKey: "template-builder-guide",
+     label: "Template Builder Guide",
+     component: () => import("./forms/TemplateBuilderGuide"),
+   },
+   {
+     formKey: "esop-term-sheet",
+     label: "ESOP Term Sheet",
+     component: () => import("./forms/ESOPTermSheetForm"),
+   },
+   // ───────── Add new forms below ─────────
   // {
   //   formKey: "deal-structure-summary",
   //   label: "Deal Structure Summary",

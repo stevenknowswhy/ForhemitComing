@@ -1,18 +1,25 @@
 "use client";
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, lazy, Suspense } from "react";
 import { useQuery, useMutation } from "convex/react";
+import { useRouter } from "next/navigation";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import DocumentPreviewModal from "../templates/DocumentPreviewModal";
 import GeneratedDocumentsLog from "../templates/GeneratedDocumentsLog";
 import "../templates.css";
 
+const TemplateBuilderGuide = lazy(() =>
+  import("../templates/forms/TemplateBuilderGuide")
+);
+
 export default function TemplatesTab() {
+  const router = useRouter();
   const templates = useQuery(api.documentTemplates.list, {});
-  const seedTemplates = useMutation(api.documentTemplates.seed);
+  const forceSeedAll = useMutation(api.documentTemplates.forceSeedAll);
 
   const [previewOpen, setPreviewOpen] = useState(false);
+  const [guideOpen, setGuideOpen] = useState(false);
   const [activeTemplateId, setActiveTemplateId] =
     useState<Id<"documentTemplates"> | null>(null);
   const [activeTemplateName, setActiveTemplateName] = useState("");
@@ -22,12 +29,21 @@ export default function TemplatesTab() {
   >();
   const [seeded, setSeeded] = useState(false);
 
-  // Seed templates on first load if empty
+  // Seed templates if less than 2 exist (excluding the guide)
   useEffect(() => {
-    if (templates && templates.length === 0 && !seeded) {
-      seedTemplates({}).then(() => setSeeded(true));
+    if (templates && templates.length < 2 && !seeded) {
+      forceSeedAll({}).then(() => setSeeded(true));
     }
-  }, [templates, seeded, seedTemplates]);
+  }, [templates, seeded, forceSeedAll]);
+
+  // Filter out the Template Builder Guide from the cards
+  const templateCards = templates?.filter((t) => t.slug !== "template-builder-guide") ?? [];
+
+  // Force refresh templates (add missing ones)
+  const handleRefreshTemplates = useCallback(async () => {
+    await forceSeedAll({});
+    router.refresh();
+  }, [forceSeedAll, router]);
 
   const openPreview = useCallback(
     (id: Id<"documentTemplates">, name: string, formKey?: string, data?: string) => {
@@ -66,11 +82,27 @@ export default function TemplatesTab() {
       {/* Section Header */}
       <div className="section-header">
         <h2>Document Templates</h2>
+        <div className="section-header-actions">
+          <button
+            type="button"
+            className="template-btn template-btn-secondary"
+            onClick={() => setGuideOpen(true)}
+          >
+            📖 Template Builder Guide
+          </button>
+          <button
+            type="button"
+            className="template-btn template-btn-secondary"
+            onClick={handleRefreshTemplates}
+          >
+            🔄 Refresh Templates
+          </button>
+        </div>
       </div>
 
       {/* Template Cards */}
       <div className="templates-grid">
-        {templates.map((template) => (
+        {templateCards.map((template) => (
           <div key={template._id} className="template-card">
             <div className="template-card-header">
               <div className="template-card-badge">
@@ -138,6 +170,29 @@ export default function TemplatesTab() {
         formKey={activeFormKey}
         initialFormData={reprintData}
       />
+
+      {/* Template Builder Guide Modal */}
+      {guideOpen && (
+        <div className="modal-overlay" onClick={() => setGuideOpen(false)}>
+          <div className="modal-content guide-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>Template Builder Guide</h2>
+              <button
+                type="button"
+                className="modal-close"
+                onClick={() => setGuideOpen(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="modal-body">
+              <Suspense fallback={<div>Loading guide...</div>}>
+                <TemplateBuilderGuide />
+              </Suspense>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

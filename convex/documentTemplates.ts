@@ -97,31 +97,164 @@ export const update = mutation({
   },
 });
 
-// Seed the ESOP Cost Reference template if none exist
+// Seed all document templates
 export const seed = mutation({
   args: {},
   handler: async (ctx) => {
-    const existing = await ctx.db
-      .query("documentTemplates")
-      .withIndex("by_slug", (q) => q.eq("slug", "esop-cost-reference"))
-      .first();
+    const templatesToSeed: Array<{
+      name: string;
+      slug: string;
+      description: string;
+      version: string;
+      status: "active" | "draft" | "archived";
+      category?: string;
+      formKey?: string;
+    }> = [
+      {
+        name: "ESOP Cost Reference Calculator",
+        slug: "esop-cost-reference",
+        description:
+          "Interactive cost reference calculator for ESOP transactions. Models sunk costs, structural costs, universal costs, and §1042 tax deferral benefits across deal stages.",
+        version: "2.0",
+        status: "active",
+        category: "Financial Analysis",
+        formKey: "esop-cost-reference",
+      },
+      {
+        name: "ESOP Head-to-Head Comparison",
+        slug: "esop-head-to-head",
+        description:
+          "Compare two ESOP transaction structures side-by-side. Analyze valuation differences, tax implications, financing requirements, and shareholder outcomes.",
+        version: "1.0",
+        status: "active",
+        category: "Financial Analysis",
+        formKey: "esop-head-to-head",
+      },
+      {
+        name: "ESOP Term Sheet",
+        slug: "esop-term-sheet",
+        description:
+          "Interactive term sheet for ESOP acquisitions. Models capital structure, debt service coverage, seller economics, and transaction scenarios with SBA-compliant underwriting.",
+        version: "1.0",
+        status: "active",
+        category: "Transaction Documents",
+        formKey: "esop-term-sheet",
+      },
+    ];
 
-    if (existing) {
-      return { success: true, id: existing._id, seeded: false };
+    const seededIds: { slug: string; id: string; seeded: boolean }[] = [];
+
+    // First, get all existing templates to check what's there
+    const existingTemplates = await ctx.db
+      .query("documentTemplates")
+      .collect();
+    
+    const existingSlugs = new Set(existingTemplates.map(t => t.slug));
+    console.log("Existing templates:", existingSlugs);
+
+    for (const template of templatesToSeed) {
+      if (existingSlugs.has(template.slug)) {
+        // Find existing and update it
+        const existing = await ctx.db
+          .query("documentTemplates")
+          .withIndex("by_slug", (q) => q.eq("slug", template.slug))
+          .first();
+        
+        if (existing) {
+          await ctx.db.patch(existing._id, {
+            name: template.name,
+            description: template.description,
+            version: template.version,
+            status: template.status,
+            category: template.category,
+            formKey: template.formKey,
+            updatedAt: Date.now(),
+          });
+          seededIds.push({ slug: template.slug, id: existing._id, seeded: false });
+        }
+      } else {
+        const id = await ctx.db.insert("documentTemplates", {
+          name: template.name,
+          slug: template.slug,
+          description: template.description,
+          version: template.version,
+          status: template.status,
+          category: template.category,
+          formKey: template.formKey,
+          createdAt: Date.now(),
+        });
+        seededIds.push({ slug: template.slug, id, seeded: true });
+      }
     }
 
-    const id = await ctx.db.insert("documentTemplates", {
-      name: "ESOP Cost Reference Calculator",
-      slug: "esop-cost-reference",
-      description:
-        "Interactive cost reference calculator for ESOP transactions. Models sunk costs, structural costs, universal costs, and §1042 tax deferral benefits across deal stages.",
-      version: "2.0",
-      status: "active",
-      category: "Financial Analysis",
-      formKey: "esop-cost-reference",
-      createdAt: Date.now(),
-    });
+    return { success: true, templates: seededIds };
+  },
+});
 
-    return { success: true, id, seeded: true };
+// Force seed all templates - creates missing ones without checking existing
+export const forceSeedAll = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const templatesToSeed = [
+      {
+        name: "ESOP Cost Reference Calculator",
+        slug: "esop-cost-reference",
+        description:
+          "Interactive cost reference calculator for ESOP transactions. Models sunk costs, structural costs, universal costs, and §1042 tax deferral benefits across deal stages.",
+        version: "2.0",
+        status: "active" as const,
+        category: "Financial Analysis",
+        formKey: "esop-cost-reference",
+      },
+      {
+        name: "ESOP Head-to-Head Comparison",
+        slug: "esop-head-to-head",
+        description:
+          "Compare two ESOP transaction structures side-by-side. Analyze valuation differences, tax implications, financing requirements, and shareholder outcomes.",
+        version: "1.0",
+        status: "active" as const,
+        category: "Financial Analysis",
+        formKey: "esop-head-to-head",
+      },
+      {
+        name: "ESOP Term Sheet",
+        slug: "esop-term-sheet",
+        description:
+          "Interactive term sheet for ESOP acquisitions. Models capital structure, debt service coverage, seller economics, and transaction scenarios with SBA-compliant underwriting.",
+        version: "1.0",
+        status: "active" as const,
+        category: "Transaction Documents",
+        formKey: "esop-term-sheet",
+      },
+    ];
+
+    const results: { slug: string; id: string; action: string }[] = [];
+
+    for (const template of templatesToSeed) {
+      const existing = await ctx.db
+        .query("documentTemplates")
+        .withIndex("by_slug", (q) => q.eq("slug", template.slug))
+        .first();
+
+      if (existing) {
+        // Delete existing and recreate
+        await ctx.db.delete(existing._id);
+      }
+
+      // Create new
+      const id = await ctx.db.insert("documentTemplates", {
+        name: template.name,
+        slug: template.slug,
+        description: template.description,
+        version: template.version,
+        status: template.status,
+        category: template.category,
+        formKey: template.formKey,
+        createdAt: Date.now(),
+      });
+      results.push({ slug: template.slug, id, action: "created" });
+    }
+
+    return { success: true, templates: results };
   },
 });

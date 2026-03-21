@@ -324,6 +324,12 @@
   gap: 1rem;
 }
 
+.section-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
 .section-header h2 {
   font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
   font-size: 1.5rem;
@@ -812,6 +818,17 @@
 
 .modal-small {
   max-width: 400px;
+}
+
+.guide-modal {
+  max-width: 900px;
+  width: 100%;
+  max-height: 90vh;
+}
+
+.guide-modal .modal-body {
+  overflow-y: auto;
+  padding: 0;
 }
 
 @keyframes slideUp {
