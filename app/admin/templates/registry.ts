@@ -68,6 +68,11 @@ export const templateFormRegistry: TemplateFormEntry[] = [
      label: "ESOP Term Sheet",
      component: () => import("./forms/esop-term-sheet"),
    },
+   {
+     formKey: "deal-intake",
+     label: "Deal Intake — Credit Memo",
+     component: () => import("./forms/deal-intake"),
+   },
    // ───────── Add new forms below ─────────
   // {
   //   formKey: "deal-structure-summary",
