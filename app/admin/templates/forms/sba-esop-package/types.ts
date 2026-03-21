@@ -75,10 +75,12 @@ export interface ValidationErrors {
   institution?: string;
   companyName?: string;
   industry?: string;
+  yearsInOperation?: string;
   revenue?: string;
   ebitda?: string;
   dscr?: string;
   founderName?: string;
+  founderYears?: string;
   founderEmail?: string;
 }
 

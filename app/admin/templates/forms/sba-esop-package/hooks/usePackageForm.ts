@@ -38,6 +38,7 @@ export function usePackageForm(initialData?: Partial<PackageInputs>) {
       if (updates.institution) delete next.institution;
       if (updates.companyName) delete next.companyName;
       if (updates.industry) delete next.industry;
+      if (updates.yearsInOperation) delete next.yearsInOperation;
       return next;
     });
   }, []);
@@ -95,6 +96,7 @@ export function usePackageForm(initialData?: Partial<PackageInputs>) {
       const next = { ...prev };
       if (updates.founderName) delete next.founderName;
       if (updates.email) delete next.founderEmail;
+      if (updates.founderYears) delete next.founderYears;
       return next;
     });
   }, []);
@@ -129,6 +131,9 @@ export function usePackageForm(initialData?: Partial<PackageInputs>) {
         if (!inputs.lender.industry) {
           newErrors.industry = "Industry is required";
         }
+        if (!inputs.lender.yearsInOperation || inputs.lender.yearsInOperation < 1) {
+          newErrors.yearsInOperation = "Years in operation is required";
+        }
       }
 
       if (step === 1) {
@@ -148,6 +153,9 @@ export function usePackageForm(initialData?: Partial<PackageInputs>) {
         // Forhemit Team
         if (!inputs.forhemit.founderName) {
           newErrors.founderName = "Founder name is required";
+        }
+        if (!inputs.forhemit.founderYears) {
+          newErrors.founderYears = "Years in SF disaster preparedness is required";
         }
         if (!inputs.forhemit.email) {
           newErrors.founderEmail = "Email address is required";

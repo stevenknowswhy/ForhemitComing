@@ -35,6 +35,7 @@ export function ForhemitTeamStep({ inputs, onUpdate, errors }: ForhemitTeamStepP
           value={inputs.founderYears}
           onChange={(v) => onUpdate({ founderYears: v })}
           placeholder="e.g. 12"
+          error={errors.founderYears}
           required
         />
       </div>

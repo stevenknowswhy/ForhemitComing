@@ -67,13 +67,14 @@ export function LenderInfoStep({ inputs, onUpdate, errors }: LenderInfoStepProps
           onChange={(v) => onUpdate({ yearsInOperation: v })}
           placeholder="e.g. 18"
           min={1}
+          error={errors.yearsInOperation}
           required
         />
         <TextInput
           label="Submission date"
+          type="date"
           value={inputs.submissionDate}
           onChange={(v) => onUpdate({ submissionDate: v })}
-          placeholder="e.g. July 15, 2025"
         />
         <SelectInput
           label="PBC registration state"

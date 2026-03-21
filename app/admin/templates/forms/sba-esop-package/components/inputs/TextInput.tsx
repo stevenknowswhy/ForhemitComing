@@ -10,7 +10,7 @@ interface TextInputProps {
   hint?: string;
   error?: string;
   required?: boolean;
-  type?: "text" | "email" | "tel";
+  type?: "text" | "email" | "tel" | "date";
 }
 
 export function TextInput({

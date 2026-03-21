@@ -59,10 +59,14 @@ export function ChecklistStep({ inputs, onUpdate }: ChecklistStepProps) {
             <input
               type="checkbox"
               checked={inputs[item.key]}
-              onChange={() => {}}
+              onChange={(e) => {
+                // Prevent double-toggle by stopping the click from bubbling
+                e.stopPropagation();
+                handleToggle(item.key);
+              }}
               onClick={(e) => e.stopPropagation()}
             />
-            <label>{item.label}</label>
+            <label onClick={(e) => e.preventDefault()}>{item.label}</label>
           </div>
         ))}
       </div>
