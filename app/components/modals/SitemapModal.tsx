@@ -26,6 +26,7 @@ const sitemapSections: SitemapSection[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Blog", href: "/blog" },
       { label: "The Exit Crisis", href: "/the-exit-crisis" },
       { label: "FAQ", href: "/faq" },
       { label: "Beyond the Balance Sheet", href: "/beyond-the-balance-sheet" },
@@ -165,7 +166,7 @@ export default function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
 
         <div className="sitemap-footer">
           <p>
-            &copy; {new Date().getFullYear()} Forhemit Capital. All Rights
+            &copy; {new Date().getFullYear()} Forhemit PBC. All Rights
             Reserved.
           </p>
         </div>

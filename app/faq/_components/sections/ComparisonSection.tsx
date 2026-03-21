@@ -1,5 +1,7 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+
 const comparisonData = [
   {
     feature: "Governance / Control",
@@ -32,7 +34,9 @@ export function ComparisonSection() {
     <section className="about-section about-section-dark faq-comparison-section">
       <div className="container">
         <div className="faq-comparison-header">
-          <span className="about-eyebrow">Stewardship Model</span>
+          <Badge variant="outline" className="about-eyebrow">
+            Stewardship Model
+          </Badge>
           <h2 className="section-title">Observational Layer, Not Governance</h2>
           <p className="faq-comparison-subtitle">
             How Forhemit fits into the capital stack without creating regulatory complications

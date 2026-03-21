@@ -16,6 +16,16 @@ export function GlobalHeader() {
   if (pathname === "/coming-soon") {
     return null;
   }
+  
+  // Hide on blog pages (blog has its own header)
+  if (pathname.startsWith("/blog")) {
+    return null;
+  }
+
+  // Hide on admin pages (admin has its own header)
+  if (pathname.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <header className="global-header">

@@ -1,5 +1,7 @@
 "use client";
 
+import { Badge } from "@/components/ui/badge";
+
 export function HeroSection() {
   return (
     <section
@@ -10,7 +12,9 @@ export function HeroSection() {
       }}
     >
       <div className="container">
-        <span className="about-eyebrow about-eyebrow-hero">Resources</span>
+        <Badge variant="outline" className="about-eyebrow about-eyebrow-hero">
+          FAQ
+        </Badge>
         <h1 className="about-title">Frequently Asked Questions</h1>
         <p className="about-subtitle">The Forhemit Approach</p>
       </div>

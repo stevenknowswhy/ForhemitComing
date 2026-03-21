@@ -1,4 +1,4 @@
-# Forhemit Capital - Implementation Roadmap
+# Forhemit PBC - Implementation Roadmap
 
 > **Status Tracker**: Use this file to track progress through each phase.  
 > **Last Updated**: 2026-03-10  

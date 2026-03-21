@@ -3,7 +3,7 @@ set -e
 
 echo "========================================"
 echo "Phase 1 Auto-Installation Script"
-echo "Forhemit Capital Security & Stability"
+echo "Forhemit PBC Security & Stability"
 echo "========================================"
 echo ""
 
@@ -148,7 +148,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Forhemit Capital',
+  title: 'Forhemit PBC',
   description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
 }
 

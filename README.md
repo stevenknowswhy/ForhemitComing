@@ -1,6 +1,6 @@
-# Forhemit Capital - Coming Soon
+# Forhemit PBC - Coming Soon
 
-A modern, responsive landing page and recruitment portal for Forhemit Capital, a private equity firm.
+A modern, responsive landing page and recruitment portal for Forhemit PBC, a private equity firm.
 
 ## 🚀 Live Demo
 
@@ -8,7 +8,7 @@ Visit the live site: [https://forhemit.com](https://forhemit.com) *(update with 
 
 ## 📋 Project Overview
 
-Forhemit Capital is a private equity firm focused on acquiring and operating small to mid-sized businesses. This project includes:
+Forhemit PBC is a private equity firm focused on acquiring and operating small to mid-sized businesses. This project includes:
 
 - **Landing Page** - Minimalist dark-themed homepage with recruitment modal
 - **About Page** - Company philosophy and value proposition
@@ -164,7 +164,7 @@ npm start
 
 ## 📝 License
 
-This project is proprietary and confidential. All rights reserved by Forhemit Capital.
+This project is proprietary and confidential. All rights reserved by Forhemit PBC.
 
 ## 📧 Contact
 
@@ -172,4 +172,4 @@ For questions or inquiries, contact: [contact@forhemit.com](mailto:contact@forhe
 
 ---
 
-Built with ❤️ by Forhemit Capital Team
+Built with ❤️ by Forhemit PBC Team

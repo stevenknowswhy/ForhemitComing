@@ -15,7 +15,7 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
   return (
     <footer className={`footer footer-${variant}`}>
       <div className="footer-content">
-        <span className="footer-text">&copy; {currentYear} Forhemit Capital</span>
+        <span className="footer-text">&copy; {currentYear} Forhemit PBC</span>
         <span className="footer-dot" />
         <span className="footer-text">All Rights Reserved</span>
         

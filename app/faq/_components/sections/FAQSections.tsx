@@ -1,5 +1,4 @@
-"use client";
-
+import { Badge } from "@/components/ui/badge";
 import { FAQAccordion } from "../FAQAccordion";
 import { faqSections } from "../../_data/faqs";
 
@@ -11,7 +10,9 @@ export function FAQSections() {
           {faqSections.map((section) => (
             <div key={section.title} className="faq-column">
               <div className="faq-column-header">
-                <span className="about-eyebrow">{section.eyebrow}</span>
+                <Badge variant="outline" className="about-eyebrow">
+                  {section.eyebrow}
+                </Badge>
                 <h2 className="faq-column-title">{section.title}</h2>
               </div>
               <FAQAccordion items={section.items} />

@@ -19,14 +19,14 @@ export default function TermsPage() {
             <div className="legal-text-content">
               <h2>1. Acceptance of Terms</h2>
               <p>
-                By accessing and using Forhemit Capital&apos;s website and services, you accept 
+                By accessing and using Forhemit PBC&apos;s website and services, you accept 
                 and agree to be bound by these Terms of Service. If you do not agree to these 
                 terms, please do not use our website or services.
               </p>
 
               <h2>2. Description of Services</h2>
               <p>
-                Forhemit Capital provides business transition consulting services, specializing 
+                Forhemit PBC provides business transition consulting services, specializing 
                 in Employee Stock Ownership Plan (ESOP) implementation and stewardship management. 
                 Our website provides information about our services, educational resources, and 
                 channels for contacting us.
@@ -46,7 +46,7 @@ export default function TermsPage() {
               <h2>4. Intellectual Property</h2>
               <p>
                 All content, trademarks, logos, and materials on this website are owned by 
-                Forhemit Capital and are protected by copyright, trademark, and other intellectual 
+                Forhemit PBC and are protected by copyright, trademark, and other intellectual 
                 property laws. You may not reproduce, distribute, modify, create derivative works 
                 of, publicly display, or commercially exploit any content without our prior written 
                 consent.
@@ -87,7 +87,7 @@ export default function TermsPage() {
 
               <h2>8. Indemnification</h2>
               <p>
-                You agree to indemnify and hold harmless Forhemit Capital and its officers, directors, 
+                You agree to indemnify and hold harmless Forhemit PBC and its officers, directors, 
                 employees, and agents from any claims, damages, losses, or expenses (including 
                 reasonable attorneys&apos; fees) arising out of your use of our website or services, 
                 your violation of these Terms, or your violation of any rights of a third party.

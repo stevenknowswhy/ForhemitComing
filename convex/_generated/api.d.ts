@@ -10,7 +10,9 @@
 
 import type * as auditLogs from "../auditLogs.js";
 import type * as contactSubmissions from "../contactSubmissions.js";
+import type * as documentTemplates from "../documentTemplates.js";
 import type * as earlyAccessSignups from "../earlyAccessSignups.js";
+import type * as generatedDocuments from "../generatedDocuments.js";
 import type * as jobApplications from "../jobApplications.js";
 
 import type {
@@ -22,7 +24,9 @@ import type {
 declare const fullApi: ApiFromModules<{
   auditLogs: typeof auditLogs;
   contactSubmissions: typeof contactSubmissions;
+  documentTemplates: typeof documentTemplates;
   earlyAccessSignups: typeof earlyAccessSignups;
+  generatedDocuments: typeof generatedDocuments;
   jobApplications: typeof jobApplications;
 }>;
 

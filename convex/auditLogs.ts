@@ -12,7 +12,9 @@ export const create = mutation({
     entityType: v.union(
       v.literal("contactSubmission"),
       v.literal("earlyAccessSignup"),
-      v.literal("jobApplication")
+      v.literal("jobApplication"),
+      v.literal("documentTemplate"),
+      v.literal("generatedDocument")
     ),
     entityId: v.string(),
     changes: v.optional(v.array(v.object({
@@ -93,6 +95,8 @@ export const getStats = query({
         contactSubmission: 0,
         earlyAccessSignup: 0,
         jobApplication: 0,
+        documentTemplate: 0,
+        generatedDocument: 0,
       } as Record<string, number>,
       recentActivity: allLogs.slice(0, 10), // Last 10 actions
     };

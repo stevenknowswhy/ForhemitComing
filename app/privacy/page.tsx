@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import "./privacy-page.css";
 
 export default function PrivacyPage() {
@@ -45,7 +46,7 @@ export default function PrivacyPage() {
               <h2>3. SMS/Text Messaging (TCPA Compliance)</h2>
               <p>
                 By providing your mobile phone number and opting in to receive text messages, 
-                you expressly consent to receive SMS communications from Forhemit Capital in 
+                you expressly consent to receive SMS communications from Forhemit PBC in 
                 accordance with the Telephone Consumer Protection Act (TCPA).
               </p>
               <h3>Message Types and Frequency</h3>
@@ -63,7 +64,7 @@ export default function PrivacyPage() {
               <h3>Message and Data Rates</h3>
               <p>
                 Message and data rates may apply depending on your mobile carrier and plan. 
-                Forhemit Capital is not responsible for any charges incurred from receiving 
+                Forhemit PBC is not responsible for any charges incurred from receiving 
                 text messages.
               </p>
               <h3>How to Opt Out</h3>
@@ -88,7 +89,7 @@ export default function PrivacyPage() {
 
               <h2>4. Email Communications (CAN-SPAM Compliance)</h2>
               <p>
-                In accordance with the CAN-SPAM Act, all marketing emails from Forhemit Capital include:
+                In accordance with the CAN-SPAM Act, all marketing emails from Forhemit PBC include:
               </p>
               <ul>
                 <li>Clear identification that the message is an advertisement or promotional</li>
@@ -173,7 +174,7 @@ export default function PrivacyPage() {
               <p>
                 <strong>Email:</strong> privacy@forhemit.com<br />
                 <strong>Phone:</strong> +1 (800) 555-0199<br />
-                <strong>Address:</strong> Forhemit Capital, Attn: Privacy Officer<br />
+                <strong>Address:</strong> Forhemit PBC, Attn: Privacy Officer<br />
                 <strong>Website:</strong> <Link href="/introduction">Contact Form</Link>
               </p>
             </div>

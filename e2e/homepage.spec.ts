@@ -16,7 +16,7 @@ test.describe('Homepage', () => {
     
     // Check Open Graph title
     const title = await page.title();
-    expect(title).toContain('Forhemit Capital');
+    expect(title).toContain('Forhemit PBC');
   });
 
   test('should show 404 for unknown routes', async ({ page }) => {

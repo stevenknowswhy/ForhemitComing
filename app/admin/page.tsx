@@ -8,10 +8,11 @@ import { LogOut, Edit2, Trash2, FileText, History } from "lucide-react";
 import AdminLogin from "./login";
 import EditModal from "./components/EditModal";
 import DeleteConfirmModal from "./components/DeleteConfirmModal";
+import TemplatesTab from "./components/TemplatesTab";
 import { Id } from "../../convex/_generated/dataModel";
 import "./admin.css";
 
-type TabType = "contacts" | "early-access" | "applications" | "stats" | "audit";
+type TabType = "contacts" | "early-access" | "applications" | "stats" | "audit" | "templates";
 
 // Hook to check if Convex is ready
 function useConvexReady() {
@@ -236,6 +237,13 @@ function AdminContent({ onLogout }: AdminContentProps) {
         >
           <History size={16} />
           Audit Log
+        </button>
+        <button
+          className={`admin-tab ${activeTab === "templates" ? "active" : ""}`}
+          onClick={() => setActiveTab("templates")}
+        >
+          <FileText size={16} />
+          Templates
         </button>
       </nav>
 
@@ -611,6 +619,13 @@ function AdminContent({ onLogout }: AdminContentProps) {
                 </div>
               </>
             )}
+          </div>
+        )}
+
+        {/* Templates Tab */}
+        {activeTab === "templates" && (
+          <div className="admin-section">
+            <TemplatesTab />
           </div>
         )}
       </div>

@@ -1,7 +1,18 @@
 "use client";
 
-import { useState } from "react";
-import { Users, Briefcase, Landmark, Lightbulb, ChevronLeft, ChevronRight } from "lucide-react";
+import { Users, Briefcase, Landmark, Lightbulb } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from "@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
 
 const stakeholderGroups = [
   {
@@ -85,18 +96,6 @@ const stakeholderGroups = [
 ];
 
 export function ValuePropositionsSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const activeGroup = stakeholderGroups[activeIndex];
-
-  const goToNext = () => {
-    setActiveIndex((prev) => (prev + 1) % stakeholderGroups.length);
-  };
-
-  const goToPrev = () => {
-    setActiveIndex((prev) => (prev - 1 + stakeholderGroups.length) % stakeholderGroups.length);
-  };
-
   return (
     <section className="about-section faq-value-props-section">
       <div className="container">
@@ -110,85 +109,66 @@ export function ValuePropositionsSection() {
           </p>
         </div>
 
-        {/* Gallery Navigation */}
-        <div className="faq-gallery-nav">
-          <button
-            className="faq-gallery-arrow"
-            onClick={goToPrev}
-            aria-label="Previous stakeholder"
-          >
-            <ChevronLeft size={24} />
-          </button>
-
-          <div className="faq-gallery-tabs">
-            {stakeholderGroups.map((group, index) => (
-              <button
+        <Tabs defaultValue="sellers" className="faq-gallery-tabs-wrapper">
+          <TabsList className="faq-gallery-tabs">
+            {stakeholderGroups.map((group) => (
+              <TabsTrigger
                 key={group.id}
-                className={`faq-gallery-tab ${activeIndex === index ? "active" : ""}`}
-                onClick={() => setActiveIndex(index)}
+                value={group.id}
+                className="faq-gallery-tab"
               >
                 <group.icon size={24} strokeWidth={1.5} />
                 <span className="faq-gallery-tab-title">{group.title}</span>
                 <span className="faq-gallery-tab-subtitle">{group.subtitle}</span>
-              </button>
+              </TabsTrigger>
             ))}
-          </div>
+          </TabsList>
 
-          <button
-            className="faq-gallery-arrow"
-            onClick={goToNext}
-            aria-label="Next stakeholder"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-
-        {/* Dots Navigation */}
-        <div className="faq-gallery-dots">
-          {stakeholderGroups.map((_, index) => (
-            <button
-              key={index}
-              className={`faq-gallery-dot ${activeIndex === index ? "active" : ""}`}
-              onClick={() => setActiveIndex(index)}
-              aria-label={`Go to slide ${index + 1}`}
-            />
-          ))}
-        </div>
-
-        {/* Active Content */}
-        <div className="faq-value-prop-content">
-          <div className="faq-value-prop-card">
-            <div className="faq-value-prop-card-header">
-              <div className="faq-value-prop-icon">
-                <activeGroup.icon size={28} strokeWidth={1.5} />
-              </div>
-              <div>
-                <h3>{activeGroup.title}</h3>
-                <span className="faq-value-prop-subtitle">{activeGroup.subtitle}</span>
-              </div>
-            </div>
-
-            <div className="faq-value-prop-concern">
-              <span className="concern-label">Core Concerns</span>
-              <p>{activeGroup.coreConcern}</p>
-            </div>
-
-            <div className="faq-value-prop-list">
-              {activeGroup.valueProps.map((prop, index) => (
-                <div key={index} className={`faq-value-prop-item ${prop.deeper ? "deeper" : ""}`}>
-                  <div className="value-prop-number">0{index + 1}</div>
-                  <div className="value-prop-content">
-                    <h4>
-                      {prop.title}
-                      {prop.deeper && <span className="deeper-badge">Deep Dive</span>}
-                    </h4>
-                    <p>{prop.description}</p>
+          {stakeholderGroups.map((group) => (
+            <TabsContent key={group.id} value={group.id} className="faq-value-prop-content">
+              <Card className="faq-value-prop-card">
+                <CardHeader className="faq-value-prop-card-header">
+                  <div className="faq-value-prop-icon">
+                    <group.icon size={28} strokeWidth={1.5} />
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+                  <div>
+                    <h3>{group.title}</h3>
+                    <span className="faq-value-prop-subtitle">{group.subtitle}</span>
+                  </div>
+                </CardHeader>
+
+                <CardContent>
+                  <div className="faq-value-prop-concern">
+                    <span className="concern-label">Core Concerns</span>
+                    <p>{group.coreConcern}</p>
+                  </div>
+
+                  <div className="faq-value-prop-list">
+                    {group.valueProps.map((prop, index) => (
+                      <div
+                        key={index}
+                        className={`faq-value-prop-item ${prop.deeper ? "deeper" : ""}`}
+                      >
+                        <div className="value-prop-number">0{index + 1}</div>
+                        <div className="value-prop-content">
+                          <h4>
+                            {prop.title}
+                            {prop.deeper && (
+                              <Badge variant="outline" className="deeper-badge">
+                                Deep Dive
+                              </Badge>
+                            )}
+                          </h4>
+                          <p>{prop.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          ))}
+        </Tabs>
 
         {/* Category Creation Advantage */}
         <div className="faq-category-advantage">

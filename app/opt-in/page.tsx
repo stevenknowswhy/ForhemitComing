@@ -125,7 +125,7 @@ export default function OptInPage() {
                 <h2>Subscribe to Updates</h2>
                 <p className="opt-in-intro">
                   Stay informed about employee ownership strategies, ESOP insights, 
-                  and opportunities to connect with Forhemit Capital.
+                  and opportunities to connect with Forhemit PBC.
                 </p>
 
                 <form onSubmit={handleSubmit} className="opt-in-form">
@@ -214,7 +214,7 @@ export default function OptInPage() {
                     <div className="sms-disclosure">
                       <p>
                         <strong>SMS Consent:</strong> By checking this box, you consent to receive 
-                        text messages from Forhemit Capital. Message and data rates may apply. 
+                        text messages from Forhemit PBC. Message and data rates may apply. 
                         Message frequency varies. Reply STOP to opt out at any time. Reply HELP 
                         for assistance. See our <Link href="/privacy">Privacy Policy</Link> for 
                         more information.

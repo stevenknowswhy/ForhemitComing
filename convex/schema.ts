@@ -102,6 +102,41 @@ export default defineSchema({
   })
     .index("by_date", ["date"]),
 
+  // Document templates metadata
+  documentTemplates: defineTable({
+    name: v.string(),
+    slug: v.string(),
+    description: v.string(),
+    version: v.string(),
+    status: v.union(
+      v.literal("active"),
+      v.literal("draft"),
+      v.literal("archived")
+    ),
+    category: v.optional(v.string()),
+    formKey: v.optional(v.string()), // <--- NEW: maps to form registry
+    createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_status", ["status"]),
+
+  // Log of all generated/downloaded/printed documents
+  generatedDocuments: defineTable({
+    templateId: v.id("documentTemplates"),
+    templateName: v.string(),
+    formData: v.string(), // JSON snapshot of form inputs at generation time
+    action: v.union(
+      v.literal("pdf-download"),
+      v.literal("print"),
+      v.literal("preview")
+    ),
+    generatedBy: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_template", ["templateId"])
+    .index("by_createdAt", ["createdAt"]),
+
   // Audit log for tracking all admin changes
   auditLogs: defineTable({
     action: v.union(
@@ -112,7 +147,9 @@ export default defineSchema({
     entityType: v.union(
       v.literal("contactSubmission"),
       v.literal("earlyAccessSignup"),
-      v.literal("jobApplication")
+      v.literal("jobApplication"),
+      v.literal("documentTemplate"),
+      v.literal("generatedDocument")
     ),
     entityId: v.string(), // The ID of the affected entity
     changes: v.optional(v.array(v.object({

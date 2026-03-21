@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Lock, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 
 interface AdminLoginProps {
   onLogin: () => void;
@@ -40,6 +41,10 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
 
   return (
     <div className="admin-login-container">
+      <Link href="/" className="admin-login-back">
+        <ArrowLeft size={16} />
+        Back to Website
+      </Link>
       <div className="admin-login-card">
         <div className="admin-login-icon">
           <Lock size={32} />

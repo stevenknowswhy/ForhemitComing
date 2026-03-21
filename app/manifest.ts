@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Forhemit Capital',
+    name: 'Forhemit PBC',
     short_name: 'Forhemit',
     description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
     start_url: '/',

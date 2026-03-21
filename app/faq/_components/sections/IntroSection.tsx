@@ -1,6 +1,14 @@
 "use client";
 
 import { Shield, Users, Heart } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 const values = [
   {
@@ -25,7 +33,9 @@ export function IntroSection() {
     <section className="about-section about-section-alt faq-intro-section">
       <div className="container">
         <div className="faq-intro-header">
-          <span className="about-eyebrow">Our Approach</span>
+          <Badge variant="outline" className="about-eyebrow">
+            Our Approach
+          </Badge>
           <h2 className="section-title">Built Different. Built to Last.</h2>
         </div>
 
@@ -43,13 +53,17 @@ export function IntroSection() {
 
         <div className="faq-values-grid">
           {values.map((value) => (
-            <div key={value.title} className="faq-value-card">
-              <div className="faq-value-icon">
-                <value.icon size={24} strokeWidth={1.5} />
-              </div>
-              <h3>{value.title}</h3>
-              <p>{value.description}</p>
-            </div>
+            <Card key={value.title} className="faq-value-card">
+              <CardHeader className="faq-value-card-header">
+                <div className="faq-value-icon">
+                  <value.icon size={24} strokeWidth={1.5} />
+                </div>
+                <CardTitle>{value.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="faq-value-card-content">
+                <CardDescription>{value.description}</CardDescription>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>

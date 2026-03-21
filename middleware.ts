@@ -4,9 +4,10 @@ import type { NextRequest } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl
   
-  // 1. Allow access to the "Coming Soon" page and static assets
+  // 1. Allow access to the "Coming Soon" page, blog, and static assets
   if (
     pathname === '/coming-soon' || 
+    pathname.startsWith('/blog') ||
     pathname.startsWith('/_next') || 
     pathname.startsWith('/api') ||
     pathname.includes('.') // matches images, favicons, etc.

@@ -25,6 +25,11 @@ export function GlobalFooter() {
     return null;
   }
 
+  // Hide footer on admin pages (admin has its own layout)
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   // Use sticky footer on homepage to keep everything in viewport
   const isHomePage = pathname === "/";
 

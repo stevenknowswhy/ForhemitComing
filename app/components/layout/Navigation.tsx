@@ -27,23 +27,6 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
-  // Hide navigation on coming-soon page
-  if (pathname === "/coming-soon") {
-    return null;
-  }
-
-  // Filter out current page from primary navigation
-  const visibleNavItems = navItems.filter((item) => {
-    // Exact match for home, startsWith for others
-    if (item.href === "/") {
-      return pathname !== "/";
-    }
-    return !pathname?.startsWith(item.href);
-  });
-
-  // Combine with permanent links (always show Introductions)
-  const allNavItems = [...visibleNavItems, ...permanentLinks];
-
   // Close menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -82,6 +65,33 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
   useEffect(() => {
     setIsOpen(false);
   }, [pathname]);
+
+  // Hide navigation on coming-soon page
+  if (pathname === "/coming-soon") {
+    return null;
+  }
+
+  // Hide navigation on blog pages (blog has its own navigation)
+  if (pathname?.startsWith("/blog")) {
+    return null;
+  }
+
+  // Hide navigation on admin pages (admin has its own header)
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
+  // Filter out current page from primary navigation
+  const visibleNavItems = navItems.filter((item) => {
+    // Exact match for home, startsWith for others
+    if (item.href === "/") {
+      return pathname !== "/";
+    }
+    return !pathname?.startsWith(item.href);
+  });
+
+  // Combine with permanent links (always show Introductions)
+  const allNavItems = [...visibleNavItems, ...permanentLinks];
 
   return (
     <nav
