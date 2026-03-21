@@ -66,7 +66,7 @@ export const templateFormRegistry: TemplateFormEntry[] = [
    {
      formKey: "esop-term-sheet",
      label: "ESOP Term Sheet",
-     component: () => import("./forms/ESOPTermSheetForm"),
+     component: () => import("./forms/esop-term-sheet"),
    },
    // ───────── Add new forms below ─────────
   // {
