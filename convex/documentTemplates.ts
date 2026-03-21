@@ -140,6 +140,16 @@ export const seed = mutation({
         category: "Transaction Documents",
         formKey: "esop-term-sheet",
       },
+      {
+        name: "Deal Intake — Credit Memo",
+        slug: "deal-intake",
+        description:
+          "Four-step deal intake wizard for generating illustrative credit memos. Captures business info, capital stack structure, DSCR scenarios, and open items for lender submission.",
+        version: "1.0",
+        status: "active",
+        category: "Transaction Documents",
+        formKey: "deal-intake",
+      },
     ];
 
     const seededIds: { slug: string; id: string; seeded: boolean }[] = [];
@@ -225,6 +235,16 @@ export const forceSeedAll = mutation({
         status: "active" as const,
         category: "Transaction Documents",
         formKey: "esop-term-sheet",
+      },
+      {
+        name: "Deal Intake — Credit Memo",
+        slug: "deal-intake",
+        description:
+          "Four-step deal intake wizard for generating illustrative credit memos. Captures business info, capital stack structure, DSCR scenarios, and open items for lender submission.",
+        version: "1.0",
+        status: "active" as const,
+        category: "Transaction Documents",
+        formKey: "deal-intake",
       },
     ];
 
