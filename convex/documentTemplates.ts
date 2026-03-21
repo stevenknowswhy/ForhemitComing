@@ -150,6 +150,16 @@ export const seed = mutation({
         category: "Transaction Documents",
         formKey: "deal-intake",
       },
+      {
+        name: "SBA ESOP Lender Package",
+        slug: "sba-esop-package",
+        description:
+          "Seven-step form for generating SBA ESOP lender package executive summaries. Captures lender info, financials, management team, advisory team, compliance checklist, and generates complete LGPC-ready documentation.",
+        version: "1.0",
+        status: "active",
+        category: "Transaction Documents",
+        formKey: "sba-esop-package",
+      },
     ];
 
     const seededIds: { slug: string; id: string; seeded: boolean }[] = [];
@@ -245,6 +255,16 @@ export const forceSeedAll = mutation({
         status: "active" as const,
         category: "Transaction Documents",
         formKey: "deal-intake",
+      },
+      {
+        name: "SBA ESOP Lender Package",
+        slug: "sba-esop-package",
+        description:
+          "Seven-step form for generating SBA ESOP lender package executive summaries. Captures lender info, financials, management team, advisory team, compliance checklist, and generates complete LGPC-ready documentation.",
+        version: "1.0",
+        status: "active" as const,
+        category: "Transaction Documents",
+        formKey: "sba-esop-package",
       },
     ];
 

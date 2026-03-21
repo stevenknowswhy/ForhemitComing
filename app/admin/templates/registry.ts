@@ -73,6 +73,11 @@ export const templateFormRegistry: TemplateFormEntry[] = [
      label: "Deal Intake — Credit Memo",
      component: () => import("./forms/deal-intake"),
    },
+   {
+     formKey: "sba-esop-package",
+     label: "SBA ESOP Lender Package",
+     component: () => import("./forms/sba-esop-package"),
+   },
    // ───────── Add new forms below ─────────
   // {
   //   formKey: "deal-structure-summary",
