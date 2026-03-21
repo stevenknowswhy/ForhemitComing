@@ -40,6 +40,12 @@ export {
 
 export { fmt, fmtPct, fmtX, fmtK } from "./lib/formatters";
 export { generateCreditMemo } from "./lib/creditMemo";
+export {
+  generateStructuredCreditMemo,
+  type StructuredCreditMemo,
+  type CreditMemoSection,
+  type CreditMemoRow,
+} from "./lib/creditMemoData";
 
 // Hooks
 export { useDealCalculations } from "./hooks/useDealCalculations";
