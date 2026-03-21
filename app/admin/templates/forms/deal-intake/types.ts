@@ -24,6 +24,11 @@ export interface DSCRInputs {
   ebitdaB: number;
   loanTerm: number;
   interestRate: number;
+  // NEW: User-editable ESOP loan assumptions (were hardcoded)
+  esopRate: number;
+  esopTerm: number;
+  // NEW: User-editable tax rate for OCF DSCR calculation
+  taxRate: number;
 }
 
 export interface OpenItem {
@@ -48,6 +53,8 @@ export interface CalculatedValues {
   sbaPct: number;
   sellerPct: number;
   esopPct: number;
+  // NEW: Dynamic guaranty fee calculation
+  guarantyFee: number;
 }
 
 export interface DSCRResult {
@@ -55,9 +62,17 @@ export interface DSCRResult {
   esopDS: number;
   snDS: number;
   totalDS: number;
+  // NEW: OCF calculation uses tax rate (removed arbitrary D&A proxy)
   ocf: number;
+  // FIXED: Primary DSCR is EBITDA / totalDS (SBA standard)
   dscrEbitda: number;
+  // FIXED: OCF DSCR is supplemental, clearly labeled
   dscrOcf: number;
+  // Include assumption values for display
+  esopRate: number;
+  esopTerm: number;
+  taxRate: number;
+  sbaRate: number;
 }
 
 export interface CreditMemoData {

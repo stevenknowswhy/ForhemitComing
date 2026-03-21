@@ -1,10 +1,6 @@
 import { DealInputs, CalculatedValues, DSCRResult } from "../types";
 import {
   TARGET_DSCR,
-  ESOP_LOAN_PREMIUM,
-  ESOP_LOAN_TERM,
-  D_AND_A_PCT,
-  TAX_RATE,
   SELLER_NOTE_RATE,
 } from "../constants";
 
@@ -14,31 +10,42 @@ import {
  * Calculate monthly loan payment using standard amortization formula
  */
 export function pmt(
-  rate: number,
-  nper: number,
+  annualRate: number,
+  termYears: number,
   pv: number
 ): number {
-  if (rate === 0) return pv / nper;
-  const r = rate / 12;
-  return (pv * r * Math.pow(1 + r, nper)) / (Math.pow(1 + r, nper) - 1);
+  if (pv <= 0) return 0;
+  const r = annualRate / 100 / 12;
+  const n = termYears * 12;
+  if (r === 0) return pv / n;
+  return (pv * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
 }
 
 /**
- * Calculate loan amount from annual payment
+ * Calculate SBA guaranty fee per FY2026 fee schedule.
+ * 
+ * Fee tiers (SBA guarantees 75% for loans > $150k):
+ *   ≤ $150k:          0%
+ *   $150,001–$700k:   2.0% of guaranteed portion
+ *   $700,001–$1M:     3.0% of guaranteed portion
+ *   > $1M:            3.5% of guaranteed portion
+ * 
+ * Source: SBA SOP 50 10 8, Appendix to Part 2, Section A
  */
-export function calculateLoanAmountFromPayment(
-  annualPayment: number,
-  annualRate: number,
-  years: number
-): number {
-  const monthlyRate = annualRate / 12;
-  const numPayments = years * 12;
-  const monthlyPayment = annualPayment / 12;
-  if (monthlyRate === 0) return monthlyPayment * numPayments;
-  return (
-    (monthlyPayment * (1 - Math.pow(1 + monthlyRate, -numPayments))) /
-    monthlyRate
-  );
+export function calcGuarantyFee(sbaAmount: number): number {
+  if (!sbaAmount || sbaAmount <= 0) return 0;
+  const guaranteedPortion = sbaAmount * 0.75;
+  let feeRate: number;
+  if (sbaAmount <= 150_000) {
+    feeRate = 0.0;
+  } else if (sbaAmount <= 700_000) {
+    feeRate = 0.02;
+  } else if (sbaAmount <= 1_000_000) {
+    feeRate = 0.03;
+  } else {
+    feeRate = 0.035;
+  }
+  return Math.round(guaranteedPortion * feeRate);
 }
 
 // ── CORE CALCULATIONS ────────────────────────────────────────────────────────
@@ -59,6 +66,9 @@ export function calculateValues(inputs: DealInputs): CalculatedValues {
     totalProjectCost > 0 ? (sellerNote / totalProjectCost) * 100 : 0;
   const esopPct = totalProjectCost > 0 ? (esopLoan / totalProjectCost) * 100 : 0;
 
+  // NEW: Dynamic guaranty fee calculation
+  const guarantyFee = calcGuarantyFee(sbaAmount);
+
   return {
     totalProjectCost,
     esopLoan,
@@ -66,43 +76,48 @@ export function calculateValues(inputs: DealInputs): CalculatedValues {
     sbaPct,
     sellerPct,
     esopPct,
+    guarantyFee,
   };
 }
 
 /**
- * Calculate DSCR metrics
+ * Calculate DSCR metrics with corrected formulas.
+ * 
+ * PRIMARY DSCR (SBA standard): EBITDA / Total Annual Debt Service
+ * - Uses pre-tax, pre-D&A EBITDA (no adjustments)
+ * - This is what SBA underwriters actually use
+ * 
+ * SUPPLEMENTAL OCF DSCR: EBITDA × (1 - taxRate) / Total Annual Debt Service
+ * - Uses user-entered effective tax rate
+ * - For pass-throughs and S-corps, user enters 0%
+ * - Clearly labeled as supplemental metric
  */
 export function calculateDSCR(
   inputs: DealInputs,
   activeEbitda: number
 ): DSCRResult {
   const { sbaAmount, sellerNote, standbyMode } = inputs.capital;
-  const { loanTerm, interestRate } = inputs.dscr;
-  const calculated = calculateValues(inputs);
+  const { loanTerm, interestRate, esopRate, esopTerm, taxRate } = inputs.dscr;
 
-  // SBA debt service
-  const sbaMonthlyDS = pmt(interestRate / 100, loanTerm * 12, sbaAmount);
-  const sbaDS = sbaMonthlyDS * 12;
+  // Annual debt service calculations
+  const sbaDS = pmt(interestRate, loanTerm, sbaAmount) * 12;
+  const esopDS = pmt(esopRate, esopTerm, inputs.financial.purchasePrice + inputs.financial.closingCosts - sbaAmount - sellerNote) * 12;
 
-  // ESOP loan debt service (7-year term, 1% premium)
-  const esopRate = interestRate / 100 + ESOP_LOAN_PREMIUM;
-  const esopMonthlyDS =
-    calculated.esopLoan > 0
-      ? pmt(esopRate, ESOP_LOAN_TERM * 12, calculated.esopLoan)
-      : 0;
-  const esopDS = esopMonthlyDS * 12;
-
-  // Seller note debt service
-  const snDS = standbyMode === "full" ? 0 : sellerNote * SELLER_NOTE_RATE;
+  // Seller note debt service:
+  // Full standby → $0 during SBA term (SOP 50 10 8 equity injection treatment)
+  // Active → interest-only at 6% per annum (conservative placeholder)
+  const snDS = (standbyMode === "full" || sellerNote <= 0) ? 0 : sellerNote * SELLER_NOTE_RATE;
 
   const totalDS = sbaDS + esopDS + snDS;
 
-  // OCF calculation
-  const dAndA = activeEbitda * D_AND_A_PCT;
-  const taxes = (activeEbitda - dAndA) * TAX_RATE;
-  const ocf = activeEbitda - taxes;
-
+  // FIXED: Primary DSCR uses EBITDA directly (SBA standard metric)
+  // No tax or D&A adjustments applied
   const dscrEbitda = totalDS > 0 ? activeEbitda / totalDS : 0;
+
+  // FIXED: OCF calculation simplified and disclosed
+  // OCF = EBITDA × (1 - effective tax rate)
+  // Removed arbitrary D&A proxy (was: ebitda * 0.08)
+  const ocf = activeEbitda * (1 - taxRate / 100);
   const dscrOcf = totalDS > 0 ? ocf / totalDS : 0;
 
   return {
@@ -113,6 +128,11 @@ export function calculateDSCR(
     ocf,
     dscrEbitda,
     dscrOcf,
+    // Include assumptions for display
+    esopRate,
+    esopTerm,
+    taxRate,
+    sbaRate: interestRate,
   };
 }
 
@@ -124,5 +144,6 @@ export function calculateStressedDSCR(
   activeEbitda: number
 ): number {
   const dscr = calculateDSCR(inputs, activeEbitda);
-  return dscr.totalDS > 0 ? (activeEbitda * 0.9) / dscr.totalDS : 0;
+  const stressedEbitda = activeEbitda * 0.9;
+  return dscr.totalDS > 0 ? stressedEbitda / dscr.totalDS : 0;
 }

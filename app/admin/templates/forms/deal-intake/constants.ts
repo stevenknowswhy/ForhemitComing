@@ -24,6 +24,11 @@ export const DEFAULT_INPUTS: DealInputs = {
     ebitdaB: 2_500_000,
     loanTerm: 10,
     interestRate: 7.5,
+    // NEW: ESOP loan assumptions (previously hardcoded at rate+1%, 7 years)
+    esopRate: 8.5,
+    esopTerm: 7,
+    // NEW: Tax rate for OCF calculation (previously hardcoded at 25%)
+    taxRate: 25,
   },
   openItems: [],
   lenderNotes: "",
@@ -88,11 +93,11 @@ export const BUSINESS_TYPE_OPTIONS = [
 
 export const SBA_MAX_LOAN = 5_000_000;
 export const TARGET_DSCR = 1.25;
-export const ESOP_LOAN_PREMIUM = 0.01; // 1% higher rate for ESOP loan
-export const ESOP_LOAN_TERM = 7; // years
-export const D_AND_A_PCT = 0.08; // 8% of EBITDA
-export const TAX_RATE = 0.25; // 25% corporate tax
-export const SELLER_NOTE_RATE = 0.06; // 6% for active payment calculation
+// REMOVED: ESOP_LOAN_PREMIUM (now user-editable field)
+// REMOVED: ESOP_LOAN_TERM (now user-editable field)
+// REMOVED: D_AND_A_PCT (arbitrary proxy removed)
+// REMOVED: TAX_RATE (now user-editable field)
+export const SELLER_NOTE_RATE = 0.06; // 6% for active payment interest-only
 
 // ── COLORS ────────────────────────────────────────────────────────────────────
 

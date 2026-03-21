@@ -27,6 +27,9 @@ export function CapitalStackStep({
   const { capital } = inputs;
   const { totalProjectCost, esopLoan, sbaPct, sellerPct, esopPct } = calculated;
 
+  // FIXED: Only show standby toggle when seller note > 0
+  const showStandbyToggle = capital.sellerNote > 0;
+
   return (
     <div className="di-step-content">
       <div className="di-section-label">Capital structure</div>
@@ -59,29 +62,34 @@ export function CapitalStackStep({
         step={100000}
       />
 
-      <ToggleButton
-        label="Seller note structure"
-        value={capital.standbyMode}
-        onChange={(v) => onUpdateCapital({ standbyMode: v as "full" | "active" })}
-        options={[
-          {
-            value: "full",
-            label: "Full standby",
-            description: "$0 debt service during SBA term — maximizes DSCR",
-          },
-          {
-            value: "active",
-            label: "Active payment",
-            description: "Interest or P&I payments begin immediately",
-          },
-        ]}
-      />
+      {/* FIXED: Only show standby toggle when seller note > 0 */}
+      {showStandbyToggle && (
+        <>
+          <ToggleButton
+            label="Seller note structure"
+            value={capital.standbyMode}
+            onChange={(v) => onUpdateCapital({ standbyMode: v as "full" | "active" })}
+            options={[
+              {
+                value: "full",
+                label: "Full standby",
+                description: "$0 debt service during SBA term — maximizes DSCR",
+              },
+              {
+                value: "active",
+                label: "Active payment",
+                description: "Interest-only at 6% p.a. (modeled)",
+              },
+            ]}
+          />
 
-      <p className="di-hint">
-        {capital.standbyMode === "full"
-          ? "Full standby: seller note counts as equity injection under SOP 50 10 8. Zero debt service during the SBA loan term."
-          : "Active payment: seller note carries current debt service. This reduces DSCR during the SBA term."}
-      </p>
+          <p className="di-hint">
+            {capital.standbyMode === "full"
+              ? "Full standby: seller note counts as equity injection under SOP 50 10 8. Zero debt service during the SBA loan term."
+              : "Active payment: seller note carries current debt service (modeled as interest-only at 6% p.a.). This reduces DSCR during the SBA term."}
+          </p>
+        </>
+      )}
 
       {totalProjectCost > 0 && (
         <div className="di-stack-summary">

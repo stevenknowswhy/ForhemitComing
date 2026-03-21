@@ -58,6 +58,21 @@ export function generateStructuredCreditMemo(
       ? "neutral"
       : "danger";
 
+  const stressedStatus =
+    stressedDscr >= TARGET_DSCR
+      ? "good"
+      : stressedDscr >= 1.1
+      ? "warn"
+      : "danger";
+
+  // FIXED: Seller note structure label only shown when seller note > 0
+  const snStructureLabel =
+    sellerNote > 0
+      ? standbyMode === "full"
+        ? "Full standby — $0 debt service (SOP 50 10 8)"
+        : "Active payment — interest-only at 6% p.a."
+      : "N/A (no seller note)";
+
   const sections: CreditMemoSection[] = [
     // Section 1: Transaction Summary
     {
@@ -99,7 +114,7 @@ export function generateStructuredCreditMemo(
         { label: "", value: "" },
         { label: "SOURCES", value: "" },
         {
-          label: `SBA 7(a) senior debt`,
+          label: "SBA 7(a) senior debt",
           value: `${fmt(sbaAmount)} (${
             calculated.totalProjectCost > 0
               ? fmtPct((sbaAmount / calculated.totalProjectCost) * 100)
@@ -107,17 +122,25 @@ export function generateStructuredCreditMemo(
           })`,
           indent: true,
         },
-        {
-          label: `Seller note [${
-            standbyMode === "full" ? "FULL STANDBY" : "active payment"
-          }]`,
-          value: `${fmt(sellerNote)} (${
-            calculated.totalProjectCost > 0
-              ? fmtPct((sellerNote / calculated.totalProjectCost) * 100)
-              : "—"
-          })`,
-          indent: true,
-        },
+        // FIXED: Only show seller note details if seller note > 0
+        ...(sellerNote > 0
+          ? [
+              {
+                label: "Seller note",
+                value: `${fmt(sellerNote)} (${
+                  calculated.totalProjectCost > 0
+                    ? fmtPct((sellerNote / calculated.totalProjectCost) * 100)
+                    : "—"
+                })`,
+                indent: true as const,
+              },
+              {
+                label: "Structure",
+                value: snStructureLabel,
+                indent: true as const,
+              },
+            ]
+          : []),
         {
           label: "ESOP leveraged loan (TBD)",
           value: `${fmt(calculated.esopLoan)} (${
@@ -132,41 +155,103 @@ export function generateStructuredCreditMemo(
           value: fmt(calculated.totalProjectCost),
           indent: true,
         },
-        ...(standbyMode === "full"
-          ? [
-              { label: "", value: "" },
-              {
-                label: "Note",
-                value:
-                  "Seller note on full standby per SOP 50 10 8. Treated as equity injection. $0 debt service during SBA loan term.",
-                indent: true,
-              },
-            ]
-          : []),
       ],
     },
 
-    // Section 3: DSCR Analysis
+    // NEW: Section 3: Loan Assumptions
+    {
+      id: "loan-assumptions",
+      title: "3. Loan Assumptions",
+      rows: [
+        {
+          label: "SBA 7(a)",
+          value: `${dscr.sbaRate.toFixed(2)}% / ${inputs.dscr.loanTerm}-year fully amortizing`,
+        },
+        {
+          label: "ESOP loan",
+          value: `${dscr.esopRate.toFixed(2)}% / ${dscr.esopTerm}-year fully amortizing (indicative)`,
+        },
+        {
+          label: "SBA guaranty fee (est.)",
+          value: `${fmt(calculated.guarantyFee)} (${
+            sbaAmount > 0 ? fmtPct((calculated.guarantyFee / sbaAmount) * 100) : "—"
+          } of loan amount)`,
+        },
+        {
+          label: "Fee basis",
+          value: "75% guaranteed portion × applicable rate per FY2026 SBA fee schedule",
+          indent: true,
+        },
+        {
+          label: "Note",
+          value: "All rate and term assumptions are illustrative. Confirm with lenders.",
+        },
+      ],
+    },
+
+    // FIXED: Section 4: DSCR Analysis (corrected formulas)
     {
       id: "dscr",
-      title: `3. DSCR Analysis (${
+      title: `4. DSCR Analysis (${
         inputs.dscr.scenario === "B" ? "Scenario B — QofE-adjusted" : "Scenario A — Base case"
       })`,
       rows: [
-        { label: "EBITDA", value: fmt(activeEbitda) },
+        { label: "EBITDA (basis)", value: fmt(activeEbitda) },
         { label: "SBA debt service", value: fmt(dscr.sbaDS) },
         { label: "ESOP loan service", value: fmt(dscr.esopDS) },
+        // FIXED: Only show seller note service if seller note > 0
+        ...(sellerNote > 0
+          ? [
+              {
+                label: "Seller note service",
+                value:
+                  dscr.snDS === 0
+                    ? "$0 (full standby)"
+                    : `${fmt(dscr.snDS)} (active, int.-only at 6%)`,
+              },
+            ]
+          : []),
         { label: "Total debt service", value: fmt(dscr.totalDS) },
+        { label: "", value: "" },
+        // FIXED: Primary DSCR clearly labeled as SBA standard metric
+        {
+          label: "PRIMARY DSCR (EBITDA basis — SBA standard metric)",
+          value: "",
+        },
         {
           label: "EBITDA DSCR",
           value: `${fmtX(dscr.dscrEbitda)} (${
             dscr.dscrEbitda >= TARGET_DSCR ? "PASS" : "FAIL"
           })`,
           highlight: dscrStatus,
+          indent: true,
         },
-        { label: "OCF DSCR", value: fmtX(dscr.dscrOcf) },
+        {
+          label: "Formula",
+          value: "EBITDA ÷ total annual debt service (pre-tax, pre-D&A)",
+          indent: true,
+        },
         { label: "", value: "" },
-        { label: "Stress Test (10% EBITDA decline)", value: "" },
+        // FIXED: OCF DSCR clearly labeled as supplemental
+        {
+          label: "SUPPLEMENTAL DSCR (OCF basis)",
+          value: "",
+        },
+        {
+          label: "OCF DSCR",
+          value: `${fmtX(dscr.dscrOcf)} (after ${dscr.taxRate}% effective tax rate)`,
+          indent: true,
+        },
+        {
+          label: "Formula",
+          value: "EBITDA × (1 − tax rate) ÷ total annual debt service",
+          indent: true,
+        },
+        { label: "", value: "" },
+        {
+          label: "STRESS TEST (10% EBITDA decline)",
+          value: "",
+        },
         {
           label: "Stressed EBITDA",
           value: fmt(stressedEbitda),
@@ -174,48 +259,49 @@ export function generateStructuredCreditMemo(
         },
         {
           label: "Stressed DSCR",
-          value: fmtX(stressedDscr),
-          highlight:
-            stressedDscr >= TARGET_DSCR
-              ? "good"
-              : stressedDscr >= 1.1
-              ? "warn"
-              : "danger",
+          value: `${fmtX(stressedDscr)} (${
+            stressedDscr >= TARGET_DSCR ? "PASS" : "FAIL"
+          })`,
+          highlight: stressedStatus,
           indent: true,
         },
       ],
     },
 
-    // Section 4: SBA Policy Compliance
+    // FIXED: Section 5: SBA Policy Compliance (removed Policy Notice 5000-876441)
     {
       id: "sba-policy",
-      title: "4. SBA Policy Compliance",
+      title: "5. SBA Policy Compliance",
       rows: [
+        // FIXED: Conditional policy treatment based on standby mode and seller note
+        ...(sellerNote > 0 && standbyMode === "full"
+          ? [
+              {
+                label: "SOP 50 10 8",
+                value: "Seller note on full standby counted as equity injection.",
+              },
+            ]
+          : [
+              {
+                label: "Seller note",
+                value: "Active payment — not eligible for equity injection treatment.",
+              },
+            ]),
         {
-          label: "SOP 50 10 8",
-          value: "Seller note on full standby counted as equity injection.",
+          label: "ESOP requirements",
+          value: "ESOP acquisition requirements governed by SBA SOP 50 10 8, Section B.",
         },
         {
-          label: "Policy Notice",
-          value:
-            "5000-876441: ESOP-specific underwriting requirements apply.",
-        },
-        {
-          label: "Guaranty Fee (FY2026)",
-          value: "~$138,125 estimated on $5M loan",
-        },
-        {
-          label: "Note",
-          value:
-            "Policy Notice 5000-876441 is not an ESOP-specific notice; SOP 50 10 8 governs ESOP standby seller note treatment.",
+          label: "SBA maximum loan amount",
+          value: "$5,000,000",
         },
       ],
     },
 
-    // Section 5: Forhemit Role
+    // Section 6: Forhemit Role
     {
       id: "forhemit",
-      title: "5. Forhemit — Role & Stewardship",
+      title: "6. Forhemit — Role & Stewardship",
       rows: [
         {
           label: "Entity",
@@ -244,12 +330,12 @@ export function generateStructuredCreditMemo(
       ],
     },
 
-    // Section 6: Open Items
+    // Section 7: Open Items
     {
       id: "open-items",
-      title: "6. Open Items & Conditions Precedent",
+      title: "7. Open Items & Conditions Precedent",
       rows: [
-        { label: `Resolved`, value: `${resolvedCount}/5` },
+        { label: "Resolved", value: `${resolvedCount}/5` },
         ...inputs.openItems.map((item) => ({
           label: item.resolved ? "✓" : "○",
           value: item.title,
@@ -282,12 +368,12 @@ export function generateStructuredCreditMemo(
       ],
     },
 
-    // Section 7: Additional Notes (conditional)
+    // Section 8: Additional Notes (conditional)
     ...(lenderNotes
       ? [
           {
             id: "notes",
-            title: "7. Additional Notes",
+            title: "8. Additional Notes",
             rows: [{ label: "", value: lenderNotes }],
           },
         ]
@@ -303,6 +389,6 @@ export function generateStructuredCreditMemo(
     },
     sections,
     footer:
-      "DISCLAIMER: Illustrative only. Not a commitment to lend. Subject to full credit underwriting, QofE, SBA lender approval, and legal review.",
+      "DISCLAIMER: Illustrative only. Not a commitment to lend. All rate and term assumptions must be confirmed with the applicable lenders. Subject to full credit underwriting, QofE, SBA lender approval, and legal review.",
   };
 }

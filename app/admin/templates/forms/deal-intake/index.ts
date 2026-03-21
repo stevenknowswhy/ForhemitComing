@@ -35,7 +35,7 @@ export {
   calculateDSCR,
   calculateStressedDSCR,
   pmt,
-  calculateLoanAmountFromPayment,
+  calcGuarantyFee,
 } from "./lib/calculations";
 
 export { fmt, fmtPct, fmtX, fmtK } from "./lib/formatters";
