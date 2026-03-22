@@ -78,6 +78,26 @@ export const templateFormRegistry: TemplateFormEntry[] = [
      label: "SBA ESOP Lender Package",
      component: () => import("./forms/sba-esop-package"),
    },
+   {
+     formKey: "deal-flow-system",
+     label: "ESOP Deal Flow System",
+     component: () => import("./forms/deal-flow-system"),
+   },
+   {
+     formKey: "lender-qa-tracker",
+     label: "Lender Q&A Tracker",
+     component: () => import("./forms/lender-qa-tracker"),
+   },
+   {
+     formKey: "esop-repayment-model",
+     label: "ESOP Repayment & Amortization Model",
+     component: () => import("./forms/esop-repayment-model"),
+   },
+   {
+     formKey: "intro-letter-generator",
+     label: "Introduction Letter Generator",
+     component: () => import("./forms/intro-letter-generator"),
+   },
    // ───────── Add new forms below ─────────
   // {
   //   formKey: "deal-structure-summary",

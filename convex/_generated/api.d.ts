@@ -10,6 +10,10 @@
 
 import type * as auditLogs from "../auditLogs.js";
 import type * as contactSubmissions from "../contactSubmissions.js";
+import type * as crmActivities from "../crmActivities.js";
+import type * as crmCompanies from "../crmCompanies.js";
+import type * as crmContacts from "../crmContacts.js";
+import type * as crmTasks from "../crmTasks.js";
 import type * as documentTemplates from "../documentTemplates.js";
 import type * as earlyAccessSignups from "../earlyAccessSignups.js";
 import type * as generatedDocuments from "../generatedDocuments.js";
@@ -24,6 +28,10 @@ import type {
 declare const fullApi: ApiFromModules<{
   auditLogs: typeof auditLogs;
   contactSubmissions: typeof contactSubmissions;
+  crmActivities: typeof crmActivities;
+  crmCompanies: typeof crmCompanies;
+  crmContacts: typeof crmContacts;
+  crmTasks: typeof crmTasks;
   documentTemplates: typeof documentTemplates;
   earlyAccessSignups: typeof earlyAccessSignups;
   generatedDocuments: typeof generatedDocuments;

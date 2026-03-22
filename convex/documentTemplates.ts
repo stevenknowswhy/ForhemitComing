@@ -160,6 +160,46 @@ export const seed = mutation({
         category: "Transaction Documents",
         formKey: "sba-esop-package",
       },
+      {
+        name: "ESOP Deal Flow System",
+        slug: "deal-flow-system",
+        description:
+          "Three-stage deal intake and due diligence system. Stage 1: First Contact (intake & qualification). Stage 2: Feasibility Study (scoring matrix & Go/No-Go). Stage 3: Due Diligence (document checklists & critical path tracking).",
+        version: "1.0",
+        status: "active",
+        category: "Transaction Documents",
+        formKey: "deal-flow-system",
+      },
+      {
+        name: "Lender Q&A Tracker",
+        slug: "lender-qa-tracker",
+        description:
+          "Three-step wizard for tracking lender questions and conditions. Step 1: Deal Header (company, lender, timeline). Step 2: Q&A Items (categorized tracking with status, priority, due dates). Step 3: Summary & Print (completion metrics, category progress, export).",
+        version: "1.0",
+        status: "active",
+        category: "Transaction Documents",
+        formKey: "lender-qa-tracker",
+      },
+      {
+        name: "ESOP Repayment & Amortization Model",
+        slug: "esop-repayment-model",
+        description:
+          "Interactive financial modeling for SBA loan and seller note analysis. Step 1: Deal Header. Step 2: Debt Structure (SBA loan, seller note, projections). Step 3: Model Output (amortization schedule, DSCR analysis, scenario testing, paydown charts).",
+        version: "1.0",
+        status: "active",
+        category: "Financial Analysis",
+        formKey: "esop-repayment-model",
+      },
+      {
+        name: "Introduction Letter Generator",
+        slug: "intro-letter-generator",
+        description:
+          "Professional introduction letter generator for Forhemit. Features 9 recipient types (Sellers, Brokers, Attorneys, Lenders, ESOP Admins, Valuation Firms, CPAs, Wealth Advisors, Accountants) with personalized templates and live preview. Export to PDF.",
+        version: "1.0",
+        status: "active",
+        category: "Marketing & Outreach",
+        formKey: "intro-letter-generator",
+      },
     ];
 
     const seededIds: { slug: string; id: string; seeded: boolean }[] = [];
@@ -265,6 +305,46 @@ export const forceSeedAll = mutation({
         status: "active" as const,
         category: "Transaction Documents",
         formKey: "sba-esop-package",
+      },
+      {
+        name: "ESOP Deal Flow System",
+        slug: "deal-flow-system",
+        description:
+          "Three-stage deal intake and due diligence system. Stage 1: First Contact (intake & qualification). Stage 2: Feasibility Study (scoring matrix & Go/No-Go). Stage 3: Due Diligence (document checklists & critical path tracking).",
+        version: "1.0",
+        status: "active" as const,
+        category: "Transaction Documents",
+        formKey: "deal-flow-system",
+      },
+      {
+        name: "Lender Q&A Tracker",
+        slug: "lender-qa-tracker",
+        description:
+          "Three-step wizard for tracking lender questions and conditions. Step 1: Deal Header (company, lender, timeline). Step 2: Q&A Items (categorized tracking with status, priority, due dates). Step 3: Summary & Print (completion metrics, category progress, export).",
+        version: "1.0",
+        status: "active" as const,
+        category: "Transaction Documents",
+        formKey: "lender-qa-tracker",
+      },
+      {
+        name: "ESOP Repayment & Amortization Model",
+        slug: "esop-repayment-model",
+        description:
+          "Interactive financial modeling for SBA loan and seller note analysis. Step 1: Deal Header. Step 2: Debt Structure (SBA loan, seller note, projections). Step 3: Model Output (amortization schedule, DSCR analysis, scenario testing, paydown charts).",
+        version: "1.0",
+        status: "active" as const,
+        category: "Financial Analysis",
+        formKey: "esop-repayment-model",
+      },
+      {
+        name: "Introduction Letter Generator",
+        slug: "intro-letter-generator",
+        description:
+          "Professional introduction letter generator for Forhemit. Features 9 recipient types (Sellers, Brokers, Attorneys, Lenders, ESOP Admins, Valuation Firms, CPAs, Wealth Advisors, Accountants) with personalized templates and live preview. Export to PDF.",
+        version: "1.0",
+        status: "active" as const,
+        category: "Marketing & Outreach",
+        formKey: "intro-letter-generator",
       },
     ];
 

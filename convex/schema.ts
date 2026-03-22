@@ -1,6 +1,25 @@
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
+// CRM Pipeline Stages
+export const PIPELINE_STAGES = [
+  "First contact",
+  "Intro call",
+  "NDA sent",
+  "Feasibility",
+  "Term sheet",
+  "LOI signed",
+  "Closed",
+  "On hold",
+  "Dead",
+] as const;
+
+// NDA Status values
+export const NDA_STATUS = ["None", "Pending", "Signed"] as const;
+
+// Activity types for CRM
+export const ACTIVITY_TYPES = ["note", "call", "email", "meeting", "stage_change", "task"] as const;
+
 export default defineSchema({
   // Contact form submissions
   contactSubmissions: defineTable({
@@ -163,4 +182,116 @@ export default defineSchema({
     .index("by_entity", ["entityType", "entityId"])
     .index("by_timestamp", ["timestamp"])
     .index("by_action", ["action"]),
+
+  // ============================================
+  // CRM - Engagement Tracker Tables
+  // ============================================
+
+  // Companies/Deals in the pipeline
+  crmCompanies: defineTable({
+    // Company Information
+    name: v.string(),
+    industry: v.optional(v.string()),
+    size: v.optional(v.string()), // e.g., "150 employees"
+    revenue: v.optional(v.string()), // e.g., "$22M"
+    website: v.optional(v.string()),
+    address: v.optional(v.string()),
+
+    // Pipeline Status
+    stage: v.union(
+      v.literal("First contact"),
+      v.literal("Intro call"),
+      v.literal("NDA sent"),
+      v.literal("Feasibility"),
+      v.literal("Term sheet"),
+      v.literal("LOI signed"),
+      v.literal("Closed"),
+      v.literal("On hold"),
+      v.literal("Dead")
+    ),
+    ndaStatus: v.union(v.literal("None"), v.literal("Pending"), v.literal("Signed")),
+
+    // Source/Advisor
+    advisor: v.optional(v.string()), // e.g., "Morgan Stanley", "Self-sourced"
+    referralSource: v.optional(v.string()),
+
+    // Important Dates
+    lastContactDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
+    nextStep: v.optional(v.string()),
+    nextStepDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
+    expectedCloseDate: v.optional(v.string()),
+
+    // Notes
+    notes: v.optional(v.string()),
+
+    // Metadata
+    createdAt: v.number(),
+    updatedAt: v.number(),
+    createdBy: v.optional(v.string()),
+  })
+    .index("by_stage", ["stage"])
+    .index("by_ndaStatus", ["ndaStatus"])
+    .index("by_advisor", ["advisor"])
+    .index("by_createdAt", ["createdAt"])
+    .index("by_nextStepDate", ["nextStepDate"])
+    .index("by_name", ["name"]),
+
+  // Contacts associated with companies
+  crmContacts: defineTable({
+    companyId: v.id("crmCompanies"),
+    firstName: v.string(),
+    lastName: v.string(),
+    email: v.optional(v.string()),
+    phone: v.optional(v.string()),
+    role: v.optional(v.string()), // e.g., "Owner", "CEO"
+    isPrimary: v.optional(v.boolean()), // Primary contact flag
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_email", ["email"]),
+
+  // Activity log for companies (calls, meetings, notes, stage changes)
+  crmActivities: defineTable({
+    companyId: v.id("crmCompanies"),
+    type: v.union(
+      v.literal("note"),
+      v.literal("call"),
+      v.literal("email"),
+      v.literal("meeting"),
+      v.literal("stage_change"),
+      v.literal("task")
+    ),
+    title: v.string(),
+    description: v.optional(v.string()),
+    date: v.string(), // ISO date string YYYY-MM-DD
+    performedBy: v.optional(v.string()),
+    metadata: v.optional(v.object({
+      oldStage: v.optional(v.string()),
+      newStage: v.optional(v.string()),
+      duration: v.optional(v.number()), // for calls/meetings
+    })),
+    createdAt: v.number(),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_date", ["date"])
+    .index("by_type", ["type"])
+    .index("by_company_date", ["companyId", "date"]),
+
+  // Tasks/Reminders for follow-ups
+  crmTasks: defineTable({
+    companyId: v.id("crmCompanies"),
+    title: v.string(),
+    description: v.optional(v.string()),
+    dueDate: v.optional(v.string()),
+    status: v.union(v.literal("pending"), v.literal("completed"), v.literal("overdue")),
+    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+    assignedTo: v.optional(v.string()),
+    completedAt: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_status", ["status"])
+    .index("by_dueDate", ["dueDate"])
+    .index("by_assignedTo", ["assignedTo"]),
 });

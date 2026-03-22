@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import "./admin.css";
 
 interface AdminLoginProps {
   onLogin: () => void;
