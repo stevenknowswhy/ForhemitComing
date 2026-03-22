@@ -99,7 +99,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 5,
+  maximumScale: 1, // Prevent zoom on input focus (iOS)
+  themeColor: '#ffffff', // Light theme browser chrome
 }
 
 export default function RootLayout({
@@ -108,16 +109,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-                  // Handle main site theme
+                  // Handle main site theme - default to light
                   var theme = localStorage.getItem('forhemit-theme');
-                  if (theme === 'light') {
+                  if (theme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  } else {
                     document.documentElement.setAttribute('data-theme', 'light');
                   }
                   

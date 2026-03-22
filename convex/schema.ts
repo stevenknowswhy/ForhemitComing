@@ -147,8 +147,12 @@ export default defineSchema({
     formData: v.string(), // JSON snapshot of form inputs at generation time
     action: v.union(
       v.literal("pdf-download"),
+      v.literal("pdf-download-server"),
+      v.literal("pdf-download-client"),
       v.literal("print"),
-      v.literal("preview")
+      v.literal("preview"),
+      v.literal("export-csv"),
+      v.literal("export-json")
     ),
     generatedBy: v.optional(v.string()),
     createdAt: v.number(),

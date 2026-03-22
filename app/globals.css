@@ -1,3 +1,7 @@
+@import './styles/theme.css';
+@import './styles/buttons.css';
+@import './styles/responsive.css';
+@import './styles/print.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -257,7 +261,7 @@ p {
   --popover: var(--bg-card);
   --popover-foreground: var(--text-primary);
   --primary: var(--color-brand);
-  --primary-foreground: var(--bg-primary);
+  --primary-foreground: var(--text-inverse);
   --secondary: var(--bg-secondary);
   --secondary-foreground: var(--text-primary);
   --muted: var(--bg-tertiary);
@@ -265,11 +269,18 @@ p {
   --accent: var(--color-brand-subtle);
   --accent-foreground: var(--color-brand);
   --destructive: #ef4444;
-  --destructive-foreground: var(--text-primary);
+  --destructive-foreground: #ffffff;
   --border: var(--border-subtle);
   --input: var(--border-subtle);
   --ring: var(--color-brand);
   --radius: 0.75rem;
+}
+
+/* Dark mode overrides for shadcn/ui */
+[data-theme="dark"] {
+  --primary-foreground: var(--bg-primary);
+  --destructive: #f87171;
+  --destructive-foreground: var(--bg-primary);
 }
 
 /* ── MOBILE UTILITIES ── */

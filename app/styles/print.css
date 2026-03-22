@@ -1,0 +1,194 @@
+/* ── PRINT & PDF STYLES ── */
+/* Forces light theme and controls pagination for PDF generation */
+
+@media print {
+  /* Force light theme colors - critical for PDF output */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body, 
+  .document-container, 
+  .form-container,
+  .esop-form-container,
+  .h2h-form-container,
+  .term-form-container,
+  .di-container,
+  .erm-form-container,
+  .lqa-form-container {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+  }
+
+  /* Reset any dark theme backgrounds */
+  [class*="bg-"],
+  [class*="dark"],
+  [class*="glass"] {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Page break controls - prevents table/section splitting */
+  table, 
+  .esop-table,
+  .section-container, 
+  .form-section,
+  .term-content,
+  .term-section,
+  .h2h-content,
+  .h2h-comparison-card,
+  .h2h-structure-card {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  thead {
+    display: table-header-group !important;
+  }
+
+  /* Explicit page break utility */
+  .page-break {
+    page-break-before: always !important;
+    break-before: always !important;
+  }
+
+  .page-break-after {
+    page-break-after: always !important;
+    break-after: always !important;
+  }
+
+  /* Hide UI elements in PDF/print output */
+  .no-print, 
+  .template-modal-actions,
+  .template-modal-header,
+  .step-indicator,
+  .form-nav,
+  .erm-form-nav,
+  .lqa-form-nav,
+  .di-nav-row,
+  .term-form-navigation,
+  .term-back-btn-container,
+  button:not(.print-only),
+  .btn-secondary,
+  .btn-ghost {
+    display: none !important;
+  }
+
+  /* Ensure text is selectable (not images) */
+  body {
+    -webkit-user-select: text !important;
+    user-select: text !important;
+  }
+
+  /* Form input styling for print */
+  input, 
+  textarea, 
+  select {
+    background: transparent !important;
+    border: 1px solid #e5e7eb !important;
+    color: #1f2937 !important;
+  }
+
+  /* Table styling for print */
+  table {
+    border-collapse: collapse !important;
+  }
+
+  th, td {
+    border: 1px solid #e5e7eb !important;
+    padding: 8px !important;
+  }
+
+  th {
+    background: #f8f9fa !important;
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Ensure proper margins */
+  @page {
+    margin: 20mm;
+    size: A4;
+  }
+
+  /* Header/footer for printed pages */
+  .print-header {
+    position: running(header);
+  }
+
+  .print-footer {
+    position: running(footer);
+  }
+
+  /* Card components */
+  .card,
+  .h2h-comparison-card,
+  .h2h-structure-card,
+  .term-card {
+    border: 1px solid #e5e7eb !important;
+    background: #ffffff !important;
+    break-inside: avoid !important;
+  }
+
+  /* Links - show URL for print */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #6b7280;
+  }
+
+  /* Hide decorative elements */
+  .decorative,
+  .mesh-gradient,
+  .ambient-glow,
+  .shadow-soft,
+  .glow-brand {
+    display: none !important;
+  }
+}
+
+/* PDF-specific overrides (data-pdf attribute) */
+[data-pdf="true"] {
+  background: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+[data-pdf="true"] .esop-form-container,
+[data-pdf="true"] .h2h-form-container,
+[data-pdf="true"] .term-form-container,
+[data-pdf="true"] .di-container,
+[data-pdf="true"] .erm-form-container,
+[data-pdf="true"] .lqa-form-container {
+  background: #ffffff !important;
+  color: #1f2937 !important;
+  border-color: #e5e7eb !important;
+}
+
+[data-pdf="true"] table,
+[data-pdf="true"] .esop-table {
+  color: #1f2937 !important;
+  border-color: #e5e7eb !important;
+}
+
+[data-pdf="true"] th,
+[data-pdf="true"] td {
+  color: #1f2937 !important;
+  border-color: #e5e7eb !important;
+}
+
+/* Utility class for elements that should only appear in print */
+.print-only {
+  display: none;
+}
+
+@media print {
+  .print-only {
+    display: block !important;
+  }
+}

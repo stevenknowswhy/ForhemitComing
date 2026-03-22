@@ -13,11 +13,6 @@ const nextConfig = {
         hostname: '618ukecvpc.ufs.sh',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'img.clerk.com',
-        pathname: '/**',
-      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
@@ -66,7 +61,6 @@ const nextConfig = {
       },
     ];
   },
-  // Trigger redeploy: v4 - Image optimization enabled
 };
 
 module.exports = nextConfig;

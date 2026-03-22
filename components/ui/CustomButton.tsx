@@ -7,13 +7,13 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className = '', variant = 'primary', size = 'md', children, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sage-light disabled:opacity-50 disabled:cursor-not-allowed';
+    const baseStyles = 'inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] disabled:opacity-50 disabled:cursor-not-allowed';
     
     const variants = {
-      primary: 'bg-sage text-white hover:bg-[#3d5543] active:scale-[0.98]',
-      secondary: 'bg-transparent border border-sage text-sage hover:bg-sage hover:text-white',
-      alert: 'bg-alert-clay text-white hover:bg-[#a06a4d] active:scale-[0.98]',
-      ghost: 'bg-transparent text-sage hover:bg-sage/10',
+      primary: 'bg-[var(--color-brand)] text-[var(--text-inverse)] hover:bg-[var(--color-brand-hover)] active:scale-[0.98]',
+      secondary: 'bg-transparent border border-[var(--color-brand)] text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-[var(--text-inverse)]',
+      alert: 'bg-[var(--alert-clay)] text-white hover:brightness-110 active:scale-[0.98]',
+      ghost: 'bg-transparent text-[var(--color-brand)] hover:bg-[var(--color-brand-subtle)]',
     };
     
     const sizes = {
