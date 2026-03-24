@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "generate:fee-pdf": "node scripts/generate-fee-transparency-pdf.mjs",
+    "generate:brokers-checklist-pdf": "node scripts/generate-broker-first-call-checklist-pdf.mjs"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",
