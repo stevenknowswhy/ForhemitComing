@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ChevronDown, X } from "lucide-react";
+import { ModalDialog } from "../ui/ModalDialog";
 import "./sitemap-modal.css";
 
 interface SitemapModalProps {
@@ -121,22 +122,21 @@ function SitemapDesktopSection({
 }
 
 export default function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
-  if (!isOpen) return null;
-
   return (
-    <div
-      className="sitemap-modal-overlay"
-      onClick={(e) => e.target === e.currentTarget && onClose()}
-    >
-      <div className="sitemap-modal-content">
-        <button
-          className="sitemap-modal-close"
-          onClick={onClose}
-          aria-label="Close sitemap"
-        >
+    <ModalDialog
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Sitemap"
+      overlayClassName="sitemap-modal-overlay"
+      className="sitemap-modal-content"
+      closeButtonClassName="sitemap-modal-close"
+      closeButtonAriaLabel="Close sitemap"
+      renderCloseButton={({ onClose, className, ariaLabel }) => (
+        <button className={className} onClick={onClose} aria-label={ariaLabel} type="button">
           <X size={20} />
         </button>
-
+      )}
+    >
         <div className="sitemap-header">
           <h2>Sitemap</h2>
           <p>Navigate to any page on our website</p>
@@ -170,7 +170,6 @@ export default function SitemapModal({ isOpen, onClose }: SitemapModalProps) {
             Reserved.
           </p>
         </div>
-      </div>
-    </div>
+    </ModalDialog>
   );
 }

@@ -16,6 +16,7 @@ import type * as crmContacts from "../crmContacts.js";
 import type * as crmTasks from "../crmTasks.js";
 import type * as documentTemplates from "../documentTemplates.js";
 import type * as earlyAccessSignups from "../earlyAccessSignups.js";
+import type * as emails from "../emails.js";
 import type * as generatedDocuments from "../generatedDocuments.js";
 import type * as jobApplications from "../jobApplications.js";
 
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   crmTasks: typeof crmTasks;
   documentTemplates: typeof documentTemplates;
   earlyAccessSignups: typeof earlyAccessSignups;
+  emails: typeof emails;
   generatedDocuments: typeof generatedDocuments;
   jobApplications: typeof jobApplications;
 }>;

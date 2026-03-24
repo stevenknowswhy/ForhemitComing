@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ModalDialog } from "../ui/ModalDialog";
 
 interface LegalModalProps {
   isOpen: boolean;
@@ -12,13 +13,16 @@ type LegalTab = "privacy" | "terms" | "accessibility";
 export function LegalModal({ isOpen, onClose }: LegalModalProps) {
   const [activeTab, setActiveTab] = useState<LegalTab>("privacy");
 
-  if (!isOpen) return null;
-
   return (
-    <div className="legal-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="legal-modal-content">
-        <button className="legal-modal-close" onClick={onClose}>&times;</button>
-
+    <ModalDialog
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Legal"
+      overlayClassName="legal-modal-overlay"
+      className="legal-modal-content"
+      closeButtonClassName="legal-modal-close"
+      closeButtonAriaLabel="Close legal"
+    >
         <div className="legal-tabs">
           <button
             className={`legal-tab ${activeTab === "privacy" ? "active" : ""}`}
@@ -45,8 +49,7 @@ export function LegalModal({ isOpen, onClose }: LegalModalProps) {
           {activeTab === "terms" && <TermsContent />}
           {activeTab === "accessibility" && <AccessibilityContent />}
         </div>
-      </div>
-    </div>
+    </ModalDialog>
   );
 }
 

@@ -6,7 +6,8 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;
+  /* Above full-bleed heroes / backdrop layers; below modals (typically 1000+) */
+  z-index: 500;
   display: flex;
   justify-content: flex-end;
   align-items: center;

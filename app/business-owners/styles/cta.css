@@ -10,17 +10,24 @@
   border-top: 1px solid var(--bo-border);
 }
 
+.business-owners-cta .bo-cta-shell {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .business-owners-cta h2 {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
-  font-weight: 600;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
   color: var(--bo-text-primary);
   margin-bottom: 1.5rem;
+  line-height: 1.2;
 }
 
 .business-owners-cta p {
-  font-size: 1.1rem;
-  font-weight: 300;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 400;
   color: var(--bo-text-secondary);
   max-width: 700px;
   margin: 0 auto 1rem;
@@ -28,28 +35,67 @@
 }
 
 .cta-subtitle {
-  font-size: 1.05rem;
-  color: var(--bo-text-primary);
-  margin-bottom: 2.5rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 2rem;
 }
 
 .cta-button {
   display: inline-block;
-  font-family: var(--font-dm-mono), 'DM Mono', monospace;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--bo-text-primary);
-  background: var(--bo-accent);
-  padding: 1.25rem 2.5rem;
+  color: var(--text-inverse);
+  background: var(--color-brand);
+  padding: 1rem 1.5rem;
   border-radius: 4px;
   text-decoration: none;
-  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.4s ease,
+    transform 0.25s ease,
+    background-color 0.25s ease;
 }
 
 .cta-button:hover {
-  background: var(--bo-accent-light);
-  transform: translateY(-2px);
-  box-shadow: var(--glow-subtle);
+  background: var(--color-brand-hover);
+  color: var(--text-inverse);
+}
+
+.bo-cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.cta-button-ghost {
+  display: inline-block;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: none;
+  border: 1px solid var(--border-subtle);
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: border-color 0.25s ease, color 0.25s ease;
+}
+
+.cta-button-ghost:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
 }

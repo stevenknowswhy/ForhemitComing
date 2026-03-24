@@ -1,16 +1,34 @@
 "use client";
 
-import { useState } from "react";
-import { InfrastructureAuditModal } from "../components/modals/InfrastructureAuditModal";
+import { lazy, Suspense, useState } from "react";
+import { useRouter } from "next/navigation";
 import { ClientOnly } from "@/components/ClientOnly";
+import {
+  BusinessOwnersClosingSections,
+  SavingsStrip,
+  BrokerComparisonSection,
+  ConfidentialIntakeModal,
+} from "./components";
 import "./business-owners.css";
 
+const TwoMinuteCheckModal = lazy(() =>
+  import("@/app/home/intake").then((mod) => ({ default: mod.TwoMinuteCheckModal }))
+);
+
 export default function BusinessOwnersPage() {
+  const router = useRouter();
   const [openFaq, setOpenFaq] = useState<string | null>(null);
-  const [isAuditOpen, setIsAuditOpen] = useState(false);
+  const [showTwoMinuteCheck, setShowTwoMinuteCheck] = useState(false);
+  const [showIntake, setShowIntake] = useState(false);
+  const [intakePath, setIntakePath] = useState<"nda" | "light" | null>(null);
 
   const toggleFaq = (id: string) => {
     setOpenFaq(openFaq === id ? null : id);
+  };
+
+  const openIntake = (path?: "nda" | "light") => {
+    setIntakePath(path ?? null);
+    setShowIntake(true);
   };
 
   const faqs = [
@@ -62,53 +80,71 @@ export default function BusinessOwnersPage() {
       
       <main className="business-owners-main">
         {/* Hero Section */}
-        <section className="business-owners-hero">
+        <section className="business-owners-hero hch-hero-section">
           <div className="container">
             <div className="hero-content">
               <span className="business-owners-eyebrow">For Business Owners</span>
               <h1 className="business-owners-title">
-                Be Ready for Tomorrow, Today:
+                Sell the Business to Your Team—at Fair Market Value
                 <br />
-                <span className="highlight">The Systematic Path to Successful Succession</span>
+                <span className="highlight">A Bank-Funded Path to Close in Months, Not Years</span>
               </h1>
               <p className="business-owners-subtitle">
-                Protect your life&apos;s work with a comprehensive transition plan.
+                We structure the ESOP sale end to end—valuation, lender, legal, and transition—so you
+                can move from fit check to funded closing when you are ready to sell.
               </p>
-              <button 
-                className="hero-cta-button"
-                onClick={() => setIsAuditOpen(true)}
-              >
-                Start Your Readiness Plan
-              </button>
+              <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
+                <button
+                  type="button"
+                  className="hch-hero-cta hch-hero-cta-primary"
+                  onClick={() => setShowTwoMinuteCheck(true)}
+                >
+                  Start My 2-Minute Check
+                </button>
+                <button
+                  type="button"
+                  className="hch-hero-cta hch-hero-cta-secondary"
+                  onClick={() => openIntake("nda")}
+                >
+                  Begin Confidential Intake
+                </button>
+              </div>
             </div>
             <div className="hero-image">
-              <img 
-                src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDfemQfPYOIdcXFC34obyDPLkhgQVTv7ERqewA" 
-                alt="Business succession planning" 
-              />
+              <div className="bo-glow-shell bo-glow-shell--hero-img">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner">
+                  <img
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDfemQfPYOIdcXFC34obyDPLkhgQVTv7ERqewA"
+                    alt="Business succession planning"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
+
+        {/* Savings Strip */}
+        <SavingsStrip />
 
         {/* Timeline Section */}
         <section className="business-owners-section luxury-section">
           <div className="container">
             <div className="luxury-grid">
               <div className="luxury-content">
-                <h2>The Ultimate Luxury: Leaving on Your Own Terms</h2>
+                <h2>You steer the sale—and the closing timeline</h2>
                 <p>
-                  One of the greatest advantages of an employee‑ownership path is control: you 
-                  decide when and how you step away—gradually, all at once, or not at all for a 
-                  while. You are not sitting around hoping the &quot;perfect buyer&quot; appears or forced 
-                  to accept terms you do not like because time or health is running out.
+                  Selling to an ESOP is still a real sale: independent appraisal, negotiated price, 
+                  bank financing, and a closing date. The difference is the buyer is your company 
+                  and your people—not a stranger doing diligence in the hallways.
                 </p>
                 <p>
-                  Our model is built so you can:
+                  That gives you room to:
                 </p>
                 <ul>
-                  <li>Set your own timeline and adjust it as life changes.</li>
-                  <li>Step back in stages—hours, responsibilities, and risk—while maintaining income.</li>
-                  <li>Choose the moment your role truly ends, instead of having it chosen for you.</li>
+                  <li>Run a traditional process in parallel if you want optionality—without giving up a funded ESOP path.</li>
+                  <li>Stage your exit (hours and responsibilities) while the deal is structured and funded.</li>
+                  <li>Close when the file is clean—not because an outside buyer forced the calendar.</li>
                 </ul>
               </div>
               <div className="luxury-image">
@@ -121,13 +157,21 @@ export default function BusinessOwnersPage() {
           </div>
         </section>
 
+        <div className="container">
+          <BusinessOwnersClosingSections />
+        </div>
+
+        {/* Broker Comparison */}
+        <BrokerComparisonSection />
+
         {/* Journey Steps Section */}
         <section className="business-owners-section section-dark">
           <div className="container">
             <div className="section-header">
-              <h2>The Readiness Journey: Step-by-Step</h2>
+              <h2>From first conversation to closing day</h2>
               <p className="section-intro">
-                Here is exactly what the systematic transition looks like when you partner with us.
+                How we move you from assessment to a funded purchase of your shares—without the chaos 
+                of a typical third-party sale.
               </p>
             </div>
 
@@ -139,7 +183,9 @@ export default function BusinessOwnersPage() {
                   <span className="step-num">01</span>
                   <div className="step-icon">🔍</div>
                 </div>
-                <div className="step-card">
+                <div className="bo-glow-shell bo-glow-shell--step">
+                  <div className="bo-glow-shell__glow" aria-hidden />
+                  <div className="bo-glow-inner step-card">
                   <div className="step-header">
                     <h3>The Assessment</h3>
                     <span className="step-tag">Today</span>
@@ -154,6 +200,7 @@ export default function BusinessOwnersPage() {
                   </div>
                   <div className="step-connector"></div>
                 </div>
+                </div>
               </div>
 
               <div className="step-item" data-step="2">
@@ -161,7 +208,9 @@ export default function BusinessOwnersPage() {
                   <span className="step-num">02</span>
                   <div className="step-icon">📐</div>
                 </div>
-                <div className="step-card">
+                <div className="bo-glow-shell bo-glow-shell--step">
+                  <div className="bo-glow-shell__glow" aria-hidden />
+                  <div className="bo-glow-inner step-card">
                   <div className="step-header">
                     <h3>The Blueprint</h3>
                     <span className="step-tag">Pre-Transition</span>
@@ -177,6 +226,7 @@ export default function BusinessOwnersPage() {
                   </div>
                   <div className="step-connector"></div>
                 </div>
+                </div>
               </div>
 
               <div className="step-item" data-step="3">
@@ -184,7 +234,9 @@ export default function BusinessOwnersPage() {
                   <span className="step-num">03</span>
                   <div className="step-icon">⚡</div>
                 </div>
-                <div className="step-card">
+                <div className="bo-glow-shell bo-glow-shell--step">
+                  <div className="bo-glow-shell__glow" aria-hidden />
+                  <div className="bo-glow-inner step-card">
                   <div className="step-header">
                     <h3>Execution & Handover</h3>
                     <span className="step-tag highlight">Transition</span>
@@ -200,6 +252,7 @@ export default function BusinessOwnersPage() {
                   </div>
                   <div className="step-connector"></div>
                 </div>
+                </div>
               </div>
 
               <div className="step-item" data-step="4">
@@ -207,7 +260,9 @@ export default function BusinessOwnersPage() {
                   <span className="step-num">04</span>
                   <div className="step-icon">✨</div>
                 </div>
-                <div className="step-card final">
+                <div className="bo-glow-shell bo-glow-shell--step">
+                  <div className="bo-glow-shell__glow" aria-hidden />
+                  <div className="bo-glow-inner step-card final">
                   <div className="step-header">
                     <h3>Continuity & Legacy</h3>
                     <span className="step-tag success">Post-Sale</span>
@@ -228,17 +283,20 @@ export default function BusinessOwnersPage() {
                     <span className="complete-icon">✓</span>
                     <span>Your Legacy Secured</span>
                   </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Comparison Section -->
+        {/* Comparison Section */}
         <section className="business-owners-section section-alt">
           <div className="container">
             <div className="comparison-grid">
-              <div className="comparison-card negative">
+              <div className="bo-glow-shell">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner comparison-card negative">
                 <div className="comparison-image">
                   <img 
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz" 
@@ -259,9 +317,12 @@ export default function BusinessOwnersPage() {
                   <li>New people brought in to shake things up</li>
                   <li>Disruptive, exhausting, and stressful</li>
                 </ul>
+                </div>
               </div>
 
-              <div className="comparison-card positive">
+              <div className="bo-glow-shell">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner comparison-card positive">
                 <div className="comparison-image">
                   <img 
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDmGV07k85Eem6OqKGFXsI071p4dSijCb2oYcR" 
@@ -282,6 +343,7 @@ export default function BusinessOwnersPage() {
                   <li>Everyone prepared, simply falling into their roles</li>
                   <li>Quiet, peaceful, gentle rollover into a new beginning</li>
                 </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -299,7 +361,10 @@ export default function BusinessOwnersPage() {
             </div>
 
             <div className="stakeholders-grid">
-              <div className="stakeholder-card hover-reveal">
+              <div className="bo-glow-shell stakeholder-glow-wrap">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner">
+                  <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
                   <img 
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDm9zJtzP85Eem6OqKGFXsI071p4dSijCb2oYc" 
@@ -316,9 +381,14 @@ export default function BusinessOwnersPage() {
                     </div>
                   </div>
                 </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="stakeholder-card hover-reveal">
+              <div className="bo-glow-shell stakeholder-glow-wrap">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner">
+                  <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
                   <img 
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
@@ -335,9 +405,14 @@ export default function BusinessOwnersPage() {
                     </div>
                   </div>
                 </div>
+                  </div>
+                </div>
               </div>
 
-              <div className="stakeholder-card hover-reveal">
+              <div className="bo-glow-shell stakeholder-glow-wrap">
+                <div className="bo-glow-shell__glow" aria-hidden />
+                <div className="bo-glow-inner">
+                  <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
                   <img 
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDH6KI9uFakxJUPrlnIVYC9XNH5uEWetF2KO67" 
@@ -355,6 +430,8 @@ export default function BusinessOwnersPage() {
                     </div>
                   </div>
                 </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -370,30 +447,38 @@ export default function BusinessOwnersPage() {
               </p>
             </div>
 
-            <div className="faq-list">
-              {faqs.map((faq) => (
-                <div key={faq.id} className={`faq-item ${openFaq === faq.id ? 'open' : ''}`}>
-                  <button 
-                    className="faq-question"
-                    onClick={() => toggleFaq(faq.id)}
+            <div className="bo-faq-list" role="list">
+              {faqs.map((faq) => {
+                const isOpen = openFaq === faq.id;
+                return (
+                  <div
+                    key={faq.id}
+                    className={`bo-faq-item ${isOpen ? "bo-faq-item--open" : ""}`}
+                    role="listitem"
                   >
-                    <span>{faq.question}</span>
-                    <span className="faq-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 5v14M5 12h14" className="faq-plus"/>
-                        <path d="M5 12h14" className="faq-minus"/>
-                      </svg>
-                    </span>
-                  </button>
-                  <div className="faq-answer">
-                    <div className="faq-answer-content">
-                      {faq.answer.split('\n\n').map((paragraph, idx) => (
-                        <p key={idx}>{paragraph}</p>
-                      ))}
+                    <button
+                      type="button"
+                      className="bo-faq-trigger"
+                      onClick={() => toggleFaq(faq.id)}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="bo-faq-q">{faq.question}</span>
+                      <span className="bo-faq-chevron" aria-hidden>
+                        +
+                      </span>
+                    </button>
+                    <div className="bo-faq-panel">
+                      <div className="bo-faq-panel-inner">
+                        <div className="bo-faq-body">
+                          {faq.answer.split("\n\n").map((paragraph, idx) => (
+                            <p key={idx}>{paragraph}</p>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
@@ -401,30 +486,58 @@ export default function BusinessOwnersPage() {
         {/* Final CTA Section */}
         <section className="business-owners-cta">
           <div className="container">
-            <h2>Secure Your Legacy on Your Terms</h2>
+            <h2>Ready to see if this fits?</h2>
             <p>
-              Waiting until you are ready to leave to start planning creates chaos, vulnerability, 
-              and risk. The best time to build a continuity plan was five years ago. The second 
-              best time is today.
+              A two-minute intake is all it takes to know if your business qualifies.
+              No commitment, no broker pitch, no obligation.
             </p>
-            <p className="cta-subtitle">
-              Let&apos;s sit down and draft the blueprint for your company&apos;s resilient future.
-            </p>
-            <a href="/introduction" className="cta-button">
-              Schedule a Confidential Conversation
-            </a>
+            <div className="bo-cta-buttons">
+              <button
+                type="button"
+                className="cta-button"
+                onClick={() => openIntake("nda")}
+              >
+                Begin Confidential Intake
+              </button>
+              <button
+                type="button"
+                className="cta-button-ghost"
+                onClick={() => openIntake("light")}
+              >
+                Tell Us a Little First
+              </button>
+            </div>
           </div>
         </section>
       </main>
 
     </div>
 
-    <ClientOnly>
-      <InfrastructureAuditModal 
-        isOpen={isAuditOpen} 
-        onClose={() => setIsAuditOpen(false)} 
-      />
+    <ClientOnly fallback={null}>
+      {showTwoMinuteCheck && (
+        <Suspense fallback={null}>
+          <TwoMinuteCheckModal
+            isOpen={showTwoMinuteCheck}
+            onClose={() => setShowTwoMinuteCheck(false)}
+            onPassProceed={() => {
+              setShowTwoMinuteCheck(false);
+              router.push("/four-month-path");
+            }}
+          />
+        </Suspense>
+      )}
     </ClientOnly>
+
+    {showIntake && (
+      <ConfidentialIntakeModal
+        isOpen={showIntake}
+        defaultPath={intakePath}
+        onClose={() => {
+          setShowIntake(false);
+          setIntakePath(null);
+        }}
+      />
+    )}
     </>
   );
 }

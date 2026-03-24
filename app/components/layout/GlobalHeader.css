@@ -62,6 +62,30 @@
   width: 100%;
 }
 
+/* Dark mode — brighter gold for visibility on dark hero bg */
+[data-theme="dark"] .global-logo-text {
+  background: linear-gradient(
+    135deg,
+    #d4b341 0%,
+    #faf0d4 25%,
+    #d4b341 50%,
+    #faf0d4 75%,
+    #d4b341 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .global-logo-underline {
+  background: linear-gradient(
+    90deg,
+    #d4b341 0%,
+    #faf0d4 50%,
+    #d4b341 100%
+  );
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .global-header {

@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { useMutation } from "convex/react";
+import { useMutation, useAction } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { ProgressBar } from "./components/ProgressBar";
 import { IntroStep, PositionsStep, NameStep, EmailStep, PhoneStep, PositionStep, PreviewStep, SuccessStep } from "./steps";
 import { ApplicationData, TOTAL_STEPS } from "./types";
+import { ModalDialog } from "../../ui/ModalDialog";
 
 interface ApplicationModalProps {
   isOpen: boolean;
@@ -33,6 +34,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
   const [error, setError] = useState<string | null>(null);
 
   const submitApplication = useMutation(api.jobApplications.submit);
+  const sendEmailNotification = useAction(api.emails.sendJobApplicationNotification);
 
   const nextStep = () => setStep(s => Math.min(s + 1, TOTAL_STEPS + 1));
   const prevStep = () => setStep(s => Math.max(s - 1, 1));
@@ -69,25 +71,20 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
       (submitWithoutResume || formData.resumeUrl));
   }, [formData, submitWithoutResume]);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      handleClose();
-    }
-    if (e.key === "Enter" && step >= 3 && step <= 5) {
+  const handleDialogKeyDown = useCallback(
+    (e: React.KeyboardEvent<HTMLDivElement>) => {
+      if (e.key !== "Enter") return;
+      if (step < 3 || step > 5) return;
+
+      const target = e.target as HTMLElement | null;
+      const tag = target?.tagName?.toLowerCase();
+      if (tag === "textarea") return;
+
       e.preventDefault();
       if (canProceed()) nextStep();
-    }
-  }, [step, canProceed]);
-
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-      window.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.body.style.overflow = "unset";
-    }
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen, handleKeyDown]);
+    },
+    [step, canProceed]
+  );
 
   const handleSubmit = async () => {
     if (!canSubmit()) return;
@@ -106,6 +103,22 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
         resumeUrl: formData.resumeUrl || undefined,
       });
 
+      // Send email notification (fire and forget)
+      try {
+        await sendEmailNotification({
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim().toLowerCase(),
+          phone: formData.phone.replace(/\D/g, ""),
+          position: formData.position,
+          otherPosition: formData.position === "Other" ? formData.otherPosition.trim() : undefined,
+          resumeUrl: formData.resumeUrl || undefined,
+        });
+      } catch {
+        // Silent fail - don't show error to user if email fails
+        console.error("Failed to send email notification");
+      }
+
       setIsSubmitting(false);
       nextStep(); // Go to success step
     } catch (err) {
@@ -114,13 +127,18 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
     }
   };
 
-  if (!isOpen) return null;
-
   return (
-    <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && handleClose()}>
-      <button className="modal-close" onClick={handleClose}>&times;</button>
-      <div className="modal-content">
-        <ProgressBar currentStep={step} />
+    <ModalDialog
+      isOpen={isOpen}
+      onClose={handleClose}
+      title="Join Forhemit"
+      overlayClassName="modal-overlay"
+      className="modal-content"
+      closeButtonClassName="modal-close"
+      closeButtonAriaLabel="Close application"
+      onKeyDown={handleDialogKeyDown}
+    >
+      <ProgressBar currentStep={step} />
 
         {error && step === 7 && (
           <div 
@@ -140,14 +158,14 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
           </div>
         )}
 
-        <div className={`modal-grid ${step === 2 ? 'image-top' : ''}`}>
-          <div className="modal-image-side">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
-          </div>
+      <div className={`modal-grid ${step === 2 ? 'image-top' : ''}`}>
+        <div className="modal-image-side">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
+        </div>
 
-          <div className="modal-form-side">
-            {step === 1 && <IntroStep onContinue={nextStep} />}
+        <div className="modal-form-side">
+          {step === 1 && <IntroStep onContinue={nextStep} />}
 
             {step === 2 && (
               <PositionsStep
@@ -220,10 +238,9 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
               />
             )}
 
-            {step === 8 && <SuccessStep onClose={handleClose} />}
-          </div>
+          {step === 8 && <SuccessStep onClose={handleClose} />}
         </div>
       </div>
-    </div>
+    </ModalDialog>
   );
 }

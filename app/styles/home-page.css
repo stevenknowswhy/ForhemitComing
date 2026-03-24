@@ -1,6 +1,8 @@
 /* ── HOME PAGE STYLES ── */
 @import "./theme.css";
 @import "./variables.css";
+@import "../home/styles/home-hero.css";
+@import "../home/intake/styles/classification-intake-modal.css";
 @import "../components/forms/early-access-form.css";
 @import "../components/modals/legal-modal.css";
 @import "../components/forms/application/application-modal.css";
@@ -27,11 +29,26 @@ body {
   overflow-x: hidden;
 }
 
-/* Home wrapper - accounts for fixed header and footer */
+/* Home wrapper - accounts for fixed nav; footer is static in document flow */
 .home-wrapper {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 1.5rem;
+  /* Contain hero/backdrop stacking so fixed nav (z-index 500) always paints on top */
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+}
+
+/* Early access below classification hero */
+.home-inline-early {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding: 0 1.5rem 4rem;
 }
 
 /* ── BACKGROUND ── */

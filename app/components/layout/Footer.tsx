@@ -11,6 +11,7 @@ interface FooterProps {
 
 export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
+  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL;
 
   return (
     <footer className={`footer footer-${variant}`}>
@@ -37,10 +38,19 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
           </>
         )}
         
-        <span className="footer-dot" />
-        <Link href="/admin" className="footer-link">
-          Admin
-        </Link>
+        {adminUrl ? (
+          <>
+            <span className="footer-dot" />
+            <a
+              href={adminUrl}
+              className="footer-link"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Admin
+            </a>
+          </>
+        ) : null}
       </div>
     </footer>
   );

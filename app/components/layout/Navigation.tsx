@@ -18,9 +18,7 @@ const navItems = [
 ];
 
 // Always show this link
-const permanentLinks = [
-  { href: "/introduction", label: "Introductions" },
-];
+const permanentLinks = [{ href: "/brokers", label: "Brokers" }];
 
 export function Navigation({ variant = "dark" }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
@@ -90,7 +88,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     return !pathname?.startsWith(item.href);
   });
 
-  // Combine with permanent links (always show Introductions)
+  // Combine with permanent links (always show Brokers)
   const allNavItems = [...visibleNavItems, ...permanentLinks];
 
   return (

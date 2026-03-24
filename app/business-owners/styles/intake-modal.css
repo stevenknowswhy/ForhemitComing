@@ -1,0 +1,663 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - CONFIDENTIAL INTAKE MODAL
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Overlay ── */
+.ci-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: ci-fadeIn 0.2s ease both;
+}
+
+@keyframes ci-fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ── Modal ── */
+.ci-modal {
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: ci-slideUp 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  position: relative;
+  border-radius: 8px;
+}
+
+@keyframes ci-slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Header ── */
+.ci-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ci-header-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 0.4rem;
+}
+
+.ci-header-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.ci-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-top: 2px;
+  transition: color 0.2s;
+}
+
+.ci-close:hover {
+  color: var(--text-primary);
+}
+
+/* ── Body ── */
+.ci-body {
+  padding: 2rem 2.5rem;
+}
+
+/* ── Step progress ── */
+.ci-step-prog {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 2.5rem;
+}
+
+.ci-step-seg {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.ci-step-seg.ci-seg-done {
+  background: var(--color-brand);
+}
+
+.ci-step-seg.ci-seg-active {
+  background: var(--color-brand-hover);
+  opacity: 0.5;
+}
+
+/* ── Step question ── */
+.ci-step-q {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.4rem;
+  font-weight: 300;
+  margin-bottom: 1.8rem;
+  line-height: 1.25;
+  color: var(--text-primary);
+}
+
+.ci-step-hint {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* ── Path selection ── */
+.ci-path-intro {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+  line-height: 1.7;
+}
+
+.ci-path-nda-note {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: var(--color-brand);
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.ci-path-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border-subtle);
+  margin-bottom: 1rem;
+}
+
+.ci-path-card {
+  background: var(--bg-primary);
+  padding: 1.8rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  border: none;
+  text-align: left;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  color: var(--text-primary);
+}
+
+.ci-path-card:hover {
+  background: var(--bg-tertiary);
+}
+
+.ci-path-sel {
+  background: var(--color-brand-subtle);
+}
+
+.ci-path-badge {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 0.2rem;
+}
+
+.ci-path-badge-muted {
+  color: var(--text-secondary);
+}
+
+.ci-path-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.ci-path-sub {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.ci-path-items {
+  list-style: none;
+  margin-top: 0.5rem;
+  padding: 0;
+}
+
+.ci-path-items li {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  padding: 0.2rem 0 0.2rem 1rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.ci-path-items li::before {
+  content: "\2014";
+  position: absolute;
+  left: 0;
+  color: var(--color-brand);
+}
+
+/* ── Form fields ── */
+.ci-field {
+  margin-bottom: 1.4rem;
+}
+
+.ci-field-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.ci-field-input,
+.ci-field-select,
+.ci-field-textarea {
+  width: 100%;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0.8rem 1rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: border-color 0.2s;
+  outline: none;
+  display: block;
+  border-radius: 4px;
+}
+
+.ci-field-input::placeholder,
+.ci-field-textarea::placeholder {
+  color: var(--text-secondary);
+}
+
+.ci-field-input:focus,
+.ci-field-select:focus,
+.ci-field-textarea:focus {
+  border-color: var(--color-brand);
+}
+
+.ci-field-select {
+  appearance: none;
+  cursor: pointer;
+}
+
+.ci-field-textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+.ci-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+/* ── Range ── */
+.ci-range-wrap {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ci-range-input {
+  flex: 1;
+  accent-color: var(--color-brand);
+}
+
+.ci-range-val {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.1rem;
+  color: var(--color-brand);
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: right;
+}
+
+/* ── NDA box ── */
+.ci-nda-box {
+  border: 1px solid var(--border-accent);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.74rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  border-radius: 4px;
+}
+
+.ci-nda-box strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.ci-nda-box p {
+  margin-bottom: 0.75rem;
+}
+
+/* ── Checkbox ── */
+.ci-checkbox-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+}
+
+.ci-checkbox-box {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+  margin-top: 2px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.ci-checkbox-box.ci-checked {
+  border-color: var(--color-brand);
+  background: var(--color-brand-subtle);
+}
+
+.ci-checkbox-check {
+  color: var(--color-brand);
+  font-size: 0.7rem;
+}
+
+.ci-checkbox-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.ci-checkbox-label span {
+  color: var(--text-primary);
+}
+
+/* ── Signature ── */
+.ci-sig-canvas {
+  width: 100%;
+  height: 80px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+  cursor: crosshair;
+  display: block;
+  touch-action: none;
+  border-radius: 4px;
+}
+
+.ci-sig-controls {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+
+.ci-sig-clear {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.ci-sig-clear:hover {
+  color: var(--text-primary);
+}
+
+/* ── Option buttons ── */
+.ci-opt-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ci-opt-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 1.5rem;
+  width: 100%;
+  transition: background 0.15s;
+  position: relative;
+  color: var(--text-primary);
+}
+
+.ci-opt-btn:hover {
+  background: var(--color-brand-subtle);
+}
+
+.ci-opt-sel {
+  background: var(--color-brand-subtle);
+}
+
+.ci-opt-btn-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.ci-opt-btn-label {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.ci-opt-sel .ci-opt-btn-label {
+  color: var(--color-brand);
+}
+
+.ci-opt-btn-sub {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.ci-opt-arr {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+
+.ci-opt-sel .ci-opt-arr {
+  color: var(--color-brand);
+}
+
+/* ── Step nav ── */
+.ci-step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ci-btn-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+  padding: 0;
+}
+
+.ci-btn-back:hover {
+  color: var(--text-primary);
+}
+
+.ci-btn-next {
+  background: none;
+  border: 1px solid var(--color-brand);
+  color: var(--color-brand);
+  cursor: pointer;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  transition: all 0.2s;
+  margin-left: auto;
+  border-radius: 4px;
+}
+
+.ci-btn-next:hover:not(:disabled) {
+  background: var(--color-brand);
+  color: var(--text-inverse);
+}
+
+.ci-btn-next:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.ci-btn-next.ci-btn-primary {
+  background: var(--color-brand);
+  color: var(--text-inverse);
+  border-color: var(--color-brand);
+}
+
+.ci-btn-next.ci-btn-primary:hover {
+  opacity: 0.85;
+}
+
+.ci-btn-ghost {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 1rem 2.5rem;
+  transition: border-color 0.2s, color 0.2s;
+  border-radius: 4px;
+}
+
+.ci-btn-ghost:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+/* ── Success ── */
+.ci-success-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 1px solid var(--color-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: var(--color-brand);
+  font-size: 1.2rem;
+}
+
+.ci-success-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 0.8rem;
+  color: var(--text-primary);
+}
+
+.ci-success-sub {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.75;
+  max-width: 380px;
+  margin: 0 auto 2rem;
+}
+
+.ci-next-steps {
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 1.5rem;
+}
+
+.ci-next-steps-title {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 1rem;
+}
+
+.ci-next-step-item {
+  display: flex;
+  gap: 1rem;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.8rem;
+}
+
+.ci-next-step-num {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1rem;
+  color: var(--color-brand);
+  flex-shrink: 0;
+  width: 20px;
+}
+
+.ci-next-step-text {
+  color: var(--text-secondary);
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+.ci-next-step-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .ci-modal {
+    max-height: 95vh;
+  }
+
+  .ci-header,
+  .ci-body {
+    padding: 1.5rem;
+  }
+
+  .ci-path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ci-field-row {
+    grid-template-columns: 1fr;
+  }
+}

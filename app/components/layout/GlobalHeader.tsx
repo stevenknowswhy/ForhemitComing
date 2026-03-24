@@ -7,11 +7,6 @@ import "./GlobalHeader.css";
 export function GlobalHeader() {
   const pathname = usePathname();
   
-  // Hide on home page
-  if (pathname === "/") {
-    return null;
-  }
-  
   // Hide on coming-soon page
   if (pathname === "/coming-soon") {
     return null;

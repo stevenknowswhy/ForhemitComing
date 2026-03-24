@@ -4,9 +4,15 @@
 
 /* Import modular styles */
 @import './styles/base.css';
+@import '../home/styles/home-hero.css';
+@import '../home/intake/styles/classification-intake-modal.css';
 @import './styles/hero.css';
+@import './styles/interactions.css';
 @import './styles/comparison.css';
 @import './styles/stakeholders.css';
 @import './styles/timeline.css';
 @import './styles/cta.css';
+@import './styles/savings-strip.css';
+@import './styles/broker-comparison.css';
+@import './styles/intake-modal.css';
 @import './styles/responsive.css';

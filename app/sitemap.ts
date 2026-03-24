@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/introduction',
     '/faq',
     '/business-owners',
+    '/four-month-path',
     '/brokers',
     '/lenders',
     '/accounting-firms',

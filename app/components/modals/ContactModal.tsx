@@ -5,7 +5,9 @@ import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
+import { ModalDialog } from "../ui/ModalDialog";
 import "./contact-modal.css";
+import { useAction } from "convex/react";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -30,8 +32,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
   const { toasts, removeToast, success, error: showError } = useToast();
 
   const submitContact = useMutation(api.contactSubmissions.submit);
-
-  if (!isOpen) return null;
+  const sendEmailNotification = useAction(api.emails.sendContactFormNotification);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -102,6 +103,24 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
         source,
       });
 
+      // Send email notification (fire and forget)
+      try {
+        await sendEmailNotification({
+          firstName: formData.firstName.trim(),
+          lastName: formData.lastName.trim(),
+          email: formData.email.trim().toLowerCase(),
+          phone: formData.phone.trim() || undefined,
+          company: formData.company.trim() || undefined,
+          contactType: formData.contactType,
+          interest: formData.interest || undefined,
+          message: formData.message.trim(),
+          source,
+        });
+      } catch {
+        // Silent fail - don't show error to user if email fails
+        console.error("Failed to send email notification");
+      }
+
       setIsSubmitting(false);
       setShowPreview(false);
       setRevealedSection("success");
@@ -154,13 +173,22 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
   return (
     <>
       <ToastContainer toasts={toasts} onRemove={removeToast} />
-      <div className="contact-modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
-      <div className="contact-modal-content">
-        <button className="contact-modal-close" onClick={onClose} aria-label="Close">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M18 6L6 18M6 6l12 12"/>
-          </svg>
-        </button>
+      <ModalDialog
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Contact"
+        overlayClassName="contact-modal-overlay"
+        className="contact-modal-content"
+        closeButtonClassName="contact-modal-close"
+        closeButtonAriaLabel="Close contact"
+        renderCloseButton={({ onClose, className, ariaLabel }) => (
+          <button className={className} onClick={onClose} aria-label={ariaLabel} type="button">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+      >
 
         <div className="contact-modal-layout">
           {/* Left Side - Contact Info */}
@@ -451,8 +479,7 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
             )}
           </div>
         </div>
-      </div>
-    </div>
+      </ModalDialog>
     </>
   );
 }

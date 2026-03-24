@@ -1,0 +1,1059 @@
+/* Post–2-Minute Check roadmap page */
+
+.fmp-page {
+  position: relative;
+  min-height: 60vh;
+  padding: 2.5rem 1.25rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  color: var(--text-primary);
+}
+
+.fmp-bg {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.45;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, var(--color-brand-subtle), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 50%, var(--bg-secondary), transparent);
+}
+
+.fmp-hero {
+  text-align: center;
+  max-width: 42rem;
+  margin: 0 auto 3rem;
+}
+
+.fmp-hero-eyebrow {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 1rem;
+}
+
+.fmp-hero-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.fmp-hero-sub {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.fmp-hero-sub strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.fmp-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .fmp-layout {
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 2rem;
+  }
+
+  .fmp-sidebar-col {
+    display: block;
+  }
+}
+
+.fmp-sidebar-col {
+  display: none;
+}
+
+.fmp-section {
+  margin-bottom: 3rem;
+}
+
+.fmp-section-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.65rem, 3vw, 2rem);
+  font-weight: 400;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+.fmp-section-lead {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 40rem;
+  margin-bottom: 1.75rem;
+}
+
+/* Timeline — 2×2 grid (single column on small screens), flip cards, animated border ring */
+.fmp-timeline-wrap {
+  margin-top: 0.25rem;
+}
+
+.fmp-timeline-hint {
+  display: none;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+  max-width: 36rem;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .fmp-timeline-hint {
+    display: block;
+  }
+}
+
+.fmp-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .fmp-timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.35rem 1.25rem;
+  }
+}
+
+.fmp-timeline-item {
+  min-width: 0;
+}
+
+.fmp-phase-shell {
+  position: relative;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  outline: none;
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-phase-shell:hover,
+  .fmp-phase-shell:focus-within {
+    background: transparent;
+  }
+}
+
+.fmp-phase-shell--flipped {
+  background: transparent;
+}
+
+.fmp-phase-shell:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .fmp-phase-shell[role="button"] {
+    cursor: pointer;
+  }
+}
+
+.fmp-phase-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-phase-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-phase-shell:hover .fmp-phase-shell__glow::before,
+  .fmp-phase-shell:focus-within .fmp-phase-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-phase-shell--flipped .fmp-phase-shell__glow::before {
+  opacity: 1;
+  animation: fmp-timeline-border-spin 2.8s linear infinite;
+}
+
+@keyframes fmp-timeline-border-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+.fmp-flip-card {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+  border-radius: 12px;
+  perspective: 1100px;
+  box-shadow: var(--shadow-medium);
+}
+
+.fmp-flip-inner {
+  position: relative;
+  width: 100%;
+  min-height: clamp(220px, 32vw, 300px);
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-phase-shell:hover .fmp-flip-inner,
+  .fmp-phase-shell:focus-within .fmp-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .fmp-phase-shell--flipped .fmp-flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.fmp-flip-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.35rem 1.2rem 1.15rem;
+  border-radius: 12px;
+  background: var(--bg-primary);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-sizing: border-box;
+}
+
+.fmp-flip-face--back {
+  transform: rotateY(180deg);
+  overflow-y: auto;
+  background: linear-gradient(
+    165deg,
+    var(--bg-secondary) 0%,
+    var(--bg-primary) 42%,
+    var(--bg-primary) 100%
+  );
+}
+
+.fmp-phase-days--front {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  margin: 0 0 0.65rem;
+}
+
+.fmp-phase-title--front {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: clamp(0.62rem, 1.9vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin: 0 0 auto;
+  line-height: 1.45;
+  flex: 1;
+}
+
+.fmp-phase-checkpoint--front {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 1rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  line-height: 1.45;
+}
+
+.fmp-flip-cue {
+  display: block;
+  margin-top: 0.85rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+.fmp-phase-days--back {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+}
+
+.fmp-flip-back-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fmp-phase-list--back {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  counter-reset: fmp-phase-step;
+}
+
+.fmp-phase-list--back li {
+  position: relative;
+  margin: 0;
+  padding: 0.65rem 0.75rem 0.7rem 2.35rem;
+  border-radius: 9px;
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-brand-border);
+  background: linear-gradient(90deg, var(--color-brand-subtle) 0%, var(--bg-primary) 1.65rem);
+  box-shadow: 0 1px 0 var(--shadow-color);
+  counter-increment: fmp-phase-step;
+}
+
+.fmp-phase-list--back li::before {
+  content: counter(fmp-phase-step);
+  position: absolute;
+  left: 0.55rem;
+  top: 0.68rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 5px;
+  background: var(--color-brand);
+  color: var(--text-inverse);
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1.35rem;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--color-brand-subtle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fmp-phase-shell__glow::before,
+  .fmp-checkpoint-shell__glow::before,
+  .fmp-role-shell__glow::before,
+  .fmp-cta-shell__glow::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .fmp-phase-shell:hover,
+  .fmp-phase-shell:focus-within,
+  .fmp-phase-shell--flipped,
+  .fmp-checkpoint-shell:hover,
+  .fmp-role-shell:hover,
+  .fmp-cta-shell:hover,
+  .fmp-cta-shell:focus-within {
+    background: var(--border-subtle);
+  }
+
+  .fmp-flip-inner {
+    transition: none !important;
+    transform: none !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: auto !important;
+  }
+
+  .fmp-flip-face {
+    position: relative !important;
+    inset: auto !important;
+    transform: none !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+  }
+
+  .fmp-flip-face--back {
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-subtle);
+  }
+
+  .fmp-flip-cue {
+    display: none;
+  }
+
+  .fmp-cta-shell:hover > button,
+  .fmp-cta-shell:focus-within > button,
+  .fmp-cta-shell:hover > a,
+  .fmp-cta-shell:focus-within > a {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
+/* CTA shells — rotating ring + lift (same language as timeline / checkpoints / roles) */
+.fmp-cta-shell {
+  position: relative;
+  display: inline-flex;
+  vertical-align: top;
+  border-radius: 12px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+.fmp-cta-shell--block {
+  display: block;
+  width: 100%;
+}
+
+.fmp-cta-shell--mb-section {
+  margin-bottom: 1.75rem;
+}
+
+.fmp-cta-shell--mb-pdf {
+  margin-bottom: 1rem;
+}
+
+.fmp-cta-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-cta-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-cta-shell:hover {
+    background: transparent;
+  }
+
+  .fmp-cta-shell:hover .fmp-cta-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-cta-shell:focus-within {
+  background: transparent;
+}
+
+.fmp-cta-shell:focus-within .fmp-cta-shell__glow::before {
+  opacity: 1;
+  animation: fmp-timeline-border-spin 2.8s linear infinite;
+}
+
+.fmp-cta-shell > button,
+.fmp-cta-shell > a {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-cta-shell:hover > button,
+  .fmp-cta-shell:hover > a {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+    transform: translateY(-1px);
+  }
+
+  .fmp-cta-shell:hover > .fmp-btn-secondary {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+}
+
+.fmp-cta-shell:focus-within > button,
+.fmp-cta-shell:focus-within > a {
+  box-shadow:
+    var(--shadow-medium),
+    0 0 0 1px var(--color-brand-border),
+    0 12px 36px var(--color-brand-subtle);
+  transform: translateY(-1px);
+}
+
+.fmp-cta-shell:focus-within > .fmp-btn-secondary {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+.fmp-cta-shell > button:focus-visible,
+.fmp-cta-shell > a:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* PDF panels */
+.fmp-pdf-panel {
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.35rem 1.25rem;
+  background: var(--bg-secondary);
+  margin-bottom: 2.5rem;
+}
+
+@media (min-width: 1024px) {
+  .fmp-pdf-panel--sticky {
+    position: sticky;
+    top: 5.5rem;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 1023px) {
+  .fmp-sidebar-col .fmp-pdf-panel {
+    display: none;
+  }
+}
+
+.fmp-pdf-panel-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  margin-bottom: 0.5rem;
+}
+
+.fmp-pdf-panel-q {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.fmp-pdf-panel-cta {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.9rem 1rem;
+  background: var(--color-brand);
+  color: var(--text-inverse);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: box-shadow 0.4s ease, transform 0.25s ease;
+  box-sizing: border-box;
+}
+
+.fmp-pdf-panel-bullets {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.fmp-pdf-panel-bullets li {
+  margin-bottom: 0.35rem;
+}
+
+.fmp-pdf-panel-filename-note {
+  margin: 1rem 0 0;
+  font-size: 0.72rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.fmp-mono {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+}
+
+/* Checkpoints — same shell + rotating conic border ring as 4-Month Path timeline */
+.fmp-checkpoint-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fmp-checkpoint-item {
+  min-width: 0;
+}
+
+.fmp-checkpoint-shell {
+  position: relative;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-checkpoint-shell:hover {
+    background: transparent;
+  }
+}
+
+.fmp-checkpoint-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-checkpoint-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-checkpoint-shell:hover .fmp-checkpoint-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-checkpoint-card {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+  border-radius: 12px;
+  padding: 0.85rem 1.15rem 0.95rem 1.15rem;
+  border-left: 3px solid var(--color-brand);
+  background: linear-gradient(90deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  box-shadow: var(--shadow-medium);
+  transition: box-shadow 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-checkpoint-shell:hover .fmp-checkpoint-card {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+}
+
+.fmp-checkpoint-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.fmp-checkpoint-name {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.fmp-checkpoint-day {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+}
+
+.fmp-checkpoint-body {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fmp-checkpoint-card {
+    transition: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .fmp-checkpoint-shell:hover .fmp-checkpoint-card {
+      box-shadow: var(--shadow-medium);
+    }
+  }
+}
+
+/* Roles — shell + rotating ring (same language as timeline & checkpoints) */
+.fmp-roles-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .fmp-roles-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fmp-role-shell {
+  position: relative;
+  min-width: 0;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-role-shell:hover {
+    background: transparent;
+  }
+}
+
+.fmp-role-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-role-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-role-shell:hover .fmp-role-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-role-card {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.35rem 1.2rem 1.25rem;
+  background: linear-gradient(168deg, var(--bg-secondary) 0%, var(--bg-primary) 42%, var(--bg-primary) 100%);
+  box-shadow: var(--shadow-medium);
+  transition: box-shadow 0.4s ease, border-color 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-role-shell:hover .fmp-role-card {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+    border-color: var(--color-brand-border);
+  }
+}
+
+.fmp-role-card--brand {
+  border-color: var(--color-brand-border);
+  background: linear-gradient(
+    168deg,
+    var(--color-brand-subtle) 0%,
+    var(--bg-secondary) 38%,
+    var(--bg-primary) 100%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-role-shell:hover .fmp-role-card--brand {
+    border-color: var(--color-brand);
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 14px 40px var(--color-brand-subtle);
+  }
+}
+
+.fmp-role-card__head {
+  margin-bottom: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fmp-role-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.25;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.fmp-role-card__head .fmp-role-kicker {
+  margin-top: 0.7rem;
+}
+
+.fmp-role-kicker {
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 1.35;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border-radius: 8px;
+  border: 1px solid var(--color-brand-border);
+  border-left: 3px solid var(--color-brand);
+  box-shadow: 0 1px 0 var(--shadow-color);
+}
+
+.fmp-role-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.fmp-role-list li {
+  position: relative;
+  margin: 0;
+  padding: 0.6rem 0.7rem 0.62rem 1.85rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 1px 0 var(--shadow-color);
+}
+
+.fmp-role-list li::before {
+  content: "";
+  position: absolute;
+  left: 0.58rem;
+  top: 0.78rem;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  box-shadow: 0 0 0 2px var(--color-brand-subtle);
+}
+
+.fmp-role-list--forhemit li {
+  background: linear-gradient(90deg, var(--color-brand-subtle) 0%, var(--bg-primary) 1.5rem);
+  border-color: var(--color-brand-border);
+  border-left: 2px solid var(--color-brand);
+}
+
+.fmp-role-list--forhemit li::before {
+  background: var(--text-inverse);
+  border: 2px solid var(--color-brand);
+  box-shadow: none;
+  width: 6px;
+  height: 6px;
+  top: 0.82rem;
+}
+
+.fmp-role-subsection {
+  margin-top: 1.05rem;
+  padding: 1rem 0.9rem 0.85rem;
+  border-radius: 9px;
+  background: var(--bg-secondary);
+  border: 1px dashed var(--border-subtle);
+}
+
+.fmp-role-subsection .fmp-role-list {
+  gap: 0.45rem;
+}
+
+.fmp-role-subsection .fmp-role-list li {
+  background: var(--bg-primary);
+  border-style: solid;
+}
+
+.fmp-role-after-setup {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fmp-role-card {
+    transition: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .fmp-role-shell:hover .fmp-role-card,
+    .fmp-role-shell:hover .fmp-role-card--brand {
+      box-shadow: var(--shadow-medium);
+      border-color: var(--border-subtle);
+    }
+
+    .fmp-role-shell:hover .fmp-role-card--brand {
+      border-color: var(--color-brand-border);
+    }
+  }
+}
+
+/* Final CTA */
+.fmp-final-cta {
+  text-align: center;
+  padding: 2.5rem 1.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  margin-top: 2rem;
+}
+
+.fmp-final-cta-headline {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+.fmp-final-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.fmp-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.4s ease,
+    transform 0.25s ease;
+  border: none;
+}
+
+.fmp-btn-primary {
+  background: var(--color-brand);
+  color: var(--text-inverse);
+}
+
+.fmp-btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}

@@ -30,13 +30,13 @@ export function GlobalFooter() {
     return null;
   }
 
-  // Use sticky footer on homepage to keep everything in viewport
-  const isHomePage = pathname === "/";
-
+  // Always use document-flow footer. The old "sticky" variant targeted a missing
+  // `.footer-sticky` rule, so only `.footer` applied — `position: fixed` + z-index
+  // sat on top of the homepage hero and swallowed clicks (looked like "dead" links).
   return (
     <>
       <Footer
-        variant={isHomePage ? "sticky" : "static"}
+        variant="static"
         onLegalClick={() => setShowLegalModal(true)}
         onSitemapClick={() => setShowSitemapModal(true)}
       />

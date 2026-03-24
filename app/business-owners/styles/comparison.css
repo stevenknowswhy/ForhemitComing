@@ -11,6 +11,10 @@
   margin: 0 auto;
 }
 
+.comparison-grid .bo-glow-inner.comparison-card {
+  transition: box-shadow 0.4s ease, border-color 0.35s ease;
+}
+
 .comparison-card {
   padding: 2rem;
   border-radius: 12px;
@@ -52,10 +56,11 @@
 }
 
 .comparison-card h3 {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+  font-weight: 500;
   margin: 0;
+  line-height: 1.25;
 }
 
 .comparison-card.negative h3 {
@@ -68,9 +73,11 @@
 }
 
 .comparison-intro {
-  font-size: 0.95rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  font-weight: 400;
   color: var(--bo-text-secondary);
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 1.25rem;
 }
 
@@ -81,9 +88,11 @@
 }
 
 .comparison-list li {
-  font-size: 0.9rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  font-weight: 400;
   color: var(--bo-text-secondary);
-  line-height: 1.6;
+  line-height: 1.55;
   padding-left: 1.25rem;
   position: relative;
   margin-bottom: 0.75rem;
@@ -106,4 +115,24 @@
 
 .comparison-card.positive .comparison-list li::before {
   background: var(--bo-accent);
+}
+
+/* ── Comparison cards: subtle frame (no rotating “radar” border) ─────────────── */
+.comparison-grid .bo-glow-shell__glow::before {
+  animation: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .comparison-grid .bo-glow-shell:hover .bo-glow-shell__glow::before,
+  .comparison-grid .bo-glow-shell:focus-within .bo-glow-shell__glow::before {
+    animation: none;
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .comparison-grid .bo-glow-shell:hover .bo-glow-shell__glow::before,
+  .comparison-grid .bo-glow-shell:focus-within .bo-glow-shell__glow::before {
+    opacity: 0.14;
+  }
 }

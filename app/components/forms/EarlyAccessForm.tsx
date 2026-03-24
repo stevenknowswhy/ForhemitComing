@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useMutation } from "convex/react";
+import { useMutation, useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
 interface EarlyAccessFormProps {
@@ -19,6 +19,7 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
   const [message, setMessage] = useState("");
 
   const submitEarlyAccess = useMutation(api.earlyAccessSignups.submit);
+  const sendEmailNotification = useAction(api.emails.sendEarlyAccessNotification);
 
   const handleClose = React.useCallback(() => {
     setEmail("");
@@ -61,6 +62,19 @@ export function EarlyAccessForm({ variant = "inline", onClose, source = "website
         email: email.trim(),
         source,
       });
+
+      // Send email notification for new signups only
+      if (!result.isDuplicate) {
+        try {
+          await sendEmailNotification({
+            email: email.trim(),
+            source,
+          });
+        } catch {
+          // Silent fail - don't show error to user if email fails
+          console.error("Failed to send email notification");
+        }
+      }
 
       setIsSubmitting(false);
 

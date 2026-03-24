@@ -22,9 +22,15 @@
   flex-shrink: 0;
 }
 
-/* Adjust z-index for static variant */
-.footer-static .minimal-nav {
-  z-index: 1;
+/* Legacy name: previously no rules existed, so `.footer` fixed positioning won and blocked clicks */
+.footer-sticky {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  padding: 1rem 2rem;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 /* Footer content container */

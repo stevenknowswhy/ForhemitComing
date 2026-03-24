@@ -2,7 +2,7 @@
 
 import { CheckpointsSection } from "@/app/four-month-path/components/CheckpointsSection";
 import { FourPhaseTimeline } from "@/app/four-month-path/components/FourPhaseTimeline";
-import { RoadmapPdfPanel } from "@/app/four-month-path/components/RoadmapPdfPanel";
+import { RoadmapPanel } from "@/app/four-month-path/components/RoadmapPanel";
 import { TimelineRealismSection } from "@/app/four-month-path/components/TimelineRealismSection";
 import "@/app/home/intake/styles/classification-intake-modal.css";
 import "@/app/four-month-path/styles/four-month-path.css";
@@ -65,22 +65,22 @@ export function BrokersPathClient() {
               Share the roadmap with your seller
             </h2>
             <p className="fmp-section-lead">
-              One PDF your client (and their attorney or CPA) can read offline—milestones, checkpoints, and
-              professional roles spelled out.
+              One interactive roadmap your client (and their attorney or CPA) can open in-browser with all
+              milestones, checkpoints, and professional roles spelled out.
             </p>
-            <RoadmapPdfPanel
+            <RoadmapPanel
               surface="brokers_inline"
-              ariaLabel="Download ESOP roadmap PDF"
+              ariaLabel="Open ESOP roadmap HTML"
               eyebrow="For your seller & advisors"
               question="Want the same 120-day timeline we use on the owner page?"
               bullets={[
                 "Month-by-month milestones and checkpoints",
                 "How bank, trustee, and appraiser sequence",
                 "Plain-English glossary for non-ESOP counsel",
-                "Print or forward under your cover email",
+                "Print to PDF or forward under your cover email",
               ]}
-              filenameNote="Opens in a new tab. Save or print from there—rename if you want a dated copy for your file."
-              ctaLabel="View: Complete 120-Day ESOP Roadmap (PDF)"
+              filenameNote="Opens in a new tab as HTML. Use browser print to save a PDF copy if needed."
+              ctaLabel="Open: Complete 120-Day ESOP Roadmap (HTML)"
             />
           </section>
 

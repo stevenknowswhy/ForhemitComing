@@ -1,0 +1,682 @@
+/* Homepage hero + path-selection — scoped; fonts from root layout (Cormorant + Outfit) */
+
+/* ── Shared design tokens ── */
+.hch-hero-section,
+.home-classification-hero {
+  --hch-ink: #1c1510;
+  --hch-ink-muted: rgba(28, 21, 16, 0.5);
+  --hch-ink-soft: rgba(28, 21, 16, 0.45);
+  --hch-ink-faint: rgba(28, 21, 16, 0.4);
+  --hch-brass: #9a7540;
+  --hch-brass-soft: rgba(154, 117, 64, 0.1);
+  --hch-green: #4a6e2a;
+  --hch-green-bg: rgba(90, 138, 74, 0.1);
+  --hch-cream: #f8f6f1;
+  --hch-line: rgba(28, 21, 16, 0.08);
+  --hch-card-border: rgba(28, 21, 16, 0.1);
+  position: relative;
+  width: 100%;
+}
+
+/* ═══════════════════════════════════
+   SECTION 1 — Full-viewport hero
+   ═══════════════════════════════════ */
+
+.hch-hero-bg {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--hch-cream);
+}
+
+.hch-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 59px,
+      rgba(28, 21, 16, 0.045) 59px,
+      rgba(28, 21, 16, 0.045) 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 59px,
+      rgba(28, 21, 16, 0.045) 59px,
+      rgba(28, 21, 16, 0.045) 60px
+    );
+}
+
+.hch-hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(ellipse 70% 50% at 20% 30%, rgba(184, 150, 90, 0.05) 0%, transparent 70%);
+}
+
+.hch-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 700px;
+  padding: 4.5rem 2rem 4rem;
+}
+
+.hch-hero-inner--centered {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.hch-hero-eyebrow {
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hch-brass);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hch-hero-eyebrow-line {
+  width: 28px;
+  height: 1px;
+  background: var(--hch-brass);
+  opacity: 0.5;
+}
+
+.hch-hero-headline {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.4rem, 5.5vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--hch-ink);
+  margin-bottom: 0.8rem;
+}
+
+.hch-hero-headline em {
+  font-style: italic;
+  color: var(--hch-brass);
+}
+
+.hch-hero-sub {
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: clamp(1.1rem, 2.3vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(28, 21, 16, 0.78);
+  max-width: 620px;
+  margin-bottom: 2.2rem;
+}
+
+.hch-hero-ctas {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+a.hch-hero-cta,
+a.hch-path-cta {
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.hch-hero-cta {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.2rem;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Match Navigation: brand underline (same easing / placement as .theme-toggle / .hamburger-btn) */
+.hch-hero-cta::after {
+  content: "";
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hch-hero-cta:hover::after,
+.hch-hero-cta:focus-visible::after {
+  width: 60%;
+}
+
+.hch-hero-cta:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.hch-hero-cta-primary {
+  background-color: var(--hch-ink);
+  background-image: none;
+  color: #f0ede8;
+}
+
+/* Glass wash + brand text — same ingredients as .theme-toggle:hover + underline */
+.hch-hero-cta-primary:hover,
+.hch-hero-cta-primary:focus-visible {
+  background-image: linear-gradient(var(--bg-glass), var(--bg-glass));
+  color: var(--color-brand);
+}
+
+.hch-hero-cta-secondary {
+  background: transparent;
+  color: var(--hch-ink);
+  border-color: var(--hch-card-border);
+}
+
+/* Match .nav-dropdown-item hover */
+.hch-hero-cta-secondary:hover,
+.hch-hero-cta-secondary:focus-visible {
+  background: var(--bg-glass);
+  color: var(--color-brand);
+  border-color: var(--border-accent);
+}
+
+/* ═══════════════════════════════════
+   SECTION 2 — Path selection ("I am a …")
+   ═══════════════════════════════════ */
+
+.hch-paths-bg {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: var(--hch-cream);
+  padding: 4rem 0 5rem;
+}
+
+.hch-hero-fork-label {
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--hch-ink-faint);
+  margin-bottom: 0.8rem;
+}
+
+.hch-hero-fork {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.hch-path-card {
+  border: 1px solid var(--hch-card-border);
+  padding: 1.6rem 1.4rem 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-align: left;
+  width: 100%;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  color: var(--hch-ink);
+}
+
+.hch-path-card:hover {
+  border-color: rgba(28, 21, 16, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.hch-path-card:focus-visible {
+  outline: 2px solid var(--hch-brass);
+  outline-offset: 3px;
+}
+
+.hch-path-card.hch-active {
+  border-color: var(--hch-brass);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.hch-path-card-role {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(28, 21, 16, 0.42);
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hch-path-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(28, 21, 16, 0.2);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.hch-path-card.hch-active .hch-path-dot {
+  background: var(--hch-brass);
+  border-color: var(--hch-brass);
+}
+
+.hch-path-card-value {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--hch-ink);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+.hch-path-card-value strong {
+  font-weight: 500;
+  color: var(--hch-brass);
+}
+
+.hch-path-card-sub {
+  font-size: 0.72rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--hch-ink-soft);
+  margin-bottom: 0;
+  display: block;
+}
+
+.hch-path-free-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--hch-green);
+  background: var(--hch-green-bg);
+  padding: 0.3rem 0.7rem;
+  margin-top: 0.9rem;
+}
+
+.hch-path-expand {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease;
+}
+
+.hch-path-expand.hch-open {
+  max-height: 340px;
+  opacity: 1;
+}
+
+.hch-path-steps {
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--hch-line);
+}
+
+.hch-path-step-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  margin-bottom: 0.75rem;
+}
+
+.hch-path-step-num {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--hch-brass-soft);
+  color: var(--hch-brass);
+  font-size: 0.58rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+}
+
+.hch-path-step-text {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--hch-ink-soft);
+  line-height: 1.5;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+}
+
+.hch-path-step-text strong {
+  font-weight: 400;
+  color: var(--hch-ink);
+}
+
+.hch-path-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  padding: 0.75rem 1.4rem;
+  background: var(--hch-ink);
+  color: #f0ede8;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+
+.hch-path-cta:hover {
+  opacity: 0.82;
+}
+
+.hch-path-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ── FAQ accordion (inside path cards) ── */
+
+.hch-faq-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.7rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(28, 21, 16, 0.35);
+  transition: color 0.2s;
+}
+
+.hch-faq-toggle:hover {
+  color: rgba(28, 21, 16, 0.6);
+}
+
+.hch-faq-toggle.hch-open {
+  color: var(--hch-brass);
+}
+
+.hch-faq-toggle-arrow {
+  font-size: 0.5rem;
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.hch-faq-toggle.hch-open .hch-faq-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.hch-faq-panel {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.hch-faq-panel.hch-open {
+  max-height: 1200px;
+  opacity: 1;
+}
+
+.hch-faq-list {
+  border: 1px solid var(--hch-line);
+  border-top: none;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.hch-faq-item {
+  border-top: 1px solid rgba(28, 21, 16, 0.06);
+}
+
+.hch-faq-item:first-child {
+  border-top: none;
+}
+
+.hch-faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.85rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--hch-ink);
+  text-align: left;
+  transition: color 0.2s;
+  gap: 1rem;
+}
+
+.hch-faq-q:hover {
+  color: var(--hch-brass);
+}
+
+.hch-faq-q-icon {
+  font-size: 0.85rem;
+  color: rgba(28, 21, 16, 0.25);
+  transition:
+    transform 0.3s ease,
+    color 0.3s ease;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.hch-faq-q.hch-open .hch-faq-q-icon {
+  transform: rotate(45deg);
+  color: var(--hch-brass);
+}
+
+.hch-faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.25s ease;
+  opacity: 0;
+}
+
+.hch-faq-a.hch-open {
+  max-height: 400px;
+  opacity: 1;
+}
+
+.hch-faq-a-inner {
+  padding: 0 1.2rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--hch-ink-muted);
+  font-family: var(--font-outfit, system-ui, sans-serif);
+}
+
+/* ═══════════════════════════════════
+   DARK MODE OVERRIDES
+   ═══════════════════════════════════ */
+
+[data-theme="dark"] .hch-hero-section,
+[data-theme="dark"] .home-classification-hero {
+  --hch-ink: #f5f0e8;
+  --hch-ink-muted: rgba(245, 240, 232, 0.55);
+  --hch-ink-soft: rgba(245, 240, 232, 0.5);
+  --hch-ink-faint: rgba(245, 240, 232, 0.4);
+  --hch-brass: #c9a955;
+  --hch-brass-soft: rgba(201, 169, 85, 0.15);
+  --hch-green: #6fcf6f;
+  --hch-green-bg: rgba(111, 207, 111, 0.12);
+  --hch-cream: #0e0e0c;
+  --hch-line: rgba(245, 240, 232, 0.08);
+  --hch-card-border: rgba(245, 240, 232, 0.1);
+}
+
+[data-theme="dark"] .hch-hero-bg {
+  background: var(--hch-cream);
+}
+
+[data-theme="dark"] .hch-hero-bg::before {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 59px,
+      rgba(245, 240, 232, 0.035) 59px,
+      rgba(245, 240, 232, 0.035) 60px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 59px,
+      rgba(245, 240, 232, 0.035) 59px,
+      rgba(245, 240, 232, 0.035) 60px
+    );
+}
+
+[data-theme="dark"] .hch-hero-bg::after {
+  background: radial-gradient(ellipse 70% 50% at 20% 30%, rgba(201, 169, 85, 0.06) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .hch-hero-sub {
+  color: rgba(245, 240, 232, 0.72);
+}
+
+[data-theme="dark"] .hch-hero-cta-primary {
+  background-color: #f5f0e8;
+  background-image: none;
+  color: #0e0e0c;
+}
+
+[data-theme="dark"] .hch-hero-cta-primary:hover,
+[data-theme="dark"] .hch-hero-cta-primary:focus-visible {
+  background-color: #f5f0e8;
+  background-image: linear-gradient(var(--bg-glass), var(--bg-glass));
+  color: var(--color-brand);
+}
+
+[data-theme="dark"] .hch-hero-cta-secondary {
+  color: var(--hch-ink);
+  border-color: var(--hch-card-border);
+}
+
+[data-theme="dark"] .hch-paths-bg {
+  background: var(--hch-cream);
+}
+
+[data-theme="dark"] .hch-path-card {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .hch-path-card:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(245, 240, 232, 0.2);
+}
+
+[data-theme="dark"] .hch-path-card.hch-active {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .hch-path-cta {
+  background: #f5f0e8;
+  color: #0e0e0c;
+}
+
+[data-theme="dark"] .hch-faq-list {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .hch-faq-item {
+  border-top-color: rgba(245, 240, 232, 0.06);
+}
+
+[data-theme="dark"] .hch-faq-toggle {
+  color: rgba(245, 240, 232, 0.35);
+}
+
+[data-theme="dark"] .hch-faq-toggle:hover {
+  color: rgba(245, 240, 232, 0.6);
+}
+
+[data-theme="dark"] .hch-path-card-role {
+  color: rgba(245, 240, 232, 0.42);
+}
+
+[data-theme="dark"] .hch-path-dot {
+  border-color: rgba(245, 240, 232, 0.2);
+}
+
+[data-theme="dark"] .hch-faq-q-icon {
+  color: rgba(245, 240, 232, 0.25);
+}
+
+/* ── Responsive ── */
+
+@media (max-width: 640px) {
+  .hch-hero-inner {
+    padding: 3rem 1.5rem;
+  }
+
+  .hch-hero-bg {
+    min-height: calc(100dvh - 80px);
+  }
+
+  .hch-hero-headline {
+    font-size: clamp(2rem, 7vw, 2.8rem);
+  }
+
+  .hch-hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.6rem;
+  }
+
+  .hch-paths-bg {
+    padding: 3rem 0 4rem;
+  }
+
+  .hch-hero-fork {
+    grid-template-columns: 1fr;
+  }
+}

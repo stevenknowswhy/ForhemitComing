@@ -99,7 +99,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1, // Prevent zoom on input focus (iOS)
   themeColor: '#ffffff', // Light theme browser chrome
 }
 
@@ -116,13 +115,15 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  // Handle main site theme - default to light
-                  var theme = localStorage.getItem('forhemit-theme');
-                  if (theme === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'dark');
+                  // Match ThemeProvider: support system | dark | light
+                  var theme = localStorage.getItem('forhemit-theme') || 'system';
+                  var resolved;
+                  if (theme === 'system') {
+                    resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                   } else {
-                    document.documentElement.setAttribute('data-theme', 'light');
+                    resolved = theme === 'dark' ? 'dark' : 'light';
                   }
+                  document.documentElement.setAttribute('data-theme', resolved);
                   
                   // Handle blog theme (if on blog page)
                   if (window.location.pathname.startsWith('/blog')) {

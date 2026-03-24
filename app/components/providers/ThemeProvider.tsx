@@ -1,6 +1,14 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  type ReactNode,
+} from "react";
 
 type Theme = "dark" | "light" | "system";
 type ResolvedTheme = "dark" | "light";
@@ -17,19 +25,17 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = "forhemit-theme";
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === "undefined") return "dark";
+  if (typeof window === "undefined") return "light";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function getInitialTheme(): { theme: Theme; resolvedTheme: ResolvedTheme } {
+function readStoredTheme(): { theme: Theme; resolvedTheme: ResolvedTheme } {
   if (typeof window === "undefined") {
-    return { theme: "system", resolvedTheme: "dark" };
+    return { theme: "system", resolvedTheme: "light" };
   }
-
   const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  const theme = stored || "system";
+  const theme = stored ?? "system";
   const resolvedTheme = theme === "system" ? getSystemTheme() : theme;
-
   return { theme, resolvedTheme };
 }
 
@@ -44,67 +50,62 @@ export function ThemeProvider({
   defaultTheme = "system",
   enableSystem = true,
 }: ThemeProviderProps) {
-  const [mounted, setMounted] = useState(false);
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
-  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("dark");
+  const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
 
-  // Initialize theme on mount
-  useEffect(() => {
-    const initial = getInitialTheme();
-    setThemeState(initial.theme);
-    setResolvedTheme(initial.resolvedTheme);
-
-    // Apply theme to document
-    document.documentElement.setAttribute("data-theme", initial.resolvedTheme);
-    setMounted(true);
+  const applyToDocument = useCallback((resolved: ResolvedTheme) => {
+    setResolvedTheme(resolved);
+    document.documentElement.setAttribute("data-theme", resolved);
   }, []);
 
-  // Listen for system theme changes
+  // Hydrate from localStorage after mount (matches blocking script in layout.tsx)
+  useEffect(() => {
+    const initial = readStoredTheme();
+    setThemeState(initial.theme);
+    applyToDocument(initial.resolvedTheme);
+  }, [applyToDocument]);
+
   useEffect(() => {
     if (!enableSystem || theme !== "system") return;
 
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const handleChange = (e: MediaQueryListEvent) => {
-      const newResolved = e.matches ? "dark" : "light";
-      setResolvedTheme(newResolved);
-      document.documentElement.setAttribute("data-theme", newResolved);
+      applyToDocument(e.matches ? "dark" : "light");
     };
 
+    applyToDocument(mediaQuery.matches ? "dark" : "light");
     mediaQuery.addEventListener("change", handleChange);
     return () => mediaQuery.removeEventListener("change", handleChange);
-  }, [theme, enableSystem]);
+  }, [theme, enableSystem, applyToDocument]);
 
-  // Listen for storage changes (sync across tabs)
   useEffect(() => {
     const handleStorage = (e: StorageEvent) => {
-      if (e.key === STORAGE_KEY && e.newValue) {
-        const newTheme = e.newValue as Theme;
-        setThemeState(newTheme);
-        const newResolved = newTheme === "system" ? getSystemTheme() : newTheme;
-        setResolvedTheme(newResolved);
-        document.documentElement.setAttribute("data-theme", newResolved);
-      }
+      if (e.key !== STORAGE_KEY || !e.newValue) return;
+      const newTheme = e.newValue as Theme;
+      setThemeState(newTheme);
+      const nextResolved = newTheme === "system" ? getSystemTheme() : newTheme;
+      applyToDocument(nextResolved);
     };
 
     window.addEventListener("storage", handleStorage);
     return () => window.removeEventListener("storage", handleStorage);
-  }, []);
+  }, [applyToDocument]);
 
-  const setTheme = (newTheme: Theme) => {
-    setThemeState(newTheme);
-    localStorage.setItem(STORAGE_KEY, newTheme);
+  const setTheme = useCallback(
+    (newTheme: Theme) => {
+      setThemeState(newTheme);
+      localStorage.setItem(STORAGE_KEY, newTheme);
+      const nextResolved = newTheme === "system" ? getSystemTheme() : newTheme;
+      applyToDocument(nextResolved);
+    },
+    [applyToDocument]
+  );
 
-    const newResolved = newTheme === "system" ? getSystemTheme() : newTheme;
-    setResolvedTheme(newResolved);
-    document.documentElement.setAttribute("data-theme", newResolved);
-  };
+  const toggleTheme = useCallback(() => {
+    const next: Theme = resolvedTheme === "dark" ? "light" : "dark";
+    setTheme(next);
+  }, [resolvedTheme, setTheme]);
 
-  const toggleTheme = () => {
-    const newTheme = resolvedTheme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-  };
-
-  // Keyboard shortcut: Cmd/Ctrl+Shift+L
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "l" && e.shiftKey && (e.metaKey || e.ctrlKey)) {
@@ -115,52 +116,27 @@ export function ThemeProvider({
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [resolvedTheme]);
+  }, [toggleTheme]);
 
-  // Prevent flash of wrong theme
-  if (!mounted) {
-    return (
-      <>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const theme = localStorage.getItem('${STORAGE_KEY}') || 'system';
-                const resolved = theme === 'system' 
-                  ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-                  : theme;
-                document.documentElement.setAttribute('data-theme', resolved);
-              })();
-            `,
-          }}
-        />
-        {children}
-      </>
-    );
-  }
-
-  return (
-    <ThemeContext.Provider
-      value={{
-        theme,
-        resolvedTheme,
-        setTheme,
-        toggleTheme,
-      }}
-    >
-      {children}
-    </ThemeContext.Provider>
+  const value = useMemo(
+    () => ({
+      theme,
+      resolvedTheme,
+      setTheme,
+      toggleTheme,
+    }),
+    [theme, resolvedTheme, setTheme, toggleTheme]
   );
+
+  return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    // Return a fallback for SSR/static generation
-    // This prevents errors during prerendering
     return {
       theme: "system",
-      resolvedTheme: "dark",
+      resolvedTheme: "light",
       setTheme: () => {},
       toggleTheme: () => {},
     };
