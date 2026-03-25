@@ -43,11 +43,11 @@ const EXIT_PATHS = [
     points: [
       "Loss of operational control",
       "Culture gutted in 12–18 months",
-      "9–12 months due diligence",
       "Buyer can walk at any time",
+      "Financial contingencies",
       "Reps & warranties exposure",
     ],
-    summary: "Highest risk. Longest timeline. No guarantees.",
+    summary: "Highest risk. No guarantees.",
   },
   {
     id: "esop",
@@ -60,9 +60,9 @@ const EXIT_PATHS = [
       "Up to 100% tax-free proceeds",
       "Employees keep their jobs",
       "Your legacy lives on",
-      "Close in ~4 months",
+      "Close in as little as four months",
     ],
-    summary: "Best price. Best terms. Most certainty.",
+    summary: "Fair price. Best terms. Most certainty.",
   },
 ] as const;
 
