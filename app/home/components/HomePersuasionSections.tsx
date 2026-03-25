@@ -188,12 +188,12 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
               >
                 <div className="hps-glow-shell__glow" aria-hidden />
                 <div className={`hps-card ${path.featured ? "hps-card-featured" : ""}`}>
-                  <span className={`hps-card-tag ${path.tagClass}`}>{path.tag}</span>
+                  <span className={`hps-card-tag ${path.tagClass} ${path.featured ? "hps-tag-green-pill" : ""}`}>{path.tag}</span>
                   <h3 className="hps-card-title">{path.label}</h3>
                   <ul className="hps-card-list">
                     {path.points.map((p) => (
                       <li key={p} className="hps-card-item">
-                        <span className="hps-card-bullet" aria-hidden>
+                        <span className={`hps-card-bullet ${path.featured ? "hps-card-bullet--green" : ""}`} aria-hidden>
                           {path.featured ? "✓" : "✗"}
                         </span>
                         {p}
