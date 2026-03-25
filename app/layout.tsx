@@ -41,11 +41,20 @@ const baseUrl = 'https://forhemit.com';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Forhemit PBC | Stewardship Management',
-    template: '%s | Forhemit PBC',
+    default: 'Forhemit | California Public Benefit Corporation',
+    template: '%s | Forhemit',
   },
-  description: 'Stewardship Management Organization Built for Continuity, Not Extraction. We acquire and operate small to mid-sized businesses with a long-term, employee-centered approach.',
-  keywords: ['private equity', 'business acquisition', 'ESOP', 'company stewardship', 'business continuity', 'employee ownership'],
+  description:
+    'Forhemit (California PBC) structures ESOP transitions and post-close stewardship for small and mid-sized businesses—continuity-first, not extraction.',
+  keywords: [
+    'ESOP',
+    'employee ownership',
+    'California public benefit corporation',
+    'business transition',
+    'company stewardship',
+    'business continuity',
+    'Section 1042',
+  ],
   authors: [{ name: 'Forhemit PBC' }],
   creator: 'Forhemit PBC',
   publisher: 'Forhemit PBC',

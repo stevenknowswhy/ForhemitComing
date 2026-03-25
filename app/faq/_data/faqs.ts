@@ -17,7 +17,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "What makes Forhemit different from a traditional private equity buyer?",
         answer:
-          'Traditional private equity built its reputation on leverage and liquidation—buying companies, cutting costs to the bone, and flipping them a few years later. We are built on Continuity of Operations (COOP). We don\'t acquire your life\'s work to dismantle it; we acquire it to harden it. We serve as stewards, transitioning your successful business into an employee-owned institution designed to last for generations.',
+          'Traditional private equity built its reputation on leverage and liquidation—buying companies, cutting costs to the bone, and flipping them a few years later. Forhemit is a California public benefit corporation built on Continuity of Operations (COOP). We structure employee-ownership (ESOP) transitions and post-close stewardship—not a quick flip. Your team becomes the buyer through the plan; we help harden operations so the business lasts for generations.',
       },
       {
         question: "What happens to my employees after I sell?",

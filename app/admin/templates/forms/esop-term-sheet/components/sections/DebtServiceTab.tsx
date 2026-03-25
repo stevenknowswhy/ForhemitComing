@@ -49,7 +49,7 @@ export function DebtServiceTab({
         <Row label="Less: D&A (estimated)" value="($150,000)" indent />
         <Row label="EBIT" value={fmt(S.ebitda - 150_000)} indent />
         <Row
-          label="Less: Taxes (~28% blended effective rate)"
+          label="Less: Taxes (~23.8% federal illustrative LTCG + NIIT)"
           value={`(${fmt((S.ebitda - 150_000) * (inputs.taxRate / 100))})`}
           indent
         />

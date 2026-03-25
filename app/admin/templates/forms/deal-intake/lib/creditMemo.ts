@@ -42,7 +42,7 @@ export function generateCreditMemo(options: CreditMemoOptions): string {
 
   const lines: string[] = [
     "ILLUSTRATIVE CREDIT MEMO PREVIEW",
-    "Prepared by Forhemit Stewardship Management Co. — Transaction Manager & Post-Close Stewardship Provider",
+    "Prepared by Forhemit PBC — Transaction Manager & Post-Close Stewardship Provider",
     "Forhemit is not the buyer, holds no equity, and does not appear in the capital structure.",
     "",
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
@@ -136,7 +136,7 @@ export function generateCreditMemo(options: CreditMemoOptions): string {
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
     "6. FORHEMIT — ROLE & STEWARDSHIP",
     "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-    "  Forhemit Stewardship Management Co. is a California Public Benefit Corporation.",
+    "  Forhemit PBC is a California Public Benefit Corporation.",
     "  Role: Transaction manager and post-close operational stewardship provider.",
     "  Forhemit has no equity position, no capital at risk, and does not appear",
     "  in sources & uses. Revenue model: structuring fees + ongoing retainer.",

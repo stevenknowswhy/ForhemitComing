@@ -317,7 +317,7 @@ export function generateStructuredCreditMemo(
         {
           label: "Entity",
           value:
-            "Forhemit Stewardship Management Co. — California Public Benefit Corporation",
+            "Forhemit PBC — California Public Benefit Corporation",
         },
         {
           label: "Role",
@@ -394,7 +394,7 @@ export function generateStructuredCreditMemo(
   return {
     header: {
       title: "Illustrative Credit Memo",
-      subtitle: "Forhemit Stewardship Management Co.",
+      subtitle: "Forhemit PBC",
       disclaimer:
         "Transaction Manager & Post-Close Stewardship Provider. Forhemit is not the buyer, holds no equity, and does not appear in the capital structure.",
     },

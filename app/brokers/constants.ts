@@ -34,7 +34,7 @@ export const BROKER_PILLARS = [
 
 export const BROKER_QUALIFICATION_CRITERIA = [
   { id: "revenue", label: "Listing at roughly $3M+ revenue (bankable scale)" },
-  { id: "employees", label: "At least ~20 full-time employees (viable internal bench)" },
+  { id: "employees", label: "At least about 20 employees (viable internal bench)" },
   { id: "profitable", label: "Profitable recent history (underwriting-friendly)" },
   { id: "ownership", label: "Seller owns a controlling stake (or clear path to 100%)" },
   { id: "operable", label: "Business can run without the owner—or owner will transition" },

@@ -74,20 +74,20 @@ export default function LendersPage() {
       answer: "The best way to protect an SBA guaranty is to prevent the default in the first place. Our 90-day transition oversight and COOP framework ensures the business remains stable during its most vulnerable window, keeping your loans performing and avoiding the scrutiny that comes with early defaults."
     },
     {
-      question: "What is the 20+ employee threshold requirement?",
-      answer: "We focus on businesses with 20+ employees because that is the critical mass where a viable internal management layer exists, making the business highly attractive for SBA lending. This ensures successor management has the depth and capability to maintain operational continuity."
+      question: "What is the 20-employee threshold requirement?",
+      answer: "We focus on businesses with at least about 20 employees because that is the critical mass where a viable internal management layer exists, making the business highly attractive for SBA lending. This ensures successor management has the depth and capability to maintain operational continuity."
     },
     {
       question: "Do you compete with our lending services?",
-      answer: "Absolutely not. We don't originate loans or compete for your banking relationships. We are an operational risk partner that acquires and stabilizes businesses through ESOP structures, making them better borrowers for you. Our stewardship management works alongside your existing credit facilities."
+      answer: "Absolutely not. We don't originate loans or compete for your banking relationships. We are an operational risk partner that structures employee-ownership (ESOP) transitions and provides post-close stewardship, making companies stronger borrowers for you. Our work runs alongside your existing credit facilities."
     },
     {
       question: "What types of businesses do you work with?",
-      answer: "We focus on founder-dependent, closely held businesses with $750K–$3M in EBITDA and 20-75 employees. These are typically the types of companies that make up a significant portion of SBA loan portfolios—businesses where succession risk is highest and our continuity framework has the greatest impact."
+      answer: "Our primary segment is founder-dependent, closely held businesses with $3M–$15M in EBITDA. We also engage select SBA-aligned opportunities below that range when the continuity story and credit profile fit. Headcount often falls in the 20–75 employee range—where succession risk is high and our COOP framework has the greatest impact."
     },
     {
       question: "What happens during the 90-day transition?",
-      answer: "We implement our Continuity of Operations (COOP) framework: systematizing tribal knowledge, securing leadership succession from the 20+ employee pool, and installing disaster-proof operational systems. Throughout this period, we maintain close oversight with early warning systems to ensure the business—and your loan—remains stable."
+      answer: "We implement our Continuity of Operations (COOP) framework: systematizing tribal knowledge, securing leadership succession from the broader employee bench, and installing disaster-proof operational systems. Throughout this period, we maintain close oversight with early warning systems to ensure the business—and your loan—remains stable."
     },
     {
       question: "How do you ensure SBA compliance?",
@@ -251,7 +251,7 @@ export default function LendersPage() {
 
                 <div className="coop-intro">
                   <p>
-                    At Forhemit Stewardship Management Co., we treat business transitions with the same
+                    At Forhemit, we treat business transitions with the same
                     rigorous preparation required for crisis management.
                   </p>
                   <p>

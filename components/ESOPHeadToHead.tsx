@@ -217,7 +217,7 @@ export default function HeadToHead() {
             <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 9,
               color: "#7dd3fc", letterSpacing: "0.14em",
               textTransform: "uppercase", marginBottom: 4 }}>
-              Forhemit Stewardship Management Co.
+              Forhemit
             </div>
             <div style={{ fontFamily: "'Crimson Pro', serif",
               fontSize: 22, fontWeight: 700, marginBottom: 3 }}>
@@ -687,7 +687,7 @@ export default function HeadToHead() {
         flexWrap: "wrap", gap: 6 }}>
         <span style={{ fontFamily: "'DM Mono', monospace",
           fontSize: 10, color: "#9ca3af" }}>
-          Forhemit Stewardship Management Co. · California PBC · San Francisco, CA
+          Forhemit · California Public Benefit Corporation · San Francisco, CA
         </span>
         <span style={{ fontFamily: "'DM Mono', monospace",
           fontSize: 10, color: "#9ca3af" }}>

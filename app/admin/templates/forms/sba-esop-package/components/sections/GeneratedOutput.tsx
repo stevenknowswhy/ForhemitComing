@@ -58,8 +58,7 @@ export function GeneratedOutput({ inputs, onBack }: GeneratedOutputProps) {
       <div className="pkg-output-section">
         <h2>I. Who Is Forhemit</h2>
         <p>
-          <strong>Forhemit Stewardship Management Co.</strong> is a Public Benefit
-          Corporation (PBC) registered in {inputs.lender.pbcState || "[State]"}.
+          <strong>Forhemit PBC</strong> is a California Public Benefit Corporation.
           Founded by {inputs.forhemit.founderName || "[Founder Name]"}, with{" "}
           {inputs.forhemit.founderYears || "[X]"}+ years of experience with the City
           and County of San Francisco in disaster preparedness and emergency
@@ -210,7 +209,7 @@ export function GeneratedOutput({ inputs, onBack }: GeneratedOutputProps) {
           only.
         </p>
 
-        <h3>Layer 3: Forhemit Stewardship (Non-Fiduciary)</h3>
+        <h3>Layer 3: Forhemit post-close stewardship (Non-Fiduciary)</h3>
         <p>
           COOP maintenance, Early Warning System monitoring, transition
           preparedness. Deliverable-based. No control.
@@ -300,7 +299,7 @@ export function GeneratedOutput({ inputs, onBack }: GeneratedOutputProps) {
         <p>
           <strong>{inputs.forhemit.founderName || "[Founder Name]"}</strong>
           <br />
-          Founder, Forhemit Stewardship Management Co.
+          Founder, Forhemit PBC
           <br />
           {inputs.forhemit.email || "[Email]"}
           {inputs.forhemit.phone && <><br />{inputs.forhemit.phone}</>}

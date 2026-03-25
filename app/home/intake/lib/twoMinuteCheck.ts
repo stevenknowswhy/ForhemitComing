@@ -24,7 +24,7 @@ export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
     id: "headcount",
     question: "Do you have at least 20 people working for you?",
     hint: "Need enough participants for the ownership structure; 15 is absolute minimum, 20 is safe",
-    noThresholdPhrase: "at least 20 employees (15 is an absolute minimum)",
+    noThresholdPhrase: "at least about 20 employees for a viable ESOP bench",
   },
   {
     id: "profitability",

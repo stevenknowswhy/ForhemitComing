@@ -1,4 +1,5 @@
 import { MetadataRoute } from 'next';
+import { mockArticles } from '@/lib/blog-data';
 
 const baseUrl = 'https://forhemit.com';
 
@@ -7,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '',
     '/about',
     '/blog',
+    '/contact',
     '/introduction',
     '/faq',
     '/business-owners',
@@ -25,12 +27,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/opt-in',
   ];
 
+  const blogArticleRoutes = mockArticles.map((a) => `/blog/${a.slug}`);
+
   const lastModified = new Date();
 
-  return routes.map((route) => ({
+  const staticEntries = routes.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified,
-    changeFrequency: route === '' ? 'weekly' : 'monthly',
+    changeFrequency: route === '' ? ('weekly' as const) : ('monthly' as const),
     priority: route === '' ? 1.0 : 0.8,
   }));
+
+  const blogEntries = blogArticleRoutes.map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified,
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticEntries, ...blogEntries];
 }

@@ -15,6 +15,7 @@ const navItems = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/business-owners", label: "For Business Owners" },
+  { href: "/contact", label: "Contact" },
 ];
 
 // Always show this link

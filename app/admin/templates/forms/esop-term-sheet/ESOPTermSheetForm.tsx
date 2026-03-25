@@ -109,7 +109,7 @@ function TermSheetDisplay({
                 marginBottom: 3,
               }}
             >
-              Forhemit Stewardship Management Co.
+              Forhemit PBC
             </div>
           </div>
           <div style={{ textAlign: "right" }}>
@@ -161,7 +161,7 @@ function TermSheetDisplay({
               color: "#9ca3af",
             }}
           >
-            Forhemit Stewardship Management Co. · California PBC · San
+            Forhemit PBC · California Public Benefit Corporation · San
             Francisco, CA
           </span>
           <span

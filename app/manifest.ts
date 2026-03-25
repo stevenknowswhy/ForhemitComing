@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Forhemit PBC',
     short_name: 'Forhemit',
-    description: 'Stewardship Management Organization Built for Continuity, Not Extraction',
+    description: 'Forhemit — California Public Benefit Corporation. ESOP transitions built for continuity, not extraction.',
     start_url: '/',
     display: 'standalone',
     background_color: '#1a1209',

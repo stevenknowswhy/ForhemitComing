@@ -112,9 +112,11 @@ function TaxComparisonCalculator() {
     return () => observer.disconnect();
   }, []);
 
-  const traditionalNet = Math.round(saleAmount * 0.72); // 28% effective tax
-  const esopNet = saleAmount; // 0% with 1042
-  const difference = esopNet - traditionalNet;
+  const federalCapGainsRate = 0.238; // up to 23.8% federal LTCG + NIIT (illustrative)
+  const traditionalNet =
+    Math.round(saleAmount * (1 - federalCapGainsRate) * 100) / 100;
+  const esopNet = saleAmount; // 0% with 1042 (illustrative)
+  const difference = Math.round((esopNet - traditionalNet) * 100) / 100;
 
   return (
     <div ref={ref} className={`tax-calculator ${isVisible ? 'visible' : ''}`}>
@@ -134,7 +136,7 @@ function TaxComparisonCalculator() {
         <div className="result-item traditional">
           <span className="result-label">Traditional Sale</span>
           <span className="result-value">${traditionalNet}M</span>
-          <span className="result-note">After ~28% capital gains</span>
+          <span className="result-note">After up to 23.8% federal capital gains</span>
         </div>
         <div className="result-divider">
           <span className="vs">VS</span>
@@ -274,11 +276,11 @@ export default function WealthManagersPage() {
     },
     {
       question: "What types of businesses work best for this model?",
-      answer: "Ideal candidates have $2M–$10M in EBITDA, stable cash flows, strong company culture, and founders aged 55-70 who care about legacy. Professional services, manufacturing, distribution, and niche service companies tend to transition especially well. The key factor is a founder who values their people and community as much as the purchase price."
+      answer: "Ideal candidates have $3M–$15M in EBITDA, stable cash flows, strong company culture, and founders aged 55-70 who care about legacy. Professional services, manufacturing, distribution, and niche service companies tend to transition especially well. The key factor is a founder who values their people and community as much as the purchase price."
     },
     {
       question: "How is this different from other ESOP advisors?",
-      answer: "Most ESOP advisors focus narrowly on the transaction. We're a stewardship management firm that stays involved for years post-close, ensuring the business thrives under employee ownership. For you, this means the client relationship doesn't end at closing—it evolves into ongoing governance work, employee wealth management, and multi-generational planning."
+      answer: "Most ESOP advisors focus narrowly on the transaction. Forhemit—a California public benefit corporation—stays involved for years post-close, ensuring the business thrives under employee ownership. For you, this means the client relationship doesn't end at closing—it evolves into ongoing governance work, employee wealth management, and multi-generational planning."
     }
   ];
 
@@ -363,12 +365,12 @@ export default function WealthManagersPage() {
                   <div className="flow-arrow">→</div>
                   <div className="flow-step loss">
                     <span className="step-label">Taxes</span>
-                    <span className="step-value">-$2.8M</span>
+                    <span className="step-value">-$2.38M</span>
                   </div>
                   <div className="flow-arrow">→</div>
                   <div className="flow-step final">
                     <span className="step-label">You Manage</span>
-                    <span className="step-value">$7.2M</span>
+                    <span className="step-value">$7.62M</span>
                   </div>
                 </div>
                 <div className="path-consequence">
@@ -494,7 +496,7 @@ export default function WealthManagersPage() {
                 <div className="role-icon">🏛️</div>
                 <h3>Our Role</h3>
                 <ul className="role-list">
-                  <li>Provide acquisition capital</li>
+                  <li>Structure ESOP transaction financing</li>
                   <li>Architect the ESOP structure</li>
                   <li>Install COOP resilience systems</li>
                   <li>Ensure operational continuity</li>
@@ -517,7 +519,7 @@ export default function WealthManagersPage() {
                   and destroy the legacy they spent a lifetime building.
                 </p>
                 <p>
-                  We are the solution you can bring to them. By introducing the Forhemit Stewardship 
+                  We are the solution you can bring to them. By introducing the Forhemit 
                   model, you are no longer just asking about their retirement timeline—you are bringing 
                   a sophisticated structural solution.
                 </p>
@@ -572,7 +574,7 @@ export default function WealthManagersPage() {
               <PartnershipStep
                 step={2}
                 title="Client Opportunity Mapping"
-                description="Together, we identify which of your clients fit the stewardship model—founders aged 55-70 with $2M–$10M EBITDA who value legacy."
+                description="Together, we identify which of your clients fit the stewardship model—founders aged 55-70 with $3M–$15M EBITDA who value legacy."
                 side="right"
               />
               <PartnershipStep
@@ -584,7 +586,7 @@ export default function WealthManagersPage() {
               <PartnershipStep
                 step={4}
                 title="Structure & Execute"
-                description="We handle the ESOP architecture and acquisition. You lead the QRP portfolio construction and personal wealth strategy."
+                description="We handle the ESOP architecture and transaction execution. You lead the QRP portfolio construction and personal wealth strategy."
                 side="right"
               />
               <PartnershipStep
@@ -627,7 +629,7 @@ export default function WealthManagersPage() {
               <h2>Preserve Their Legacy. Secure Your Future.</h2>
               <p className="cta-subtitle">
                 You don&apos;t need to be an ESOP expert to present this option—that&apos;s what we&apos;re here for. 
-                If you have a client generating $2M–$10M in EBITDA who is concerned about taxes, 
+                If you have a client generating $3M–$15M in EBITDA who is concerned about taxes, 
                 employee welfare, and their legacy, let&apos;s talk.
               </p>
               

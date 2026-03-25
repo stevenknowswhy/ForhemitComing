@@ -11,7 +11,7 @@ export const HOME_HERO_FAQ_OWNER: HomeHeroFaqItem[] = [
   },
   {
     q: "How long does the process take?",
-    a: "Most transitions close in 3–4 months. We handle the entire process — valuation, financing, legal, compliance — so nothing stalls.",
+    a: "Most transitions close in about 3–4 months (typically 90–120 days when the file is clean). We handle the entire process — valuation, financing, legal, compliance — so nothing stalls.",
   },
   {
     q: "How can you guarantee the close?",

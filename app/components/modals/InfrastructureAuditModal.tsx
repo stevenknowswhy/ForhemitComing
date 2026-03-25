@@ -220,7 +220,7 @@ Diagnostic: ${diagnostic}`,
       title: "Personnel Grid Capacity",
       description: "What is the current capacity of your Human Grid (total full-time employees)? ESOPs typically require critical mass for tax efficiency.",
       options: [
-        { value: 20, label: "20+ FTEs (Optimal for ESOP mechanics)", points: "20 pts" },
+        { value: 20, label: "About 20 FTEs (optimal for ESOP mechanics)", points: "20 pts" },
         { value: 10, label: "10-19 FTEs (Viable but less efficient)", points: "10 pts" },
         { value: 5, label: "Under 10 FTEs (Below critical mass)", points: "5 pts" },
       ],

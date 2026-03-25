@@ -1,6 +1,6 @@
 # Forhemit PBC - Coming Soon
 
-A modern, responsive landing page and recruitment portal for Forhemit PBC, a private equity firm.
+A modern, responsive site for **Forhemit**, a California Public Benefit Corporation focused on ESOP transitions and post-close stewardship.
 
 ## 🚀 Live Demo
 
@@ -8,7 +8,7 @@ Visit the live site: [https://forhemit.com](https://forhemit.com) *(update with 
 
 ## 📋 Project Overview
 
-Forhemit PBC is a private equity firm focused on acquiring and operating small to mid-sized businesses. This project includes:
+Forhemit PBC structures employee-ownership transitions for small and mid-sized businesses. This project includes:
 
 - **Landing Page** - Minimalist dark-themed homepage with recruitment modal
 - **About Page** - Company philosophy and value proposition

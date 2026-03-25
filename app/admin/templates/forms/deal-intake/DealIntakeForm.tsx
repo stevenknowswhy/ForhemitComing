@@ -253,7 +253,7 @@ const DealIntakeForm = forwardRef<
           {/* Header */}
           <div className="di-header">
             <div className="di-header-label">
-              Forhemit Stewardship Management Co.
+              Forhemit PBC
             </div>
             <h1>Deal intake — illustrative credit memo</h1>
             <p>

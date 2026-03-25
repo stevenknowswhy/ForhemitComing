@@ -148,7 +148,7 @@ export default function AccountingFirms() {
                 </div>
                 <div className="reality-content">
                   <h3>Your Client Loses to Taxes</h3>
-                  <p>In a traditional sale, founders can lose up to 23.8%+ of their proceeds to federal capital gains taxes overnight.</p>
+                  <p>In a traditional sale, founders can pay up to 23.8% in federal capital gains taxes on their proceeds (long-term rate plus net investment income tax, before state taxes).</p>
                 </div>
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function AccountingFirms() {
               <span className="section-eyebrow">The Revenue Opportunity</span>
               <h2>The CPA Practice Multiplier: 5-Year Revenue Comparison</h2>
               <p className="multiplier-context">
-                Let&apos;s look at a typical 15-person business with $10M in revenue in the San Francisco market.
+                Let&apos;s look at a typical 20-employee business with $10M in revenue in the San Francisco market.
               </p>
             </div>
 
@@ -285,8 +285,8 @@ export default function AccountingFirms() {
             <div className="moat-header" data-animate="fade-up">
               <h2>Build a Moat Around Your Best Clients</h2>
               <p>
-                We are a <strong>Stewardship Management Company</strong>. We partner with businesses to transition them into 
-                Employee Ownership (ESOPs) using a framework designed for continuity. By introducing this model to your clients, 
+                <strong>Forhemit</strong> is a California Public Benefit Corporation. We partner with businesses to transition them into 
+                employee ownership (ESOPs) using a framework designed for continuity. By introducing this model to your clients, 
                 you don&apos;t just facilitate a sale; you <strong>secure your future role as their indispensable advisor</strong>.
               </p>
             </div>

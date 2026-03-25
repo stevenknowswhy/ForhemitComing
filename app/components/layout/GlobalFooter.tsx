@@ -3,12 +3,14 @@
 import { useState, Suspense, lazy } from "react";
 import { usePathname } from "next/navigation";
 import { Footer } from "./Footer";
+import SitemapModal from "../modals/SitemapModal";
 
-// Lazy load modals for better performance (code splitting)
-const LegalModal = lazy(() => import("../modals/LegalModal").then((mod) => ({ 
-  default: mod.LegalModal 
-})));
-const SitemapModal = lazy(() => import("../modals/SitemapModal"));
+// Lazy load legal modal only (sitemap stays eager so the footer control works on first click)
+const LegalModal = lazy(() =>
+  import("../modals/LegalModal").then((mod) => ({
+    default: mod.LegalModal,
+  })),
+);
 
 export function GlobalFooter() {
   const [showLegalModal, setShowLegalModal] = useState(false);
@@ -46,11 +48,7 @@ export function GlobalFooter() {
           <LegalModal isOpen={showLegalModal} onClose={() => setShowLegalModal(false)} />
         </Suspense>
       )}
-      {showSitemapModal && (
-        <Suspense fallback={null}>
-          <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
-        </Suspense>
-      )}
+      <SitemapModal isOpen={showSitemapModal} onClose={() => setShowSitemapModal(false)} />
     </>
   );
 }

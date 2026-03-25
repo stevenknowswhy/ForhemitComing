@@ -62,9 +62,8 @@ export function BenefitsSection() {
             </div>
             <div className="benefit-row-content">
               <blockquote className="benefit-quote">
-                &quot;We offer a proven, stewardship-managed, employee-ownership transition path that
-                preserves client relationships and community jobs, with our Stewardship Management
-                approach providing long-term fiduciary partnership.&quot;
+                &quot;We offer a proven Forhemit stewardship transition path to employee ownership that
+                preserves client relationships and community jobs, with long-term partnership beyond the closing date.&quot;
               </blockquote>
             </div>
             <div className="benefit-row-result">

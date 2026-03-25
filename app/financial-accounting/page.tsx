@@ -82,8 +82,8 @@ export default function FinancialAccounting() {
                       <p className="stat-description">of employer businesses are owned by people 55 and older</p>
                     </div>
                     <div className="stat-card">
-                      <div className="stat-number">30%</div>
-                      <p className="stat-description">of sale proceeds can be lost to capital gains taxes</p>
+                      <div className="stat-number">23.8%</div>
+                      <p className="stat-description">federal long-term capital gains rate at the top bracket (before state taxes)</p>
                     </div>
                   </div>
 
@@ -99,7 +99,7 @@ export default function FinancialAccounting() {
                   <div className="content-block highlight-block">
                     <h3>The Stewardship Model: A Better Path for Your Clients — and for You</h3>
                     <p>
-                      Stewardship Management Company works with business owners to transition their companies into employee ownership through ESOPs (Employee Stock Ownership Plans). Our approach isn&apos;t just about closing a transaction. It&apos;s about building a transition that protects the seller&apos;s employees, preserves the company&apos;s independence, and — critically — unlocks a tax structure most advisors have never offered their clients.
+                      Forhemit, a California Public Benefit Corporation, works with business owners to transition their companies into employee ownership through ESOPs (Employee Stock Ownership Plans). Our approach isn&apos;t just about closing a transaction. It&apos;s about building a transition that protects the seller&apos;s employees, preserves the company&apos;s independence, and — critically — unlocks a tax structure most advisors have never offered their clients.
                     </p>
                   </div>
 

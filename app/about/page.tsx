@@ -6,6 +6,7 @@ import "./about-page.css";
 // Section components
 import { HeroSection } from "./_components/sections/HeroSection";
 import { MissionSection } from "./_components/sections/MissionSection";
+import { EvolutionSection } from "./_components/sections/EvolutionSection";
 import { WhyWeExistSection } from "./_components/sections/WhyWeExistSection";
 import { PBCSection } from "./_components/sections/PBCSection";
 import { FAQSection } from "./_components/sections/FAQSection";
@@ -23,6 +24,7 @@ export default function AboutPage() {
         <HeroSection />
         <PBCSection />
         <MissionSection />
+        <EvolutionSection />
         <WhyWeExistSection />
         <FAQSection />
         <CTASection />

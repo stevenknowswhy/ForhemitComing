@@ -26,10 +26,10 @@ export default function TermsPage() {
 
               <h2>2. Description of Services</h2>
               <p>
-                Forhemit PBC provides business transition consulting services, specializing 
-                in Employee Stock Ownership Plan (ESOP) implementation and stewardship management. 
-                Our website provides information about our services, educational resources, and 
-                channels for contacting us.
+                Forhemit PBC (a California Public Benefit Corporation) provides business transition
+                consulting services, specializing in Employee Stock Ownership Plan (ESOP)
+                implementation and post-close stewardship. Our website provides information about our
+                services, educational resources, and channels for contacting us.
               </p>
 
               <h2>3. Use of Services</h2>
@@ -79,7 +79,7 @@ export default function TermsPage() {
 
               <h2>7. Limitation of Liability</h2>
               <p>
-                TO THE MAXIMUM EXTENT PERMITTED BY LAW, FORHEMIT CAPITAL AND ITS OFFICERS, DIRECTORS, 
+                TO THE MAXIMUM EXTENT PERMITTED BY LAW, FORHEMIT PBC AND ITS OFFICERS, DIRECTORS, 
                 EMPLOYEES, AND AGENTS SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
                 CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING OUT OF OR RELATING TO YOUR USE OF OUR 
                 WEBSITE OR SERVICES.

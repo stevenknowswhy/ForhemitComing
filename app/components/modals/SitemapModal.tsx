@@ -28,10 +28,12 @@ const sitemapSections: SitemapSection[] = [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
       { label: "Blog", href: "/blog" },
+      { label: "Contact", href: "/contact" },
       { label: "The Exit Crisis", href: "/the-exit-crisis" },
       { label: "FAQ", href: "/faq" },
       { label: "Beyond the Balance Sheet", href: "/beyond-the-balance-sheet" },
-      { label: "Contact / Introduction", href: "/introduction" },
+      { label: "Four Month Path", href: "/four-month-path" },
+      { label: "Introduction Hub", href: "/introduction" },
     ],
   },
   {
