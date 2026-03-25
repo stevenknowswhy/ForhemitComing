@@ -165,10 +165,14 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         aria-label="Compare your exit options"
       >
         <div className="hps-inner">
-          <p className="hps-eyebrow">
-            <span className="hps-eyebrow-line" aria-hidden />
-            Compare your options
-          </p>
+          <div className="hps-section-header">
+            <span className="hps-section-number">01 — Compare</span>
+            <p className="hps-eyebrow">
+              <span className="hps-eyebrow-line" aria-hidden />
+              Exit Options
+            </p>
+            <div className="hps-section-divider" />
+          </div>
           <h2 className="hps-headline">Three ways out. Only one that works.</h2>
           <p className="hps-sub">
             Most owners don&apos;t realize there&apos;s a path that preserves their legacy, pays fair
@@ -211,10 +215,14 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         aria-label="Cost of waiting"
       >
         <div className="hps-inner">
-          <p className="hps-eyebrow">
-            <span className="hps-eyebrow-line" aria-hidden />
-            The cost of waiting
-          </p>
+          <div className="hps-section-header">
+            <span className="hps-section-number">02 — Urgency</span>
+            <p className="hps-eyebrow">
+              <span className="hps-eyebrow-line" aria-hidden />
+              Cost of Waiting
+            </p>
+            <div className="hps-section-divider" />
+          </div>
           <h2 className="hps-headline">
             Every month you delay, the market gets harder.
           </h2>
@@ -253,10 +261,14 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         aria-label="Who this is not for"
       >
         <div className="hps-inner">
-          <p className="hps-eyebrow">
-            <span className="hps-eyebrow-line" aria-hidden />
-            Full transparency
-          </p>
+          <div className="hps-section-header">
+            <span className="hps-section-number">03 — Filter</span>
+            <p className="hps-eyebrow">
+              <span className="hps-eyebrow-line" aria-hidden />
+              Full Transparency
+            </p>
+            <div className="hps-section-divider" />
+          </div>
           <h2 className="hps-headline">This path isn&apos;t for everyone.</h2>
           <p className="hps-sub">
             An ESOP isn&apos;t a magic wand. To be honest about who we can help, here&apos;s who
