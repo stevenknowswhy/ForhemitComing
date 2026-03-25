@@ -505,9 +505,9 @@
   align-items: flex-start;
   gap: 0.5rem;
   font-family: var(--font-outfit, system-ui, sans-serif);
-  font-size: 0.85rem;
-  font-weight: 300;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
   color: var(--hch-ink-soft);
   padding: 0.35rem 0;
   border-bottom: 1px solid var(--hch-line);
@@ -551,7 +551,7 @@
 
 .hps-card-summary {
   font-family: var(--font-outfit, system-ui, sans-serif);
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   font-weight: 500;
   letter-spacing: 0.06em;
   color: var(--hch-ink);
@@ -666,10 +666,10 @@
 
 .hps-stat-detail {
   font-family: var(--font-outfit, system-ui, sans-serif);
-  font-size: 0.8rem;
-  font-weight: 300;
-  color: var(--hch-ink-muted);
-  line-height: 1.55;
+  font-size: 0.98rem;
+  font-weight: 400;
+  color: var(--hch-ink-soft);
+  line-height: 1.6;
 }
 
 /* ── CTA Shell ── */
