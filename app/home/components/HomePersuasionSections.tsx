@@ -8,9 +8,10 @@
  * - Omission Bias ("Cost of Waiting")
  * - Prattfall Effect ("Who This Is Not For")
  * - Pre-Suasion trust anchors
- *
- * Max ~380 lines (fits within 400-line component target)
+ * - Enhanced micro-interactions from business-owners patterns
  */
+
+import { useEffect, useRef, useState } from "react";
 
 export type HomePersuasionSectionsProps = {
   onStartTwoMinuteCheck?: () => void;
@@ -86,11 +87,11 @@ const WAITING_STATS = [
 
 /* ── Not-For-You qualifiers (Prattfall) ── */
 const NOT_FOR_YOU = [
-  "Revenue under $3M annually",
-  "Pre-profit or revenue declining",
-  "Fewer than 15 employees",
-  "Need cash within 30 days",
-  "Unwilling to stay 12 months post-close",
+  { text: "Revenue under $3M annually", delay: 0 },
+  { text: "Pre-profit or revenue declining", delay: 1 },
+  { text: "Fewer than 15 employees", delay: 2 },
+  { text: "Need cash within 30 days", delay: 3 },
+  { text: "Unwilling to stay 12 months post-close", delay: 4 },
 ] as const;
 
 /* ── Trust anchors (Pre-Suasion) ── */
@@ -101,14 +102,53 @@ const TRUST_ANCHORS = [
   { icon: "🏦", text: "Lender-Ready Packaging" },
 ] as const;
 
+/* ── Intersection Observer hook for reveal animations ── */
+function useRevealObserver() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isRevealed, setIsRevealed] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, isRevealed };
+}
+
 export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasionSectionsProps) {
+  const trustRef = useRevealObserver();
+  const compareRef = useRevealObserver();
+  const waitingRef = useRevealObserver();
+  const prattfallRef = useRevealObserver();
+
   return (
     <div className="hps-wrap">
       {/* ── 1. Trust Anchors (Pre-Suasion) ── */}
-      <section className="hps-trust" aria-label="Trust indicators">
+      <section 
+        ref={trustRef.ref}
+        className={`hps-trust ${trustRef.isRevealed ? "hps-revealed" : ""}`} 
+        aria-label="Trust indicators"
+      >
         <div className="hps-trust-row">
-          {TRUST_ANCHORS.map((a) => (
-            <span key={a.text} className="hps-trust-badge">
+          {TRUST_ANCHORS.map((a, i) => (
+            <span 
+              key={a.text} 
+              className="hps-trust-badge"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
               <span className="hps-trust-icon" aria-hidden>
                 {a.icon}
               </span>
@@ -119,7 +159,11 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
       </section>
 
       {/* ── 2. Decoy Effect — Exit Path Comparison ── */}
-      <section className="hps-compare" aria-label="Compare your exit options">
+      <section 
+        ref={compareRef.ref}
+        className={`hps-compare ${compareRef.isRevealed ? "hps-revealed" : ""}`} 
+        aria-label="Compare your exit options"
+      >
         <div className="hps-inner">
           <p className="hps-eyebrow">
             <span className="hps-eyebrow-line" aria-hidden />
@@ -132,24 +176,28 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
           </p>
 
           <div className="hps-cards">
-            {EXIT_PATHS.map((path) => (
+            {EXIT_PATHS.map((path, i) => (
               <div
                 key={path.id}
-                className={`hps-card ${path.featured ? "hps-card-featured" : ""}`}
+                className={`hps-glow-shell ${path.featured ? "hps-glow-shell--featured" : ""}`}
+                style={{ animationDelay: `${i * 0.15}s` }}
               >
-                <span className={`hps-card-tag ${path.tagClass}`}>{path.tag}</span>
-                <h3 className="hps-card-title">{path.label}</h3>
-                <ul className="hps-card-list">
-                  {path.points.map((p) => (
-                    <li key={p} className="hps-card-item">
-                      <span className="hps-card-bullet" aria-hidden>
-                        {path.featured ? "✓" : "✗"}
-                      </span>
-                      {p}
-                    </li>
-                  ))}
-                </ul>
-                <p className="hps-card-summary">{path.summary}</p>
+                <div className="hps-glow-shell__glow" aria-hidden />
+                <div className={`hps-card ${path.featured ? "hps-card-featured" : ""}`}>
+                  <span className={`hps-card-tag ${path.tagClass}`}>{path.tag}</span>
+                  <h3 className="hps-card-title">{path.label}</h3>
+                  <ul className="hps-card-list">
+                    {path.points.map((p) => (
+                      <li key={p} className="hps-card-item">
+                        <span className="hps-card-bullet" aria-hidden>
+                          {path.featured ? "✓" : "✗"}
+                        </span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="hps-card-summary">{path.summary}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -157,7 +205,11 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
       </section>
 
       {/* ── 3. Omission Bias — Cost of Waiting ── */}
-      <section className="hps-waiting" aria-label="Cost of waiting">
+      <section 
+        ref={waitingRef.ref}
+        className={`hps-waiting ${waitingRef.isRevealed ? "hps-revealed" : ""}`} 
+        aria-label="Cost of waiting"
+      >
         <div className="hps-inner">
           <p className="hps-eyebrow">
             <span className="hps-eyebrow-line" aria-hidden />
@@ -168,8 +220,12 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
           </h2>
 
           <div className="hps-stats">
-            {WAITING_STATS.map((s) => (
-              <div key={s.figure} className="hps-stat">
+            {WAITING_STATS.map((s, i) => (
+              <div 
+                key={s.figure} 
+                className="hps-stat"
+                style={{ animationDelay: `${i * 0.15}s` }}
+              >
                 <span className="hps-stat-figure">{s.figure}</span>
                 <span className="hps-stat-label">{s.label}</span>
                 <span className="hps-stat-detail">{s.detail}</span>
@@ -177,18 +233,25 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             ))}
           </div>
 
-          <button
-            type="button"
-            className="hps-cta"
-            onClick={onStartTwoMinuteCheck}
-          >
-            Claim Your Free Assessment →
-          </button>
+          <span className="hps-cta-shell">
+            <span className="hps-cta-shell__glow" aria-hidden />
+            <button
+              type="button"
+              className="hps-cta"
+              onClick={onStartTwoMinuteCheck}
+            >
+              Claim Your Free Assessment →
+            </button>
+          </span>
         </div>
       </section>
 
       {/* ── 4. Prattfall Effect — "Who This Is NOT For" ── */}
-      <section className="hps-prattfall" aria-label="Who this is not for">
+      <section 
+        ref={prattfallRef.ref}
+        className={`hps-prattfall ${prattfallRef.isRevealed ? "hps-revealed" : ""}`} 
+        aria-label="Who this is not for"
+      >
         <div className="hps-inner">
           <p className="hps-eyebrow">
             <span className="hps-eyebrow-line" aria-hidden />
@@ -200,29 +263,39 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             this process is <em>not</em> designed for:
           </p>
 
-          <ul className="hps-nfy-list">
-            {NOT_FOR_YOU.map((item) => (
-              <li key={item} className="hps-nfy-item">
-                <span className="hps-nfy-x" aria-hidden>
-                  ✗
-                </span>
-                {item}
-              </li>
-            ))}
-          </ul>
+          <div className="hps-nfy-glow-shell">
+            <div className="hps-nfy-glow-shell__glow" aria-hidden />
+            <ul className="hps-nfy-list">
+              {NOT_FOR_YOU.map((item) => (
+                <li 
+                  key={item.text} 
+                  className="hps-nfy-item"
+                  style={{ animationDelay: `${item.delay * 0.1}s` }}
+                >
+                  <span className="hps-nfy-x" aria-hidden>
+                    ✗
+                  </span>
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </div>
 
           <p className="hps-nfy-coda">
             If none of that describes you, you&apos;re likely an excellent fit. Start with our free
             2-minute assessment to find out.
           </p>
 
-          <button
-            type="button"
-            className="hps-cta hps-cta-outline"
-            onClick={onStartTwoMinuteCheck}
-          >
-            Take the 2-Minute Check →
-          </button>
+          <span className="hps-cta-shell">
+            <span className="hps-cta-shell__glow" aria-hidden />
+            <button
+              type="button"
+              className="hps-cta hps-cta-outline"
+              onClick={onStartTwoMinuteCheck}
+            >
+              Take the 2-Minute Check →
+            </button>
+          </span>
         </div>
       </section>
     </div>
