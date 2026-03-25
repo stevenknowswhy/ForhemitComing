@@ -472,12 +472,12 @@
 }
 
 .hps-tag-green-pill {
-  color: #f5f0e8;
-  background: linear-gradient(135deg, #4a6e2a 0%, #5a8a4a 100%);
-  border: 1px solid rgba(74, 110, 42, 0.3);
-  box-shadow: 0 2px 8px rgba(74, 110, 42, 0.2);
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  color: #2d4a1e;
+  background: rgba(90, 138, 74, 0.15);
+  border: 1px solid rgba(90, 138, 74, 0.35);
+  box-shadow: 0 1px 4px rgba(90, 138, 74, 0.1);
+  font-weight: 500;
+  letter-spacing: 0.1em;
   padding: 0.3rem 0.8rem;
 }
 
@@ -540,8 +540,8 @@
 }
 
 .hps-card-bullet--green {
-  color: #4a6e2a !important;
-  font-weight: 600;
+  color: #5a8a4a !important;
+  font-weight: 500;
 }
 
 .hps-card:not(.hps-card-featured) .hps-card-bullet {
@@ -1040,13 +1040,14 @@
 }
 
 [data-theme="dark"] .hps-card-bullet--green {
-  color: #6fcf6f !important;
+  color: #7dbd6e !important;
 }
 
 [data-theme="dark"] .hps-tag-green-pill {
-  background: linear-gradient(135deg, #3d5c24 0%, #4a6e2a 100%);
-  border-color: rgba(111, 207, 111, 0.2);
-  box-shadow: 0 2px 8px rgba(74, 110, 42, 0.3);
+  color: #a8d99a;
+  background: rgba(90, 138, 74, 0.2);
+  border-color: rgba(125, 189, 110, 0.3);
+  box-shadow: 0 1px 4px rgba(90, 138, 74, 0.15);
 }
 
 [data-theme="dark"] .hps-nfy-x {
