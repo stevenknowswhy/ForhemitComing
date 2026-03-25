@@ -28,10 +28,10 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
               Employee ownership transitions · 3–4 month close
             </p>
 
-            <h1 className="hch-hero-headline">Sell Your Business Today</h1>
+            <h1 className="hch-hero-headline">Your Exit Is Ready</h1>
 
             <p className="hch-hero-sub">
-              Have a clear path to close in as little as four months
+              Claim your tax-free exit and close in as little as four months
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
@@ -43,12 +43,16 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
                   else onStartIntake?.("owner");
                 }}
               >
-                Start My 2-Minute Check
+                Unlock My Free Assessment
               </button>
               <Link href="/brokers" className="hch-hero-cta hch-hero-cta-secondary">
                 I&apos;m a Broker →
               </Link>
             </div>
+
+            <p className="hch-hero-trust-note">
+              🔒 Confidential · No cost · Takes 2 minutes
+            </p>
           </div>
         </div>
       </section>

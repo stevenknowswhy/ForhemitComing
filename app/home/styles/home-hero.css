@@ -198,6 +198,15 @@ a.hch-path-cta {
   border-color: var(--border-accent);
 }
 
+.hch-hero-trust-note {
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 0.62rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--hch-ink-faint);
+  margin-top: 1rem;
+}
+
 /* ═══════════════════════════════════
    SECTION 2 — Path selection ("I am a …")
    ═══════════════════════════════════ */

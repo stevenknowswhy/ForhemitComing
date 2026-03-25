@@ -14,6 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/business-owners',
     '/four-month-path',
     '/brokers',
+    '/broker-screening',
     '/lenders',
     '/accounting-firms',
     '/legal-practices',

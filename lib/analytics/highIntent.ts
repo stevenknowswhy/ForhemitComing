@@ -35,3 +35,11 @@ export function trackBrokerFirstCallChecklistPdfDownload(surface: string): void 
 export function trackScheduleCallClick(surface: string): void {
   trackHighIntentEvent("schedule_call_click", { surface });
 }
+
+export function trackTwoMinuteCheckClick(surface: string): void {
+  trackHighIntentEvent("two_minute_check_click", { surface });
+}
+
+export function trackBeginIntakeClick(surface: string, path?: string): void {
+  trackHighIntentEvent("begin_intake_click", { surface, path });
+}

@@ -16,7 +16,15 @@ type Props = {
   onPassProceed: () => void;
 };
 
-type Phase = "questions" | "result";
+type Phase = "questions" | "analyzing" | "result";
+
+/** Hard Effect — rotating analysis labels to show perceived work */
+const ANALYSIS_LABELS = [
+  "Evaluating tax advantages…",
+  "Analyzing EBITDA multiples…",
+  "Checking lender eligibility…",
+  "Generating custom ESOP assessment…",
+] as const;
 
 export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
   const [idx, setIdx] = useState(0);
@@ -27,6 +35,7 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
     Record<TwoMinuteCheckStepId, "yes" | "no">
   > | null>(null);
   const [phase, setPhase] = useState<Phase>("questions");
+  const [analysisIdx, setAnalysisIdx] = useState(0);
 
   const step: TwoMinuteCheckStep | undefined = TWO_MINUTE_CHECK_STEPS[idx];
 
@@ -35,16 +44,33 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
     setSel(answers[step.id] ?? null);
   }, [idx, step, answers]);
 
+  /* Hard Effect — cycle analysis labels then transition to result */
+  useEffect(() => {
+    if (phase !== "analyzing") return;
+    const labelTimer = setInterval(() => {
+      setAnalysisIdx((prev) => {
+        if (prev >= ANALYSIS_LABELS.length - 1) {
+          clearInterval(labelTimer);
+          setTimeout(() => setPhase("result"), 600);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 750);
+    return () => clearInterval(labelTimer);
+  }, [phase]);
+
   function reset() {
     setIdx(0);
     setSel(null);
     setAnswers({});
     setResultAnswers(null);
     setPhase("questions");
+    setAnalysisIdx(0);
   }
 
   const back = () => {
-    if (phase === "result") {
+    if (phase === "result" || phase === "analyzing") {
       reset();
       return;
     }
@@ -61,7 +87,8 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
     if (idx >= TWO_MINUTE_CHECK_STEPS.length - 1) {
       setAnswers(nextAnswers);
       setResultAnswers(nextAnswers);
-      setPhase("result");
+      setAnalysisIdx(0);
+      setPhase("analyzing");
       return;
     }
     setAnswers(nextAnswers);
@@ -73,7 +100,13 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
   const pendingFirstNo = phase === "result" ? getFirstNoStep(outcome) : null;
 
   const headerStepLabel =
-    phase === "result" ? "Complete" : step ? `${idx + 1} / ${TWO_MINUTE_CHECK_STEPS.length}` : "";
+    phase === "result"
+      ? "Complete"
+      : phase === "analyzing"
+        ? "Analyzing"
+        : step
+          ? `${idx + 1} / ${TWO_MINUTE_CHECK_STEPS.length}`
+          : "";
 
   const isLastStep = idx === TWO_MINUTE_CHECK_STEPS.length - 1;
   const btnLabel = isLastStep ? "See results" : "Continue";
@@ -136,15 +169,29 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
           </div>
         )}
 
+        {/* ── Hard Effect: Analyzing animation ── */}
+        {phase === "analyzing" && (
+          <div className="ci-frame ci-load">
+            <div className="ci-load-line" />
+            <p className="ci-load-label">Analyzing your business…</p>
+            <p className="ci-load-sub" key={analysisIdx}>
+              {ANALYSIS_LABELS[analysisIdx]}
+            </p>
+          </div>
+        )}
+
         {phase === "result" && (
           <div className="ci-frame ci-result">
             <p className="ci-r-type">2-Minute Check</p>
             {passed ? (
               <>
-                <h2 className="ci-r-headline">Congratulations — you&apos;re a strong fit.</h2>
+                {/* Peak-End Rule: celebratory result */}
+                <div className="ci-r-check" aria-hidden>✓</div>
+                <h2 className="ci-r-headline">You qualify for a tax-free exit.</h2>
                 <p className="ci-r-sub">
-                  Based on your answers, you could likely close in about four months. Next, see the same
-                  month-by-month path we use with owners—plain English, no surprises.
+                  Based on your answers, your business is an excellent fit for an ESOP transition.
+                  You could close in about four months. Next, see the same
+                  month-by-month path we use with owners — plain English, no surprises.
                 </p>
                 <div className="ci-r-actions">
                   <button type="button" className="ci-cta-primary" onClick={onPassProceed}>

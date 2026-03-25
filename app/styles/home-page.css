@@ -2,6 +2,7 @@
 @import "./theme.css";
 @import "./variables.css";
 @import "../home/styles/home-hero.css";
+@import "../home/styles/home-persuasion.css";
 @import "../home/intake/styles/classification-intake-modal.css";
 @import "../components/forms/early-access-form.css";
 @import "../components/modals/legal-modal.css";

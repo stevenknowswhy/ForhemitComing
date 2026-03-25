@@ -48,6 +48,7 @@ const sitemapSections: SitemapSection[] = [
     links: [
       { label: "Accounting Firms", href: "/accounting-firms" },
       { label: "Brokers", href: "/brokers" },
+      { label: "Broker Deal Screening", href: "/broker-screening" },
       { label: "Lenders", href: "/lenders" },
       { label: "Appraisers", href: "/appraisers" },
       { label: "Legal Practices", href: "/legal-practices" },

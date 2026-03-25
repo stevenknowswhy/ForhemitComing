@@ -1025,6 +1025,24 @@
   margin: 0 auto;
 }
 
+.fmp-final-cta-actions--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 40rem;
+}
+
+.fmp-final-cta-actions--row .fmp-cta-shell {
+  flex: 1 1 0;
+  min-width: 16rem;
+  max-width: 20rem;
+}
+
+.fmp-final-cta-actions--secondary {
+  margin-top: 0.85rem;
+}
+
 .fmp-btn {
   display: block;
   width: 100%;

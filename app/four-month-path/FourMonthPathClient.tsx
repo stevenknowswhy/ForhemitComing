@@ -1,5 +1,6 @@
 "use client";
 
+import { lazy, Suspense, useState } from "react";
 import {
   AfterCloseSection,
   CheckpointsSection,
@@ -20,13 +21,32 @@ import {
   WhyForhemitSection,
 } from "./components";
 import { FOUR_CHECKPOINTS, FOUR_PHASE_BLOCKS } from "./constants";
+import { ConfidentialIntakeModal } from "@/app/business-owners/components";
 import "@/app/home/intake/styles/classification-intake-modal.css";
 import "./styles/four-month-path.css";
 import "./styles/fee-transparency.css";
 import "./styles/deal-comparison.css";
 import "./styles/sections.css";
 
+const TwoMinuteCheckModal = lazy(() =>
+  import("@/app/home/intake").then((mod) => ({ default: mod.TwoMinuteCheckModal }))
+);
+
 export function FourMonthPathClient() {
+  const [showTwoMinuteCheck, setShowTwoMinuteCheck] = useState(false);
+  const [showIntake, setShowIntake] = useState(false);
+  const [intakePath, setIntakePath] = useState<"nda" | "light" | null>(null);
+
+  const openIntake = (path?: "nda" | "light") => {
+    setIntakePath(path ?? null);
+    setShowIntake(true);
+  };
+
+  const handleTwoMinuteCheckPass = () => {
+    // User passed the check, stay on this page (already on four-month-path)
+    setShowTwoMinuteCheck(false);
+  };
+
   return (
     <main className="fmp-page">
       <div className="fmp-bg" aria-hidden />
@@ -86,13 +106,32 @@ export function FourMonthPathClient() {
 
           <FirstCallSection />
 
-          <FinalCtaSection />
+          <FinalCtaSection
+            onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)}
+            onBeginIntake={() => openIntake("nda")}
+          />
         </div>
 
         <div className="fmp-sidebar-col">
           <FloatingNav />
         </div>
       </div>
+
+      {showTwoMinuteCheck && (
+        <Suspense fallback={null}>
+          <TwoMinuteCheckModal
+            isOpen={showTwoMinuteCheck}
+            onClose={() => setShowTwoMinuteCheck(false)}
+            onPassProceed={handleTwoMinuteCheckPass}
+          />
+        </Suspense>
+      )}
+
+      <ConfidentialIntakeModal
+        isOpen={showIntake}
+        onClose={() => setShowIntake(false)}
+        defaultPath={intakePath}
+      />
     </main>
   );
 }

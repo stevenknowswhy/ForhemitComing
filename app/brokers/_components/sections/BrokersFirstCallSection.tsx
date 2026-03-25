@@ -1,6 +1,11 @@
+"use client";
+
+import { useState } from "react";
 import { BrokerFirstCallChecklistPdfLink } from "../BrokerFirstCallChecklistPdfLink";
+import { BrokerScreeningModal } from "../BrokerScreeningModal";
 
 export function BrokersFirstCallSection() {
+  const [isScreeningOpen, setIsScreeningOpen] = useState(false);
   return (
     <section id="brk-first-call" className="fmp-section" aria-labelledby="brk-first-call-heading">
       <h2 id="brk-first-call-heading" className="fmp-section-title">
@@ -71,6 +76,31 @@ export function BrokersFirstCallSection() {
           </BrokerFirstCallChecklistPdfLink>
         </span>
       </div>
+
+      <div className="brk-first-call-checklist brk-screening-checklist" style={{ marginTop: "16px" }}>
+        <p className="brk-first-call-checklist-note">
+          Want to pre-qualify your client before reaching out?
+        </p>
+        <span className="fmp-cta-shell fmp-cta-shell--block">
+          <span className="fmp-cta-shell__glow" aria-hidden />
+          <button
+            className="fmp-btn fmp-btn-primary"
+            onClick={() => setIsScreeningOpen(true)}
+          >
+            Open client qualification form
+          </button>
+        </span>
+        <p className="brk-screening-description">
+          This is the same checklist Forhemit uses internally to evaluate every deal submission. 
+          Work through it with your client&apos;s listing in front of you — no personal information 
+          is collected or stored. Use this for transparency and clarity on what we look for.
+        </p>
+      </div>
+
+      <BrokerScreeningModal
+        isOpen={isScreeningOpen}
+        onClose={() => setIsScreeningOpen(false)}
+      />
     </section>
   );
 }

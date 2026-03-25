@@ -4,7 +4,7 @@ import { useState, useEffect, Suspense, lazy } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
 import { ClientOnly } from "@/components/ClientOnly";
-import { HomeHeroSection } from "./home";
+import { HomeHeroSection, HomePersuasionSections } from "./home";
 import type { IntakeRole } from "./home/intake";
 import "./styles/home-page.css";
 
@@ -50,6 +50,10 @@ function HomeContent() {
           setClassificationRole(role);
           setShowClassificationIntake(true);
         }}
+      />
+
+      <HomePersuasionSections
+        onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)}
       />
 
       {showEmailInput && (

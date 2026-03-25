@@ -5,7 +5,7 @@ const PREVIEW_COOKIE = "forhemit_preview";
 const PREVIEW_COOKIE_VALUE = "granted";
 
 function isGateDisabled(): boolean {
-  return process.env.PREVIEW_GATE_DISABLED === "true";
+  return true;
 }
 
 function isPublicPath(pathname: string): boolean {

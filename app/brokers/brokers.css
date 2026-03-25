@@ -249,6 +249,31 @@
   width: 100%;
 }
 
+/* Broker Screening Checklist */
+.brk-screening-checklist {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.brk-screening-description {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.brk-screening-checklist .fmp-btn-primary {
+  background: var(--color-brand);
+  color: var(--bg-primary);
+}
+
+.brk-screening-checklist .fmp-btn-primary:hover {
+  background: var(--color-brand-hover);
+}
+
 #brk-workload .brk-workload-answer-group {
   transition: box-shadow 0.35s ease, border-color 0.28s ease;
 }

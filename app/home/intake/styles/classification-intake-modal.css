@@ -373,12 +373,49 @@
   text-transform: uppercase;
   color: var(--ci-muted);
   line-height: 1.6;
+  animation: ciFadeIn 0.35s ease both;
+}
+
+@keyframes ciFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Result */
 .ci-result {
   width: 100%;
   max-width: 620px;
+}
+
+.ci-r-check {
+  width: 48px;
+  height: 48px;
+  border: 2px solid var(--ci-brass);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--ci-brass);
+  margin-bottom: 1.25rem;
+  animation: ciCheckIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes ciCheckIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .ci-r-type {
