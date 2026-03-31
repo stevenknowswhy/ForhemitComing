@@ -21,6 +21,9 @@ const navItems = [
 // Always show this link
 const permanentLinks = [{ href: "/brokers", label: "Brokers" }];
 
+/** In dev, prefetching every in-view route can saturate Turbopack and feel like a hang. */
+const navPrefetch = process.env.NODE_ENV === "production";
+
 export function Navigation({ variant = "dark" }: NavigationProps) {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -119,6 +122,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
             <Link
               key={item.href}
               href={item.href}
+              prefetch={navPrefetch}
               className="nav-dropdown-item"
               onClick={() => setIsOpen(false)}
             >

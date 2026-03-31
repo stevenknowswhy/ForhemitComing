@@ -84,11 +84,12 @@ export function DealComparisonSection() {
   return (
     <section id="fmp-comparison" className="fmp-section dc-section" aria-labelledby="dc-heading">
       <h2 id="dc-heading" className="fmp-section-title">
-        How much can I expect?
+        Beyond the Balance Sheet™: Owner-First Tax Design
       </h2>
       <p className="fmp-section-lead">
-        Adjust the sliders to match your situation and see your estimated net proceeds — including the
-        §1042 tax election only ESOP sellers can use.{" "}
+        Adjust the sliders to see your estimated net proceeds — including the §1042 tax election 
+        only ESOP sellers can use. Fair price guarantees and escrow-free closings paired with 
+        §1042/§1045 tax advantages.{" "}
         <strong>Approximations only. Not a quote or financial advice.</strong>
       </p>
 

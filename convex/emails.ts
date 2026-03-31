@@ -130,6 +130,7 @@ export const sendContactFormNotification = action({
       "lending": "Lending Partnership",
       "broker": "Business Broker Partnership",
       "wealth": "Wealth Management Partnership",
+      "appraisal": "Appraisal / Valuation Partnership",
       "career": "Career Opportunities",
       "general": "General Inquiry",
     };
@@ -237,6 +238,121 @@ This email was sent from the Forhemit website contact form.
       .join("\n");
 
     const telegramResult = await sendTelegramMessage(telegramText);
+
+    return {
+      success: emailResult.success || telegramResult.success,
+      email: emailResult,
+      telegram: telegramResult,
+    };
+  },
+});
+
+/**
+ * Send infrastructure audit notification to admin
+ */
+export const sendInfrastructureAuditNotification = action({
+  args: {
+    lane: v.string(),
+    score: v.number(),
+    status: v.string(),
+    statusLabel: v.string(),
+    answers: v.object({
+      q1: v.number(),
+      q2: v.number(),
+      q3: v.number(),
+      q4: v.number(),
+      q5: v.number(),
+    }),
+  },
+  handler: async (_ctx, args) => {
+    const laneLabels: Record<string, string> = {
+      resilience: "Lane 1: Resilience",
+      stewardship: "Lane 2: Stewardship",
+      competitive: "Lane 3: Competitive",
+    };
+
+    const statusColors: Record<string, string> = {
+      optimal: "#2e7d32",
+      warning: "#ed6c02",
+      critical: "#d32f2f",
+    };
+
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #F0562E; border-bottom: 2px solid #F0562E; padding-bottom: 10px;">
+          🏢 New Infrastructure Audit Completed
+        </h2>
+        <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #333;">Audit Results</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; color: #666; width: 140px;"><strong>Lane:</strong></td>
+              <td style="padding: 8px 0;">${laneLabels[args.lane] || args.lane}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Score:</strong></td>
+              <td style="padding: 8px 0; font-size: 18px; font-weight: bold; color: ${statusColors[args.status] || "#333"};">${args.score}/100</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Status:</strong></td>
+              <td style="padding: 8px 0; color: ${statusColors[args.status] || "#333"}; font-weight: bold;">${args.statusLabel}</td>
+            </tr>
+          </table>
+        </div>
+        <div style="background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #333;">Score Breakdown</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Cash Flow (Q1):</strong></td>
+              <td style="padding: 8px 0;">${args.answers.q1}/20</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Personnel Grid (Q2):</strong></td>
+              <td style="padding: 8px 0;">${args.answers.q2}/20</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Autonomy (Q3):</strong></td>
+              <td style="padding: 8px 0;">${args.answers.q3}/20</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Tenure (Q4):</strong></td>
+              <td style="padding: 8px 0;">${args.answers.q4}/20</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Documentation (Q5):</strong></td>
+              <td style="padding: 8px 0;">${args.answers.q5}/20</td>
+            </tr>
+          </table>
+        </div>
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+          <p>Sent from the Forhemit Infrastructure Audit.</p>
+        </div>
+      </div>
+    `;
+
+    const textLines = [
+      "🏢 New Infrastructure Audit Completed",
+      "",
+      `Lane: ${laneLabels[args.lane] || args.lane}`,
+      `Score: ${args.score}/100`,
+      `Status: ${args.statusLabel}`,
+      "",
+      "Score Breakdown:",
+      `- Cash Flow (Q1): ${args.answers.q1}/20`,
+      `- Personnel Grid (Q2): ${args.answers.q2}/20`,
+      `- Autonomy (Q3): ${args.answers.q3}/20`,
+      `- Tenure (Q4): ${args.answers.q4}/20`,
+      `- Documentation (Q5): ${args.answers.q5}/20`,
+    ].filter(Boolean);
+
+    const emailResult = await sendEmail({
+      to: ADMIN_EMAIL,
+      subject: `🏢 Infrastructure Audit: ${laneLabels[args.lane] || args.lane} — ${args.statusLabel} (${args.score}/100)`,
+      html,
+      text: textLines.join("\n"),
+    });
+
+    const telegramResult = await sendTelegramMessage(textLines.join("\n"));
 
     return {
       success: emailResult.success || telegramResult.success,

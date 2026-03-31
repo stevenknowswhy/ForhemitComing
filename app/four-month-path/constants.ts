@@ -19,7 +19,7 @@ export type PhaseBlock = {
 export const FOUR_PHASE_BLOCKS: PhaseBlock[] = [
   {
     id: "phase-1",
-    monthLabel: "MONTH 1: GET YOUR NUMBER & BUILD THE PLAN",
+    monthLabel: "MONTH 1: VALUATION (Competitors take 3–6 months)",
     dayRange: "Days 1–30",
     bullets: [
       "Sign NDAs and Retainer Agreement",
@@ -52,15 +52,15 @@ export const FOUR_PHASE_BLOCKS: PhaseBlock[] = [
   },
   {
     id: "phase-4",
-    monthLabel: "MONTH 4: CLOSE & GET PAID",
+    monthLabel: "MONTH 4: CLOSE & STEWARD YOUR LEGACY",
     dayRange: "Days 91–120",
     bullets: [
       "Final document signing",
       "Bank wires the money—you get paid (usually 60–80% upfront, remainder via seller note)",
-      "Employees officially take over",
-      "You stay on as an advisor for 6–12 months (flexible hours) to help them learn the ropes",
+      "Employees officially take over and become owners",
+      "We stay as fiduciary bridge—stewarding your legacy through the critical first 24 months",
     ],
-    checkpoint: "Result: You sold your business. Check in hand.",
+    checkpoint: "Result: You sold your business. Check in hand. Legacy protected.",
   },
 ];
 

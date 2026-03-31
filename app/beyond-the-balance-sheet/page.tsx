@@ -37,7 +37,7 @@ export default function BeyondBalanceSheetPage() {
         {/* ① Hero Section */}
         <section id="hero" className={`bbs-section bbs-hero ${visibleSections.has("hero") ? "visible" : ""}`}>
           <div className="container">
-            <div className="bbs-eyebrow">How our planning is different</div>
+            <div className="bbs-eyebrow">Beyond the Balance Sheet™</div>
             <h1 className="bbs-title">A great business is worthless if the doors aren&apos;t open.</h1>
             <p className="bbs-subhead">
               Financial modeling tells you what you have. COOP ensures you don&apos;t lose it.
@@ -205,7 +205,7 @@ export default function BeyondBalanceSheetPage() {
         <section id="comparison" className={`bbs-section bbs-comparison ${visibleSections.has("comparison") ? "visible" : ""}`}>
           <div className="container">
             <div className="bbs-label">Side by side</div>
-            <h2 className="bbs-section-title">The planning difference.</h2>
+            <h2 className="bbs-section-title">Beyond the Balance Sheet™: The planning difference.</h2>
             <p className="bbs-lead">
               Traditional financial modeling and COOP aren&apos;t competing frameworks. They&apos;re asking 
               different questions — and both answers are required.
@@ -221,7 +221,7 @@ export default function BeyondBalanceSheetPage() {
                       <span className="col-subtitle">Underwriting focus</span>
                     </th>
                     <th className="col-forhemit">
-                      The Forhemit model
+                      Beyond the Balance Sheet™
                       <span className="col-subtitle">Continuity focus</span>
                     </th>
                   </tr>

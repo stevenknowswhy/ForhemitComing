@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
 
+/** Never statically prerender — avoids Next build calling static-gen helpers on this handler. */
+export const dynamic = 'force-dynamic';
+
 export const runtime = 'nodejs';
 export const maxDuration = 30; // 30 seconds max for PDF generation
 

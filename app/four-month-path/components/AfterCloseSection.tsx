@@ -39,10 +39,11 @@ export function AfterCloseSection() {
   return (
     <section id="fmp-after-close" className="fmp-section" aria-labelledby="fmp-after-heading">
       <h2 id="fmp-after-heading" className="fmp-section-title">
-        After you close
+        Post-Close Stewardship: We Stay When Others Leave
       </h2>
       <p className="fmp-section-lead">
-        The deal is done. Here&apos;s what life actually looks like.
+        The deal is done—but our work continues. While others disappear at closing, 
+        we steward your legacy through the critical first 24 months.
       </p>
       <div className="fmp-after-grid">
         {AFTER_ITEMS.map((item) => {

@@ -15,10 +15,7 @@ export function BlogHeader() {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
             <span className="font-serif text-xl tracking-wide text-sage font-semibold">
-              FORHEMIT
-            </span>
-            <span className="text-xs text-stone-light uppercase tracking-wider hidden sm:inline">
-              Capital
+              Forhemit
             </span>
           </Link>
 

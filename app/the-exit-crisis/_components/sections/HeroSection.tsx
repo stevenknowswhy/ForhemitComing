@@ -9,9 +9,9 @@ export function HeroSection() {
       }}
     >
       <div className="container">
-        <span className="about-eyebrow about-eyebrow-hero">The Challenge</span>
+        <span className="about-eyebrow about-eyebrow-hero">Beyond the Balance Sheet™</span>
         <h1 className="about-title">The Exit Crisis</h1>
-        <p className="about-subtitle">What your broker&apos;s isn&apos;t telling you.</p>
+        <p className="about-subtitle">What your broker isn&apos;t telling you. Silver Tsunami Alert: 50 sellers for every qualified buyer.</p>
       </div>
     </section>
   );

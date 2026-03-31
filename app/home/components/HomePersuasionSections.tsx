@@ -51,26 +51,26 @@ const EXIT_PATHS = [
   },
   {
     id: "esop",
-    label: "Forhemit ESOP Exit",
+    label: "Beyond the Balance Sheet™ Exit",
     tag: "Recommended",
     tagClass: "hps-tag-brass",
     featured: true,
     points: [
       "Fair market value — full price",
-      "Up to 100% tax-free proceeds",
-      "Employees keep their jobs",
-      "Your legacy lives on",
-      "Close in as little as four months",
+      "Up to 100% tax-free proceeds (§1042)",
+      "The only advisor that stays after the wire hits",
+      "Your legacy lives on — employees become owners",
+      "Close in 4 months vs. 12–18 months traditional",
     ],
-    summary: "Fair price. Best terms. Most certainty.",
+    summary: "Fair price. Best terms. Post-close stewardship.",
   },
 ] as const;
 
 /* ── Cost of Waiting stats ── */
 const WAITING_STATS = [
   {
-    figure: "10,000+",
-    label: "businesses hit the market every day",
+    figure: "50:1",
+    label: "sellers for every qualified buyer",
     detail: "The Silver Tsunami is here — boomer owners are exiting en masse.",
   },
   {
@@ -79,9 +79,9 @@ const WAITING_STATS = [
     detail: "Oversupply compresses valuations and kills deals.",
   },
   {
-    figure: "$0",
-    label: "in tax savings while you wait",
-    detail: "Every year you delay, you pay taxes an ESOP could eliminate.",
+    figure: "4 months",
+    label: "vs. 12–18 months traditional sale",
+    detail: "While others disappear at closing, we steward your legacy through the critical first 24 months.",
   },
 ] as const;
 
@@ -219,12 +219,12 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             <span className="hps-section-number">02 — Urgency</span>
             <p className="hps-eyebrow">
               <span className="hps-eyebrow-line" aria-hidden />
-              Cost of Waiting
+              The Exit Crisis
             </p>
             <div className="hps-section-divider" />
           </div>
           <h2 className="hps-headline">
-            Every month you delay, the market gets harder.
+            Silver Tsunami Alert: 50 sellers for every qualified buyer. Your window is closing.
           </h2>
 
           <div className="hps-stats">
@@ -248,7 +248,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
               className="hps-cta"
               onClick={onStartTwoMinuteCheck}
             >
-              Claim Your Free Assessment →
+              See the Crisis Data →
             </button>
           </span>
         </div>

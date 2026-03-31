@@ -9,9 +9,14 @@ export function CTASection() {
           It&apos;s an option you may not have known existed. We&apos;d love to talk about whether
           it&apos;s the right one for you.
         </p>
-        <a href="/introduction" className="cta-button">
-          Schedule a Discussion
-        </a>
+        <div className="about-cta-actions">
+          <a href="/introduction" className="cta-button">
+            Schedule a Discussion
+          </a>
+          <a href="/contact" className="cta-button">
+            Get in Touch →
+          </a>
+        </div>
       </div>
     </section>
   );

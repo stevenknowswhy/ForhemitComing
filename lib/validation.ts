@@ -32,6 +32,7 @@ export const contactFormSchema = z.object({
     "lending",
     "broker",
     "wealth",
+    "appraisal",
     "career",
     "general"
   ]).optional(),

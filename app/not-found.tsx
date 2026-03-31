@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Home, ArrowLeft } from 'lucide-react';
-import './not-found.css';
 
 export default function NotFound() {
   const handleGoBack = () => {

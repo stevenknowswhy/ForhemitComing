@@ -52,11 +52,12 @@ export function FourMonthPathClient() {
       <div className="fmp-bg" aria-hidden />
 
       <header className="fmp-hero">
-        <p className="fmp-hero-eyebrow">You passed the 2-Minute Check</p>
-        <h1 className="fmp-hero-title">Congratulations</h1>
+        <p className="fmp-hero-eyebrow">Beyond the Balance Sheet™ · The 4-Month Path</p>
+        <h1 className="fmp-hero-title">The Fastest Path to a Funded Exit That Preserves Your Legacy</h1>
         <p className="fmp-hero-sub">
-          Based on your answers, a roughly <strong>four-month path</strong> to close is realistic. Below is the
-          same timeline we walk owners through—plain English, no jargon.
+          Traditional sale: 12–18 months. Forhemit ESOP: <strong>4 months</strong>. 
+          Below is the same timeline we walk owners through—plain English, no jargon. 
+          While others disappear at closing, we steward your legacy through the critical first 24 months.
         </p>
         <p className="fmp-hero-alternate">
           Haven&apos;t taken the 2-Minute Check yet?{" "}
@@ -73,11 +74,11 @@ export function FourMonthPathClient() {
 
           <section id="fmp-timeline" className="fmp-section" aria-labelledby="fmp-timeline-heading">
             <h2 id="fmp-timeline-heading" className="fmp-section-title">
-              The 4-Month Path Timeline
+              Traditional Sale: 12–18 Months. Forhemit ESOP: 4 Months.
             </h2>
             <p className="fmp-section-lead">
               Four phases from first numbers to check in hand. Your team clears a checkpoint at each stage so
-              there are no surprises at closing.
+              there are no surprises at closing. The only exit advisor that stays after the wire hits.
             </p>
             <FourPhaseTimeline phases={FOUR_PHASE_BLOCKS} />
           </section>

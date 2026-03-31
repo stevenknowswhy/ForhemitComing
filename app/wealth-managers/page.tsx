@@ -310,9 +310,12 @@ export default function WealthManagersPage() {
                 and creates a legacy that endures.
               </p>
               <div className="wealth-hero-cta" data-animate="fade-up" data-delay="300">
-                <a href="#contact" className="cta-button magnetic">
+                <Link
+                  href="/contact?contactType=partner&interest=wealth"
+                  className="cta-button magnetic"
+                >
                   Schedule an Advisor Partnership Call
-                </a>
+                </Link>
               </div>
             </div>
             

@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { PathwayBadge } from '@/components/ui/CustomBadge';
 import { Button } from '@/components/ui/CustomButton';
+import { contactHrefFromBlogPathway } from '@/lib/contact-deeplink';
 
 interface ResilienceSummaryProps {
   summary: string[];
@@ -67,9 +69,12 @@ export function ResilienceSummary({ summary, pathway, author, reviewedBy }: Resi
             </svg>
             Cite This
           </Button>
-          <Button variant="secondary" size="sm">
+          <Link
+            href={contactHrefFromBlogPathway(pathway)}
+            className="inline-flex items-center justify-center font-medium rounded-md transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-brand)] px-3 py-1.5 text-sm bg-transparent border border-[var(--color-brand)] text-[var(--color-brand)] hover:bg-[var(--color-brand)] hover:text-[var(--text-inverse)]"
+          >
             Schedule a briefing →
-          </Button>
+          </Link>
         </div>
       </div>
     </div>

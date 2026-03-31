@@ -1939,6 +1939,31 @@
   color: var(--about-text-primary);
 }
 
+.result-next {
+  margin-top: 1.25rem;
+  font-size: 1rem;
+}
+
+.result-next a {
+  color: var(--about-accent);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.result-next a:hover {
+  border-bottom-color: var(--about-accent);
+}
+
+.about-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ── FAQ Section ── */
 .about-section-faq {
   background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-primary) 100%);

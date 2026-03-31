@@ -45,6 +45,7 @@ export default defineSchema({
       v.literal("lending"),
       v.literal("broker"),
       v.literal("wealth"),
+      v.literal("appraisal"),
       v.literal("career"),
       v.literal("general")
     )),

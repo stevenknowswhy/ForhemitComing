@@ -31,6 +31,7 @@ export const submit = mutation({
       v.literal("lending"),
       v.literal("broker"),
       v.literal("wealth"),
+      v.literal("appraisal"),
       v.literal("career"),
       v.literal("general")
     )),
@@ -182,6 +183,7 @@ export const update = mutation({
       v.literal("lending"),
       v.literal("broker"),
       v.literal("wealth"),
+      v.literal("appraisal"),
       v.literal("career"),
       v.literal("general")
     )),

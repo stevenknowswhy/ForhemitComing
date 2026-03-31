@@ -1,9 +1,9 @@
 "use client";
 
 import { CheckpointsSection } from "@/app/four-month-path/components/CheckpointsSection";
-import { FourPhaseTimeline } from "@/app/four-month-path/components/FourPhaseTimeline";
 import { RoadmapPanel } from "@/app/four-month-path/components/RoadmapPanel";
 import { TimelineRealismSection } from "@/app/four-month-path/components/TimelineRealismSection";
+import { EsopTransactionCalendar } from "@/app/esop-transaction-calendar";
 import "@/app/home/intake/styles/classification-intake-modal.css";
 import "@/app/four-month-path/styles/four-month-path.css";
 import "@/app/four-month-path/styles/sections.css";
@@ -19,7 +19,7 @@ import { BrokersWorkloadSection } from "./_components/sections/BrokersWorkloadSe
 import { BrokersWhySection } from "./_components/sections/BrokersWhySection";
 import { DualTrackOutcomesSection } from "./_components/sections/DualTrackOutcomesSection";
 import { EmployeesAreTheBuyerSection } from "./_components/sections/EmployeesAreTheBuyerSection";
-import { BROKER_CHECKPOINTS, BROKER_PHASE_BLOCKS, BROKER_REALISM_FAQ } from "./constants";
+import { BROKER_CHECKPOINTS, BROKER_REALISM_FAQ } from "./constants";
 
 export function BrokersPathClient() {
   return (
@@ -48,7 +48,7 @@ export function BrokersPathClient() {
               Same phased rhythm we use with sellers—written so you can see where your listing sits relative
               to lender, trustee, and documentation work.
             </p>
-            <FourPhaseTimeline phases={BROKER_PHASE_BLOCKS} />
+            <EsopTransactionCalendar variant="embedded" />
           </section>
 
           <TimelineRealismSection

@@ -53,6 +53,7 @@ export type InterestType =
   | "lending"
   | "broker"
   | "wealth"
+  | "appraisal"
   | "career"
   | "general";
 

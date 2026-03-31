@@ -31,10 +31,10 @@ function getSystemTheme(): ResolvedTheme {
 
 function readStoredTheme(): { theme: Theme; resolvedTheme: ResolvedTheme } {
   if (typeof window === "undefined") {
-    return { theme: "system", resolvedTheme: "light" };
+    return { theme: "light", resolvedTheme: "light" };
   }
   const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  const theme = stored ?? "system";
+  const theme = stored ?? "light";
   const resolvedTheme = theme === "system" ? getSystemTheme() : theme;
   return { theme, resolvedTheme };
 }
@@ -47,7 +47,7 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
   enableSystem = true,
 }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(defaultTheme);

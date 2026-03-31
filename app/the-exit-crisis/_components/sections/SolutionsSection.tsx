@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export function SolutionsSection() {
   return (
     <section className="about-section about-section-solutions">
@@ -81,6 +83,9 @@ export function SolutionsSection() {
             Your employees get ownership. Your community keeps its foundation.
           </p>
           <p className="result-closing">This is the resilience Forhemit was built to deliver.</p>
+          <p className="result-next">
+            <Link href="/four-month-path">See our 4-month path →</Link>
+          </p>
         </div>
       </div>
     </section>

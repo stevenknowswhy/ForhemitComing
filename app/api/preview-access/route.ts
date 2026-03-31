@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 const PREVIEW_COOKIE = "forhemit_preview";
 const PREVIEW_COOKIE_VALUE = "granted";
 const DEFAULT_CODE = "Forhemit-access2026";

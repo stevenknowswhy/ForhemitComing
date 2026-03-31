@@ -12,7 +12,7 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
   return (
     <section id="fmp-get-started" className="fmp-section fmp-final-cta" aria-labelledby="fmp-final-cta-heading">
       <h2 id="fmp-final-cta-heading" className="fmp-final-cta-headline">
-        Ready to get your Month 1 started?
+        Protect Your Legacy Now: Your Window Is Closing
       </h2>
       <div className="fmp-final-cta-actions fmp-final-cta-actions--row">
         <span className="fmp-cta-shell">
@@ -25,7 +25,7 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
               onStartTwoMinuteCheck();
             }}
           >
-            Start My 2-Minute Check
+            See If You Qualify →
           </button>
         </span>
         <span className="fmp-cta-shell">

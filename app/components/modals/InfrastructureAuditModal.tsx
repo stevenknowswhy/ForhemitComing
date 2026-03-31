@@ -3,7 +3,7 @@
 import DOMPurify from "isomorphic-dompurify";
 
 import { useState } from "react";
-import { useMutation } from "convex/react";
+import { useMutation, useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
@@ -46,6 +46,7 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
   const { toasts, removeToast, success, error: showError } = useToast();
 
   const submitAudit = useMutation(api.contactSubmissions.submit);
+  const sendNotification = useAction(api.emails.sendInfrastructureAuditNotification);
 
   if (!isOpen) return null;
 
@@ -148,6 +149,7 @@ export function InfrastructureAuditModal({ isOpen, onClose }: InfrastructureAudi
 
       const diagnostic = getDiagnosticText(lane, results.status);
 
+      // Save to Convex
       await submitAudit({
         contactType: "business-owner",
         firstName: "Infrastructure",
@@ -169,6 +171,25 @@ Q5 (Documentation): ${answers.q5}/20
 Diagnostic: ${diagnostic}`,
         source: "infrastructure-audit",
       });
+
+      // Send email + Telegram notification
+      try {
+        await sendNotification({
+          lane: lane || "unknown",
+          score: results.score,
+          status: results.status,
+          statusLabel: results.statusLabel,
+          answers: {
+            q1: answers.q1 || 0,
+            q2: answers.q2 || 0,
+            q3: answers.q3 || 0,
+            q4: answers.q4 || 0,
+            q5: answers.q5 || 0,
+          },
+        });
+      } catch (err) {
+        console.error("Failed to send audit notification:", err);
+      }
 
       setShowResults(true);
       success("Audit completed! Review your results below.");

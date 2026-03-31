@@ -303,9 +303,12 @@ export default function AppraisersPage() {
                 and turn one-off appraisals into mandated, annual engagements for the next decade.
               </p>
               <div className="appraisers-hero-cta" data-animate="fade-up" data-delay="300">
-                <a href="#contact" className="cta-button magnetic">
+                <Link
+                  href="/contact?contactType=partner&interest=appraisal"
+                  className="cta-button magnetic"
+                >
                   Schedule a Pipeline & Partnership Call
-                </a>
+                </Link>
               </div>
             </div>
             

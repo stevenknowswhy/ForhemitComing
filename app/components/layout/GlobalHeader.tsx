@@ -24,7 +24,11 @@ export function GlobalHeader() {
 
   return (
     <header className="global-header">
-      <Link href="/" className="global-logo-link">
+      <Link
+        href="/"
+        className="global-logo-link"
+        prefetch={process.env.NODE_ENV === "production"}
+      >
         <span className="global-logo-text">Forhemit</span>
         <span className="global-logo-underline" />
       </Link>

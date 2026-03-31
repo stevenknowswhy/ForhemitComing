@@ -18,7 +18,10 @@ export function HeroSection() {
             Protect the clients you&apos;ve spent a career winning — before someone else owns the relationship
           </p>
           <div className="legal-hero-cta" data-animate="fade-up" data-delay="300">
-            <Link href="#consultation" className="cta-button magnetic">
+            <Link
+              href="/contact?contactType=partner&interest=legal"
+              className="cta-button magnetic"
+            >
               Schedule a Confidential Consultation
             </Link>
           </div>

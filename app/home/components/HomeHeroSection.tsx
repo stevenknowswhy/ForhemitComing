@@ -25,13 +25,13 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
           <div className="hch-hero-inner hch-hero-inner--centered">
             <p className="hch-hero-eyebrow">
               <span className="hch-hero-eyebrow-line" aria-hidden />
-              Employee ownership transitions · 3–4 month close
+              Beyond the Balance Sheet™ · Employee ownership transitions
             </p>
 
             <h1 className="hch-hero-headline">Your Exit Is Ready</h1>
 
             <p className="hch-hero-sub">
-              Claim your tax-free exit and close in as little as four months
+              We don&apos;t just plan your exit. We ensure your business survives it. Close in as little as four months with the only exit advisor that stays after the wire hits.
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
@@ -43,7 +43,7 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
                   else onStartIntake?.("owner");
                 }}
               >
-                Unlock My Free Assessment
+                Protect Your Legacy Now
               </button>
               <Link href="/brokers" className="hch-hero-cta hch-hero-cta-secondary">
                 I&apos;m a Broker →
@@ -53,6 +53,30 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
             <p className="hch-hero-trust-note">
               🔒 Confidential · No cost · Takes 2 minutes
             </p>
+
+            <nav className="hch-hero-pro-links" aria-label="Professional audiences">
+              <Link href="/lenders">Lenders</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>
+                ·
+              </span>
+              <Link href="/legal-practices">Legal</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>
+                ·
+              </span>
+              <Link href="/wealth-managers">Wealth</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>
+                ·
+              </span>
+              <Link href="/appraisers">Appraisers</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>
+                ·
+              </span>
+              <Link href="/accounting-firms">Accounting</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>
+                ·
+              </span>
+              <Link href="/financial-accounting">Financial &amp; accounting</Link>
+            </nav>
           </div>
         </div>
       </section>

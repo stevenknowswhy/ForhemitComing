@@ -1,9 +1,15 @@
 const PILLARS = [
   {
+    id: "post-close",
+    icon: "◈",
+    title: "Post-close stewardship",
+    body: "The only exit advisor that stays after the wire hits. We steward your legacy through the critical first 24 months—not just planning your exit, but ensuring your business survives it.",
+  },
+  {
     id: "owner-first",
     icon: "◆",
     title: "Owner-first design",
-    body: "Every decision is filtered through one question: does this protect the seller? From fair price guarantees to escrow-free closings, the structure exists to get you paid — fully and on time.",
+    body: "Every decision is filtered through one question: does this protect the seller? From fair price guarantees to escrow-free closings paired with §1042/§1045 tax advantages, the structure exists to get you paid — fully and on time.",
   },
   {
     id: "transparency",
@@ -23,11 +29,11 @@ export function WhyForhemitSection() {
   return (
     <section id="fmp-why" className="fmp-section fmp-why" aria-labelledby="fmp-why-heading">
       <h2 id="fmp-why-heading" className="fmp-section-title">
-        Why owners choose Forhemit
+        Beyond the Balance Sheet™: Why owners choose Forhemit
       </h2>
       <p className="fmp-section-lead">
-        We built Forhemit because most ESOP advisors make this harder than it needs to be.
-        Here&apos;s what makes us different.
+        We don&apos;t just plan your exit. We ensure your business survives it. 
+        While others disappear at closing, we steward your legacy through the critical first 24 months.
       </p>
       <div className="fmp-pillars-grid">
         {PILLARS.map((p) => (

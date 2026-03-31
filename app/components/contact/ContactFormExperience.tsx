@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import { useMutation, useAction } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
@@ -14,11 +15,34 @@ export interface ContactFormExperienceProps {
   onAfterSuccessDismiss?: () => void;
 }
 
+const VALID_CONTACT_TYPES = new Set([
+  "business-owner",
+  "partner",
+  "existing-business",
+  "website-visitor",
+  "marketing",
+]);
+
+const VALID_INTERESTS = new Set([
+  "esop-transition",
+  "accounting",
+  "legal",
+  "lending",
+  "broker",
+  "wealth",
+  "appraisal",
+  "career",
+  "general",
+]);
+
+const PARTNER_INTERESTS = new Set(["accounting", "legal", "lending", "broker", "wealth", "appraisal"]);
+
 export function ContactFormExperience({
   source,
   variant,
   onAfterSuccessDismiss,
 }: ContactFormExperienceProps) {
+  const searchParams = useSearchParams();
   const [revealedSection, setRevealedSection] = useState<"none" | "contact" | "message" | "success">("none");
   const [showPreview, setShowPreview] = useState(false);
   const [formData, setFormData] = useState({
@@ -36,6 +60,33 @@ export function ContactFormExperience({
 
   const submitContact = useMutation(api.contactSubmissions.submit);
   const sendEmailNotification = useAction(api.emails.sendContactFormNotification);
+
+  useEffect(() => {
+    const qs = searchParams.toString();
+    if (!qs) return;
+
+    const ctRaw = searchParams.get("contactType") ?? searchParams.get("type");
+    const intRaw = searchParams.get("interest");
+
+    let contactType = ctRaw && VALID_CONTACT_TYPES.has(ctRaw) ? ctRaw : "";
+    const interest = intRaw && VALID_INTERESTS.has(intRaw) ? intRaw : "";
+
+    if (interest && !contactType) {
+      if (interest === "esop-transition") contactType = "business-owner";
+      else if (PARTNER_INTERESTS.has(interest)) contactType = "partner";
+    }
+
+    if (!contactType && !interest) return;
+
+    setFormData((prev) => ({
+      ...prev,
+      ...(contactType ? { contactType } : {}),
+      ...(interest ? { interest } : {}),
+    }));
+    if (contactType) {
+      setRevealedSection("contact");
+    }
+  }, [searchParams]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -115,6 +166,7 @@ export function ContactFormExperience({
           | "lending"
           | "broker"
           | "wealth"
+          | "appraisal"
           | "career"
           | "general"
           | undefined) || undefined,
@@ -189,6 +241,7 @@ export function ContactFormExperience({
       lending: "Lending Partnership",
       broker: "Business Broker Partnership",
       wealth: "Wealth Management Partnership",
+      appraisal: "Appraisal / Valuation Partnership",
       career: "Career Opportunities",
       general: "General Inquiry",
     };
@@ -387,6 +440,7 @@ export function ContactFormExperience({
                     <option value="lending">Lending Partnership</option>
                     <option value="broker">Business Broker Partnership</option>
                     <option value="wealth">Wealth Management Partnership</option>
+                    <option value="appraisal">Appraisal / Valuation Partnership</option>
                     <option value="career">Career Opportunities</option>
                     <option value="general">General Inquiry</option>
                   </select>

@@ -112,9 +112,12 @@ export default function LendersPage() {
                 Secure your collateral with operational-level early warning systems that stop risk before it impacts your financials.
               </p>
               <div className="lenders-hero-cta" data-animate="fade-up" data-delay="300">
-                <a href="#contact" className="cta-button magnetic">
+                <Link
+                  href="/contact?contactType=partner&interest=lending"
+                  className="cta-button magnetic"
+                >
                   Schedule a Portfolio Risk Assessment
-                </a>
+                </Link>
               </div>
             </div>
             

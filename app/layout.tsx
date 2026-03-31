@@ -124,14 +124,14 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  // Match ThemeProvider: support system | dark | light
-                  var theme = localStorage.getItem('forhemit-theme') || 'system';
-                  var resolved;
-                  if (theme === 'system') {
-                    resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  } else {
-                    resolved = theme === 'dark' ? 'dark' : 'light';
-                  }
+          // Match ThemeProvider: support system | dark | light
+          var theme = localStorage.getItem('forhemit-theme') || 'light';
+          var resolved;
+          if (theme === 'system') {
+            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          } else {
+            resolved = theme === 'dark' ? 'dark' : 'light';
+          }
                   document.documentElement.setAttribute('data-theme', resolved);
                   
                   // Handle blog theme (if on blog page)

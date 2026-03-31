@@ -83,15 +83,16 @@ export default function BusinessOwnersPage() {
         <section className="business-owners-hero hch-hero-section">
           <div className="container">
             <div className="hero-content">
-              <span className="business-owners-eyebrow">For Business Owners</span>
+              <span className="business-owners-eyebrow">For Owners: Sell to Your Team, Keep Your Legacy</span>
               <h1 className="business-owners-title">
-                Sell the Business to Your Team—at Fair Market Value
+                Beyond the Balance Sheet™: Sell to Your Team at Fair Market Value
                 <br />
-                <span className="highlight">A Bank-Funded Path to Close in Months, Not Years</span>
+                <span className="highlight">While Others Disappear at Closing, We Steward Your Legacy Through the Critical First 24 Months</span>
               </h1>
               <p className="business-owners-subtitle">
-                We structure the ESOP sale end to end—valuation, lender, legal, and transition—so you
-                can move from fit check to funded closing when you are ready to sell.
+                We don&apos;t just plan your exit. We ensure your business survives it. 
+                The only exit advisor that stays after the wire hits—structuring your ESOP end to end 
+                with post-close stewardship built in.
               </p>
               <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
                 <button
@@ -134,9 +135,10 @@ export default function BusinessOwnersPage() {
               <div className="luxury-content">
                 <h2>You steer the sale—and the closing timeline</h2>
                 <p>
-                  Selling to an ESOP is still a real sale: independent appraisal, negotiated price, 
-                  bank financing, and a closing date. The difference is the buyer is your company 
-                  and your people—not a stranger doing diligence in the hallways.
+                  Traditional sale: 12–18 months. Forhemit ESOP: 4 months. Selling to an ESOP is 
+                  still a real sale: independent appraisal, negotiated price, bank financing, and 
+                  a closing date. The difference is the buyer is your company and your people—not 
+                  a stranger doing diligence in the hallways.
                 </p>
                 <p>
                   That gives you room to:

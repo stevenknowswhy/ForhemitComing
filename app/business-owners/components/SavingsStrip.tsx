@@ -19,12 +19,12 @@ export function SavingsStrip() {
         </div>
       </div>
       <div className="bo-savings-item">
-        <div className="bo-savings-num">90&ndash;120</div>
-        <div className="bo-savings-label">Days to close</div>
+        <div className="bo-savings-num">4 mo</div>
+        <div className="bo-savings-label">vs. 12–18 months traditional</div>
         <div className="bo-savings-sub">
-          Competitive with traditional buyers. No contingency drama. The ESOP
-          trust is the buyer&mdash;deal certainty is structurally higher once
-          the numbers work.
+          The fastest path to a funded exit that preserves your legacy. 
+          No contingency drama. The ESOP trust is the buyer—deal certainty 
+          is structurally higher once the numbers work.
         </div>
       </div>
     </div>
