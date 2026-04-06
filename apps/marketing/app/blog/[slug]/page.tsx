@@ -23,10 +23,17 @@ export async function generateMetadata({ params }: PageProps) {
 
   if (!doc) return { title: "Article Not Found" };
 
+  const title = doc.metaTitle?.trim() || doc.title;
+  const description =
+    doc.metaDescription?.trim() || doc.excerpt?.trim() || doc.title;
+  const ogUrl = doc.ogImage?.trim() || doc.featuredImage?.trim();
+
   return {
-    title: doc.metaTitle?.trim() || doc.title,
-    description:
-      doc.metaDescription?.trim() || doc.excerpt?.trim() || doc.title,
+    title,
+    description,
+    ...(ogUrl
+      ? { openGraph: { title, description, images: [{ url: ogUrl }] } }
+      : {}),
   };
 }
 

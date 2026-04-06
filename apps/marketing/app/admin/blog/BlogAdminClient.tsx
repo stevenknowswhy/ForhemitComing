@@ -237,6 +237,27 @@ export function BlogAdminClient({ posts, configError }: Props) {
             <input name="category" placeholder="Insights" style={inputStyle} />
           </label>
           <label style={labelStyle}>
+            Meta title (optional, SEO)
+            <input
+              name="metaTitle"
+              placeholder="Overrides document title when set"
+              style={inputStyle}
+            />
+          </label>
+          <label style={labelStyle}>
+            Meta description (optional, SEO)
+            <textarea
+              name="metaDescription"
+              rows={2}
+              placeholder="Search / social snippet"
+              style={inputStyle}
+            />
+          </label>
+          <label style={labelStyle}>
+            Open Graph image URL (optional)
+            <input name="ogImage" placeholder="https://…" style={inputStyle} />
+          </label>
+          <label style={labelStyle}>
             Pathway
             <select name="pathway" style={inputStyle} defaultValue="founders">
               <option value="founders">Founders</option>
