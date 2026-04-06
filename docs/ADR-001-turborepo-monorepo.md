@@ -2,11 +2,11 @@
 
 ## Status
 
-Accepted (planning — implementation pending)
+Accepted — **implemented** (`apps/admin`, `apps/marketing`, `packages/convex`).
 
 ## Context
 
-Forhemit runs two Next.js applications (`ForhemitAdminWebsite-main`, `ForhemitComing-main`) that each contain a copy of `convex/`. That duplicates schema and functions, risks conflicting deploys, and complicates the blog platform (single source of truth for `posts`).
+Forhemit runs two Next.js applications that previously each contained a copy of `convex/`, which duplicated schema and functions, risked conflicting deploys, and complicated the blog platform (single source of truth for `posts`). The monorepo removes the duplicate; Convex code lives only under `packages/convex/convex/`.
 
 Alternatives considered:
 
