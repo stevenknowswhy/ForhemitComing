@@ -19,6 +19,7 @@ Only **one** `convex dev` process should run against a given Convex project at a
    ```bash
    cd ForhemitAdminWebsite-main && npx convex dev
    ```
+   For **`npx convex deploy`**, set **`CONVEX_DEPLOY_KEY`** in that app’s **`.env.local`** (or `export` it in the shell). The Convex CLI reads env from the process environment.
 2. **Everyone else:** avoid long-running `convex dev` against the same deployment. For a quick schema push:
    ```bash
    npx convex dev --once
