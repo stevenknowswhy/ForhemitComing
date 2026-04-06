@@ -334,10 +334,10 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 
 **Existing app docs:**
 
-- `ForhemitAdminWebsite-main/AGENTS.md`
-- `ForhemitAdminWebsite-main/STRUCTURE_ANALYSIS.md` / `ForhemitComing-main/STRUCTURE_ANALYSIS.md`
-- `ForhemitAdminWebsite-main/REPO_SPLIT_COMPLETE.md`
-- `ForhemitAdminWebsite-main/MODULAR_DESIGN.md`, `REFACTORING_PLAN.md`
+- `apps/admin/AGENTS.md`
+- `apps/admin/STRUCTURE_ANALYSIS.md` / `apps/marketing/STRUCTURE_ANALYSIS.md`
+- `apps/admin/REPO_SPLIT_COMPLETE.md`
+- `apps/admin/MODULAR_DESIGN.md`, `REFACTORING_PLAN.md`
 
 ---
 

@@ -6,7 +6,7 @@ Operational checklist aligned with `HARMONIZATION_PLAN.md`. Replace placeholder 
 
 | Surface | Platform | Branch | Notes |
 |---------|----------|--------|--------|
-| Convex | Convex Cloud | `main` | Deploy via CI after TypeScript passes: `npx convex deploy` |
+| Convex | Convex Cloud | `main` | Deploy from `packages/convex`: `pnpm convex:deploy` (root) or `pnpm run convex:deploy` in that package |
 | Marketing | Vercel (Project A) | `main` | Root: `apps/marketing` after monorepo |
 | Admin | Vercel (Project B) | `main` | Root: `apps/admin`; optional **deployment protection** (approval) |
 
@@ -33,7 +33,7 @@ Validate at build time with **`@t3-oss/env-nextjs`** in each app’s `lib/env.ts
 
 ### CI (GitHub Actions)
 
-- **`CONVEX_DEPLOY_KEY`** — full value from Convex dashboard (format `dev:deployment|…`). Add as an **encrypted repository secret**, not in workflow YAML. For local deploys, keep it only in **`.env.local`** (gitignored).
+- **`CONVEX_DEPLOY_KEY`** — full value from Convex dashboard (format `dev:deployment|…`). Add as an **encrypted repository secret**, not in workflow YAML. For local deploys, keep it in **`packages/convex/.env.local`** (gitignored), or export in the shell before deploy.
 
 ## Secrets hygiene
 
