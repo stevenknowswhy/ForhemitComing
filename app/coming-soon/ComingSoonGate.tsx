@@ -12,7 +12,11 @@ function safeInternalPath(next: string | null): string {
   return next;
 }
 
+const DEFAULT_ADMIN_LOGIN_URL = "https://www.forhemit.website";
+
 export function ComingSoonGate() {
+  const loginUrl =
+    process.env.NEXT_PUBLIC_ADMIN_URL?.trim() || DEFAULT_ADMIN_LOGIN_URL;
   const searchParams = useSearchParams();
   const [showCodeEntry, setShowCodeEntry] = useState(false);
   const [code, setCode] = useState("");
@@ -114,7 +118,18 @@ export function ComingSoonGate() {
       </main>
 
       <footer className="coming-soon-footer">
-        <span className="coming-soon-footer-copy">&copy; {new Date().getFullYear()} Forhemit PBC</span>
+        <span className="coming-soon-footer-copy">
+          &copy; {new Date().getFullYear()} Forhemit PBC
+        </span>
+        <span className="coming-soon-footer-dot" aria-hidden />
+        <a
+          href={loginUrl}
+          className="coming-soon-footer-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Login
+        </a>
       </footer>
     </div>
   );

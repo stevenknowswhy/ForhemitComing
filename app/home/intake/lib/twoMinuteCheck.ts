@@ -28,21 +28,25 @@ export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
   },
   {
     id: "profitability",
-    question: "Does your business make steady profit every year—not just breaking even?",
+    question: "Does your business make steady profit for the past 3 years?",
     hint: "The business must afford loan payments to buy you out. If it's not profitable, banks won't finance it",
-    noThresholdPhrase: "consistent annual profitability",
+    noThresholdPhrase: "steady profit in each of the past 3 years",
   },
   {
     id: "timeline",
-    question: "Can you wait about 4 months to close the deal and get paid?",
+    question:
+      "Can you wait at least 120 days to close and be paid fair market value for your business?",
     hint: 'Separates "I need cash this week" from "I\'m ready to sell." Filters out distressed liquidation',
-    noThresholdPhrase: "about 4 months to close—not an emergency or same-week liquidity need",
+    noThresholdPhrase:
+      "at least 120 days to close and fair market value—not an emergency or same-week liquidity need",
   },
   {
     id: "transition",
-    question: "Are you willing to stick around for at least 12 months after selling to help the new owners learn the ropes?",
-    hint: "Banks and buyers require seller transition. If you want to disappear immediately, this doesn't work",
-    noThresholdPhrase: "willingness to stay at least 12 months post-close to support transition",
+    question:
+      "Are you willing to offer guidance when needed for at least the first 12 months to help the business continue to succeed?",
+    hint: "Lenders and employee-ownership transitions expect meaningful seller support early on. If you want zero involvement, this path is harder",
+    noThresholdPhrase:
+      "willingness to offer guidance when needed for at least the first 12 months post-close",
   },
 ];
 
