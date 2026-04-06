@@ -6,9 +6,33 @@ Operational checklist aligned with `HARMONIZATION_PLAN.md`. Replace placeholder 
 
 | Surface | Platform | Branch | Notes |
 |---------|----------|--------|--------|
-| Convex | Convex Cloud | `main` | Deploy from `packages/convex`: `pnpm convex:deploy` (root) or `pnpm run convex:deploy` in that package |
-| Marketing | Vercel (Project A) | `main` | Root: `apps/marketing` after monorepo |
-| Admin | Vercel (Project B) | `main` | Root: `apps/admin`; optional **deployment protection** (approval) |
+| Convex | Convex Cloud | `main` | Deploy **only** from `packages/convex` (local or CI; see below) |
+| Marketing | Vercel (Project A) | `main` | **Root Directory:** `apps/marketing` |
+| Admin | Vercel (Project B) | `main` | **Root Directory:** `apps/admin`; optional **deployment protection** |
+
+## Vercel (marketing + admin)
+
+Use **two** Vercel projects pointing at the **same** GitHub repository.
+
+1. **Settings → General → Root Directory**
+   - Marketing: **`apps/marketing`**
+   - Admin: **`apps/admin`**
+
+2. **Install command** — the pnpm lockfile is at the **monorepo root**. Each app includes **`vercel.json`** with:
+   - `cd ../.. && pnpm install --frozen-lockfile`
+   - In the dashboard, remove any conflicting **Install Command** override, or paste that exact command.
+
+3. **Build command** — default **`next build`** (no override needed unless you standardize on Turbo).
+
+4. **Framework preset** — Next.js.
+
+5. **Node.js version** — **22.x** (aligned with GitHub Actions).
+
+## Convex (single deployment)
+
+- **Manual (local):** from repo root: **`pnpm convex:deploy`**. Set **`CONVEX_DEPLOY_KEY`** in **`packages/convex/.env.local`** or export it; never commit the key.
+- **Do not** run **`convex deploy`** from **`apps/admin`** or **`apps/marketing`** (no Convex project files there).
+- **CI:** **`.github/workflows/convex-deploy.yml`** runs on **`push` to `main`** when files under **`packages/convex/**`** change. Add GitHub secret **`CONVEX_DEPLOY_KEY`**. Without it, the workflow fails on those pushes.
 
 ## Environment variables
 
@@ -33,7 +57,7 @@ Validate at build time with **`@t3-oss/env-nextjs`** in each app’s `lib/env.ts
 
 ### CI (GitHub Actions)
 
-- **`CONVEX_DEPLOY_KEY`** — full value from Convex dashboard (format `dev:deployment|…`). Add as an **encrypted repository secret**, not in workflow YAML. For local deploys, keep it in **`packages/convex/.env.local`** (gitignored), or export in the shell before deploy.
+- **`CONVEX_DEPLOY_KEY`** — used by **`.github/workflows/convex-deploy.yml`** on pushes to `main` that change **`packages/convex/**`**. Add as an **encrypted repository secret**. For local deploys, use **`packages/convex/.env.local`** (gitignored) or export in the shell.
 
 ## Secrets hygiene
 
