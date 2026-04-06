@@ -229,6 +229,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.27(postcss@8.5.8)
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.6.1
       jsdom:
         specifier: ^29.0.0
         version: 29.0.1
