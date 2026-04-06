@@ -115,6 +115,33 @@ function EventCard({ ev, index }: { ev: CalendarEvent; index: number }) {
   );
 }
 
+const CALENDAR_WRAP_SELECTOR = ".etc-calendar-wrap";
+
+/**
+ * Bring the active month into view inside the calendar's scroll area without scrolling
+ * the document. Plain scrollIntoView walks scrollable ancestors and moves the window,
+ * which jumps long host pages (e.g. /brokers) to the embedded calendar on mount.
+ */
+function scrollMonthIntoView(
+  monthEl: HTMLElement | null,
+  variant: "embedded" | "standalone",
+  behavior: ScrollBehavior,
+) {
+  if (!monthEl) return;
+  if (variant === "embedded") {
+    const wrap = monthEl.closest(CALENDAR_WRAP_SELECTOR);
+    if (wrap instanceof HTMLElement) {
+      const top =
+        monthEl.getBoundingClientRect().top -
+        wrap.getBoundingClientRect().top +
+        wrap.scrollTop;
+      wrap.scrollTo({ top, behavior });
+      return;
+    }
+  }
+  monthEl.scrollIntoView({ behavior, block: "start" });
+}
+
 export function EsopTransactionCalendar({
   className,
   variant = "embedded",
@@ -129,6 +156,7 @@ export function EsopTransactionCalendar({
   const [twoLenderOn, setTwoLenderOn] = useState(false);
   const [detail, setDetail] = useState<DetailState>({ kind: "closed" });
   const monthEls = useRef<Record<string, HTMLDivElement | null>>({});
+  const isFirstMonthScrollRef = useRef(true);
 
   useEffect(() => {
     const d = defaultStartDate ? stripTime(new Date(defaultStartDate)) : tomorrowLocal();
@@ -140,8 +168,11 @@ export function EsopTransactionCalendar({
     if (!viewMonth) return;
     const key = monthKey(viewMonth);
     const el = monthEls.current[key];
-    el?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, [viewMonth]);
+    const behavior: ScrollBehavior =
+      variant === "embedded" && isFirstMonthScrollRef.current ? "instant" : "smooth";
+    isFirstMonthScrollRef.current = false;
+    scrollMonthIntoView(el, variant, behavior);
+  }, [viewMonth, variant]);
 
   useEffect(() => {
     if (detail.kind === "closed") return;
@@ -227,10 +258,10 @@ export function EsopTransactionCalendar({
       setViewMonth(new Date(target.getFullYear(), target.getMonth(), 1));
       setTimeout(() => {
         const key = monthKey(new Date(target.getFullYear(), target.getMonth(), 1));
-        monthEls.current[key]?.scrollIntoView({ behavior: "smooth", block: "start" });
+        scrollMonthIntoView(monthEls.current[key] ?? null, variant, "smooth");
       }, 50);
     },
-    [startDate],
+    [startDate, variant],
   );
 
   const months = useMemo(() => {

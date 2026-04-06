@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import "./footer.css";
 
 interface FooterProps {
@@ -9,9 +8,12 @@ interface FooterProps {
   variant?: "sticky" | "static";
 }
 
+const DEFAULT_ADMIN_LOGIN_URL = "https://www.forhemit.website";
+
 export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const adminUrl = process.env.NEXT_PUBLIC_ADMIN_URL;
+  const loginUrl =
+    process.env.NEXT_PUBLIC_ADMIN_URL?.trim() || DEFAULT_ADMIN_LOGIN_URL;
 
   return (
     <footer className={`footer footer-${variant}`}>
@@ -38,19 +40,17 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
           </>
         )}
         
-        {adminUrl ? (
-          <>
-            <span className="footer-dot" />
-            <a
-              href={adminUrl}
-              className="footer-link"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Admin
-            </a>
-          </>
-        ) : null}
+        <>
+          <span className="footer-dot" />
+          <a
+            href={loginUrl}
+            className="footer-link"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Login
+          </a>
+        </>
       </div>
     </footer>
   );

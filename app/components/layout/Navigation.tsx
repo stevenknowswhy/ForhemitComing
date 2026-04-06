@@ -124,7 +124,12 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
               href={item.href}
               prefetch={navPrefetch}
               className="nav-dropdown-item"
-              onClick={() => setIsOpen(false)}
+              onClick={() => {
+                setIsOpen(false);
+                if (pathname === item.href) {
+                  window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+                }
+              }}
             >
               {item.label}
             </Link>
