@@ -30,7 +30,7 @@ Use **two** Vercel projects pointing at the **same** GitHub repository.
 
 ## Convex (single deployment)
 
-- **Manual (local):** from repo root: **`pnpm convex:deploy`**. Set **`CONVEX_DEPLOY_KEY`** in **`packages/convex/.env.local`** or export it; never commit the key.
+- **Manual (local):** from repo root: **`pnpm convex:deploy`**. Env is loaded from **`packages/convex/.env.local`** if present, otherwise **`apps/admin/.env.local`** or **`apps/marketing/.env.local`** (same **`CONVEX_DEPLOYMENT`** as the apps). **`CONVEX_DEPLOY_KEY`** must be in one of those files for deploy; never commit it.
 - **Do not** run **`convex deploy`** from **`apps/admin`** or **`apps/marketing`** (no Convex project files there).
 - **CI:** **`.github/workflows/convex-deploy.yml`** runs on **`push` to `main`** when files under **`packages/convex/**`** change. Add GitHub secret **`CONVEX_DEPLOY_KEY`**. Without it, the workflow fails on those pushes.
 
