@@ -5,27 +5,29 @@
 
 ## Integration with current codebase
 
-Today (`ForhemitAdminWebsite-main/convex/schema.ts`):
+Today (`packages/convex/convex/schema.ts`):
 
 - There is **no** `users` table.
 - Admin authorization uses `requireAdmin()` in `convex/lib/requireAdmin.ts`: Clerk identity **email** must match super-admin email or `@forhemit.com` domain (plus optional `ADMIN_TOKEN`).
 
 **Migration path (recommended):**
 
-1. Add **`users`** table synced from Clerk (webhook + upsert fallback in mutations per plan).
-2. Set **`isAdmin`** from Clerk `publicMetadata` / role claim (source of truth), with safe default `false` on upsert.
-3. Refactor **`requireAdmin`** to prefer `users.isAdmin` (by `clerkId`), with a **temporary** fallback to current email rules until all admins have rows.
-4. Extend **`auditLogs.entityType`** with `literal("post")` when implementing blog audits.
+1. Add `**users`** table synced from Clerk (webhook + upsert fallback in mutations per plan).
+2. Set `**isAdmin**` from Clerk `publicMetadata` / role claim (source of truth), with safe default `false` on upsert.
+3. Refactor `**requireAdmin**` to prefer `users.isAdmin` (by `clerkId`), with a **temporary** fallback to current email rules until all admins have rows.
+4. Extend `**auditLogs.entityType`** with `literal("post")` when implementing blog audits.
 
 ## `users` table (new)
 
-| Field | Type | Notes |
-|-------|------|--------|
-| `clerkId` | string | Clerk `subject`; unique |
-| `email` | string | Denormalized for display |
-| `isAdmin` | boolean | Default `false`; webhook sets true for role |
-| `createdAt` | number | ms |
-| `updatedAt` | optional number | ms |
+
+| Field       | Type            | Notes                                       |
+| ----------- | --------------- | ------------------------------------------- |
+| `clerkId`   | string          | Clerk `subject`; unique                     |
+| `email`     | string          | Denormalized for display                    |
+| `isAdmin`   | boolean         | Default `false`; webhook sets true for role |
+| `createdAt` | number          | ms                                          |
+| `updatedAt` | optional number | ms                                          |
+
 
 **Indexes:**
 
@@ -33,24 +35,26 @@ Today (`ForhemitAdminWebsite-main/convex/schema.ts`):
 
 ## `posts` table (new)
 
-| Field | Type | Notes |
-|-------|------|--------|
-| `title` | string | |
-| `slug` | string | Unique; validate format in mutation |
-| `excerpt` | optional string | Card / meta fallback |
-| `content` | any | TipTap JSON; **Zod whitelist validated in mutation** before `ctx.db.insert/patch` |
-| `status` | union | `draft` \| `published` \| `scheduled` |
-| `publishedAt` | optional number | Set when moving to published |
-| `scheduledAt` | optional number | Phase 4 scheduling |
-| `version` | number | Start at `1`; bump on meaningful edits (Phase 4 revisions) |
-| `parentId` | optional id("posts") | Revision chain |
-| `authorId` | id("users") | |
-| `featuredImage` | optional string | UploadThing URL |
-| `metaTitle` | optional string | |
-| `metaDescription` | optional string | |
-| `ogImage` | optional string | UploadThing URL |
-| `createdAt` | number | |
-| `updatedAt` | number | |
+
+| Field             | Type                 | Notes                                                                             |
+| ----------------- | -------------------- | --------------------------------------------------------------------------------- |
+| `title`           | string               |                                                                                   |
+| `slug`            | string               | Unique; validate format in mutation                                               |
+| `excerpt`         | optional string      | Card / meta fallback                                                              |
+| `content`         | any                  | TipTap JSON; **Zod whitelist validated in mutation** before `ctx.db.insert/patch` |
+| `status`          | union                | `draft` | `published` | `scheduled`                                               |
+| `publishedAt`     | optional number      | Set when moving to published                                                      |
+| `scheduledAt`     | optional number      | Phase 4 scheduling                                                                |
+| `version`         | number               | Start at `1`; bump on meaningful edits (Phase 4 revisions)                        |
+| `parentId`        | optional id("posts") | Revision chain                                                                    |
+| `authorId`        | id("users")          |                                                                                   |
+| `featuredImage`   | optional string      | UploadThing URL                                                                   |
+| `metaTitle`       | optional string      |                                                                                   |
+| `metaDescription` | optional string      |                                                                                   |
+| `ogImage`         | optional string      | UploadThing URL                                                                   |
+| `createdAt`       | number               |                                                                                   |
+| `updatedAt`       | number               |                                                                                   |
+
 
 **Indexes:**
 
