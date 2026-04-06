@@ -183,7 +183,9 @@ export default defineSchema({
       v.literal("earlyAccessSignup"),
       v.literal("jobApplication"),
       v.literal("documentTemplate"),
-      v.literal("generatedDocument")
+      v.literal("generatedDocument"),
+      v.literal("post"),
+      v.literal("user")
     ),
     entityId: v.string(), // The ID of the affected entity
     changes: v.optional(v.array(v.object({
@@ -309,6 +311,78 @@ export default defineSchema({
     .index("by_status", ["status"])
     .index("by_dueDate", ["dueDate"])
     .index("by_assignedTo", ["assignedTo"]),
+
+  // Clerk-synced users (webhook + upsert fallback; see HARMONIZATION_PLAN)
+  users: defineTable({
+    clerkId: v.string(),
+    email: v.string(),
+    isAdmin: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
+  }).index("by_clerk_id", ["clerkId"]),
+
+  // Blog / resources (TipTap JSON in content; validate in mutations)
+  posts: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    excerpt: v.optional(v.string()),
+    content: v.any(),
+    status: v.union(
+      v.literal("draft"),
+      v.literal("published"),
+      v.literal("scheduled")
+    ),
+    publishedAt: v.optional(v.number()),
+    scheduledAt: v.optional(v.number()),
+    version: v.number(),
+    parentId: v.optional(v.id("posts")),
+    authorId: v.optional(v.id("users")),
+    authorDisplayName: v.optional(v.string()),
+    featuredImage: v.optional(v.string()),
+    metaTitle: v.optional(v.string()),
+    metaDescription: v.optional(v.string()),
+    ogImage: v.optional(v.string()),
+    /** Marketing blog: audience filter & cards */
+    pathway: v.optional(
+      v.union(
+        v.literal("founders"),
+        v.literal("attorneys"),
+        v.literal("lenders"),
+        v.literal("cpas"),
+        v.literal("employees")
+      )
+    ),
+    category: v.optional(v.string()),
+    subtitle: v.optional(v.string()),
+    readTimeOverview: v.optional(v.number()),
+    readTimeDeepDive: v.optional(v.number()),
+    readTimeMethodology: v.optional(v.number()),
+    depthLevel: v.optional(
+      v.union(
+        v.literal("overview"),
+        v.literal("detailed"),
+        v.literal("comprehensive")
+      )
+    ),
+    resilienceSummary: v.optional(v.array(v.string())),
+    relatedPathways: v.optional(
+      v.array(
+        v.union(
+          v.literal("founders"),
+          v.literal("attorneys"),
+          v.literal("lenders"),
+          v.literal("cpas"),
+          v.literal("employees")
+        )
+      )
+    ),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_status_publishedAt", ["status", "publishedAt"])
+    .index("by_author", ["authorId"])
+    .index("by_updatedAt", ["updatedAt"]),
 
   // Phone messages from Retell AI webhook
   phoneMessages: defineTable({
