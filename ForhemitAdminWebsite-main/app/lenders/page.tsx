@@ -1,0 +1,567 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+
+import "./lenders.css";
+
+// FAQ Accordion Component
+function FAQItem({ question, answer, isOpen, onClick }: { 
+  question: string; 
+  answer: string; 
+  isOpen: boolean; 
+  onClick: () => void;
+}) {
+  const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    if (contentRef.current) {
+      setHeight(isOpen ? contentRef.current.scrollHeight : 0);
+    }
+  }, [isOpen]);
+
+  return (
+    <div className={`faq-item ${isOpen ? 'open' : ''}`}>
+      <button className="faq-question" onClick={onClick}>
+        <span>{question}</span>
+        <span className="faq-icon">{isOpen ? '−' : '+'}</span>
+      </button>
+      <div 
+        className="faq-answer"
+        style={{ height: `${height}px` }}
+      >
+        <div className="faq-answer-content" ref={contentRef}>
+          <p>{answer}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function LendersPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  // Scroll reveal animation
+  const observerRef = useRef<IntersectionObserver | null>(null);
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-in');
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    document.querySelectorAll('[data-animate]').forEach((el) => {
+      observerRef.current?.observe(el);
+    });
+
+    return () => observerRef.current?.disconnect();
+  }, []);
+
+  const faqs = [
+    {
+      question: "How does this protect my SBA guaranty?",
+      answer: "The best way to protect an SBA guaranty is to prevent the default in the first place. Our 90-day transition oversight and COOP framework ensures the business remains stable during its most vulnerable window, keeping your loans performing and avoiding the scrutiny that comes with early defaults."
+    },
+    {
+      question: "What is the 20+ employee threshold requirement?",
+      answer: "We focus on businesses with 20+ employees because that is the critical mass where a viable internal management layer exists, making the business highly attractive for SBA lending. This ensures successor management has the depth and capability to maintain operational continuity."
+    },
+    {
+      question: "Do you compete with our lending services?",
+      answer: "Absolutely not. We don't originate loans or compete for your banking relationships. We are an operational risk partner that acquires and stabilizes businesses through ESOP structures, making them better borrowers for you. Our stewardship management works alongside your existing credit facilities."
+    },
+    {
+      question: "What types of businesses do you work with?",
+      answer: "We focus on founder-dependent, closely held businesses with $750K–$3M in EBITDA and 20-75 employees. These are typically the types of companies that make up a significant portion of SBA loan portfolios—businesses where succession risk is highest and our continuity framework has the greatest impact."
+    },
+    {
+      question: "What happens during the 90-day transition?",
+      answer: "We implement our Continuity of Operations (COOP) framework: systematizing tribal knowledge, securing leadership succession from the 20+ employee pool, and installing disaster-proof operational systems. Throughout this period, we maintain close oversight with early warning systems to ensure the business—and your loan—remains stable."
+    },
+    {
+      question: "How do you ensure SBA compliance?",
+      answer: "We proactively structure every transaction to meet SOP 50 10 8 requirements. This includes comprehensive citizenship audits of ESOP beneficiaries, independent ERISA-compliant valuations, legal certifications from qualified ERISA/SBA counsel, and full disclosure of our advisory role as non-management transition consultants."
+    }
+  ];
+
+  return (
+    <div className="lenders-wrapper">
+      <div className="lenders-background"></div>
+
+      <main className="lenders-main" id="main-content">
+        {/* Hero Section */}
+        <section className="lenders-hero">
+          <div className="container">
+            <div className="lenders-hero-content">
+              <span className="lenders-eyebrow" data-animate="fade-up">For Lending Institutions</span>
+              <h1 className="lenders-title" data-animate="fade-up" data-delay="100">
+                Earning Lenders Confidence
+              </h1>
+              <p className="lenders-lead" data-animate="fade-up" data-delay="200">
+                Secure your collateral with operational-level early warning systems that stop risk before it impacts your financials.
+              </p>
+              <div className="lenders-hero-cta" data-animate="fade-up" data-delay="300">
+                <a href="#contact" className="cta-button magnetic">
+                  Schedule a Portfolio Risk Assessment
+                </a>
+              </div>
+            </div>
+            
+            {/* Scroll indicator */}
+            <div className="scroll-indicator" data-animate="fade-up" data-delay="500">
+              <div className="scroll-mouse">
+                <div className="scroll-wheel"></div>
+              </div>
+              <span>Scroll to explore</span>
+            </div>
+          </div>
+        </section>
+
+        {/* The Friday 3 PM vs Tuesday Morning Pitch */}
+        <section className="lenders-section pitch-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>The &quot;Friday at 3 PM vs. Tuesday Morning&quot; Scenario</h2>
+            </div>
+            
+            <div className="pitch-grid">
+              {/* Status Quo - Friday 3 PM Crisis */}
+              <div className="pitch-card crisis" data-animate="slide-left">
+                <div className="pitch-visual">
+                  <div className="crisis-image">
+                    <div className="phone-icon">📞</div>
+                    <div className="crisis-overlay">
+                      <span className="time-badge">Fri 3:00 PM</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pitch-content">
+                  <span className="pitch-label crisis-label">The Status Quo</span>
+                  <h3>The Disease: Stage 4</h3>
+                  <p className="pitch-quote">
+                    &quot;Right now, in a traditional ESOP transition, how do you find out that a company is in trouble? 
+                    You get a phone call on a Friday at 3:00 PM. The CEO tells you they are going to miss Monday&apos;s 
+                    debt service payment.&quot;
+                  </p>
+                  <p className="pitch-detail">
+                    Why? Because you find out their CFO left 90 days ago, the accounting department has been 
+                    flying blind, and cash flow has seized up. By the time you get that phone call, the damage 
+                    is catastrophic. You aren&apos;t managing a transition; you are managing a crisis, and the loan 
+                    is headed straight to the workout group.
+                  </p>
+                </div>
+              </div>
+
+              {/* Forhemit Reality - Tuesday Morning Control */}
+              <div className="pitch-card solution" data-animate="slide-right">
+                <div className="pitch-visual">
+                  <div className="solution-image">
+                    <div className="report-icon">📋</div>
+                    <div className="solution-overlay">
+                      <span className="time-badge solution-time">Tue 9:00 AM</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="pitch-content">
+                  <span className="pitch-label solution-label">The Forhemit Reality</span>
+                  <h3>The Early Diagnosis</h3>
+                  <p className="pitch-quote">
+                    &quot;With Forhemit&apos;s 24-month stewardship, that Friday afternoon call never happens. 
+                    Instead, you get an update from us on a Tuesday morning, 48 hours after that CFO resigns.&quot;
+                  </p>
+                  <p className="pitch-detail">
+                    But it&apos;s not a panic call; it&apos;s a status report. We tell you: &quot;The CFO has departed. 
+                    Per the COOP playbook we built prior to closing, the cross-trained Controller has already 
+                    stepped in as interim CFO. The books are stable, a search firm was engaged yesterday, 
+                    and there is zero threat to your debt service.&quot;
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* The Bottom Line */}
+            <div className="bottom-line" data-animate="fade-up">
+              <div className="bottom-line-content">
+                <span className="bottom-line-label">The Bottom Line: The Cure</span>
+                <p>
+                  A fundamental principle holds true across business, medicine, and life: <strong>early engagement 
+                  with a problem preserves the greatest number of solutions.</strong> Most lending models are reactive, 
+                  triggered only when the event has impacted the balance sheet — this is frequently months after the cause.
+                </p>
+                <p style={{ marginTop: '1rem' }}>
+                  Forhemit engages at the operational level; we provide that critical advantage of an early warning system. 
+                  We help you handle the situation at Stage One with easy to manage adjustments, rather than being forced 
+                  to consider limited, high-stakes options at Stage Four.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* The Lender's Challenge Section */}
+        <section className="lenders-section threat-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>The Lender&apos;s Challenge: Vulnerability in Transition</h2>
+              <p className="section-intro">
+                SBA portfolio data consistently highlights a critical vulnerability: early defaults in 
+                acquisition financing are rarely caused by a flawed business model. They are driven by 
+                execution missteps, leadership vacuums, and sudden operational disruptions following a founder&apos;s exit.
+              </p>
+            </div>
+
+            <div className="threat-cards" data-animate="fade-up">
+              <div className="threat-card">
+                <span className="threat-icon">⚡</span>
+                <h3>Rapid Activation</h3>
+                <p>When the unexpected strikes during a transition, the business needs more than a financial model; it needs a tested operational playbook. We ensure backup systems activate within hours.</p>
+              </div>
+              <div className="threat-card">
+                <span className="threat-icon">🔗</span>
+                <h3>Seamless Operations</h3>
+                <p>Critical vendors are notified through pre-established channels, and invoicing continues uninterrupted. The business keeps running even when leadership changes.</p>
+              </div>
+              <div className="threat-card">
+                <span className="threat-icon">💰</span>
+                <h3>Uninterrupted Debt Service</h3>
+                <p>Cash flow is protected, the system absorbs the shock, and the monthly payment is made on schedule. Your collateral remains secure throughout the transition.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Our Approach Section */}
+        <section className="lenders-section coop-section">
+          <div className="container">
+            <div className="coop-grid">
+              <div className="coop-content" data-animate="slide-right">
+                <span className="coop-eyebrow">Our Approach</span>
+                <h2 className="coop-title">Disaster-Tested Continuity of Operations (COOP)</h2>
+
+                <div className="coop-intro">
+                  <p>
+                    At Forhemit Transition Stewardship Co., we treat business transitions with the same
+                    rigorous preparation required for crisis management.
+                  </p>
+                  <p>
+                    Drawing on over a decade of experience leading disaster preparedness and response
+                    for the City and County of San Francisco, we apply specialized disciplines to protect
+                    your collateral.
+                  </p>
+                </div>
+
+                <div className="coop-benefits">
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Operational Continuity</h3>
+                      <p>We engineer operational continuity—not just financial restructuring</p>
+                    </div>
+                  </div>
+
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14,2 14,8 20,8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <polyline points="10,9 9,9 8,9"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Structured Playbooks</h3>
+                      <p>Pre-built operational frameworks for seamless transitions</p>
+                    </div>
+                  </div>
+
+                  <div className="coop-benefit">
+                    <div className="coop-benefit-icon">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                      </svg>
+                    </div>
+                    <div className="coop-benefit-content">
+                      <h3>Risk Mitigation</h3>
+                      <p>Proactive protection ensuring your credit memo remains accurate</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="coop-visual" data-animate="slide-left">
+                <div className="coop-image-container">
+                  <img
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
+                    alt="COOP operational continuity framework"
+                  />
+                  <div className="coop-overlay">
+                    <div className="coop-card-overlay">
+                      <div className="card-mock">
+                        <div className="card-header">
+                          <div className="card-title">Credit Memo</div>
+                          <div className="card-status">✓ Verified</div>
+                        </div>
+                        <div className="card-metrics">
+                          <div className="metric">
+                            <span className="metric-value">1.45x</span>
+                            <span className="metric-label">DSCR</span>
+                          </div>
+                          <div className="metric">
+                            <span className="metric-value">$2.8M</span>
+                            <span className="metric-label">EBITDA</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="coop-chart-overlay">
+                      <div className="mini-chart">
+                        <svg viewBox="0 0 100 40" className="chart-svg">
+                          <path d="M0,30 L20,25 L40,35 L60,20 L80,15 L100,10" stroke="var(--lenders-accent)" strokeWidth="2" fill="none"/>
+                          <circle cx="20" cy="25" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="40" cy="35" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="60" cy="20" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="80" cy="15" r="2" fill="var(--lenders-accent)"/>
+                          <circle cx="100" cy="10" r="2" fill="var(--lenders-accent)"/>
+                        </svg>
+                        <div className="chart-label">Operational Stability</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* SBA Compliance Section */}
+        <section className="lenders-section what-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>Uncompromising SBA Compliance</h2>
+              <p className="section-intro">SOP 50 10 8 & Beyond</p>
+            </div>
+
+            <div className="coop-framework" data-animate="fade-up">
+              <div className="coop-badge">Full Regulatory Alignment</div>
+              <p className="coop-subtitle">We recognize the shifting regulatory landscape and proactively structure every transaction to meet the most rigorous SBA eligibility and compliance mandates, ensuring a smooth path through LGPC submission.</p>
+            </div>
+
+            <div className="hardening-steps">
+              <div className="harden-step" data-animate="fade-up" data-delay="0">
+                <div className="harden-icon">✓</div>
+                <h3>1. Strict Eligibility & Citizenship Audits</h3>
+                <p>We conduct comprehensive citizenship and residency audits of all ESOP beneficiaries to ensure absolute compliance with Policy Notice 5000-876441. 100% Verification: We certify that all participants are U.S. Citizens or Nationals whose principal residence is in the U.S.</p>
+              </div>
+              
+              <div className="harden-step" data-animate="fade-up" data-delay="100">
+                <div className="harden-icon">📊</div>
+                <h3>2. ESOP Trust & ERISA Standards</h3>
+                <p>The ESOP trust acquires 100% equity, easily satisfying the 51% requirement. All packages include an ERISA-compliant valuation report from an independent appraiser (Procedural Notice 5000-872764) and legal opinions confirming trust compliance.</p>
+              </div>
+              
+              <div className="harden-step" data-animate="fade-up" data-delay="200">
+                <div className="harden-icon">🎯</div>
+                <h3>3. Transparent SBA Agent Governance</h3>
+                <p>We operate with absolute clarity regarding governance, strictly adhering to SBA Agent guidelines (SOP 50 10 7.1). We serve as specialized transition consultants for a strict 90-day post-close period—the borrower's independent management team retains exclusive operational control.</p>
+              </div>
+            </div>
+
+            <div className="sop-alert" data-animate="fade-up">
+              <div className="sop-badge">Fee Transparency</div>
+              <p className="sop-text">
+                All compensation is a fixed, non-contingent advisory fee, fully disclosed on SBA Form 159. 
+                We provide no guarantees or keepwells; the borrower's creditworthiness is assessed on a standalone basis.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* 90-Day Early Warning System Section */}
+        <section className="lenders-section why-section section-alt">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>Post-Close Observability</h2>
+              <p className="section-intro">The 90-Day Early Warning System</p>
+            </div>
+
+            <div className="benefits-grid">
+              <div className="benefit-card" data-animate="slide-right">
+                <div className="benefit-content">
+                  <span className="benefit-number">01</span>
+                  <h3>DSCR Trajectory Drop</h3>
+                  <p>When the Debt Service Coverage Ratio drops below 1.25x trailing 3-month average, we trigger immediate board notification and advisory review of non-essential distributions. Proactive intervention prevents default.</p>
+                </div>
+                <div className="benefit-image">
+                  <img 
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdGxJ5CeLAZPcI2XFHu8ORonq6MaQyfrGUBxS" 
+                    alt="Financial monitoring dashboard" 
+                  />
+                </div>
+              </div>
+
+              <div className="benefit-card reverse" data-animate="slide-left">
+                <div className="benefit-content">
+                  <span className="benefit-number">02</span>
+                  <h3>Cyber / IT Breach Response</h3>
+                  <p>In the event of any verified compromise, we activate our COOP Incident Response protocol immediately. A written incident report is delivered to the Lender within 72 hours, with full remediation steps outlined.</p>
+                </div>
+                <div className="benefit-image">
+                  <img 
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDmGV07k85Eem6OqKGFXsI071p4dSijCb2oYcR" 
+                    alt="Cybersecurity monitoring" 
+                  />
+                </div>
+              </div>
+
+              <div className="benefit-card" data-animate="slide-right">
+                <div className="benefit-content">
+                  <span className="benefit-number">03</span>
+                  <h3>Continuous Monitoring</h3>
+                  <p>Following funding, we implement a continuous monitoring and reporting framework during the critical transition period to provide lenders with unparalleled visibility into borrower performance and operational health.</p>
+                </div>
+                <div className="benefit-image">
+                  <img 
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
+                    alt="Real-time monitoring systems" 
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Complete Credit Package Section */}
+        <section className="lenders-section how-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>The Complete Credit Package</h2>
+              <p className="section-intro">
+                Without structured transition oversight, leveraged ESOP transactions face elevated default exposure. 
+                We thoroughly mitigate this risk by delivering fully documented, underwriter-ready packages.
+              </p>
+            </div>
+
+            <div className="process-timeline">
+              <div className="timeline-line"></div>
+              
+              <div className="process-step" data-animate="fade-up" data-delay="0">
+                <div className="step-badge">
+                  <span className="step-num">📊</span>
+                </div>
+                <div className="step-card">
+                  <h3>Financials</h3>
+                  <p>3 years historical (tax-reconciled), 13-week post-close cash flow, and 5-year projections (including S-Corp tax benefits and ESOP contribution modeling).</p>
+                </div>
+              </div>
+
+              <div className="process-step" data-animate="fade-up" data-delay="150">
+                <div className="step-badge">
+                  <span className="step-num">✓</span>
+                </div>
+                <div className="step-card">
+                  <h3>Compliance Verification</h3>
+                  <p>ESOP Beneficiary Citizenship Audit & Legal Certifications. Independent ERISA-Compliant Valuation, Equity Injection Verification, & Seller Standby Agreement (120 Months).</p>
+                </div>
+              </div>
+
+              <div className="process-step" data-animate="fade-up" data-delay="300">
+                <div className="step-badge">
+                  <span className="step-num">📋</span>
+                </div>
+                <div className="step-card">
+                  <h3>Operational Playbooks</h3>
+                  <p>The 90-Day Transition Blueprint, COOP Operational Playbook, Completed SBA Form 159, & Management Separation Affidavits. Everything an underwriter needs for confident approval.</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="five-d-content" data-animate="fade-up" style={{ marginTop: '4rem' }}>
+              <div className="who-highlight" style={{ maxWidth: '800px', margin: '0 auto' }}>
+                <span className="highlight-icon">💡</span>
+                <p style={{ fontStyle: 'italic', fontSize: '1.1rem' }}>
+                  &quot;The founder is not the business. We ensure the tenured leadership team has the independent capacity, cross-training, and operational authority to run the company successfully.&quot;
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="lenders-section faq-section section-alt">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <h2>Frequently Asked Questions</h2>
+            </div>
+
+            <div className="faq-container" data-animate="fade-up">
+              {faqs.map((faq, index) => (
+                <FAQItem
+                  key={index}
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={openFaq === index}
+                  onClick={() => toggleFaq(index)}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className="lenders-section cta-section" id="contact">
+          <div className="container">
+            <div className="cta-content" data-animate="fade-up">
+              <h2>Secure Your Portfolio Today</h2>
+              <p className="cta-subtitle">
+                The regulatory landscape is tightening. Your portfolio concentration is showing. 
+                The demographic cliff waits for no one. Partner with Forhemit to secure your collateral 
+                through proven operational continuity frameworks.
+              </p>
+              
+              <div className="cta-options">
+                <div className="cta-option primary" data-animate="slide-right">
+                  <div className="cta-option-badge">Recommended</div>
+                  <h3>Have More Questions?</h3>
+                  <p>Browse our comprehensive FAQ section covering lender partnerships, SBA compliance, risk mitigation strategies, and operational continuity frameworks.</p>
+                  <Link href="/faq" className="cta-button magnetic">
+                    Visit FAQ Page
+                  </Link>
+                </div>
+
+                <div className="cta-option secondary" data-animate="slide-left">
+                  <h3>Schedule a Call</h3>
+                  <p>Speak directly with our stewardship experts to discuss your portfolio's succession risks and explore how our COOP framework can protect your SBA guaranty.</p>
+                  <Link href="/introduction?join=true" className="cta-button secondary">
+                    Book a Call
+                  </Link>
+                </div>
+              </div>
+
+              <div className="cta-contact" data-animate="fade-up">
+                <p>Or contact us directly:</p>
+                <a href="mailto:info@forhemit.com" className="cta-email">info@forhemit.com</a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+    </div>
+  );
+}

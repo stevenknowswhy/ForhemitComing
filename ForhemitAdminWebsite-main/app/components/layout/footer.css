@@ -1,0 +1,174 @@
+/* ── FOOTER ── */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 2rem;
+  text-align: right;
+  z-index: 10;
+  background: var(--bg-primary);
+  border-top: 1px solid rgba(160, 160, 160, 0.2);
+}
+
+/* Static variant - positioned at bottom of content */
+.footer-static {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  right: auto;
+  padding: 1rem 2rem;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+/* Adjust z-index for static variant */
+.footer-static .minimal-nav {
+  z-index: 1;
+}
+
+/* Footer content container */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Footer text (non-interactive) */
+.footer-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Footer dot separator */
+.footer-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-secondary);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.footer-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.footer-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.footer-link:hover {
+  color: var(--text-primary);
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* Tablet adjustments */
+@media (max-width: 768px) {
+  .footer,
+  .footer-static {
+    padding: 0.75rem 1rem;
+  }
+  
+  .footer-content {
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    white-space: normal;
+    line-height: 1.5;
+  }
+}
+
+/* Mobile adjustments */
+@media (max-width: 480px) {
+  .footer,
+  .footer-static {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .footer-content {
+    gap: 0.5rem;
+  }
+  
+  .footer-text,
+  .footer-link {
+    font-size: 0.55rem;
+  }
+  
+  .footer-dot {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+/* Extra small screens - stack layout */
+@media (max-width: 360px) {
+  .footer,
+  .footer-static {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .footer-content {
+    gap: 0.35rem 0.5rem;
+  }
+  
+  .footer-text,
+  .footer-link {
+    font-size: 0.5rem;
+  }
+  
+  .footer-dot {
+    width: 2px;
+    height: 2px;
+  }
+}
+
+/* Very small screens - optimize spacing */
+@media (max-width: 320px) {
+  .footer,
+  .footer-static {
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .footer-content {
+    gap: 0.25rem 0.4rem;
+  }
+  
+  .footer-text,
+  .footer-link {
+    font-size: 0.45rem;
+  }
+}

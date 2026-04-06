@@ -1,0 +1,84 @@
+/* Letters Page Styles */
+
+.letters-page {
+  padding: 0;
+}
+
+/* Modal width override - letters need more space */
+.letter-modal-wide {
+  max-width: 1200px !important;
+}
+
+/* Modal body - remove padding for letter generator */
+.letter-modal-body {
+  padding: 0 !important;
+  overflow: auto;
+}
+
+/* Ensure letter generator fits properly in modal */
+.letter-modal-body .ilg-container {
+  border: none;
+  border-radius: 0;
+  min-height: 600px;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+  /* Hide sidebar and navigation */
+  .admin-sidebar-stitch,
+  .sidebar-header,
+  .sidebar-nav,
+  .sidebar-menu,
+  .sidebar-footer,
+  .users-mobile-bottom-nav,
+  .admin-mobile-appbar,
+  .admin-mobile-bottom-nav {
+    display: none !important;
+  }
+
+  /* Hide modal chrome */
+  .template-modal-header,
+  .letter-modal-header {
+    display: none !important;
+  }
+
+  /* Reset modal for print */
+  .template-modal-overlay {
+    background: white !important;
+    position: static !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .template-modal-content,
+  .letter-modal-wide {
+    max-width: none !important;
+    max-height: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+
+  .template-modal-body,
+  .letter-modal-body {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+
+  /* Hide letters page UI */
+  .letters-page .admin-page-header,
+  .letters-page .templates-grid {
+    display: none !important;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .letter-modal-wide {
+    max-width: 100% !important;
+    margin: 0;
+    border-radius: 0;
+    max-height: 100vh;
+  }
+}

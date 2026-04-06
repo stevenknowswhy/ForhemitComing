@@ -1,0 +1,64 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - CTA SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.cta-section {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(180deg, transparent 0%, var(--af-bg-secondary) 30%, var(--af-bg-secondary) 70%, transparent 100%);
+}
+
+.cta-content {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.cta-content h2 {
+  margin-bottom: var(--space-md);
+}
+
+.cta-context {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-md);
+}
+
+.cta-details {
+  color: var(--af-text-muted);
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Assessment Areas ── */
+.assessment-areas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.assessment-item {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--af-accent);
+  padding: 0.75rem 1.5rem;
+  background: var(--af-accent-subtle);
+  border: 1px solid var(--af-border-accent);
+  border-radius: 100px;
+}
+
+/* ── CTA Button Large ── */
+.cta-section .cta-button {
+  padding: 1.25rem 2.5rem;
+  font-size: var(--text-base);
+  margin-bottom: var(--space-md);
+}
+
+/* ── CTA Note ── */
+.cta-note {
+  font-size: var(--text-xs);
+  color: var(--af-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 0;
+}

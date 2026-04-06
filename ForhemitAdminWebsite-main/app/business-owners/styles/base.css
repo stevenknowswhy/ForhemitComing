@@ -1,0 +1,258 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - BASE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@import "../../styles/theme.css";
+
+:root {
+  --bo-bg: var(--bg-primary);
+  --bo-bg-secondary: var(--bg-secondary);
+  --bo-bg-dark: var(--bg-tertiary);
+  --bo-text-primary: var(--text-primary);
+  --bo-text-secondary: var(--text-secondary);
+  --bo-accent: var(--color-brand);
+  --bo-accent-light: var(--color-brand-hover);
+  --bo-muted: var(--text-secondary);
+  --bo-border: var(--border-accent);
+  /* Theme-aware colors */
+  --bo-overlay-light: var(--shadow-color);
+  --bo-overlay-medium: var(--shadow-color);
+  --bo-overlay-heavy: rgba(0, 0, 0, 0.7);
+  --bo-overlay-darker: rgba(0, 0, 0, 0.8);
+}
+
+/* Light Theme Overrides */
+[data-theme="light"] {
+  --bo-overlay-light: rgba(26, 22, 18, 0.2);
+  --bo-overlay-medium: rgba(26, 22, 18, 0.4);
+  --bo-overlay-heavy: rgba(26, 22, 18, 0.6);
+  --bo-overlay-darker: rgba(26, 22, 18, 0.75);
+}
+
+/* ── Base ── */
+.business-owners-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--bo-bg);
+  color: var(--bo-text-primary);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.business-owners-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 20% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+  transition: background 0.3s ease;
+}
+
+/* ── Logo Header ── */
+.business-owners-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.business-owners-logo-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.business-owners-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--metallic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease, background 0.3s ease;
+  display: inline-block;
+}
+
+.business-owners-logo-link:hover .business-owners-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.business-owners-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--bo-accent);
+  transition: width 0.3s ease;
+}
+
+.business-owners-logo-link:hover .business-owners-logo-underline {
+  width: 100%;
+}
+
+/* ── Container ── */
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ── Main Content ── */
+.business-owners-main {
+  position: relative;
+  z-index: 1;
+  padding-top: 80px;
+}
+
+/* ── Sections ── */
+.business-owners-section {
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-alt {
+  background: linear-gradient(180deg, transparent 0%, var(--bg-card) 50%, transparent 100%);
+}
+
+.section-dark {
+  background: var(--bo-bg-dark);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin-bottom: 1rem;
+}
+
+.section-intro {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.7;
+}
+
+.content-block {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.content-block h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.content-block p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.content-block ul {
+  margin: 1rem 0 1.25rem 1.5rem;
+  padding: 0;
+}
+
+.content-block li {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Luxury Section (Two Column) ── */
+.luxury-section {
+  padding: 5rem 0;
+}
+
+.luxury-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.luxury-content h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.luxury-content p {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+
+.luxury-content ul {
+  margin: 1rem 0 1.25rem 1.5rem;
+  padding: 0;
+}
+
+.luxury-content li {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+
+.luxury-image {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+}
+
+.luxury-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.luxury-image:hover img {
+  transform: scale(1.03);
+}
+
+/* ── Footer Override ── */
+/* Make footer static instead of fixed on Business Owners page */
+.business-owners-wrapper .footer {
+  position: static;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  background: var(--bo-bg);
+}

@@ -1,0 +1,165 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - RESPONSIVE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Desktop Styles (min-width: 900px) ── */
+@media (min-width: 900px) {
+  /* Luxury Section Two Column */
+  .luxury-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+  
+  .luxury-image {
+    height: 100%;
+    min-height: 350px;
+  }
+}
+
+/* ── Tablet Styles ── */
+@media (max-width: 900px) {
+  /* Hero */
+  .business-owners-hero .container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    text-align: center;
+    order: 1;
+  }
+
+  .hero-image {
+    order: 2;
+  }
+
+  .hero-image img {
+    max-width: 450px;
+  }
+
+  .business-owners-title {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+  }
+
+  /* Comparison */
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Stakeholders */
+  .stakeholders-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Timeline */
+  .steps-container {
+    padding-left: 2rem;
+  }
+
+  .timeline-line {
+    left: 1rem;
+  }
+
+  .step-badge {
+    left: -1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .step-num {
+    font-size: 0.6rem;
+  }
+
+  .step-icon {
+    font-size: 0.9rem;
+  }
+
+  .step-card {
+    margin-left: 1rem;
+    padding: 1.25rem;
+  }
+
+  .step-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .step-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .step-connector {
+    display: none;
+  }
+}
+
+/* ── Mobile Styles ── */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1.25rem;
+  }
+
+  /* Hero */
+  .business-owners-hero {
+    min-height: auto;
+    padding: 5rem 0 3rem;
+  }
+
+  .hero-image img {
+    max-width: 320px;
+  }
+
+  /* Sections */
+  .business-owners-section {
+    padding: 3.5rem 0;
+  }
+
+  /* Comparison */
+  .comparison-card {
+    padding: 1.5rem;
+  }
+
+  .comparison-image {
+    margin: -1.5rem -1.5rem 1.25rem;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .comparison-image img {
+    height: 150px;
+  }
+
+  /* Stakeholders */
+  .stakeholder-card.hover-reveal {
+    height: 280px;
+  }
+
+  .stakeholder-card.hover-reveal:hover {
+    height: 400px;
+  }
+
+  .stakeholder-overlay {
+    padding: 1.25rem;
+  }
+
+  .stakeholder-overlay h3 {
+    font-size: 1.1rem;
+  }
+
+  .stakeholder-card:hover .stakeholder-overlay h3 {
+    font-size: 1.2rem;
+  }
+
+  .stakeholder-description p {
+    font-size: 0.85rem;
+  }
+
+  /* CTA */
+  .business-owners-cta {
+    padding: 4rem 0;
+  }
+
+  .business-owners-cta h2 {
+    font-size: 1.5rem;
+  }
+}

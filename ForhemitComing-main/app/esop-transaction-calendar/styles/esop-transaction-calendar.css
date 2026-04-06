@@ -1,0 +1,963 @@
+/* Scoped to .etc-root — safe to import on any page */
+
+.etc-root {
+  --etc-navy: #1e2d45;
+  --etc-brass: #c4954a;
+  --etc-cream: #fdfaf6;
+  --etc-bg: #f4f0e8;
+  --etc-surface: #ede8df;
+  --etc-text: #1a1714;
+  --etc-text-mid: #3d3830;
+  --etc-text-dim: #7a7068;
+  --etc-rule: rgba(26, 23, 20, 0.09);
+  --etc-rule-mid: rgba(26, 23, 20, 0.16);
+  --etc-gate: #7a2020;
+  --etc-gate-bg: rgba(122, 32, 32, 0.08);
+  --etc-gate-bd: rgba(122, 32, 32, 0.4);
+
+  box-sizing: border-box;
+  color: var(--etc-text);
+  background: var(--etc-bg);
+  font-family: var(--font-etc-body), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--etc-rule-mid);
+}
+
+.etc-root *,
+.etc-root *::before,
+.etc-root *::after {
+  box-sizing: border-box;
+}
+
+.etc-skeleton {
+  min-height: 420px;
+  background: linear-gradient(90deg, var(--etc-surface) 25%, var(--etc-cream) 50%, var(--etc-surface) 75%);
+  background-size: 200% 100%;
+  animation: etc-shimmer 1.2s infinite;
+}
+
+@keyframes etc-shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.etc-root--embedded .etc-calendar-wrap {
+  max-height: min(70vh, 720px);
+}
+
+.etc-root--standalone .etc-calendar-wrap {
+  max-height: min(85vh, 900px);
+}
+
+/* Header */
+.etc-header {
+  height: 56px;
+  background: var(--etc-navy);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.etc-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.etc-header-logo {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #ede8e0;
+}
+
+.etc-header-subtitle {
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(237, 232, 224, 0.35);
+}
+
+.etc-header-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.etc-nav-arrow {
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: none;
+  color: rgba(237, 232, 224, 0.6);
+  cursor: pointer;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.etc-nav-arrow:hover {
+  border-color: var(--etc-brass);
+  color: var(--etc-brass);
+}
+
+.etc-nav-month-label {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #ede8e0;
+  min-width: 160px;
+  text-align: center;
+}
+
+.etc-nav-today {
+  font-family: inherit;
+  font-size: 0.58rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--etc-brass);
+  background: none;
+  border: 1px solid rgba(196, 149, 74, 0.35);
+  padding: 0.3rem 0.8rem;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-left: 0.5rem;
+}
+
+.etc-nav-today:hover {
+  background: rgba(196, 149, 74, 0.12);
+}
+
+/* Controls — stacked rows so role chips stay horizontal, full width */
+.etc-controls {
+  background: var(--etc-cream);
+  border-bottom: 1px solid var(--etc-rule-mid);
+  padding: 0.65rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.etc-controls__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  min-width: 0;
+}
+
+.etc-controls__row--main {
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.65rem;
+}
+
+.etc-controls__row--main .etc-role-chips {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.etc-party-tier {
+  display: inline-flex;
+  border: 1px solid var(--etc-rule-mid);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.etc-tier-btn {
+  font-family: inherit;
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border: none;
+  background: var(--etc-surface);
+  color: var(--etc-text-dim);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.etc-tier-btn + .etc-tier-btn {
+  border-left: 1px solid var(--etc-rule-mid);
+}
+
+.etc-tier-btn--on {
+  background: var(--etc-cream);
+  color: var(--etc-text);
+  box-shadow: inset 0 0 0 1px var(--etc-brass);
+}
+
+.etc-two-lender {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.etc-two-lender-label {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  white-space: nowrap;
+}
+
+.etc-two-lender-switch {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  border: none;
+  background: var(--etc-rule-mid);
+  cursor: pointer;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+
+.etc-two-lender-switch::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.etc-two-lender-switch--on {
+  background: #8a3a3a;
+}
+
+.etc-two-lender-switch--on::after {
+  transform: translateX(16px);
+}
+
+.etc-rc-count {
+  font-size: 0.5rem;
+  font-weight: 500;
+  color: var(--etc-text-dim);
+  font-variant-numeric: tabular-nums;
+}
+
+.etc-controls__row--roles {
+  align-items: flex-start;
+}
+
+.etc-controls__row--roles .etc-ctrl-label {
+  flex-shrink: 0;
+  padding-top: 0.32rem;
+}
+
+.etc-controls__row--roles .etc-role-chips {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.etc-controls__row--phases {
+  align-items: center;
+}
+
+.etc-ctrl-label--inline {
+  margin-right: 0.25rem;
+}
+
+.etc-controls::-webkit-scrollbar {
+  display: none;
+}
+
+.etc-ctrl-label {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  flex-shrink: 0;
+}
+
+.etc-ctrl-sep {
+  width: 1px;
+  height: 22px;
+  background: var(--etc-rule-mid);
+  flex-shrink: 0;
+}
+
+.etc-role-chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.etc-role-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid var(--etc-rule);
+  background: none;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+
+.etc-role-chip:hover {
+  background: var(--etc-surface);
+}
+
+.etc-role-chip--selected {
+  border-color: currentcolor;
+  background: var(--etc-surface);
+}
+
+.etc-role-chip--all {
+  border-color: var(--etc-rule-mid);
+  color: var(--etc-text-mid);
+}
+
+.etc-role-chip--all.etc-role-chip--selected {
+  border-color: var(--etc-brass);
+  color: var(--etc-text);
+  background: rgba(196, 149, 74, 0.12);
+}
+
+.etc-rc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.etc-rc-label {
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.etc-phase-chips {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.etc-phase-chip {
+  font-family: inherit;
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.55rem;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  border: none;
+  white-space: nowrap;
+}
+
+.etc-phase-chip:hover {
+  opacity: 0.8;
+}
+
+.etc-start-date {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+}
+
+.etc-start-date label {
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  white-space: nowrap;
+}
+
+.etc-start-date input {
+  font-family: inherit;
+  font-size: 0.68rem;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--etc-rule-mid);
+  border-radius: 3px;
+  background: var(--etc-bg);
+  color: var(--etc-text);
+  width: 130px;
+}
+
+/* Calendar grid */
+.etc-calendar-wrap {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.75rem 1rem 3rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.etc-cal-month {
+  margin-bottom: 2rem;
+  scroll-margin-top: 0.5rem;
+}
+
+.etc-cal-month-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 0.5rem;
+  padding: 0 0.2rem;
+}
+
+.etc-cmh-name {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--etc-text);
+}
+
+.etc-cmh-year {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--etc-text-dim);
+}
+
+.etc-cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-bottom: 1px solid var(--etc-rule-mid);
+  margin-bottom: 2px;
+}
+
+.etc-cal-wd {
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  text-align: center;
+  padding: 0.4rem 0;
+}
+
+.etc-cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: var(--etc-rule);
+  border: 1px solid var(--etc-rule);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.etc-cal-cell {
+  background: var(--etc-cream);
+  min-height: 100px;
+  padding: 0.35rem 0.4rem;
+  position: relative;
+  transition: background 0.12s;
+  cursor: default;
+}
+
+.etc-cal-cell--outside {
+  background: var(--etc-bg);
+}
+
+.etc-cal-cell--outside .etc-cc-num {
+  color: var(--etc-text-dim);
+  opacity: 0.35;
+}
+
+.etc-cal-cell--has-events:hover {
+  background: #f7f3ec;
+}
+
+.etc-cc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+}
+
+.etc-cc-num {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--etc-text-mid);
+  line-height: 1;
+}
+
+.etc-cc-day-badge {
+  font-size: 0.48rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.12rem 0.35rem;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.etc-cal-cell--today .etc-cc-num {
+  background: var(--etc-navy);
+  color: white;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 500;
+}
+
+.etc-cc-events {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.etc-cc-ev {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  border-left: 2px solid;
+  cursor: pointer;
+  transition: all 0.1s;
+  min-height: 18px;
+}
+
+.etc-cc-ev:hover {
+  filter: brightness(0.95);
+  transform: translateX(1px);
+}
+
+.etc-cc-ev-text {
+  font-size: 0.58rem;
+  font-weight: 500;
+  line-height: 1.2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.etc-cc-ev--gate {
+  border-left-width: 3px;
+  animation: etc-gate-pulse 3s ease-in-out infinite;
+}
+
+.etc-cc-ev--2l {
+  border-left-style: dashed;
+}
+
+.etc-cc-ev-tags {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+  margin-left: 2px;
+}
+
+.etc-cc-ev-tag {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@keyframes etc-gate-pulse {
+  0%,
+  100% {
+    box-shadow: none;
+  }
+  50% {
+    box-shadow: inset 0 0 0 1px rgba(122, 32, 32, 0.15);
+  }
+}
+
+.etc-cc-more {
+  font-size: 0.52rem;
+  font-weight: 500;
+  color: var(--etc-brass);
+  cursor: pointer;
+  padding: 1px 4px;
+  letter-spacing: 0.05em;
+  background: none;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+}
+
+.etc-cc-more:hover {
+  text-decoration: underline;
+}
+
+.etc-cc-phase-stripe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+}
+
+.etc-cc-gate-diamond {
+  width: 7px;
+  height: 7px;
+  background: var(--etc-gate);
+  transform: rotate(45deg);
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+
+/* Detail overlay */
+.etc-detail-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(26, 23, 20, 0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10000;
+}
+
+.etc-detail-backdrop--open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.etc-detail-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90vw;
+  background: var(--etc-cream);
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -4px 0 24px rgba(26, 23, 20, 0.12);
+}
+
+.etc-detail-panel--open {
+  transform: translateX(0);
+}
+
+.etc-dp-header {
+  padding: 1.2rem 1.4rem 0.8rem;
+  border-bottom: 1px solid var(--etc-rule);
+  flex-shrink: 0;
+  position: relative;
+}
+
+.etc-dp-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--etc-text-dim);
+  font-size: 1.1rem;
+  padding: 0.25rem;
+  line-height: 1;
+  transition: color 0.15s;
+}
+
+.etc-dp-close:hover {
+  color: var(--etc-text);
+}
+
+.etc-dp-date-label {
+  font-size: 0.56rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  margin-bottom: 0.3rem;
+}
+
+.etc-dp-title {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--etc-text);
+  line-height: 1.15;
+  padding-right: 2rem;
+}
+
+.etc-dp-phase-tag {
+  display: inline-block;
+  font-size: 0.54rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 2px;
+  margin-top: 0.5rem;
+  color: white;
+}
+
+.etc-dp-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1.4rem 2rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.etc-dp-gate-box {
+  background: var(--etc-gate-bg);
+  border: 1px solid var(--etc-gate-bd);
+  border-left: 3px solid var(--etc-gate);
+  padding: 0.9rem 1.1rem;
+  border-radius: 3px;
+  margin-bottom: 1.2rem;
+}
+
+.etc-dpg-label {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--etc-gate);
+  margin-bottom: 0.25rem;
+}
+
+.etc-dpg-title {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--etc-gate);
+  margin-bottom: 0.3rem;
+}
+
+.etc-dpg-desc {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--etc-text-mid);
+  line-height: 1.65;
+}
+
+.etc-dp-event {
+  border-left: 3px solid;
+  border-radius: 3px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+  animation: etc-dp-fade-up 0.2s ease both;
+}
+
+.etc-dp-event--2l {
+  border-left-style: dashed;
+}
+
+@keyframes etc-dp-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.etc-dpe-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.etc-dpe-2l {
+  font-size: 0.46rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.4rem;
+  border-radius: 2px;
+  background: rgba(138, 58, 58, 0.1);
+  color: #8a3a3a;
+  border: 1px solid rgba(138, 58, 58, 0.28);
+}
+
+.etc-dpe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+}
+
+.etc-dpe-ptag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.48rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.4rem;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+.etc-dpe-ptag-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.etc-dpe-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.etc-dpe-role {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.etc-dpe-type {
+  font-size: 0.52rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+}
+
+.etc-dpe-title {
+  font-family: var(--font-etc-display), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--etc-text);
+  line-height: 1.25;
+  margin-bottom: 0.3rem;
+}
+
+.etc-dpe-desc {
+  font-size: 0.73rem;
+  font-weight: 300;
+  color: var(--etc-text-mid);
+  line-height: 1.65;
+}
+
+.etc-dp-divider {
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--etc-text-dim);
+  padding: 0.6rem 0 0.4rem;
+  border-bottom: 1px solid var(--etc-rule);
+  margin-bottom: 0.6rem;
+}
+
+@media (max-width: 900px) {
+  .etc-cal-cell {
+    min-height: 80px;
+  }
+
+  .etc-header-subtitle {
+    display: none;
+  }
+
+  .etc-controls__row--phases {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .etc-header {
+    padding: 0 0.75rem;
+  }
+
+  .etc-controls {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .etc-calendar-wrap {
+    padding: 0.5rem 0.5rem 3rem;
+  }
+
+  .etc-cal-cell {
+    min-height: 64px;
+    padding: 0.25rem;
+  }
+
+  .etc-cc-ev-text {
+    font-size: 0.5rem;
+  }
+
+  .etc-cc-num {
+    font-size: 0.62rem;
+  }
+
+  .etc-cc-day-badge {
+    font-size: 0.42rem;
+  }
+
+  .etc-nav-month-label {
+    min-width: 120px;
+    font-size: 0.95rem;
+  }
+
+  .etc-cmh-name {
+    font-size: 1.2rem;
+  }
+
+  .etc-detail-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.etc-root ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.etc-root ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.etc-root ::-webkit-scrollbar-thumb {
+  background: rgba(26, 23, 20, 0.12);
+  border-radius: 3px;
+}

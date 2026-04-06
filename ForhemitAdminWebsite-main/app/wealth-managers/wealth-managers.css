@@ -1,0 +1,1457 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   WEALTH MANAGERS PAGE STYLES
+   A carefully crafted experience with thoughtful interactions
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@import "../styles/theme.css";
+
+/* ── CSS Variables ── */
+:root {
+  --wealth-bg: var(--bg-primary);
+  --wealth-bg-secondary: var(--bg-secondary);
+  --wealth-bg-card: var(--bg-glass);
+  --wealth-bg-elevated: var(--bg-dropdown);
+  --wealth-text-primary: var(--text-primary);
+  --wealth-text-secondary: var(--text-secondary);
+  --wealth-text-muted: var(--text-secondary);
+  --wealth-accent: var(--color-brand);
+  --wealth-accent-light: var(--color-brand-hover);
+  --wealth-accent-dark: #cc5500;
+  --wealth-accent-glow: var(--glow-brand);
+  --wealth-border: var(--border-subtle);
+  --wealth-border-accent: var(--border-accent);
+  --wealth-success: #00cc66;
+  --wealth-warning: #ffaa00;
+  --wealth-danger: var(--color-error);
+  
+  /* Animation timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-sine: cubic-bezier(0.37, 0, 0.63, 1);
+  --duration-fast: 0.2s;
+  --duration-normal: 0.4s;
+  --duration-slow: 0.8s;
+}
+
+/* ── Base ── */
+.wealth-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--wealth-bg);
+  color: var(--wealth-text-primary);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+.wealth-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.wealth-bg-gradient {
+  position: absolute;
+  inset: -20%;
+  background:
+    radial-gradient(ellipse at 15% 20%, var(--mesh-color-1) 0%, transparent 40%),
+    radial-gradient(ellipse at 85% 60%, var(--mesh-color-2) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 100%, var(--mesh-color-3) 0%, transparent 30%);
+  will-change: transform;
+  transition: background 0.3s ease;
+}
+
+/* ── Logo Header ── */
+.wealth-logo-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+}
+
+.wealth-logo-link {
+  position: relative;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.wealth-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--metallic-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter var(--duration-normal) ease, transform var(--duration-normal) ease, background 0.3s ease;
+  display: inline-block;
+}
+
+.wealth-logo-link:hover .wealth-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.wealth-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--wealth-accent);
+  transition: width var(--duration-normal) var(--ease-out-expo);
+}
+
+.wealth-logo-link:hover .wealth-logo-underline {
+  width: 100%;
+}
+
+/* ── Main Content ── */
+.wealth-main {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Hero Section ── */
+.wealth-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 4rem;
+}
+
+.wealth-hero .container {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
+}
+
+.wealth-hero-content {
+  max-width: 700px;
+}
+
+.wealth-eyebrow {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--wealth-accent);
+  margin-bottom: 1.5rem;
+}
+
+.wealth-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+}
+
+.wealth-title .highlight {
+  color: var(--wealth-accent);
+  position: relative;
+}
+
+.wealth-title .highlight::after {
+  content: '';
+  position: absolute;
+  bottom: 0.05em;
+  left: 0;
+  right: 0;
+  height: 0.1em;
+  background: linear-gradient(90deg, transparent, var(--wealth-accent-glow), transparent);
+  opacity: 0.5;
+}
+
+.wealth-lead {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  font-weight: 300;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.wealth-hero-cta {
+  margin-top: 2rem;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2.5rem;
+  background: var(--wealth-accent);
+  color: #fff;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  border: 2px solid var(--wealth-accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.cta-button:hover {
+  background: transparent;
+  color: var(--wealth-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 40px var(--wealth-accent-glow);
+}
+
+.cta-button:hover::before {
+  transform: translateX(100%);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: var(--wealth-accent);
+}
+
+.cta-button.secondary:hover {
+  background: var(--wealth-accent);
+  color: #fff;
+}
+
+/* Floating AUM Stat */
+.floating-stat {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  will-change: transform;
+}
+
+.stat-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--wealth-accent) 0%,
+    var(--wealth-accent-light) 25%,
+    var(--wealth-accent) 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: rotateRing 20s linear infinite;
+}
+
+.stat-ring::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--wealth-bg);
+}
+
+.stat-number {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--wealth-accent);
+  position: relative;
+  z-index: 1;
+  animation: counterRotate 20s linear infinite;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--wealth-text-secondary);
+  position: relative;
+  z-index: 1;
+  animation: counterRotate 20s linear infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes counterRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--wealth-text-secondary);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.scroll-mouse {
+  width: 26px;
+  height: 40px;
+  border: 2px solid var(--wealth-text-secondary);
+  border-radius: 13px;
+  position: relative;
+  opacity: 0.6;
+}
+
+.scroll-wheel {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: var(--wealth-text-secondary);
+  border-radius: 2px;
+  animation: scrollBounce 2s infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+  50% { transform: translateX(-50%) translateY(8px); opacity: 0.3; }
+}
+
+/* ── Sections ── */
+.wealth-section {
+  padding: 6rem 0;
+  position: relative;
+}
+
+.wealth-section.section-alt {
+  background: var(--wealth-bg-secondary);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 4rem;
+}
+
+.section-eyebrow {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wealth-accent);
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.section-intro {
+  font-size: 1.15rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+}
+
+/* ── Warning Section ── */
+.warning-comparison {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.warning-path {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.warning-path:hover {
+  border-color: var(--wealth-border-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px var(--shadow-color);
+}
+
+.warning-path.traditional {
+  border-left: 4px solid var(--wealth-danger);
+}
+
+.warning-path.esop {
+  border-left: 4px solid var(--wealth-success);
+}
+
+.path-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--wealth-border);
+}
+
+.path-icon {
+  font-size: 1.5rem;
+}
+
+.path-header h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.path-flow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.flow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--wealth-bg-elevated);
+  border-radius: 8px;
+  min-width: 80px;
+}
+
+.flow-step.loss {
+  background: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+.flow-step.gain {
+  background: rgba(0, 204, 102, 0.15);
+  border: 1px solid rgba(0, 204, 102, 0.3);
+}
+
+.flow-step.final {
+  background: var(--wealth-accent-glow);
+  border: 1px solid var(--wealth-border-accent);
+}
+
+.step-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wealth-text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.step-value {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.flow-arrow {
+  color: var(--wealth-text-muted);
+  font-size: 1.25rem;
+}
+
+.path-consequence,
+.path-benefits {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--wealth-border);
+}
+
+.consequence-label,
+.benefit-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--wealth-text-secondary);
+  margin-bottom: 0.75rem;
+}
+
+.consequence-item,
+.benefit-item {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--wealth-text-secondary);
+  padding: 0.4rem 0;
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+.consequence-item::before,
+.benefit-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--wealth-accent);
+}
+
+.warning-vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vs-text {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--wealth-text-muted);
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--wealth-border);
+  border-radius: 50%;
+}
+
+/* ── Benefits Section ── */
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.benefit-card-interactive {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 16px;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+  cursor: default;
+}
+
+.benefit-card-interactive:hover {
+  border-color: var(--wealth-border-accent);
+  transform: translateY(-6px);
+  box-shadow: 0 25px 50px var(--shadow-color);
+}
+
+.benefit-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-icon {
+  font-size: 2.5rem;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.benefit-icon-wrapper.hovered .benefit-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.benefit-number {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--wealth-accent);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--wealth-border-accent);
+  border-radius: 20px;
+}
+
+.benefit-card-interactive h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-card-interactive p {
+  font-size: 0.95rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+.benefit-glow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--wealth-accent-glow) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-normal) ease;
+  transform: translate(-50%, -50%);
+}
+
+.benefit-glow.active {
+  opacity: 1;
+}
+
+/* ── Tax Calculator ── */
+.calculator-section {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.calculator-section h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.tax-calculator {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all var(--duration-slow) var(--ease-out-expo);
+}
+
+.tax-calculator.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.calculator-label {
+  font-size: 0.9rem;
+  color: var(--wealth-text-secondary);
+}
+
+.calculator-value {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--wealth-accent);
+}
+
+.calculator-slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--wealth-bg-elevated);
+  border-radius: 3px;
+  outline: none;
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+}
+
+.calculator-slider:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 4px;
+}
+
+.calculator-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 24px;
+  height: 24px;
+  background: var(--wealth-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--wealth-accent-glow);
+  transition: transform var(--duration-fast) ease;
+}
+
+.calculator-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.calculator-slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  background: var(--wealth-accent);
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 20px var(--wealth-accent-glow);
+}
+
+.calculator-results {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.result-item {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: var(--wealth-bg-elevated);
+}
+
+.result-item.traditional {
+  border: 1px solid var(--color-error);
+}
+
+.result-item.esop {
+  border: 1px solid rgba(0, 204, 102, 0.2);
+}
+
+.result-label {
+  display: block;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wealth-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.result-value {
+  display: block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.result-item.traditional .result-value {
+  color: var(--wealth-danger);
+}
+
+.result-item.esop .result-value {
+  color: var(--wealth-success);
+}
+
+.result-note {
+  font-size: 0.8rem;
+  color: var(--wealth-text-muted);
+}
+
+.result-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.result-divider .vs {
+  font-size: 0.75rem;
+  color: var(--wealth-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.result-divider .diff {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--wealth-accent);
+}
+
+/* ── Roles Section ── */
+.roles-visualization {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.role-card {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.role-card:hover {
+  border-color: var(--wealth-border-accent);
+  transform: translateY(-4px);
+}
+
+.role-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.role-card h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.role-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.role-list li {
+  font-size: 0.95rem;
+  color: var(--wealth-text-secondary);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--wealth-border);
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.role-list li:last-child {
+  border-bottom: none;
+}
+
+.role-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--wealth-accent);
+}
+
+.partnership-connector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 100%;
+  min-height: 200px;
+}
+
+.connector-line {
+  width: 2px;
+  flex: 1;
+  background: linear-gradient(180deg, var(--wealth-border) 0%, var(--wealth-accent) 50%, var(--wealth-border) 100%);
+}
+
+.connector-center {
+  width: 60px;
+  height: 60px;
+  background: var(--wealth-bg-card);
+  border: 2px solid var(--wealth-accent);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.partnership-icon {
+  font-size: 1.25rem;
+}
+
+.partnership-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--wealth-text-secondary);
+}
+
+/* ── Reluctant Seller Section ── */
+.reluctant-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.reluctant-content {
+  max-width: 550px;
+}
+
+.reluctant-lead {
+  font-size: 1.15rem;
+  color: var(--wealth-text-primary);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.reluctant-content p {
+  font-size: 1rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.protection-pillars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pillar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 50px;
+  transition: all var(--duration-normal) ease;
+}
+
+.pillar:hover {
+  border-color: var(--wealth-border-accent);
+  transform: translateX(5px);
+}
+
+.pillar-icon {
+  font-size: 1.25rem;
+}
+
+.pillar-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.reluctant-visual {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.reluctant-visual img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.visual-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background: linear-gradient(transparent, rgba(10, 10, 8, 0.95));
+}
+
+.overlay-stat {
+  text-align: center;
+}
+
+.overlay-number {
+  display: block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--wealth-accent);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.overlay-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--wealth-text-secondary);
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* ── Process Section ── */
+.partnership-timeline {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.partnership-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: linear-gradient(180deg, var(--wealth-border) 0%, var(--wealth-accent) 20%, var(--wealth-accent) 80%, var(--wealth-border) 100%);
+  transform: translateX(-50%);
+}
+
+.partnership-step {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all var(--duration-slow) var(--ease-out-expo);
+}
+
+.partnership-step.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.partnership-step:last-child {
+  margin-bottom: 0;
+}
+
+.partnership-step.left {
+  grid-template-areas: "content connector .";
+}
+
+.partnership-step.right {
+  grid-template-areas: ". connector content";
+}
+
+.partnership-step.left .step-content {
+  grid-area: content;
+  text-align: right;
+}
+
+.partnership-step.right .step-content {
+  grid-area: content;
+  text-align: left;
+}
+
+.partnership-step .step-connector {
+  grid-area: connector;
+  position: relative;
+  z-index: 1;
+}
+
+.step-dot {
+  width: 20px;
+  height: 20px;
+  background: var(--wealth-bg);
+  border: 3px solid var(--wealth-accent);
+  border-radius: 50%;
+  position: relative;
+  transition: all var(--duration-normal) ease;
+}
+
+.partnership-step.active .step-dot {
+  background: var(--wealth-accent);
+  box-shadow: 0 0 20px var(--wealth-accent-glow);
+}
+
+.step-content {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  transition: all var(--duration-normal) ease;
+}
+
+.step-content:hover {
+  border-color: var(--wealth-border-accent);
+}
+
+.step-badge {
+  display: inline-block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--wealth-accent);
+  padding: 0.35rem 0.75rem;
+  border: 1px solid var(--wealth-border-accent);
+  border-radius: 20px;
+  margin-bottom: 0.75rem;
+}
+
+.step-content h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.step-content p {
+  font-size: 0.95rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── FAQ Section ── */
+.faq-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all var(--duration-normal) ease;
+}
+
+.faq-item:hover {
+  border-color: var(--wealth-border-accent);
+}
+
+.faq-item.open {
+  border-color: var(--wealth-border-accent);
+  background: var(--wealth-bg-elevated);
+}
+
+.faq-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--wealth-text-primary);
+  transition: color var(--duration-normal) ease;
+}
+
+.faq-question:hover {
+  color: var(--wealth-accent);
+}
+
+.faq-icon {
+  font-size: 1.5rem;
+  color: var(--wealth-accent);
+  flex-shrink: 0;
+  transition: transform var(--duration-normal) var(--ease-out-expo);
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  height: 0;
+  overflow: hidden;
+  transition: height var(--duration-normal) var(--ease-out-expo);
+}
+
+.faq-answer-content {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.faq-answer-content p {
+  font-size: 0.95rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* ── CTA Section ── */
+.cta-section {
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-subtle) 30%, var(--color-brand-subtle) 70%, transparent 100%);
+}
+
+.cta-content {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-eyebrow {
+  display: block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--wealth-accent);
+  margin-bottom: 1rem;
+}
+
+.cta-content h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.cta-subtitle {
+  font-size: 1.1rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.7;
+  margin-bottom: 3rem;
+}
+
+.cta-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.cta-option {
+  background: var(--wealth-bg-card);
+  border: 1px solid var(--wealth-border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  position: relative;
+  transition: all var(--duration-normal) var(--ease-out-expo);
+}
+
+.cta-option:hover {
+  border-color: var(--wealth-border-accent);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px var(--shadow-color);
+}
+
+.cta-option.primary {
+  border-color: var(--wealth-border-accent);
+  background: linear-gradient(135deg, var(--wealth-bg-card) 0%, var(--color-brand-subtle) 100%);
+}
+
+.cta-option-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--wealth-accent);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+}
+
+.cta-option h3 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+}
+
+.cta-option p {
+  font-size: 0.95rem;
+  color: var(--wealth-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.cta-contact {
+  text-align: center;
+}
+
+.cta-contact p {
+  font-size: 0.9rem;
+  color: var(--wealth-text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.cta-email {
+  font-size: 1.1rem;
+  color: var(--wealth-accent);
+  text-decoration: none;
+  font-weight: 500;
+  position: relative;
+}
+
+.cta-email::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--wealth-accent);
+  transition: width var(--duration-normal) var(--ease-out-expo);
+}
+
+.cta-email:hover::after {
+  width: 100%;
+}
+
+/* ── Animation ── */
+[data-animate] {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--duration-slow) var(--ease-out-expo), 
+              transform var(--duration-slow) var(--ease-out-expo);
+}
+
+[data-animate]:not(.animate-in) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-animate="slide-right"]:not(.animate-in) {
+  transform: translateX(-50px);
+}
+
+[data-animate="slide-left"]:not(.animate-in) {
+  transform: translateX(50px);
+}
+
+[data-animate].animate-in {
+  opacity: 1;
+  transform: translateY(0) translateX(0);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .wealth-hero .container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .floating-stat {
+    display: none;
+  }
+  
+  .warning-comparison {
+    grid-template-columns: 1fr;
+  }
+  
+  .warning-vs {
+    padding: 1rem 0;
+  }
+  
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .roles-visualization {
+    grid-template-columns: 1fr;
+  }
+  
+  .partnership-connector {
+    flex-direction: row;
+    min-height: auto;
+    padding: 1rem 0;
+  }
+  
+  .connector-line {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--wealth-border) 0%, var(--wealth-accent) 50%, var(--wealth-border) 100%);
+  }
+  
+  .reluctant-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .reluctant-visual {
+    order: -1;
+  }
+  
+  .partnership-timeline::before {
+    left: 1.5rem;
+  }
+  
+  .partnership-step,
+  .partnership-step.left,
+  .partnership-step.right {
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "connector content" !important;
+    gap: 1.5rem;
+  }
+  
+  .partnership-step .step-content {
+    text-align: left !important;
+  }
+  
+  .cta-options {
+    grid-template-columns: 1fr;
+  }
+  
+  .calculator-results {
+    grid-template-columns: 1fr;
+  }
+  
+  .result-divider {
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wealth-hero {
+    padding: 7rem 0 3rem;
+  }
+  
+  .wealth-section {
+    padding: 4rem 0;
+  }
+  
+  .path-flow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .flow-arrow {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+  
+  .protection-pillars {
+    flex-direction: column;
+  }
+  
+  .pillar {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .overlay-number {
+    font-size: 2.5rem;
+  }
+}

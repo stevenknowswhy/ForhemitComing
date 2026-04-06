@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forhemit — 120-Day ESOP Roadmap</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brass:#B8965A;--brass-dim:rgba(184,150,90,0.09);--brass-border:rgba(184,150,90,0.35);
+  --ink:#0D0D0D;--muted:#666;--line:#e5e2dd;
+  --green:#3B6D11;--green-bg:#EAF3DE;
+  --amber:#854F0B;--amber-bg:#FAEEDA;
+  --red:#A32D2D;--red-bg:#FCEBEB;
+  --purple:#534AB7;--purple-bg:#EEEDFE;
+  --ff-display:'Cormorant Garamond',Georgia,serif;
+  --ff-body:'Jost',system-ui,sans-serif;
+}
+html,body{font-family:var(--ff-body);color:var(--ink);background:#fff}
+.page{max-width:860px;margin:0 auto;padding:2.5rem 2rem 4rem}
+.site-header{display:flex;align-items:baseline;justify-content:space-between;padding-bottom:1.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--ff-display);font-size:1.4rem;font-weight:300;letter-spacing:.22em;text-transform:uppercase}
+.logo span{color:var(--brass)}
+.header-tag{font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.print-btn{background:none;border:1px solid var(--brass-border);color:var(--brass);font-family:var(--ff-body);font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;cursor:pointer;border-radius:3px;transition:all .14s;flex-shrink:0}
+.print-btn:hover{background:var(--brass);color:#fff}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:1.3rem}
+.tab{background:none;border:1px solid #ddd;color:var(--muted);font-family:var(--ff-body);font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;padding:5px 12px;cursor:pointer;transition:all .14s;border-radius:3px}
+.tab:hover{color:var(--ink);border-color:#aaa}
+.tab.on{border-color:var(--brass);color:var(--brass);background:var(--brass-dim)}
+.ph{display:flex;align-items:baseline;gap:14px;margin-bottom:1.1rem;padding-bottom:.8rem;border-bottom:1px solid var(--line)}
+.pn{font-family:var(--ff-display);font-size:2rem;font-weight:300;color:var(--brass);line-height:1}
+.pt{font-size:15px;font-weight:500;line-height:1.2}
+.pd{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.fbar{display:flex;gap:12px;padding:12px 15px;border:1px solid var(--brass-border);border-radius:3px;background:var(--brass-dim);margin-bottom:1.2rem;align-items:flex-start}
+.flab{font-size:10px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--brass);white-space:nowrap;padding-top:2px;min-width:68px}
+.ftxt{font-size:12.5px;color:#333;line-height:1.65}
+.sl{font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:#bbb;margin:1.2rem 0 7px;display:flex;align-items:center;gap:8px}
+.sl::after{content:'';flex:1;height:1px;background:var(--line)}
+.rows{display:flex;flex-direction:column;gap:5px}
+.row{display:flex;align-items:flex-start;gap:10px;padding:9px 11px;border-radius:3px;border:1px solid transparent;transition:background .12s}
+.row:hover{background:#faf8f4;border-color:#eee}
+.row.fh{border-color:var(--brass-border);background:var(--brass-dim)}
+.row.fh:hover{background:rgba(184,150,90,.13)}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:4px}
+.rb{flex:1}
+.rt{font-size:13px;font-weight:500;line-height:1.3;color:var(--ink)}
+.rs{font-size:12px;color:var(--muted);line-height:1.55;margin-top:2px}
+.tg{display:inline-block;font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:2px;margin-top:5px;font-weight:500}
+.tr{background:var(--red-bg);color:var(--red)}
+.ta{background:var(--amber-bg);color:var(--amber)}
+.tg2{background:var(--green-bg);color:var(--green)}
+.tp{background:var(--purple-bg);color:var(--purple)}
+.tf{background:rgba(184,150,90,.16);color:#6B4C20}
+.dl{font-size:11px;color:#bbb;flex-shrink:0;margin-top:3px;white-space:nowrap}
+.gate{display:flex;gap:10px;padding:12px 15px;border-left:2.5px solid var(--brass);background:var(--brass-dim);margin-top:1.1rem;border-radius:0 3px 3px 0}
+.gl{font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--brass);font-weight:500;display:block;margin-bottom:3px}
+.gt{font-size:12.5px;line-height:1.65;color:#333}
+.gs{color:var(--brass);font-size:15px;flex-shrink:0;margin-top:1px}
+.og{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1.4rem}
+.oc{background:#f7f5f1;border-radius:3px;padding:12px 14px}
+.onum{font-family:var(--ff-display);font-size:2.1rem;font-weight:400;color:var(--brass)}
+.olbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.bw{display:flex;gap:3px;margin-bottom:4px}
+.bs{height:6px;border-radius:3px;cursor:pointer;transition:opacity .12s}
+.bs:hover{opacity:.72}
+.bl{display:flex;gap:3px;margin-bottom:1.4rem}
+.bll{font-size:10px;color:#bbb;text-align:center;letter-spacing:.05em;text-transform:uppercase;line-height:1.35}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tc{padding:11px 13px;border:1px solid var(--line);border-radius:3px}
+.tc.fh2{border-color:var(--brass-border);background:var(--brass-dim)}
+.trl{font-size:10px;letter-spacing:.11em;text-transform:uppercase;color:#bbb;margin-bottom:3px;display:flex;align-items:center;gap:5px}
+.trd{width:6px;height:6px;border-radius:50%;display:inline-block;flex-shrink:0}
+.tn{font-size:13px;font-weight:500;color:var(--ink);line-height:1.2}
+.tw{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.55}
+.panel{display:none}
+.panel.on{display:block;animation:fi .2s ease both}
+@keyframes fi{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+.site-footer{margin-top:3rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.ft-note{font-size:.63rem;letter-spacing:.08em;color:#bbb}
+@media print{
+  .tabs,.print-btn{display:none!important}
+  .panel{display:block!important;page-break-inside:avoid}
+  .page{padding:1rem}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="site-header">
+  <div class="logo">For<span>hemit</span></div>
+  <div class="header-tag">120-Day ESOP Roadmap &mdash; General Business</div>
+  <button class="print-btn" onclick="window.print()">&#9113; Print / Save PDF</button>
+</header>
+
+<div class="tabs">
+  <button class="tab on" onclick="go('ov',this)">Overview</button>
+  <button class="tab" onclick="go('p1',this)">Phase 1 &mdash; Days 1&ndash;14</button>
+  <button class="tab" onclick="go('p2',this)">Phase 2 &mdash; Days 15&ndash;45</button>
+  <button class="tab" onclick="go('p3',this)">Phase 3 &mdash; Days 46&ndash;75</button>
+  <button class="tab" onclick="go('p4',this)">Phase 4 &mdash; Days 76&ndash;105</button>
+  <button class="tab" onclick="go('p5',this)">Phase 5 &mdash; Days 106&ndash;120</button>
+  <button class="tab" onclick="go('tm',this)">Team seats</button>
+</div>
+
+<!-- OVERVIEW -->
+<div id="ov" class="panel on">
+  <div class="fbar">
+    <div class="flab">Forhemit</div>
+    <div class="ftxt">Forhemit is the Continuation of Operations (COOP) stewardship firm engaged from Day 1 through 12&ndash;24 months post-close. Forhemit owns all four operational tracks &mdash; people, place, technology, and financial systems &mdash; and is the party responsible for delivering the COOP document the trustee must accept before a closing date can be set. <strong>Gate 4 is Forhemit&rsquo;s defining transaction deliverable.</strong> Forhemit&rsquo;s engagement begins with a <strong>$25,000 non-refundable retainer</strong> covering COOP pre-assessment, deal structuring coordination, and advisor assembly from Day 1 through closing.</div>
+  </div>
+  <div class="og">
+    <div class="oc"><div class="onum">120</div><div class="olbl">Days to close</div></div>
+    <div class="oc"><div class="onum">5</div><div class="olbl">Phases</div></div>
+    <div class="oc"><div class="onum">9</div><div class="olbl">Team seats</div></div>
+    <div class="oc"><div class="onum">4</div><div class="olbl">Hard gates</div></div>
+  </div>
+  <div class="bw">
+    <div class="bs" style="flex:14;background:#B8965A" onclick="go('p1',null)" title="Ignition 1-14"></div>
+    <div class="bs" style="flex:31;background:#3B6D11" onclick="go('p2',null)" title="Build 15-45"></div>
+    <div class="bs" style="flex:30;background:#185FA5" onclick="go('p3',null)" title="Validate 46-75"></div>
+    <div class="bs" style="flex:30;background:#534AB7" onclick="go('p4',null)" title="Close Prep 76-105"></div>
+    <div class="bs" style="flex:15;background:#0F6E56" onclick="go('p5',null)" title="Closing 106-120"></div>
+  </div>
+  <div class="bl">
+    <div class="bll" style="flex:14">Ignition<br>1&ndash;14</div>
+    <div class="bll" style="flex:31">Build<br>15&ndash;45</div>
+    <div class="bll" style="flex:30">Validate<br>46&ndash;75</div>
+    <div class="bll" style="flex:30">Close prep<br>76&ndash;105</div>
+    <div class="bll" style="flex:15">Closing<br>106&ndash;120</div>
+  </div>
+
+  <div class="sl">Forhemit deliverables by phase &mdash; all covered under the $25,000 retainer through closing</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Phase 1 &mdash; COOP intake complete (all 4 tracks)</div><div class="rs">People, place, technology, and financial systems inventoried. Raw material for every downstream COOP deliverable.</div></div><div class="dl">Day 14</div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Phase 2 &mdash; Full COOP plan drafted</div><div class="rs">Continuity plans written for all 4 tracks. Gaps remediated before the trustee sees the document. Post-close manager search begins.</div></div><div class="dl">Day 45</div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Phase 3 &mdash; COOP delivered to trustee; Q&amp;A led</div><div class="rs">Full package submitted. Forhemit leads trustee review on operational readiness, key-man mitigation, and post-close governance.</div></div><div class="dl">Day 70</div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Phase 4 &mdash; Trustee COOP sign-off obtained &mdash; Gate 4</div><div class="rs">Forhemit&rsquo;s primary transaction deliverable. No sign-off = no closing date. Forhemit is accountable for this gate.</div></div><div class="dl">Day 90</div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Phase 5 &mdash; Written Day 121 readiness confirmation delivered to trustee</div><div class="rs">Final deliverable under the $25,000 retainer. Every system, credential, and process confirmed ready to run without the owner. Closing date is then set.</div></div><div class="dl">Day 112&ndash;118</div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Post-close stewardship (12&ndash;24 months) &mdash; separate engagement</div><div class="rs">Operations monitoring, annual valuation coordination, debt service and refinance trigger tracking, employee ownership culture development.</div></div><div class="dl">Day 121+</div></div>
+  </div>
+
+  <div class="sl">The 4 hard gates &mdash; process stops if any don&rsquo;t clear</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#A32D2D"></div><div class="rb"><div class="rt">Gate 1 &mdash; FMV adequacy letter (Day 45)</div><div class="rs">Trustee&rsquo;s appraiser confirms purchase price is fair to the ESOP under ERISA. No letter = no LOI. Full stop.</div></div></div>
+    <div class="row"><div class="dot" style="background:#A32D2D"></div><div class="rb"><div class="rt">Gate 2 &mdash; SBA commitment letter (Day 60)</div><div class="rs">Lender issues formal commitment defining the capital stack. Nothing is drafted before this arrives.</div></div></div>
+    <div class="row"><div class="dot" style="background:#A32D2D"></div><div class="rb"><div class="rt">Gate 3 &mdash; QofE EBITDA within 15% of LOI (Day 75)</div><div class="rs">Outside that band: stop, renegotiate the structure, then draft. Do not draft on a broken number.</div></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Gate 4 &mdash; Trustee COOP sign-off (Day 90) &mdash; Forhemit owned</div><div class="rs">Forhemit delivers and drives this gate. Trustee confirms business is operationally viable post-close. No sign-off = no closing date scheduled.</div></div></div>
+  </div>
+</div>
+
+<!-- PHASE 1 -->
+<div id="p1" class="panel">
+  <div class="ph"><div class="pn">01</div><div><div class="pt">Ignition &mdash; team assembly &amp; structure</div><div class="pd">Days 1&ndash;14 &middot; Forhemit engaged Day 1 &mdash; $25,000 retainer initiates COOP intake</div></div></div>
+  <div class="fbar"><div class="flab">Forhemit</div><div class="ftxt">Retained Day 1 alongside legal counsel &mdash; not after the deal is structured. The <strong>$25,000 non-refundable retainer</strong> activates immediately, covering COOP intake, deal structuring coordination, and advisor assembly through closing. COOP intake across all four tracks must be complete by Day 14. Early findings directly inform the FMV appraisal, lender package, and trustee&rsquo;s initial risk assessment.</div></div>
+
+  <div class="sl">Legal &amp; advisory &mdash; seat these before anything else moves</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Retain independent ESOP trustee</div><div class="rs">Legal buyer &mdash; holds shares as fiduciary for all eligible employees. Conflict check mandatory before engagement. Must have general business experience at the target deal size. Capital Trustees, ERISA Advisory Group, and Argent Trust are active providers.</div><span class="tg tr">Day 7 &mdash; hard deadline</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Engage ESOP/ERISA counsel</div><div class="rs">Plan documents, DOL compliance, &sect;1042 election mechanics, seller note subordination under ERISA. Not general M&amp;A counsel &mdash; requires ESOP-specific experience. Krieg DeVault, Dickinson Wright, and Verrill Dana are established ESOP practices.</div><span class="tg tr">Day 7 &mdash; hard deadline</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Confirm SBA lender &mdash; ESOP-specific vetting call</div><div class="rs">Ask for specific prior deals: ESOP trust as buyer, trustee as closing party, seller note subordination treatment. &ldquo;We&rsquo;ve done both SBA and ESOPs&rdquo; is not confirmation &mdash; ask for a reference transaction and the trustee&rsquo;s name.</div><span class="tg tr">Day 10 &mdash; hard deadline</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Engage seller&rsquo;s CPA / tax advisor</div><div class="rs">S-to-C conversion built-in gains analysis, &sect;1042 QRP investment planning, seller net proceeds modeling. Independent of Forhemit &mdash; this is the seller&rsquo;s own advisor.</div><span class="tg ta">Day 10</span></div></div>
+  </div>
+
+  <div class="sl">Entity structure &mdash; decide before plan documents are drafted</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#534AB7"></div><div class="rb"><div class="rt">S-corp vs. C-corp decision</div><div class="rs">&sect;1042 capital gains deferral requires a C-corp. If currently an S-corp, the built-in gains tax over the 5-year recognition period must be calculated before committing to conversion. Seller&rsquo;s CPA owns this analysis.</div><span class="tg tr">Days 1&ndash;7 &mdash; do not defer</span></div></div>
+    <div class="row"><div class="dot" style="background:#534AB7"></div><div class="rb"><div class="rt">100% vs. partial ESOP decision</div><div class="rs">Full exit or retained minority stake? This shapes the capital stack, &sect;1042 eligibility, and the trustee&rsquo;s FMV adequacy analysis. Every downstream document is built on this decision.</div><span class="tg ta">Day 10</span></div></div>
+  </div>
+
+  <div class="sl">Forhemit &mdash; COOP intake across all 4 tracks</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">People &mdash; org chart, key-man mapping, employment agreements</div><div class="rs">Every person whose departure breaks a critical function. Revenue concentration by individual. Employment agreement status for each key role. Any customer relationship not transferable to another employee flagged immediately.</div><span class="tg tf">Forhemit &middot; Days 7&ndash;14</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Place &mdash; leases, facilities, equipment ownership</div><div class="rs">Transfer and assignment provisions in every lease. Owned vs. leased facilities and equipment. Landlord or lender consent requirements flagged now &mdash; the most common late-discovered deal killers. Can delay closing 30+ days if surfaced late.</div><span class="tg tf">Forhemit &middot; Days 7&ndash;14</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Technology &mdash; systems, credentials, licenses, auto-renewals</div><div class="rs">Every admin credential mapped to a named non-owner employee. Software licenses tied personally to the owner identified. Auto-renewing contracts inventoried. Every system that must run on Day 121 documented and assigned to a specific person.</div><span class="tg tf">Forhemit &middot; Days 7&ndash;14</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Financial systems &mdash; banking, payroll, contracts, authority</div><div class="rs">Bank relationships and authorized signers. Payroll processor and workflow. Key customer contracts with change-of-control provisions. Vendor lines of credit with personal guarantee clauses. Who can write a check on Day 121 without the owner?</div><span class="tg tf">Forhemit &middot; Days 10&ndash;14</span></div></div>
+  </div>
+
+  <div class="gate"><div class="gs">&#9672;</div><div class="gt"><span class="gl">Gate check &mdash; end of Day 14</span>Trustee seated. ERISA counsel engaged. SBA lender confirmed. Seller&rsquo;s CPA engaged. Entity structure decided. Forhemit COOP intake complete across all 4 tracks. All six must be closed before Phase 2 starts on schedule.</div></div>
+</div>
+
+<!-- PHASE 2 -->
+<div id="p2" class="panel">
+  <div class="ph"><div class="pn">02</div><div><div class="pt">Build &mdash; financials, valuation &amp; COOP plan</div><div class="pd">Days 15&ndash;45 &middot; Everything runs in parallel &mdash; Forhemit builds while the financial team validates</div></div></div>
+  <div class="fbar"><div class="flab">Forhemit</div><div class="ftxt">Converts the intake inventory into a working COOP plan across all four tracks. Operational gaps found during intake are remediated here &mdash; before the trustee sees the document. Post-close governance structure identified and the manager search begins. Target: COOP draft complete internally by Day 40, ready for trustee submission by Day 60.</div></div>
+
+  <div class="sl">Financial baseline &mdash; the number everything is built on</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Quality of Earnings engagement</div><div class="rs">3 years of tax returns, P&amp;Ls, and balance sheets. Revenue by customer. Owner compensation normalization. The adjusted EBITDA is what the trustee&rsquo;s appraiser builds the purchase price on &mdash; must be clean before the appraisal begins.</div><span class="tg tg2">Start day 15</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Normalized EBITDA and customer concentration analysis</div><div class="rs">Owner add-backs, one-time costs, above-market compensation. Any customer over 20% of revenue will be scrutinized by both lender and trustee regardless. Surface it now &mdash; not in underwriting.</div><span class="tg tg2">Days 15&ndash;35</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Complete financial package assembled</div><div class="rs">Tax returns, financials, AR aging, customer concentration schedule, equipment list, real estate summary. One clean package shared to both the lender and the trustee&rsquo;s appraiser &mdash; build it once.</div><span class="tg tg2">Days 25&ndash;40</span></div></div>
+  </div>
+
+  <div class="sl">ERISA FMV appraisal &mdash; trustee orders it; seller pays for it</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#854F0B"></div><div class="rb"><div class="rt">Trustee orders independent FMV appraisal</div><div class="rs">The trustee &mdash; not the seller, not Forhemit &mdash; selects and directs the appraiser. ERISA independence requirement protecting employees. Appraiser must be accredited (ASA or ABV). FMV sets the maximum the ESOP can legally pay.</div><span class="tg ta">Order by day 18</span></div></div>
+    <div class="row"><div class="dot" style="background:#854F0B"></div><div class="rb"><div class="rt">FMV result and price negotiation</div><div class="rs">If the appraisal comes in below the seller&rsquo;s target, the seller note bridges the gap. Cash-at-close cannot exceed the appraised value. This is a negotiation, not a failure &mdash; structure the seller note accordingly.</div><span class="tg ta">Days 35&ndash;42</span></div></div>
+  </div>
+
+  <div class="sl">Forhemit &mdash; COOP plan built across all 4 tracks</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">People continuity plan written</div><div class="rs">Role-by-role redundancy documented. Named backups for every critical function. Employment agreements with tail provisions drafted for key managers. ESOP vesting schedule designed as the primary retention tool.</div><span class="tg tf">Forhemit &middot; Days 15&ndash;35</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Systems continuity plan written</div><div class="rs">Every software login transferred to a named non-owner employee. Vendor relationships migrated from personal accounts. Auto-renewing contracts inventoried. IT support vendor contracted independently. Day 121 systems readiness confirmed on paper.</div><span class="tg tf">Forhemit &middot; Days 15&ndash;35</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Financial continuity plan written</div><div class="rs">Bank signature authority post-close protocol established. Payroll continuity confirmed for the transition period. Customer contracts with change-of-control provisions identified. Vendor lines with personal guarantees flagged for renegotiation.</div><span class="tg tf">Forhemit &middot; Days 20&ndash;40</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Governance plan &mdash; post-close CEO/GM search begins</div><div class="rs">Who runs the business on Day 121? Forhemit drives the identification. The trustee needs a specific named, contracted person &mdash; not a role description &mdash; before Gate 4 sign-off is issued.</div><span class="tg tf">Forhemit &middot; Days 25&ndash;45</span></div></div>
+  </div>
+
+  <div class="sl">Lender package begins</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#0F6E56"></div><div class="rb"><div class="rt">SBA 7(a) lender package assembly begins</div><div class="rs">Financial package, normalized EBITDA, collateral inventory, business plan narrative, ESOP plan design summary. Full capital stack: SBA senior debt + seller note (subordinated, mandatory refinance trigger at Month 14&ndash;18).</div><span class="tg tg2">Start day 20</span></div></div>
+  </div>
+
+  <div class="gate"><div class="gs">&#9672;</div><div class="gt"><span class="gl">Gate 1 &mdash; Day 45</span>FMV adequacy letter received from the trustee&rsquo;s appraiser. Purchase price confirmed fair to the ESOP under ERISA. Without this letter there is no LOI. Forhemit COOP draft complete internally and ready for trustee submission in Phase 3.</div></div>
+</div>
+
+<!-- PHASE 3 -->
+<div id="p3" class="panel">
+  <div class="ph"><div class="pn">03</div><div><div class="pt">Validate &mdash; LOI, lender commitment &amp; COOP review</div><div class="pd">Days 46&ndash;75 &middot; Lock the deal &mdash; Forhemit delivers COOP to trustee and leads the review</div></div></div>
+  <div class="fbar"><div class="flab">Forhemit</div><div class="ftxt">The completed COOP package is delivered to the trustee by Day 70. Forhemit leads the Q&amp;A on operational readiness, key-man mitigation, and post-close governance. The post-close manager must be named and under contract before submission &mdash; the trustee will ask for a specific person, not a plan to find one.</div></div>
+
+  <div class="sl">LOI and lender commitment</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Letter of intent executed</div><div class="rs">Price, structure, capital stack, seller note terms, exclusivity period, and trustee consent requirement. ERISA counsel must review before signing. The LOI sets the architecture &mdash; every document downstream is built on it.</div><span class="tg tg2">Days 46&ndash;52</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">SBA commitment letter</div><div class="rs">Complete lender package submitted by Day 50. Commitment by Day 60. If the lender cannot commit by Day 65 &mdash; replace the lender or extend the timeline. No legal drafting begins without this document.</div><span class="tg tr">Day 60 &mdash; Gate 2</span></div></div>
+  </div>
+
+  <div class="sl">Quality of Earnings final validation</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#854F0B"></div><div class="rb"><div class="rt">QofE report delivered and validated</div><div class="rs">Adjusted EBITDA within 15% of LOI assumption &mdash; or stop and renegotiate before drafting. Drafting on a broken number creates liability for every party and almost always collapses the deal late in the process.</div><span class="tg tr">Day 75 &mdash; Gate 3</span></div></div>
+    <div class="row"><div class="dot" style="background:#854F0B"></div><div class="rb"><div class="rt">Customer and contract risk review</div><div class="rs">Key customer contracts reviewed for change-of-control clauses. Any contract that could dissolve or materially change at closing must be surfaced now &mdash; not discovered during lender underwriting.</div><span class="tg ta">Days 50&ndash;70</span></div></div>
+  </div>
+
+  <div class="sl">ESOP plan design</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#534AB7"></div><div class="rb"><div class="rt">ESOP plan document drafted</div><div class="rs">Vesting schedule, eligibility, allocation formula, distribution policy, share repurchase obligation methodology. These decisions affect employee retention and the business&rsquo;s long-term cash obligations to departing employees. ERISA counsel owns this &mdash; get it right now.</div><span class="tg tp">Days 50&ndash;72</span></div></div>
+    <div class="row"><div class="dot" style="background:#534AB7"></div><div class="rb"><div class="rt">TPA engaged</div><div class="rs">Third Party Administrator handles annual plan administration, participant recordkeeping, allocation calculations, and Form 5500 DOL filings. Must be engaged before the plan becomes effective at closing. Pentegra, Newport Group, and ESOP Partners are established nationwide providers.</div><span class="tg tp">Days 55&ndash;70</span></div></div>
+  </div>
+
+  <div class="sl">Forhemit &mdash; COOP delivered to trustee</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Full COOP package submitted to trustee</div><div class="rs">All 4 tracks documented: people (named backups, employment agreements executed), place (lease transfer confirmations obtained), technology (admin access transferred and tested), financial (bank authority protocol, payroll continuity, customer contract status). Post-close manager named and contracted before submission.</div><span class="tg tf">Forhemit &middot; Days 60&ndash;70</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Trustee Q&amp;A on operational readiness</div><div class="rs">Forhemit leads responses to trustee questions on key-man concentration, operational dependencies, and post-close management capability. Specific documented answers &mdash; not aspirational language. The trustee&rsquo;s fiduciary obligation requires satisfaction on each specific point.</div><span class="tg tf">Forhemit &middot; Days 65&ndash;75</span></div></div>
+  </div>
+
+  <div class="gate"><div class="gs">&#9672;</div><div class="gt"><span class="gl">Gates 2 &amp; 3 &mdash; Days 60 and 75</span>Gate 2: SBA commitment letter in hand. Gate 3: QofE EBITDA within 15% of LOI assumption. Both must clear before legal drafting begins. Forhemit COOP submitted and trustee review actively underway.</div></div>
+</div>
+
+<!-- PHASE 4 -->
+<div id="p4" class="panel">
+  <div class="ph"><div class="pn">04</div><div><div class="pt">Close prep &mdash; legal drafting, Gate 4 &amp; employee notice</div><div class="pd">Days 76&ndash;105 &middot; Forhemit owns Gate 4 &mdash; no sign-off, no closing date</div></div></div>
+  <div class="fbar"><div class="flab">Forhemit</div><div class="ftxt">Gate 4 is Forhemit&rsquo;s primary transaction responsibility under the $25,000 retainer. Trustee COOP sign-off by Day 90 is what allows a closing date to be scheduled. Forhemit also coordinates the employee announcement, delivers the final Day 121 operational readiness confirmation to the trustee, and begins transitioning into the post-close stewardship engagement.</div></div>
+
+  <div class="sl">Legal document drafting</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Purchase and Sale Agreement (PSA)</div><div class="rs">ERISA counsel drafts. The ESOP trust is the buyer &mdash; the PSA structure differs materially from a standard M&amp;A purchase agreement. Seller representations and warranties are typically more limited given the trustee&rsquo;s independent fiduciary role.</div><span class="tg tg2">Days 76&ndash;90</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Seller note and subordination agreement</div><div class="rs">Interest rate, maturity, mandatory refinance trigger at Month 14&ndash;18, subordination to SBA debt. Triparty document &mdash; seller, ESOP trustee, and SBA lender all sign. SBA lender must approve seller note terms before the PSA is finalized.</div><span class="tg tg2">Days 80&ndash;95</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Management and employment agreements</div><div class="rs">Selling owner&rsquo;s post-close transition agreement. CEO/GM employment agreement. Key manager agreements with ESOP participation provisions. Non-compete review &mdash; enforceability varies significantly by state.</div><span class="tg tg2">Days 80&ndash;98</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">SBA loan documents</div><div class="rs">Standard loan agreement plus ESOP-specific riders. SBA Form 1050 required at closing. The trustee signs as buyer &mdash; lender&rsquo;s counsel must be comfortable with the trustee in that legal role.</div><span class="tg tg2">Days 85&ndash;102</span></div></div>
+  </div>
+
+  <div class="sl">Forhemit &mdash; Gate 4, Day 121 readiness &amp; employee communication</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Trustee COOP sign-off &mdash; Gate 4 (Forhemit owned)</div><div class="rs">Forhemit delivers Gate 4. The trustee formally accepts the COOP, satisfying their fiduciary obligation to confirm the business is operationally viable post-close. This sign-off is what allows the closing date to be set. Forhemit is accountable for obtaining it.</div><span class="tg tf">Forhemit &middot; Day 90 &mdash; Gate 4</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Employee announcement and ESOP education</div><div class="rs">Forhemit coordinates the announcement process. The message comes from the owner &mdash; not Forhemit. Summary Plan Description distributed. TPA available for participant questions. This moment begins the ownership culture Forhemit develops during the stewardship period.</div><span class="tg tf">Forhemit &middot; Days 90&ndash;105</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Day 121 operational readiness confirmed &mdash; all 4 tracks</div><div class="rs">Final walkthrough: every system login transferred and tested, bank authority updated, payroll confirmed, notifications sent, post-close manager fully briefed. Forhemit delivers written readiness confirmation to the trustee. Final deliverable under the $25,000 retainer.</div><span class="tg tf">Forhemit &middot; Days 100&ndash;105</span></div></div>
+  </div>
+
+  <div class="sl">Licensing and contract notifications</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#A32D2D"></div><div class="rb"><div class="rt">State and local licensing review</div><div class="rs">Business licenses, permits, and registrations requiring notification or re-issuance upon change of ownership. Varies by industry and state. Anything with an advance notice requirement filed now.</div><span class="tg ta">Days 80&ndash;100</span></div></div>
+    <div class="row"><div class="dot" style="background:#A32D2D"></div><div class="rb"><div class="rt">Key contract change-of-control notifications</div><div class="rs">Customer and vendor notifications per contract terms. Landlord consent on the facility lease &mdash; flagged by Forhemit in Phase 1, executed now with sufficient lead time to avoid closing delays.</div><span class="tg ta">Days 85&ndash;105</span></div></div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div id="p5" class="panel">
+  <div class="ph"><div class="pn">05</div><div><div class="pt">Closing &mdash; execution &amp; Forhemit stewardship begins</div><div class="pd">Days 106&ndash;120 &middot; $25,000 retainer closes &mdash; stewardship engagement activates Day 121</div></div></div>
+  <div class="fbar"><div class="flab">Forhemit</div><div class="ftxt">Forhemit&rsquo;s transaction role &mdash; covered under the $25,000 non-refundable retainer &mdash; ends at closing with the delivery of the written Day 121 readiness confirmation. The post-close stewardship engagement activates Day 121 under a separate agreement and runs 12&ndash;24 months: operations monitoring, annual ESOP valuation coordination, debt service and refinance trigger tracking, and employee ownership culture development.</div></div>
+
+  <div class="sl">Pre-closing &mdash; days 106&ndash;115</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Final document review by all parties</div><div class="rs">PSA, seller note, loan documents, employment agreements, ESOP plan. The trustee&rsquo;s counsel is the final reviewer &mdash; their sign-off is the green light. No surprises at the closing table.</div><span class="tg tg2">Days 106&ndash;112</span></div></div>
+    <div class="row"><div class="dot" style="background:#3B6D11"></div><div class="rb"><div class="rt">Wire instructions confirmed by phone &mdash; not email</div><div class="rs">Every wire destination confirmed via live phone call to the actual account holder. Wire fraud targeting closings is active. Email confirmation alone is insufficient. This step is non-negotiable.</div><span class="tg tg2">Days 110&ndash;114</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Forhemit delivers written Day 121 readiness confirmation</div><div class="rs">Written confirmation to the trustee that every system, credential, vendor relationship, bank authority, and payroll process is ready to run without the owner on Day 121. This is the final deliverable under the $25,000 retainer. Closing date is then set.</div><span class="tg tf">Forhemit &middot; Days 112&ndash;118</span></div></div>
+  </div>
+
+  <div class="sl">Closing day &mdash; Day 120</div>
+  <div class="rows">
+    <div class="row"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Documents executed &mdash; business is 100% employee-owned</div><div class="rs">PSA signed by seller and trustee. Loan documents executed. Employment agreements signed. ESOP plan formally adopted. The trustee takes title to shares on behalf of the ESOP trust. Every eligible employee is now an owner.</div></div></div>
+    <div class="row"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Funds disbursed</div><div class="rs">SBA loan proceeds wired. Seller receives cash at close. Broker commission paid. Forhemit structuring fee paid from proceeds. Seller note established per the agreed schedule.</div></div></div>
+  </div>
+
+  <div class="sl">Forhemit post-close stewardship &mdash; Day 121 onward (separate engagement)</div>
+  <div class="rows">
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Operations monitoring and COOP plan maintenance</div><div class="rs">Ongoing review of all 4 tracks as the business evolves. Key person changes, system migrations, new contracts &mdash; each triggers a COOP update. The plan is a living document, not an archive.</div><span class="tg tf">Forhemit &middot; Months 1&ndash;24</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Annual ESOP valuation coordination</div><div class="rs">Required every year by ERISA. Forhemit coordinates between trustee, appraiser, and TPA to ensure operational data is clean and current going into each appraisal cycle.</div><span class="tg tf">Forhemit &middot; Annual</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Seller note refinance trigger monitoring</div><div class="rs">Performance metrics tracked against the mandatory refinance trigger at Month 14&ndash;18. Forhemit coordinates the refinance process when the trigger is met &mdash; seller note paid down from conventional refinance proceeds.</div><span class="tg tf">Forhemit &middot; Month 14&ndash;18</span></div></div>
+    <div class="row fh"><div class="dot" style="background:#B8965A"></div><div class="rb"><div class="rt">Employee ownership culture development</div><div class="rs">Annual employee meetings on ESOP account values. Open-book management introduction. Leadership development for employee-owners. The ESOP structure creates ownership &mdash; Forhemit&rsquo;s stewardship work turns it into an ownership culture.</div><span class="tg tf">Forhemit &middot; Ongoing</span></div></div>
+  </div>
+
+  <div class="gate"><div class="gs">&#9672;</div><div class="gt"><span class="gl">Post-close milestones</span>Day 150: First SBA payment made. TPA sends participant account notifications. Month 6: Annual ESOP valuation ordered. Month 14&ndash;18: Forhemit coordinates refinance trigger evaluation and seller note paydown. Month 24: Full stewardship review &mdash; COOP updated, culture assessment, debt service health check.</div></div>
+</div>
+
+<!-- TEAM SEATS -->
+<div id="tm" class="panel">
+  <div class="ph"><div class="pn" style="font-size:1.5rem">&#9672;</div><div><div class="pt">The 9 team seats</div><div class="pd">Who you need, when you need them, and what breaks if they&rsquo;re late</div></div></div>
+
+  <div class="sl">Engaged Day 1 &mdash; the operational and legal foundation</div>
+  <div class="tgrid">
+    <div class="tc fh2">
+      <div class="trl"><span class="trd" style="background:#B8965A"></span>COOP stewardship</div>
+      <div class="tn">Forhemit</div>
+      <div class="tw">Day 1. Owns all 4 COOP tracks (people, place, technology, financials) from intake through the 12&ndash;24 month post-close stewardship period. Drives Gate 4. Coordinates employee announcement. Manages annual valuation, debt service tracking, and refinance trigger. The operational through-line of the entire transaction and transition.</div>
+    </div>
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#A32D2D"></span>Legal &mdash; ERISA</div>
+      <div class="tn">ESOP / ERISA counsel</div>
+      <div class="tw">Day 1. Plan documents, DOL compliance, &sect;1042 mechanics, seller note subordination under ERISA. Not general M&amp;A counsel &mdash; requires ESOP-specific experience. Krieg DeVault, Dickinson Wright, and Verrill Dana are established ESOP practices.</div>
+    </div>
+  </div>
+
+  <div class="sl">Seat by day 7</div>
+  <div class="tgrid">
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#A32D2D"></span>Fiduciary</div>
+      <div class="tn">Independent ESOP trustee</div>
+      <div class="tw">Day 7. Conflict check mandatory before engagement. Must have general business experience at the target deal size. Capital Trustees, ERISA Advisory Group, and Argent Trust are active providers.</div>
+    </div>
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#854F0B"></span>Tax</div>
+      <div class="tn">Seller&rsquo;s CPA / tax advisor</div>
+      <div class="tw">Day 7&ndash;10. S-to-C conversion BIG tax analysis, &sect;1042 QRP investment planning, seller net proceeds modeling. Independent of Forhemit &mdash; this is the seller&rsquo;s own advisor.</div>
+    </div>
+  </div>
+
+  <div class="sl">Confirm by day 10 &mdash; appraisal ordered by day 18</div>
+  <div class="tgrid">
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#854F0B"></span>Capital</div>
+      <div class="tn">SBA lender &mdash; ESOP confirmed</div>
+      <div class="tw">Day 10. Specific deal references required: ESOP trust as buyer, trustee as closing party, seller note subordination treatment. &ldquo;We&rsquo;ve done both SBA and ESOPs&rdquo; is not confirmation &mdash; ask for a reference transaction and the trustee&rsquo;s name.</div>
+    </div>
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#854F0B"></span>Valuation</div>
+      <div class="tn">ERISA FMV appraiser</div>
+      <div class="tw">Day 18 &mdash; trustee orders this seat. Accredited (ASA or ABV). Selected and directed by the trustee, not the seller or Forhemit. Sets the maximum the ESOP can legally pay.</div>
+    </div>
+  </div>
+
+  <div class="sl">Engage by day 15 and day 55</div>
+  <div class="tgrid">
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#3B6D11"></span>Financial</div>
+      <div class="tn">Quality of Earnings firm</div>
+      <div class="tw">Day 15. Must understand the industry&rsquo;s revenue recognition and contract norms. Customer concentration analysis is critical &mdash; any customer over 20% of revenue will be scrutinized closely by both lender and trustee.</div>
+    </div>
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#534AB7"></span>Administration</div>
+      <div class="tn">ESOP TPA</div>
+      <div class="tw">Day 55. Annual plan administration, participant recordkeeping, allocation calculations, Form 5500 filings. Pentegra, Newport Group, and ESOP Partners are established nationwide providers.</div>
+    </div>
+  </div>
+
+  <div class="sl">Identified by day 45 &mdash; contracted by day 75</div>
+  <div class="tgrid">
+    <div class="tc">
+      <div class="trl"><span class="trd" style="background:#185FA5"></span>Operations</div>
+      <div class="tn">Post-close CEO / general manager</div>
+      <div class="tw">Named by day 45, contracted by day 75. Forhemit drives the identification. The trustee requires a specific named person with a signed employment agreement before Gate 4 sign-off is issued. No name = no Gate 4 = no closing date.</div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <span class="ft-note">Forhemit Stewardship Management Co. &mdash; &copy; 2026</span>
+  <span class="ft-note">Your information is encrypted and never shared without consent.</span>
+</footer>
+
+</div>
+<script>
+function go(id, btn) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+  const panel = document.getElementById(id);
+  if (panel) panel.classList.add('on');
+  if (btn) {
+    btn.classList.add('on');
+  } else {
+    const map = {ov:0,p1:1,p2:2,p3:3,p4:4,p5:5,tm:6};
+    const tabs = document.querySelectorAll('.tab');
+    if (map[id] !== undefined && tabs[map[id]]) tabs[map[id]].classList.add('on');
+  }
+}
+</script>
+</body>
+</html>

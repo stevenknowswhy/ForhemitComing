@@ -1,0 +1,25 @@
+"use client";
+
+import { useEffect } from "react";
+import * as Sentry from "@sentry/nextjs";
+
+export function SentryProvider({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    // Only initialize on client
+    if (typeof window !== "undefined" && process.env.NEXT_PUBLIC_SENTRY_DSN) {
+      Sentry.init({
+        dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+        tracesSampleRate: process.env.NODE_ENV === "production" ? 0.1 : 1.0,
+        debug: process.env.NODE_ENV === "development",
+        replaysOnErrorSampleRate: 1.0,
+        replaysSessionSampleRate: 0.1,
+        integrations: [
+          Sentry.replayIntegration(),
+          Sentry.browserTracingIntegration(),
+        ],
+      });
+    }
+  }, []);
+
+  return <>{children}</>;
+}

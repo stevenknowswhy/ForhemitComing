@@ -1,0 +1,488 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   LEGAL PRACTICES PAGE - RESPONSIVE DESIGN (Mobile-First)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Mobile Base (default) ── */
+/* All mobile styles are the base, we enhance for larger screens */
+
+/* ── Small Tablets (480px+) ── */
+@media (min-width: 480px) {
+  .legal-wrapper .container {
+    padding: 0 var(--space-lg);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  
+  .stat-card {
+    padding: var(--space-md) var(--space-sm);
+  }
+  
+  .cost-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .preserve-list {
+    gap: 0.75rem;
+  }
+  
+  .wait-actions {
+    gap: var(--space-sm);
+  }
+  
+  .wait-actions span {
+    padding: 0.6rem 1.25rem;
+  }
+}
+
+/* ── Tablets (768px+) ── */
+@media (min-width: 768px) {
+  :root {
+    --space-2xl: 8rem;
+  }
+  
+  .legal-main {
+    padding-top: 100px;
+  }
+  
+  /* Hero */
+  .legal-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+  
+  .legal-lead {
+    font-size: var(--text-xl);
+  }
+  
+  /* Questions - Visual Layout */
+  .question-row {
+    grid-template-columns: 1fr 1fr;
+    min-height: 320px;
+  }
+  
+  .question-row.reverse {
+    direction: rtl;
+  }
+  
+  .question-row.reverse > * {
+    direction: ltr;
+  }
+  
+  .question-image {
+    height: 100%;
+    min-height: 320px;
+  }
+  
+  .question-image-overlay {
+    background: linear-gradient(90deg, transparent 30%, var(--bg-tertiary) 100%) !important;
+  }
+  
+  .question-row.reverse .question-image-overlay {
+    background: linear-gradient(270deg, transparent 30%, var(--bg-tertiary) 100%) !important;
+  }
+  
+  .question-content {
+    padding: var(--space-xl);
+    justify-content: center;
+  }
+  
+  .question-text {
+    font-size: var(--text-xl);
+  }
+  
+  /* Risk Cards */
+  .risk-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Comparison */
+  .comparison-blocks {
+    grid-template-columns: 1fr auto 1fr;
+    align-items: stretch;
+  }
+  
+  .comparison-block {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comparison-image {
+    height: 180px;
+    flex-shrink: 0;
+  }
+  
+  .comparison-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comparison-result {
+    margin-top: auto;
+  }
+  
+  .comparison-connector {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    align-self: center;
+  }
+  
+  /* Benefits - Row Layout */
+  .benefit-row {
+    grid-template-columns: 200px 1fr 200px;
+    align-items: center;
+  }
+  
+  .benefit-row.stacked {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+  
+  .benefit-row-top {
+    grid-template-columns: 200px 1fr;
+    align-items: center;
+  }
+  
+  .benefit-row-phases {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .benefit-row-header h3 {
+    font-size: var(--text-lg);
+  }
+  
+  /* Differentiator Rows */
+  .differentiator-row {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  
+  .diff-row-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 0;
+  }
+  
+  /* Fit Grid */
+  .fit-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* CTA Options */
+  .cta-options {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: stretch;
+  }
+  
+  /* CTA Bottom Row */
+  .cta-bottom-row {
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+  }
+  
+  .who-we-are-card {
+    text-align: center;
+  }
+  
+  /* Stats */
+  .stat-card {
+    padding: var(--space-lg);
+  }
+  
+  /* Process Steps */
+  .process-step {
+    gap: var(--space-lg);
+  }
+  
+  .step-badge {
+    width: 56px;
+    height: 56px;
+    font-size: var(--text-sm);
+  }
+  
+  .step-connector-line {
+    left: 28px;
+    top: 68px;
+  }
+  
+  /* Wave Points */
+  .wave-points {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ── Desktop (1024px+) ── */
+@media (min-width: 1024px) {
+  .legal-wrapper .container {
+    max-width: 1000px;
+  }
+  
+  /* Hero */
+  .legal-hero {
+    min-height: 90vh;
+  }
+  
+  .legal-hero-content {
+    max-width: 900px;
+  }
+  
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  /* Risk Steps */
+  .risk-steps-container {
+    padding-left: 2rem;
+  }
+
+  .risk-timeline-line {
+    left: 1rem;
+  }
+
+  .risk-step-badge {
+    left: -1.5rem;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  .risk-step-num {
+    font-size: 0.6rem;
+  }
+
+  .risk-step-icon {
+    font-size: 0.9rem;
+  }
+
+  .risk-step-card {
+    margin-left: 1rem;
+    padding: 1.25rem;
+  }
+
+  .risk-step-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .risk-step-header h3 {
+    width: 100%;
+    text-align: center;
+  }
+
+  .risk-step-header h3 {
+    font-size: var(--text-base);
+  }
+
+  .risk-step-connector {
+    display: none;
+  }
+  
+  /* Risk Cards - 3 columns */
+  .risk-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .risk-card:last-child {
+    grid-column: span 1;
+  }
+  
+  /* Cost Cards */
+  .cost-card {
+    padding: var(--space-lg);
+  }
+  
+  .cost-value {
+    font-size: 1.25rem;
+  }
+  
+  /* Benefits - Row Layout Desktop */
+  .benefit-row {
+    grid-template-columns: 220px 1fr 240px;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+  
+  .benefit-row.stacked {
+    gap: var(--space-lg);
+  }
+  
+  .benefit-row-top {
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-lg);
+  }
+  
+  .benefit-row-phases {
+    gap: var(--space-md);
+  }
+  
+  /* Differentiator Rows Desktop */
+  .differentiator-row {
+    grid-template-columns: 80px 1fr 280px;
+    padding: var(--space-lg);
+    gap: var(--space-lg);
+  }
+  
+  .diff-row-icon {
+    width: 64px;
+    height: 64px;
+  }
+  
+  /* Process */
+  .process-steps {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  /* FAQ */
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-question {
+    padding: var(--space-md) var(--space-lg);
+    font-size: var(--text-base);
+  }
+  
+  .faq-answer {
+    padding: var(--space-sm) var(--space-lg) var(--space-md);
+  }
+}
+
+/* ── Large Desktop (1280px+) ── */
+@media (min-width: 1280px) {
+  .legal-wrapper .container {
+    max-width: 1100px;
+  }
+  
+  .legal-title {
+    font-size: 4.5rem;
+  }
+  
+  /* Section Spacing */
+  .legal-section {
+    padding: 8rem 0;
+  }
+  
+  /* Stats */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  /* CTA Options */
+  .cta-option {
+    padding: var(--space-xl);
+  }
+}
+
+/* ── Mobile Landscape Optimizations ── */
+@media (max-height: 600px) and (orientation: landscape) {
+  .legal-hero {
+    min-height: auto;
+    padding: var(--space-xl) 0;
+  }
+  
+  .scroll-indicator {
+    display: none;
+  }
+  
+  .legal-title {
+    font-size: clamp(1.75rem, 5vh, 2.5rem);
+  }
+}
+
+/* ── High DPI / Retina Displays ── */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .legal-background {
+    background:
+      radial-gradient(ellipse 80% 50% at 10% 0%, rgba(255, 107, 0, 0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 90% 100%, var(--color-brand-subtle) 0%, transparent 50%),
+      radial-gradient(ellipse 50% 30% at 50% 50%, var(--color-brand-subtle) 0%, transparent 60%),
+      linear-gradient(180deg, 
+        rgba(13, 12, 10, 0.98) 0%, 
+        rgba(21, 19, 16, 0.95) 30%,
+        rgba(13, 12, 10, 0.98) 70%,
+        rgba(21, 19, 16, 0.95) 100%);
+  }
+}
+
+/* ── Dark Mode Support (system preference) ── */
+@media (prefers-color-scheme: dark) {
+  /* Already dark by default, but ensures consistency */
+  .legal-wrapper {
+    color-scheme: dark;
+  }
+}
+
+/* ── Touch Device Optimizations ── */
+@media (hover: none) and (pointer: coarse) {
+  /* Remove hover effects on touch devices */
+  .risk-card:hover,
+  .benefit-card:hover,
+  .differentiator-row:hover,
+  .stat-card:hover,
+  .cost-card:hover,
+  .question-row:hover,
+  .evap-item:hover,
+  .phase:hover,
+  .wave-point:hover,
+  .cta-option:hover {
+    transform: none;
+    box-shadow: none;
+  }
+  
+  /* Larger touch targets */
+  .faq-question {
+    min-height: 56px;
+  }
+  
+  .cta-button {
+    min-height: 52px;
+  }
+  
+  /* Remove magnetic effect */
+  .cta-button.magnetic:hover {
+    transform: none;
+  }
+}
+
+/* ── Print Styles ── */
+@media print {
+  .legal-background,
+  .scroll-indicator,
+  .legal-hero-cta {
+    display: none !important;
+  }
+  
+  .legal-wrapper {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .legal-section,
+  .question-row {
+    padding: 2rem 0;
+    page-break-inside: avoid;
+  }
+  
+  .cta-section {
+    display: none;
+  }
+}

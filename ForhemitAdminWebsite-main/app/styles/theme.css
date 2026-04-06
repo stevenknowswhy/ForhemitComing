@@ -1,0 +1,330 @@
+/* ── THEME SYSTEM ── */
+/* Light theme is default (per implementation decision); PDF forced light */
+
+:root {
+  /* ========== BRAND COLORS (Orange Theme) ========== */
+  --color-brand: #FF6B00;
+  --color-brand-hover: #FF8533;
+  --color-brand-subtle: rgba(255, 107, 0, 0.1);
+  --color-brand-border: rgba(255, 107, 0, 0.3);
+
+  /* ========== LIGHT THEME (Default) ========== */
+  /* Backgrounds */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f0f0f0;
+  --bg-card: rgba(0, 0, 0, 0.02);
+  --bg-glass: rgba(0, 0, 0, 0.03);
+  --bg-dropdown: rgba(255, 255, 255, 0.98);
+  --bg-input: rgba(0, 0, 0, 0.03);
+  --bg-hover: rgba(0, 0, 0, 0.05);
+
+  /* Text */
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --text-inverse: #ffffff;
+
+  /* Borders */
+  --border-subtle: #e5e7eb;
+  --border-accent: rgba(255, 107, 0, 0.4);
+  --border-hover: rgba(255, 107, 0, 0.6);
+
+  /* Effects */
+  --shadow-color: rgba(0, 0, 0, 0.04);
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.04);
+  --glow-brand: 0 0 12px rgba(255, 107, 0, 0.3);
+  --glow-subtle: 0 0 20px rgba(255, 107, 0, 0.1);
+
+  /* Mesh Gradient - warm orange tones */
+  --mesh-color-1: rgba(255, 107, 0, 0.08);
+  --mesh-color-2: rgba(255, 107, 0, 0.05);
+  --mesh-color-3: rgba(255, 107, 0, 0.03);
+
+  /* Metallic Text Gradient - Silver */
+  --metallic-gradient: linear-gradient(
+    180deg,
+    #909090 0%,
+    #e0e0e0 25%,
+    #ffffff 50%,
+    #c0c0c0 75%,
+    #a0a0a0 100%
+  );
+
+  /* Selection */
+  --selection-bg: rgba(255, 107, 0, 0.2);
+  --selection-text: #1f2937;
+
+  /* Status Colors */
+  --color-success: #059669;
+  --color-success-bg: rgba(5, 150, 105, 0.15);
+  --color-success-border: rgba(5, 150, 105, 0.25);
+  --color-success-subtle: rgba(5, 150, 105, 0.08);
+  --color-error: #dc2626;
+  --color-error-bg: rgba(220, 38, 38, 0.1);
+  --color-error-border: rgba(220, 38, 38, 0.25);
+  --color-warning: #d97706;
+  --color-warning-bg: rgba(217, 119, 6, 0.1);
+  --color-warning-border: rgba(217, 119, 6, 0.3);
+  --color-info: #2563eb;
+  --color-info-bg: rgba(37, 99, 235, 0.1);
+  --color-info-border: rgba(37, 99, 235, 0.3);
+  
+  /* Overlay Backgrounds */
+  --overlay-heavy: rgba(255, 255, 255, 0.95);
+  --overlay-medium: rgba(255, 255, 255, 0.8);
+  --overlay-light: var(--shadow-color);
+  
+  /* Component-specific */
+  --toggle-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --progress-bar-bg: rgba(0, 0, 0, 0.08);
+  --dropzone-border: rgba(0, 0, 0, 0.15);
+  --dropzone-bg: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
+  --badge-bg: rgba(0, 0, 0, 0.05);
+  --badge-border: var(--shadow-color);
+
+  /* High Contrast overrides */
+  --hc-bg: #ffffff;
+  --hc-text: #000000;
+  --hc-border: #000000;
+}
+
+/* ========== DARK THEME ========== */
+[data-theme="dark"] {
+  /* Brand Colors - LIGHTER ORANGE for dark mode visibility */
+  --color-brand: #FF8533;        /* Lighter orange - 5.8:1 contrast on dark bg */
+  --color-brand-hover: #FFA366;   /* Even lighter for hover states */
+  --color-brand-subtle: rgba(255, 133, 51, 0.15);
+  --color-brand-border: rgba(255, 133, 51, 0.4);
+
+  /* Backgrounds */
+  --bg-primary: #0e0e0c;
+  --bg-secondary: #1a1814;
+  --bg-tertiary: #141410;
+  --bg-card: rgba(255, 255, 255, 0.03);
+  --bg-glass: rgba(255, 255, 255, 0.05);
+  --bg-dropdown: var(--bg-primary);
+  --bg-input: rgba(255, 255, 255, 0.05);
+  --bg-hover: rgba(255, 255, 255, 0.08);
+
+  /* Text */
+  --text-primary: #f5f0e8;
+  --text-secondary: #a09a90;
+  --text-muted: #6a645a;
+  --text-inverse: #1a1612;
+
+  /* Borders */
+  --border-subtle: rgba(245, 240, 232, 0.12);
+  --border-accent: rgba(255, 133, 51, 0.4);
+  --border-hover: rgba(255, 133, 51, 0.6);
+
+  /* Effects */
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 10px 40px var(--shadow-color);
+  --shadow-medium: 0 4px 20px var(--shadow-color);
+  --glow-brand: 0 0 12px rgba(255, 133, 51, 0.4);
+  --glow-subtle: 0 0 20px rgba(255, 133, 51, 0.15);
+
+  /* Mesh Gradient - warm orange tones for dark mode */
+  --mesh-color-1: rgba(255, 133, 51, 0.12);
+  --mesh-color-2: rgba(255, 120, 40, 0.08);
+  --mesh-color-3: rgba(255, 107, 0, 0.05);
+
+  /* Selection */
+  --selection-bg: rgba(255, 133, 51, 0.35);
+  --selection-text: #f5f0e8;
+
+  /* Status Colors - adjusted for dark mode */
+  --color-success: #4ade80;
+  --color-success-bg: rgba(74, 222, 128, 0.15);
+  --color-success-border: rgba(74, 222, 128, 0.3);
+  --color-error: #f87171;
+  --color-error-bg: rgba(248, 113, 113, 0.15);
+  --color-error-border: rgba(248, 113, 113, 0.3);
+  --color-warning: #fbbf24;
+  --color-warning-bg: rgba(251, 191, 36, 0.15);
+  --color-warning-border: rgba(251, 191, 36, 0.3);
+  --color-info: #60a5fa;
+  --color-info-bg: rgba(96, 165, 250, 0.15);
+  --color-info-border: rgba(96, 165, 250, 0.3);
+  
+  /* Overlay Backgrounds */
+  --overlay-heavy: rgba(0, 0, 0, 0.9);
+  --overlay-medium: rgba(0, 0, 0, 0.8);
+  --overlay-light: var(--shadow-color);
+  
+  /* Component-specific */
+  --toggle-shadow: 0 2px 4px var(--shadow-color);
+  --progress-bar-bg: rgba(255, 255, 255, 0.1);
+  --dropzone-border: rgba(255, 255, 255, 0.2);
+  --badge-bg: rgba(255, 255, 255, 0.08);
+  --badge-border: rgba(255, 255, 255, 0.15);
+}
+
+/* ========== PDF/PRINT FORCED LIGHT THEME ========== */
+/* Critical: PDFs must always render with light theme on white background */
+[data-pdf="true"] {
+  --bg-primary: #ffffff !important;
+  --bg-secondary: #f8f9fa !important;
+  --bg-tertiary: #f0f0f0 !important;
+  --bg-card: rgba(0, 0, 0, 0.02) !important;
+  --bg-glass: rgba(0, 0, 0, 0.03) !important;
+  --bg-input: rgba(0, 0, 0, 0.03) !important;
+  --bg-hover: rgba(0, 0, 0, 0.05) !important;
+
+  --text-primary: #1f2937 !important;
+  --text-secondary: #6b7280 !important;
+  --text-muted: #9ca3af !important;
+  --text-inverse: #ffffff !important;
+
+  --border-subtle: #e5e7eb !important;
+  --border-accent: rgba(30, 58, 95, 0.4) !important;
+  --border-hover: rgba(30, 58, 95, 0.6) !important;
+
+  --shadow-color: rgba(0, 0, 0, 0.04) !important;
+  
+  background: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+/* Print media query - forces light theme */
+@media print {
+  :root {
+    --bg-primary: #ffffff !important;
+    --bg-secondary: #f8f9fa !important;
+    --bg-tertiary: #f0f0f0 !important;
+    --bg-card: rgba(0, 0, 0, 0.02) !important;
+    --bg-glass: rgba(0, 0, 0, 0.03) !important;
+    --bg-input: rgba(0, 0, 0, 0.03) !important;
+    --text-primary: #1f2937 !important;
+    --text-secondary: #6b7280 !important;
+    --text-muted: #9ca3af !important;
+    --border-subtle: #e5e7eb !important;
+  }
+
+  body, .document-container, .form-container {
+    background: #ffffff !important;
+    color: #1f2937 !important;
+  }
+
+  /* Page break controls for PDF generation */
+  table, .section-container, .form-section, .esop-table, .term-content {
+    page-break-inside: avoid !important;
+  }
+
+  .page-break {
+    page-break-before: always !important;
+  }
+
+  /* Hide UI elements in print/PDF */
+  .no-print, .step-indicator, .form-nav, 
+  .template-modal-actions, button:not(.print-btn) {
+    display: none !important;
+  }
+}
+
+/* ========== SMOOTH THEME TRANSITIONS ========== */
+.theme-transition {
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* ========== TRANSITION TIMING ========== */
+:root {
+  /* Quick interactions */
+  --transition-instant: 0.1s ease;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  
+  /* Default transitions */
+  --transition-default: 0.3s ease;
+  
+  /* Slow animations */
+  --transition-slow: 0.4s ease;
+  --transition-slower: 0.6s ease;
+  --transition-slowest: 1s ease;
+  
+  /* Easing functions */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+  --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* ========== TYPOGRAPHY BASE ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant);
+  color: var(--text-primary);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.625rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+p {
+  max-width: 45rem;
+}
+
+/* ========== UTILITY CLASSES ========== */
+.theme-bg { background: var(--bg-primary); }
+.theme-bg-secondary { background: var(--bg-secondary); }
+.theme-text { color: var(--text-primary); }
+.theme-text-muted { color: var(--text-muted); }
+.theme-border { border-color: var(--border-subtle); }
+
+/* Force light theme utility */
+.force-light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-subtle: #e5e7eb;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

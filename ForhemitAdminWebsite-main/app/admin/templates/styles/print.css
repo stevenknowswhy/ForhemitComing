@@ -1,0 +1,86 @@
+/* ── PRINT STYLES ── */
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  html,
+  body {
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  /* Engagement letter (and similar): hide data-entry chrome; show contract capture only */
+  .el-no-print {
+    display: none !important;
+  }
+
+  /* Modal layout clips multi-page content (flex + overflow + max-height) — reset for print */
+  .template-modal-overlay {
+    position: static !important;
+    inset: auto !important;
+    overflow: visible !important;
+    padding: 0 !important;
+    display: block !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    max-height: none !important;
+    height: auto !important;
+    align-items: stretch !important;
+  }
+
+  .template-modal-content {
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 100% !important;
+    max-width: none !important;
+    border-radius: 0 !important;
+  }
+
+  .template-modal-body {
+    overflow: visible !important;
+    max-height: none !important;
+    flex: none !important;
+    padding: 0 !important;
+  }
+
+  .template-modal-header {
+    background: #fff !important;
+    backdrop-filter: none !important;
+  }
+
+  .template-modal-actions {
+    display: none !important;
+  }
+
+  /* Engagement letter: print is the contract only — drop modal title bar */
+  .template-modal-content:has([data-engagement-letter-contract="true"]) .template-modal-header {
+    display: none !important;
+  }
+
+  .el-root {
+    overflow: visible !important;
+    min-height: 0 !important;
+  }
+
+  /* Reset dark theme for print */
+  .esop-form-container {
+    background: #fff !important;
+    color: #1a1a2e !important;
+    border-color: #e2e8f0 !important;
+  }
+  .esop-table td,
+  .esop-table th {
+    color: #1a1a2e !important;
+    border-color: #e2e8f0 !important;
+  }
+}
+
+

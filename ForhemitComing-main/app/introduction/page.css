@@ -1,0 +1,681 @@
+/* ── INTRODUCTION PAGE STYLES ── */
+@import "../styles/theme.css";
+
+.intro-wrapper {
+  --primary-orange: var(--color-brand);
+  --primary-red: var(--color-brand-hover);
+  --dark-bg: var(--bg-secondary);
+  --light-text: var(--text-primary);
+  --muted-text: var(--text-secondary);
+  --glass-bg: var(--bg-glass);
+  --glass-border: var(--border-subtle);
+
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background - matches homepage */
+.intro-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(ellipse at 20% 20%, var(--mesh-color-1) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, var(--mesh-color-2) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, var(--mesh-color-3) 0%, transparent 70%),
+    linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 50%, var(--bg-secondary) 100%);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+/* Slide-up Panel */
+.intro-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border-top: 1px solid var(--glass-border);
+  border-radius: 20px 20px 0 0;
+  max-height: 90vh;
+  overflow: hidden;
+  z-index: 1000;
+  transform: translateY(100%);
+  animation: slideUpPanel 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  box-shadow: 0 -10px 40px var(--shadow-color);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.intro-panel.visible {
+  transform: translateY(0);
+}
+
+@keyframes slideUpPanel {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Close Button */
+.intro-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: var(--muted-text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.intro-close:hover {
+  background: var(--color-brand-subtle);
+  border-color: var(--primary-orange);
+  color: var(--primary-orange);
+}
+
+/* Content */
+.intro-content {
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.intro-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--light-text);
+  margin-bottom: 0.75rem;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.2s forwards;
+}
+
+.intro-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  color: var(--muted-text);
+  line-height: 1.5;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cards Container */
+.intro-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0;
+  animation: fadeInUp 0.6s ease 0.4s forwards;
+}
+
+/* Individual Card */
+.intro-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--light-text);
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: left;
+  align-items: center;
+}
+
+.intro-card:not(.disabled):hover {
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
+  border-color: var(--primary-orange);
+  transform: translateX(5px);
+}
+
+.intro-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Card Icon */
+.card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--color-brand-subtle);
+  border: 1px solid var(--border-accent);
+  border-radius: 12px;
+  color: var(--primary-orange);
+  flex-shrink: 0;
+}
+
+.intro-card.disabled .card-icon {
+  background: var(--bg-glass);
+  border-color: var(--border-subtle);
+  color: var(--muted-text);
+}
+
+/* Card Text Container */
+.card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+/* Card Title */
+.card-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+
+/* Card Description */
+.card-description {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted-text);
+  line-height: 1.4;
+  margin-bottom: 0;
+}
+
+/* Card Arrow */
+.card-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-orange);
+  transition: all 0.3s ease;
+  width: 32px;
+  height: 32px;
+}
+
+.intro-card:not(.disabled):hover .card-arrow {
+  transform: translateX(4px);
+  color: var(--primary-red);
+}
+
+/* Card Badge (Coming Soon) */
+.card-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.75rem;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  color: var(--muted-text);
+}
+
+/* ── CARD FALL & RISE ANIMATIONS ── */
+
+/* Main cards falling animation */
+.intro-cards.cards-fall .intro-card:nth-child(1) {
+  animation: cardFall1 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+}
+
+.intro-cards.cards-fall .intro-card:nth-child(2) {
+  animation: cardFall2 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.05s forwards;
+}
+
+.intro-cards.cards-fall .intro-card:nth-child(3) {
+  animation: cardFall3 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.1s forwards;
+}
+
+.intro-cards.cards-fall .intro-card:nth-child(4) {
+  animation: cardFall4 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) 0.15s forwards;
+}
+
+@keyframes cardFall1 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(-2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(-8deg);
+  }
+}
+
+@keyframes cardFall2 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(6deg);
+  }
+}
+
+@keyframes cardFall3 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(-1deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(-5deg);
+  }
+}
+
+@keyframes cardFall4 {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(20px) rotate(2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(150px) rotate(7deg);
+  }
+}
+
+/* Business Options Container */
+.business-options {
+  opacity: 0;
+}
+
+/* Wide options view - override parent max-width constraint */
+.intro-content:has(.business-options.options-wide) {
+  max-width: 800px;
+  width: 90vw;
+}
+
+.business-options.options-rise {
+  animation: optionsRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
+}
+
+@keyframes optionsRise {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Back Button */
+.back-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--border-accent);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--muted-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0 auto 1.5rem;
+}
+
+.back-button:hover {
+  background: var(--color-brand-subtle);
+  border-color: var(--primary-orange);
+  color: var(--primary-orange);
+  transform: translateX(-3px);
+}
+
+.back-button svg {
+  transition: transform 0.3s ease;
+}
+
+.back-button:hover svg {
+  transform: translateX(-3px);
+}
+
+/* Sub-options 2x2 Grid - Rectangular Cards */
+.intro-cards.sub-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.sub-options .sub-option-card {
+  opacity: 0;
+  animation: subCardRise 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  min-height: auto;
+}
+
+.sub-options .sub-option-card:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.sub-options .sub-option-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.sub-options .sub-option-card:nth-child(3) {
+  animation-delay: 0.5s;
+}
+
+.sub-options .sub-option-card:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes subCardRise {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Sub-option card horizontal layout */
+.sub-option-card .card-icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+.sub-option-card .card-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.sub-option-card .card-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.sub-option-card .card-title {
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.sub-option-card .card-description {
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sub-option-card .card-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-left: 0.5rem;
+}
+
+/* Sub-option card hover effect */
+.sub-option-card:hover {
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--color-brand-subtle) 100%);
+}
+
+/* Early Access Email Reveal */
+.early-access-wrapper {
+  position: relative;
+}
+
+.email-reveal-card {
+  animation: fadeInReveal 0.3s ease;
+}
+
+@keyframes fadeInReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.email-reveal-card .card-text {
+  gap: 1rem;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 768px) {
+  .intro-content {
+    padding: 4rem 1.5rem 2rem;
+    max-width: 400px;
+  }
+
+  .intro-title {
+    font-size: 1.5rem;
+  }
+
+  .intro-subtitle {
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .intro-card {
+    padding: 1rem 1.25rem;
+    gap: 1rem;
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .card-title {
+    font-size: 0.9rem;
+  }
+
+  .card-description {
+    font-size: 0.75rem;
+  }
+
+  /* Wide options view - tablet adjustment */
+  .intro-content:has(.business-options.options-wide) {
+    max-width: 700px;
+    width: 95vw;
+  }
+
+  /* Sub-options grid - tablet adjustment */
+  .intro-cards.sub-options {
+    gap: 0.75rem;
+  }
+
+  .sub-options .sub-option-card {
+    display: flex;
+    padding: 1.25rem;
+  }
+
+  .sub-option-card .card-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .sub-option-card .card-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .sub-option-card .card-title {
+    font-size: 0.9rem;
+  }
+
+  .sub-option-card .card-description {
+    font-size: 0.75rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 480px) {
+  .intro-panel {
+    border-radius: 16px 16px 0 0;
+    max-height: 85vh;
+  }
+
+  .intro-close {
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+  }
+
+  .intro-content {
+    padding: 3.5rem 1.25rem 2rem;
+  }
+
+  .intro-title {
+    font-size: 1.35rem;
+  }
+
+  .intro-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .intro-cards {
+    gap: 0.875rem;
+  }
+
+  .intro-card {
+    padding: 1rem;
+    gap: 0.875rem;
+  }
+
+  .card-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .card-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .card-title {
+    font-size: 0.85rem;
+  }
+
+  .card-description {
+    font-size: 0.7rem;
+  }
+
+  .card-arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .card-badge {
+    font-size: 0.65rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  /* Responsive Back Button */
+  .back-button {
+    font-size: 0.75rem;
+    padding: 0.4rem 0.875rem;
+    margin-bottom: 1.25rem;
+  }
+
+  /* Wide options view - mobile reset */
+  .intro-content:has(.business-options.options-wide) {
+    max-width: 500px;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  /* Sub-options grid - mobile single column */
+  .intro-cards.sub-options {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+
+  .sub-options .sub-option-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 1.25rem;
+  }
+
+  .sub-option-card .card-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sub-option-card .card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .sub-option-card .card-title {
+    font-size: 0.9rem;
+  }
+
+  .sub-option-card .card-description {
+    font-size: 0.75rem;
+  }
+
+  .sub-option-card .card-arrow {
+    margin-left: 0.5rem;
+  }
+}

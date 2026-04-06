@@ -1,0 +1,12 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS PAGE STYLES
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* Import modular styles */
+@import './styles/base.css';
+@import './styles/hero.css';
+@import './styles/comparison.css';
+@import './styles/stakeholders.css';
+@import './styles/timeline.css';
+@import './styles/cta.css';
+@import './styles/responsive.css';

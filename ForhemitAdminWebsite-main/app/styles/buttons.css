@@ -1,0 +1,402 @@
+/* ── BUTTON STANDARDIZATION ── */
+/* Consistent button styles across all template forms */
+
+/* =============================================
+   BASE BUTTON STYLES
+   ============================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+  min-width: 44px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* =============================================
+   PRIMARY BUTTON (Navy)
+   ============================================= */
+
+.btn-primary {
+  background: var(--color-brand, #1e3a5f);
+  color: #ffffff;
+  border-color: var(--color-brand, #1e3a5f);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-brand-hover, #2a4a6f);
+  border-color: var(--color-brand-hover, #2a4a6f);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.25);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(30, 58, 95, 0.25);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-brand, #1e3a5f);
+  outline-offset: 2px;
+}
+
+/* =============================================
+   SECONDARY BUTTON (Outlined)
+   ============================================= */
+
+.btn-secondary {
+  background: var(--bg-secondary, #f8f9fa);
+  color: var(--text-primary, #1f2937);
+  border-color: var(--border-subtle, #e5e7eb);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  border-color: var(--border-accent, rgba(30, 58, 95, 0.4));
+  color: var(--color-brand, #1e3a5f);
+}
+
+.btn-secondary:active:not(:disabled) {
+  background: var(--bg-tertiary, #f0f0f0);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--border-accent, rgba(30, 58, 95, 0.4));
+  outline-offset: 2px;
+}
+
+/* =============================================
+   GHOST BUTTON (Minimal)
+   ============================================= */
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  border-color: transparent;
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-primary, #1f2937);
+}
+
+.btn-ghost:active:not(:disabled) {
+  background: var(--bg-secondary, #f8f9fa);
+}
+
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--border-subtle, #e5e7eb);
+  outline-offset: 2px;
+}
+
+/* =============================================
+   DANGER/DESTRUCTIVE BUTTON
+   ============================================= */
+
+.btn-danger {
+  background: var(--color-error, #dc2626);
+  color: #ffffff;
+  border-color: var(--color-error, #dc2626);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #b91c1c;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.25);
+}
+
+.btn-danger:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* =============================================
+   SUCCESS BUTTON
+   ============================================= */
+
+.btn-success {
+  background: var(--color-success, #059669);
+  color: #ffffff;
+  border-color: var(--color-success, #059669);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #047857;
+  border-color: #047857;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+}
+
+.btn-success:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* =============================================
+   PRINT BUTTON
+   ============================================= */
+
+.btn-print {
+  background: var(--bg-secondary, #f8f9fa);
+  color: var(--text-primary, #1f2937);
+  border-color: var(--border-subtle, #e5e7eb);
+}
+
+.btn-print:hover:not(:disabled) {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  border-color: var(--color-brand, #1e3a5f);
+  color: var(--color-brand, #1e3a5f);
+}
+
+/* =============================================
+   BUTTON SIZES
+   ============================================= */
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  min-height: 36px;
+}
+
+.btn-lg {
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  min-height: 52px;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* =============================================
+   BUTTON WITH ICON
+   ============================================= */
+
+.btn-icon {
+  padding: 0.75rem;
+}
+
+.btn-icon-left {
+  padding-left: 1rem;
+}
+
+.btn-icon-right {
+  padding-right: 1rem;
+}
+
+/* =============================================
+   BUTTON GROUPS
+   ============================================= */
+
+.btn-group {
+  display: inline-flex;
+  gap: 0;
+}
+
+.btn-group .btn {
+  border-radius: 0;
+}
+
+.btn-group .btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.btn-group .btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.btn-group .btn:not(:first-child) {
+  border-left-width: 0;
+}
+
+/* =============================================
+   STAGE SELECTOR (ESOP Cost Reference)
+   ============================================= */
+
+.stage-selector {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--bg-secondary, #f8f9fa);
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.stage-btn {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  min-height: 40px;
+}
+
+.stage-btn:hover {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  color: var(--text-primary, #1f2937);
+}
+
+.stage-btn.active {
+  background: var(--color-brand, #1e3a5f);
+  color: #ffffff;
+}
+
+/* =============================================
+   TAB BUTTONS (Head-to-Head, Term Sheet)
+   ============================================= */
+
+.tab-btn {
+  padding: 0.75rem 1rem;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary, #6b7280);
+  background: var(--bg-secondary, #f8f9fa);
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.tab-btn:hover {
+  color: var(--text-primary, #1f2937);
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+}
+
+.tab-btn.active {
+  background: var(--color-brand, #1e3a5f);
+  color: #ffffff;
+  border-bottom-color: transparent;
+}
+
+/* =============================================
+   NAVIGATION BUTTONS (Form Steps)
+   ============================================= */
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-height: 44px;
+}
+
+.nav-btn-prev {
+  background: transparent;
+  color: var(--text-secondary, #6b7280);
+  border: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.nav-btn-prev:hover:not(:disabled) {
+  background: var(--bg-hover, rgba(0, 0, 0, 0.05));
+  border-color: var(--border-accent, rgba(30, 58, 95, 0.4));
+  color: var(--text-primary, #1f2937);
+}
+
+.nav-btn-next {
+  background: var(--color-brand, #1e3a5f);
+  color: #ffffff;
+  border: 1px solid var(--color-brand, #1e3a5f);
+}
+
+.nav-btn-next:hover:not(:disabled) {
+  background: var(--color-brand-hover, #2a4a6f);
+  border-color: var(--color-brand-hover, #2a4a6f);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 95, 0.25);
+}
+
+.nav-btn-generate {
+  background: var(--color-success, #059669);
+  color: #ffffff;
+  border: 1px solid var(--color-success, #059669);
+}
+
+.nav-btn-generate:hover:not(:disabled) {
+  background: #047857;
+  border-color: #047857;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+}
+
+/* =============================================
+   MOBILE BUTTON ADJUSTMENTS
+   ============================================= */
+
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.875rem 1.25rem; /* Larger touch target on mobile */
+  }
+  
+  .btn-group {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .btn-group .btn {
+    border-radius: 6px !important;
+    border-left-width: 1px !important;
+  }
+  
+  .btn-group .btn:not(:first-child) {
+    margin-top: 8px;
+  }
+  
+  .stage-selector {
+    flex-wrap: wrap;
+  }
+  
+  .stage-btn {
+    flex: 1 1 45%;
+  }
+  
+  .tab-btn {
+    flex: 1 1 auto;
+    min-width: 100px;
+  }
+}
+
+/* =============================================
+   PRINT BUTTON HIDING
+   ============================================= */
+
+@media print {
+  .btn:not(.print-btn),
+  .stage-selector,
+  .tab-btn,
+  .nav-btn {
+    display: none !important;
+  }
+}
