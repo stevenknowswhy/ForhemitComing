@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { env } from '@/lib/env'
 
 export const dynamic = 'force-dynamic'
 
@@ -10,14 +11,21 @@ export async function GET() {
     environment: process.env.NODE_ENV || 'development',
   }
 
-  // Check Convex connection (optional - remove if not needed)
-  const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL
-  if (!convexUrl) {
+  const convexUrl = env.NEXT_PUBLIC_CONVEX_URL
+  const convexConfigured = convexUrl !== 'https://dummy.convex.cloud'
+  if (process.env.NODE_ENV === 'production' && !convexConfigured) {
     return NextResponse.json(
-      { ...checks, status: 'unhealthy', error: 'Missing Convex URL' },
-      { status: 503 }
+      {
+        ...checks,
+        status: 'unhealthy',
+        error: 'Convex URL not configured for production',
+      },
+      { status: 503 },
     )
   }
 
-  return NextResponse.json(checks, { status: 200 })
+  return NextResponse.json(
+    { ...checks, convexConfigured },
+    { status: 200 },
+  )
 }
