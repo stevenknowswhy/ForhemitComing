@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { COOKIE_NAME, verifyAdminSession } from "@/lib/admin-session";
 
 const PREVIEW_COOKIE = "forhemit_preview";
 const PREVIEW_COOKIE_VALUE = "granted";
@@ -32,7 +33,35 @@ function hasDevPreviewBypass(request: NextRequest): boolean {
   return request.nextUrl.searchParams.get("preview") === "true";
 }
 
-export function proxy(request: NextRequest) {
+const ADMIN_LOGIN = "/admin/login";
+const ADMIN_LOGOUT = "/admin/logout";
+
+async function adminAuthResponse(
+  request: NextRequest
+): Promise<NextResponse | null> {
+  const { pathname } = request.nextUrl;
+  if (!pathname.startsWith("/admin")) return null;
+  if (pathname === ADMIN_LOGIN || pathname.startsWith(`${ADMIN_LOGOUT}`)) {
+    return null;
+  }
+
+  const secret = process.env.ADMIN_TOKEN;
+  if (!secret?.length) return null;
+
+  const cookie = request.cookies.get(COOKIE_NAME)?.value;
+  const ok = await verifyAdminSession(cookie, secret);
+  if (ok) return null;
+
+  const url = request.nextUrl.clone();
+  url.pathname = ADMIN_LOGIN;
+  url.searchParams.set("next", pathname);
+  return NextResponse.redirect(url);
+}
+
+export async function proxy(request: NextRequest) {
+  const adminRes = await adminAuthResponse(request);
+  if (adminRes) return adminRes;
+
   if (isGateDisabled()) {
     return NextResponse.next();
   }
