@@ -70,6 +70,43 @@ type PathwayOpt =
   | "cpas"
   | "employees";
 
+const PATHWAY_SET: ReadonlySet<string> = new Set<PathwayOpt>([
+  "founders",
+  "attorneys",
+  "lenders",
+  "cpas",
+  "employees",
+]);
+
+function parseRelatedPathways(formData: FormData): PathwayOpt[] {
+  const out: PathwayOpt[] = [];
+  const seen = new Set<string>();
+  for (const v of formData.getAll("relatedPathways").map(String)) {
+    if (!PATHWAY_SET.has(v) || seen.has(v)) continue;
+    seen.add(v);
+    out.push(v as PathwayOpt);
+  }
+  return out;
+}
+
+function parseDepthLevelCreate(
+  formData: FormData
+): "overview" | "detailed" | "comprehensive" | undefined {
+  const d = String(formData.get("depthLevel") ?? "").trim();
+  if (d === "overview" || d === "detailed" || d === "comprehensive") return d;
+  return undefined;
+}
+
+/** Empty string clears stored depth; valid value sets; malformed omits patch. */
+function parseDepthLevelUpdate(
+  formData: FormData
+): "overview" | "detailed" | "comprehensive" | null | undefined {
+  const d = String(formData.get("depthLevel") ?? "").trim();
+  if (d === "") return null;
+  if (d === "overview" || d === "detailed" || d === "comprehensive") return d;
+  return undefined;
+}
+
 export async function createBlogPost(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
   const slug = String(formData.get("slug") ?? "").trim();
@@ -90,6 +127,9 @@ export async function createBlogPost(formData: FormData) {
     pathwayRaw === "employees"
       ? pathwayRaw
       : undefined;
+
+  const depthLevel = parseDepthLevelCreate(formData);
+  const relatedPathways = parseRelatedPathways(formData);
 
   const readTimeOverview = numOrUndef(formData.get("readTimeOverview"));
   const readTimeDeepDive = numOrUndef(formData.get("readTimeDeepDive"));
@@ -128,7 +168,10 @@ export async function createBlogPost(formData: FormData) {
     readTimeOverview,
     readTimeDeepDive,
     readTimeMethodology,
+    depthLevel,
     resilienceSummary,
+    relatedPathways:
+      relatedPathways.length > 0 ? relatedPathways : undefined,
     adminToken: adminToken(),
   });
   revalidateBlog();
@@ -156,6 +199,9 @@ export async function updateBlogPost(formData: FormData) {
     pathwayRaw === "employees"
       ? pathwayRaw
       : undefined;
+
+  const depthLevel = parseDepthLevelUpdate(formData);
+  const relatedPathways = parseRelatedPathways(formData);
 
   const readTimeOverview = numOrUndef(formData.get("readTimeOverview"));
   const readTimeDeepDive = numOrUndef(formData.get("readTimeDeepDive"));
@@ -193,7 +239,9 @@ export async function updateBlogPost(formData: FormData) {
     readTimeOverview,
     readTimeDeepDive,
     readTimeMethodology,
+    ...(depthLevel !== undefined ? { depthLevel } : {}),
     resilienceSummary,
+    relatedPathways,
     adminToken: adminToken(),
   });
   revalidateBlog();
