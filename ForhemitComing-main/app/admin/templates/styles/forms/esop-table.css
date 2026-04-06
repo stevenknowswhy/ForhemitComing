@@ -1,0 +1,144 @@
+/* ── ESOP TABLE (Dark Theme) ── */
+
+.esop-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+}
+
+.esop-table th {
+  background: var(--shadow-color);
+  color: var(--text-secondary);
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-weight: 500;
+  padding: 0.7rem 0.75rem;
+  text-align: left;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.esop-col-item { width: 28%; }
+.esop-col-amount { width: 14%; }
+.esop-col-calc { width: 14%; }
+.esop-col-note { width: 30%; }
+
+.esop-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: top;
+  color: var(--text-primary);
+}
+
+.esop-item-sub {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.esop-note-cell {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.esop-category-header {
+  background: var(--bg-glass);
+}
+
+.esop-category-header td {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-weight: 600;
+  font-size: 0.75rem;
+  color: var(--text-primary);
+  padding: 0.85rem 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.esop-danger-header {
+  background: rgba(255, 68, 68, 0.08) !important;
+}
+
+.esop-danger-header td {
+  color: var(--color-error) !important;
+}
+
+.esop-danger-row td {
+  background: rgba(255, 68, 68, 0.05);
+}
+
+.esop-lost-value {
+  font-weight: 700;
+  color: var(--color-error);
+  font-size: 0.9rem;
+}
+
+.esop-subtotal {
+  background: rgba(255, 107, 0, 0.06);
+}
+
+.esop-subtotal td {
+  border-bottom: 1px solid var(--border-subtle);
+  font-weight: 600;
+}
+
+.esop-subtotal-val {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.esop-grand-total td {
+  background: var(--color-brand);
+  color: #0e0e0c;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.esop-grand-total .esop-grand-value {
+  font-family: var(--font-cormorant), 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+}
+
+.esop-grand-note {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.esop-warning {
+  background: rgba(255, 68, 68, 0.08);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.esop-warning h4 {
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-error);
+  margin: 0 0 0.5rem;
+}
+
+.esop-warning p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+  line-height: 1.5;
+}
+
+.esop-warning p:last-child {
+  margin-bottom: 0;
+}
+
+.esop-assumptions {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+

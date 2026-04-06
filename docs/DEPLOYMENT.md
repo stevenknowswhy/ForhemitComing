@@ -1,0 +1,56 @@
+# Deployment
+
+Operational checklist aligned with `HARMONIZATION_PLAN.md`. Replace placeholder domains with production values.
+
+## Surfaces
+
+| Surface | Platform | Branch | Notes |
+|---------|----------|--------|--------|
+| Convex | Convex Cloud | `main` | Deploy via CI after TypeScript passes: `npx convex deploy` |
+| Marketing | Vercel (Project A) | `main` | Root: `apps/marketing` after monorepo |
+| Admin | Vercel (Project B) | `main` | Root: `apps/admin`; optional **deployment protection** (approval) |
+
+## Environment variables
+
+Validate at build time with **t3-env** (or equivalent) once wired. Minimum set:
+
+### Both Next apps
+
+- `NEXT_PUBLIC_CONVEX_URL`
+- `NEXT_PUBLIC_CONVEX_SITE_URL` (if used)
+- Sentry / analytics as applicable
+
+### Admin only
+
+- `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+- `CLERK_SECRET_KEY`
+- Clerk URL redirect envs per Clerk dashboard
+- `ADMIN_TOKEN` (optional; scripts / `requireAdmin` fallback in current code)
+
+### UploadThing (both if uploads used)
+
+- `UPLOADTHING_TOKEN` (and any UploadThing public app id vars your version requires)
+
+### CI (GitHub Actions)
+
+- `CONVEX_DEPLOY_KEY` (or org-approved Convex deploy secret)
+
+## Secrets hygiene
+
+- Store a **single** 1Password (or team vault) item listing **both** Vercel projects’ UploadThing and shared keys.
+- **Rotate UploadThing** (and shared secrets) in **both** Vercel projects in the same change window to avoid drift.
+
+## SEO / hosts
+
+- **Indexable blog:** marketing host (e.g. `https://www.example.com/resources/blog/...`).
+- **Admin host:** `noindex` via `robots.txt` and meta; no duplicate blog routes.
+
+## Post-deploy smoke
+
+- Marketing: health route, one published blog post (post–blog launch), sitemap URL.
+- Admin: sign-in, one authenticated Convex mutation (e.g. list contacts).
+
+## References
+
+- `HARMONIZATION_PLAN.md` — phases, success criteria, risk register
+- Each app’s `.env.example` (until merged into monorepo root)

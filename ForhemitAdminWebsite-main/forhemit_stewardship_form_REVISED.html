@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forhemit — Stewardship Agreement (REVISED)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream:   #F8F6F1;
+  --linen:   #EDE9E0;
+  --rule:    #D6D0C4;
+  --navy:    #1B2A4A;
+  --navy2:   #243659;
+  --brass:   #9A7540;
+  --brass2:  #B8965A;
+  --ink:     #1C1510;
+  --muted:   #7A7068;
+  --green:   #4A7A5A;
+  --red:     #8B3A3A;
+  --ff-d:    'Cormorant Garamond', Georgia, serif;
+  --ff-b:    'Jost', system-ui, sans-serif;
+  --ff-m:    'DM Mono', monospace;
+  --shadow:  0 1px 3px rgba(28,21,16,.06), 0 4px 16px rgba(28,21,16,.08);
+}
+
+html { background: var(--linen); min-height: 100vh; }
+body { font-family: var(--ff-b); color: var(--ink); background: var(--linen); min-height: 100vh; }
+
+.topbar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 56px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.topbar-mark { font-family: var(--ff-d); font-size: 1rem; font-weight: 300; letter-spacing: .22em; text-transform: uppercase; color: #fff; }
+.topbar-right { display: flex; align-items: center; gap: 1.5rem; }
+.topbar-label { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.topbar-doc { font-family: var(--ff-m); font-size: .72rem; color: var(--brass2); }
+
+.shell { max-width: 900px; margin: 0 auto; padding: 3rem 2rem 6rem; }
+
+.pg-header { margin-bottom: 3rem; }
+.pg-eyebrow { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brass); margin-bottom: .75rem; font-family: var(--ff-b); font-weight: 400; }
+.pg-title { font-family: var(--ff-d); font-size: 2.6rem; font-weight: 300; color: var(--navy); line-height: 1.1; margin-bottom: .75rem; }
+.pg-sub { font-size: .82rem; font-weight: 300; color: var(--muted); line-height: 1.7; max-width: 520px; }
+.pg-nav { display: flex; gap: 1rem; margin-top: 1.5rem; }
+.pg-nav-link { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); text-decoration: none; padding: .4rem .9rem; border: 1px solid var(--rule); transition: all .2s; }
+.pg-nav-link:hover, .pg-nav-link.active { border-color: var(--brass); color: var(--brass); background: rgba(154,117,64,.06); }
+
+.shared-banner {
+  background: var(--navy); color: #fff;
+  padding: 1.6rem 2rem; margin-bottom: 2.5rem;
+  border-left: 3px solid var(--brass);
+}
+.shared-banner-label { font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--brass2); margin-bottom: 1.2rem; }
+.shared-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+.shared-item { display: flex; flex-direction: column; gap: .3rem; }
+.shared-item-label { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+.shared-item-val { font-size: .88rem; font-weight: 300; color: #fff; font-family: var(--ff-b); min-height: 1.4em; }
+.shared-item-empty { font-size: .78rem; color: rgba(255,255,255,.3); font-style: italic; }
+.shared-link { font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--brass2); text-decoration: none; border-bottom: 1px solid rgba(184,150,90,.3); padding-bottom: 1px; transition: color .2s; }
+.shared-link:hover { color: #fff; }
+
+.section { background: var(--cream); border: 1px solid var(--rule); margin-bottom: 1.5rem; box-shadow: var(--shadow); }
+.section-head { padding: 1.2rem 1.8rem; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 1rem; cursor: pointer; user-select: none; }
+.section-num { font-family: var(--ff-m); font-size: .65rem; color: var(--brass); width: 28px; }
+.section-title { font-family: var(--ff-d); font-size: 1.1rem; font-weight: 500; color: var(--navy); flex: 1; }
+.section-status { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; padding: .25rem .7rem; border: 1px solid var(--rule); color: var(--muted); transition: all .2s; }
+.section-status.complete { border-color: var(--green); color: var(--green); background: rgba(74,122,90,.06); }
+.section-chevron { color: var(--muted); font-size: .8rem; transition: transform .3s; flex-shrink: 0; }
+.section.open .section-chevron { transform: rotate(180deg); }
+.section-body { padding: 1.8rem; display: none; }
+.section.open .section-body { display: block; }
+
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem; margin-bottom: 1.4rem; }
+.field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.field-grid.full { grid-template-columns: 1fr; }
+.field { display: flex; flex-direction: column; gap: .4rem; }
+.field label { font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); font-weight: 400; }
+.field label span.req { color: var(--brass); margin-left: 2px; }
+.field input, .field select, .field textarea {
+  font-family: var(--ff-b); font-size: .84rem; font-weight: 300; color: var(--ink);
+  background: #fff; border: 1px solid var(--rule); padding: .6rem .85rem;
+  outline: none; transition: border-color .2s, box-shadow .2s; width: 100%;
+  -webkit-appearance: none;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--navy); box-shadow: 0 0 0 2px rgba(27,42,74,.08); }
+.field input.prefilled { background: rgba(154,117,64,.06); border-color: rgba(154,117,64,.35); color: var(--navy); }
+.field textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+.field select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%237A7068'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right .85rem center; padding-right: 2rem; }
+.field-hint { font-size: .7rem; color: var(--muted); font-weight: 300; margin-top: .2rem; line-height: 1.5; }
+.field-note { font-size: .72rem; color: var(--navy); background: rgba(27,42,74,.05); border-left: 2px solid var(--navy); padding: .6rem .85rem; margin-top: .5rem; line-height: 1.6; }
+.field-warn { font-size: .72rem; color: var(--brass); background: rgba(154,117,64,.07); border-left: 2px solid var(--brass); padding: .6rem .85rem; margin-top: .5rem; line-height: 1.6; }
+
+.tranche-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.tranche-table th { background: var(--navy); color: #fff; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .6rem .85rem; text-align: left; font-weight: 400; }
+.tranche-table td { padding: .7rem .85rem; font-size: .8rem; border-bottom: 1px solid var(--rule); vertical-align: top; line-height: 1.5; }
+.tranche-table tr:last-child td { border-bottom: none; }
+.tranche-table tr:nth-child(odd) td { background: rgba(248,246,241,.6); }
+.tranche-pct { font-family: var(--ff-d); font-size: 1.1rem; color: var(--brass); font-weight: 500; }
+.tranche-trigger { font-size: .72rem; color: var(--muted); }
+
+.fee-calc { background: rgba(27,42,74,.04); border: 1px solid rgba(27,42,74,.12); padding: 1.4rem; margin: 1rem 0; }
+.fee-calc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+.fee-metric { display: flex; flex-direction: column; gap: .3rem; }
+.fee-metric-label { font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.fee-metric-val { font-family: var(--ff-d); font-size: 1.2rem; color: var(--navy); }
+.fee-metric-val.brass { color: var(--brass); }
+
+.pillar-list { display: flex; flex-direction: column; gap: .5rem; }
+.pillar-item { display: flex; align-items: flex-start; gap: .85rem; padding: .9rem 1rem; border: 1px solid var(--rule); background: #fff; transition: border-color .2s; }
+.pillar-item:hover { border-color: rgba(154,117,64,.4); }
+.pillar-check { width: 18px; height: 18px; accent-color: var(--navy); flex-shrink: 0; margin-top: .1rem; }
+.pillar-num { font-family: var(--ff-m); font-size: .62rem; color: var(--brass); width: 20px; flex-shrink: 0; margin-top: .1rem; }
+.pillar-text { flex: 1; }
+.pillar-title { font-size: .82rem; color: var(--ink); font-weight: 500; margin-bottom: .2rem; }
+.pillar-desc { font-size: .72rem; color: var(--muted); line-height: 1.5; }
+
+.ack-block { background: rgba(27,42,74,.05); border: 1px solid rgba(27,42,74,.15); padding: 1.2rem 1.4rem; margin: 1.4rem 0; }
+.ack-check { display: flex; align-items: flex-start; gap: .8rem; cursor: pointer; }
+.ack-check input { margin-top: .2rem; accent-color: var(--navy); flex-shrink: 0; width: 16px; height: 16px; }
+.ack-text { font-size: .8rem; color: var(--ink); line-height: 1.6; }
+.ack-text strong { color: var(--navy); }
+
+.progress-bar-wrap { height: 3px; background: var(--rule); margin-bottom: 2rem; }
+.progress-bar-fill { height: 100%; background: var(--brass); transition: width .4s ease; }
+.progress-label { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-top: .5rem; }
+
+.submit-bar {
+  position: sticky; bottom: 0; background: var(--cream);
+  border-top: 1px solid var(--rule); padding: 1.2rem 0;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; margin-top: 2rem;
+}
+.submit-status { font-size: .72rem; color: var(--muted); font-weight: 300; }
+.submit-status.error { color: var(--red); }
+.submit-status.success { color: var(--green); }
+.btn-submit {
+  background: var(--navy); color: #fff; border: none; cursor: pointer;
+  font-family: var(--ff-b); font-size: .72rem; font-weight: 500; letter-spacing: .16em;
+  text-transform: uppercase; padding: .9rem 2.4rem; transition: background .2s;
+  display: flex; align-items: center; gap: .75rem;
+}
+.btn-submit:hover:not(:disabled) { background: var(--navy2); }
+.btn-submit:disabled { opacity: .45; cursor: not-allowed; }
+.btn-secondary {
+  background: none; color: var(--navy); border: 1px solid var(--navy); cursor: pointer;
+  font-family: var(--ff-b); font-size: .72rem; font-weight: 400; letter-spacing: .16em;
+  text-transform: uppercase; padding: .85rem 1.8rem; transition: all .2s;
+}
+.btn-secondary:hover { background: var(--navy); color: #fff; }
+
+/* ── Accessibility ── */
+.skip-link {
+  position: absolute; top: -40px; left: 0;
+  background: var(--brass); color: #fff;
+  padding: 8px 16px; z-index: 10000;
+  text-decoration: none; font-size: .75rem;
+  font-family: var(--ff-b); letter-spacing: .12em; text-transform: uppercase;
+}
+.skip-link:focus { top: 0; outline: 2px solid #fff; }
+
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--brass);
+  outline-offset: 2px;
+}
+
+.pillar-item:focus-within,
+.section-head:focus-visible {
+  border-color: var(--brass);
+  box-shadow: 0 0 0 2px rgba(154,117,64,.3);
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.3); border-top-color: #fff; border-radius: 50%; animation: spin .7s linear infinite; }
+
+.term-opts { display: flex; gap: 1rem; margin-top: .5rem; }
+.term-opt {
+  flex: 1; padding: 1rem; border: 1px solid var(--rule); background: #fff;
+  cursor: pointer; text-align: center; transition: all .2s;
+}
+.term-opt:hover { border-color: var(--brass); }
+.term-opt.selected { border-color: var(--navy); background: rgba(27,42,74,.04); }
+.term-opt-months { font-family: var(--ff-d); font-size: 1.6rem; color: var(--navy); }
+.term-opt-label { font-size: .65rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-top: .3rem; }
+.term-opt-sub { font-size: .68rem; color: var(--muted); margin-top: .25rem; line-height: 1.4; }
+
+@media (max-width: 640px) {
+  .shared-grid, .field-grid, .field-grid.three, .fee-calc-grid { grid-template-columns: 1fr; }
+  .term-opts { flex-direction: column; }
+  .topbar { padding: 0 1.2rem; }
+  .shell { padding: 1.5rem 1rem 5rem; }
+}
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav class="topbar" aria-label="Document navigation">
+  <span class="topbar-mark">Forhemit Transition Stewardship</span>
+  <div class="topbar-right">
+    <span class="topbar-label">Document</span>
+    <span class="topbar-doc">11 — Stewardship Agreement (REVISED v1.0)</span>
+    <a href="#accessibility" class="topbar-doc" style="color:var(--brass2); text-decoration:none; margin-left:1rem; font-size:.65rem;">Accessibility</a>
+  </div>
+</nav>
+
+<main id="main-content" class="shell">
+
+  <div class="pg-header">
+    <p class="pg-eyebrow">Admin — Contract Generation</p>
+    <h1 class="pg-title">Transition Stewardship Agreement</h1>
+    <p class="pg-sub">Post-close 12–24 month stewardship services with comprehensive legal protections. Shared fields are pre-populated from the Engagement Letter.</p>
+    <div class="pg-nav">
+      <a href="forhemit_engagement_form_REVISED.html" class="pg-nav-link">Doc 10 — Engagement Letter (REVISED)</a>
+      <a href="forhemit_stewardship_form_REVISED.html" class="pg-nav-link active">Doc 11 — Stewardship Agreement (REVISED)</a>
+    </div>
+  </div>
+
+  <div class="progress-bar-wrap">
+    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="12" aria-live="polite" id="progressBar" class="progress-bar-fill" style="width:0%">
+      <span class="visually-hidden">0 of 12 sections complete</span>
+    </div>
+  </div>
+  <p class="progress-label" id="progressLabel">0 of 12 sections complete</p>
+
+  <!-- Shared fields display (read from localStorage) -->
+  <div class="shared-banner">
+    <p class="shared-banner-label">Shared Fields — populated from Engagement Letter</p>
+    <div class="shared-grid">
+      <div class="shared-item">
+        <span class="shared-item-label">Company</span>
+        <span class="shared-item-val" id="disp_company"><span class="shared-item-empty">Not set — <a href="forhemit_engagement_form_REVISED.html" class="shared-link">open Engagement Letter</a></span></span>
+      </div>
+      <div class="shared-item">
+        <span class="shared-item-label">Engagement Reference</span>
+        <span class="shared-item-val" id="disp_ref"><span class="shared-item-empty">—</span></span>
+      </div>
+      <div class="shared-item">
+        <span class="shared-item-label">Effective Date</span>
+        <span class="shared-item-val" id="disp_date"><span class="shared-item-empty">—</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Parties & Closing -->
+  <div class="section open" id="sec1" aria-labelledby="sec1-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="true" aria-controls="sec1-body" onclick="toggleSection('sec1')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec1')}">
+      <span class="section-num">01</span>
+      <span class="section-title" id="sec1-title">Parties & Closing Details</span>
+      <span class="section-status" id="sec1-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>Company Legal Name <span class="req">*</span></label>
+          <input type="text" id="company" class="prefilled" placeholder="Auto-filled from Engagement Letter" readonly>
+        </div>
+        <div class="field">
+          <label>Engagement Reference <span class="req">*</span></label>
+          <input type="text" id="eng_ref" class="prefilled" placeholder="Auto-filled" readonly>
+        </div>
+        <div class="field">
+          <label>Closing Date (ESOP trust funded) <span class="req">*</span></label>
+          <input type="date" id="closing_date" oninput="checkSection('sec1')">
+          <div class="field-hint">The date the ESOP trust funded and seller received proceeds.</div>
+        </div>
+        <div class="field">
+          <label>Agreement Date <span class="req">*</span></label>
+          <input type="date" id="agreement_date" oninput="checkSection('sec1')">
+          <div class="field-hint">Date of execution — at or before Closing Date.</div>
+        </div>
+        <div class="field">
+          <label>Post-Close Authorized Officer <span class="req">*</span></label>
+          <input type="text" id="post_officer" placeholder="Name, Title (trustee-appointed manager)" oninput="checkSection('sec1')">
+        </div>
+        <div class="field">
+          <label>Company Email (document delivery) <span class="req">*</span></label>
+          <input type="email" id="company_email" placeholder="manager@company.com" oninput="checkSection('sec1')">
+        </div>
+      </div>
+      <div class="field-note">The post-close authorized officer may differ from the pre-close seller. After closing, the ESOP trustee-appointed manager or board-designated officer has authority to execute on behalf of the Company.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Stewardship Term -->
+  <div class="section" id="sec2" aria-labelledby="sec2-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec2-body" onclick="toggleSection('sec2')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec2')}">
+      <span class="section-num">02</span>
+      <span class="section-title" id="sec2-title">Stewardship Term</span>
+      <span class="section-status" id="sec2-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.7;">Select the initial term. Extension tranches (Months 13–24) are elected separately by both parties no later than 30 days before the prior period ends.</p>
+      <div class="term-opts">
+        <div class="term-opt" id="term12" onclick="selectTerm(12)">
+          <div class="term-opt-months">12</div>
+          <div class="term-opt-label">Month Initial Term</div>
+          <div class="term-opt-sub">Months 1–6 (60%) + Months 7–12 (20%) committed at signing</div>
+        </div>
+        <div class="term-opt" id="term18" onclick="selectTerm(18)">
+          <div class="term-opt-months">18</div>
+          <div class="term-opt-label">Month Initial Term</div>
+          <div class="term-opt-sub">Includes first extension tranche — Months 13–18 (10%)</div>
+        </div>
+        <div class="term-opt" id="term24" onclick="selectTerm(24)">
+          <div class="term-opt-months">24</div>
+          <div class="term-opt-label">Month Full Term</div>
+          <div class="term-opt-sub">Full window committed — all four tranches at signing</div>
+        </div>
+      </div>
+      <div id="term-note" style="margin-top:1rem;display:none" class="field-note"></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: EBITDA & Fee -->
+  <div class="section" id="sec3" aria-labelledby="sec3-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec3-body" onclick="toggleSection('sec3')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec3')}">
+      <span class="section-num">03</span>
+      <span class="section-title" id="sec3-title">EBITDA Baseline & Annual Fee</span>
+      <span class="section-status" id="sec3-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>QofE Adjusted EBITDA (closing baseline) <span class="req">*</span></label>
+          <input type="number" id="ebitda" placeholder="3500000" oninput="calcFee()">
+          <div class="field-hint">From the Quality of Earnings report used in ESOP underwriting. This is the Year 1 baseline.</div>
+        </div>
+        <div class="field">
+          <label>EBITDA Source</label>
+          <select id="ebitda_source">
+            <option>QofE — adjusted EBITDA (recommended)</option>
+            <option>Unaudited management accounts</option>
+            <option>Reviewed financial statements</option>
+            <option>Audited financial statements</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="fee-calc" id="feeCalc">
+        <p style="font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;">Fee Calculation — 2.5% of EBITDA</p>
+        <div class="fee-calc-grid">
+          <div class="fee-metric">
+            <span class="fee-metric-label">Annual Fee</span>
+            <span class="fee-metric-val brass" id="calc_annual">—</span>
+          </div>
+          <div class="fee-metric">
+            <span class="fee-metric-label">Quarterly Invoice</span>
+            <span class="fee-metric-val" id="calc_quarterly">—</span>
+          </div>
+          <div class="fee-metric">
+            <span class="fee-metric-label">Months 1–6 (60%)</span>
+            <span class="fee-metric-val" id="calc_t1">—</span>
+          </div>
+          <div class="fee-metric">
+            <span class="fee-metric-label">Months 7–12 (20%)</span>
+            <span class="fee-metric-val" id="calc_t2">—</span>
+          </div>
+        </div>
+      </div>
+
+      <table class="tranche-table">
+        <thead>
+          <tr><th>Period</th><th>% of Annual Fee</th><th>Trigger</th><th>Primary Focus</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Months 1–6</strong></td>
+            <td><span class="tranche-pct">60%</span><br><span class="tranche-trigger" id="t1_amt">—</span></td>
+            <td>Automatic at Closing Date</td>
+            <td style="font-size:.72rem;color:var(--muted)">COOP active, lender reporting established, governance stabilized</td>
+          </tr>
+          <tr>
+            <td><strong>Months 7–12</strong></td>
+            <td><span class="tranche-pct">20%</span><br><span class="tranche-trigger" id="t2_amt">—</span></td>
+            <td>Completion of 6-Month Review</td>
+            <td style="font-size:.72rem;color:var(--muted)">Monitoring — covenant tracking, key-person review, variance analysis</td>
+          </tr>
+          <tr>
+            <td><strong>Months 13–18</strong></td>
+            <td><span class="tranche-pct">10%</span><br><span class="tranche-trigger" id="t3_amt">—</span></td>
+            <td>Written election by both parties</td>
+            <td style="font-size:.72rem;color:var(--muted)">Succession progress, governance maturation, refinance preparation</td>
+          </tr>
+          <tr>
+            <td><strong>Months 19–24</strong></td>
+            <td><span class="tranche-pct">10%</span><br><span class="tranche-trigger" id="t4_amt">—</span></td>
+            <td>Written election by both parties</td>
+            <td style="font-size:.72rem;color:var(--muted)">Final stewardship, close-out, Final Transition Report delivery</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="field-warn">The Stewardship Fee is paid from Company operating cash flow. It is not paid from ESOP trust assets or SBA loan proceeds. It is disclosed to the SBA lender as a recurring operating expense in the underwriting DSCR model prior to close.</div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_fee" onchange="checkSection('sec3')">
+          <span class="ack-text">I confirm the EBITDA baseline entered above. The annual Stewardship Fee of <strong id="ack_fee_val">2.5% of the stated EBITDA</strong> is payable by the Company from operating cash flow, disclosed to the SBA lender, and does not reduce seller proceeds or affect ESOP trust assets.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Service Pillars -->
+  <div class="section" id="sec4" aria-labelledby="sec4-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec4-body" onclick="toggleSection('sec4')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec4')}">
+      <span class="section-num">04</span>
+      <span class="section-title" id="sec4-title">Stewardship Service Pillars</span>
+      <span class="section-status" id="sec4-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.7;">Confirm the service pillars included in this engagement. All six are standard. Deselect only if explicitly excluded by written agreement prior to execution.</p>
+      <div class="pillar-list">
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P1</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Operational Continuity Monitoring</div>
+            <div class="pillar-desc">Monthly COOP review against actual conditions. Written status report within 10 business days of month-end.</div>
+          </div>
+        </div>
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P2</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Key-Person Risk Tracking</div>
+            <div class="pillar-desc">Employment status and succession readiness monitoring for critical personnel. Escalation protocol active.</div>
+          </div>
+        </div>
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P3</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Financial Baseline Reporting</div>
+            <div class="pillar-desc">Monthly comparison vs. QofE baseline. EBITDA variance flagging at ±15%. CPA coordination for lender reporting.</div>
+          </div>
+        </div>
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P4</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Governance Documentation</div>
+            <div class="pillar-desc">Operating procedures, delegation of authority, board resolution log, officer succession plan maintenance.</div>
+          </div>
+        </div>
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P5</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Lender Covenant Monitoring</div>
+            <div class="pillar-desc">Monthly DSCR, liquidity, and CapEx covenant tracking. 60-day advance warning of projected breach. Lender RM coordination.</div>
+          </div>
+        </div>
+        <div class="pillar-item">
+          <input type="checkbox" class="pillar-check pillar-checkbox" checked onchange="checkSection('sec4')">
+          <span class="pillar-num">P6</span>
+          <div class="pillar-text">
+            <div class="pillar-title">Succession Progress Reporting</div>
+            <div class="pillar-desc">Quarterly successor readiness updates. Final Transition Report at end of stewardship period.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Lender & Trustee Disclosure -->
+  <div class="section" id="sec5" aria-labelledby="sec5-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec5-body" onclick="toggleSection('sec5')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec5')}">
+      <span class="section-num">05</span>
+      <span class="section-title" id="sec5-title">Lender & Trustee Disclosure</span>
+      <span class="section-status" id="sec5-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>SBA Lender Name <span class="req">*</span></label>
+          <input type="text" id="lender_name" placeholder="Live Oak Bank" oninput="checkSection('sec5')">
+        </div>
+        <div class="field">
+          <label>SBA Lender Relationship Manager</label>
+          <input type="text" id="lender_rm" placeholder="Name, title">
+        </div>
+        <div class="field">
+          <label>ESOP Trustee Name <span class="req">*</span></label>
+          <input type="text" id="trustee_name" placeholder="e.g. Kaplan Fiduciary Group" oninput="checkSection('sec5')">
+        </div>
+        <div class="field">
+          <label>Trustee Contact</label>
+          <input type="text" id="trustee_contact" placeholder="Name, email">
+        </div>
+      </div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_disclosure" onchange="checkSection('sec5')">
+          <span class="ack-text">I confirm that this Agreement <strong>will be provided in full to the SBA lender and ESOP trustee</strong> as a disclosed document prior to the Closing Date, and that the Stewardship Fee is reflected in the lender's DSCR underwriting model. The Section 408(b)(2) disclosure will be delivered to the trustee as a separate instrument before execution.</span>
+        </label>
+      </div>
+      <div class="field-note">Forhemit is a service provider to the Company — not a fiduciary of the ESOP plan. The trustee acknowledgment signature on this document confirms receipt of disclosure only; the trustee assumes no obligations under this Agreement.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: Governing Terms -->
+  <div class="section" id="sec6" aria-labelledby="sec6-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec6-body" onclick="toggleSection('sec6')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec6')}">
+      <span class="section-num">06</span>
+      <span class="section-title" id="sec6-title">Governing Terms & Liability</span>
+      <span class="section-status" id="sec6-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>Governing Law State <span class="req">*</span></label>
+          <select id="gov_law" onchange="checkSection('sec6')">
+            <option value="">Select…</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+            <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+            <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+            <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+            <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+            <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+            <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+            <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+            <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Arbitration Venue County</label>
+          <input type="text" id="venue_county" placeholder="County for arbitration hearings">
+          <div class="field-hint">County where AAA arbitration will be conducted.</div>
+        </div>
+        <div class="field">
+          <label>Liability Cap</label>
+          <select id="liability_cap">
+            <option>12 months of fees paid</option>
+            <option>$25,000 fixed cap</option>
+            <option>$50,000 fixed cap</option>
+            <option>$100,000 fixed cap</option>
+          </select>
+          <div class="field-hint">Maximum liability Forhemit may have under this Agreement.</div>
+        </div>
+        <div class="field">
+          <label>EBITDA Variance Threshold for Escalation</label>
+          <select id="variance_threshold">
+            <option>±15% (standard)</option>
+            <option>±10% (tighter)</option>
+            <option>±20% (looser)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-grid">
+        <div class="field">
+          <label>Lender RM Notification Trigger</label>
+          <select id="lender_notify">
+            <option>5 business days after Company non-response (standard)</option>
+            <option>10 business days after Company non-response</option>
+            <option>Immediate — concurrent with Company notification</option>
+          </select>
+          <div class="field-hint">When Forhemit may notify the SBA lender if a material risk is identified and the Company does not respond.</div>
+        </div>
+        <div class="field">
+          <label>Termination for Convenience Notice</label>
+          <select id="term_conv_notice">
+            <option>Company 60 days / Forhemit 90 days</option>
+            <option>60 days both parties</option>
+            <option>30 days both parties</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Special Terms or Notes</label>
+        <textarea id="special_terms" placeholder="Any modifications to standard terms…"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: Standard of Care -->
+  <div class="section" id="sec7" aria-labelledby="sec7-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec7-body" onclick="toggleSection('sec7')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec7')}">
+      <span class="section-num">07</span>
+      <span class="section-title" id="sec7-title">Standard of Care</span>
+      <span class="section-status" id="sec7-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-note" style="margin-bottom:1rem;">Forhemit shall perform services in a commercially reasonable manner consistent with industry standards for post-transaction monitoring services. Forhemit exercises no discretionary authority over Company operations and makes no management decisions.</div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_standard" onchange="checkSection('sec7')">
+          <span class="ack-text">I acknowledge that <strong>Forhemit does not guarantee or warrant any specific financial results, covenant compliance, ESOP plan performance, or business outcomes.</strong> The Company remains solely responsible for all operational and financial decisions. Forhemit's services rely on data provided by the Company and its advisors.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: Termination -->
+  <div class="section" id="sec8" aria-labelledby="sec8-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec8-body" onclick="toggleSection('sec8')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec8')}">
+      <span class="section-num">08</span>
+      <span class="section-title" id="sec8-title">Termination</span>
+      <span class="section-status" id="sec8-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>Termination for Cause Cure Period</label>
+          <select id="term_cure_period">
+            <option>30 days (standard) / 10 days for payment</option>
+            <option>15 days (all breaches)</option>
+            <option>Immediate for material breach</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Late Payment Interest Rate</label>
+          <select id="late_interest">
+            <option>1.5% per month (or maximum permitted by law)</option>
+            <option>1% per month</option>
+            <option>Federal prime rate + 3%</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-note" style="margin-top:1rem;">Either party may terminate for cause if the other party materially breaches this Agreement and fails to cure, fails to pay when due, becomes insolvent, or engages in fraud. Company may terminate for convenience upon notice. Forhemit may terminate for convenience upon notice.</div>
+      <div class="field-warn" style="margin-top:.5rem;">Upon termination for cause, all unpaid fees become immediately due. Upon termination for convenience, Company pays prorated fees through termination date.</div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_termination" onchange="checkSection('sec8')">
+          <span class="ack-text">I acknowledge the termination provisions. If any invoice remains unpaid for 30 days, Forhemit may suspend services and withhold the Final Transition Report until payment is received in full.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: Confidentiality -->
+  <div class="section" id="sec9" aria-labelledby="sec9-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec9-body" onclick="toggleSection('sec9')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec9')}">
+      <span class="section-num">09</span>
+      <span class="section-title" id="sec9-title">Confidentiality</span>
+      <span class="section-status" id="sec9-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.7;">Each party shall maintain the confidentiality of the other party's confidential information, using at least the same degree of care used to protect its own confidential information. Confidential information includes all business, financial, technical, and operational information, and the existence and terms of this Agreement.</p>
+      <div class="field-grid">
+        <div class="field">
+          <label>Confidentiality Survival Period</label>
+          <select id="confidentiality_survival">
+            <option>3 years after termination</option>
+            <option>2 years after termination</option>
+            <option>5 years after termination</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Permitted Disclosure</label>
+          <input type="text" id="permitted_disclosure" placeholder="Employees, advisors, agents with need-to-know">
+        </div>
+      </div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_confidentiality" onchange="checkSection('sec9')">
+          <span class="ack-text">I acknowledge the confidentiality obligations. Upon termination, each party shall return or destroy the other's confidential information in its possession.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: Indemnification -->
+  <div class="section" id="sec10" aria-labelledby="sec10-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec10-body" onclick="toggleSection('sec10')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec10')}">
+      <span class="section-num">10</span>
+      <span class="section-title" id="sec10-title">Indemnification</span>
+      <span class="section-status" id="sec10-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.7;">The Company shall indemnify Forhemit from claims arising from the Company's breach, operations, or business (except from Forhemit's gross negligence or willful misconduct). Forhemit shall indemnify the Company from claims arising from Forhemit's material breach, gross negligence, or willful misconduct.</p>
+      <div class="field-note">Indemnification procedure: Prompt notice of claim, indemnifying party controls defense and settlement, reasonable cooperation required. Settlement without consent not permitted if involving admission of fault or financial liability.</div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_indemnification" onchange="checkSection('sec10')">
+          <span class="ack-text">I acknowledge the mutual indemnification provisions. The Company shall indemnify Forhemit from third-party claims arising from the Company's operations, except to the extent resulting from Forhemit's gross negligence or willful misconduct.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 11: Dispute Resolution -->
+  <div class="section" id="sec11" aria-labelledby="sec11-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec11-body" onclick="toggleSection('sec11')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec11')}">
+      <span class="section-num">11</span>
+      <span class="section-title" id="sec11-title">Dispute Resolution</span>
+      <span class="section-status" id="sec11-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.7;">Disputes shall first be negotiated between principal representatives. If unresolved within 15 days, the dispute escalates to executive leadership. If still unresolved after 30 days, parties proceed to mediation, then binding AAA arbitration.</p>
+      <div class="field-grid">
+        <div class="field">
+          <label>Mediation Timeline</label>
+          <select id="mediation_timeline">
+            <option>45 days to conclude</option>
+            <option>30 days to conclude</option>
+            <option>60 days to conclude</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Arbitration Rules</label>
+          <select id="arbitration_rules">
+            <option>AAA Commercial Arbitration Rules</option>
+            <option>JAMS Comprehensive Arbitration Rules</option>
+          </select>
+        </div>
+      </div>
+      <div class="field-note">The parties hereby waive any right to trial by jury. The prevailing party in any dispute shall be entitled to recover reasonable attorney fees, costs, and expenses.</div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_dispute" onchange="checkSection('sec11')">
+          <span class="ack-text">I acknowledge the dispute resolution provisions. Disputes will be resolved through negotiation, mediation, then binding arbitration. Jury trial is waived.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 12: Final Acknowledgment -->
+  <div class="section" id="sec12" aria-labelledby="sec12-title">
+    <div class="section-head" role="button" tabindex="0" aria-expanded="false" aria-controls="sec12-body" onclick="toggleSection('sec12')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleSection('sec12')}">
+      <span class="section-num">12</span>
+      <span class="section-title" id="sec12-title">Final Acknowledgment & Delivery</span>
+      <span class="section-status" id="sec12-status">Incomplete</span>
+      <span class="section-chevron" aria-hidden="true">▾</span>
+    </div>
+    <div class="section-body">
+      <div class="field-grid">
+        <div class="field">
+          <label>Forhemit Authorized Signatory <span class="req">*</span></label>
+          <input type="text" id="fhm_signer" placeholder="Stefano Stokes" oninput="checkSection('sec12')">
+        </div>
+        <div class="field">
+          <label>Forhemit Signatory Title</label>
+          <input type="text" id="fhm_title" value="Founder & Managing Director">
+        </div>
+      </div>
+      <div class="ack-block">
+        <label class="ack-check">
+          <input type="checkbox" id="ack_final" onchange="checkSection('sec12')">
+          <span class="ack-text">I confirm all information is accurate. This Agreement will be sent to the Company email on file and a PDF will be downloaded. <strong>Wet or electronic signatures are still required before this Agreement is effective.</strong> The trustee acknowledgment signature must be obtained separately.</span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit bar -->
+  <div class="submit-bar">
+    <span class="submit-status" id="submitStatus">Complete all 12 sections to generate document</span>
+    <div style="display:flex;gap:.75rem">
+      <button class="btn-secondary" onclick="saveDraft()">Save Draft</button>
+      <button class="btn-submit" id="submitBtn" disabled onclick="generateDocument()">
+        <span id="submitBtnText">Generate & Send</span>
+        <span id="submitSpinner" class="spinner" style="display:none"></span>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+
+const sectionComplete = { sec1:false, sec2:false, sec3:false, sec4:false, sec5:false, sec6:false, sec7:false, sec8:false, sec9:false, sec10:false, sec11:false, sec12:false };
+let selectedTerm = null;
+
+function toggleSection(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+// ── Load shared fields ────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('fhm_shared');
+  if (saved) {
+    try {
+      const d = JSON.parse(saved);
+      if (d.company) {
+        document.getElementById('disp_company').textContent = d.company;
+        document.getElementById('company').value = d.company;
+      }
+      if (d.ref) {
+        document.getElementById('disp_ref').textContent = d.ref;
+        document.getElementById('eng_ref').value = d.ref;
+      }
+      if (d.date) {
+        document.getElementById('disp_date').textContent = new Date(d.date + 'T12:00:00').toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+      }
+    } catch(e) {}
+  }
+  document.getElementById('agreement_date').value = new Date().toISOString().split('T')[0];
+  loadDraft();
+  checkSection('sec4'); // pillars pre-checked
+  checkSection('sec6'); // some fields have defaults
+});
+
+// ── Term selection ────────────────────────────────────────────────────────────
+function selectTerm(months) {
+  selectedTerm = months;
+  ['term12','term18','term24'].forEach(id => document.getElementById(id).classList.remove('selected'));
+  document.getElementById('term' + months).classList.add('selected');
+  const notes = {
+    12: 'Initial 12-month term. Months 1–6 (60%) and Months 7–12 (20%) are committed at signing. Extension to 18 or 24 months requires written election by both parties no later than Month 11.',
+    18: '18-month term. Months 1–6 (60%), Months 7–12 (20%), and Months 13–18 (10%) are committed at signing. Extension to 24 months requires written election no later than Month 17.',
+    24: 'Full 24-month term. All four tranches committed at signing. No extension election required.',
+  };
+  const noteEl = document.getElementById('term-note');
+  noteEl.textContent = notes[months];
+  noteEl.style.display = 'block';
+  checkSection('sec2');
+  calcFee();
+}
+
+// ── Fee calculator ────────────────────────────────────────────────────────────
+function fmt(n) { return n ? new Intl.NumberFormat('en-US', { style:'currency', currency:'USD', maximumFractionDigits:0 }).format(n) : '—'; }
+
+function calcFee() {
+  const ebitda = parseFloat(document.getElementById('ebitda').value) || 0;
+  const annual = ebitda * 0.025;
+  const quarterly = annual / 4;
+  const t1 = annual * 0.60;
+  const t2 = annual * 0.20;
+  const t3 = annual * 0.10;
+  const t4 = annual * 0.10;
+
+  document.getElementById('calc_annual').textContent     = ebitda > 0 ? fmt(annual) : '—';
+  document.getElementById('calc_quarterly').textContent  = ebitda > 0 ? fmt(quarterly) + '/qtr' : '—';
+  document.getElementById('calc_t1').textContent         = ebitda > 0 ? fmt(t1) : '—';
+  document.getElementById('calc_t2').textContent         = ebitda > 0 ? fmt(t2) : '—';
+  document.getElementById('t1_amt').textContent          = ebitda > 0 ? fmt(t1) : '';
+  document.getElementById('t2_amt').textContent          = ebitda > 0 ? fmt(t2) : '';
+  document.getElementById('t3_amt').textContent          = ebitda > 0 ? fmt(t3) : '';
+  document.getElementById('t4_amt').textContent          = ebitda > 0 ? fmt(t4) : '';
+
+  if (ebitda > 0) {
+    document.getElementById('ack_fee_val').textContent = fmt(annual) + ' annually (' + fmt(quarterly) + '/quarter)';
+  }
+  checkSection('sec3');
+}
+
+// ── Section validation ────────────────────────────────────────────────────────
+function val(id) { const el = document.getElementById(id); return el && el.value.trim() !== ''; }
+
+function checkSection(id) {
+  let complete = false;
+  switch(id) {
+    case 'sec1': complete = val('closing_date') && val('agreement_date') && val('post_officer') && val('company_email'); break;
+    case 'sec2': complete = selectedTerm !== null; break;
+    case 'sec3': complete = parseFloat(document.getElementById('ebitda').value) > 0 && document.getElementById('ack_fee').checked; break;
+    case 'sec4': complete = [...document.querySelectorAll('.pillar-checkbox')].some(c => c.checked); break;
+    case 'sec5': complete = val('lender_name') && val('trustee_name') && document.getElementById('ack_disclosure').checked; break;
+    case 'sec6': complete = val('gov_law'); break;
+    case 'sec7': complete = document.getElementById('ack_standard').checked; break;
+    case 'sec8': complete = document.getElementById('ack_termination').checked; break;
+    case 'sec9': complete = document.getElementById('ack_confidentiality').checked; break;
+    case 'sec10': complete = document.getElementById('ack_indemnification').checked; break;
+    case 'sec11': complete = document.getElementById('ack_dispute').checked; break;
+    case 'sec12': complete = val('fhm_signer') && document.getElementById('ack_final').checked; break;
+  }
+  sectionComplete[id] = complete;
+  const statusEl = document.getElementById(id + '-status');
+  statusEl.textContent = complete ? 'Complete' : 'Incomplete';
+  statusEl.className   = 'section-status' + (complete ? ' complete' : '');
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = Object.keys(sectionComplete).length;
+  const done  = Object.values(sectionComplete).filter(Boolean).length;
+  const pct   = Math.round((done / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `${done} of ${total} sections complete`;
+  const allDone = done === total;
+  document.getElementById('submitBtn').disabled = !allDone;
+  document.getElementById('submitStatus').textContent = allDone
+    ? 'Ready to generate — click Generate & Send'
+    : `${total - done} section${total - done !== 1 ? 's' : ''} remaining`;
+  document.getElementById('submitStatus').className = 'submit-status';
+}
+
+// ── Draft ─────────────────────────────────────────────────────────────────────
+function saveDraft() {
+  const fields = ['closing_date','agreement_date','post_officer','company_email','ebitda','ebitda_source','lender_name','lender_rm','trustee_name','trustee_contact','gov_law','venue_county','liability_cap','variance_threshold','lender_notify','term_conv_notice','term_cure_period','late_interest','special_terms','confidentiality_survival','permitted_disclosure','mediation_timeline','arbitration_rules','fhm_signer','fhm_title'];
+  const data = {};
+  fields.forEach(id => { const el = document.getElementById(id); if(el) data[id] = el.value; });
+  data.ack_fee = document.getElementById('ack_fee').checked;
+  data.ack_disclosure = document.getElementById('ack_disclosure').checked;
+  data.ack_standard = document.getElementById('ack_standard').checked;
+  data.ack_termination = document.getElementById('ack_termination').checked;
+  data.ack_confidentiality = document.getElementById('ack_confidentiality').checked;
+  data.ack_indemnification = document.getElementById('ack_indemnification').checked;
+  data.ack_dispute = document.getElementById('ack_dispute').checked;
+  data.ack_final = document.getElementById('ack_final').checked;
+  data.selectedTerm = selectedTerm;
+  data.selectedPillars = [...document.querySelectorAll('.pillar-checkbox')].map(c => c.checked);
+  localStorage.setItem('fhm_stew_draft', JSON.stringify(data));
+  const s = document.getElementById('submitStatus');
+  s.textContent = 'Draft saved — ' + new Date().toLocaleTimeString();
+  s.className = 'submit-status success';
+  setTimeout(() => { s.textContent = 'Complete all 12 sections to generate document'; s.className = 'submit-status'; }, 3000);
+}
+
+function loadDraft() {
+  const saved = localStorage.getItem('fhm_stew_draft');
+  if (!saved) return;
+  try {
+    const data = JSON.parse(saved);
+    Object.keys(data).forEach(id => {
+      if (id === 'selectedPillars') {
+        document.querySelectorAll('.pillar-checkbox').forEach((cb, i) => { cb.checked = data.selectedPillars[i]; });
+      } else if (id === 'selectedTerm') {
+        if (data.selectedTerm) selectTerm(data.selectedTerm);
+      } else {
+        const el = document.getElementById(id);
+        if (el && el.type === 'checkbox') el.checked = data[id];
+        else if (el && id !== 'selectedTerm') el.value = data[id] || '';
+      }
+    });
+    calcFee();
+    Object.keys(sectionComplete).forEach(checkSection);
+  } catch(e) {}
+}
+
+// ── PDF generation ────────────────────────────────────────────────────────────
+function buildData() {
+  const ebitda = parseFloat(document.getElementById('ebitda').value) || 0;
+  const annual = ebitda * 0.025;
+  const shared = JSON.parse(localStorage.getItem('fhm_shared') || '{}');
+
+  // Get selected pillars
+  const pillars = [];
+  const pillarData = [
+    { id:'P1', title:'Operational Continuity Monitoring', desc:'Monthly COOP review. Written status within 10 business days of month-end.' },
+    { id:'P2', title:'Key-Person Risk Tracking', desc:'Employment status and succession readiness monitoring. Escalation protocol active.' },
+    { id:'P3', title:'Financial Baseline Reporting', desc:'Monthly comparison vs. QofE baseline. EBITDA variance flagging at ±15%.' },
+    { id:'P4', title:'Governance Documentation', desc:'Operating procedures, delegation of authority, board resolution log, succession plan.' },
+    { id:'P5', title:'Lender Covenant Monitoring', desc:'Monthly DSCR, liquidity, CapEx tracking. 60-day advance warning of projected breach.' },
+    { id:'P6', title:'Succession Progress Reporting', desc:'Quarterly successor readiness updates. Final Transition Report at end.' }
+  ];
+  document.querySelectorAll('.pillar-checkbox').forEach((cb, i) => {
+    if (cb.checked) pillars.push(pillarData[i]);
+  });
+
+  return {
+    company:         document.getElementById('company').value,
+    eng_ref:         document.getElementById('eng_ref').value,
+    closing_date:    document.getElementById('closing_date').value,
+    agreement_date:  document.getElementById('agreement_date').value,
+    post_officer:    document.getElementById('post_officer').value,
+    company_email:   document.getElementById('company_email').value,
+    term:            selectedTerm,
+    ebitda:          fmt(ebitda),
+    annual_fee:      fmt(annual),
+    quarterly_fee:   fmt(annual / 4),
+    t1_fee:          fmt(annual * 0.60),
+    t2_fee:          fmt(annual * 0.20),
+    t3_fee:          fmt(annual * 0.10),
+    t4_fee:          fmt(annual * 0.10),
+    lender_name:     document.getElementById('lender_name').value,
+    lender_rm:       document.getElementById('lender_rm').value,
+    trustee_name:    document.getElementById('trustee_name').value,
+    trustee_contact: document.getElementById('trustee_contact').value,
+    gov_law:         document.getElementById('gov_law').value,
+    venue_county:    document.getElementById('venue_county').value || '[County]',
+    liability_cap:   document.getElementById('liability_cap').value,
+    variance_threshold: document.getElementById('variance_threshold').value,
+    pillars:         pillars,
+    special_terms:   document.getElementById('special_terms').value,
+    fhm_signer:      document.getElementById('fhm_signer').value,
+    fhm_title:       document.getElementById('fhm_title').value,
+    gen_date:        new Date().toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' }),
+  };
+}
+
+async function generateDocument() {
+  const btn  = document.getElementById('submitBtn');
+  const txt  = document.getElementById('submitBtnText');
+  const spin = document.getElementById('submitSpinner');
+  const stat = document.getElementById('submitStatus');
+  btn.disabled = true; txt.style.display = 'none'; spin.style.display = 'block';
+  stat.textContent = 'Generating document…';
+
+  try {
+    const d = buildData();
+    const pdf = generatePDF(d);
+    pdf.save(`Forhemit_Stewardship_Agreement_REVISED_${d.company.replace(/\s+/g,'_')}_${d.closing_date}.pdf`);
+    stat.textContent = 'PDF downloaded. Sending email copy…';
+    await sendEmail(d);
+    stat.textContent = '✓ Document generated and emailed to ' + d.company_email;
+    stat.className = 'submit-status success';
+  } catch(e) {
+    console.error(e);
+    stat.textContent = 'PDF downloaded. Email requires EmailJS configuration — see setup notes.';
+    stat.className = 'submit-status';
+  } finally {
+    btn.disabled = false; txt.style.display = 'block'; spin.style.display = 'none';
+    updateProgress();
+  }
+}
+
+function generatePDF(d) {
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ orientation:'portrait', unit:'pt', format:'letter' });
+  const W=612, ML=72, MR=72, CW=W-ML-MR;
+  let y = 72;
+
+  const NAVY=[27,42,74], BRASS=[154,117,64], MUTED=[122,112,104], RULE=[214,208,196], INK=[28,21,16];
+
+  function rule(yy, col=RULE, thick=0.5) { pdf.setDrawColor(...col); pdf.setLineWidth(thick); pdf.line(ML,yy,W-MR,yy); }
+
+  function addPage() {
+    pdf.addPage(); y = 72;
+    pdf.setFontSize(7.5); pdf.setFont('helvetica','normal'); pdf.setTextColor(...MUTED);
+    pdf.text('FORHEMIT TRANSITION STEWARDSHIP  |  Stewardship Agreement (REVISED)  |  CONFIDENTIAL', ML, 36);
+    pdf.text(d.company + '  |  ' + d.eng_ref, W-MR, 36, { align:'right' });
+    rule(42, RULE, 0.4); y = 60;
+  }
+
+  function checkY(n=60) { if (y+n > 740) addPage(); }
+
+  function block(text, opts={}) {
+    const sz=opts.size||9, font=opts.bold?'bold':(opts.italic?'italic':'normal'), col=opts.color||INK;
+    pdf.setFontSize(sz); pdf.setFont('helvetica',font); pdf.setTextColor(...col);
+    const lines = pdf.splitTextToSize(text, opts.width||CW);
+    checkY(lines.length*(sz*1.4));
+    pdf.text(lines, opts.x||ML, y);
+    y += lines.length*(sz*1.4)+(opts.after||0);
+  }
+
+  // Cover
+  y=140;
+  pdf.setFontSize(28); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('FORHEMIT', W/2, y, {align:'center'}); y+=32;
+  pdf.setFontSize(11); pdf.setFont('helvetica','normal'); pdf.setTextColor(...BRASS);
+  pdf.text('Transition Stewardship', W/2, y, {align:'center'}); y+=60;
+  pdf.setFontSize(18); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('TRANSITION STEWARDSHIP AGREEMENT', W/2, y, {align:'center'}); y+=24;
+  pdf.setFontSize(10); pdf.setFont('helvetica','italic'); pdf.setTextColor(...MUTED);
+  pdf.text(`Post-Close Operational Stewardship  |  ${d.term}-Month Term  |  REVISED v1.0`, W/2, y, {align:'center'}); y+=60;
+  rule(y); y+=32;
+
+  const coverFields = [
+    ['Company', d.company], ['Engagement Reference', d.eng_ref],
+    ['Closing Date', d.closing_date], ['Agreement Date', d.agreement_date],
+    ['Stewardship Term', d.term + ' months'], ['SBA Lender', d.lender_name],
+    ['ESOP Trustee', d.trustee_name],
+  ];
+  coverFields.forEach(([label,value]) => {
+    pdf.setFontSize(8); pdf.setFont('helvetica','bold'); pdf.setTextColor(...MUTED);
+    pdf.text(label.toUpperCase(), ML, y);
+    pdf.setFontSize(10); pdf.setFont('helvetica','normal'); pdf.setTextColor(...INK);
+    pdf.text(value||'—', ML+160, y); y+=22;
+  });
+  rule(y+10); y+=30;
+  pdf.setFontSize(8); pdf.setFont('helvetica','italic'); pdf.setTextColor(...MUTED);
+  pdf.text('This Agreement is disclosed to the SBA lender and ESOP trustee as a disclosed operating expense.', W/2, y+10, {align:'center', maxWidth:CW});
+  pdf.text('Forhemit Transition Stewardship  |  forhemit.com  |  deals@forhemit.com', W/2, 720, {align:'center'});
+
+  // Content
+  addPage();
+
+  // Article 1 - Parties
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 1 — PARTIES AND RELATIONSHIP', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`This Transition Stewardship Agreement is entered into as of ${d.agreement_date} between Forhemit Transition Stewardship, a California public benefit corporation ("Forhemit"), and ${d.company} ("Company"). The Company completed a sale to an ESOP on ${d.closing_date}.`, {after:10});
+  block(`Forhemit is an independent contractor service provider to the Company. Forhemit is NOT: (a) a fiduciary of the ESOP benefit plan; (b) an employee, agent, or manager of the Company; (c) a party to the SBA loan; or (d) responsible for the Company's operations.`, {after:10});
+
+  // Article 2 - Term
+  checkY(60); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 2 — STEWARDSHIP TERM', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Initial Term: ${d.term} months commencing on ${d.closing_date}.`, {after:8});
+  block(`Extension Periods: Months 13–18 and 19–24 may be extended only upon written election by both parties. Either party may decline extension with 45 days' notice.`, {after:8});
+
+  // Article 3 - Fee
+  checkY(100); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 3 — STEWARDSHIP FEE', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Annual Fee: 2.5% of QofE Adjusted EBITDA of ${d.ebitda} = ${d.annual_fee} annually (${d.quarterly_fee}/quarter).`, {after:8});
+  block(`Fee Schedule: Months 1–6: ${d.t1_fee} (60%) | Months 7–12: ${d.t2_fee} (20%) | Months 13–18: ${d.t3_fee} (10%) | Months 19–24: ${d.t4_fee} (10%).`, {after:8});
+  block(`Payment Terms: Due within 30 days of invoice. Late payments accrue interest at 1.5% per month. Forhemit may suspend services for non-payment after 30 days.`, {after:8});
+  block(`Fee Source: Paid from Company operating cash flow. Not paid from ESOP trust assets or SBA loan proceeds.`, {after:8});
+
+  // Article 4 - Service Scope
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 4 — SERVICE SCOPE', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Selected Service Pillars (${d.pillars.length} of 6):`, {after:8});
+  d.pillars.forEach(p => {
+    checkY(20);
+    pdf.setFontSize(9); pdf.setFont('helvetica','bold'); pdf.setTextColor(...BRASS);
+    pdf.text(`${p.id} — ${p.title}`, ML+15, y); y+=12;
+    pdf.setFontSize(8); pdf.setFont('helvetica','normal'); pdf.setTextColor(...MUTED);
+    pdf.text(p.desc, ML+15, y, {maxWidth:CW-15}); y+=14;
+  });
+
+  // Article 5 - Standard of Care
+  checkY(60); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 5 — STANDARD OF CARE', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Forhemit shall perform services in a commercially reasonable manner consistent with industry standards. Forhemit exercises no discretionary authority over Company operations and makes no management decisions.`, {after:8});
+  block(`No Guarantee of Results: Forhemit does not guarantee or warrant any specific financial results, covenant compliance, ESOP plan performance, or business outcomes.`, {after:8});
+
+  // Article 6 - Confidentiality
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 6 — CONFIDENTIALITY', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Each party shall maintain the confidentiality of the other's confidential information, using at least the same degree of care used to protect its own confidential information. Confidential information includes all business, financial, technical, and operational information.`, {after:8});
+  block(`Obligations survive termination for 3 years. Upon termination, each party shall return or destroy the other's confidential information.`, {after:8});
+
+  // Article 7 - Lender & Trustee Disclosure
+  checkY(100); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 7 — LENDER & TRUSTEE DISCLOSURE', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`SBA Lender: ${d.lender_name}${d.lender_rm ? ' (RM: ' + d.lender_rm + ')' : ''}.`, {after:8});
+  block(`ESOP Trustee: ${d.trustee_name}${d.trustee_contact ? ' (' + d.trustee_contact + ')' : ''}.`, {after:8});
+  block(`ERISA Status: Forhemit is not a fiduciary within the meaning of ERISA Section 3(21) with respect to the ESOP or its assets.`, {after:8});
+  block(`Material Risk (for lender notification): (a) DSCR below 1.25x for two consecutive months; (b) actual or projected covenant breach; (c) loss of key person without qualified successor; or (d) condition that could result in SBA loan acceleration.`, {after:8});
+
+  // Article 8 - Termination
+  checkY(100); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 8 — TERMINATION', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Termination for Cause: Either party may terminate if the other party: (a) materially breaches and fails to cure within 30 days (10 days for payment); (b) fails to pay when due; (c) becomes insolvent; or (d) engages in fraud.`, {after:8});
+  block(`Termination for Convenience: Company may terminate upon 60 days' notice. Forhemit may terminate upon 90 days' notice.`, {after:8});
+  block(`Effect of Termination: Company pays all earned fees through termination date (prorated for convenience termination; immediately due for cause termination). Forhemit delivers all work product within 10 days.`, {after:8});
+
+  // Article 9 - Limitation of Liability
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 9 — LIMITATION OF LIABILITY', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Liability Cap: Except for breach of confidentiality, gross negligence, or willful misconduct, Forhemit's total liability shall not exceed ${d.liability_cap}.`, {after:8});
+  block(`Consequential Damages Waiver: Forhemit shall not be liable for any indirect, special, incidental, punitive, or consequential damages, including lost profits, lost revenue, or damages from ESOP plan disqualification.`, {after:8});
+
+  // Article 10 - Indemnification
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 10 — INDEMNIFICATION', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Company shall indemnify Forhemit from claims arising from: (a) Company's breach; (b) Company's operations; (c) third-party claims relating to Company's business; or (d) allegation of fiduciary advice (except from Forhemit's gross negligence or willful misconduct).`, {after:8});
+  block(`Forhemit shall indemnify Company from claims arising from Forhemit's material breach, gross negligence, or willful misconduct.`, {after:8});
+
+  // Article 11 - Dispute Resolution
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 11 — DISPUTE RESOLUTION', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Governing Law: State of ${d.gov_law}.`, {after:8});
+  block(`Mediation: Disputes submitted to non-binding mediation before AAA in ${d.venue_county}, ${d.gov_law}. Mediation to conclude within 45 days.`, {after:8});
+  block(`Arbitration: If unresolved, binding arbitration under AAA Commercial Rules. Single arbitrator in ${d.venue_county}, ${d.gov_law}.`, {after:8});
+  block(`Jury Trial Waiver: Parties hereby waive right to trial by jury. Prevailing party entitled to attorney fees.`, {after:8});
+
+  // Article 12 - General Provisions
+  checkY(80); y+=20;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('ARTICLE 12 — GENERAL PROVISIONS', ML, y); y+=6;
+  rule(y, BRASS, 1); y+=14;
+  block(`Notices: Forhemit — deals@forhemit.com; Company — ${d.company_email}.`, {after:8});
+  block(`Amendment: This Agreement may only be amended by written instrument signed by both parties.`, {after:8});
+  block(`Assignment: Neither party may assign without consent, except to affiliates or successors in connection with merger or asset sale.`, {after:8});
+  block(`Entire Agreement: This Agreement, together with the Engagement Letter, constitutes the entire agreement between the parties.`, {after:8});
+  block(`Severability: If any provision is held invalid, the remaining provisions continue in full force.`, {after:8});
+  block(`Force Majeure: Neither party liable for delay beyond reasonable control. Fee prorated during events extending beyond 30 days.`, {after:8});
+
+  if (d.special_terms) {
+    block(`Special Terms: ${d.special_terms}`, {after:8});
+  }
+
+  // Signatures
+  checkY(200); y+=20; rule(y); y+=32;
+  pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('SIGNATURES', ML, y); y+=24;
+
+  const sy = y;
+  pdf.setFontSize(8); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('FORHEMIT TRANSITION STEWARDSHIP', ML, sy);
+  pdf.setFontSize(7.5); pdf.setFont('helvetica','normal'); pdf.setTextColor(...MUTED);
+  pdf.text('California Public Benefit Corporation', ML, sy+12);
+  rule(sy+50, RULE, 0.5); pdf.text('Signature', ML, sy+60);
+  rule(sy+80, RULE, 0.5); pdf.text(`Printed Name & Title: ${d.fhm_signer}, ${d.fhm_title}`, ML, sy+90);
+  rule(sy+110, RULE, 0.5); pdf.text('Date', ML, sy+120);
+
+  const rx = ML+CW/2+20;
+  pdf.setFontSize(8); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
+  pdf.text('COMPANY (CLIENT)', rx, sy);
+  pdf.setFontSize(7.5); pdf.setFont('helvetica','normal'); pdf.setTextColor(...MUTED);
+  pdf.text('Authorized Officer — signing on behalf of Company', rx, sy+12);
+  rule(sy+50, RULE, 0.5); pdf.text('Signature', rx, sy+60);
+  rule(sy+80, RULE, 0.5); pdf.text(`Printed Name & Title: ${d.post_officer}`, rx, sy+90);
+  rule(sy+110, RULE, 0.5); pdf.text('Date', rx, sy+120);
+
+  y = sy+160; checkY(100);
+  pdf.setFontSize(8); pdf.setFont('helvetica','bold'); pdf.setTextColor(...MUTED);
+  pdf.text('ESOP TRUSTEE — ACKNOWLEDGMENT ONLY (NOT A PARTY)', ML, y); y+=14;
+  pdf.setFontSize(7.5); pdf.setFont('helvetica','italic'); pdf.setTextColor(...MUTED);
+  pdf.text(`${d.trustee_name}: acknowledges receipt of this Agreement and the ERISA Section 408(b)(2) disclosure from Forhemit.`, ML, y, {maxWidth:CW}); y+=24;
+  rule(y+30, RULE, 0.5); y+=40;
+  pdf.text('Trustee Signature', ML, y); pdf.text('Date', ML+300, y);
+
+  pdf.setFontSize(7.5); pdf.setFont('helvetica','normal'); pdf.setTextColor(...MUTED);
+  pdf.text(`Generated: ${d.gen_date}  |  deals@forhemit.com  |  forhemit.com`, W/2, 752, {align:'center'});
+  pdf.text('REVISED v1.0 — CONFIDENTIAL — Requires wet or electronic signatures before becoming effective.', W/2, 763, {align:'center'});
+
+  return pdf;
+}
+
+async function sendEmail(d) {
+  return emailjs.send('YOUR_SERVICE_ID', 'YOUR_STEWARDSHIP_TEMPLATE_ID', {
+    to_email:      d.company_email,
+    company:       d.company,
+    eng_ref:       d.eng_ref,
+    closing_date:  d.closing_date,
+    term:          d.term,
+    annual_fee:    d.annual_fee,
+    lender_name:   d.lender_name,
+    trustee_name:  d.trustee_name,
+    fhm_signer:    d.fhm_signer,
+    reply_to:      'deals@forhemit.com',
+    message:       `Your Transition Stewardship Agreement (Reference: ${d.eng_ref}) has been generated. Please review and obtain signatures from the Company's authorized officer and ESOP trustee. Return fully executed copy to deals@forhemit.com.`,
+  });
+}
+</script>
+</body>
+</html>

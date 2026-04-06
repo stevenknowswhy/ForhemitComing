@@ -1,0 +1,53 @@
+@import "../styles/theme.css";
+
+.contact-page-outer {
+  padding: 5.5rem 1rem 3rem;
+  min-height: calc(100vh - 8rem);
+}
+
+.contact-page-shell {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border: 1px solid var(--border-accent);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft), 0 0 0 1px var(--color-brand-subtle);
+}
+
+.contact-page-shell .contact-form-section {
+  max-height: none;
+}
+
+/* Full-page contact: keep sidebar visible on smaller viewports */
+@media (max-width: 768px) {
+  .contact-page-shell .contact-page-layout {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .contact-page-shell .contact-info-section {
+    display: flex;
+    border-right: none;
+    border-bottom: 1px solid var(--border-accent);
+  }
+}
+
+.contact-page-footnote {
+  max-width: 900px;
+  margin: 1.25rem auto 0;
+  text-align: center;
+  font-family: Inter, sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.contact-page-footnote a {
+  color: var(--color-brand);
+  text-decoration: none;
+}
+
+.contact-page-footnote a:hover {
+  text-decoration: underline;
+}

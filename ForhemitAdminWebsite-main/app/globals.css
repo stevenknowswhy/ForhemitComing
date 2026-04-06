@@ -1,0 +1,307 @@
+@import './styles/theme.css';
+@import './styles/buttons.css';
+@import './styles/responsive.css';
+@import './styles/print.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── GLOBAL STYLES ── */
+/* Fonts loaded via next/font/google in layout.tsx */
+
+/* ── EXECUTIVE MANUSCRIPT DESIGN TOKENS ── */
+:root {
+  /* Canvas & Backgrounds */
+  --canvas: #F9F7F2;
+  --parchment: #F0EBE3;
+  --deep-dive-bg: #1E2A1E;
+  
+  /* Text Hierarchy */
+  --ink: #1A1A1A;
+  --stone: #5A5A5A;
+  --stone-light: #7A7A7A;
+  
+  /* Brand Accents */
+  --sage: #2C3E2D;
+  --sage-light: #A8C3A8;
+  --sage-muted: #C5CEBD;
+  
+  /* Conversion */
+  --alert-clay: #B87D5E;
+  
+  /* Utility */
+  --border-light: #E0D9D0;
+  --border-medium: #D0CCC4;
+  --shadow-subtle: 0 2px 8px rgba(26,26,24,0.04);
+  --shadow-hover: 0 8px 24px rgba(26,26,24,0.08);
+  
+  /* Selection */
+  --selection-bg: #2C3E2D;
+  --selection-text: #F9F7F2;
+  
+  /* Font Display */
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  
+  /* Transitions */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Legacy compatibility */
+  --bg-primary: var(--canvas);
+  --text-primary: var(--ink);
+  --text-secondary: var(--stone);
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #1F2521;
+    --parchment: #2A3028;
+    --ink: #E8E6E1;
+    --stone: #A8A5A0;
+    --stone-light: #8A8580;
+    --sage: #8FA88F;
+    --sage-light: #C5D4C5;
+    --sage-muted: #3D4A3D;
+    --border-light: #3A423A;
+    --border-medium: #4A524A;
+    --selection-bg: #8FA88F;
+    --selection-text: #1F2521;
+    --bg-primary: var(--canvas);
+    --text-primary: var(--ink);
+    --text-secondary: var(--stone);
+  }
+}
+
+/* Manual dark mode class override */
+.dark {
+  --canvas: #1F2521;
+  --parchment: #2A3028;
+  --ink: #E8E6E1;
+  --stone: #A8A5A0;
+  --stone-light: #8A8580;
+  --sage: #8FA88F;
+  --sage-light: #C5D4C5;
+  --sage-muted: #3D4A3D;
+  --border-light: #3A423A;
+  --border-medium: #4A524A;
+  --selection-bg: #8FA88F;
+  --selection-text: #1F2521;
+}
+
+/* ── RESET & BASE STYLES ── */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-inter);
+  background: var(--canvas);
+  color: var(--ink);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* ── TYPOGRAPHY ── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-cormorant);
+  color: var(--ink);
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 2.625rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+}
+
+p {
+  max-width: 45rem;
+}
+
+/* ── COMPONENT STYLES ── */
+
+.card {
+  background: var(--parchment);
+  border: 1px solid var(--border-light);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: transform 0.3s var(--transition-smooth), 
+              box-shadow 0.3s var(--transition-smooth),
+              border-color 0.3s var(--transition-smooth);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--sage);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  border-radius: 9999px;
+  background: var(--sage-muted);
+  color: var(--sage);
+}
+
+.pull-quote {
+  font-family: var(--font-cormorant);
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-style: italic;
+  border-left: 4px solid var(--sage);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  color: var(--stone);
+}
+
+.reading-river {
+  max-width: 45rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sticky-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--parchment);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--sage-muted);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sage-light);
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid var(--sage-light);
+  outline-offset: 2px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── SHADCN/UI THEME MAPPING ── */
+/* Maps existing brand/theme variables to shadcn's expected names */
+:root {
+  --background: var(--bg-primary);
+  --foreground: var(--text-primary);
+  --card: var(--bg-card);
+  --card-foreground: var(--text-primary);
+  --popover: var(--bg-card);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--color-brand);
+  --primary-foreground: var(--text-inverse);
+  --secondary: var(--bg-secondary);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--bg-tertiary);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--color-brand-subtle);
+  --accent-foreground: var(--color-brand);
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: var(--border-subtle);
+  --input: var(--border-subtle);
+  --ring: var(--color-brand);
+  --radius: 0.75rem;
+}
+
+/* Dark mode overrides for shadcn/ui */
+[data-theme="dark"] {
+  --primary-foreground: var(--bg-primary);
+  --destructive: #f87171;
+  --destructive-foreground: var(--bg-primary);
+}
+
+/* ── MOBILE UTILITIES ── */
+
+/* Hide scrollbar on horizontal scroll containers */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure adequate touch targets on mobile */
+@media (max-width: 640px) {
+  button,
+  [role="tab"],
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+

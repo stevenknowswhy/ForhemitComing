@@ -1,0 +1,230 @@
+/* Engagement letter: contract capture (off-screen html2canvas + print pagination) */
+
+.el-contract-capture {
+  position: absolute;
+  left: -10000px;
+  top: 0;
+  width: 8.5in;
+  max-width: 816px;
+  background: #fff;
+  color: #1c1510;
+  padding: 48px 56px 56px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11pt;
+  line-height: 1.55;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  box-shadow: 0 0 0 1px #e5e5e5;
+}
+
+.el-contract-inner {
+  max-width: 100%;
+}
+
+.el-cd-cover {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  page-break-after: always;
+  break-after: page;
+}
+
+.el-cd-brand {
+  font-size: 28pt;
+  font-weight: 700;
+  color: #1b2a4a;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.25rem;
+}
+
+.el-cd-tag {
+  font-size: 11pt;
+  color: #9a7540;
+  margin-bottom: 2rem;
+}
+
+.el-cd-title {
+  font-size: 18pt;
+  font-weight: 700;
+  color: #1b2a4a;
+  margin-bottom: 0.35rem;
+}
+
+.el-cd-subtitle {
+  font-size: 10pt;
+  font-style: italic;
+  color: #7a7068;
+  margin-bottom: 1.5rem;
+}
+
+.el-cd-rule {
+  border: none;
+  border-top: 1px solid #d6d0c4;
+  margin: 1.25rem 0;
+}
+
+.el-cd-meta {
+  text-align: left;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.el-cd-meta div {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.65rem;
+  font-size: 10pt;
+}
+
+.el-cd-meta dt {
+  font-weight: 700;
+  color: #7a7068;
+  text-transform: uppercase;
+  font-size: 8pt;
+  letter-spacing: 0.06em;
+}
+
+.el-cd-meta dd {
+  margin: 0;
+  color: #1c1510;
+}
+
+.el-cd-footer-note {
+  font-size: 8pt;
+  color: #7a7068;
+  font-style: italic;
+  margin-top: 1rem;
+}
+
+.el-cd-terms {
+  break-inside: auto;
+}
+
+.el-cd-section {
+  margin-bottom: 1.35rem;
+  break-inside: auto;
+  page-break-inside: auto;
+}
+
+.el-cd-section h3 {
+  font-size: 11pt;
+  font-weight: 700;
+  color: #1b2a4a;
+  border-bottom: 2px solid #9a7540;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.75rem;
+  break-after: avoid;
+  page-break-after: avoid;
+}
+
+.el-cd-section p {
+  margin: 0 0 0.65rem;
+  text-align: justify;
+  orphans: 3;
+  widows: 3;
+}
+
+.el-cd-signatures {
+  margin-top: 2rem;
+  page-break-before: always;
+  break-before: page;
+}
+
+.el-cd-signatures h3 {
+  font-size: 11pt;
+  color: #1b2a4a;
+  margin-bottom: 1rem;
+}
+
+.el-cd-sig-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.el-cd-sig-party {
+  font-size: 8pt;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #1b2a4a;
+  margin-bottom: 0.25rem;
+}
+
+.el-cd-sig-sub {
+  font-size: 7.5pt;
+  color: #7a7068;
+  margin: 0 0 0.5rem;
+}
+
+.el-cd-sig-line {
+  border-bottom: 1px solid #d6d0c4;
+  height: 28px;
+  margin-bottom: 0.2rem;
+}
+
+.el-cd-sig-label {
+  font-size: 8pt;
+  color: #7a7068;
+  font-style: italic;
+  margin: 0 0 0.65rem;
+}
+
+.el-cd-broker {
+  margin-top: 1.75rem;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.el-cd-broker h4 {
+  font-size: 8pt;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #7a7068;
+  margin-bottom: 0.5rem;
+}
+
+.el-cd-broker-note {
+  font-size: 7.5pt;
+  font-style: italic;
+  color: #7a7068;
+  margin-bottom: 0.75rem;
+  line-height: 1.45;
+}
+
+.el-cd-doc-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d6d0c4;
+  font-size: 7.5pt;
+  color: #7a7068;
+  text-align: center;
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+.el-cd-doc-footer p {
+  margin: 0.25rem 0;
+}
+
+@media print {
+  .el-contract-capture {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .el-cd-sig-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .el-cd-sig-col {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}

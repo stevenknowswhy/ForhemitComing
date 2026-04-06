@@ -1,0 +1,52 @@
+/* ── RESPONSIVE ── */
+
+@media (max-width: 768px) {
+  .templates-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .esop-controls {
+    flex-direction: column;
+  }
+
+  .esop-table {
+    font-size: 0.75rem;
+  }
+
+  .esop-input {
+    max-width: 100px;
+  }
+
+  .template-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .template-modal-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .term-scenarios {
+    flex-direction: column;
+  }
+
+  .term-scenario {
+    min-width: auto;
+  }
+
+  .term-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .term-scenario-grid {
+    flex-direction: column;
+  }
+
+  .term-stack-legend {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+

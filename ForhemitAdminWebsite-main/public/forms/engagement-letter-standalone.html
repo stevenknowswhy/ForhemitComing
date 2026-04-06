@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forhemit — Engagement Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; background: var(--ink); min-height: 100%; }
+
+/* ═══ DARK THEME (default) ═══ */
+:root, [data-theme="dark"] {
+  --brass: #B8965A;
+  --brass-light: rgba(184,150,90,0.12);
+  --brass-dim: rgba(184,150,90,0.25);
+  --ink: #0D0D0D;
+  --ink-mid: #1C1C1C;
+  --ink-soft: #252525;
+  --off-white: #F0EDE8;
+  --body-text: rgba(240,237,232,0.75);
+  --muted: rgba(240,237,232,0.45);
+  --line: rgba(255,255,255,0.09);
+  --line-strong: rgba(255,255,255,0.18);
+  --red-warn: #C0392B;
+  --red-bg: rgba(192,57,43,0.08);
+  --green: #7AAF7A;
+  --green-bg: rgba(122,175,122,0.06);
+  --yellow-bg: rgba(255,220,0,0.10);
+  --yellow-border: rgba(255,220,0,0.55);
+  --callout-bg: rgba(184,150,90,0.12);
+  --callout-warn-bg: rgba(192,57,43,0.08);
+  --select-bg: #252525;
+  --badge-bg: #0D0D0D;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Jost', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+  --page-w: 820px;
+}
+
+/* ═══ LIGHT THEME ═══ */
+[data-theme="light"] {
+  --brass: #8A6830;
+  --brass-light: rgba(138,104,48,0.1);
+  --brass-dim: rgba(138,104,48,0.2);
+  --ink: #F7F4EF;
+  --ink-mid: #EDE9E2;
+  --ink-soft: #E2DDD5;
+  --off-white: #1C1510;
+  --body-text: rgba(28,21,16,0.72);
+  --muted: rgba(28,21,16,0.52);
+  --line: rgba(28,21,16,0.12);
+  --line-strong: rgba(28,21,16,0.22);
+  --green: #2E7D32;
+  --green-bg: rgba(46,125,50,0.06);
+  --red-bg: rgba(192,57,43,0.06);
+  --yellow-bg: rgba(200,160,0,0.13);
+  --yellow-border: rgba(180,130,0,0.55);
+  --callout-bg: rgba(138,104,48,0.07);
+  --callout-warn-bg: rgba(192,57,43,0.06);
+  --select-bg: #E2DDD5;
+  --badge-bg: #F7F4EF;
+}
+[data-theme="light"] .sb strong,
+[data-theme="light"] .co strong,
+[data-theme="light"] .ft .tr-total td strong { color: #1C1510; }
+[data-theme="light"] .ft td { color: rgba(28,21,16,0.72); }
+[data-theme="light"] .ft .tr-total td { color: #1C1510; }
+[data-theme="light"] select option { background: #EDE9E2; color: #1C1510; }
+
+.broker-section { transition: max-height 0.3s ease, opacity 0.3s ease; overflow: hidden; }
+.broker-section.hidden { max-height: 0; opacity: 0; padding: 0; margin: 0; border: none; }
+.broker-section.visible { max-height: 500px; opacity: 1; }
+
+.title-combo { display: flex; gap: 0.5rem; align-items: baseline; }
+.title-combo select { flex: 0 0 auto; width: auto; min-width: 120px; }
+.title-combo input { flex: 1; }
+.title-combo input.hidden-field { display: none; }
+
+.ds-anchor { font-size: 0px; color: transparent; line-height: 0; height: 0; overflow: hidden; display: block; }
+@media print { .ds-anchor { font-size: 1px; color: #fff; } }
+
+body {
+  background: var(--ink); color: var(--off-white);
+  font-family: var(--ff-body); min-height: 100vh;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.control-bar {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--ink-mid); border-bottom: 1px solid var(--line-strong);
+  padding: 0.7rem 2rem;
+  display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap;
+  transition: background 0.25s, border-color 0.25s;
+}
+.cb-brand {
+  font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--brass); flex: 1; min-width: 120px;
+}
+.tg { display: flex; align-items: center; gap: 0.5rem; font-size: 0.68rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.tg-label { white-space: nowrap; }
+.tg-sw { position: relative; width: 42px; height: 22px; flex-shrink: 0; }
+.tg-sw input { opacity: 0; width: 0; height: 0; }
+.tg-slider {
+  position: absolute; inset: 0; background: rgba(128,128,128,0.15);
+  border: 1px solid var(--line-strong); border-radius: 11px; cursor: pointer;
+  transition: background 0.25s, border-color 0.25s;
+}
+.tg-slider::before {
+  content: ''; position: absolute; left: 2px; top: 2px;
+  width: 16px; height: 16px; border-radius: 50%; background: var(--muted);
+  transition: transform 0.25s, background 0.25s;
+}
+.tg-sw input:checked + .tg-slider { background: var(--brass-light); border-color: var(--brass); }
+.tg-sw input:checked + .tg-slider::before { transform: translateX(20px); background: var(--brass); }
+.tg-val { font-weight: 500; min-width: 72px; }
+.tg-val.ref { color: var(--green); }
+.tg-val.nonref { color: var(--brass); }
+
+.btn-sm {
+  background: none; border: 1px solid var(--line-strong); color: var(--muted);
+  padding: 0.35rem 0.7rem; font-family: var(--ff-body); font-size: 0.65rem;
+  font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+  cursor: pointer; transition: border-color 0.2s, color 0.2s;
+  display: flex; align-items: center; gap: 0.35rem; flex-shrink: 0; white-space: nowrap;
+}
+.btn-sm:hover { border-color: var(--red-warn); color: var(--red-warn); }
+.btn-print {
+  background: var(--brass); color: var(--ink); border: none;
+  padding: 0.4rem 1rem; font-family: var(--ff-body); font-size: 0.65rem;
+  font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  cursor: pointer; transition: opacity 0.2s; flex-shrink: 0;
+}
+.btn-print:hover { opacity: 0.85; }
+.ps { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+.ps.ok { color: var(--green); }
+.ps.inc { color: #E67E22; }
+
+.prog { width: 100%; height: 2px; background: var(--line); overflow: hidden; }
+.prog-fill { height: 100%; background: var(--brass); transition: width 0.4s; width: 0; }
+.prog-fill.done { background: var(--green); }
+
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--ink-mid); color: var(--off-white);
+  border: 1px solid var(--line-strong); padding: 0.6rem 1.2rem;
+  font-family: var(--ff-body); font-size: 0.75rem; z-index: 200; opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease; pointer-events: none;
+}
+.toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+.toast.ok { border-color: var(--green); color: var(--green); }
+
+.cpanel { background: var(--ink-mid); border-bottom: 1px solid var(--line-strong); transition: background 0.25s, border-color 0.25s; }
+.cp-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.9rem 2rem; cursor: pointer; user-select: none;
+  transition: background 0.15s;
+}
+.cp-head:hover { background: var(--ink-soft); }
+.cp-title { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: var(--off-white); }
+.cp-hint { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-left: 1rem; }
+.cp-arrow { font-size: 0.75rem; color: var(--brass); transition: transform 0.25s; }
+.cpanel.shut .cp-arrow { transform: rotate(-90deg); }
+.cpanel.shut .cp-body { display: none; }
+
+.cp-body { padding: 0 2rem 1.8rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.cg {
+  padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line);
+  transition: border-color 0.25s;
+}
+.cg:nth-child(even) { border-right: none; }
+.cg.full { grid-column: 1 / -1; border-right: none; }
+.cg:nth-last-child(1), .cg:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+.cg:nth-last-child(1) { border-bottom: none; }
+.cg-label { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.35rem; font-weight: 400; }
+
+input[type="text"], input[type="date"], input[type="number"], select, textarea {
+  background: transparent; border: none; border-bottom: 1px solid var(--line-strong);
+  color: var(--off-white); font-family: var(--ff-body); font-size: 0.85rem;
+  font-weight: 300; padding: 0.25rem 0; width: 100%; outline: none;
+  transition: border-color 0.2s, color 0.25s; -webkit-appearance: none;
+}
+input:focus, select:focus, textarea:focus { border-bottom-color: var(--brass); }
+select { cursor: pointer; background: var(--select-bg); padding: 0.25rem 0.3rem; border-radius: 0; transition: background 0.25s, color 0.25s; }
+select option { background: var(--ink-mid); color: var(--off-white); }
+textarea { resize: vertical; border: 1px solid var(--line-strong); padding: 0.4rem 0.6rem; min-height: 44px; border-radius: 0; }
+textarea:focus { border-color: var(--brass); }
+input.req, select.req { background: var(--yellow-bg); border-bottom-color: var(--yellow-border); }
+input.req:focus, select.req:focus { background: transparent; border-bottom-color: var(--brass); }
+
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 2rem; margin-bottom: 2.5rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; transition: border-color 0.25s; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: var(--off-white); }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: var(--off-white); margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2.5rem; }
+
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 3rem; transition: border-color 0.25s; }
+.cvc { padding: 0.9rem 1.2rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); transition: border-color 0.25s; }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.35rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: var(--off-white); min-height: 1.2em; }
+.cvc-v.mono { font-family: var(--ff-mono); font-size: 0.8rem; }
+
+.sec { margin-bottom: 2.5rem; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--line); transition: border-color 0.25s; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: var(--off-white); }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: var(--body-text); }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+
+.dv { color: var(--brass); font-weight: 400; border-bottom: 1px dotted var(--brass-dim); padding-bottom: 1px; }
+.dv.empty { color: var(--muted); font-style: italic; border-bottom-style: dashed; }
+
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.6rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+
+.rb { border: 1px solid var(--line-strong); padding: 1.2rem 1.4rem; position: relative; margin: 1rem 0; transition: border-color 0.25s; }
+.rb.ref-mode { border-color: rgba(122,175,122,0.4); }
+.rb.nonref-mode { border-color: var(--brass-dim); }
+.rb-badge { position: absolute; top: -0.55rem; left: 1rem; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0 0.5rem; background: var(--badge-bg); font-family: var(--ff-mono); transition: color 0.25s, background 0.25s; }
+.rb.ref-mode .rb-badge { color: var(--green); }
+.rb.nonref-mode .rb-badge { color: var(--brass); }
+
+.co { border-left: 2px solid var(--brass); padding: 0.7rem 1rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: var(--body-text); background: var(--callout-bg); transition: background 0.25s, color 0.25s; }
+.co.w { border-color: var(--red-warn); background: var(--callout-warn-bg); }
+.co strong { color: var(--off-white); font-weight: 500; }
+
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: var(--body-text); transition: border-color 0.25s, color 0.25s; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+
+.ft { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+.ft th { text-align: left; font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--brass); font-weight: 400; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line-strong); }
+.ft td { padding: 0.55rem 0.6rem; border-bottom: 1px solid var(--line); color: var(--body-text); font-weight: 300; vertical-align: top; transition: border-color 0.25s, color 0.25s; }
+.ft td:last-child { text-align: right; }
+.ft .tr-total td { border-top: 1px solid var(--line-strong); color: var(--off-white); font-weight: 500; border-bottom: none; }
+
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: var(--off-white); line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; transition: border-color 0.25s; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+.wb { border: 1px solid var(--line); padding: 1.2rem 1.4rem; margin-top: 2rem; position: relative; transition: border-color 0.25s; }
+.wb-badge { position: absolute; top: -0.55rem; left: 1rem; background: var(--badge-bg); padding: 0 0.5rem; font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); font-family: var(--ff-mono); transition: background 0.25s; }
+.wb-note { font-size: 0.72rem; font-weight: 300; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+.wg { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; }
+.wf-l { font-size: 0.6rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.wf-v { font-size: 0.85rem; color: var(--off-white); min-height: 1.2em; }
+
+.df { border-top: 1px solid var(--line); padding-top: 1.5rem; margin-top: 3rem; display: flex; justify-content: space-between; align-items: center; transition: border-color 0.25s; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+
+@media (max-width: 700px) {
+  .control-bar { padding: 0.5rem 1rem; gap: 0.6rem; }
+  .cb-brand { font-size: 0.75rem; flex-basis: 100%; }
+  .cp-head { padding: 0.7rem 1rem; }
+  .cp-body { grid-template-columns: 1fr; padding: 0 1rem 1.2rem; }
+  .cg { border-right: none; }
+  .pw { padding: 2rem 1.2rem 4rem; }
+  .dh { flex-direction: column; gap: 1rem; }
+  .dref { text-align: left; }
+  .cvg { grid-template-columns: 1fr; }
+  .cvc { border-right: none; }
+  .sg { grid-template-columns: 1fr; gap: 2rem; }
+  .wg { grid-template-columns: 1fr; gap: 0.8rem; }
+  .ft { font-size: 0.7rem; }
+  .ft th, .ft td { padding: 0.35rem 0.3rem; }
+}
+
+@media print {
+  @page { size: letter; margin: 0.75in; }
+  html { font-size: 10pt; background: #fff; }
+  :root, [data-theme="dark"], [data-theme="light"] {
+    --brass: #7A5C20; --ink: #fff; --ink-mid: #f5f5f5; --ink-soft: #eee;
+    --off-white: #111; --body-text: #333; --muted: #666;
+    --line: #ddd; --line-strong: #bbb;
+    --brass-light: rgba(122,92,32,0.06); --brass-dim: #bbb;
+    --green: #2E7D32; --callout-bg: #faf7f0; --callout-warn-bg: #fdf5f4;
+    --badge-bg: #fff; --select-bg: transparent; --red-bg: #fdf5f4;
+  }
+  body { background: #fff; color: #111; }
+  .control-bar, .prog, .toast, .cpanel { display: none; }
+  .broker-section.hidden { display: none; }
+  .pw { padding: 0; max-width: 100%; }
+  .dv { border-bottom: none; }
+  .sh { break-after: avoid; }
+  .co, .sg, .sb-block, .wb, .cvg, .ft, .sl, .rb, .df { break-inside: avoid; }
+  tr { break-inside: avoid; }
+  .sec:nth-of-type(4) { break-before: page; }
+  .sec:nth-of-type(5) { break-before: page; }
+  .sec:last-of-type { break-before: page; }
+  .sec:nth-of-type(n+6) { break-inside: avoid; }
+}
+
+/* Admin PDF capture (parent sets data-pdf on documentElement) */
+html[data-pdf="true"] .control-bar,
+html[data-pdf="true"] .prog,
+html[data-pdf="true"] .toast,
+html[data-pdf="true"] .cpanel {
+  display: none !important;
+}
+html[data-pdf="true"] .pw {
+  padding-top: 1rem;
+}
+</style>
+</head>
+<body>
+
+<div class="control-bar">
+  <div class="cb-brand">Forhemit</div>
+  <div class="tg">
+    <span class="tg-label">Retainer:</span>
+    <label class="tg-sw"><input type="checkbox" id="tog-ret"><span class="tg-slider"></span></label>
+    <span class="tg-val nonref" id="ret-lbl">Non-Refundable</span>
+  </div>
+  <div class="tg">
+    <span class="tg-label">Theme:</span>
+    <label class="tg-sw"><input type="checkbox" id="tog-theme"><span class="tg-slider"></span></label>
+    <span class="tg-val" id="theme-lbl" style="min-width:36px;">Dark</span>
+  </div>
+  <button class="btn-sm" id="btn-clr">
+    <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span id="clr-txt">Clear</span>
+  </button>
+  <span class="ps" id="ps"></span>
+  <button class="btn-print" id="btn-pr">&#8595; Print</button>
+</div>
+<div class="prog"><div class="prog-fill" id="pf"></div></div>
+<div class="toast" id="toast"></div>
+
+<div class="cpanel" id="cpanel">
+  <div class="cp-head" id="cp-head">
+    <div><span class="cp-title">Deal Configuration</span><span class="cp-hint">All fields in one place</span></div>
+    <span class="cp-arrow" id="cp-arr">&#9662;</span>
+  </div>
+  <div class="cp-body" id="cp-body">
+    <div class="cg"><div class="cg-label">Company (Client)</div><input type="text" id="f-co" placeholder="Legal entity name"></div>
+    <div class="cg"><div class="cg-label">Authorized Officer Name</div><input type="text" id="f-of-name" placeholder="Full name"></div>
+    <div class="cg"><div class="cg-label">Authorized Officer Title</div>
+      <div class="title-combo">
+        <select id="f-of-title-sel">
+          <option value="">— Select —</option>
+          <option value="Owner">Owner</option>
+          <option value="Managing Member">Managing Member</option>
+          <option value="President">President</option>
+          <option value="CEO">CEO</option>
+          <option value="Chairman">Chairman</option>
+          <option value="Managing Partner">Managing Partner</option>
+          <option value="General Partner">General Partner</option>
+          <option value="Sole Proprietor">Sole Proprietor</option>
+          <option value="Director">Director</option>
+          <option value="Authorized Representative">Authorized Representative</option>
+          <option value="_other">Other…</option>
+        </select>
+        <input type="text" id="f-of-title-custom" class="hidden-field" placeholder="Enter title">
+      </div>
+    </div>
+    <div class="cg"><div class="cg-label">Engagement Reference</div><input type="text" id="f-ref" placeholder="FHH-XXXX" value="FHH-0023" style="font-family:var(--ff-mono);"></div>
+    <div class="cg"><div class="cg-label">Effective Date</div><input type="date" id="f-dt"></div>
+    <div class="cg"><div class="cg-label">QofE-Normalized TTM EBITDA</div><div style="display:flex;align-items:baseline;gap:0.4rem;"><span style="color:var(--muted);font-size:0.85rem;">$</span><input type="number" id="f-eb" placeholder="e.g. 4500000" min="0" step="50000"></div></div>
+    <div class="cg"><div class="cg-label">Fee Tier</div><select id="f-ti"><option value="">— Select —</option><option value="1">Tier 1 — &lt; $5M</option><option value="2">Tier 2 — $5M–$10M</option><option value="3">Tier 3 — $10M–$15M</option></select></div>
+    <div class="cg"><div class="cg-label">Retainer Amount <span id="ra-auto-tag" style="color:var(--green);font-size:0.5rem;letter-spacing:0.15em;">AUTO FROM TIER</span></div><div style="display:flex;align-items:baseline;gap:0.4rem;"><span style="color:var(--muted);font-size:0.85rem;">$</span><input type="number" id="f-ra" min="0" step="1000"></div></div>
+    <div class="cg"><div class="cg-label">Payment Method</div><select id="f-pm"><option value="wire">Wire Transfer</option><option value="ach">ACH / Stripe</option><option value="check">Business Check</option></select></div>
+    <div class="cg"><div class="cg-label">Payment Due Date</div><input type="date" id="f-pd"></div>
+    <div class="cg"><div class="cg-label">Governing State</div><select id="f-gs"><option value="CA">California</option><option value="FL">Florida</option><option value="TX">Texas</option><option value="TN">Tennessee</option><option value="DE">Delaware</option><option value="NY">New York</option><option value="NV">Nevada</option></select></div>
+    <div class="cg"><div class="cg-label">Arbitration County</div><input type="text" id="f-ac" value="San Francisco, CA" placeholder="City, State"></div>
+    <div class="cg"><div class="cg-label">Tail Provision</div><select id="f-tl"><option value="90">90 days</option><option value="180" selected>180 days</option><option value="270">270 days</option><option value="365">365 days</option></select></div>
+
+    <div class="cg full" style="display:flex;align-items:center;gap:1rem;padding-top:1rem;padding-bottom:0.6rem;">
+      <div class="cg-label" style="margin-bottom:0;">Broker Involved?</div>
+      <label class="tg-sw"><input type="checkbox" id="f-broker-tog"><span class="tg-slider"></span></label>
+      <span style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);" id="broker-tog-lbl">No broker</span>
+    </div>
+    <div class="cg broker-section hidden" id="cg-bn"><div class="cg-label">Broker Name</div><input type="text" id="f-bn" placeholder="Broker name"></div>
+    <div class="cg broker-section hidden" id="cg-bf"><div class="cg-label">Broker Firm</div><input type="text" id="f-bf" placeholder="Brokerage firm"></div>
+
+    <div class="cg full"><div class="cg-label">Additional Terms (Optional)</div><textarea id="f-ad" placeholder="Deal-specific terms, conditions, or modifications..." rows="2"></textarea></div>
+  </div>
+</div>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals@forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: <span class="dv" data-dv="ref">FHH-0023</span></div></div>
+  </div>
+  <div class="dt">Engagement Letter</div>
+  <div class="dst">Transition Stewardship Services Agreement</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company (Client)</div><div class="cvc-v" data-dv="co"></div></div>
+    <div class="cvc"><div class="cvc-l">Authorized Officer</div><div class="cvc-v" data-dv="of-full"></div></div>
+    <div class="cvc"><div class="cvc-l">Effective Date</div><div class="cvc-v" data-dv="dt-fmt"></div></div>
+    <div class="cvc"><div class="cvc-l">Engagement Reference</div><div class="cvc-v mono" data-dv="ref"></div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 01</span><span class="st">Parties and Nature of Engagement</span></div><div class="sb">
+    <p>This Engagement Letter ("Agreement") is entered into between <strong>Forhemit Stewardship Management Co., a California Public Benefit Corporation, doing business as Forhemit Transition Stewardship</strong> ("Forhemit"), and <span class="dv" data-dv="co">[Company]</span> ("Company"), acting through <span class="dv" data-dv="of-full">[Authorized Officer]</span>.</p>
+    <p>Forhemit is a transaction stewardship firm that facilitates employee ownership transitions — coordinating the transaction team, managing the process timeline, preparing the lender and trustee package, and providing post-close operational stewardship for a period of 12 to 24 months following closing.</p>
+    <div class="co w"><strong>IMPORTANT:</strong> Forhemit is not a buyer, investor, lender, broker, attorney, or financial advisor. The ESOP trust is the legal acquirer. All Forhemit fees are paid by the Company as ordinary operating business expenses.<br><br><strong>ERISA DISCLAIMER:</strong> Forhemit is NOT an ERISA fiduciary. All ERISA matters must be reviewed by independent ERISA counsel engaged and directed solely by the ESOP trustee.<br><br><strong>TAX DISCLAIMER:</strong> Forhemit does NOT provide tax advice. All tax matters, including §1042 election analysis, must be reviewed by independent tax professionals.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 02</span><span class="st">Scope of Services</span></div><div class="sb">
+    <p>Forhemit's engagement encompasses the following services across a structured 120-day transaction process, organized into five phases with four Hard Stop gates:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">01</span><span><strong>Transaction Coordination</strong> — Assembly and management of the full professional team including trustee, ERISA counsel, appraiser, QofE provider, and SBA lender.</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>Lender Package Preparation</strong> — Compilation of financial, operational, and legal documentation required for SBA 7(a) underwriting and trustee review.</span></div>
+      <div class="si"><span class="si-n">03</span><span><strong>COOP Development</strong> — Continuity of Operations Plan across four progressive versions (v1–v4) from Day 11 through Day 90, culminating in trustee sign-off at Gate 4.</span></div>
+      <div class="si"><span class="si-n">04</span><span><strong>Process Management</strong> — Timeline governance including four Hard Stop gates at Days 11, 35, 63, and 90.</span></div>
+      <div class="si"><span class="si-n">05</span><span><strong>Post-Close Stewardship</strong> — Operational support for 12–24 months beginning Day 121, at the Annual Stewardship Fee set forth in §04.</span></div>
+    </div>
+    <p style="margin-top:0.8rem;">Services do <em>not</em> include legal representation, tax advice, ERISA fiduciary services, brokerage, investment advice, or capital provision of any kind.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 03</span><span class="st">Retainer</span></div><div class="sb">
+    <div class="rb nonref-mode" id="rb">
+      <div class="rb-badge" id="rb-badge">Non-Refundable Retainer</div>
+      <div class="fr" style="margin-top:0.4rem;"><label>Retainer Amount</label><span class="dv" data-dv="ra-fmt" style="flex:1;">—</span></div>
+      <div class="fr"><label>Payment Method</label><span class="dv" data-dv="pm-lbl" style="flex:1;">Wire Transfer</span></div>
+      <div class="fr"><label>Payment Due</label><span class="dv" data-dv="pd-fmt" style="flex:1;">—</span></div>
+      <div id="nonref-txt"><p style="margin-top:0.8rem;">The Retainer is earned in full upon execution of this Agreement. It does not apply toward the Transition Success Fee or any other fee obligation. The Retainer compensates Forhemit for pre-assessment work, professional team coordination, deal structuring time, and advisor engagement that commences immediately upon execution.</p><div class="co w" style="margin-top:0.7rem;"><strong>Non-Refundable:</strong> The Retainer is non-refundable in all circumstances <em>except</em> (a) Forhemit's material breach, or (b) Forhemit's failure to substantially commence material services within 10 business days of the payment due date. In no event shall the Retainer be refunded due to deal failure, lender decline, trustee non-approval, or Company's decision not to proceed.</div></div>
+      <div id="ref-txt" style="display:none;"><p style="margin-top:0.8rem;">The Retainer is fully refundable for a period of 30 calendar days following execution ("Refund Period"), provided Company delivers written notice to deals@forhemit.com prior to expiration. Following expiration, the Retainer is earned and non-refundable.</p><div class="co" style="margin-top:0.7rem;border-color:var(--green);background:var(--green-bg);"><strong style="color:var(--green);">Refundable Period Active:</strong> Company may terminate without cause and receive a full refund if written notice is delivered within the Refund Period.</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 04</span><span class="st">Fee Schedule &amp; Milestone Payments</span></div><div class="sb">
+    <p>All fees are paid by the Company as a tax-deductible business expense. Forhemit does not appear on the seller's closing statement, does not reduce seller proceeds, and does not affect broker commission.</p>
+    <div class="fr" style="margin:1rem 0 0.4rem;"><label>QofE TTM EBITDA</label><span class="dv" data-dv="eb-fmt" style="flex:1;">—</span></div>
+    <div class="fr" style="margin-bottom:1.4rem;"><label>Fee Tier</label><span class="dv" data-dv="ti-lbl" style="flex:1;">—</span></div>
+    <div class="co" id="tc" style="display:none;margin-bottom:1rem;"><strong id="tc-l"></strong><br><span id="tc-b"></span></div>
+    <table class="ft"><thead><tr><th style="width:22%;">Milestone</th><th>Trigger / Gate Condition</th><th style="width:10%;text-align:center;">Timing</th><th style="width:12%;text-align:right;">Amount</th><th style="width:13%;text-align:right;">Cumulative</th></tr></thead><tbody>
+      <tr><td><span id="rl-txt"><strong>Engagement Retainer</strong></span><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 1 of 4</span></td><td id="rd-txt">COOP intake initiated; earned in full at signing.</td><td style="text-align:center;">Day 1</td><td style="text-align:right;" id="fd-r"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-1"><span style="color:var(--muted);">—</span></td></tr>
+      <tr><td><strong>Validation Fee</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 2 of 4</span></td><td>Trustee issues FMV Adequacy Letter; LOI executed.</td><td style="text-align:center;">Day 45–46</td><td style="text-align:right;" id="fd-v"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-2"><span style="color:var(--muted);">—</span></td></tr>
+      <tr><td><strong>Commitment Fee</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 3 of 4</span></td><td>SBA Commitment Letter issued; Close Prep Phase launched.</td><td style="text-align:center;">Day 60</td><td style="text-align:right;" id="fd-c"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-3"><span style="color:var(--muted);">—</span></td></tr>
+      <tr><td><strong>Success Balance</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 4 of 4</span></td><td>Closing executed; Day 121 Readiness confirmed.</td><td style="text-align:center;">Day 120</td><td style="text-align:right;" id="fd-s"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-4"><span style="color:var(--muted);">—</span></td></tr>
+      <tr style="border-top:1px solid var(--line);"><td>Annual Stewardship</td><td colspan="2">2.5% of EBITDA, beginning Day 121. Billed annually.</td><td style="text-align:right;">2.5% / yr</td><td style="text-align:right;color:var(--muted);">—</td></tr>
+      <tr class="tr-total"><td colspan="3"><strong>Total Engagement Fee</strong></td><td colspan="2" style="text-align:right;" id="fd-tot"><strong style="color:var(--muted);">Select tier</strong></td></tr>
+    </tbody></table>
+    <div class="co w" style="margin-top:0.8rem;"><strong>No Payment Without Gate Clearance:</strong> No milestone payment beyond the Engagement Retainer is due unless the corresponding gate clears.</div>
+    <div class="co w" style="margin-top:0.6rem;"><strong>Late Payment:</strong> Fees not paid within 10 business days accrue interest at 1.5% per month.</div>
+    <div class="co w" style="margin-top:0.6rem;"><strong>Broker Commission:</strong> Forhemit does not adjust, share, defer, or appear as a line item affecting the broker's commission.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 05</span><span class="st">SBA Independence — No Equity, Control, or Affiliation</span></div><div class="sb">
+    <div class="co w"><strong>SBA SOP 50 10 8 Compliance Statement.</strong> These representations are material terms of this Agreement.</div>
+    <p style="margin-top:0.9rem;">Forhemit represents and warrants that:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">a.</span><span><strong>No Equity Ownership.</strong> Forhemit holds no equity interest in the Company, ESOP trust, or any acquiring entity.</span></div>
+      <div class="si"><span class="si-n">b.</span><span><strong>No Managerial Control.</strong> No board seat, managerial title, or authority to bind the Company.</span></div>
+      <div class="si"><span class="si-n">c.</span><span><strong>No Voting Rights.</strong> No voting rights in Company or ESOP trust.</span></div>
+      <div class="si"><span class="si-n">d.</span><span><strong>No SBA Affiliation.</strong> Not an affiliate under 13 C.F.R. § 121.103.</span></div>
+      <div class="si"><span class="si-n">e.</span><span><strong>No Proceeds Interest.</strong> All fees paid by the operating company as ordinary business expenses.</span></div>
+      <div class="si"><span class="si-n">f.</span><span><strong>ERISA Independence.</strong> Not an ERISA fiduciary; does not direct the independent trustee or appraiser.</span></div>
+      <div class="si"><span class="si-n">g.</span><span><strong>Facilitator Role Only.</strong> The ESOP trust is the legal acquirer.</span></div>
+    </div>
+    <p style="margin-top:0.8rem;">These representations survive closing and apply throughout post-close stewardship.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 06</span><span class="st">Confidentiality</span></div><div class="sb"><p>Each Party agrees to hold in strict confidence all non-public information disclosed in connection with this engagement. This obligation survives termination for three (3) years.</p></div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 07</span><span class="st">Term and Termination</span></div><div class="sb"><p>This Agreement commences on the Effective Date and continues through closing and Post-Close Stewardship. Either Party may terminate upon 15 days' written notice. Forhemit may terminate immediately upon material breach, fraud, or non-payment. Upon termination: (a) earned fees remain due; (b) Retainer governed by §03; (c) tail provision in §08 applies.</p></div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 08</span><span class="st">Governing Law &amp; Venue</span></div><div class="sb">
+    <p>This Agreement is governed by the laws of the State of <span class="dv" data-dv="gs-lbl">California</span>, without regard to its conflict of laws principles.</p>
+    <div class="fr" style="margin-top:0.8rem;"><label>Arbitration County</label><span class="dv" data-dv="ac" style="flex:1;">San Francisco, CA</span></div>
+    <p style="margin-top:0.8rem;">Either Party may seek injunctive relief to protect confidential information or proprietary rights.</p>
+    <div style="margin-top:1rem;"><strong style="font-size:0.8rem;letter-spacing:0.08em;color:var(--off-white);">Tail Provision.</strong> <span class="sb">If Company closes a transaction with a party introduced by Forhemit within <span class="dv" data-dv="tl-lbl">180 days</span> of termination, the Transition Success Fee is owed in full. The tail does <em>not</em> apply if terminated due to Forhemit's material breach.</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 09</span><span class="st">Dispute Resolution</span></div><div class="sb"><p>Any dispute shall be resolved by binding arbitration administered by JAMS in the Arbitration County identified in §08. The prevailing party shall recover reasonable attorneys' fees.</p></div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 10</span><span class="st">Limitation of Liability</span></div><div class="sb"><div class="co w">EXCEPT FOR WILLFUL MISCONDUCT OR GROSS NEGLIGENCE, FORHEMIT'S TOTAL LIABILITY SHALL NOT EXCEED THE TOTAL FEES ACTUALLY PAID. IN NO EVENT SHALL FORHEMIT BE LIABLE FOR INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES.</div></div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 11</span><span class="st">Indemnification</span></div><div class="sb"><p>Each Party agrees to defend, indemnify, and hold harmless the other from third-party claims arising from gross negligence, willful misconduct, or material breach. Company additionally indemnifies Forhemit for claims from Company's misrepresentation, fraud, or IP infringement.</p></div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">§ 12</span><span class="st">Additional Terms</span></div><div class="sb">
+    <p><strong>Entire Agreement.</strong> This Agreement constitutes the entire agreement and supersedes all prior negotiations. <strong>Amendment.</strong> Amendments require a written instrument signed by both Parties. <strong>Severability.</strong> Unenforceable provisions modified to the minimum extent necessary. <strong>Counterparts / Electronic Signature.</strong> Electronic signatures are binding.</p>
+    <div id="ad-disp" style="margin-top:0.8rem;display:none;"><strong>Additional Terms:</strong> <span class="dv" data-dv="ad"></span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">—</span><span class="st">Signatures</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-title">Forhemit Transition Stewardship</div>
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <span class="ds-anchor">/sn1/</span>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:var(--off-white);">Stefano Stokes, Founder &amp; Managing Director</div>
+        <span class="ds-anchor">/d1/</span>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-title">Company (Client)</div>
+        <div class="sb-entity"><span data-dv="co">—</span><br><span style="font-size:0.78rem;color:var(--muted);">Authorized Officer</span></div>
+        <span class="ds-anchor">/sn2/</span>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:var(--off-white);" data-dv="of-full">—</div>
+        <span class="ds-anchor">/d2/</span>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+    </div>
+    <div class="wb broker-section hidden" id="wb-block">
+      <div class="wb-badge">Broker Acknowledgment — Witness Only, Not a Party</div>
+      <p class="wb-note">The undersigned broker acknowledges having reviewed the fee and retainer terms with the Company's authorized officer prior to execution.</p>
+      <div class="wg">
+        <div><div class="wf-l">Broker Name</div><div class="wf-v" data-dv="bn">—</div></div>
+        <div><div class="wf-l">Firm</div><div class="wf-v" data-dv="bf">—</div></div>
+        <div><div class="wf-l">Date</div><div class="wf-v">—</div></div>
+      </div>
+      <span class="ds-anchor">/sn3/</span>
+      <div style="margin-top:0.8rem;"><div class="s-line"></div><div class="s-lbl">Broker Signature</div></div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: <span id="gd"></span><br>deals@forhemit.com · forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Requires wet or electronic signatures before becoming effective.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+'use strict';
+function $(id){return document.getElementById(id)}
+function fmt(n){return '$'+n.toLocaleString()}
+function fmtDate(s){if(!s)return '';var d=new Date(s+'T00:00:00');return isNaN(d)?s:d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+
+var tt;function toast(m,c){var e=$('toast');if(!e)return;clearTimeout(tt);e.textContent=m;e.className='toast'+(c?' '+c:'');void e.offsetWidth;e.classList.add('show');tt=setTimeout(function(){e.classList.remove('show')},2600)}
+
+$('gd').textContent=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+$('cp-head').addEventListener('click',function(){$('cpanel').classList.toggle('shut')});
+
+$('tog-theme').addEventListener('change',function(){
+  document.documentElement.setAttribute('data-theme',this.checked?'light':'dark');
+  $('theme-lbl').textContent=this.checked?'Light':'Dark';
+});
+
+$('f-of-title-sel').addEventListener('change',function(){
+  var custom=$('f-of-title-custom');
+  if(this.value==='_other'){custom.classList.remove('hidden-field');custom.focus();}
+  else{custom.classList.add('hidden-field');custom.value='';}
+  sync();
+});
+$('f-of-title-custom').addEventListener('input',sync);
+
+function getOfficerTitle(){
+  var sel=$('f-of-title-sel').value;
+  if(sel==='_other')return $('f-of-title-custom').value;
+  return sel;
+}
+function getOfficerFull(){
+  var name=$('f-of-name').value;
+  var title=getOfficerTitle();
+  if(name&&title)return name+', '+title;
+  if(name)return name;
+  return '';
+}
+
+$('f-broker-tog').addEventListener('change',function(){
+  var on=this.checked;
+  $('broker-tog-lbl').textContent=on?'Broker included':'No broker';
+  ['cg-bn','cg-bf'].forEach(function(id){
+    var el=$(id);if(el){el.classList.toggle('hidden',!on);el.classList.toggle('visible',on);}
+  });
+  var wb=$('wb-block');
+  if(wb){wb.classList.toggle('hidden',!on);wb.classList.toggle('visible',on);}
+  if(!on){$('f-bn').value='';$('f-bf').value='';}
+  sync();
+});
+
+var TIERS={'1':{l:'Tier 1 \u2014 Less than $5,000,000 EBITDA',t:75000,r:15000,v:12500,c:12500,s:35000},'2':{l:'Tier 2 \u2014 $5,000,000\u2013$10,000,000 EBITDA',t:100000,r:25000,v:15000,c:15000,s:45000},'3':{l:'Tier 3 \u2014 $10,000,000\u2013$15,000,000 EBITDA',t:125000,r:25000,v:17500,c:17500,s:65000}};
+var STATES={CA:'California',FL:'Florida',TX:'Texas',TN:'Tennessee',DE:'Delaware',NY:'New York',NV:'Nevada'};
+var PM={wire:'Wire Transfer',ach:'ACH / Stripe',check:'Business Check'};
+var REQ=['f-co','f-of-name','f-dt','f-ref','f-eb','f-ti','f-ra','f-pd'];
+var retainerOverride=false;
+
+$('f-ra').addEventListener('input',function(){
+  var ti=$('f-ti').value;
+  var tier=TIERS[ti];
+  if(tier && Number(this.value)!==tier.r){
+    retainerOverride=true;
+    $('ra-auto-tag').textContent='MANUAL OVERRIDE';
+    $('ra-auto-tag').style.color='var(--brass)';
+  }else if(tier && Number(this.value)===tier.r){
+    retainerOverride=false;
+    $('ra-auto-tag').textContent='AUTO FROM TIER';
+    $('ra-auto-tag').style.color='var(--green)';
+  }
+});
+
+function setDV(k,val,fb){document.querySelectorAll('[data-dv="'+k+'"]').forEach(function(el){var t=val||fb||'';el.textContent=t;if(!val)el.classList.add('empty');else el.classList.remove('empty')})}
+function setT(id,v){var e=$(id);if(e)e.textContent=v}
+function setH(id,v){var e=$(id);if(e)e.innerHTML=v}
+
+function sync(){
+  var co=$('f-co').value, ofFull=getOfficerFull(), ref=$('f-ref').value, dt=$('f-dt').value;
+  var eb=$('f-eb').value, ti=$('f-ti').value, ra=$('f-ra').value;
+  var pm=$('f-pm').value, pd=$('f-pd').value, gs=$('f-gs').value;
+  var ac=$('f-ac').value, tl=$('f-tl').value;
+  var bn=$('f-bn').value, bf=$('f-bf').value, ad=$('f-ad').value;
+
+  setDV('co',co,'[Company Name]');
+  setDV('of-full',ofFull,'[Authorized Officer]');
+  setDV('ref',ref,'FHH-XXXX');setDV('dt-fmt',fmtDate(dt),'[Date]');
+  setDV('eb-fmt',eb?fmt(Number(eb)):'','—');
+  setDV('ra-fmt',ra?fmt(Number(ra)):'','—');
+  setDV('pm-lbl',PM[pm]||pm,'—');
+  setDV('pd-fmt',fmtDate(pd),'—');
+  setDV('gs-lbl',STATES[gs]||gs,'—');
+  setDV('ac',ac,'—');setDV('tl-lbl',tl?tl+' days':'','180 days');
+  setDV('bn',bn,'—');setDV('bf',bf,'—');setDV('ad',ad,'');
+
+  var tier=TIERS[ti];
+  setDV('ti-lbl',tier?tier.l:'','— Select tier —');
+  var atd=$('ad-disp');if(atd)atd.style.display=ad?'block':'none';
+
+  if(!tier){
+    ['fd-r','fd-v','fd-c','fd-s','fc-1','fc-2','fc-3','fc-4'].forEach(function(id){setT(id,'\u2014')});
+    setH('fd-tot','<strong style="color:var(--muted);">Select tier</strong>');
+    $('tc').style.display='none';
+  }else{
+    setT('fd-r',fmt(tier.r));setT('fd-v',fmt(tier.v));setT('fd-c',fmt(tier.c));setT('fd-s',fmt(tier.s));
+    setT('fc-1',fmt(tier.r));setT('fc-2',fmt(tier.r+tier.v));setT('fc-3',fmt(tier.r+tier.v+tier.c));setT('fc-4',fmt(tier.t));
+    setH('fd-tot','<strong>'+fmt(tier.t)+'</strong>');
+    var rEl=$('f-ra');
+    if(rEl&&!retainerOverride){
+      rEl.value=tier.r;
+      $('ra-auto-tag').textContent='AUTO FROM TIER';
+      $('ra-auto-tag').style.color='var(--green)';
+    }
+    $('tc').style.display='block';
+    setT('tc-l',tier.l);
+    setT('tc-b','Total: '+fmt(tier.t)+'. Retainer '+fmt(tier.r)+' \u2192 Validation '+fmt(tier.v)+' \u2192 Commitment '+fmt(tier.c)+' \u2192 Success '+fmt(tier.s));
+  }
+  chk();
+}
+
+function chk(){
+  var total=REQ.length,filled=0,missing=0;
+  REQ.forEach(function(id){var e=$(id);if(!e)return;var empty=!e.value||e.value.trim()===''||e.value==='0';if(empty){e.classList.add('req');missing++}else{e.classList.remove('req');filled++}});
+  var p=Math.round(filled/total*100);
+  var pf=$('pf');if(pf){pf.style.width=p+'%';pf.classList.toggle('done',p===100)}
+  var ps=$('ps');if(ps){if(!missing){ps.textContent='\u2713 Ready';ps.className='ps ok'}else{ps.textContent=missing+' left';ps.className='ps inc'}}
+}
+
+$('f-eb').addEventListener('input',function(){
+  var v=parseFloat(this.value);if(isNaN(v)||v<=0)return;
+  var e=$('f-ti');if(v<5e6)e.value='1';else if(v<1e7)e.value='2';else e.value='3';
+  sync();
+});
+
+document.querySelectorAll('.cp-body input,.cp-body select,.cp-body textarea').forEach(function(el){
+  el.addEventListener('input',sync);el.addEventListener('change',sync);
+});
+
+$('tog-ret').addEventListener('change',function(){
+  var b=$('rb'),bg=$('rb-badge'),lbl=$('ret-lbl');
+  var nr=$('nonref-txt'),rf=$('ref-txt'),fl=$('rl-txt'),fd=$('rd-txt');
+  if(this.checked){
+    b.className='rb ref-mode';bg.textContent='Refundable Retainer';
+    lbl.textContent='Refundable';lbl.className='tg-val ref';
+    nr.style.display='none';rf.style.display='block';
+    if(fl)fl.innerHTML='<strong>Engagement Retainer (Refundable)</strong>';
+    if(fd)fd.textContent='Refundable within 30-day window; does not apply toward milestone fees.';
+  }else{
+    b.className='rb nonref-mode';bg.textContent='Non-Refundable Retainer';
+    lbl.textContent='Non-Refundable';lbl.className='tg-val nonref';
+    nr.style.display='block';rf.style.display='none';
+    if(fl)fl.innerHTML='<strong>Engagement Retainer</strong>';
+    if(fd)fd.textContent='COOP intake initiated; earned in full at signing.';
+  }
+});
+
+var clrP=false,clrT;
+$('btn-clr').addEventListener('click',function(){
+  if(!clrP){clrP=true;$('clr-txt').textContent='Confirm?';this.style.borderColor='#C0392B';this.style.color='#C0392B';clrT=setTimeout(function(){clrP=false;rcl()},2500);return}
+  clearTimeout(clrT);clrP=false;rcl();
+  document.querySelectorAll('.cp-body input[type="text"],.cp-body input[type="date"],.cp-body input[type="number"],.cp-body textarea').forEach(function(e){e.value=''});
+  document.querySelectorAll('.cp-body select').forEach(function(e){e.selectedIndex=0});
+  $('f-of-title-custom').classList.add('hidden-field');
+  retainerOverride=false;
+  $('ra-auto-tag').textContent='AUTO FROM TIER';
+  $('ra-auto-tag').style.color='var(--green)';
+  $('f-broker-tog').checked=false;
+  $('f-broker-tog').dispatchEvent(new Event('change'));
+  sync();toast('Form cleared','');
+});
+function rcl(){$('clr-txt').textContent='Clear';$('btn-clr').style.borderColor='';$('btn-clr').style.color=''}
+
+$('btn-pr').addEventListener('click',function(){
+  var was=$('cpanel').classList.contains('shut');
+  $('cpanel').classList.add('shut');
+  setTimeout(function(){window.print();if(!was)$('cpanel').classList.remove('shut')},100);
+});
+
+sync();
+})();
+</script>
+</body>
+</html>

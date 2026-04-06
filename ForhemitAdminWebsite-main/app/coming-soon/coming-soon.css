@@ -1,0 +1,83 @@
+/* ── COMING SOON PAGE STYLES ── */
+
+.coming-soon-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.coming-soon-text {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.875rem, 2vw, 1.1rem);
+  font-weight: 400;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+  animation: fadeInDown 1s ease-out;
+}
+
+.coming-soon-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-brand),
+    transparent
+  );
+  margin: 2rem auto;
+  opacity: 0.5;
+  animation: fadeIn 1.5s ease-out 0.5s both;
+}
+
+.coming-soon-message {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-top: 0.5rem;
+  animation: fadeInUp 1s ease-out 0.8s both;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+/* Ensure the brand title has proper spacing with Coming Soon above */
+.coming-soon-hero .brand-title {
+  margin-top: 0;
+}
