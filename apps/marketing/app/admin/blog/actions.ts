@@ -107,6 +107,12 @@ function parseDepthLevelUpdate(
   return undefined;
 }
 
+/** Empty string clears stored value on update (Convex `null`). */
+function parseMetaForUpdate(formData: FormData, name: string): string | null {
+  const s = String(formData.get(name) ?? "").trim();
+  return s === "" ? null : s;
+}
+
 export async function createBlogPost(formData: FormData) {
   const title = String(formData.get("title") ?? "").trim();
   const slug = String(formData.get("slug") ?? "").trim();
@@ -115,6 +121,11 @@ export async function createBlogPost(formData: FormData) {
   const category = String(formData.get("category") ?? "").trim() || undefined;
   const featuredImage =
     String(formData.get("featuredImage") ?? "").trim() || undefined;
+  const metaTitle =
+    String(formData.get("metaTitle") ?? "").trim() || undefined;
+  const metaDescription =
+    String(formData.get("metaDescription") ?? "").trim() || undefined;
+  const ogImage = String(formData.get("ogImage") ?? "").trim() || undefined;
   const contentRaw = String(formData.get("content") ?? "").trim();
   const publishNow = formData.get("publishNow") === "on";
   const pathwayRaw = String(formData.get("pathway") ?? "").trim();
@@ -162,6 +173,9 @@ export async function createBlogPost(formData: FormData) {
     subtitle,
     category,
     featuredImage,
+    metaTitle,
+    metaDescription,
+    ogImage,
     content,
     status: publishNow ? "published" : "draft",
     pathway,
@@ -190,6 +204,10 @@ export async function updateBlogPost(formData: FormData) {
     String(formData.get("featuredImage") ?? "").trim() || undefined;
   const contentRaw = String(formData.get("content") ?? "").trim();
   const pathwayRaw = String(formData.get("pathway") ?? "").trim();
+
+  const metaTitle = parseMetaForUpdate(formData, "metaTitle");
+  const metaDescription = parseMetaForUpdate(formData, "metaDescription");
+  const ogImage = parseMetaForUpdate(formData, "ogImage");
 
   const pathway: PathwayOpt | undefined =
     pathwayRaw === "founders" ||
@@ -234,6 +252,9 @@ export async function updateBlogPost(formData: FormData) {
     subtitle,
     category,
     featuredImage,
+    metaTitle,
+    metaDescription,
+    ogImage,
     content,
     pathway,
     readTimeOverview,
