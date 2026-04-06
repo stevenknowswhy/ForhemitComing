@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { UploadButton } from "@/utils/uploadthing";
+import { UploadButton } from "@/lib/uploads/client";
 
 interface ResumeUploadProps {
   resumeUrl: string;

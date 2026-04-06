@@ -314,7 +314,7 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 4. **Lock env:** t3-env coverage for `CONVEX_DEPLOY_KEY`, `CLERK_*`, `UPLOADTHING_*`, `NEXT_PUBLIC_*` as applicable.
 5. **LOCAL_DEV.md** — [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md) (current two-folder workflow + post-monorepo target).
 6. **DEPLOYMENT.md** — [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) (Vercel/Convex checklist).
-7. **Implement `uploadFile()` wrapper** first; **no** direct UploadThing in app routes/components (pending implementation).
+7. **UploadThing client abstraction** — Per app, `@uploadthing/react` is only imported in `lib/uploads/client.ts`; feature code imports `UploadButton` / `UploadDropzone` from there. Server router (`uploadthing.ts`) and API route remain the only `uploadthing/next` touchpoints. (Programmatic `uploadFile()` can wrap SDK calls in the same folder when needed.)
 
 ---
 
@@ -326,6 +326,10 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 - [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md) — Convex dev ownership and ports
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — Deploy and env checklist
 - [`docs/SCHEMA_DRAFT_POSTS_USERS.md`](docs/SCHEMA_DRAFT_POSTS_USERS.md) — Blog `posts` + `users` draft
+
+**Legal / engagement artifacts:**
+
+- `ForhemitLegal/` — engagement letter, stewardship agreement, attorney checklists, revised HTML forms (tracked in git)
 
 **Existing app docs:**
 
@@ -347,7 +351,8 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 | Ops | t3-env, p95 baseline Phase 1, remote cache Day 1, Phase 3 alerting |
 | SEO | www canonical, admin noindex, sitemap/RSS Phase 2 |
 | Docs scaffold | `docs/ADR-001`, `LOCAL_DEV`, `DEPLOYMENT`, `SCHEMA_DRAFT_POSTS_USERS`; Sections 15–16 updated with links |
+| Upload client + repo hygiene | Root `.gitignore` (`.DS_Store`); `lib/uploads/client.ts` in admin and marketing apps; `ForhemitLegal` linked in Section 16 |
 
 ---
 
-*Last updated: harmonization plan + workspace docs scaffold (`docs/`).*
+*Last updated: harmonization plan + upload abstraction + root gitignore.*
