@@ -29,11 +29,8 @@ pnpm --filter forhemit-coming-soon dev
 
 Only **one** `convex dev` process should run against a given Convex deployment at a time.
 
-1. Run Convex from the shared package (or `pnpm convex:dev` from repo root):
-   ```bash
-   cd packages/convex && pnpm run convex:dev
-   ```
-2. For **`convex deploy`**, set **`CONVEX_DEPLOY_KEY`** in **`packages/convex/.env.local`** (or export in the shell). You can symlink or copy from an app’s `.env.local` while migrating.
+1. Run Convex from the shared package (or **`pnpm convex:dev`** from repo root). Scripts load env from the first file that exists: **`packages/convex/.env.local`**, then **`apps/admin/.env.local`**, then **`apps/marketing/.env.local`** (so you usually do not need a separate Convex env file if an app already has **`CONVEX_DEPLOYMENT`**).
+2. For **`pnpm convex:deploy`**, the same lookup applies; add **`CONVEX_DEPLOY_KEY`** to one of those files (or **`packages/convex/.env.local`** only for deploy secrets). See **`packages/convex/.env.example`**.
 3. **`pnpm convex:once`** — one-shot codegen / schema push from root.
 
 ### Environment
