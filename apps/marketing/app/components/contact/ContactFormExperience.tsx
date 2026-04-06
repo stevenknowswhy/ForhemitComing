@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useMutation, useAction } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
 import "../modals/contact-modal.css";

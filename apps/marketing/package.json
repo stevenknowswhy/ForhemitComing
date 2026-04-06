@@ -10,7 +10,10 @@
     "lint": "next lint",
     "test": "vitest",
     "generate:fee-pdf": "node scripts/generate-fee-transparency-pdf.mjs",
-    "generate:brokers-checklist-pdf": "node scripts/generate-broker-first-call-checklist-pdf.mjs"
+    "generate:brokers-checklist-pdf": "node scripts/generate-broker-first-call-checklist-pdf.mjs",
+    "convex:dev": "pnpm --filter @forhemit/convex run convex:dev",
+    "convex:once": "pnpm --filter @forhemit/convex run convex:once",
+    "convex:deploy": "pnpm --filter @forhemit/convex run convex:deploy"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.12",

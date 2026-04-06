@@ -9,10 +9,11 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "convex:dev": "convex dev",
-    "convex:once": "convex dev --once",
-    "convex:env": "convex env list",
-    "convex:dashboard": "convex dashboard"
+    "convex:dev": "pnpm --filter @forhemit/convex run convex:dev",
+    "convex:once": "pnpm --filter @forhemit/convex run convex:once",
+    "convex:deploy": "pnpm --filter @forhemit/convex run convex:deploy",
+    "convex:env": "pnpm --filter @forhemit/convex exec convex env list",
+    "convex:dashboard": "pnpm --filter @forhemit/convex exec convex dashboard"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.0.6",

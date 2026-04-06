@@ -2,7 +2,7 @@
 
 import { useState, useCallback } from "react";
 import { useMutation, useAction } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { NDA_STEPS, NON_NDA_STEPS } from "../constants";
 import {
   PathStep,

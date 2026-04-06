@@ -4,7 +4,7 @@ import DOMPurify from "isomorphic-dompurify";
 
 import { useState } from "react";
 import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
 import "./infrastructure-audit.css";

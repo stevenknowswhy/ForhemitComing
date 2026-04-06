@@ -2,10 +2,15 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Allow `@/convex/_generated/*` → `packages/convex/convex/_generated` (outside this app).
+  experimental: {
+    externalDir: true,
+  },
   // Lockfile in a parent directory (e.g. ~/package-lock.json) makes Next pick the wrong root;
   // without this, dev may never listen / Turbopack resolves the wrong tree.
   turbopack: {
-    root: path.resolve(__dirname),
+    // Monorepo root so Turbopack resolves `next` and allows `packages/convex` via externalDir.
+    root: path.resolve(__dirname, '../..'),
   },
   reactStrictMode: true,
   images: {

@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { X, Trash2, Loader2, AlertTriangle } from "lucide-react";
 import { useMutation } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import { Id } from "../../../convex/_generated/dataModel";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 interface DeleteConfirmModalProps {
   isOpen: boolean;

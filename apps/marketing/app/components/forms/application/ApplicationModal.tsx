@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useMutation, useAction } from "convex/react";
-import { api } from "../../../../convex/_generated/api";
+import { api } from "@/convex/_generated/api";
 import { ProgressBar } from "./components/ProgressBar";
 import { IntroStep, PositionsStep, NameStep, EmailStep, PhoneStep, PositionStep, PreviewStep, SuccessStep } from "./steps";
 import { ApplicationData, TOTAL_STEPS } from "./types";

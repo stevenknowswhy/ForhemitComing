@@ -2,9 +2,12 @@ const path = require('path');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    externalDir: true,
+  },
   reactStrictMode: true,
   turbopack: {
-    root: path.resolve(__dirname),
+    root: path.resolve(__dirname, '../..'),
   },
   images: {
     remotePatterns: [
