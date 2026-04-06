@@ -201,6 +201,35 @@ a.hch-path-cta {
   outline-offset: 2px;
 }
 
+.hch-hero-cta--stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.4rem;
+  padding: 0.8rem 1.25rem 0.9rem;
+}
+
+.hch-hero-cta--stacked::after {
+  bottom: 10px;
+}
+
+.hch-hero-cta-main {
+  display: block;
+}
+
+.hch-hero-cta-sub {
+  display: block;
+  font-size: 0.58rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+  text-transform: none;
+  max-width: 18rem;
+  opacity: 0.88;
+}
+
 .hch-hero-cta-primary {
   background-color: var(--hch-ink);
   background-image: none;

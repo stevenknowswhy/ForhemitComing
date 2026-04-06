@@ -302,10 +302,14 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             <span className="hps-cta-shell__glow" aria-hidden />
             <button
               type="button"
-              className="hps-cta hps-cta-outline"
+              className="hps-cta hps-cta-outline hps-cta--stacked"
+              aria-label="Take the 2 minute check now. Check to see if your business is ready to close now."
               onClick={onStartTwoMinuteCheck}
             >
-              Take the 2-Minute Check →
+              <span className="hps-cta-main">Take the 2 minute check now</span>
+              <span className="hps-cta-sub">
+                Check to see if your business is ready to close now
+              </span>
             </button>
           </span>
         </div>

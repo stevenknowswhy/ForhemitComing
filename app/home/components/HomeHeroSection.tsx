@@ -37,13 +37,17 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
               <button
                 type="button"
-                className="hch-hero-cta hch-hero-cta-primary"
+                className="hch-hero-cta hch-hero-cta-primary hch-hero-cta--stacked"
+                aria-label="Take the 2 minute check now. Check to see if your business is ready to close now."
                 onClick={() => {
                   if (onStartTwoMinuteCheck) onStartTwoMinuteCheck();
                   else onStartIntake?.("owner");
                 }}
               >
-                Protect Your Legacy Now
+                <span className="hch-hero-cta-main">Take the 2 minute check now</span>
+                <span className="hch-hero-cta-sub">
+                  Check to see if your business is ready to close now
+                </span>
               </button>
               <Link href="/brokers" className="hch-hero-cta hch-hero-cta-secondary">
                 I&apos;m a Broker →
