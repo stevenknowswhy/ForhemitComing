@@ -1,0 +1,224 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Stewardship Agreement — Form-specific styles
+   Uses the existing el- prefixed design tokens (base: engagement-letter-form-base.css).
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Bodies mount via React when expanded; engagement base CSS hides .el-section-body until .open */
+.el-root.sa-stewardship .el-section-body {
+  display: block !important;
+}
+
+/* Shared fields strip (matches legacy HTML shared-banner) */
+.el-shared-banner {
+  background: var(--navy, #1b2a4a);
+  color: #fff;
+  padding: 1.6rem 2rem;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--brass, #9a7540);
+}
+
+.el-shared-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass2, #b8965a);
+  margin-bottom: 1.2rem;
+  font-family: var(--ff-b, Jost, system-ui, sans-serif);
+}
+
+.el-shared-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.el-shared-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.el-shared-dt {
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.el-shared-dd {
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: #fff;
+  font-family: var(--ff-b, Jost, system-ui, sans-serif);
+  min-height: 1.4em;
+}
+
+/* ── Term Selection Cards ─────────────────────────────────────── */
+.el-term-opts {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.el-term-opt {
+  flex: 1;
+  padding: 22px 18px;
+  border: 1.5px solid var(--rule, #d6d0c4);
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  background: transparent;
+}
+
+.el-term-opt:hover {
+  border-color: var(--brass, #9a7540);
+  background: rgba(154, 117, 64, 0.04);
+}
+
+.el-term-opt.selected {
+  border-color: var(--brass, #9a7540);
+  background: rgba(154, 117, 64, 0.08);
+  box-shadow: 0 2px 12px rgba(154, 117, 64, 0.12);
+}
+
+.el-term-months {
+  font-family: var(--ff-d, 'Cormorant Garamond', serif);
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--navy, #1b2a4a);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.el-term-opt.selected .el-term-months {
+  color: var(--brass, #9a7540);
+}
+
+.el-term-label {
+  font-size: 11px;
+  color: var(--muted, #7a7068);
+  letter-spacing: 0.04em;
+}
+
+/* ── Fee Calculation Display ──────────────────────────────────── */
+.el-fee-calc {
+  padding: 18px 20px;
+  background: rgba(27, 42, 74, 0.03);
+  border: 1px solid rgba(27, 42, 74, 0.08);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.el-fee-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.el-fee-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted, #7a7068);
+  margin-bottom: 4px;
+}
+
+.el-fee-val {
+  display: block;
+  font-family: var(--ff-d, 'Cormorant Garamond', serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--navy, #1b2a4a);
+}
+
+.el-fee-val.brass {
+  color: var(--brass, #9a7540);
+}
+
+/* ── Pillar Checkboxes ────────────────────────────────────────── */
+.el-pillar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.el-pillar-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--rule, #d6d0c4);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.el-pillar-item:hover {
+  border-color: var(--brass, #9a7540);
+  background: rgba(154, 117, 64, 0.03);
+}
+
+.el-pillar-item input[type="checkbox"] {
+  margin-top: 3px;
+  flex-shrink: 0;
+  accent-color: var(--brass, #9a7540);
+  width: 16px;
+  height: 16px;
+}
+
+.el-pillar-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy, #1b2a4a);
+  margin-bottom: 3px;
+}
+
+.el-pillar-desc {
+  font-size: 12px;
+  color: var(--muted, #7a7068);
+  line-height: 1.55;
+}
+
+/* ── Acknowledgment checkboxes ────────────────────────────────── */
+.el-ack {
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: rgba(27, 42, 74, 0.02);
+  border: 1px solid rgba(27, 42, 74, 0.08);
+  border-radius: 8px;
+}
+
+.el-ack-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 12.5px;
+  color: var(--ink, #1c1510);
+  line-height: 1.6;
+}
+
+.el-ack-label input[type="checkbox"] {
+  margin-top: 4px;
+  flex-shrink: 0;
+  accent-color: var(--brass, #9a7540);
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 700px) {
+  .el-term-opts {
+    flex-direction: column;
+  }
+
+  .el-fee-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .el-shared-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

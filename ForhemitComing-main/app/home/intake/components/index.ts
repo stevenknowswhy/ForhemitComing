@@ -1,0 +1,1 @@
+export { ClassificationIntakeResult } from "./ClassificationIntakeResult";
