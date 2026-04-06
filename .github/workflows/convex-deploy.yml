@@ -1,0 +1,36 @@
+name: Convex deploy
+
+# Deploy backend only when Convex source or its lockfile slice changes.
+# Add repo secret CONVEX_DEPLOY_KEY (Convex dashboard → Project → Settings → Deploy key).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/convex/**"
+
+concurrency:
+  group: convex-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Deploy Convex
+        env:
+          CONVEX_DEPLOY_KEY: ${{ secrets.CONVEX_DEPLOY_KEY }}
+        run: pnpm --filter @forhemit/convex exec convex deploy --yes
