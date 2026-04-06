@@ -1,0 +1,216 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - HERO SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Hero Container ── */
+.accounting-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl) 0;
+  overflow: hidden;
+}
+
+/* ── Hero Background Image ── */
+.accounting-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDu8od17nGK97Qb28RSliJC6otDkFv5zxsNdym');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.accounting-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    var(--shadow-color) 0%,
+    var(--shadow-color) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+}
+
+.accounting-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Hero Content ── */
+.accounting-hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ── Eyebrow Text ── */
+.accounting-eyebrow {
+  display: inline-block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--af-accent);
+  margin-bottom: var(--space-md);
+  padding: 0.5rem 1rem;
+  background: var(--af-accent-subtle);
+  border: 1px solid var(--af-border-accent);
+  border-radius: 100px;
+}
+
+/* Hero section text - fixed light for image background */
+.accounting-hero .accounting-eyebrow {
+  color: #FF6B00;
+  background: var(--color-brand-subtle);
+  border-color: rgba(255, 107, 0, 0.4);
+}
+
+/* ── Main Title ── */
+.accounting-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.title-line-1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  letter-spacing: -0.02em;
+}
+
+.title-line-2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  letter-spacing: -0.01em;
+}
+
+.accounting-title .highlight {
+  background: linear-gradient(135deg, var(--af-accent) 0%, var(--af-accent-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Lead Paragraph ── */
+.accounting-lead {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--af-text-secondary);
+  max-width: 650px;
+  margin: 0 auto var(--space-lg);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+/* ── Hero CTA ── */
+.accounting-hero-cta {
+  margin-top: var(--space-md);
+}
+
+/* ── Scroll Indicator ── */
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  opacity: 0.6;
+  animation: fadeInUp 1s var(--ease-out-expo) 1s both;
+}
+
+.scroll-mouse {
+  width: 24px;
+  height: 38px;
+  border: 2px solid var(--af-border-accent);
+  border-radius: 12px;
+  position: relative;
+}
+
+.scroll-wheel {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 6px;
+  background: var(--af-accent);
+  border-radius: 2px;
+  animation: scrollWheel 2s ease-in-out infinite;
+}
+
+@keyframes scrollWheel {
+  0%, 100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translateX(-50%) translateY(8px);
+  }
+}
+
+.scroll-indicator span {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--af-text-muted);
+}
+
+/* ── Entrance Animations ── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+[data-animate="fade-up"] {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+[data-animate="fade-up"].animate-in {
+  animation: fadeInUp 0.8s var(--ease-out-expo) forwards;
+}
+
+[data-delay="100"].animate-in { animation-delay: 0.1s; }
+[data-delay="200"].animate-in { animation-delay: 0.2s; }
+[data-delay="300"].animate-in { animation-delay: 0.3s; }
+
+/* ── Scroll bounce ── */
+.scroll-indicator {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}

@@ -1,0 +1,634 @@
+/* ── Fee Transparency Modal ── */
+
+/* Modal overlay — needed because page.css (where the base .modal-overlay
+   rule lives) is not imported on /four-month-path. Scoped here so the
+   fee modal always renders as a centered overlay regardless of entry path. */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  animation: ftFadeIn 0.3s ease;
+}
+
+@keyframes ftFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal close button base — page.css defines this but is not loaded here. */
+.modal-close {
+  position: absolute;
+  background: none;
+  border: none;
+  color: var(--text-muted, #999);
+  font-size: 1.5rem;
+  font-weight: 200;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--text-primary, #fff);
+}
+
+/* Wider than default classification modal */
+.ft-modal-size {
+  max-width: 780px;
+}
+
+/* ── Fee Disclosure CTA Section (page) ── */
+.fmp-fee-disclosure {
+  margin-bottom: 3rem;
+}
+
+.fmp-fee-disclosure-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2rem;
+  padding: 1.75rem 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-left: 4px solid var(--color-brand);
+  border-radius: 0 10px 10px 0;
+  background: var(--bg-secondary);
+}
+
+.fmp-fee-disclosure-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.fmp-fee-disclosure-eyebrow {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 0.4rem;
+}
+
+.fmp-fee-disclosure-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.fmp-fee-disclosure-body {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+  max-width: 36rem;
+}
+
+.fmp-fee-disclosure-inner > .fmp-cta-shell {
+  flex-shrink: 0;
+}
+
+.fmp-fee-disclosure-btn {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.5rem;
+  background: none;
+  border: 1px solid var(--color-brand);
+  color: var(--color-brand);
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.4s ease,
+    transform 0.25s ease;
+}
+
+.fmp-cta-shell:hover > .fmp-fee-disclosure-btn,
+.fmp-cta-shell:focus-within > .fmp-fee-disclosure-btn {
+  background: var(--color-brand);
+  color: var(--text-inverse);
+}
+
+/* ── Modal content wrapper ── */
+.ft-wrap {
+  padding: 1.75rem 1.5rem 2rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: var(--text-primary);
+}
+
+/* Disclaimer banner */
+.ft-disclaimer {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  padding: 1rem 1.1rem;
+  background: var(--color-warning-bg, rgba(217, 119, 6, 0.08));
+  border: 1px solid var(--color-warning-border, rgba(217, 119, 6, 0.3));
+  border-radius: 8px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+}
+
+.ft-disclaimer-icon {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  flex-shrink: 0;
+  color: var(--color-warning, #d97706);
+}
+
+.ft-disclaimer p {
+  margin: 0;
+}
+
+/* Context block */
+.ft-context-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.ft-context-body {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Legend */
+.ft-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1rem 1.1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.ft-legend-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+/* Tag badges */
+.ft-tag {
+  display: inline-block;
+  flex-shrink: 0;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.ft-tag--universal {
+  background: var(--color-success-bg, rgba(5, 150, 105, 0.1));
+  color: var(--color-success, #059669);
+  border: 1px solid var(--color-success-border, rgba(5, 150, 105, 0.25));
+}
+
+.ft-tag--esop-specific {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
+  border: 1px solid var(--color-brand-border);
+}
+
+.ft-tag--varies {
+  background: var(--color-info-bg, rgba(37, 99, 235, 0.08));
+  color: var(--color-info, #2563eb);
+  border: 1px solid var(--color-info-border, rgba(37, 99, 235, 0.2));
+}
+
+/* State selector */
+.ft-state-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.ft-state-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.ft-state-select {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.82rem;
+  padding: 0.55rem 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  appearance: auto;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.ft-state-select:focus {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* State note */
+.ft-state-note {
+  padding: 0.85rem 1.1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--color-brand);
+  border-radius: 0 8px 8px 0;
+}
+
+.ft-state-note-headline {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin-bottom: 0.3rem;
+}
+
+.ft-state-note-body {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Phase accordion */
+.ft-phases {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ft-phase {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ft-phase:last-child {
+  border-bottom: none;
+}
+
+.ft-phase-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.ft-phase-hd:hover {
+  background: var(--bg-secondary);
+}
+
+.ft-phase--open .ft-phase-hd {
+  background: var(--bg-secondary);
+}
+
+.ft-phase-hd-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.ft-phase-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.ft-phase-sub {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.ft-phase-chevron {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.ft-phase-body {
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* Fee rows */
+.ft-fee-row {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.ft-fee-row:last-child {
+  border-bottom: none;
+}
+
+.ft-fee-row-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.ft-fee-name {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+  line-height: 1.3;
+}
+
+.ft-fee-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.ft-fee-range {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.ft-fee-note {
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Totals */
+.ft-totals {
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--color-brand-border);
+  border-radius: 8px;
+  background: var(--color-brand-subtle);
+}
+
+.ft-totals-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.4rem;
+}
+
+.ft-totals-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+}
+
+.ft-totals-range {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--text-primary);
+}
+
+.ft-totals-typical {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.6rem;
+}
+
+.ft-totals-typical strong {
+  color: var(--text-primary);
+}
+
+.ft-totals-note {
+  font-size: 0.78rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--color-brand-border);
+}
+
+/* Dual-track disclosure */
+.ft-dual-track {
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.ft-dual-track-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  transition: background 0.15s;
+}
+
+.ft-dual-track-toggle:hover {
+  background: var(--bg-secondary);
+}
+
+.ft-dual-track-body {
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.ft-dual-track-item {
+  padding: 0.95rem 1.15rem;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.ft-dual-track-item:last-child {
+  border-bottom: none;
+}
+
+.ft-dual-track-item p {
+  margin: 0.3rem 0 0;
+  color: var(--text-secondary);
+}
+
+.ft-dual-track-item-label {
+  display: block;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.ft-dual-track-item--good .ft-dual-track-item-label {
+  color: var(--color-success, #059669);
+}
+
+.ft-dual-track-item--caution .ft-dual-track-item-label {
+  color: var(--color-warning, #d97706);
+}
+
+.ft-dual-track-item--note .ft-dual-track-item-label {
+  color: var(--color-info, #2563eb);
+}
+
+/* Footer note */
+.ft-footer-note {
+  font-size: 0.72rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.ft-pdf-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.65rem;
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+}
+
+.ft-pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.75rem 1.35rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-inverse, #0a0a0a);
+  background: var(--color-brand, #c9a227);
+  border: 1px solid var(--color-brand, #c9a227);
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.ft-pdf-btn:hover {
+  opacity: 0.92;
+}
+
+.ft-pdf-btn:active {
+  transform: scale(0.99);
+}
+
+.ft-pdf-hint {
+  margin: 0;
+  max-width: 22rem;
+  font-size: 0.65rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  letter-spacing: 0.04em;
+}
+
+/* Mobile adjustments */
+@media (max-width: 640px) {
+  .ft-wrap {
+    padding: 1.25rem 1rem 1.5rem;
+    gap: 1.25rem;
+  }
+
+  .ft-fee-row-top {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .ft-fee-right {
+    flex-direction: row;
+  }
+
+  .fmp-fee-disclosure-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .fmp-fee-disclosure-inner .fmp-cta-shell {
+    display: block;
+    width: 100%;
+  }
+
+  .fmp-fee-disclosure-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

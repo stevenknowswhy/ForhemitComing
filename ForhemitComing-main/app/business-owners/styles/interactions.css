@@ -1,0 +1,363 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS — Micro-interactions aligned with /four-month-path
+   (conic glow rings, CTA shell, FAQ accordion)
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@keyframes bo-border-spin {
+  to {
+    transform: translate(-50%, -50%) rotate(1turn);
+  }
+}
+
+@keyframes bo-section-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Glow shell (timeline cards, comparison, stakeholders, hero image) ── */
+.bo-glow-shell {
+  position: relative;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-glow-shell:hover,
+  .bo-glow-shell:focus-within {
+    background: transparent;
+  }
+}
+
+.bo-glow-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bo-glow-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-glow-shell:hover .bo-glow-shell__glow::before,
+  .bo-glow-shell:focus-within .bo-glow-shell__glow::before {
+    opacity: 1;
+    animation: bo-border-spin 2.8s linear infinite;
+  }
+}
+
+.bo-glow-inner {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.bo-glow-shell--hero-img .bo-glow-inner {
+  overflow: hidden;
+  box-shadow: var(--shadow-medium);
+  transition: box-shadow 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-glow-shell--hero-img:hover .bo-glow-inner {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+}
+
+.bo-glow-shell--hero-img .bo-glow-inner img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-glow-shell--hero-img:hover .bo-glow-inner img {
+    transform: scale(1.02);
+  }
+}
+
+.stakeholder-glow-wrap {
+  min-width: 0;
+}
+
+.stakeholder-glow-wrap .bo-glow-inner {
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 0;
+}
+
+.stakeholder-glow-wrap .stakeholder-card {
+  border: none;
+  border-radius: 0;
+}
+
+/* ── CTA shell (matches fmp-cta-shell) ── */
+.bo-cta-shell {
+  position: relative;
+  display: inline-flex;
+  vertical-align: top;
+  border-radius: 12px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+.bo-cta-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bo-cta-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-cta-shell:hover {
+    background: transparent;
+  }
+
+  .bo-cta-shell:hover .bo-cta-shell__glow::before {
+    opacity: 1;
+    animation: bo-border-spin 2.8s linear infinite;
+  }
+}
+
+.bo-cta-shell:focus-within {
+  background: transparent;
+}
+
+.bo-cta-shell:focus-within .bo-cta-shell__glow::before {
+  opacity: 1;
+  animation: bo-border-spin 2.8s linear infinite;
+}
+
+.bo-cta-shell .cta-button {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .bo-cta-shell:hover .cta-button {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+    transform: translateY(-1px);
+  }
+}
+
+.bo-cta-shell .cta-button:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ── FAQ — unified list + Cormorant questions (matches fmp-faq-*) ── */
+.bo-faq-list {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: 0 auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.bo-faq-item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bo-faq-item:last-child {
+  border-bottom: none;
+}
+
+.bo-faq-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.bo-faq-trigger:hover {
+  background: var(--bg-secondary);
+}
+
+.bo-faq-item--open .bo-faq-trigger {
+  background: var(--bg-secondary);
+}
+
+.bo-faq-q {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.bo-faq-trigger:hover .bo-faq-q {
+  color: var(--color-brand);
+}
+
+.bo-faq-chevron {
+  flex-shrink: 0;
+  font-size: 1.35rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s ease;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.bo-faq-item--open .bo-faq-chevron {
+  transform: rotate(45deg);
+  color: var(--color-brand);
+}
+
+.bo-faq-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bo-faq-item--open .bo-faq-panel {
+  grid-template-rows: 1fr;
+}
+
+.bo-faq-panel-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+
+.bo-faq-body {
+  padding: 0 1.15rem 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+  animation: bo-section-fade-in 0.28s ease;
+}
+
+.bo-faq-body p {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.bo-faq-body p:first-child {
+  margin-top: 0;
+}
+
+/* Step + comparison cards — depth on shell hover (four-month-path language) */
+@media (hover: hover) and (pointer: fine) {
+  .bo-glow-shell--step:hover .bo-glow-inner.step-card {
+    border-color: var(--border-accent);
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+
+  .comparison-grid .bo-glow-shell:hover .bo-glow-inner.comparison-card {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bo-glow-shell__glow::before,
+  .bo-cta-shell__glow::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+
+  .bo-glow-shell:hover,
+  .bo-glow-shell:focus-within,
+  .bo-cta-shell:hover,
+  .bo-cta-shell:focus-within {
+    background: var(--border-subtle);
+  }
+
+  .bo-faq-panel {
+    transition: none;
+  }
+
+  .bo-faq-item--open .bo-faq-panel {
+    grid-template-rows: 1fr;
+  }
+
+  .bo-glow-shell--hero-img:hover .bo-glow-inner img {
+    transform: none;
+  }
+
+  .bo-cta-shell:hover .cta-button {
+    transform: none;
+  }
+
+  .bo-glow-shell--step:hover .bo-glow-inner.step-card,
+  .comparison-grid .bo-glow-shell:hover .bo-glow-inner.comparison-card {
+    box-shadow: var(--shadow-medium);
+  }
+}

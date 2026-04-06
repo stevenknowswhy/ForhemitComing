@@ -1,0 +1,55 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   BUSINESS OWNERS - CTA SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── CTA Section ── */
+.business-owners-cta {
+  padding: 6rem 0;
+  text-align: center;
+  background: linear-gradient(180deg, transparent 0%, var(--bg-secondary) 100%);
+  border-top: 1px solid var(--bo-border);
+}
+
+.business-owners-cta h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  color: var(--bo-text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.business-owners-cta p {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--bo-text-secondary);
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  line-height: 1.7;
+}
+
+.cta-subtitle {
+  font-size: 1.05rem;
+  color: var(--bo-text-primary);
+  margin-bottom: 2.5rem;
+}
+
+.cta-button {
+  display: inline-block;
+  font-family: var(--font-dm-mono), 'DM Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--bo-text-primary);
+  background: var(--bo-accent);
+  padding: 1.25rem 2.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--bo-accent-light);
+  transform: translateY(-2px);
+  box-shadow: var(--glow-subtle);
+}

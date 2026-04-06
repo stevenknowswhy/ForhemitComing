@@ -1,0 +1,448 @@
+/* Sitemap Modal Styles */
+@import "../../styles/theme.css";
+
+/* Overlay - Low opacity with high blur for subtlety */
+.sitemap-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-heavy);
+  backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 2rem;
+  animation: sitemapFadeIn 0.25s ease;
+}
+
+@keyframes sitemapFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal Content - Wider to use horizontal space */
+.sitemap-modal-content {
+  background: linear-gradient(
+    135deg,
+    var(--bg-secondary) 0%,
+    var(--bg-primary) 100%
+  );
+  border: 1px solid var(--border-accent);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 1200px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2.5rem;
+  animation: sitemapSlideIn 0.25s ease;
+  /* Subtle shadow for depth in light mode */
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+@keyframes sitemapSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Close Button - Professional icon button with 4 states */
+.sitemap-modal-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sitemap-modal-close:hover {
+  background: var(--color-brand-subtle);
+  border-color: var(--border-accent);
+  color: var(--color-brand);
+}
+
+.sitemap-modal-close:active {
+  transform: scale(0.95);
+}
+
+.sitemap-modal-close:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* Header - Visual hierarchy with tightened letter spacing */
+.sitemap-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sitemap-header h2 {
+  font-family: "Cinzel", serif;
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  /* Tightened letter spacing for large headers per rules */
+  letter-spacing: -0.02em;
+  /* Reduced line height for headers */
+  line-height: 1.1;
+}
+
+.sitemap-header p {
+  font-family: var(--font-dm-mono), "DM Mono", monospace;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Desktop Grid Layout - 4 columns to use width not height */
+.sitemap-grid-desktop {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+/* Section Cards - Grouping with clear visual cues */
+.sitemap-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+}
+
+.sitemap-section:hover {
+  border-color: var(--border-accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.sitemap-section h3 {
+  font-family: var(--font-dm-mono), "DM Mono", monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-brand);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-accent);
+}
+
+.sitemap-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sitemap-section li {
+  margin: 0;
+}
+
+/* Links - Clear interactive states with underline animation */
+.sitemap-section a {
+  display: block;
+  padding: 0.5rem 0.625rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  /* Micro-interaction: slight shift on hover */
+  transform: translateX(0);
+  position: relative;
+}
+
+.sitemap-section a:hover {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
+  transform: translateX(4px);
+}
+
+/* Underline animation for sitemap links */
+.sitemap-section a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0.625rem;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sitemap-section a:hover::after {
+  width: calc(100% - 1.25rem);
+}
+
+.sitemap-section a:active {
+  transform: translateX(4px) scale(0.98);
+}
+
+.sitemap-section a:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: -2px;
+}
+
+/* Mobile Accordion - Hidden on desktop */
+.sitemap-accordion-mobile {
+  display: none;
+}
+
+.sitemap-accordion-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.sitemap-accordion-item:hover {
+  border-color: var(--border-accent);
+}
+
+.sitemap-accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-family: var(--font-dm-mono), "DM Mono", monospace;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sitemap-accordion-trigger:hover {
+  background: var(--bg-glass);
+  color: var(--color-brand);
+}
+
+.sitemap-accordion-trigger.expanded {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
+}
+
+.sitemap-accordion-icon {
+  transition: transform 0.25s ease;
+  color: var(--text-secondary);
+}
+
+.sitemap-accordion-trigger.expanded .sitemap-accordion-icon {
+  transform: rotate(180deg);
+  color: var(--color-brand);
+}
+
+.sitemap-accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.sitemap-accordion-content.expanded {
+  max-height: 400px;
+  padding: 0 1.25rem 1rem;
+}
+
+.sitemap-accordion-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.sitemap-accordion-content a {
+  display: block;
+  padding: 0.625rem 0.75rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+  position: relative;
+}
+
+.sitemap-accordion-content a:hover {
+  background: var(--color-brand-subtle);
+  color: var(--color-brand);
+  padding-left: 1rem;
+}
+
+/* Underline animation for accordion links */
+.sitemap-accordion-content a::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 0.75rem;
+  width: 0;
+  height: 1px;
+  background: var(--color-brand);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sitemap-accordion-content a:hover::after {
+  width: calc(100% - 1.5rem);
+}
+
+/* Footer */
+.sitemap-footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+}
+
+.sitemap-footer p {
+  font-family: var(--font-dm-mono), "DM Mono", monospace;
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Responsive Breakpoints */
+
+/* Large Desktop - 4 columns */
+@media (min-width: 1024px) {
+  .sitemap-grid-desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .sitemap-modal-content {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+/* Tablet - 2 columns */
+@media (max-width: 1023px) {
+  .sitemap-grid-desktop {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+  
+  .sitemap-modal-content {
+    max-width: 800px;
+    padding: 2rem;
+  }
+}
+
+/* Mobile - Accordion Layout */
+@media (max-width: 640px) {
+  .sitemap-modal-overlay {
+    padding: 0.75rem;
+    align-items: flex-end;
+  }
+  
+  .sitemap-modal-content {
+    padding: 1.5rem;
+    max-height: 85vh;
+    border-radius: 20px 20px 16px 16px;
+  }
+  
+  .sitemap-grid-desktop {
+    display: none;
+  }
+  
+  .sitemap-accordion-mobile {
+    display: block;
+  }
+  
+  .sitemap-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+  
+  .sitemap-header h2 {
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  
+  .sitemap-footer {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Scrollbar Styling */
+.sitemap-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sitemap-modal-content::-webkit-scrollbar-track {
+  background: var(--bg-glass);
+  border-radius: 3px;
+}
+
+.sitemap-modal-content::-webkit-scrollbar-thumb {
+  background: var(--border-accent);
+  border-radius: 3px;
+}
+
+.sitemap-modal-content::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .sitemap-modal-overlay,
+  .sitemap-modal-content,
+  .sitemap-accordion-content,
+  .sitemap-accordion-icon,
+  .sitemap-section,
+  .sitemap-section a,
+  .sitemap-modal-close,
+  .sitemap-accordion-trigger {
+    animation: none;
+    transition: none;
+  }
+  
+  .sitemap-accordion-content.expanded {
+    max-height: none;
+  }
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+  .sitemap-modal-content {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .sitemap-section:hover {
+    box-shadow: none;
+    /* Depth by lightening card background instead of shadow */
+    background: var(--bg-glass);
+  }
+}

@@ -1,0 +1,98 @@
+/* Global Header - Gold/Metallic Forhemit Logo */
+.global-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  padding: 1.25rem 1.5rem;
+  pointer-events: none;
+}
+
+.global-header > * {
+  pointer-events: auto;
+}
+
+.global-logo-link {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+
+.global-logo-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    135deg,
+    #c9a227 0%,
+    #f4e5c2 25%,
+    #c9a227 50%,
+    #f4e5c2 75%,
+    #c9a227 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+.global-logo-link:hover .global-logo-text {
+  filter: brightness(1.15);
+  transform: scale(1.03);
+}
+
+.global-logo-underline {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    #c9a227 0%,
+    #f4e5c2 50%,
+    #c9a227 100%
+  );
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.global-logo-link:hover .global-logo-underline {
+  width: 100%;
+}
+
+/* Dark mode — brighter gold for visibility on dark hero bg */
+[data-theme="dark"] .global-logo-text {
+  background: linear-gradient(
+    135deg,
+    #d4b341 0%,
+    #faf0d4 25%,
+    #d4b341 50%,
+    #faf0d4 75%,
+    #d4b341 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme="dark"] .global-logo-underline {
+  background: linear-gradient(
+    90deg,
+    #d4b341 0%,
+    #faf0d4 50%,
+    #d4b341 100%
+  );
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .global-header {
+    padding: 1rem 1rem;
+  }
+  
+  .global-logo-text {
+    font-size: 1.1rem;
+  }
+}
