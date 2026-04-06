@@ -1,6 +1,7 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import type { Doc, Id } from "@/convex/_generated/dataModel";
@@ -117,6 +118,19 @@ export function BlogAdminClient({ posts, configError }: Props) {
                   </div>
                 </div>
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
+                  <Link
+                    href={`/admin/blog/${p._id}/edit`}
+                    style={{
+                      ...btnStyle,
+                      textDecoration: "none",
+                      display: "inline-block",
+                      opacity: configError ? 0.5 : 1,
+                      pointerEvents: configError ? "none" : "auto",
+                    }}
+                    aria-disabled={!!configError}
+                  >
+                    Edit
+                  </Link>
                   {p.status !== "published" && (
                     <button
                       type="button"
