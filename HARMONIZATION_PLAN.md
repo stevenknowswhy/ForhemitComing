@@ -326,6 +326,7 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 - [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md) — Convex dev ownership and ports
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — Deploy and env checklist
 - [`docs/SCHEMA_DRAFT_POSTS_USERS.md`](docs/SCHEMA_DRAFT_POSTS_USERS.md) — Blog `posts` + `users` draft
+- [`docs/PRE_MONOREPO_GITHUB_MAIN.md`](docs/PRE_MONOREPO_GITHUB_MAIN.md) — Old GitHub `main` tip (`83a1504`); tag `pre-monorepo-github-main`
 
 **Legal / engagement artifacts:**
 
