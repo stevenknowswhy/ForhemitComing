@@ -170,6 +170,34 @@ export function EditBlogPostForm({ post, configError }: Props) {
           />
         </label>
         <label style={labelStyle}>
+          Meta title (optional, SEO)
+          <input
+            name="metaTitle"
+            style={inputStyle}
+            defaultValue={post.metaTitle ?? ""}
+            placeholder="Overrides page title when set"
+          />
+        </label>
+        <label style={labelStyle}>
+          Meta description (optional, SEO)
+          <textarea
+            name="metaDescription"
+            rows={2}
+            style={inputStyle}
+            defaultValue={post.metaDescription ?? ""}
+            placeholder="Search / social snippet"
+          />
+        </label>
+        <label style={labelStyle}>
+          Open Graph image URL (optional)
+          <input
+            name="ogImage"
+            style={inputStyle}
+            defaultValue={post.ogImage ?? ""}
+            placeholder="https://…"
+          />
+        </label>
+        <label style={labelStyle}>
           Pathway
           <select
             name="pathway"
