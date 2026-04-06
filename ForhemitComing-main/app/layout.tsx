@@ -8,6 +8,7 @@ import { ConvexClientProvider } from './components/providers/ConvexProvider'
 import { ThemeProvider } from './components/providers/ThemeProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SentryProvider } from './components/providers/SentryProvider'
+import { env } from '@/lib/env'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -36,7 +37,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const baseUrl = 'https://forhemit.com';
+const baseUrl = env.NEXT_PUBLIC_SITE_URL ?? 'https://forhemit.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -157,7 +158,7 @@ export default function RootLayout({
         <ThemeProvider>
           <ErrorBoundary>
             <SentryProvider>
-              <ConvexClientProvider>
+              <ConvexClientProvider convexUrl={env.NEXT_PUBLIC_CONVEX_URL}>
                 <GlobalHeader />
                 <Navigation />
                 {children}
