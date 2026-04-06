@@ -21,6 +21,7 @@ import type * as generatedDocuments from "../generatedDocuments.js";
 import type * as jobApplications from "../jobApplications.js";
 import type * as lib_requireAdmin from "../lib/requireAdmin.js";
 import type * as phoneMessages from "../phoneMessages.js";
+import type * as posts from "../posts.js";
 
 import type {
   ApiFromModules,
@@ -42,6 +43,7 @@ declare const fullApi: ApiFromModules<{
   jobApplications: typeof jobApplications;
   "lib/requireAdmin": typeof lib_requireAdmin;
   phoneMessages: typeof phoneMessages;
+  posts: typeof posts;
 }>;
 
 /**
