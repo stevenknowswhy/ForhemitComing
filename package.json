@@ -1,0 +1,17 @@
+{
+  "name": "forhemit-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "convex:dev": "pnpm --filter @forhemit/convex run convex:dev",
+    "convex:deploy": "pnpm --filter @forhemit/convex run convex:deploy",
+    "convex:once": "pnpm --filter @forhemit/convex run convex:once"
+  },
+  "devDependencies": {
+    "turbo": "^2.4.4"
+  }
+}
