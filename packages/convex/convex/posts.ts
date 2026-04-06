@@ -211,7 +211,8 @@ export const update = mutation({
     readTimeOverview: v.optional(v.number()),
     readTimeDeepDive: v.optional(v.number()),
     readTimeMethodology: v.optional(v.number()),
-    depthLevel: v.optional(blogDepthLevel),
+    /** Pass `null` to clear optional depth level. */
+    depthLevel: v.optional(v.union(blogDepthLevel, v.null())),
     resilienceSummary: v.optional(v.array(v.string())),
     relatedPathways: v.optional(v.array(blogPathway)),
     adminToken: v.optional(v.string()),
@@ -279,7 +280,12 @@ export const update = mutation({
       ...(args.readTimeMethodology !== undefined
         ? { readTimeMethodology: args.readTimeMethodology }
         : {}),
-      ...(args.depthLevel !== undefined ? { depthLevel: args.depthLevel } : {}),
+      ...(args.depthLevel !== undefined
+        ? {
+            depthLevel:
+              args.depthLevel === null ? undefined : args.depthLevel,
+          }
+        : {}),
       ...(args.resilienceSummary !== undefined
         ? { resilienceSummary: args.resilienceSummary }
         : {}),

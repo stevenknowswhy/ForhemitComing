@@ -47,6 +47,17 @@ export function BlogAdminClient({ posts, configError }: Props) {
 
   return (
     <main style={{ padding: 24, maxWidth: 960, margin: "0 auto" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: 12,
+        }}
+      >
+        <a href="/admin/logout" style={{ ...btnStyle, fontSize: 14 }}>
+          Sign out
+        </a>
+      </div>
       <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 8 }}>
         Blog posts
       </h1>
@@ -130,6 +141,19 @@ export function BlogAdminClient({ posts, configError }: Props) {
                     aria-disabled={!!configError}
                   >
                     Edit
+                  </Link>
+                  <Link
+                    href={`/admin/blog/${p._id}/preview`}
+                    style={{
+                      ...btnStyle,
+                      textDecoration: "none",
+                      display: "inline-block",
+                      opacity: configError ? 0.5 : 1,
+                      pointerEvents: configError ? "none" : "auto",
+                    }}
+                    aria-disabled={!!configError}
+                  >
+                    Preview
                   </Link>
                   {p.status !== "published" && (
                     <button
@@ -223,6 +247,49 @@ export function BlogAdminClient({ posts, configError }: Props) {
             </select>
           </label>
           <label style={labelStyle}>
+            Depth level (optional)
+            <select name="depthLevel" style={inputStyle} defaultValue="">
+              <option value="">— Default —</option>
+              <option value="overview">Overview</option>
+              <option value="detailed">Detailed</option>
+              <option value="comprehensive">Comprehensive</option>
+            </select>
+          </label>
+          <fieldset
+            style={{
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: 8,
+              padding: 12,
+            }}
+          >
+            <legend style={{ fontSize: 14, padding: "0 4px" }}>
+              Also relevant for (optional)
+            </legend>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: 12,
+                marginTop: 8,
+              }}
+            >
+              {relatedPathwayOptions.map(({ value, label }) => (
+                <label
+                  key={value}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 6,
+                    fontSize: 14,
+                  }}
+                >
+                  <input type="checkbox" name="relatedPathways" value={value} />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <label style={labelStyle}>
             Featured image URL (optional)
             <input name="featuredImage" style={inputStyle} />
           </label>
@@ -296,3 +363,11 @@ const labelStyle: CSSProperties = {
   flexDirection: "column",
   fontSize: 14,
 };
+
+const relatedPathwayOptions = [
+  { value: "founders", label: "Founders" },
+  { value: "attorneys", label: "Attorneys" },
+  { value: "lenders", label: "Lenders" },
+  { value: "cpas", label: "CPAs" },
+  { value: "employees", label: "Employees" },
+] as const;

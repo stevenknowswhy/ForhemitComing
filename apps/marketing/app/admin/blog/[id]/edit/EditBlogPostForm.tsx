@@ -38,6 +38,14 @@ interface Props {
   configError: string | null;
 }
 
+const relatedPathwayOptions = [
+  { value: "founders", label: "Founders" },
+  { value: "attorneys", label: "Attorneys" },
+  { value: "lenders", label: "Lenders" },
+  { value: "cpas", label: "CPAs" },
+  { value: "employees", label: "Employees" },
+] as const;
+
 export function EditBlogPostForm({ post, configError }: Props) {
   const router = useRouter();
   const [formError, setFormError] = useState<string | null>(null);
@@ -53,14 +61,35 @@ export function EditBlogPostForm({ post, configError }: Props) {
 
   const contentJson = JSON.stringify(post.content ?? {}, null, 2);
   const resilienceText = (post.resilienceSummary ?? []).join("\n");
+  const relatedSet = new Set(post.relatedPathways ?? []);
 
   return (
     <main style={{ padding: 24, maxWidth: 720, margin: "0 auto" }}>
-      <p style={{ marginBottom: 16 }}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: 12,
+          alignItems: "center",
+          justifyContent: "space-between",
+          marginBottom: 16,
+        }}
+      >
         <Link href="/admin/blog" style={{ ...btnStyle, fontSize: 14 }}>
           ← All posts
         </Link>
-      </p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+          <Link
+            href={`/admin/blog/${post._id}/preview`}
+            style={{ ...btnStyle, fontSize: 14 }}
+          >
+            Preview
+          </Link>
+          <a href="/admin/logout" style={{ ...btnStyle, fontSize: 14 }}>
+            Sign out
+          </a>
+        </div>
+      </div>
       <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 8 }}>
         Edit post
       </h1>
@@ -154,6 +183,58 @@ export function EditBlogPostForm({ post, configError }: Props) {
             <option value="employees">Employees</option>
           </select>
         </label>
+        <label style={labelStyle}>
+          Depth level
+          <select
+            name="depthLevel"
+            style={inputStyle}
+            defaultValue={post.depthLevel ?? ""}
+          >
+            <option value="">— Not set —</option>
+            <option value="overview">Overview</option>
+            <option value="detailed">Detailed</option>
+            <option value="comprehensive">Comprehensive</option>
+          </select>
+        </label>
+        <fieldset
+          style={{
+            border: "1px solid rgba(255,255,255,0.15)",
+            borderRadius: 8,
+            padding: 12,
+          }}
+        >
+          <legend style={{ fontSize: 14, padding: "0 4px" }}>
+            Also relevant for (optional)
+          </legend>
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 12,
+              marginTop: 8,
+            }}
+          >
+            {relatedPathwayOptions.map(({ value, label }) => (
+              <label
+                key={value}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 6,
+                  fontSize: 14,
+                }}
+              >
+                <input
+                  type="checkbox"
+                  name="relatedPathways"
+                  value={value}
+                  defaultChecked={relatedSet.has(value)}
+                />
+                {label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
         <label style={labelStyle}>
           Featured image URL (optional)
           <input
