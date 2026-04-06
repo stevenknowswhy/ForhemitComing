@@ -53,6 +53,10 @@ export const pathways: { value: Pathway; label: string; context: string }[] = [
   { value: 'employees', context: 'For team members impacted by transitions', label: 'Employees' },
 ];
 
+/**
+ * Legacy demo articles — not used by the live blog (Convex `posts` is the source of truth).
+ * Kept for `scripts/seed-blog-posts.ts` one-time import.
+ */
 export const mockArticles: Article[] = [
   {
     id: '1',
