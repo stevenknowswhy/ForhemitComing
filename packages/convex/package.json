@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "convex:dev": "convex dev",
-    "convex:deploy": "convex deploy",
-    "convex:once": "convex dev --once"
+    "convex:dev": "bash scripts/with-env.sh dev",
+    "convex:deploy": "bash scripts/with-env.sh deploy --yes",
+    "convex:once": "bash scripts/with-env.sh dev --once"
   },
   "dependencies": {
     "convex": "^1.33.0"
