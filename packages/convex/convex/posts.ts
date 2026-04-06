@@ -201,9 +201,10 @@ export const update = mutation({
     excerpt: v.optional(v.string()),
     content: v.optional(v.any()),
     featuredImage: v.optional(v.string()),
-    metaTitle: v.optional(v.string()),
-    metaDescription: v.optional(v.string()),
-    ogImage: v.optional(v.string()),
+    /** Pass `null` to clear optional SEO fields. */
+    metaTitle: v.optional(v.union(v.string(), v.null())),
+    metaDescription: v.optional(v.union(v.string(), v.null())),
+    ogImage: v.optional(v.union(v.string(), v.null())),
     status: v.optional(postStatus),
     pathway: v.optional(blogPathway),
     category: v.optional(v.string()),
@@ -263,11 +264,26 @@ export const update = mutation({
       ...(args.excerpt !== undefined ? { excerpt: args.excerpt?.trim() } : {}),
       ...(args.content !== undefined ? { content: args.content } : {}),
       ...(args.featuredImage !== undefined ? { featuredImage: args.featuredImage } : {}),
-      ...(args.metaTitle !== undefined ? { metaTitle: args.metaTitle } : {}),
-      ...(args.metaDescription !== undefined
-        ? { metaDescription: args.metaDescription }
+      ...(args.metaTitle !== undefined
+        ? {
+            metaTitle:
+              args.metaTitle === null ? undefined : args.metaTitle.trim(),
+          }
         : {}),
-      ...(args.ogImage !== undefined ? { ogImage: args.ogImage } : {}),
+      ...(args.metaDescription !== undefined
+        ? {
+            metaDescription:
+              args.metaDescription === null
+                ? undefined
+                : args.metaDescription.trim(),
+          }
+        : {}),
+      ...(args.ogImage !== undefined
+        ? {
+            ogImage:
+              args.ogImage === null ? undefined : args.ogImage.trim(),
+          }
+        : {}),
       ...(args.pathway !== undefined ? { pathway: args.pathway } : {}),
       ...(args.category !== undefined ? { category: args.category?.trim() } : {}),
       ...(args.subtitle !== undefined ? { subtitle: args.subtitle?.trim() } : {}),
