@@ -14,6 +14,8 @@ export const env = createEnv({
     UNSPLASH_ACCESS_KEY: z.string().optional(),
     UNSPLASH_SECRET_KEY: z.string().optional(),
     CONVEX_DEPLOYMENT: z.string().optional(),
+    /** Used by `npx convex deploy` / CI — never commit the value */
+    CONVEX_DEPLOY_KEY: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_CONVEX_URL: convexUrlSchema,
@@ -27,6 +29,7 @@ export const env = createEnv({
     UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
     UNSPLASH_SECRET_KEY: process.env.UNSPLASH_SECRET_KEY,
     CONVEX_DEPLOYMENT: process.env.CONVEX_DEPLOYMENT,
+    CONVEX_DEPLOY_KEY: process.env.CONVEX_DEPLOY_KEY,
     NEXT_PUBLIC_CONVEX_URL:
       process.env.NEXT_PUBLIC_CONVEX_URL ?? "https://dummy.convex.cloud",
     NEXT_PUBLIC_CONVEX_SITE_URL: process.env.NEXT_PUBLIC_CONVEX_SITE_URL,

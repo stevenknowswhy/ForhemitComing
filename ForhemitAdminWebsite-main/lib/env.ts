@@ -16,6 +16,8 @@ export const env = createEnv({
     UNSPLASH_ACCESS_KEY: z.string().optional(),
     UNSPLASH_SECRET_KEY: z.string().optional(),
     CONVEX_DEPLOYMENT: z.string().optional(),
+    /** Used by `npx convex deploy` / CI — never commit the value */
+    CONVEX_DEPLOY_KEY: z.string().optional(),
     CLERK_JWT_ISSUER_DOMAIN: z.string().optional(),
     ADMIN_TOKEN: z.string().optional(),
   },
@@ -38,6 +40,7 @@ export const env = createEnv({
     UNSPLASH_ACCESS_KEY: process.env.UNSPLASH_ACCESS_KEY,
     UNSPLASH_SECRET_KEY: process.env.UNSPLASH_SECRET_KEY,
     CONVEX_DEPLOYMENT: process.env.CONVEX_DEPLOYMENT,
+    CONVEX_DEPLOY_KEY: process.env.CONVEX_DEPLOY_KEY,
     CLERK_JWT_ISSUER_DOMAIN: process.env.CLERK_JWT_ISSUER_DOMAIN,
     ADMIN_TOKEN: process.env.ADMIN_TOKEN,
     NEXT_PUBLIC_CONVEX_URL:

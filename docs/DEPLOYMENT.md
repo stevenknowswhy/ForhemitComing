@@ -33,7 +33,7 @@ Validate at build time with **`@t3-oss/env-nextjs`** in each app’s `lib/env.ts
 
 ### CI (GitHub Actions)
 
-- `CONVEX_DEPLOY_KEY` (or org-approved Convex deploy secret)
+- **`CONVEX_DEPLOY_KEY`** — full value from Convex dashboard (format `dev:deployment|…`). Add as an **encrypted repository secret**, not in workflow YAML. For local deploys, keep it only in **`.env.local`** (gitignored).
 
 ## Secrets hygiene
 
