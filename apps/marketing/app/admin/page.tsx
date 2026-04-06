@@ -19,6 +19,11 @@ export default function AdminPage() {
             ESOP Partners
           </Link>
         </li>
+        <li>
+          <Link href="/admin/blog" style={{ textDecoration: "underline" }}>
+            Blog posts (Convex)
+          </Link>
+        </li>
       </ul>
     </main>
   );

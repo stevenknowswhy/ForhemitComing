@@ -15,4 +15,12 @@ if [[ -z "${ENV_FILE}" ]]; then
   echo "Create packages/convex/.env.local (see .env.example) or apps/admin/.env.local / apps/marketing/.env.local."
   exit 1
 fi
+# codegen does not support --env-file; load vars for it.
+if [[ "${1:-}" == "codegen" ]]; then
+  set -a
+  # shellcheck disable=SC1090
+  source "${ENV_FILE}"
+  set +a
+  exec convex "$@"
+fi
 exec convex "$@" --env-file "$ENV_FILE"
