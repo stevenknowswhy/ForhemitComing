@@ -1,6 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
 import { isSuperAdmin, isAllowedEmail } from '@/lib/clerk';
+import { env } from '@/lib/env';
 import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
@@ -36,7 +37,7 @@ export async function POST(req: Request) {
         role: 'admin',
         invitedBy: userId,
       },
-      redirectUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:5050'}/admin`,
+      redirectUrl: `${env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:5050'}/admin`,
     });
 
     return NextResponse.json({ 

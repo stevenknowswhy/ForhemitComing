@@ -12,7 +12,7 @@ Operational checklist aligned with `HARMONIZATION_PLAN.md`. Replace placeholder 
 
 ## Environment variables
 
-Validate at build time with **t3-env** (or equivalent) once wired. Minimum set:
+Validate at build time with **`@t3-oss/env-nextjs`** in each app’s `lib/env.ts`. Use **`SKIP_ENV_VALIDATION=true`** only for lint or CI steps without secrets. Minimum set:
 
 ### Both Next apps
 
