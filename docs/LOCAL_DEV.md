@@ -31,6 +31,7 @@ After **monorepo**: run `convex dev` only from `packages/convex` (or repo root s
 
 - Copy `.env.example` → `.env.local` in **each** app you run.
 - Clerk keys are required for **admin**; marketing may omit Clerk for public routes but still needs Convex URL (and UploadThing if testing uploads).
+- Each app validates env at runtime via **`lib/env.ts`** (`@t3-oss/env-nextjs`). For **`next lint`** without a full `.env.local`, validation is skipped automatically; you can set **`SKIP_ENV_VALIDATION=true`** for other commands if needed.
 
 ### Ports
 

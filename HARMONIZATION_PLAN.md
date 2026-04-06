@@ -311,7 +311,7 @@ Production Convex URL must be the only target for production Vercel envs on **ma
 1. **Draft `posts` + `users` schema** — Done for review: [`docs/SCHEMA_DRAFT_POSTS_USERS.md`](docs/SCHEMA_DRAFT_POSTS_USERS.md). **Team review before code** (Clerk `isAdmin` source, slug uniqueness).
 2. **Monorepo tool:** **Turborepo** — Recorded in [`docs/ADR-001-turborepo-monorepo.md`](docs/ADR-001-turborepo-monorepo.md).
 3. **Convex:** Project settings + **deploy key** for CI (ops).
-4. **Lock env:** t3-env coverage for `CONVEX_DEPLOY_KEY`, `CLERK_*`, `UPLOADTHING_*`, `NEXT_PUBLIC_*` as applicable.
+4. **Lock env:** **`lib/env.ts`** in admin and marketing (`@t3-oss/env-nextjs`) covers `CONVEX_*`, `CLERK_*`, `UPLOADTHING_*`, `NEXT_PUBLIC_*`, etc. Add **`CONVEX_DEPLOY_KEY`** to the schema when CI runs `convex deploy` from this repo. `SKIP_ENV_VALIDATION` documented in `.env.example`.
 5. **LOCAL_DEV.md** — [`docs/LOCAL_DEV.md`](docs/LOCAL_DEV.md) (current two-folder workflow + post-monorepo target).
 6. **DEPLOYMENT.md** — [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) (Vercel/Convex checklist).
 7. **UploadThing client abstraction** — Per app, `@uploadthing/react` is only imported in `lib/uploads/client.ts`; feature code imports `UploadButton` / `UploadDropzone` from there. Server router (`uploadthing.ts`) and API route remain the only `uploadthing/next` touchpoints. (Programmatic `uploadFile()` can wrap SDK calls in the same folder when needed.)

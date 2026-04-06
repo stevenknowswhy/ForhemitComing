@@ -4,6 +4,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { env } from '@/lib/env'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -11,7 +12,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://forhemit.website';
+const baseUrl = env.NEXT_PUBLIC_SITE_URL ?? 'https://forhemit.website';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -60,7 +61,7 @@ export default function RootLayout({
       <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
         <body suppressHydrationWarning className="min-h-screen bg-gray-50">
           <ErrorBoundary>
-            <ConvexClientProvider>
+            <ConvexClientProvider convexUrl={env.NEXT_PUBLIC_CONVEX_URL}>
               {children}
             </ConvexClientProvider>
           </ErrorBoundary>
