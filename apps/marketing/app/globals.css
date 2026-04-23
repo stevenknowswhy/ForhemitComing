@@ -89,6 +89,26 @@
   --selection-text: #1F2521;
 }
 
+html[data-theme="light"],
+[data-theme="light"] {
+  --canvas: #F9F7F2;
+  --parchment: #F0EBE3;
+  --deep-dive-bg: #1E2A1E;
+  --ink: #1A1A1A;
+  --stone: #5A5A5A;
+  --stone-light: #7A7A7A;
+  --sage: #2C3E2D;
+  --sage-light: #A8C3A8;
+  --sage-muted: #C5CEBD;
+  --border-light: #E0D9D0;
+  --border-medium: #D0CCC4;
+  --selection-bg: #2C3E2D;
+  --selection-text: #F9F7F2;
+  --bg-primary: var(--canvas);
+  --text-primary: var(--ink);
+  --text-secondary: var(--stone);
+}
+
 /* ── RESET & BASE STYLES ── */
 
 *,
@@ -103,6 +123,7 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
+  color-scheme: light;
 }
 
 body {
@@ -438,4 +459,3 @@ p {
     justify-content: center;
   }
 }
-
