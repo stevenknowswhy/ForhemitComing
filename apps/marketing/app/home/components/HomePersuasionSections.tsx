@@ -51,18 +51,18 @@ const EXIT_PATHS = [
   },
   {
     id: "esop",
-    label: "Beyond the Balance Sheet™ Exit",
+    label: "Founder Succession Through Employee Ownership",
     tag: "Recommended",
     tagClass: "hps-tag-brass",
     featured: true,
     points: [
-      "Fair market value — full price",
-      "Up to 100% tax-free proceeds (§1042)",
-      "The only advisor that stays after the wire hits",
-      "Your legacy lives on — employees become owners",
-      "Close in 4 months vs. 12–18 months traditional",
+      "Independent valuation and structured financing",
+      "Potential Section 1042 tax deferral when eligible",
+      "Employees become owners instead of an outside buyer taking over",
+      "Post-close stewardship built into the model",
+      "A practical succession path for qualified founder-led companies",
     ],
-    summary: "Fair price. Best terms. Post-close stewardship.",
+    summary: "Continuity, employee ownership, and post-close stewardship.",
   },
 ] as const;
 
@@ -71,17 +71,17 @@ const WAITING_STATS = [
   {
     figure: "50:1",
     label: "sellers for every qualified buyer",
-    detail: "The Silver Tsunami is here — boomer owners are exiting en masse.",
+    detail: "Succession planning gets harder when owners wait until the market is crowded.",
   },
   {
     figure: "30–40%",
     label: "of listed businesses never sell",
-    detail: "Oversupply compresses valuations and kills deals.",
+    detail: "A founder needs more than a listing plan; they need a real continuity path.",
   },
   {
     figure: "4 months",
     label: "vs. 12–18 months traditional sale",
-    detail: "While others disappear at closing, we steward your legacy through the critical first 24 months.",
+    detail: "When a company is prepared, an ESOP transition can move faster than a traditional buyer process.",
   },
 ] as const;
 
@@ -89,9 +89,9 @@ const WAITING_STATS = [
 const NOT_FOR_YOU = [
   { text: "Revenue under $3M annually", delay: 0 },
   { text: "Pre-profit or revenue declining", delay: 1 },
-  { text: "Fewer than 15 employees", delay: 2 },
+  { text: "Fewer than 20 employees", delay: 2 },
   { text: "Need cash within 30 days", delay: 3 },
-  { text: "Unwilling to stay 12 months post-close", delay: 4 },
+  { text: "Unwilling to support the transition through the handoff period", delay: 4 },
 ] as const;
 
 /* ── Trust anchors (Pre-Suasion) ── */
@@ -173,10 +173,10 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             </p>
             <div className="hps-section-divider" />
           </div>
-          <h2 className="hps-headline">Three ways out. Only one that works.</h2>
+          <h2 className="hps-headline">Three paths founders consider at succession.</h2>
           <p className="hps-sub">
-            Most owners don&apos;t realize there&apos;s a path that preserves their legacy, pays fair
-            market value, and closes in months — not years.
+            The right path depends on your goals, but employee ownership can preserve continuity
+            in a way liquidation or a conventional outside sale often cannot.
           </p>
 
           <div className="hps-cards">
@@ -224,7 +224,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             <div className="hps-section-divider" />
           </div>
           <h2 className="hps-headline">
-            Silver Tsunami Alert: 50 sellers for every qualified buyer. Your window is closing.
+            Succession becomes harder when owners wait for the perfect moment.
           </h2>
 
           <div className="hps-stats">
