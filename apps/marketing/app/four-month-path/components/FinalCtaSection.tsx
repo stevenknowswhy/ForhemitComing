@@ -12,7 +12,7 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
   return (
     <section id="fmp-get-started" className="fmp-section fmp-final-cta" aria-labelledby="fmp-final-cta-heading">
       <h2 id="fmp-final-cta-heading" className="fmp-final-cta-headline">
-        Protect Your Legacy Now: Your Window Is Closing
+        Start Your Succession Plan While You Still Have Options
       </h2>
       <div className="fmp-final-cta-actions fmp-final-cta-actions--row">
         <span className="fmp-cta-shell">

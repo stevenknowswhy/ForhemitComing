@@ -37,7 +37,7 @@ const inter = Inter({
   display: 'swap',
 })
 
-const baseUrl = env.NEXT_PUBLIC_SITE_URL ?? 'https://forhemit.com';
+const baseUrl = env.NEXT_PUBLIC_SITE_URL ?? 'https://www.forhemit.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     template: '%s | Forhemit',
   },
   description:
-    'Forhemit (California PBC) structures ESOP transitions and post-close stewardship for small and mid-sized businesses—continuity-first, not extraction.',
+    'Forhemit helps founder-led businesses pursue 100% employee-ownership succession with ESOP structuring and post-close stewardship support.',
   keywords: [
     'ESOP',
     'employee ownership',
@@ -80,21 +80,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: baseUrl,
     siteName: 'Forhemit PBC',
-    title: 'Forhemit PBC | Stewardship Management',
-    description: 'Stewardship Management Organization Built for Continuity, Not Extraction.',
+    title: 'Forhemit | Founder Exit and ESOP Succession',
+    description: 'Founder succession through employee ownership, with ESOP structuring and post-close stewardship support.',
     images: [
       {
         url: `${baseUrl}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Forhemit PBC - Stewardship Management',
+        alt: 'Forhemit - Founder Exit and ESOP Succession',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Forhemit PBC | Stewardship Management',
-    description: 'Stewardship Management Organization Built for Continuity, Not Extraction.',
+    title: 'Forhemit | Founder Exit and ESOP Succession',
+    description: 'Founder succession through employee ownership, with ESOP structuring and post-close stewardship support.',
     images: [`${baseUrl}/og-image.png`],
     creator: '@forhemit',
   },
@@ -118,35 +118,22 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth" style={{ colorScheme: "light" }}>
       <head>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               (function() {
                 try {
-          // Match ThemeProvider: support system | dark | light
-          var theme = localStorage.getItem('forhemit-theme') || 'light';
-          var resolved;
-          if (theme === 'system') {
-            resolved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          } else {
-            resolved = theme === 'dark' ? 'dark' : 'light';
-          }
-                  document.documentElement.setAttribute('data-theme', resolved);
+                  localStorage.setItem('forhemit-theme', 'light');
+                  document.documentElement.setAttribute('data-theme', 'light');
+                  document.documentElement.style.colorScheme = 'light';
                   
                   // Handle blog theme (if on blog page)
                   if (window.location.pathname.startsWith('/blog')) {
-                    var blogTheme = localStorage.getItem('forhemit-blog-theme');
-                    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    var effectiveTheme = blogTheme || (prefersDark ? 'dark' : 'light');
-                    if (effectiveTheme === 'dark') {
-                      document.documentElement.classList.add('blog-dark');
-                      document.documentElement.classList.remove('blog-light');
-                    } else {
-                      document.documentElement.classList.add('blog-light');
-                      document.documentElement.classList.remove('blog-dark');
-                    }
+                    localStorage.setItem('forhemit-blog-theme', 'light');
+                    document.documentElement.classList.add('blog-light');
+                    document.documentElement.classList.remove('blog-dark');
                   }
                 } catch (e) {}
               })();
