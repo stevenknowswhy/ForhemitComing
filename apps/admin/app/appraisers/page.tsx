@@ -359,8 +359,9 @@ export default function AppraisersPage() {
                 <span className="appraisers-eyebrow">The Forhemit Solution</span>
                 <h2>Valuation as an Annuity</h2>
                 <p className="solution-lead">
-                  Forhemit is a human-centric private equity firm that acquires $3M–$15M businesses 
-                  and transitions them into 100% Employee Stock Ownership Plans (ESOPs).
+                  Forhemit structures founder succession transactions for $3M-$15M businesses by
+                  transitioning them into 100% Employee Stock Ownership Plans (ESOPs) with
+                  continuity-focused stewardship support.
                 </p>
                 <p>
                   For an evaluation specialist, the ESOP model is the holy grail of valuation work. 
