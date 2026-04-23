@@ -28,10 +28,12 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
               Beyond the Balance Sheet™ · Employee ownership transitions
             </p>
 
-            <h1 className="hch-hero-headline">Your Exit Is Ready</h1>
+            <h1 className="hch-hero-headline">Founder Succession Without Selling Out</h1>
 
             <p className="hch-hero-sub">
-              We don&apos;t just plan your exit. We ensure your business survives it. Close in as little as four months with the only exit advisor that stays after the wire hits.
+              For founder-led businesses preparing for succession, Forhemit structures 100%
+              employee-ownership transitions and stays involved after close so continuity is
+              protected, not left to chance.
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
@@ -43,7 +45,7 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
                   else onStartIntake?.("owner");
                 }}
               >
-                Protect Your Legacy Now
+                See If Your Company Fits
               </button>
               <Link href="/brokers" className="hch-hero-cta hch-hero-cta-secondary">
                 I&apos;m a Broker →
