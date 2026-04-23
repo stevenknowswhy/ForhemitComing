@@ -25,18 +25,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const STORAGE_KEY = "forhemit-theme";
 
 function getSystemTheme(): ResolvedTheme {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  return "light";
 }
 
 function readStoredTheme(): { theme: Theme; resolvedTheme: ResolvedTheme } {
-  if (typeof window === "undefined") {
-    return { theme: "light", resolvedTheme: "light" };
-  }
-  const stored = localStorage.getItem(STORAGE_KEY) as Theme | null;
-  const theme = stored ?? "light";
-  const resolvedTheme = theme === "system" ? getSystemTheme() : theme;
-  return { theme, resolvedTheme };
+  return { theme: "light", resolvedTheme: "light" };
 }
 
 interface ThemeProviderProps {
@@ -53,38 +46,30 @@ export function ThemeProvider({
   const [theme, setThemeState] = useState<Theme>(defaultTheme);
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
 
-  const applyToDocument = useCallback((resolved: ResolvedTheme) => {
-    setResolvedTheme(resolved);
-    document.documentElement.setAttribute("data-theme", resolved);
+  const applyToDocument = useCallback((_resolved: ResolvedTheme) => {
+    setResolvedTheme("light");
+    document.documentElement.setAttribute("data-theme", "light");
+    document.documentElement.style.colorScheme = "light";
   }, []);
 
   // Hydrate from localStorage after mount (matches blocking script in layout.tsx)
   useEffect(() => {
     const initial = readStoredTheme();
     setThemeState(initial.theme);
+    localStorage.setItem(STORAGE_KEY, "light");
     applyToDocument(initial.resolvedTheme);
   }, [applyToDocument]);
 
   useEffect(() => {
-    if (!enableSystem || theme !== "system") return;
-
-    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      applyToDocument(e.matches ? "dark" : "light");
-    };
-
-    applyToDocument(mediaQuery.matches ? "dark" : "light");
-    mediaQuery.addEventListener("change", handleChange);
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    applyToDocument("light");
+    return;
   }, [theme, enableSystem, applyToDocument]);
 
   useEffect(() => {
     const handleStorage = (e: StorageEvent) => {
-      if (e.key !== STORAGE_KEY || !e.newValue) return;
-      const newTheme = e.newValue as Theme;
-      setThemeState(newTheme);
-      const nextResolved = newTheme === "system" ? getSystemTheme() : newTheme;
-      applyToDocument(nextResolved);
+      if (e.key !== STORAGE_KEY) return;
+      setThemeState("light");
+      applyToDocument("light");
     };
 
     window.addEventListener("storage", handleStorage);
@@ -92,11 +77,10 @@ export function ThemeProvider({
   }, [applyToDocument]);
 
   const setTheme = useCallback(
-    (newTheme: Theme) => {
-      setThemeState(newTheme);
-      localStorage.setItem(STORAGE_KEY, newTheme);
-      const nextResolved = newTheme === "system" ? getSystemTheme() : newTheme;
-      applyToDocument(nextResolved);
+    (_newTheme: Theme) => {
+      setThemeState("light");
+      localStorage.setItem(STORAGE_KEY, "light");
+      applyToDocument("light");
     },
     [applyToDocument]
   );
