@@ -1,7 +1,6 @@
 import { v } from "convex/values";
-import { query, mutation, action, internal } from "./_generated/server";
-import { Doc, Id } from "./_generated/dataModel";
-import { internal as internalApi } from "./_generated/api";
+import { query, mutation } from "./_generated/server";
+import { Doc } from "./_generated/dataModel";
 
 // ============================================
 // Pipeline Stage → Agent Mapping
@@ -244,6 +243,11 @@ export const advanceStage = mutation({
   handler: async (ctx, args) => {
     const company = await ctx.db.get(args.companyId);
     if (!company) throw new Error("Company not found");
+
+    // Idempotency: skip if already at this stage
+    if (company.stage === args.newStage) {
+      return { success: true, agentQueued: false, skipped: true };
+    }
 
     const oldStage = company.stage;
     const now = Date.now();
