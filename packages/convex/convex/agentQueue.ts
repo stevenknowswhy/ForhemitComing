@@ -159,6 +159,9 @@ export const markInProgress = mutation({
   handler: async (ctx, args) => {
     const job = await ctx.db.get(args.id);
     if (!job) throw new Error("Queue job not found");
+    if (job.status !== "pending" && job.status !== "simulation") {
+      throw new Error(`Job is already ${job.status} — cannot claim`);
+    }
 
     await ctx.db.patch(args.id, {
       status: "in_progress" as const,
@@ -176,6 +179,9 @@ export const markCompleted = mutation({
   handler: async (ctx, args) => {
     const job = await ctx.db.get(args.id);
     if (!job) throw new Error("Queue job not found");
+    if (job.status !== "in_progress") {
+      throw new Error(`Job is ${job.status} — can only complete in_progress jobs`);
+    }
 
     await ctx.db.patch(args.id, {
       status: "completed" as const,
@@ -196,6 +202,9 @@ export const markFailed = mutation({
   handler: async (ctx, args) => {
     const job = await ctx.db.get(args.id);
     if (!job) throw new Error("Queue job not found");
+    if (job.status !== "in_progress") {
+      throw new Error(`Job is ${job.status} — can only fail in_progress jobs`);
+    }
 
     await ctx.db.patch(args.id, {
       status: "failed" as const,
