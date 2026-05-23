@@ -397,4 +397,56 @@ export default defineSchema({
     .index("by_status_priority", ["status", "priority"])
     .index("by_company", ["companyId", "gate"])
     .index("by_agent", ["agentId", "status"]),
+
+  // ============================================
+  // Phase 3 — Financial Data & Documents
+  // ============================================
+
+  // Historical financial data for deals — agents read this for QofE, capital structure, valuation
+  companyFinancials: defineTable({
+    companyId: v.id("crmCompanies"),
+    year: v.number(), // e.g. 2024
+    revenue: v.number(),
+    ebitda: v.number(),
+    netIncome: v.optional(v.number()),
+    freeCashFlow: v.optional(v.number()),
+    ownerCompensation: v.optional(v.number()),
+    ownerBenefits: v.optional(v.number()),
+    totalDebt: v.optional(v.number()),
+    tangibleAssets: v.optional(v.number()),
+    currentAssets: v.optional(v.number()),
+    currentLiabilities: v.optional(v.number()),
+    notes: v.optional(v.string()),
+    source: v.optional(v.string()), // e.g. "tax-return", "financial-statement", "management"
+    createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_company_year", ["companyId", "year"]),
+
+  // Due diligence documents — metadata for uploaded files
+  dealDocuments: defineTable({
+    companyId: v.id("crmCompanies"),
+    name: v.string(),
+    type: v.union(
+      v.literal("appraisal"),
+      v.literal("plan-document"),
+      v.literal("tax-return"),
+      v.literal("financial-statement"),
+      v.literal("legal"),
+      v.literal("lender-doc"),
+      v.literal("compliance"),
+      v.literal("other")
+    ),
+    url: v.optional(v.string()),
+    storageId: v.optional(v.string()), // Convex file storage ID
+    uploadedBy: v.optional(v.string()),
+    fileSize: v.optional(v.number()),
+    mimeType: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_type", ["type"])
+    .index("by_company_type", ["companyId", "type"]),
 });
