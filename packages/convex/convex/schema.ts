@@ -183,7 +183,9 @@ export default defineSchema({
       v.literal("earlyAccessSignup"),
       v.literal("jobApplication"),
       v.literal("documentTemplate"),
-      v.literal("generatedDocument")
+      v.literal("generatedDocument"),
+      v.literal("agentOutput"),
+      v.literal("agentJob")
     ),
     entityId: v.string(), // The ID of the affected entity
     changes: v.optional(v.array(v.object({
@@ -333,4 +335,66 @@ export default defineSchema({
     .index("by_createdAt", ["createdAt"])
     .index("by_status", ["status"])
     .index("by_read", ["read"]),
+
+  // ============================================
+  // AI Agent Layer
+  // ============================================
+
+  // Agent output artifacts — every agent-produced draft/model/memo
+  agentOutputs: defineTable({
+    companyId: v.id("crmCompanies"),
+    agentId: v.string(), // e.g. "deal-analyst", "capital-structurer"
+    templateId: v.string(), // e.g. "T-04", "T-08"
+    gate: v.number(), // 1-4, or 0 for pre-pipeline
+    content: v.string(), // markdown, JSON, or structured data
+    contentType: v.union(v.literal("markdown"), v.literal("json"), v.literal("structured")),
+    status: v.union(
+      v.literal("pending_review"),
+      v.literal("approved"),
+      v.literal("rejected"),
+      v.literal("superseded"),
+      v.literal("simulation")
+    ),
+    provider: v.string(), // "openrouter", "opengateway", etc.
+    model: v.string(), // model ID used
+    usage: v.object({
+      promptTokens: v.number(),
+      completionTokens: v.number(),
+      totalTokens: v.number(),
+    }),
+    costUsd: v.number(),
+    source: v.union(v.literal("claude"), v.literal("kimi")),
+    supersedes: v.optional(v.string()), // prior output _id
+    reviewNotes: v.optional(v.string()),
+    createdAt: v.number(),
+  })
+    .index("by_company", ["companyId", "gate"])
+    .index("by_agent", ["agentId", "companyId"])
+    .index("by_status", ["status", "companyId"])
+    .index("by_template", ["templateId", "companyId"]),
+
+  // Agent job queue — pending/in-progress agent work
+  agentQueue: defineTable({
+    companyId: v.id("crmCompanies"),
+    agentId: v.string(),
+    templateId: v.string(),
+    gate: v.number(),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("in_progress"),
+      v.literal("completed"),
+      v.literal("failed"),
+      v.literal("simulation")
+    ),
+    priority: v.number(), // lower = higher priority
+    isSimulation: v.boolean(),
+    context: v.optional(v.string()), // deal data snapshot
+    error: v.optional(v.string()),
+    createdAt: v.number(),
+    startedAt: v.optional(v.number()),
+    completedAt: v.optional(v.number()),
+  })
+    .index("by_status_priority", ["status", "priority"])
+    .index("by_company", ["companyId", "gate"])
+    .index("by_agent", ["agentId", "status"]),
 });
