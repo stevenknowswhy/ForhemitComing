@@ -40,3 +40,6 @@ test-results/
 
 # Documentation generated files
 THEME_AUDIT_CHECKLIST.md
+
+# clerk configuration (can include secrets)
+/.clerk/
