@@ -2,6 +2,45 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { COOKIE_NAME, verifyAdminSession } from "@/lib/admin-session";
 
+const markdownRoutes: Record<string, string> = {
+  '/': `# Forhemit
+
+Founder succession through employee ownership, with ESOP structuring and post-close stewardship support.
+
+## Navigation
+
+- [About](/about)
+- [Blog](/blog)
+- [Contact](/contact)
+- [FAQ](/faq)
+- [Business Owners](/business-owners)
+- [Brokers](/brokers)
+- [Lenders](/lenders)
+- [Accounting Firms](/accounting-firms)
+- [Legal Practices](/legal-practices)
+- [Wealth Managers](/wealth-managers)
+- [Appraisers](/appraisers)
+
+## Services
+
+Forhemit helps business owners transition their companies to employee ownership through ESOPs (Employee Stock Ownership Plans).
+
+[Learn more](/introduction)
+`,
+  '/about': `# About Forhemit
+
+Forhemit PBC is a public benefit corporation dedicated to helping founders exit through employee ownership.
+`,
+  '/faq': `# Frequently Asked Questions
+
+Find answers to common questions about ESOPs and founder succession.
+`,
+  '/introduction': `# Introduction to ESOPs
+
+Learn how Employee Stock Ownership Plans work and how they can benefit your business.
+`,
+}
+
 const PREVIEW_COOKIE = "forhemit_preview";
 const PREVIEW_COOKIE_VALUE = "granted";
 
@@ -59,14 +98,26 @@ async function adminAuthResponse(
 }
 
 export async function proxy(request: NextRequest) {
+  const accept = request.headers.get('accept') || ''
+  const { pathname } = request.nextUrl;
+
+  if (accept.includes('text/markdown')) {
+    const markdown = markdownRoutes[pathname]
+    if (markdown) {
+      return new NextResponse(markdown, {
+        status: 200,
+        headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
+      })
+    }
+    return new NextResponse('Not found', { status: 404 })
+  }
+
   const adminRes = await adminAuthResponse(request);
   if (adminRes) return adminRes;
 
   if (isGateDisabled()) {
     return NextResponse.next();
   }
-
-  const { pathname } = request.nextUrl;
 
   if (isPublicPath(pathname)) {
     return NextResponse.next();

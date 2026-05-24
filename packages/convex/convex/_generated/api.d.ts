@@ -26,6 +26,7 @@ import type * as jobApplications from "../jobApplications.js";
 import type * as lib_requireAdmin from "../lib/requireAdmin.js";
 import type * as phoneMessages from "../phoneMessages.js";
 import type * as posts from "../posts.js";
+import type * as seed from "../seed.js";
 
 import type {
   ApiFromModules,
@@ -52,6 +53,7 @@ declare const fullApi: ApiFromModules<{
   "lib/requireAdmin": typeof lib_requireAdmin;
   phoneMessages: typeof phoneMessages;
   posts: typeof posts;
+  seed: typeof seed;
 }>;
 
 /**
