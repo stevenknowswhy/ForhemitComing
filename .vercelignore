@@ -1,0 +1,8 @@
+node_modules
+.next
+.turbo
+.git
+apps/docs
+apps/storybook
+apps/marketing
+static
