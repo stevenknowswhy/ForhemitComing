@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 import { fetchPublishedPostSlugs } from "@/lib/blog-convex-server";
 
-const baseUrl = "https://forhemit.com";
+const baseUrl = "https://www.forhemit.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const routes = [

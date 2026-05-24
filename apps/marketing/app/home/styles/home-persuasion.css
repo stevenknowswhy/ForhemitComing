@@ -1107,6 +1107,39 @@
   }
 }
 
+/* ═══════════════════════════════════
+   FINAL CTA BANNER
+   ═══════════════════════════════════ */
+
+.hps-final-cta {
+  padding: 4.5rem 0 5rem;
+  background: var(--hch-cream);
+  text-align: center;
+}
+
+.hps-final-cta .hps-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hps-final-cta-headline {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 300;
+  line-height: 1.2;
+  color: var(--hch-ink);
+  margin-bottom: 0.6rem;
+}
+
+.hps-final-cta-sub {
+  font-family: var(--font-outfit, system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--hch-ink-soft);
+  margin-bottom: 1.8rem;
+}
+
 @media (max-width: 640px) {
   .hps-inner {
     padding: 0 1.5rem;
@@ -1114,7 +1147,8 @@
 
   .hps-compare,
   .hps-waiting,
-  .hps-prattfall {
+  .hps-prattfall,
+  .hps-final-cta {
     padding: 3.5rem 0;
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * HomePersuasionSections — Below-the-fold psychological trigger sections.
+ * HomePersuasionSections - Below-the-fold psychological trigger sections.
  *
  * Implements:
  * - Decoy Effect (exit-path comparison)
@@ -158,7 +158,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         </div>
       </section>
 
-      {/* ── 2. Decoy Effect — Exit Path Comparison ── */}
+      {/* ── 2. Decoy Effect - Exit Path Comparison ── */}
       <section 
         ref={compareRef.ref}
         className={`hps-compare ${compareRef.isRevealed ? "hps-revealed" : ""}`} 
@@ -166,7 +166,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
       >
         <div className="hps-inner">
           <div className="hps-section-header">
-            <span className="hps-section-number">01 — Compare</span>
+            <span className="hps-section-number">01 - Compare</span>
             <p className="hps-eyebrow">
               <span className="hps-eyebrow-line" aria-hidden />
               Exit Options
@@ -208,7 +208,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         </div>
       </section>
 
-      {/* ── 3. Omission Bias — Cost of Waiting ── */}
+      {/* ── 3. Omission Bias - Cost of Waiting ── */}
       <section 
         ref={waitingRef.ref}
         className={`hps-waiting ${waitingRef.isRevealed ? "hps-revealed" : ""}`} 
@@ -216,7 +216,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
       >
         <div className="hps-inner">
           <div className="hps-section-header">
-            <span className="hps-section-number">02 — Urgency</span>
+            <span className="hps-section-number">02 - Urgency</span>
             <p className="hps-eyebrow">
               <span className="hps-eyebrow-line" aria-hidden />
               The Exit Crisis
@@ -248,13 +248,13 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
               className="hps-cta"
               onClick={onStartTwoMinuteCheck}
             >
-              See the Crisis Data →
+              Start Your Free Assessment →
             </button>
           </span>
         </div>
       </section>
 
-      {/* ── 4. Prattfall Effect — "Who This Is NOT For" ── */}
+      {/* ── 4. Prattfall Effect - "Who This Is NOT For" ── */}
       <section 
         ref={prattfallRef.ref}
         className={`hps-prattfall ${prattfallRef.isRevealed ? "hps-revealed" : ""}`} 
@@ -262,7 +262,7 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
       >
         <div className="hps-inner">
           <div className="hps-section-header">
-            <span className="hps-section-number">03 — Filter</span>
+            <span className="hps-section-number">03 - Filter</span>
             <p className="hps-eyebrow">
               <span className="hps-eyebrow-line" aria-hidden />
               Full Transparency
@@ -305,7 +305,24 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
               className="hps-cta hps-cta-outline"
               onClick={onStartTwoMinuteCheck}
             >
-              Take the 2-Minute Check →
+              Start Your Free Assessment →
+            </button>
+          </span>
+        </div>
+      </section>
+      {/* ── 5. Final CTA Banner ── */}
+      <section className="hps-final-cta" aria-label="Get started">
+        <div className="hps-inner">
+          <h2 className="hps-final-cta-headline">Ready to explore employee ownership?</h2>
+          <p className="hps-final-cta-sub">Start with a free, confidential assessment. Takes 2 minutes.</p>
+          <span className="hps-cta-shell">
+            <span className="hps-cta-shell__glow" aria-hidden />
+            <button
+              type="button"
+              className="hps-cta"
+              onClick={onStartTwoMinuteCheck}
+            >
+              Start Your Free Assessment →
             </button>
           </span>
         </div>
