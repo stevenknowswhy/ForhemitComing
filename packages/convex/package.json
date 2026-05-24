@@ -8,6 +8,7 @@
     "convex:once": "bash scripts/with-env.sh dev --once"
   },
   "dependencies": {
+    "@upstash/redis": "^1.38.0",
     "convex": "^1.33.0"
   },
   "devDependencies": {

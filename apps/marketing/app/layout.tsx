@@ -9,6 +9,7 @@ import { ThemeProvider } from './components/providers/ThemeProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { SentryProvider } from './components/providers/SentryProvider'
 import { env } from '@/lib/env'
+import { WebMCP } from '@/components/agent-readiness/WebMCP'
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -150,6 +151,7 @@ export default function RootLayout({
                 <Navigation />
                 {children}
                 <GlobalFooter />
+                <WebMCP />
               </ConvexClientProvider>
             </SentryProvider>
           </ErrorBoundary>
