@@ -6,7 +6,7 @@ import {
   type HomePathRole,
 } from "./HomePathSelectionSection";
 
-/** Set to true to show the “I am a …” owner / broker path cards below the hero. */
+/** Set to true to show the "I am a ..." owner / broker path cards below the hero. */
 const SHOW_HOME_PATH_SELECTION = false;
 
 export type HomeHeroSectionProps = {
@@ -31,9 +31,8 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
             <h1 className="hch-hero-headline">Founder Succession Without Selling Out</h1>
 
             <p className="hch-hero-sub">
-              For founder-led businesses preparing for succession, Forhemit structures 100%
-              employee-ownership transitions and stays involved after close so continuity is
-              protected, not left to chance.
+              Forhemit structures 100% employee-ownership transitions for founder-led businesses
+              and stays involved after close to protect continuity.
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
@@ -45,39 +44,30 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
                   else onStartIntake?.("owner");
                 }}
               >
-                See If Your Company Fits
+                Start Your Free Assessment
               </button>
-              <Link href="/brokers" className="hch-hero-cta hch-hero-cta-secondary">
+              <Link href="/brokers" className="hch-hero-cta-link">
                 I&apos;m a Broker →
               </Link>
             </div>
 
             <p className="hch-hero-trust-note">
-              🔒 Confidential · No cost · Takes 2 minutes
+              🔒 Free assessment · Confidential · 2 minutes
             </p>
 
             <nav className="hch-hero-pro-links" aria-label="Professional audiences">
+              <span className="hch-hero-pro-label">For professionals:</span>
               <Link href="/lenders">Lenders</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>
-                ·
-              </span>
+              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/legal-practices">Legal</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>
-                ·
-              </span>
+              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/wealth-managers">Wealth</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>
-                ·
-              </span>
+              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/appraisers">Appraisers</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>
-                ·
-              </span>
+              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/accounting-firms">Accounting</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>
-                ·
-              </span>
-              <Link href="/financial-accounting">Financial &amp; accounting</Link>
+              <span className="hch-hero-pro-sep" aria-hidden>·</span>
+              <Link href="/financial-accounting">Finance</Link>
             </nav>
           </div>
         </div>

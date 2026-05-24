@@ -1,34 +1,19 @@
-"use client";
+import type { Metadata } from "next";
+import { AboutPageClient } from "./AboutPageClient";
 
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
-import "./about-page.css";
+const title = "About Forhemit | Employee Ownership Succession";
+const description =
+  "Forhemit is a California Public Benefit Corporation helping founder-led businesses transition to 100% employee ownership through ESOP structuring and post-close stewardship.";
 
-// Section components
-import { HeroSection } from "./_components/sections/HeroSection";
-import { MissionSection } from "./_components/sections/MissionSection";
-import { EvolutionSection } from "./_components/sections/EvolutionSection";
-import { WhyWeExistSection } from "./_components/sections/WhyWeExistSection";
-import { PBCSection } from "./_components/sections/PBCSection";
-import { FAQSection } from "./_components/sections/FAQSection";
-import { CTASection } from "./_components/sections/CTASection";
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+};
 
 export default function AboutPage() {
-  // Initialize scroll reveal animations
-  useGlobalScrollReveal();
-
-  return (
-    <div className="about-wrapper">
-      <div className="about-background"></div>
-
-      <main className="about-main">
-        <HeroSection />
-        <PBCSection />
-        <MissionSection />
-        <EvolutionSection />
-        <WhyWeExistSection />
-        <FAQSection />
-        <CTASection />
-      </main>
-    </div>
-  );
+  return <AboutPageClient />;
 }

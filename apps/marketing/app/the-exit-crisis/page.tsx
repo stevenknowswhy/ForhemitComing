@@ -1,34 +1,19 @@
-"use client";
+import type { Metadata } from "next";
+import { TheExitCrisisPageClient } from "./TheExitCrisisPageClient";
 
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
+const title = "The Exit Crisis | Why Founders Need a Succession Plan";
+const description =
+  "With 50 sellers for every qualified buyer and 30-40% of businesses never selling, founders need a real succession path. Explore the exit crisis and employee ownership alternative.";
 
-// Import styles from about page since we're using the same CSS classes
-import "../about/about-page.css";
-
-// Section components
-import {
-  HeroSection,
-  CrisesSection,
-  TheComingDisasterSection,
-  ProblemSolutionSection,
-  SolutionsSection,
-} from "./_components/sections";
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+};
 
 export default function TheExitCrisisPage() {
-  // Initialize scroll reveal animations
-  useGlobalScrollReveal();
-
-  return (
-    <div className="about-wrapper">
-      <div className="about-background"></div>
-
-      <main className="about-main">
-        <HeroSection />
-        <CrisesSection />
-        <TheComingDisasterSection />
-        <ProblemSolutionSection />
-        <SolutionsSection />
-      </main>
-    </div>
-  );
+  return <TheExitCrisisPageClient />;
 }

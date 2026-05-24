@@ -1,33 +1,19 @@
-"use client";
+import type { Metadata } from "next";
+import { FAQPageClient } from "./FAQPageClient";
 
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
-import "../about/about-page.css";
-import "./faq-page.css";
+const title = "Frequently Asked Questions | ESOP Succession";
+const description =
+  "Common questions about ESOP structuring, employee ownership transitions, Section 1042 tax deferral, and Forhemit's post-close stewardship model.";
 
-import {
-  HeroSection,
-  IntroSection,
-  ComparisonSection,
-  FAQSections,
-  ValuePropositionsSection,
-  CTASection,
-} from "./_components/sections";
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+  },
+};
 
 export default function FAQPage() {
-  useGlobalScrollReveal();
-
-  return (
-    <div className="about-wrapper">
-      <div className="about-background"></div>
-
-      <main className="about-main">
-        <HeroSection />
-        <IntroSection />
-        <ComparisonSection />
-        <FAQSections />
-        <ValuePropositionsSection />
-        <CTASection />
-      </main>
-    </div>
-  );
+  return <FAQPageClient />;
 }
