@@ -39,27 +39,38 @@ export function HomeClient() {
     setShowEmailInput(earlyParam === "true");
   }, [joinParam, earlyParam]);
 
+  // Hide the server-rendered static content once client hydrates
+  useEffect(() => {
+    const serverRendered = document.querySelector("[data-ssr-fallback]");
+    if (serverRendered) {
+      (serverRendered as HTMLElement).style.display = "none";
+    }
+  }, []);
+
   return (
-    <div className="home-wrapper">
-      <div className="background-mesh"></div>
+    <>
+      {/* Interactive version: replaces static content on hydration */}
+      <div className="home-wrapper home-wrapper--interactive">
+        <div className="background-mesh" />
 
-      <HomeHeroSection
-        onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)}
-        onStartIntake={(role) => {
-          setClassificationRole(role);
-          setShowClassificationIntake(true);
-        }}
-      />
+        <HomeHeroSection
+          onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)}
+          onStartIntake={(role) => {
+            setClassificationRole(role);
+            setShowClassificationIntake(true);
+          }}
+        />
 
-      <HomePersuasionSections onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)} />
+        <HomePersuasionSections onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)} />
 
-      {showEmailInput && (
-        <section className="home-inline-early" aria-label="Early access">
-          <ClientOnly fallback={<div style={{ height: "48px" }} />}>
-            <EarlyAccessForm variant="inline" onClose={() => setShowEmailInput(false)} />
-          </ClientOnly>
-        </section>
-      )}
+        {showEmailInput && (
+          <section className="home-inline-early" aria-label="Early access">
+            <ClientOnly fallback={<div style={{ height: "48px" }} />}>
+              <EarlyAccessForm variant="inline" onClose={() => setShowEmailInput(false)} />
+            </ClientOnly>
+          </section>
+        )}
+      </div>
 
       <ClientOnly fallback={null}>
         {showApplicationModal && (
@@ -95,6 +106,6 @@ export function HomeClient() {
           </Suspense>
         )}
       </ClientOnly>
-    </div>
+    </>
   );
 }

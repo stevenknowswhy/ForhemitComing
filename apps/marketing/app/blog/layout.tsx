@@ -9,8 +9,8 @@ import './blog-globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Blog | Forhemit PBC',
-    template: '%s | Forhemit PBC',
+    default: 'Blog | Forhemit',
+    template: '%s | Forhemit',
   },
   description: 'Institutional intelligence for business transitions and legacy preservation.',
 };

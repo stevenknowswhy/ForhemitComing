@@ -43,19 +43,19 @@ const baseUrl = env.NEXT_PUBLIC_SITE_URL ?? 'https://www.forhemit.com';
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Forhemit | California Public Benefit Corporation',
+    default: 'Forhemit | 100% Employee Ownership Succession for Founder-Led Businesses',
     template: '%s | Forhemit',
   },
   description:
-    'Forhemit helps founder-led businesses pursue 100% employee-ownership succession with ESOP structuring and post-close stewardship support.',
+    'Transition your business to 100% employee ownership. Preserve your legacy, unlock Section 1042 tax benefits, and steward your company\'s future with Forhemit.',
   keywords: [
-    'ESOP',
-    'employee ownership',
-    'California public benefit corporation',
-    'business transition',
-    'company stewardship',
-    'business continuity',
-    'Section 1042',
+    'ESOP succession',
+    'employee ownership transition',
+    'Section 1042 tax deferral',
+    'founder exit planning',
+    'business succession',
+    'employee ownership trust',
+    'ESOP structuring',
   ],
   authors: [{ name: 'Forhemit PBC' }],
   creator: 'Forhemit PBC',
@@ -81,8 +81,8 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: baseUrl,
     siteName: 'Forhemit PBC',
-    title: 'Forhemit | Founder Exit and ESOP Succession',
-    description: 'Founder succession through employee ownership, with ESOP structuring and post-close stewardship support.',
+    title: 'Forhemit | 100% Employee Ownership Succession',
+    description: 'Transition your business to 100% employee ownership. Preserve your legacy and unlock Section 1042 tax benefits.',
     images: [
       {
         url: `${baseUrl}/og-image.png`,
@@ -94,8 +94,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Forhemit | Founder Exit and ESOP Succession',
-    description: 'Founder succession through employee ownership, with ESOP structuring and post-close stewardship support.',
+    title: 'Forhemit | 100% Employee Ownership Succession',
+    description: 'Transition your business to 100% employee ownership. Preserve your legacy and unlock Section 1042 tax benefits.',
     images: [`${baseUrl}/og-image.png`],
     creator: '@forhemit',
   },
