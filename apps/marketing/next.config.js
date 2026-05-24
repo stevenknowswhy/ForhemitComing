@@ -30,10 +30,14 @@ const nextConfig = {
         source: '/(.*)',
         headers: [
           {
+            key: 'Link',
+            value: linkHeaders.join(', '),
+          },
+          {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://uploadthing.com https://cdn.jsdelivr.net",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://uploadthing.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
               "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net",
               "img-src 'self' data: https: blob:",
@@ -72,3 +76,15 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
+// Link headers for agent discovery (RFC 8288)
+const linkHeaders = [
+  '</.well-known/api-catalog>; rel="api-catalog"',
+  '</.well-known/openid-configuration>; rel="openid-configuration"',
+  '</.well-known/oauth-authorization-server>; rel="oauth-authorization-server"',
+  '</.well-known/oauth-protected-resource>; rel="oauth-protected-resource"',
+  '</.well-known/mcp.json>; rel="mcp"',
+  '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+  '</.well-known/agent-card.json>; rel="agent-card"',
+  '</.well-known/agent-skills/index.json>; rel="agent-skills"',
+];
