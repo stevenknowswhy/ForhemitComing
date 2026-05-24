@@ -42,6 +42,15 @@ body {
   isolation: isolate;
 }
 
+/* SSR: hide static fallback content once client-side interactive version loads */
+[data-ssr-fallback] {
+  display: contents;
+}
+
+.home-wrapper--interactive ~ [data-ssr-fallback] {
+  display: none;
+}
+
 /* Early access below classification hero */
 .home-inline-early {
   position: relative;
