@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — First Day as an ESOP</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">First Day as an ESOP</div>
+  <div class="dst">Employee Town Hall Agenda &amp; FAQ</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Announcement Date</div><div class="cvc-v">{{announcementDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Location</div><div class="cvc-v">{{location}}</div></div>
+    <div class="cvc"><div class="cvc-l">Attendees</div><div class="cvc-v">All eligible employees</div></div>
+  </div>
+
+  <!-- § 01 Meeting Agenda -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Meeting Agenda</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Welcome &amp; Opening Remarks</strong> — {{presenterName}}, CEO/Owner <span style="color:var(--muted);font-size:0.72rem;">(5 min)</span></span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>What Happened Today</strong> — ESOP announcement: the company is now employee-owned <span style="color:var(--muted);font-size:0.72rem;">(5 min)</span></span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>What Is an ESOP?</strong> — Plain-language explanation of employee stock ownership plans <span style="color:var(--muted);font-size:0.72rem;">(10 min)</span></span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>What This Means for You</strong> — Ownership stake, retirement benefits, how value grows over time <span style="color:var(--muted);font-size:0.72rem;">(10 min)</span></span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>How It Works Day-to-Day</strong> — No changes to your job, reporting, or daily responsibilities <span style="color:var(--muted);font-size:0.72rem;">(5 min)</span></span></div>
+      <div class="si"><span class="si-n">6.</span><span><strong>Q&amp;A</strong> — Open floor for employee questions <span style="color:var(--muted);font-size:0.72rem;">(15 min)</span></span></div>
+      <div class="si"><span class="si-n">7.</span><span><strong>Next Steps &amp; Closing</strong> — What to expect next, who to contact with questions <span style="color:var(--muted);font-size:0.72rem;">(5 min)</span></span></div>
+    </div>
+    <div class="co"><strong>Total Duration:</strong> Approximately 55 minutes. Adjust timing based on group size and Q&amp;A engagement.</div>
+  </div></div>
+
+  <!-- § 02 Key Messages to Convey -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Key Messages to Convey</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>You are now an owner.</strong> {{companyName}} is 100% employee-owned through the ESOP trust. Every eligible employee has a stake in the company's success.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Your job is not changing.</strong> The ESOP does not affect your role, manager, daily responsibilities, or how the company operates.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>This costs you nothing.</strong> You do not pay anything for your ESOP shares. The company funds the plan entirely.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Your ownership grows over time.</strong> The longer you stay, the more shares you accumulate. Vesting begins immediately.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>This is a retirement benefit.</strong> The ESOP is a qualified retirement plan. Your shares are held in a trust and distributed when you retire or leave.</span></div>
+      <div class="si"><span class="si-n">F.</span><span><strong>The company remains independent.</strong> There is no outside buyer. The management team stays in place. {{companyName}} will continue to operate as it always has.</span></div>
+    </div>
+  </div></div>
+
+  <!-- § 03 Employee FAQ -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Employee FAQ</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">Q.</span><span><strong>"Do I have to buy stock?"</strong><br>No. The ESOP is funded entirely by the company. You receive ownership shares at no cost to you.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"Is my job changing?"</strong><br>No. The ESOP does not change your role, your manager, your pay, or your daily responsibilities. The company continues to operate the same way.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"When do I get money?"</strong><br>Your shares are allocated over time according to the vesting schedule. You receive distributions when you retire or leave the company, subject to plan rules.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"What if the company is sold?"</strong><br>An independent trustee protects your interests. If the company is ever sold, you would receive the fair market value of your vested shares.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"Do I get to vote?"</strong><br>In most cases, the trustee votes on your behalf. You may have the right to vote on limited fiduciary matters as specified in the plan document.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"What happens if I leave the company?"</strong><br>You are entitled to the value of your vested shares. Distributions are made according to the plan's rules, which may include a waiting period.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"Is this like stock options?"</strong><br>No. An ESOP is a qualified retirement plan, not a stock option program. You do not exercise options or pay anything to participate.</span></div>
+      <div class="si"><span class="si-n">Q.</span><span><strong>"How much is my share worth?"</strong><br>The value of your shares is determined by an independent annual valuation. You will receive a statement each year showing your account balance.</span></div>
+    </div>
+  </div></div>
+
+  <!-- § 04 Facilitator Notes -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Facilitator Notes</span></div><div class="sb">
+    <p>This meeting sets the tone for the company's employee ownership culture. Use these guidelines to deliver an effective session:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Speak plainly.</strong> Avoid ESOP jargon. Use simple language. Employees don't need to understand ERISA or trust mechanics — they need to understand that they own part of the company now.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Don't overpromise on value.</strong> Be honest that share values can go up or down. Do not make guarantees about how much employees will receive. This is a long-term benefit, not a lottery ticket.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Acknowledge uncertainty.</strong> It's okay to say "I don't know" or "That's a great question — let me get back to you." Employees respect honesty more than guessing.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Celebrate the milestone.</strong> This is a once-in-a-company event. Recognize what it means for the team. The company chose employees over outside buyers — that's worth celebrating.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Direct complex questions to the ESOP Committee.</strong> For questions about specific account balances, tax implications, or plan mechanics, refer employees to the ESOP committee or plan administrator. Don't improvise financial or legal answers.</span></div>
+    </div>
+    <div class="co"><strong>Remember:</strong> The goal is to make employees feel informed, valued, and confident — not to turn them into ESOP experts. Keep it simple, keep it honest, and celebrate the moment.</div>
+  </div></div>
+
+  <!-- Signature Block -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For internal and employee use only.</div>
+  </div>
+</div>
+
+</body>
+</html>

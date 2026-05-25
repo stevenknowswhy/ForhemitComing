@@ -172,6 +172,18 @@ export function CompanyModal({ company, initialDate, onSave, onClose }: CompanyM
             </FormField>
           </div>
 
+          {/* Expected Close Date */}
+          <div className="crm-form-row">
+            <FormField label="Expected Close Date">
+              <input
+                type="date"
+                value={formData.expectedCloseDate}
+                onChange={(e) => handleChange("expectedCloseDate", e.target.value)}
+              />
+            </FormField>
+            <div /> {/* spacer for grid alignment */}
+          </div>
+
           {/* Notes */}
           <FormField label="Notes / Activity" className="crm-form-field full-width">
             <textarea

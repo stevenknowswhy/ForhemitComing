@@ -1,0 +1,22 @@
+{
+  "files": {
+    "app/admin/crm/hooks/useCrmCompanies.ts": {
+      "modifiedRanges": [
+        {
+          "start": 57,
+          "end": 57
+        },
+        {
+          "start": 84,
+          "end": 84
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T20:24:04.952Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-25T20:24:04.952Z",
+  "sessionId": "lens-mpliwwvb-4f8a6f91"
+}

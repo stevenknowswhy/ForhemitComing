@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Id, Doc } from "@/convex/_generated/dataModel";
 import { Company } from "../types";
 import { useCrmCompany, useCrmActivities, useCrmContacts } from "../hooks";
+import { DealSummary } from "./DealSummary";
 
 // ============================================
 // Company Detail Panel Component
@@ -88,6 +89,9 @@ export function CompanyDetailPanel({ companyId, onClose, onEdit }: CompanyDetail
           </div>
         </Section>
 
+        {/* Deal Engine */}
+        <DealSummary company={company} />
+
         {/* Contact Info */}
         <Section title="Contact Information">
           <div className="grid grid-cols-2 gap-4">
@@ -121,16 +125,24 @@ export function CompanyDetailPanel({ companyId, onClose, onEdit }: CompanyDetail
         </Section>
 
         {/* Next Step */}
-        {company.nextStep && (
+        {(company.nextStep || company.expectedCloseDate) && (
           <Section title="Next Step">
-            <div className="bg-[var(--surface2)] border border-[var(--border)] rounded-md p-3">
-              <div className="text-[var(--text)] mb-1.5 text-[14px]">{company.nextStep}</div>
-              {company.nextStepDate && (
-                <div className="text-[11px] text-[var(--text3)]">
-                  Due: {company.nextStepDate}
-                </div>
-              )}
-            </div>
+            {company.nextStep && (
+              <div className="bg-[var(--surface2)] border border-[var(--border)] rounded-md p-3">
+                <div className="text-[var(--text)] mb-1.5 text-[14px]">{company.nextStep}</div>
+                {company.nextStepDate && (
+                  <div className="text-[11px] text-[var(--text3)]">
+                    Due: {company.nextStepDate}
+                  </div>
+                )}
+              </div>
+            )}
+            {company.expectedCloseDate && (
+              <div className="bg-[var(--surface2)] border border-[var(--border)] rounded-md p-3 mt-2">
+                <div className="text-[11px] text-[var(--text3)]">Expected Close Date</div>
+                <div className="text-[var(--text)] text-[14px]">{company.expectedCloseDate}</div>
+              </div>
+            )}
           </Section>
         )}
 

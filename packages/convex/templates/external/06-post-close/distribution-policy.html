@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — ESOP Distribution Policy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">ESOP Distribution Policy</div>
+  <div class="dst">Rules Governing Participant Distributions</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Effective Date</div><div class="cvc-v">{{effectiveDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Approved By</div><div class="cvc-v">{{approvedBy}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Purpose &amp; Scope</span></div><div class="sb">
+    <p>This Distribution Policy establishes the rules governing distributions from the {{companyName}} Employee Stock Ownership Plan (the &ldquo;Plan&rdquo;) to participants. This policy applies to all vested participants who separate from service with the Company, whether through retirement, disability, death, or voluntary or involuntary termination.</p>
+    <p>This policy governs the timing, method, and form of distributions and is intended to comply with the Employee Retirement Income Security Act of 1974 (&ldquo;ERISA&rdquo;) and the Internal Revenue Code (&ldquo;IRC&rdquo;). All distributions are subject to the terms of the Plan document and this policy.</p>
+    <div class="co"><strong>Plan document control:</strong> In the event of any conflict between this policy and the Plan document, the Plan document shall govern. This policy is intended as an administrative guide for participants and the Plan Administrator.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Eligibility</span></div><div class="sb">
+    <p>Distributions are available to participants who meet all of the following criteria:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Separation from service.</strong> The participant has separated from service with the Company due to retirement, disability, death, voluntary termination, or involuntary termination.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Vesting.</strong> The participant&apos;s account is fully vested in accordance with the vesting schedule described in Section 03 below. Unvested portions are forfeited upon separation.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Plan year.</strong> The participant&apos;s account balance has been allocated for the plan year in which separation occurs, subject to the allocation requirements in the Plan document.</span></div>
+    </div>
+    <div class="co"><strong>Note:</strong> Hardship distributions are not permitted from the ESOP. Participants experiencing financial hardship should consult with a tax advisor regarding other available options.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Vesting Schedule</span></div><div class="sb">
+    <p>Participants vest in their ESOP accounts according to the following schedule:</p>
+    <div class="fr"><label>Vesting type</label><span style="flex:1;">{{vestingType}}</span></div>
+    <div class="fr"><label>Cliff period</label><span style="flex:1;">{{cliffPeriod}}</span></div>
+    <div class="fr"><label>Graded schedule</label><span style="flex:1;">{{gradedSchedule}}</span></div>
+    <div class="fr"><label>Full vesting at</label><span style="flex:1;">{{fullVestingYears}} years of service</span></div>
+    <div class="fr"><label>Accelerated vesting</label><span style="flex:1;">{{acceleratedVestingTrigger}}</span></div>
+    <div class="co"><strong>Important:</strong> Participants who separate before becoming fully vested will forfeit the unvested portion of their account. Forfeitures are reallocated to remaining participants in accordance with the Plan document.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Distribution Timing</span></div><div class="sb">
+    <p>Distributions are made in accordance with the following timing rules:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Waiting period.</strong> Distributions begin no earlier than {{distributionWaitingPeriod}} after the date of separation from service, as required by the Plan document.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Installment option.</strong> Participants may elect to receive distributions in substantially equal annual installments over a period of up to {{maxInstallmentYears}} years.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Lump sum option.</strong> Participants may elect to receive their entire vested account balance in a single lump sum distribution.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Distribution window.</strong> Distributions are processed annually during the month of {{distributionWindowMonth}}. Requests received after the processing deadline will be included in the next annual distribution.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Required minimum distributions.</strong> Participants who reach age 73 (or such other age as required by law) must begin receiving required minimum distributions regardless of separation status.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Distribution Methods</span></div><div class="sb">
+    <p>The Plan provides the following distribution methods:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Cash distributions.</strong> The Company purchases shares from the ESOP trust at the current fair market value, and the trust distributes cash to the participant. This is the standard distribution method for all participants.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Installment payments.</strong> Participants who elect the installment option receive annual cash payments calculated by dividing the vested account balance by the number of remaining installments, adjusted for investment performance.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>In-kind stock distribution.</strong> Not available. As a privately held company, all distributions are made in cash.</span></div>
+    </div>
+    <div class="co"><strong>Note:</strong> The Company&apos;s repurchase obligation to fund cash distributions is a material financial commitment. The Company maintains a repurchase obligation reserve to ensure sufficient liquidity to meet distribution obligations.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Diversification Rights</span></div><div class="sb">
+    <p>Participants who meet the eligibility requirements below may elect to diversify a portion of their ESOP account in accordance with ERISA &sect;404(c):</p>
+    <div class="fr"><label>Eligibility</label><span style="flex:1;">10 years of plan participation AND age 55 or older</span></div>
+    <div class="fr"><label>Years 10&#8211;11</label><span style="flex:1;">Up to 25% of account balance may be diversified</span></div>
+    <div class="fr"><label>Year 12 and beyond</label><span style="flex:1;">Up to 50% of account balance may be diversified</span></div>
+    <div class="fr"><label>Election window</label><span style="flex:1;">90 days following delivery of annual account statement</span></div>
+    <div class="fr"><label>Investment options</label><span style="flex:1;">{{diversificationOptions}}</span></div>
+    <p>Diversification elections are irrevocable for the applicable plan year. Participants who do not make an election within the 90-day window forfeit diversification rights for that year. Diversified amounts remain in the Plan but are invested in the selected alternatives.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Valuation of Shares</span></div><div class="sb">
+    <p>The fair market value (&ldquo;FMV&rdquo;) of Company stock held in the ESOP is determined as follows:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Annual appraisal.</strong> FMV is determined annually by an independent, qualified appraiser selected by the Plan Trustee. The appraisal is conducted in accordance with IRS Revenue Ruling 59-60 and applicable ERISA requirements.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Distribution value.</strong> The value used for distributions is based on the most recent annual appraisal completed prior to the distribution date.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Interim valuation.</strong> An interim valuation may be obtained for distributions exceeding {{interimValuationThreshold}} at the discretion of the Plan Trustee.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Statement delivery.</strong> Participants receive an annual account statement within {{statementDeliveryDays}} days of the annual valuation date, reflecting their vested account balance and diversification rights.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Tax Implications</span></div><div class="sb">
+    <p>Participants should be aware of the following tax considerations:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Ordinary income.</strong> ESOP distributions are taxed as ordinary income in the year received, regardless of whether received as a lump sum or in installments.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Early withdrawal penalty.</strong> An additional 10% tax applies to distributions made before age 59&frac12;, unless an exception applies (separation from service after age 55, disability, or substantially equal periodic payments).</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Rollover options.</strong> Participants may roll over eligible distributions to an Individual Retirement Account (&ldquo;IRA&rdquo;) or another qualified plan on a tax-deferred basis. Direct rollover elections must be made on the distribution election form.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>&sect;1042 rollover.</strong> The selling shareholder who elected &sect;1042 treatment at the time of the ESOP transaction should consult with their tax advisor regarding any implications for distributions from the Plan.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Withholding.</strong> Federal income tax withholding of 20% is mandatory on eligible rollover distributions not directly rolled over. State withholding may also apply.</span></div>
+    </div>
+    <div class="co"><strong>Tax advice:</strong> Forhemit does not provide tax advice. Participants should consult with a qualified tax professional regarding their individual circumstances.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Administrative Procedures</span></div><div class="sb">
+    <p>To request a distribution, participants must complete the following steps:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Distribution request.</strong> The participant submits a completed Distribution Request Form to the Plan Administrator. Forms are available from the Plan Administrator or the Company&apos;s HR department.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Rollover election.</strong> If applicable, the participant completes a Direct Rollover Election Form specifying the receiving institution and account.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Tax withholding election.</strong> The participant completes a Tax Withholding Election Form. Federal withholding is mandatory at 20% for eligible rollover distributions not directly rolled over.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Processing time.</strong> Distribution requests are processed within {{processingDays}} business days of receipt of all required documentation.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Payment method.</strong> Distributions are made by check mailed to the participant&apos;s address on file or by direct deposit to the participant&apos;s designated bank account.</span></div>
+    </div>
+    <div class="co"><strong>Questions:</strong> For questions regarding distributions, contact the Plan Administrator at {{planAdministratorEmail}} or {{planAdministratorPhone}}.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Plan Administrator / Trustee Approval</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Plan Administrator<br><span style="font-size:0.78rem;color:var(--muted);">{{companyName}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">ESOP Trustee<br><span style="font-size:0.78rem;color:var(--muted);">{{trusteeName}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For internal review and participant reference.</div>
+  </div>
+</div>
+
+</body>
+</html>

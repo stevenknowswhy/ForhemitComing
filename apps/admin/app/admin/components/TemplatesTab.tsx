@@ -42,12 +42,12 @@ export default function TemplatesTab() {
   }, [templates, seeded, forceSeedAll]);
 
   // Filter out the Template Builder Guide from the cards
-  const baseTemplates = templates?.filter((t) => t.slug !== "template-builder-guide") ?? [];
+  const baseTemplates = templates?.filter((t: any) => t.slug !== "template-builder-guide") ?? [];
   
   // Extract unique categories for filter dropdown
   const categories = useMemo(() => {
     const cats = new Set<string>();
-    baseTemplates.forEach((t) => {
+    baseTemplates.forEach((t: any) => {
       if (t.category) cats.add(t.category);
     });
     return Array.from(cats).sort();
@@ -55,7 +55,7 @@ export default function TemplatesTab() {
   
   // Filter templates based on search and filters
   const templateCards = useMemo(() => {
-    return baseTemplates.filter((template) => {
+    return baseTemplates.filter((template: any) => {
       // Search filter (name, description, slug)
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
@@ -220,7 +220,7 @@ export default function TemplatesTab() {
       {/* Template Cards */}
       {templateCards.length > 0 ? (
         <div className="templates-grid">
-          {templateCards.map((template) => (
+          {templateCards.map((template: any) => (
             <div key={template._id} className="template-card">
               <div className="template-card-header">
                 <div className="template-card-badge">
