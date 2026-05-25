@@ -3,6 +3,7 @@ import { action, mutation, query } from "./_generated/server";
 import { api } from "./_generated/api";
 import { sendEmail } from "./emailCore";
 import { fillTemplate } from "./templateRenderer";
+import { requireAuth } from "./lib/requireAuth";
 
 // ============================================
 // Helpers
@@ -10,39 +11,41 @@ import { fillTemplate } from "./templateRenderer";
 
 /** Template placeholder replacement - uses shared templateRenderer utility */
 
-
 // ============================================
 // Queries
 // ============================================
 
 /** Get a template by ID from the templates table (includes content) */
 export const getTemplate = query({
-  args: { templateId: v.id("templates") },
-  handler: async (ctx, args) => {
-    return await ctx.db.get(args.templateId);
-  },
+	args: { templateId: v.id("templates") },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db.get(args.templateId);
+	},
 });
 
 /** Find template by title */
 export const getTemplateByTitle = query({
-  args: { title: v.string() },
-  handler: async (ctx, args) => {
-    return await ctx.db
-      .query("templates")
-      .filter((q) => q.eq(q.field("title"), args.title))
-      .first();
-  },
+	args: { title: v.string() },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db
+			.query("templates")
+			.filter((q) => q.eq(q.field("title"), args.title))
+			.first();
+	},
 });
 
 /** Get templates required at a given lifecycle stage */
 export const getStageRequirements = query({
-  args: { stage: v.string() },
-  handler: async (ctx, args) => {
-    return await ctx.db
-      .query("stageRequirements")
-      .withIndex("by_stage", (q) => q.eq("stage", args.stage))
-      .collect();
-  },
+	args: { stage: v.string() },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db
+			.query("stageRequirements")
+			.withIndex("by_stage", (q) => q.eq("stage", args.stage))
+			.collect();
+	},
 });
 
 // ============================================
@@ -51,102 +54,106 @@ export const getStageRequirements = query({
 
 /** Seed or update HTML content for a template */
 export const seedTemplateContent = mutation({
-  args: {
-    templateId: v.id("templates"),
-    content: v.string(),
-  },
-  handler: async (ctx, args) => {
-    await ctx.db.patch(args.templateId, {
-      content: args.content,
-      updatedAt: Date.now(),
-    });
-    return { success: true };
-  },
+	args: {
+		templateId: v.id("templates"),
+		content: v.string(),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		await ctx.db.patch(args.templateId, {
+			content: args.content,
+			updatedAt: Date.now(),
+		});
+		return { success: true };
+	},
 });
 
 /** Find a template by title, or create it, then set its HTML content */
 export const findOrCreateAndSeed = mutation({
-  args: {
-    title: v.string(),
-    content: v.string(),
-    lifecycleStage: v.string(),
-    audience: v.array(v.string()),
-    category: v.union(
-      v.literal("document"),
-      v.literal("communication"),
-      v.literal("meeting"),
-      v.literal("internal")
-    ),
-    description: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    const existing = await ctx.db
-      .query("templates")
-      .filter((q) => q.eq(q.field("title"), args.title))
-      .first();
+	args: {
+		title: v.string(),
+		content: v.string(),
+		lifecycleStage: v.string(),
+		audience: v.array(v.string()),
+		category: v.union(
+			v.literal("document"),
+			v.literal("communication"),
+			v.literal("meeting"),
+			v.literal("internal"),
+		),
+		description: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		const existing = await ctx.db
+			.query("templates")
+			.filter((q) => q.eq(q.field("title"), args.title))
+			.first();
 
-    if (existing) {
-      await ctx.db.patch(existing._id, {
-        content: args.content,
-        updatedAt: Date.now(),
-      });
-      return { id: existing._id, action: "updated" as const };
-    }
+		if (existing) {
+			await ctx.db.patch(existing._id, {
+				content: args.content,
+				updatedAt: Date.now(),
+			});
+			return { id: existing._id, action: "updated" as const };
+		}
 
-    const id = await ctx.db.insert("templates", {
-      title: args.title,
-      source: "communications",
-      category: args.category,
-      lifecycleStage: args.lifecycleStage,
-      audience: args.audience,
-      status: "exists",
-      isRequired: true,
-      isRecurring: false,
-      requiresSignature: false,
-      content: args.content,
-      description: args.description || "",
-      version: 1,
-      createdAt: Date.now(),
-      updatedAt: Date.now(),
-    });
-    return { id, action: "created" as const };
-  },
+		const id = await ctx.db.insert("templates", {
+			title: args.title,
+			source: "communications",
+			category: args.category,
+			lifecycleStage: args.lifecycleStage,
+			audience: args.audience,
+			status: "exists",
+			isRequired: true,
+			isRecurring: false,
+			requiresSignature: false,
+			content: args.content,
+			description: args.description || "",
+			version: 1,
+			createdAt: Date.now(),
+			updatedAt: Date.now(),
+		});
+		return { id, action: "created" as const };
+	},
 });
 
 /** Update a workflowTask after successful send */
 export const markWorkflowTaskSent = mutation({
-  args: {
-    workflowTaskId: v.id("workflowTasks"),
-    resendId: v.string(),
-  },
-  handler: async (ctx, args) => {
-    await ctx.db.patch(args.workflowTaskId, {
-      status: "sent" as const,
-      sentAt: Date.now(),
-      resendId: args.resendId,
-    });
-  },
+	args: {
+		workflowTaskId: v.id("workflowTasks"),
+		resendId: v.string(),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		await ctx.db.patch(args.workflowTaskId, {
+			status: "sent" as const,
+			sentAt: Date.now(),
+			resendId: args.resendId,
+		});
+	},
 });
 
 /** Log a generated document */
 export const logGeneratedDocument = mutation({
-  args: {
-    templateId: v.id("templates"),
-    templateName: v.string(),
-    templateVersion: v.number(),
-    formData: v.string(),
-    generatedBy: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    await ctx.db.insert("generatedDocuments", {
-      templateId: args.templateId as any,
-      templateName: args.templateName,
-      formData: args.formData,
-      action: "pdf-download-server" as const,
-      generatedBy: args.generatedBy,
-      createdAt: Date.now(),
-    });
-  },
+	args: {
+		templateId: v.id("templates"),
+		templateName: v.string(),
+		templateVersion: v.number(),
+		formData: v.string(),
+		generatedBy: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		await ctx.db.insert("generatedDocuments", {
+			templateId: args.templateId as any,
+			templateName: args.templateName,
+			formData: args.formData,
+			action: "pdf-download-server" as const,
+			generatedBy: args.generatedBy,
+			createdAt: Date.now(),
+		});
+	},
 });
 
 // ============================================
@@ -165,70 +172,89 @@ export const logGeneratedDocument = mutation({
  * 6. Update workflowTask status → "sent" (if linked)
  */
 export const generateAndSendDocument = action({
-  args: {
-    templateId: v.id("templates"),
-    to: v.string(),
-    subject: v.string(),
-    data: v.record(v.string(), v.string()),
-    workflowTaskId: v.optional(v.id("workflowTasks")),
-    htmlBody: v.optional(v.string()),
-    generatedBy: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    const { templateId, to, subject, data, workflowTaskId, htmlBody, generatedBy } = args;
+	args: {
+		templateId: v.id("templates"),
+		to: v.string(),
+		subject: v.string(),
+		data: v.record(v.string(), v.string()),
+		workflowTaskId: v.optional(v.id("workflowTasks")),
+		htmlBody: v.optional(v.string()),
+		generatedBy: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const {
+			templateId,
+			to,
+			subject,
+			data,
+			workflowTaskId,
+			htmlBody,
+			generatedBy,
+		} = args;
 
-    // 1. Read template from templates table (not documentTemplates)
-    const template = await ctx.runQuery("documentPipeline:getTemplate" as any, { templateId });
-    if (!template) throw new Error(`Template ${templateId} not found`);
-    if (!template.content) throw new Error(`Template "${template.title}" has no HTML content`);
+		// 1. Read template from templates table (not documentTemplates)
+		const template = await ctx.runQuery("documentPipeline:getTemplate" as any, {
+			templateId,
+		});
+		if (!template) throw new Error(`Template ${templateId} not found`);
+		if (!template.content)
+			throw new Error(`Template "${template.title}" has no HTML content`);
 
-    // 2. Fill placeholders
-    const filledHtml = fillTemplate(template.content, data);
+		// 2. Fill placeholders
+		const filledHtml = fillTemplate(template.content, data);
 
-    // 3. Generate PDF
-    const pdfResult: any = await ctx.runAction(api.pdfGenerator.generatePdf, {
-      formData: data,
-      templateId: template._id,
-      templateName: template.title,
-      htmlContent: filledHtml,
-      mode: "full",
-    });
-    const pdfBase64 = pdfResult.pdfBase64;
+		// 3. Generate PDF
+		const pdfResult: any = await ctx.runAction(api.pdfGenerator.generatePdf, {
+			formData: data,
+			templateId: template._id,
+			templateName: template.title,
+			htmlContent: filledHtml,
+			mode: "full",
+		});
+		const pdfBase64 = pdfResult.pdfBase64;
 
-    // 4. Send email with PDF attachment
-    const emailResult = await sendEmail({
-      to,
-      subject,
-      html: htmlBody || `<p>Please find the attached document: <strong>${template.title}</strong></p>`,
-      attachments: [{
-        filename: `${template.title.replace(/[^a-zA-Z0-9-_ ]/g, "").replace(/\s+/g, "-")}.pdf`,
-        content: pdfBase64,
-      }],
-    });
+		// 4. Send email with PDF attachment
+		const emailResult = await sendEmail({
+			to,
+			subject,
+			html:
+				htmlBody ||
+				`<p>Please find the attached document: <strong>${template.title}</strong></p>`,
+			attachments: [
+				{
+					filename: `${template.title.replace(/[^a-zA-Z0-9-_ ]/g, "").replace(/\s+/g, "-")}.pdf`,
+					content: pdfBase64,
+				},
+			],
+		});
 
-    if (!emailResult.success) {
-      throw new Error(`Email send failed: ${emailResult.error}`);
-    }
+		if (!emailResult.success) {
+			throw new Error(`Email send failed: ${emailResult.error}`);
+		}
 
-    // 5. Log to generatedDocuments
-    await ctx.runMutation("documentPipeline:logGeneratedDocument" as any, {
-      templateId,
-      templateName: template.title,
-      templateVersion: template.version,
-      formData: JSON.stringify(data),
-      generatedBy,
-    });
+		// 5. Log to generatedDocuments
+		await ctx.runMutation("documentPipeline:logGeneratedDocument" as any, {
+			templateId,
+			templateName: template.title,
+			templateVersion: template.version,
+			formData: JSON.stringify(data),
+			generatedBy,
+		});
 
-    // 6. Update workflowTask if linked
-    if (workflowTaskId && emailResult.id) {
-      await ctx.runMutation("documentPipeline:markWorkflowTaskSent" as any, {
-        workflowTaskId,
-        resendId: emailResult.id,
-      });
-    }
+		// 6. Update workflowTask if linked
+		if (workflowTaskId && emailResult.id) {
+			await ctx.runMutation("documentPipeline:markWorkflowTaskSent" as any, {
+				workflowTaskId,
+				resendId: emailResult.id,
+			});
+		}
 
-    return { success: true, resendId: emailResult.id, templateVersion: template.version };
-  },
+		return {
+			success: true,
+			resendId: emailResult.id,
+			templateVersion: template.version,
+		};
+	},
 });
 
 /**
@@ -236,49 +262,65 @@ export const generateAndSendDocument = action({
  * Sequential calls — each is independently retryable.
  */
 export const generateStageDocuments = action({
-  args: {
-    stage: v.string(),
-    to: v.string(),
-    data: v.record(v.string(), v.string()),
-    generatedBy: v.optional(v.string()),
-  },
-  handler: async (ctx, args) => {
-    const { stage, to, data, generatedBy } = args;
+	args: {
+		stage: v.string(),
+		to: v.string(),
+		data: v.record(v.string(), v.string()),
+		generatedBy: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const { stage, to, data, generatedBy } = args;
 
-    const requirements = await ctx.runQuery("documentPipeline:getStageRequirements" as any, { stage });
+		const requirements = await ctx.runQuery(
+			"documentPipeline:getStageRequirements" as any,
+			{ stage },
+		);
 
-    const succeeded: string[] = [];
-    const failed: { templateId: string; error: string }[] = [];
+		const succeeded: string[] = [];
+		const failed: { templateId: string; error: string }[] = [];
 
-    for (const req of requirements) {
-      try {
-        const template = await ctx.runQuery("documentPipeline:getTemplate" as any, { templateId: req.templateId });
-        if (!template) {
-          failed.push({ templateId: req.templateId, error: "Template not found" });
-          continue;
-        }
-        if (!template.content) {
-          failed.push({ templateId: req.templateId, error: `Template "${template.title}" has no HTML content` });
-          continue;
-        }
+		for (const req of requirements) {
+			try {
+				const template = await ctx.runQuery(
+					"documentPipeline:getTemplate" as any,
+					{ templateId: req.templateId },
+				);
+				if (!template) {
+					failed.push({
+						templateId: req.templateId,
+						error: "Template not found",
+					});
+					continue;
+				}
+				if (!template.content) {
+					failed.push({
+						templateId: req.templateId,
+						error: `Template "${template.title}" has no HTML content`,
+					});
+					continue;
+				}
 
-        await ctx.runAction("documentPipeline:generateAndSendDocument" as any, {
-          templateId: req.templateId,
-          to,
-          subject: `Forhemit — ${template.title}`,
-          data,
-          generatedBy,
-        });
+				await ctx.runAction("documentPipeline:generateAndSendDocument" as any, {
+					templateId: req.templateId,
+					to,
+					subject: `Forhemit — ${template.title}`,
+					data,
+					generatedBy,
+				});
 
-        succeeded.push(template.title);
-      } catch (error) {
-        failed.push({
-          templateId: req.templateId,
-          error: error instanceof Error ? error.message : "Unknown error",
-        });
-      }
-    }
+				succeeded.push(template.title);
+			} catch (error) {
+				failed.push({
+					templateId: req.templateId,
+					error: error instanceof Error ? error.message : "Unknown error",
+				});
+			}
+		}
 
-    return { succeeded, failed, message: `${succeeded.length} sent, ${failed.length} failed` };
-  },
+		return {
+			succeeded,
+			failed,
+			message: `${succeeded.length} sent, ${failed.length} failed`,
+		};
+	},
 });
