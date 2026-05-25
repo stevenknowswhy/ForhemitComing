@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { api } from "./_generated/api";
 import { calculateStageTriggerDueDate } from "./stages";
 import { calculateGateTriggerDueDate } from "./gates";
 
@@ -125,8 +126,8 @@ export const wireTriggers = mutation({
       });
     }
 
-    // 2. Fire createTriggeredTasks inline (same mutation context)
-    const result = await createTriggeredTasks(ctx, {
+    // 2. Fire createTriggeredTasks via api
+    const result = await ctx.runMutation(api.triggers.createTriggeredTasks, {
       companyId: args.companyId,
       event: args.event,
       gateName: args.gateName,

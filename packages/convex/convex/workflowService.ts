@@ -21,13 +21,13 @@ export const shouldCreateWorkflowTask = async (
 ): Promise<boolean> => {
   const existing = await ctx.db
     .query("workflowTasks")
-    .withIndex("by_company_template", (q) =>
+    .withIndex("by_company_template", (q: any) =>
       q.eq("companyId", companyId).eq("templateId", templateId)
     );
 
   if (contactId) {
     const existingForContact = await existing
-      .filter((q) => q.eq(q.field("contactId"), contactId))
+      .filter((q: any) => q.eq(q.field("contactId"), contactId))
       .first();
     return !existingForContact;
   } else {
@@ -94,11 +94,11 @@ export const createWorkflowTasksForContacts = mutation({
     dueDate: v.number(),
     recurrenceRule: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ created: number; tasks: any[] }> => {
     const template = await ctx.db.get(args.templateId);
     if (!template) throw new Error("Template not found");
 
-    const createdTasks = [];
+    const createdTasks: any[] = [];
     const now = Date.now();
 
     for (const contactId of args.contactIds) {
@@ -110,7 +110,7 @@ export const createWorkflowTasksForContacts = mutation({
       );
 
       if (shouldCreate) {
-        const taskId = await ctx.runMutation(api.workflowService.createWorkflowTask, {
+        const taskId: any = await ctx.runMutation(api.workflowService.createWorkflowTask, {
           companyId: args.companyId,
           templateId: args.templateId,
           contactId,
