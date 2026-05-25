@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { action, mutation } from "./_generated/server";
+import { api } from "./_generated/api";
 
 // ============================================
 // Priority levels
@@ -115,7 +116,7 @@ export const notifyInboundEmail = action({
       args.preview,
     ].join("\n");
 
-    await ctx.runAction("notifications:notifyTelegram" as any, {
+    await ctx.runAction(api.notifications.notifyTelegram, {
       priority,
       title: `Inbound Email — ${inboxLabel}`,
       body,
@@ -152,7 +153,7 @@ export const notifyDealActivity = action({
       args.details ? `\n${args.details}` : "",
     ].join("\n");
 
-    await ctx.runAction("notifications:notifyTelegram" as any, {
+    await ctx.runAction(api.notifications.notifyTelegram, {
       priority,
       title: "Deal Activity",
       body,
@@ -185,7 +186,7 @@ export const notifyTaskOverdue = action({
       `**Days overdue:** ${daysOverdue}`,
     ].filter(Boolean).join("\n");
 
-    await ctx.runAction("notifications:notifyTelegram" as any, {
+    await ctx.runAction(api.notifications.notifyTelegram, {
       priority: daysOverdue > 7 ? "URGENT" : "HIGH",
       title: "Overdue Task",
       body,
@@ -204,7 +205,7 @@ export const sendDailyDigest = action({
   handler: async (ctx) => {
     // This would be called by a cron job
     // For now, just send a placeholder
-    await ctx.runAction("notifications:notifyTelegram" as any, {
+    await ctx.runAction(api.notifications.notifyTelegram, {
       priority: "LOW",
       title: "Daily Digest",
       body: "Daily deal activity digest — to be implemented with dashboard queries.",
@@ -274,7 +275,7 @@ export const notifySlackInboundEmail = action({
     subject: v.string(),
     preview: v.string(),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ success: boolean; error?: string }> => {
     const blocks = [
       {
         type: "header",
@@ -298,7 +299,7 @@ export const notifySlackInboundEmail = action({
       { type: "divider" },
     ];
 
-    return await ctx.runAction("notifications:notifySlack" as any, {
+    return await ctx.runAction(api.notifications.notifySlack, {
       channel: "email-inbound",
       message: `Inbound email from ${args.from}: ${args.subject}`,
       blocks,
@@ -317,7 +318,7 @@ export const notifySlackOutboundEmail = action({
     templateId: v.optional(v.string()),
     status: v.string(),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ success: boolean; error?: string }> => {
     const blocks = [
       {
         type: "header",
@@ -337,7 +338,7 @@ export const notifySlackOutboundEmail = action({
       { type: "divider" },
     ];
 
-    return await ctx.runAction("notifications:notifySlack" as any, {
+    return await ctx.runAction(api.notifications.notifySlack, {
       channel: "email-outbound",
       message: `Outbound email to ${args.to}: ${args.subject}`,
       blocks,
@@ -355,8 +356,8 @@ export const notifySlackDealActivity = action({
     activity: v.string(),
     details: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
-    const blocks = [
+  handler: async (ctx, args): Promise<{ success: boolean; error?: string }> => {
+    const blocks: Array<Record<string, unknown>> = [
       {
         type: "header",
         text: { type: "plain_text", text: "🏢 Deal Activity" },
@@ -374,9 +375,9 @@ export const notifySlackDealActivity = action({
       });
     }
 
-    blocks.push({ type: "divider" } as any);
+    blocks.push({ type: "divider" } as { type: string; text?: { type: string; text: string } });
 
-    return await ctx.runAction("notifications:notifySlack" as any, {
+    return await ctx.runAction(api.notifications.notifySlack, {
       channel: "deal-activity",
       message: `${args.companyName}: ${args.activity}`,
       blocks,
@@ -393,7 +394,7 @@ export const notifySlackEmailError = action({
     error: v.string(),
     context: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ success: boolean; error?: string }> => {
     const blocks = [
       {
         type: "header",
@@ -406,7 +407,7 @@ export const notifySlackEmailError = action({
       { type: "divider" },
     ];
 
-    return await ctx.runAction("notifications:notifySlack" as any, {
+    return await ctx.runAction(api.notifications.notifySlack, {
       channel: "email-errors",
       message: `Email error: ${args.error}`,
       blocks,

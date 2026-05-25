@@ -1,6 +1,6 @@
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { useCallback } from "react";
 import { api as gatesApi } from "@/convex/_generated/api";
 
@@ -12,8 +12,8 @@ export function useDealEngine(companyId: Id<"crmCompanies"> | null) {
   // Mutations
   const initializeDeal = useMutation(api.dealEngine.initializeDeal);
   const setGate = useMutation(gatesApi.gates.setGate);
-  const updateFee = useMutation(api.dealEngine.updateFee);
-  const wireTriggers = useMutation(api.dealEngine.wireTriggers);
+  const updateFee = useMutation(api.feeCalculator.updateFee);
+  const wireTriggers = useMutation(api.triggers.wireTriggers);
 
   // Initialize a deal on a company
   const initialize = useCallback(
@@ -37,7 +37,7 @@ export function useDealEngine(companyId: Id<"crmCompanies"> | null) {
   const markFeeStatus = useCallback(
     async (
       milestone: "retainer" | "validation" | "commitment" | "success",
-      status: "pending" | "invoiced" | "paid"
+      status: "invoiced" | "paid"
     ) => {
       if (!companyId) throw new Error("No company selected");
       return await updateFee({ companyId, milestone, status });

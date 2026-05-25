@@ -325,6 +325,17 @@ input.req:focus, select.req:focus { background: transparent; border-bottom-color
   .sec:last-of-type { break-before: page; }
   .sec:nth-of-type(n+6) { break-inside: avoid; }
 }
+
+/* Admin PDF capture (parent sets data-pdf on documentElement) */
+html[data-pdf="true"] .control-bar,
+html[data-pdf="true"] .prog,
+html[data-pdf="true"] .toast,
+html[data-pdf="true"] .cpanel {
+  display: none !important;
+}
+html[data-pdf="true"] .pw {
+  padding-top: 1rem;
+}
 </style>
 </head>
 <body>
