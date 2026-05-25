@@ -76,7 +76,7 @@ export const generateDocument = action({
     // 3. Generate PDF
     try {
       const pdfResult: any = await ctx.runAction(api.pdfGenerator.generatePdf, {
-        formData: data,
+        formData: data as any,
         templateId: template._id,
         templateName: templateTitle,
         htmlContent: renderedHtml,
@@ -111,7 +111,7 @@ export const generateDocument = action({
           content: pdfResult.pdfBase64,
         }],
         templateId: template._id,
-        templateVersion: template.version,
+        templateVersion: template.version ?? 1,
       });
 
       if (!emailResult.success) {
@@ -119,7 +119,7 @@ export const generateDocument = action({
         return {
           success: false,
           error: emailResult.error,
-          templateVersion: template.version,
+          templateVersion: template.version ?? 1,
           pdfSize: pdfResult.pdfSize,
         };
       }
@@ -128,7 +128,7 @@ export const generateDocument = action({
       return {
         success: true,
         emailId: emailResult.emailId,
-        templateVersion: template.version,
+        templateVersion: template.version ?? 1,
         pdfSize: pdfResult.pdfSize,
       };
     } catch (error) {
@@ -175,7 +175,7 @@ export const testTemplateRendering = action({
     return {
       success: true,
       html: renderedHtml,
-      templateVersion: template.version,
+      templateVersion: template.version ?? 1,
     };
   },
 });

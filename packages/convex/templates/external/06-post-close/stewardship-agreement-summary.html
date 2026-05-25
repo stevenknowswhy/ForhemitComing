@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Transition Stewardship Agreement Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: #faf7f0; }
+.co strong { color: #111; font-weight: 500; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Transition Stewardship Agreement Summary</div>
+  <div class="dst">Plain-Language Overview for Incoming CEO &amp; Trustee</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Incoming CEO</div><div class="cvc-v">{{ceoName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Closing Date</div><div class="cvc-v">{{closingDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Engagement Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Who Is Forhemit?</span></div><div class="sb">
+    <p>Forhemit Stewardship Management Co. is a California Public Benefit Corporation that facilitates employee ownership transitions. Forhemit coordinated the ESOP transaction that brought your company to 100% employee ownership.</p>
+    <p>Forhemit is <strong>not</strong> a buyer, investor, lender, broker, attorney, or financial advisor. Forhemit does not hold equity in the company, does not sit on the board, and does not make management decisions.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">What Does Forhemit Do Post-Close?</span></div><div class="sb">
+    <p>Forhemit provides 12 to 24 months of operational stewardship support after the ESOP closes. Think of Forhemit as your experienced ESOP operations partner during the transition:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">01</span><span><strong>Continuity of Operations Plan (COOP)</strong> — Maintains and updates the operational playbook developed during the transaction, ensuring nothing falls through the cracks.</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>ESOP Administration Support</strong> — Coordinates with the trustee, plan administrator, and counsel on annual compliance, repurchase obligation planning, and participant communications.</span></div>
+      <div class="si"><span class="si-n">03</span><span><strong>Financial Monitoring</strong> — Provides quarterly status reports on ESOP health metrics, debt service coverage, and repurchase obligation projections.</span></div>
+      <div class="si"><span class="si-n">04</span><span><strong>Governance Advisory</strong> — Serves as a resource for the board and CEO on ESOP governance best practices, fiduciary considerations, and employee-ownership culture.</span></div>
+      <div class="si"><span class="si-n">05</span><span><strong>Lender &amp; Trustee Coordination</strong> — Acts as the primary point of contact for ongoing SBA lender reporting and trustee communication, reducing the CEO's administrative burden.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">What Does Forhemit NOT Do?</span></div><div class="sb">
+    <p>Forhemit does not:</p>
+    <p>&#8226; Make business decisions or manage employees</p>
+    <p>&#8226; Provide legal advice or act as legal counsel</p>
+    <p>&#8226; Provide tax advice or prepare tax returns</p>
+    <p>&#8226; Serve as an ERISA fiduciary</p>
+    <p>&#8226; Hold equity or voting rights in the company</p>
+    <p>&#8226; Receive any share of seller proceeds</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">How Much Does Stewardship Cost?</span></div><div class="sb">
+    <div class="fr"><label>Annual Stewardship Fee</label><span style="flex:1;">{{annualStewardshipFee}}</span></div>
+    <div class="fr"><label>Basis</label><span style="flex:1;">{{stewardshipRate}} of company EBITDA, per engagement agreement</span></div>
+    <div class="fr"><label>Billing</label><span style="flex:1;">{{billingFrequency}} in arrears</span></div>
+    <div class="fr"><label>Tax Treatment</label><span style="flex:1;">Ordinary business expense — fully deductible</span></div>
+    <div class="co"><strong>Key Point:</strong> This fee is paid by the company as a business expense. It does not come out of employee distributions, does not reduce the ESOP trust's assets, and does not affect the seller's note.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">How Long Does Stewardship Last?</span></div><div class="sb">
+    <p>The stewardship period is typically 12 to 24 months, depending on the complexity of the transition. Either party may end the stewardship with 30 days' written notice.</p>
+    <p>At the end of stewardship, Forhemit provides a final summary and hands off all documentation, contacts, and institutional knowledge to the company's leadership team.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Key Contacts</span></div><div class="sb">
+    <div class="fr"><label>Forhemit Primary Contact</label><span style="flex:1;">Stefano Stokes, Founder &amp; Managing Director</span></div>
+    <div class="fr"><label>Email</label><span style="flex:1;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Website</label><span style="flex:1;">forhemit.com</span></div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Forhemit Stewardship Management Co.<br>deals&#64;forhemit.com | forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Stewardship Summary — {{ref}}</div>
+  </div>
+</div>
+</body>
+</html>

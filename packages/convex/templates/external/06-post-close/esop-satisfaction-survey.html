@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — ESOP Satisfaction Survey</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.survey-scale { display: flex; justify-content: space-between; margin: 0.6rem 0 0.2rem; padding: 0 0 0 0; }
+.survey-scale span { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center; flex: 1; }
+.survey-q { font-size: 0.8rem; font-weight: 300; color: #333; padding: 0.55rem 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline; }
+.survey-q-text { flex: 1; }
+.survey-dots { display: flex; gap: 1.2rem; flex-shrink: 0; margin-left: 1rem; }
+.survey-dot { width: 10px; height: 10px; border: 1px solid var(--line-strong); border-radius: 50%; }
+.textarea-field { width: 100%; height: 3.5rem; border: 1px solid var(--line); border-radius: 0; padding: 0.5rem; font-family: var(--ff-body); font-size: 0.78rem; font-weight: 300; color: #333; resize: vertical; margin-top: 0.3rem; }
+.textarea-field:focus { outline: none; border-color: var(--brass); }
+.input-field { width: 100%; border: none; border-bottom: 1px solid var(--line-strong); padding: 0.3rem 0; font-family: var(--ff-body); font-size: 0.8rem; font-weight: 300; color: #333; margin-top: 0.2rem; }
+.input-field:focus { outline: none; border-bottom-color: var(--brass); }
+.result-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border-bottom: 1px solid var(--line); }
+.result-cell { padding: 0.6rem 0.8rem; border-right: 1px solid var(--line); }
+.result-cell:last-child { border-right: none; }
+.result-label { font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.2rem; }
+.result-value { font-family: var(--ff-mono); font-size: 0.85rem; font-weight: 300; color: #111; min-height: 1.2em; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">ESOP Satisfaction Survey</div>
+  <div class="dst">Annual Employee Feedback Instrument</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Survey Year</div><div class="cvc-v">{{surveyYear}}</div></div>
+    <div class="cvc"><div class="cvc-l">Response Deadline</div><div class="cvc-v">{{responseDeadline}}</div></div>
+    <div class="cvc"><div class="cvc-l">Survey Administrator</div><div class="cvc-v">{{administratorName}}</div></div>
+  </div>
+
+  <!-- § 01 About This Survey -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">About This Survey</span></div><div class="sb">
+    <p>At {{companyName}}, you are an owner. This annual survey helps us understand how well we are communicating about your Employee Stock Ownership Plan (ESOP) and how satisfied you are with this benefit.</p>
+    <p>Your responses are completely anonymous. No individual answers will be linked to you. The results are used solely to improve ESOP communications and plan administration.</p>
+    <div class="co"><strong>How to respond:</strong> Please complete this survey by {{responseDeadline}} and return it to {{administratorName}} via {{responseMethod}}. It should take approximately 10&#8211;15 minutes.</div>
+  </div></div>
+
+  <!-- Rating Scale Legend -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Rating Scale</span></div><div class="sb">
+    <p>For each question below, please circle the number that best reflects your response:</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr;gap:0;border:1px solid var(--line);text-align:center;margin:0.8rem 0;">
+      <div style="padding:0.5rem;border-right:1px solid var(--line);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);">1 &#8212; Strongly Disagree</div>
+      <div style="padding:0.5rem;border-right:1px solid var(--line);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);">2 &#8212; Disagree</div>
+      <div style="padding:0.5rem;border-right:1px solid var(--line);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);">3 &#8212; Neutral</div>
+      <div style="padding:0.5rem;border-right:1px solid var(--line);font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);">4 &#8212; Agree</div>
+      <div style="padding:0.5rem;font-size:0.62rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--brass);">5 &#8212; Strongly Agree</div>
+    </div>
+  </div></div>
+
+  <!-- § 02 Understanding -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Understanding</span></div><div class="sb">
+    <p>How well do you understand your ESOP? Please rate each statement:</p>
+    <div class="survey-q"><span class="survey-q-text">I understand what an ESOP is.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">I understand how my ESOP account grows in value.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">I understand the vesting schedule.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">I know when and how I will receive distributions.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q" style="border-bottom:none;"><span class="survey-q-text">I understand my rights as an ESOP participant.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+  </div></div>
+
+  <!-- § 03 Satisfaction -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Satisfaction</span></div><div class="sb">
+    <p>How satisfied are you with the ESOP? Please rate each statement:</p>
+    <div class="survey-q"><span class="survey-q-text">I am satisfied with the ESOP as a retirement benefit.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">The ESOP makes me feel more connected to the company.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">I believe the ESOP will provide meaningful retirement wealth.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q" style="border-bottom:none;"><span class="survey-q-text">I would recommend this company to others partly because of the ESOP.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+  </div></div>
+
+  <!-- § 04 Communication -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Communication</span></div><div class="sb">
+    <p>How well are we communicating about the ESOP? Please rate each statement:</p>
+    <div class="survey-q"><span class="survey-q-text">I receive enough information about the ESOP.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">The information I receive is easy to understand.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q"><span class="survey-q-text">I know who to contact with ESOP questions.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+    <div class="survey-q" style="border-bottom:none;"><span class="survey-q-text">Annual statements are clear and helpful.</span><div class="survey-dots"><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div><div class="survey-dot"></div></div></div>
+  </div></div>
+
+  <!-- § 05 Open Feedback -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Open Feedback</span></div><div class="sb">
+    <p>We value your honest thoughts. Please write as much or as little as you like:</p>
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">What do you value most about the ESOP?</div>
+      <textarea class="textarea-field"></textarea>
+    </div>
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">What would you like to know more about?</div>
+      <textarea class="textarea-field"></textarea>
+    </div>
+    <div style="margin-bottom:1rem;">
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">How can we improve ESOP communications?</div>
+      <textarea class="textarea-field"></textarea>
+    </div>
+    <div>
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Any other comments?</div>
+      <textarea class="textarea-field"></textarea>
+    </div>
+  </div></div>
+
+  <!-- § 06 Demographics (Optional) -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Demographics (Optional)</span></div><div class="sb">
+    <p>These questions are optional and for analysis purposes only. Your responses will not be linked to your individual answers above.</p>
+    <div class="fr"><label>Department</label><div style="flex:1;"><input type="text" class="input-field" placeholder="{{departmentPlaceholder}}"></div></div>
+    <div class="fr"><label>Years of Service</label><div style="flex:1;"><input type="text" class="input-field" placeholder="{{yearsOfServicePlaceholder}}"></div></div>
+    <div class="fr"><label>Age Range</label><div style="flex:1;"><input type="text" class="input-field" placeholder="{{ageRangePlaceholder}}"></div></div>
+  </div></div>
+
+  <!-- § 07 Results Summary (Internal Use) -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Results Summary (Internal Use)</span></div><div class="sb">
+    <div class="co"><strong>For administrator use only.</strong> Complete this section after compiling survey results.</div>
+    <div class="result-row">
+      <div class="result-cell"><div class="result-label">Overall Satisfaction Score</div><div class="result-value">{{overallSatisfactionScore}}</div></div>
+      <div class="result-cell"><div class="result-label">Understanding Score</div><div class="result-value">{{understandingScore}}</div></div>
+      <div class="result-cell"><div class="result-label">Communication Score</div><div class="result-value">{{communicationScore}}</div></div>
+    </div>
+    <div class="result-row">
+      <div class="result-cell"><div class="result-label">Response Rate</div><div class="result-value">{{responseRate}}</div></div>
+      <div class="result-cell"><div class="result-label">Year-Over-Year Trend</div><div class="result-value">{{yearOverYearTrend}}</div></div>
+      <div class="result-cell"><div class="result-label">Priority Improvement Areas</div><div class="result-value">{{priorityImprovementAreas}}</div></div>
+    </div>
+    <div style="margin-top:1rem;">
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Key Findings</div>
+      <textarea class="textarea-field" style="height:4rem;">{{keyFindings}}</textarea>
+    </div>
+    <div style="margin-top:1rem;">
+      <div style="font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:0.3rem;">Recommended Actions</div>
+      <textarea class="textarea-field" style="height:4rem;">{{recommendedActions}}</textarea>
+    </div>
+  </div></div>
+
+  <!-- Signature Block -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Employee responses are anonymous.</div>
+  </div>
+</div>
+
+</body>
+</html>

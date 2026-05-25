@@ -61,7 +61,7 @@ export default function PhoneMessagesPage() {
     markAsRead({ id, read: !currentReadStatus });
   };
 
-  const filteredMessages = messages?.filter((msg) => {
+  const filteredMessages = messages?.filter((msg: any) => {
     if (filterStatus && msg.status !== filterStatus) return false;
     return true;
   });
@@ -96,7 +96,7 @@ export default function PhoneMessagesPage() {
         <div className="admin-empty-state">No phone messages found</div>
       ) : (
         <div className="admin-cards-grid">
-          {filteredMessages?.map((msg) => (
+          {filteredMessages?.map((msg: any) => (
             <div
               key={msg._id}
               className={`admin-card ${msg.read ? "read" : "unread"}`}

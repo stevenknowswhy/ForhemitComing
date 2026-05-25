@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Fee Collection Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --amber: #E67E22; --amber-bg: #fef9f0; --red: #C0392B; --red-bg: #fdf5f4; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.fee-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.fee-table th { text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); padding: 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.fee-table td { padding: 0.6rem; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+.fee-table td:last-child { text-align: right; }
+.fee-status { display: inline-block; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.15rem 0.5rem; font-family: var(--ff-mono); }
+.fee-status.paid { background: var(--green-bg); color: var(--green); }
+.fee-status.pending { background: var(--amber-bg); color: var(--amber); }
+.fee-status.overdue { background: var(--red-bg); color: var(--red); }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-DIL-003</div><div>Fee Collection Tracker</div></div>
+  </div>
+  <div class="dt">Fee Collection Tracker</div>
+  <div class="dst">Payment Status — {{reportDate}}</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Updated when payment is due, received, or overdue</p>
+      <p><strong>Purpose:</strong> Track all milestone payments and stewardship fees per deal</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Deal Summary</span></div><div class="sb">
+    <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}}</span></div>
+    <div class="fr"><label>Ref</label><span style="flex:1;">{{ref}}</span></div>
+    <div class="fr"><label>Tier</label><span style="flex:1;">{{feeTier}}</span></div>
+    <div class="fr"><label>Total engagement fee</label><span style="flex:1;">{{totalFee}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Milestone Payments</span></div><div class="sb">
+    <table class="fee-table">
+      <thead>
+        <tr><th>Milestone</th><th>Amount</th><th>Due Date</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Engagement Retainer</td><td>{{retainerAmount}}</td><td>{{retainerDue}}</td><td><span class="fee-status {{retainerStatusClass}}">{{retainerStatus}}</span></td></tr>
+        <tr><td>Validation Fee</td><td>{{validationAmount}}</td><td>{{validationDue}}</td><td><span class="fee-status {{validationStatusClass}}">{{validationStatus}}</span></td></tr>
+        <tr><td>Commitment Fee</td><td>{{commitmentAmount}}</td><td>{{commitmentDue}}</td><td><span class="fee-status {{commitmentStatusClass}}">{{commitmentStatus}}</span></td></tr>
+        <tr><td>Success Balance</td><td>{{successAmount}}</td><td>{{successDue}}</td><td><span class="fee-status {{successStatusClass}}">{{successStatus}}</span></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Stewardship Fees</span></div><div class="sb">
+    <table class="fee-table">
+      <thead>
+        <tr><th>Period</th><th>Amount</th><th>Due Date</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        {{#each stewardshipFees}}
+        <tr><td>{{period}}</td><td>{{amount}}</td><td>{{dueDate}}</td><td><span class="fee-status {{statusClass}}">{{status}}</span></td></tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Collection Notes</span></div><div class="sb">
+    <div class="fr"><label>Last contact</label><span style="flex:1;">{{lastContactDate}}</span></div>
+    <div class="fr"><label>Outstanding</label><span style="flex:1;">{{outstandingAmount}}</span></div>
+    <div class="fr"><label>Overdue</label><span style="flex:1;">{{overdueAmount}}</span></div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Tracker — Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-DIL-003</div>
+  </div>
+</div>
+</body>
+</html>

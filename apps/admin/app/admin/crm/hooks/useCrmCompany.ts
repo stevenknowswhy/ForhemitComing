@@ -18,7 +18,7 @@ interface CompanyWithRelations {
 interface UseCrmCompanyReturn {
   data: CompanyWithRelations | null | undefined;
   isLoading: boolean;
-  update: (data: Partial<CompanyFormData>) => Promise<Id<"crmCompanies">>;
+  update: (data: Partial<CompanyFormData>) => Promise<any>;
   remove: () => Promise<{ success: boolean }>;
 }
 
@@ -35,7 +35,7 @@ export function useCrmCompany(id: Id<"crmCompanies"> | null): UseCrmCompanyRetur
 
   // Update handler
   const update = useCallback(
-    async (formData: Partial<CompanyFormData>): Promise<Id<"crmCompanies">> => {
+    async (formData: Partial<CompanyFormData>): Promise<any> => {
       if (!id) throw new Error("Company ID is required");
       return await updateMutation({
         id,

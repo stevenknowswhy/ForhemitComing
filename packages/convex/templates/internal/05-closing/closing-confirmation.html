@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Closing Confirmation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.alert-block { border: 1px solid rgba(46,125,50,0.4); background: var(--green-bg); padding: 1.2rem 1.4rem; margin: 1.2rem 0; position: relative; }
+.alert-badge { position: absolute; top: -0.55rem; left: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0 0.5rem; background: #fff; font-family: var(--ff-mono); color: var(--green); }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-CLOSE-002</div><div>Closing Confirmation</div></div>
+  </div>
+  <div class="dt">Closing Confirmation</div>
+  <div class="dst">Internal Notification — Funds Settled</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Sent when all closing funds are settled and stock is transferred</p>
+      <p><strong>Recipients:</strong> Deal team, Stefano, accounting, all team members</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Closing Confirmation</span></div><div class="sb">
+    <div class="alert-block">
+      <div class="alert-badge">Deal Closed</div>
+      <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}}</span></div>
+      <div class="fr"><label>Seller</label><span style="flex:1;">{{sellerName}}</span></div>
+      <div class="fr"><label>Ref</label><span style="flex:1;">{{ref}}</span></div>
+      <div class="fr"><label>Closing date</label><span style="flex:1;">{{closingDate}}</span></div>
+      <div class="fr"><label>Days elapsed</label><span style="flex:1;">{{daysElapsed}} of 120</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Financial Summary</span></div><div class="sb">
+    <div class="fr"><label>Purchase price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+    <div class="fr"><label>SBA loan</label><span style="flex:1;">{{sbaLoan}}</span></div>
+    <div class="fr"><label>Seller note</label><span style="flex:1;">{{sellerNote}}</span></div>
+    <div class="fr"><label>Day 1 cash to seller</label><span style="flex:1;">{{day1Cash}}</span></div>
+    <div class="fr"><label>Broker commission</label><span style="flex:1;">{{brokerCommission}}</span></div>
+    <div class="fr"><label>Forhemit success fee</label><span style="flex:1;">{{forhemitFee}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Post-Close Schedule</span></div><div class="sb">
+    <div class="fr"><label>COOP kickoff</label><span style="flex:1;">{{coopKickoffDate}} (Day 121)</span></div>
+    <div class="fr"><label>First stewardship billing</label><span style="flex:1;">{{firstStewardshipBilling}}</span></div>
+    <div class="fr"><label>Refinance window opens</label><span style="flex:1;">{{refinanceWindowOpen}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Immediate Actions</span></div><div class="sb">
+    <p>1. <strong>Post to Slack:</strong> Announce closing in #deals channel</p>
+    <p>2. <strong>Update CRM:</strong> Move to "Closed" stage</p>
+    <p>3. <strong>Schedule COOP:</strong> Set up Day 121 kickoff meeting</p>
+    <p>4. <strong>Lessons learned:</strong> Schedule post-close debrief within 5 business days</p>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Notification — Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-CLOSE-002</div>
+  </div>
+</div>
+</body>
+</html>

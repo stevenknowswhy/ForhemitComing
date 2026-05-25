@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Seller FAQ</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.faq-q { font-weight: 400; color: #111; margin-bottom: 0.4rem; }
+.faq-a { margin-bottom: 1.2rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Seller FAQ</div>
+  <div class="dst">Plain-Language Guide to ESOP Transactions</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">The Basics</span></div><div class="sb">
+    <p class="faq-q"><strong>Q: What is an ESOP?</strong></p>
+    <p class="faq-a">An ESOP (Employee Stock Ownership Plan) is a retirement plan that holds stock in the company on behalf of employees. Think of it like a 401(k), but instead of holding mutual funds, it holds shares of the company. Employees don't buy the stock — the company funds the ESOP, and shares are allocated to employee accounts over time.</p>
+
+    <p class="faq-q"><strong>Q: Am I selling to my employees?</strong></p>
+    <p class="faq-a">Not directly. You're selling to the ESOP trust, which is a legal entity that holds the stock for the benefit of employees. The trust is managed by an independent trustee — not by you, not by your employees, and not by Forhemit. The trustee's job is to make sure the deal is fair to the employees.</p>
+
+    <p class="faq-q"><strong>Q: Do my employees have to put up their own money?</strong></p>
+    <p class="faq-a">No. Employees never contribute their own money. The ESOP is funded entirely by the company. This is one of the key differences between an ESOP and other employee ownership models (like stock purchase plans or equity grants).</p>
+
+    <p class="faq-q"><strong>Q: What happens to my employees' jobs?</strong></p>
+    <p class="faq-a">Nothing changes. The ESOP doesn't restructure the company, lay off employees, or change day-to-day operations. Your management team stays in place. The employees now have a retirement benefit tied to the company's success, but their jobs, pay, and benefits remain the same.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">The Money</span></div><div class="sb">
+    <p class="faq-q"><strong>Q: How much will I get for my company?</strong></p>
+    <p class="faq-a">The price is determined by an independent, ASA-accredited appraiser — not by Forhemit, not by the trustee, and not by you. The appraiser determines the Fair Market Value (FMV) based on the company's financial performance, industry comparables, and risk factors. This is the same valuation standard used in all ESOP transactions and is reviewed by the Department of Labor.</p>
+
+    <p class="faq-q"><strong>Q: Is the FMV less than what a private equity firm would pay?</strong></p>
+    <p class="faq-a">It depends on the company. For the right company — stable revenue, strong EBITDA, good management depth — the FMV is often competitive with or exceeds PE offers. The difference is that PE deals often include earnouts, equity rollovers, and management holdbacks that reduce the effective price. An ESOP is typically a cleaner transaction with fewer strings attached.</p>
+
+    <p class="faq-q"><strong>Q: Do I get all the cash at closing?</strong></p>
+    <p class="faq-a">Typically not all of it. The deal is usually structured as a combination of: (1) Day 1 cash from the SBA loan, (2) a seller note that pays out over time, and (3) a small escrow holdback. The exact split depends on the deal structure, but you'll know the terms before you sign anything.</p>
+
+    <p class="faq-q"><strong>Q: What is the seller note?</strong></p>
+    <p class="faq-a">The seller note is a loan you make to the company. Instead of receiving all cash at closing, you receive a portion of the purchase price as a promissory note — the company pays you back over time with interest. This is common in ESOP transactions and is subordinated to the SBA loan (meaning the SBA gets paid first).</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Tax Benefits</span></div><div class="sb">
+    <p class="faq-q"><strong>Q: What is §1042 and why does everyone keep talking about it?</strong></p>
+    <p class="faq-a">IRC §1042 is a tax provision that lets you defer 100% of the capital gains tax on the sale of your company stock to an ESOP — as long as you reinvest the proceeds in Qualified Replacement Securities (QRS) within 12 months. It's a powerful tax deferral tool. Your CPA can explain the specifics, and we provide a detailed §1042 explainer for your tax advisor.</p>
+
+    <p class="faq-q"><strong>Q: Does the company get tax benefits too?</strong></p>
+    <p class="faq-a">Yes. As a C-Corporation with an ESOP, the company can deduct principal and interest payments on the ESOP loan. This is one of the most significant tax advantages of an ESOP — it effectively reduces the cost of the transaction by 25–35% through tax savings.</p>
+
+    <p class="faq-q"><strong>Q: What if my company is an LLC or S-Corp?</strong></p>
+    <p class="faq-a">ESOPs require a C-Corporation. If your company is an LLC or S-Corp, it must convert to a C-Corp before the transaction. The conversion has tax implications that your CPA should model. We provide a detailed conversion checklist and coordinate with your tax advisor.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">The Process</span></div><div class="sb">
+    <p class="faq-q"><strong>Q: How long does this take?</strong></p>
+    <p class="faq-a">The target is 120 days from engagement to closing. That's not a guarantee — some deals close faster, some take longer. The timeline depends on how quickly documents are provided, how fast the appraisal goes, and whether any issues come up during diligence.</p>
+
+    <p class="faq-q"><strong>Q: What is Forhemit's role?</strong></p>
+    <p class="faq-a">Forhemit is the transaction steward. We coordinate the deal team, manage the timeline, prepare lender and trustee packages, and keep everything moving. We're not the buyer, not your attorney, and not a fiduciary. Think of us as the project manager for the transaction.</p>
+
+    <p class="faq-q"><strong>Q: Who else is involved?</strong></p>
+    <p class="faq-a">The deal team includes: an independent ESOP trustee (acts on behalf of the employees), ERISA counsel (legal advisor to the trustee), an independent appraiser (determines FMV), and an SBA lender (provides financing). Forhemit coordinates all of them.</p>
+
+    <p class="faq-q"><strong>Q: Do I need my own attorney?</strong></p>
+    <p class="faq-a">Yes. We strongly recommend you have your own personal attorney review the Engagement Letter, LOI, and Stock Purchase Agreement before you sign anything. The deal team (trustee, counsel, appraiser) represents the ESOP — not you. Your attorney is your advocate.</p>
+
+    <p class="faq-q"><strong>Q: What if I change my mind?</strong></p>
+    <p class="faq-a">You can walk away at any point before signing the LOI without penalty. After the LOI is signed, there's an exclusivity period during which you agree not to negotiate with other buyers. The Engagement Letter has a 15-day termination clause. You're never locked in until closing.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">After Closing</span></div><div class="sb">
+    <p class="faq-q"><strong>Q: What happens to me after closing?</strong></p>
+    <p class="faq-a">That's up to you. Some sellers exit completely. Others stay on as CEO, advisor, or board member for a transition period. The post-close role is negotiated as part of the deal. Forhemit provides 12–24 months of post-close stewardship to help the company operate successfully as an employee-owned business.</p>
+
+    <p class="faq-q"><strong>Q: Do my employees know what's going on?</strong></p>
+    <p class="faq-a">Not yet — and that's intentional. We don't announce the transaction until after closing. When it's time, we provide an employee announcement template and help you communicate the transition in a way that's positive and clear.</p>
+
+    <p class="faq-q"><strong>Q: What if the company's value goes down after closing?</strong></p>
+    <p class="faq-a">The FMV is determined at closing. If the company's value declines afterward, that affects the ESOP accounts (employees' retirement accounts) but doesn't change the purchase price you received. Your seller note payments are fixed per the note terms.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Next Steps</span></div><div class="sb">
+    <p>If you have more questions, contact us anytime:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This FAQ is for informational purposes. Consult your CPA and attorney for specific advice.</div>
+  </div>
+</div>
+</body>
+</html>

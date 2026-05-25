@@ -8,3 +8,4 @@ export { useCrmStats } from "./useCrmStats";
 export { useCrmActivities } from "./useCrmActivities";
 export { useCrmContacts } from "./useCrmContacts";
 export { useCrmTasks } from "./useCrmTasks";
+export { useDealEngine } from "./useDealEngine";

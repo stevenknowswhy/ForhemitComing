@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Letter of Intent</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.term-box { border: 1px solid var(--line-strong); padding: 1rem 1.2rem; margin: 0.8rem 0; break-inside: avoid; }
+.term-box-title { font-family: var(--ff-display); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.06em; color: #111; margin-bottom: 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Letter of Intent</div>
+  <div class="dst">Non-Binding — ESOP Acquisition</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Introduction</span></div><div class="sb">
+    <p>Dear {{sellerName}},</p>
+    <p>Forhemit Stewardship Management Co. ("Forhemit") is pleased to present this Letter of Intent ("LOI") outlining the proposed terms for the acquisition of 100% of the equity interests in {{companyName}} (the "Company") by an Employee Stock Ownership Plan ("ESOP") to be established by the Company for the benefit of its employees.</p>
+    <p>This LOI is intended to serve as a basis for further negotiation and due diligence. Except as expressly stated in the Binding Provisions section below, this LOI is non-binding and does not create any legal obligation on either party.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Transaction Structure</span></div><div class="sb">
+    <div class="term-box">
+      <div class="term-box-title">Purchase &amp; Consideration</div>
+      <div class="fr"><label>Purchase price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+      <div class="fr"><label>Valuation basis</label><span style="flex:1;">Independent Fair Market Value appraisal per IRC &#167;401(a)(28)</span></div>
+      <div class="fr"><label>Acquirer</label><span style="flex:1;">ESOP Trust — new plan sponsored by the Company</span></div>
+      <div class="fr"><label>Equity acquired</label><span style="flex:1;">100% of outstanding equity interests</span></div>
+    </div>
+    <div class="term-box">
+      <div class="term-box-title">Consideration Mix</div>
+      <div class="fr"><label>Day 1 cash</label><span style="flex:1;">{{day1Cash}} (SBA 7(a) loan proceeds)</span></div>
+      <div class="fr"><label>Seller note</label><span style="flex:1;">{{sellerNoteAmount}} at {{sellerNoteRate}}, {{sellerNoteTerm}} term</span></div>
+      <div class="fr"><label>Seller note subordination</span><span style="flex:1;">Fully subordinated to SBA loan for {{subordinationPeriod}}</span></div>
+    </div>
+    <div class="term-box">
+      <div class="term-box-title">Entity Requirements</div>
+      <div class="fr"><label>Current entity</label><span style="flex:1;">{{entityType}}</span></div>
+      <div class="fr"><label>Conversion required</label><span style="flex:1;">{{conversionRequired}}</span></div>
+      <div class="fr"><label>Conversion deadline</span><span style="flex:1;">Prior to closing</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Financing</span></div><div class="sb">
+    <p>The transaction will be financed through a combination of SBA 7(a) loan proceeds and a subordinated seller note:</p>
+    <div class="fr"><label>SBA lender</label><span style="flex:1;">{{sbaLenderName}} (to be confirmed during underwriting)</span></div>
+    <div class="fr"><label>SBA loan amount</label><span style="flex:1;">{{sbaLoanAmount}}</span></div>
+    <div class="fr"><label>SBA loan rate</label><span style="flex:1;">{{sbaLoanRate}} (estimated; subject to lender terms)</span></div>
+    <div class="fr"><label>SBA loan term</label><span style="flex:1;">{{sbaLoanTerm}}</span></div>
+    <div class="fr"><label>Intercreditor agreement</span><span style="flex:1;">Required between SBA lender and seller</span></div>
+    <div class="co"><strong>Note:</strong> SBA financing is subject to lender underwriting and SBA approval. Forhemit will coordinate lender outreach and submission, but the Seller acknowledges that financing is not guaranteed until the SBA issues a commitment letter.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Timeline</span></div><div class="sb">
+    <p>The target transaction timeline is 120 days from LOI execution, structured around four gates:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Gate 1 — Capital Committed (Day 30).</strong> SBA lender engagement confirmed, trustee and ERISA counsel retained, appraisal firm engaged.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Gate 2 — Valuation Confirmed (Day 60).</strong> QofE and FMV appraisal completed and accepted by trustee. Purchase price confirmed or adjusted.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Gate 3 — Operations Cleared (Day 90).</strong> Entity conversion complete, ESOP plan document drafted, SBA loan approved, all due diligence items cleared.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Gate 4 — Closing (Day 120).</strong> All documents executed, funds wired, ESOP trust holds 100% of equity.</span></div>
+    </div>
+    <div class="fr"><label>Target closing date</label><span style="flex:1;">{{targetClosingDate}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Deposit</span></div><div class="sb">
+    <div class="fr"><label>Pre-flight deposit</label><span style="flex:1;">$15,000 (previously submitted)</span></div>
+    <div class="fr"><label>Treatment</label><span style="flex:1;">Credited toward Engagement Retainer upon LOI execution</span></div>
+    <div class="fr"><label>Exclusivity deposit</label><span style="flex:1;">{{exclusivityDeposit}}</span></div>
+    <div class="fr"><label>Refund conditions</label><span style="flex:1;">Refundable if transaction fails due to Gate failure not caused by Seller; non-refundable if Seller withdraws or breaches exclusivity</span></div>
+    <div class="co"><strong>Escrow:</strong> All deposits are held in a separate escrow account at {{escrowBank}} and are not commingled with Forhemit operating funds. Detailed escrow terms will be provided upon execution.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Seller Representations</span></div><div class="sb">
+    <p>The Seller represents and warrants to Forhemit and the ESOP Trust, to the best of the Seller's knowledge, that:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>The Seller has full authority to enter into this transaction and sell 100% of the equity interests in the Company.</span></div>
+      <div class="si"><span class="si-n">B.</span><span>The Company is current on all federal, state, and local tax filings and has no known material tax liabilities outside the ordinary course of business.</span></div>
+      <div class="si"><span class="si-n">C.</span><span>There are no pending or threatened legal proceedings, regulatory actions, or material disputes that could affect the transaction.</span></div>
+      <div class="si"><span class="si-n">D.</span><span>All financial information provided to Forhemit and its advisors is accurate and complete in all material respects.</span></div>
+      <div class="si"><span class="si-n">E.</span><span>The Company has not entered into any agreement that would prevent or materially impair the transaction, including change-of-control provisions or rights of first refusal.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Seller Obligations</span></div><div class="sb">
+    <p>During the period between LOI execution and closing, the Seller agrees to:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Operate in the ordinary course.</strong> Continue operating the Company in the ordinary course of business and not take any action that would materially impair the Company's value or the transaction.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Provide access.</strong> Provide Forhemit, the trustee, appraiser, and lender with reasonable access to the Company's books, records, employees, and facilities for due diligence purposes.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Cooperate on conversion.</strong> If applicable, cooperate with the entity conversion process, including executing required filings and tax elections.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Maintain confidentiality.</strong> Keep the terms of this LOI and the transaction confidential, except as required by law or as disclosed to the Seller's personal attorney and CPA.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Post-Close Transition</span></div><div class="sb">
+    <div class="fr"><label>Seller role</label><span style="flex:1;">{{postCloseRole}}</span></div>
+    <div class="fr"><label>Transition period</label><span style="flex:1;">{{transitionPeriod}}</span></div>
+    <div class="fr"><label>Governance</label><span style="flex:1;">{{governanceTerms}}</span></div>
+    <p>The specific terms of the Seller's post-close employment or consulting arrangement will be negotiated separately and documented in a definitive agreement.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Advisors &amp; Costs</span></div><div class="sb">
+    <div class="fr"><label>Transaction coordinator</label><span style="flex:1;">Forhemit Stewardship Management Co.</span></div>
+    <div class="fr"><label>Forhemit fee</label><span style="flex:1;">{{forhemitFee}} (per Engagement Letter)</span></div>
+    <div class="fr"><label>Seller's attorney</label><span style="flex:1;">{{sellerAttorney}} (at Seller's expense)</span></div>
+    <div class="fr"><label>Seller's CPA</label><span style="flex:1;">{{sellerCPA}}</span></div>
+    <div class="fr"><label>Transaction costs</label><span style="flex:1;">Estimated {{transactionCosts}} — itemized in Transaction Cost Disclosure</span></div>
+    <p>All transaction costs, including legal, appraisal, and lender fees, are paid from the transaction proceeds at closing unless otherwise specified.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 10</span><span class="st">Tax Treatment</span></div><div class="sb">
+    <p>The transaction is structured to allow the Seller to elect tax deferral under IRC &#167;1042, provided the following conditions are met:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>The ESOP acquires at least 30% of the Company's equity (this LOI contemplates 100%).</span></div>
+      <div class="si"><span class="si-n">B.</span><span>The Seller reinvests the sale proceeds in Qualified Replacement Securities ("QRS") within the statutory period.</span></div>
+      <div class="si"><span class="si-n">C.</span><span>The Seller has held the equity for at least 3 years prior to the sale.</span></div>
+    </div>
+    <div class="co"><strong>Not tax advice:</strong> Forhemit does not provide tax advice. The Seller should consult with a qualified tax advisor regarding &#167;1042 eligibility, state tax implications, and the mechanics of the QRS reinvestment strategy.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 11</span><span class="st">Binding Provisions</span></div><div class="sb">
+    <p>Notwithstanding the non-binding nature of this LOI, the following provisions shall be legally binding upon execution by both parties:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Exclusivity.</strong> From the date of execution through {{exclusivityPeriod}}, the Seller shall not directly or indirectly solicit, encourage, negotiate, or enter into any agreement with any other party for the sale, merger, or recapitalization of the Company. The Seller shall promptly notify Forhemit of any unsolicited inquiries.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Confidentiality.</strong> The terms of this LOI and all information exchanged in connection with the transaction are confidential and subject to the NDA previously executed between the parties. Neither party shall disclose the terms of this LOI to any third party except as required by law or to their professional advisors who are bound by confidentiality obligations.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Deposit.</strong> The treatment and refundability of deposits as described in &#167;05 is binding.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Governing law.</strong> This LOI shall be governed by the laws of the State of {{governingState}}.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Termination.</strong> Either party may terminate this LOI upon 10 business days' written notice if the transaction has not closed within {{maxTimeline}} of execution, or immediately upon mutual written agreement.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 12</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this Letter of Intent, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <!-- Seller Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Seller Acceptance</span></div>
+    <p style="font-size:0.8rem;font-weight:300;color:#333;line-height:1.7;margin-bottom:1.2rem;">By signing below, the Seller acknowledges receipt and review of this Letter of Intent and agrees to the terms set forth herein, including the binding provisions in &#167;11.</p>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">{{sellerName}}<br><span style="font-size:0.78rem;color:var(--muted);">Seller &amp; Owner of {{companyName}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div class="s-line" style="margin-top:0.8rem;"></div><div class="s-lbl">Printed Name</div>
+        <div class="s-line" style="margin-top:0.8rem;"></div><div class="s-lbl">Date</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Forhemit Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Acceptance</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+        <div class="s-line" style="margin-top:0.8rem;"></div><div class="s-lbl">Date</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">NON-BINDING (EXCEPT &#167;11)<br>This LOI is subject to execution of a definitive Stock Purchase Agreement.</div>
+  </div>
+</div>
+</body>
+</html>

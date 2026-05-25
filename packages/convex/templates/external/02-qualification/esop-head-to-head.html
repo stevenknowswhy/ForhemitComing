@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — ESOP Head-to-Head Comparison</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.compare-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.75rem; }
+.compare-table th { text-align: center; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); font-weight: 400; padding: 0.6rem 0.4rem; border-bottom: 2px solid var(--line-strong); }
+.compare-table th:first-child { text-align: left; }
+.compare-table td { padding: 0.55rem 0.4rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; text-align: center; vertical-align: top; }
+.compare-table td:first-child { text-align: left; font-weight: 400; color: #111; white-space: nowrap; }
+.compare-table tr:last-child td { border-bottom: 2px solid var(--line-strong); }
+.compare-table .yes { color: var(--green); font-weight: 400; }
+.compare-table .partial { color: var(--brass); font-weight: 400; }
+.compare-table .no { color: #999; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">ESOP Head-to-Head Comparison</div>
+  <div class="dst">ESOP vs. Third-Party Sale vs. PE Recap vs. Management Buyout</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{generatedDate}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Comparison Matrix</span></div><div class="sb">
+    <p>The following matrix compares four common exit strategies across the dimensions that matter most to business owners. Each option has trade-offs; the right choice depends on the seller's priorities.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th style="width:18%;">Factor</th>
+          <th style="width:20%;">ESOP Sale</th>
+          <th style="width:20%;">Third-Party Sale</th>
+          <th style="width:22%;">PE Recap</th>
+          <th style="width:20%;">Mgmt Buyout</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Tax Treatment</td>
+          <td class="yes">&check; &sect;1042 deferral</td>
+          <td class="no">Capital gains at close</td>
+          <td class="partial">Partial deferral possible</td>
+          <td class="no">Capital gains at close</td>
+        </tr>
+        <tr>
+          <td>Seller Control</td>
+          <td class="yes">&check; Seller sets terms</td>
+          <td class="no">Buyer drives process</td>
+          <td class="partial">Shared governance</td>
+          <td class="yes">&check; Seller chooses terms</td>
+        </tr>
+        <tr>
+          <td>Employee Impact</td>
+          <td class="yes">&check; Ownership stake</td>
+          <td class="no">No ownership</td>
+          <td class="no">Often layoffs</td>
+          <td class="partial">Leadership only</td>
+        </tr>
+        <tr>
+          <td>Timeline</td>
+          <td class="partial">90&ndash;150 days</td>
+          <td class="partial">6&ndash;12 months</td>
+          <td class="yes">&check; 3&ndash;6 months</td>
+          <td class="partial">Variable</td>
+        </tr>
+        <tr>
+          <td>Certainty of Close</td>
+          <td class="yes">&check; Trustee-controlled</td>
+          <td class="no">Buyer diligence risk</td>
+          <td class="partial">Financing contingency</td>
+          <td class="no">Financing risk</td>
+        </tr>
+        <tr>
+          <td>Transaction Cost</td>
+          <td class="partial">Moderate</td>
+          <td class="no">High (broker fees)</td>
+          <td class="no">High (advisory fees)</td>
+          <td class="yes">&check; Lower</td>
+        </tr>
+        <tr>
+          <td>Legacy Preservation</td>
+          <td class="yes">&check; Brand &amp; culture intact</td>
+          <td class="no">Buyer may rebrand</td>
+          <td class="no">Often restructured</td>
+          <td class="yes">&check; Continuity</td>
+        </tr>
+        <tr>
+          <td>Post-Sale Involvement</td>
+          <td class="yes">&check; Optional &mdash; seller chooses</td>
+          <td class="no">Earnout-driven</td>
+          <td class="partial">Rolled equity ties</td>
+          <td class="partial">Typically ongoing</td>
+        </tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Reading the Symbols</span></div><div class="sb">
+    <div class="fr"><label style="min-width:60px;"><span class="yes" style="font-size:0.9rem;">&check;</span></label><span style="flex:1;">Favorable outcome for the seller or company</span></div>
+    <div class="fr"><label style="min-width:60px;"><span class="partial" style="font-size:0.9rem;">&#9679;</span></label><span style="flex:1;">Mixed or conditional outcome</span></div>
+    <div class="fr"><label style="min-width:60px;"><span class="no" style="font-size:0.9rem;">&mdash;</span></label><span style="flex:1;">Less favorable or significant trade-off</span></div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">When an ESOP Is the Right Fit</span></div><div class="sb">
+    <p>An ESOP tends to be the strongest option when the seller values any combination of the following:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Tax efficiency.</strong> The &sect;1042 election can defer capital gains tax, potentially increasing after-tax proceeds by 20&ndash;30% compared to a third-party sale.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Employee ownership.</strong> The seller wants to create an ownership culture that rewards employees and supports long-term retention.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Legacy preservation.</strong> The seller wants the company name, culture, and community presence to continue unchanged.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Flexible timeline.</strong> The seller does not need to exit immediately and can work with the 90&ndash;150 day ESOP process.</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Seller control.</strong> The seller wants to set the terms of the sale rather than responding to a buyer's offer.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">When Other Options May Be Better</span></div><div class="sb">
+    <p>A third-party sale, PE recap, or management buyout may be more appropriate when:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Maximum price is the sole priority.</strong> If the seller's only goal is the highest possible price and tax treatment is secondary, a competitive auction may yield a premium.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>The company is not C-Corp eligible.</strong> If converting from an LLC or S-Corp is not feasible, &sect;1042 is unavailable, and the tax advantage diminishes.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>The seller needs an immediate exit.</strong> If the seller cannot commit to the ESOP timeline or transition period, a PE recap with a clean break may be preferred.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Management has capital.</strong> If the management team can fund a buyout without excessive leverage, it may offer the cleanest exit with minimal transaction cost.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Recommendation</span></div><div class="sb">
+    <p>Based on the factors above, Forhemit recommends an ESOP for companies where the seller values tax efficiency, employee ownership, and legacy preservation. The &sect;1042 election alone can offset the entire transaction cost and then some, making the ESOP economically competitive with any exit strategy on an after-tax basis.</p>
+    <div class="co"><strong>Next step:</strong> For a personalized comparison, we can prepare a tax impact summary and net proceeds analysis using the seller's actual financial data. This will show the after-tax outcome for each exit path.</div>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL &mdash; FOR SELLER DISCUSSION ONLY<br>Not a recommendation to sell. Consult legal and tax advisors.</div>
+  </div>
+</div>
+
+</body>
+</html>

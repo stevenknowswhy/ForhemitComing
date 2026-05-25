@@ -1,0 +1,82 @@
+{
+  "files": {
+    "app/lib/formatters.ts": {
+      "modifiedRanges": [
+        {
+          "start": 4,
+          "end": 13
+        },
+        {
+          "start": 15,
+          "end": 20
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T18:40:09.622Z"
+    },
+    "app/admin/crm/components/views/DealQueueView.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 49,
+          "end": 49
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T20:48:52.894Z"
+    },
+    "app/admin/components/TemplatesTab 2.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 45,
+          "end": 45
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T20:51:17.445Z"
+    },
+    "app/admin/components/TemplatesTab.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 45,
+          "end": 45
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T20:51:39.179Z"
+    },
+    "app/admin/crm/hooks/useCrmCompanies.ts": {
+      "modifiedRanges": [
+        {
+          "start": 88,
+          "end": 88
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T21:08:16.007Z"
+    },
+    "app/admin/crm/hooks/useCrmStats.ts": {
+      "modifiedRanges": [
+        {
+          "start": 40,
+          "end": 40
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T21:12:37.652Z"
+    },
+    "app/admin/crm/components/views/KanbanView.tsx": {
+      "modifiedRanges": [
+        {
+          "start": 117,
+          "end": 117
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T21:20:34.626Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-25T21:20:34.626Z",
+  "sessionId": "lens-mpliwwvb-4f8a6f91"
+}

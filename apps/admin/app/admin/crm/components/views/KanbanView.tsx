@@ -1,6 +1,6 @@
 "use client";
 
-import { Company, PipelineStage, STAGE_STYLES } from "../../types";
+import { type Company, type PipelineStage, STAGE_STYLES } from "../../types";
 import { StageBadge, NdaBadge } from "../shared";
 import { daysUntil } from "../../lib";
 
@@ -114,7 +114,7 @@ function KanbanCard({ company, onClick }: KanbanCardProps) {
   const days = daysUntil(company.nextStepDate);
 
   // Due date indicator
-  let dueIndicator = null;
+  let dueIndicator: React.ReactNode = null;
   if (company.nextStepDate) {
     if (days !== null && days < 0) {
       dueIndicator = (

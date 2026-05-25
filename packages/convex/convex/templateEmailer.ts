@@ -103,7 +103,7 @@ export const sendTemplateEmail = action({
       }
 
       console.log(`Email sent successfully to ${to}`);
-      return { success: true, emailId: emailResult.emailId };
+      return { success: true, emailId: emailResult.id };
     } catch (error) {
       console.error("Email send error:", error);
       return { success: false, error: error instanceof Error ? error.message : "Unknown error" };

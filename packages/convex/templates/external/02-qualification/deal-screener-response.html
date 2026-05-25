@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Deal Screener Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body {
+  color: #111; background: #fff;
+  font-family: 'Jost', system-ui, sans-serif;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+
+/* ── Brand tokens (print/PDF) ── */
+:root {
+  --brass: #7A5C20;
+  --brass-dim: #bbb;
+  --muted: #666;
+  --line: #ddd;
+  --line-strong: #bbb;
+  --green: #2E7D32;
+  --green-bg: #f0f8f0;
+  --red: #C0392B;
+  --red-bg: #fdf5f4;
+  --callout-bg: #faf7f0;
+  --badge-bg: #fff;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Jost', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+  --page-w: 720px;
+}
+
+/* ── Page ── */
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+
+/* ── Doc header ── */
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+
+/* ── Cover grid ── */
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+
+/* ── Section ── */
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+
+/* ── Response block (green for fits, red for no-fit) ── */
+.response-block {
+  border: 1px solid rgba(46,125,50,0.4);
+  background: var(--green-bg);
+  padding: 1.2rem 1.4rem;
+  margin: 1.2rem 0;
+  position: relative;
+  break-inside: avoid;
+}
+.response-block.no-fit {
+  border-color: rgba(192,57,43,0.4);
+  background: var(--red-bg);
+}
+.response-badge {
+  position: absolute; top: -0.55rem; left: 1rem;
+  font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 0 0.5rem; background: var(--badge-bg);
+  font-family: var(--ff-mono);
+}
+.response-block .response-badge { color: var(--green); }
+.response-block.no-fit .response-badge { color: var(--red); }
+.response-icon { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.8rem; }
+.response-icon svg { flex-shrink: 0; }
+.response-label {
+  font-family: var(--ff-display); font-size: 1.1rem; font-weight: 400;
+  letter-spacing: 0.04em;
+}
+.response-block .response-label { color: var(--green); }
+.response-block.no-fit .response-label { color: var(--red); }
+
+/* ── Field row ── */
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+
+/* ── Callout ── */
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+
+/* ── Services list ── */
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+
+/* ── Signature ── */
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+
+/* ── Footer ── */
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Deal Screener Response</div>
+  <div class="dst">Qualification Assessment</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Firm</div><div class="cvc-v">{{brokerFirm}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Response Date</div><div class="cvc-v">{{responseDate}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Assessment Result</span></div><div class="sb">
+    <p>Dear {{brokerName}},</p>
+    <p>Thank you for submitting the listing for {{companyName}}. We have completed our initial qualification assessment based on the information provided.</p>
+
+    {{#if fitsCriteria}}
+    <div class="response-block">
+      <div class="response-badge">Qualifies</div>
+      <div class="response-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#2E7D32" stroke-width="1.5"/><path d="M8 12.5L11 15.5L16.5 9" stroke="#2E7D32" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="response-label">This Opportunity Meets Our Criteria</span>
+      </div>
+      <p>Based on the information provided, this opportunity aligns with Forhemit's qualification parameters for ESOP transition stewardship. We are interested in proceeding with a preliminary discussion.</p>
+    </div>
+    {{else}}
+    <div class="response-block no-fit">
+      <div class="response-badge">Does Not Qualify</div>
+      <div class="response-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="#C0392B" stroke-width="1.5"/><path d="M15 9L9 15M9 9L15 15" stroke="#C0392B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="response-label">This Opportunity Does Not Meet Our Criteria</span>
+      </div>
+      <p>After careful review, this opportunity does not currently align with Forhemit's qualification parameters. We appreciate you thinking of us and welcome future submissions.</p>
+    </div>
+    {{/if}}
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Assessment Details</span></div><div class="sb">
+    <p>Our qualification assessment evaluates the following key criteria:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">01</span><span><strong>EBITDA Range:</strong> {{ebitdaRange}} — {{ebitdaStatus}}</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>Industry Fit:</strong> {{industryFit}} — {{industryStatus}}</span></div>
+      <div class="si"><span class="si-n">03</span><span><strong>Ownership Structure:</strong> {{ownershipStructure}} — {{ownershipStatus}}</span></div>
+      <div class="si"><span class="si-n">04</span><span><strong>Geographic Location:</strong> {{location}} — {{locationStatus}}</span></div>
+      <div class="si"><span class="si-n">05</span><span><strong>Management Depth:</strong> {{managementDepth}} — {{managementStatus}}</span></div>
+    </div>
+
+    {{#if fitsCriteria}}
+    <div class="co"><strong>Next Step:</strong> We would like to schedule a brief introductory call to learn more about the business and discuss the ESOP transition process. Please reply with your availability for a 20-minute call this week or next.</div>
+    {{else}}
+    <div class="co"><strong>Feedback:</strong> {{declineReason}} We encourage you to submit other opportunities that may be a better fit for our program.</div>
+    {{/if}}
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Our Qualification Criteria</span></div><div class="sb">
+    <p>For reference, Forhemit's standard qualification parameters include:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>EBITDA:</strong> $1M–$15M (QofE-normalized, trailing twelve months)</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Industry:</strong> Manufacturing, professional services, healthcare, or distribution</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Ownership:</strong> Owner-operator seeking full or partial exit</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Structure:</strong> LLC, S-Corp, or C-Corp (LLC requires conversion)</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Employees:</strong> 15+ W-2 employees with management depth</span></div>
+    </div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Contact</span></div><div class="sb">
+    <p>If you have questions about this assessment or would like to discuss other opportunities, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+    <p style="margin-top:0.8rem;">Please reference the above number in all correspondence related to this submission.</p>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Deal Screening Team</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This assessment is based on information provided and does not constitute a commitment to proceed.</div>
+  </div>
+</div>
+
+</body>
+</html>

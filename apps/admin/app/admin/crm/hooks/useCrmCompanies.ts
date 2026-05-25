@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { useCallback, useMemo } from "react";
-import { Company, CompanyFilters, SortConfig, CompanyFormData } from "../types";
+import type { Company, CompanyFilters, SortConfig, CompanyFormData } from "../types";
 import { filterCompanies, sortCompanies } from "../lib";
 
 // ============================================
@@ -18,8 +18,8 @@ interface UseCrmCompaniesReturn {
   companies: Company[] | undefined;
   isLoading: boolean;
   error: Error | null;
-  createCompany: (data: CompanyFormData) => Promise<Id<"crmCompanies">>;
-  updateCompany: (id: Id<"crmCompanies">, data: Partial<CompanyFormData>) => Promise<Id<"crmCompanies">>;
+  createCompany: (data: CompanyFormData) => Promise<any>;
+  updateCompany: (id: Id<"crmCompanies">, data: Partial<CompanyFormData>) => Promise<any>;
   deleteCompany: (id: Id<"crmCompanies">) => Promise<{ success: boolean }>;
   filteredCompanies: Company[];
 }
@@ -34,6 +34,8 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
   const createMutation = useMutation(api.crmCompanies.create);
   const updateMutation = useMutation(api.crmCompanies.update);
   const deleteMutation = useMutation(api.crmCompanies.remove);
+  const wireTriggersMutation = useMutation(api.dealEngine.wireTriggers);
+
 
   // Apply filters and sorting
   const filteredCompanies = useMemo(() => {
@@ -54,7 +56,7 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
 
   // Create company handler
   const createCompany = useCallback(
-    async (data: CompanyFormData): Promise<Id<"crmCompanies">> => {
+    async (data: CompanyFormData): Promise<any> => {
       return await createMutation({
         name: data.name,
         industry: data.industry,
@@ -76,18 +78,34 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
     [createMutation]
   );
 
-  // Update company handler
+  // Update company handler — also wires deal engine triggers on stage change
   const updateCompany = useCallback(
     async (
       id: Id<"crmCompanies">,
       data: Partial<CompanyFormData>
-    ): Promise<Id<"crmCompanies">> => {
-      return await updateMutation({
+    ): Promise<any> => {
+      // Capture previous stage before the update
+      const company = companies?.find((c: any) => c._id === id);
+      const previousStage = company?.stage;
+
+      const result = await updateMutation({
         id,
         ...data,
       });
+
+      // If stage changed, wire deal engine triggers (fire-and-forget)
+      if (data.stage && previousStage && data.stage !== previousStage) {
+        wireTriggersMutation({
+          companyId: id,
+          event: "stage_change",
+          previousStage,
+          newStage: data.stage,
+        }).catch((err) => console.warn("Failed to wire triggers on stage change:", err));
+      }
+
+      return result;
     },
-    [updateMutation]
+    [updateMutation, wireTriggersMutation, companies]
   );
 
   // Delete company handler

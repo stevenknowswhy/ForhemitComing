@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Vendor / Advisor Onboarding Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --callout-bg: #faf7f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: var(--callout-bg); }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.checklist { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.checklist-item { display: grid; grid-template-columns: 26px 1fr auto; gap: 0.6rem; align-items: center; padding: 0.65rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.checklist-box { width: 16px; height: 16px; border: 1.5px solid var(--line-strong); display: inline-block; flex-shrink: 0; }
+.checklist-status { font-family: var(--ff-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: right; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-ENG-005</div><div>Deal: {{ref}}</div><div>{{generatedDate}}</div></div>
+  </div>
+  <div class="dt">Vendor / Advisor Onboarding</div>
+  <div class="dst">Internal Checklist — External Advisor Onboarding Tracker</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal — Do Not Distribute</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Created when a new external advisor (trustee, counsel, QofE firm, appraiser) is engaged</p>
+      <p><strong>Purpose:</strong> Track all onboarding items to ensure compliance and timely access</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Advisor Information</span></div><div class="sb">
+    <div class="cvg">
+      <div class="cvc"><div class="cvc-l">Advisor Name</div><div class="cvc-v">{{advisorName}}</div></div>
+      <div class="cvc"><div class="cvc-l">Firm</div><div class="cvc-v">{{advisorFirm}}</div></div>
+      <div class="cvc"><div class="cvc-l">Role</div><div class="cvc-v">{{advisorRole}}</div></div>
+      <div class="cvc"><div class="cvc-l">Email</div><div class="cvc-v">{{advisorEmail}}</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Onboarding Checklist</span></div><div class="sb">
+    <div class="checklist">
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Conflict check submitted</strong> — Send conflict disclosure form to advisor</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Conflict check cleared</strong> — Receive written confirmation of no conflicts</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Engagement letter sent</strong> — Transmit scope, fees, and terms</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Engagement letter signed</strong> — Receive executed copy</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>NDA executed</strong> — Mutual NDA signed and filed</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Dataroom access granted</strong> — Create account, set permissions, send credentials</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Kickoff call scheduled</strong> — Align on scope, timeline, and deliverables</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Kickoff call completed</strong> — Document key decisions and action items</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Slack channel access</strong> — Add advisor to deal channel (if applicable)</span><span class="checklist-status">Pending</span></div>
+      <div class="checklist-item"><span class="checklist-box"></span><span><strong>Insurance verification</strong> — Confirm E&O / professional liability coverage</span><span class="checklist-status">Pending</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Notes</span></div><div class="sb">
+    <p style="color:var(--muted);font-style:italic;">Record any special instructions, access requirements, or follow-up items below:</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal — Forhemit Stewardship Management Co.<br>Generated {{generatedDate}}</div>
+    <div class="df-conf">INTERNAL — DO NOT DISTRIBUTE<br>REF: {{ref}}</div>
+  </div>
+</div>
+</body>
+</html>
