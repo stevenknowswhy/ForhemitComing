@@ -67,7 +67,7 @@ export const initializeStage = mutation({
   },
   handler: async (ctx, args) => {
     const now = Date.now();
-    const stage = args.stage || "First contact" as DealStage;
+    const stage = (args.stage || "First contact") as DealStage;
 
     await ctx.db.patch(args.companyId, {
       stage,

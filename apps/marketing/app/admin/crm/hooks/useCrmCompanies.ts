@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
 import { useCallback, useMemo } from "react";
-import { Company, CompanyFilters, SortConfig, CompanyFormData } from "../types";
+import type { Company, CompanyFilters, SortConfig, CompanyFormData } from "../types";
 import { filterCompanies, sortCompanies } from "../lib";
 
 // ============================================
@@ -54,7 +54,7 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
 
   // Create company handler
   const createCompany = useCallback(
-    async (data: CompanyFormData): Promise<Id<"crmCompanies">> => {
+    async (data: CompanyFormData): Promise<any> => {
       return await createMutation({
         name: data.name,
         industry: data.industry,
@@ -81,7 +81,7 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
     async (
       id: Id<"crmCompanies">,
       data: Partial<CompanyFormData>
-    ): Promise<Id<"crmCompanies">> => {
+    ): Promise<any> => {
       return await updateMutation({
         id,
         ...data,

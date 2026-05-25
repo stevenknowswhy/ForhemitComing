@@ -41,7 +41,7 @@ export const initializeDeal = mutation({
 
       fees: {
         ...fees,
-        tier: breakdown.tier,
+        tier: String(breakdown.tier),
         ebitda: args.ebitda,
         totalFee: breakdown.totalFee,
         stewardshipAnnual: breakdown.stewardshipAnnual,

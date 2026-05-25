@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Honest Review</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.obj-q { font-family: var(--ff-display); font-size: 0.9rem; font-weight: 400; color: #111; margin-bottom: 0.5rem; font-style: italic; }
+.obj-a { font-size: 0.8rem; font-weight: 300; line-height: 1.8; color: #333; margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--line); }
+.obj-a:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Honest Review</div>
+  <div class="dst">Candid Assessment for {{companyName}}</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Prepared By</div><div class="cvc-v">Forhemit Stewardship</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{generatedDate}}</div></div>
+  </div>
+
+  <!-- Intro -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">A Note on Candor</span></div><div class="sb">
+    <p>Dear {{sellerName}},</p>
+    <p>This document is intentionally candid. Most transaction intermediaries will tell you only what you want to hear. We believe you deserve better. Below we address the objections, fears, and hopes that every business owner faces when considering an ESOP transition &#8212; honestly, without spin.</p>
+    <p>Our goal is not to sell you on anything. It is to ensure that if we move forward together, you do so with eyes wide open.</p>
+  </div></div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Common Seller Objections</span></div><div class="sb">
+    <p>These are the objections we hear most often from business owners considering an ESOP. We take every one of them seriously.</p>
+
+    <div class="obj-q">&#8220;I will lose control of my company.&#8221;</div>
+    <div class="obj-a">This is the most common concern, and it is partially valid. In an ESOP, the trust legally owns the shares. However, the existing management team &#8212; typically including you &#8212; continues to run the company day to day. The trustee has a fiduciary duty to employees, not a management mandate. In practice, most selling owners retain operational control for years after the transition. Where you will lose unilateral control is on major corporate actions (sale, merger, dissolution) that require trustee approval. We consider this a feature, not a bug &#8212; it protects the employees whose retirement depends on the company.</div>
+
+    <div class="obj-q">&#8220;The valuation will be lower than a private sale.&#8221;</div>
+    <div class="obj-a">Sometimes yes, sometimes no. ESOP valuations are set by independent appraisers using IRC &#167;401(a)(28) standards, which require fair market value &#8212; not strategic value. A strategic buyer may pay a premium for synergies. However, the tax benefits of an ESOP (Section 1042 deferral, corporate deductions for principal and interest) often make the net after-tax proceeds competitive with or exceeding a taxable sale. We model this honestly for every deal and will show you the numbers before you commit to anything.</div>
+
+    <div class="obj-q">&#8220;This is too complicated and will take too long.&#8221;</div>
+    <div class="obj-a">An ESOP transaction is more complex than a typical asset sale. There are regulatory requirements, fiduciary obligations, and multiple advisors involved. Our typical timeline from engagement to closing is 120 days. We maintain a structured calendar with clear milestones and gate passages to keep the process on track. Complexity is real, but it is also the reason ESOPs have meaningful protections for everyone involved.</div>
+
+    <div class="obj-q">&#8220;My employees cannot run the business without me.&#8221;</div>
+    <div class="obj-a">This is worth examining honestly. If the business truly cannot function without a single person, that is a valuation and risk problem regardless of exit type. An ESOP transition incentivizes building a management team that can operate independently. We often find that owners underestimate their team. The transition period (typically 2&#8211;5 years) gives you time to develop successors. If you are right and the team is not ready, we will tell you that too.</div>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Legitimate Fears</span></div><div class="sb">
+    <p>Not all concerns are objections. Some are real risks that deserve honest acknowledgment.</p>
+
+    <div class="obj-q">&#8220;What if the ESOP fails and my employees lose their retirement?&#8221;</div>
+    <div class="obj-a">This is a real risk. If the company cannot service the debt used to finance the ESOP, the trust assets decline and employee accounts lose value. This is the same risk that exists in any leveraged transaction. Mitigating factors include conservative leverage ratios (we target a debt service coverage ratio above 1.5x), diversification provisions that allow employees to sell shares after a holding period, and the fact that ESOP companies historically outperform comparable non-ESOP companies on retention and productivity. But the risk is real and we will not pretend otherwise.</div>
+
+    <div class="obj-q">&#8220;What if the tax benefits change?&#8221;</div>
+    <div class="obj-a">The ESOP tax benefits under IRC &#167;1042 and the deduction for ESOP contributions are established law, but tax law can change. A future Congress could modify or eliminate these provisions. We view the current tax treatment as a strong incentive, not a permanent guarantee. If the tax code changes materially, it could affect the net economics of ESOPs relative to other exit strategies. This is a systemic risk that applies to all tax-motivated transactions.</div>
+
+    <div class="obj-q">&#8220;What if I need liquidity that the ESOP structure cannot provide?&#8221;</div>
+    <div class="obj-a">ESOP transactions provide liquidity at closing, but ongoing liquidity depends on the company's ability to repurchase shares from departing employees and the annual independent valuation. If you retain a significant stake, your liquidity is tied to the company's performance and the repurchase obligation schedule. This is different from a full cash sale. We will model your personal liquidity needs against the ESOP structure before recommending it.</div>
+
+    <div class="obj-q">&#8220;What if the DOL challenges the transaction?&#8221;</div>
+    <div class="obj-a">The Department of Labor has become more active in reviewing ESOP transactions, particularly around valuation and fiduciary conduct. A DOL investigation is costly and disruptive even if you prevail. Mitigating factors include using a truly independent trustee, obtaining a robust valuation from a qualified appraiser, and documenting the process thoroughly. We work with ERISA counsel experienced in DOL matters and structure every transaction to withstand scrutiny.</div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Hopes and Realistic Outcomes</span></div><div class="sb">
+    <p>ESOPs are often marketed with aspirational language. Here is what the evidence actually supports.</p>
+
+    <div class="co"><strong>What the data shows:</strong> ESOP companies have 25% higher median job tenure, are 2.5x less likely to lay off employees during recessions, and generate 8&#8211;12% higher annual productivity growth compared to non-ESOP peers. These are meaningful advantages, but they are not guarantees.</div>
+
+    <div class="obj-q">&#8220;My employees will be more motivated as owners.&#8221;</div>
+    <div class="obj-a">The research is mixed. Ownership alone does not create motivation. Ownership combined with transparent communication, profit sharing, and genuine participation in decision-making does. An ESOP without an ownership culture is just a retirement plan. We will work with you to build the cultural infrastructure that makes ownership real, but it requires ongoing effort from management.</div>
+
+    <div class="obj-q">&#8220;The company will perform better as an ESOP.&#8221;</div>
+    <div class="obj-a">Aggregate data supports this, but your company is not the aggregate. Performance improvements depend on management quality, market conditions, and the degree to which employees are engaged as owners. We have seen ESOPs outperform expectations and we have seen them underperform. Our commitment is to give you honest projections based on your specific business, not industry averages dressed up as promises.</div>
+
+    <div class="obj-q">&#8220;I will get a fair price and a smooth transition.&#8221;</div>
+    <div class="obj-a">Fair price: yes, by legal requirement. The independent appraisal process exists to ensure fair market value. Smooth transition: that depends on preparation. The 120-day process is designed to surface and resolve issues before closing. Smoothness correlates directly with how well-prepared the company is and how honestly information flows between parties. We will be direct with you about readiness at every stage.</div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Fees</span></div><div class="sb">
+    <p>We believe in transparent pricing. Our fee structure is designed to align our incentives with yours.</p>
+
+    <div class="fr"><label>Engagement fee</label><span style="flex:1;">{{engagementFee}}</span></div>
+    <div class="fr"><label>Success fee</label><span style="flex:1;">{{successFee}}</span></div>
+    <div class="fr"><label>Trustee fees</label><span style="flex:1;">{{trusteeFees}}</span></div>
+    <div class="fr"><label>Legal (ERISA counsel)</label><span style="flex:1;">{{legalFees}}</span></div>
+    <div class="fr"><label>Appraiser / QofE</label><span style="flex:1;">{{appraisalFees}}</span></div>
+
+    <div class="co"><strong>A note on negotiation:</strong> All fees listed above reflect standard terms. We recognize that every transaction is unique and we are prepared to discuss modifications that make sense for your specific situation. If the numbers above do not work for you, tell us. We would rather find a structure that works than lose a good deal over fees.</div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">What We Need from You</span></div><div class="sb">
+    <p>An ESOP transaction is a partnership. For it to work, we need certain things from you.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">01</span><span><strong>Honesty about the business.</strong> We will discover problems during diligence. It is far better for you to surface them early than for us to find them late. Surprises erode trust and delay closings.</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>Commitment to the timeline.</strong> A 120-day close requires timely document production, responsive communication, and willingness to make decisions under pressure. If you cannot commit to this pace, we should discuss a longer timeline up front.</span></div>
+      <div class="si"><span class="si-n">03</span><span><strong>Engagement with your team.</strong> Your employees are the beneficiaries of this transaction. They need to hear about the ESOP from you, not from a press release. We will help you with communication, but you need to be present.</span></div>
+      <div class="si"><span class="si-n">04</span><span><strong>Financial transparency.</strong> We need access to clean financials, tax returns, and operational data. If your books need cleanup, we can recommend QofE professionals, but the data must be forthcoming.</span></div>
+      <div class="si"><span class="si-n">05</span><span><strong>Realistic expectations.</strong> We will give you honest numbers. If the valuation does not meet your expectations, we will explain why and discuss alternatives. What we will not do is inflate numbers to win your business.</span></div>
+    </div>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This document is for {{sellerName}} only. Do not distribute.</div>
+  </div>
+</div>
+
+</body>
+</html>

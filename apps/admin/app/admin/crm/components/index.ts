@@ -9,3 +9,4 @@ export * from "./views";
 
 export { CompanyDetailPanel } from "./CompanyDetailPanel";
 export { CompanyModal } from "./CompanyModal";
+export { DealSummary } from "./DealSummary";

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Monthly COOP Check-In Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root {
+  --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb;
+  --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff;
+  --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px;
+}
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Monthly COOP Check-In</div>
+  <div class="dst">Agenda for {{meetingDate}}</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Stewardship Month</div><div class="cvc-v">Month {{monthNumber}} of {{totalMonths}}</div></div>
+    <div class="cvc"><div class="cvc-l">Meeting Time</div><div class="cvc-v">{{meetingTime}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Meeting Agenda</span></div><div class="sb">
+    <p>Dear {{sellerName}},</p>
+    <p>Below is the agenda for our monthly COOP stewardship check-in. Please review and let us know if you would like to add any items.</p>
+
+    <div class="sl">
+      <div class="si"><span class="si-n">01</span><span><strong>Opening &amp; Review</strong> (10 min) — Review of action items from last month</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>Track 1: People</strong> (15 min) — {{track1Agenda}}</span></div>
+      <div class="si"><span class="si-n">03</span><span><strong>Track 2: Systems</strong> (15 min) — {{track2Agenda}}</span></div>
+      <div class="si"><span class="si-n">04</span><span><strong>Track 3: Financial</strong> (15 min) — {{track3Agenda}}</span></div>
+      <div class="si"><span class="si-n">05</span><span><strong>Track 4: Governance</strong> (15 min) — {{track4Agenda}}</span></div>
+      <div class="si"><span class="si-n">06</span><span><strong>Challenges &amp; Blockers</strong> (10 min) — Any issues requiring resolution</span></div>
+      <div class="si"><span class="si-n">07</span><span><strong>Next Month Priorities</strong> (10 min) — Key goals and action items for next month</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Track Progress Summary</span></div><div class="sb">
+    <div class="fr"><label>Track 1: People</label><span style="flex:1;">{{track1Progress}}</span></div>
+    <div class="fr"><label>Track 2: Systems</label><span style="flex:1;">{{track2Progress}}</span></div>
+    <div class="fr"><label>Track 3: Financial</label><span style="flex:1;">{{track3Progress}}</span></div>
+    <div class="fr"><label>Track 4: Governance</label><span style="flex:1;">{{track4Progress}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Action Items from Last Month</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>{{actionItem1}}:</strong> {{actionItem1Status}}</span></div>
+      {{#if actionItem2}}<div class="si"><span class="si-n">B.</span><span><strong>{{actionItem2}}:</strong> {{actionItem2Status}}</span></div>{{/if}}
+      {{#if actionItem3}}<div class="si"><span class="si-n">C.</span><span><strong>{{actionItem3}}:</strong> {{actionItem3Status}}</span></div>{{/if}}
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Pre-Meeting Preparation</span></div><div class="sb">
+    <p>To make the most of our time together, please:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Review:</strong> Review the enclosed quarterly report (if applicable)</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Prepare:</strong> Prepare updates on any items you are responsible for</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Questions:</strong> Compile any questions or concerns you would like to discuss</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Contact</span></div><div class="sb">
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Stewardship Lead</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Monthly COOP check-in — {{meetingDate}}</div>
+  </div>
+</div>
+</body>
+</html>

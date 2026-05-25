@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — EIDL Lien Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">EIDL Lien Tracker</div>
+  <div class="dst">Internal — SBA Economic Injury Disaster Loan Status</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Status</div><div class="cvc-v">{{eidlStatus}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">EIDL Loan Details</span></div><div class="sb">
+    <div class="fr"><label>EIDL loan number</label><span style="flex:1;">{{eidlLoanNumber}}</span></div>
+    <div class="fr"><label>Original amount</label><span style="flex:1;">{{eidlOriginalAmount}}</span></div>
+    <div class="fr"><label>Current balance</label><span style="flex:1;">{{eidlCurrentBalance}}</span></div>
+    <div class="fr"><label>Interest rate</label><span style="flex:1;">{{eidlInterestRate}}</span></div>
+    <div class="fr"><label>Monthly payment</label><span style="flex:1;">{{eidlMonthlyPayment}}</span></div>
+    <div class="fr"><label>Maturity date</label><span style="flex:1;">{{eidlMaturityDate}}</span></div>
+    <div class="co"><strong>Why this matters:</strong> EIDL loans over $25,000 are secured by a UCC-1 blanket lien on all business assets. This lien must be released or subordinated before the ESOP transaction can close. The SBA must consent to the change in ownership structure.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Lien Status</span></div><div class="sb">
+    <div class="fr"><label>UCC-1 filed</label><span style="flex:1;">{{ucc1Filed}}</span></div>
+    <div class="fr"><label>UCC-1 filing number</label><span style="flex:1;">{{ucc1FilingNumber}}</span></div>
+    <div class="fr"><label>Filed with</label><span style="flex:1;">{{ucc1FiledWith}}</span></div>
+    <div class="fr"><label>Lien covers</label><span style="flex:1;">All business assets (blanket lien)</span></div>
+    <div class="fr"><label>SBA contact</label><span style="flex:1;">{{sbaContactName}} — {{sbaContactPhone}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Payoff / Release Options</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Full payoff.</strong> Pay the EIDL balance in full at or before closing. SBA releases UCC-1 within 30 days of payoff. Cleanest option — no lien at closing.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>SBA subordination.</strong> Request SBA to subordinate the EIDL lien to the new SBA 7(a) loan. Requires SBA approval. Processing time: 30–60 days. The EIDL remains in place but is junior to the 7(a) loan.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>SBA consent to transfer.</strong> Request SBA consent to transfer the EIDL obligation to the post-ESOP entity. The C-Corp assumes the EIDL debt. Requires SBA approval and may affect 7(a) eligibility.</span></div>
+    </div>
+    <div class="co"><strong>Recommendation:</strong> {{recommendedOption}}. Reason: {{recommendationReason}}</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Action Items</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Request payoff letter.</strong> Contact SBA to request a formal payoff letter with a good-through date. Owner: {{action1Owner}} — Due: {{action1Due}}</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>File subordination request (if applicable).</strong> Submit SBA Form 159 and supporting documents. Owner: {{action2Owner}} — Due: {{action2Due}}</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Coordinate with 7(a) lender.</strong> Confirm that the EIDL lien status is acceptable to the 7(a) lender. Owner: {{action3Owner}} — Due: {{action3Due}}</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>UCC-3 termination (after payoff).</strong> File UCC-3 termination statement after EIDL is paid off. Owner: {{action4Owner}} — Due: {{action4Due}}</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">INTERNAL USE ONLY</div>
+  </div>
+</div>
+</body>
+</html>

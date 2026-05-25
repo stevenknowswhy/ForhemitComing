@@ -89,7 +89,7 @@ export const seedTriggerMetadata = mutation({
           createdAt: now,
           updatedAt: now,
         });
-        template = await ctx.db.get(newId);
+        template = await ctx.db.get(newId) ?? undefined;
         if (!template) {
           skipped++;
           continue;
