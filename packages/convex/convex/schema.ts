@@ -240,6 +240,46 @@ export default defineSchema({
     nextStepDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
     expectedCloseDate: v.optional(v.string()),
 
+    // Deal Engine Gates (4 hard-stop checkpoints)
+    gates: v.optional(v.object({
+      gate1: v.optional(v.object({
+        passed: v.boolean(),
+        passedAt: v.optional(v.number()),
+      })),
+      gate2: v.optional(v.object({
+        passed: v.boolean(),
+        passedAt: v.optional(v.number()),
+      })),
+      gate3: v.optional(v.object({
+        passed: v.boolean(),
+        passedAt: v.optional(v.number()),
+      })),
+      gate4: v.optional(v.object({
+        passed: v.boolean(),
+        passedAt: v.optional(v.number()),
+      })),
+    })),
+
+    // Deal Engine Fields
+    ref: v.optional(v.string()), // Deal reference number
+    stageEnteredAt: v.optional(v.number()), // Timestamp when stage was entered
+    fees: v.optional(v.object({
+      tier: v.string(),
+      ebitda: v.optional(v.number()),
+      totalFee: v.optional(v.number()),
+      stewardshipAnnual: v.optional(v.number()),
+      stewardshipTranchesPaid: v.optional(v.number()),
+      stewardshipTotalTranches: v.optional(v.number()),
+    })),
+    sentAt: v.optional(v.number()), // Timestamp when document was sent
+
+    // Contact IDs for different roles
+    sellerContactId: v.optional(v.id("crmContacts")),
+    brokerContactId: v.optional(v.id("crmContacts")),
+    lenderContactId: v.optional(v.id("crmContacts")),
+    trusteeContactId: v.optional(v.id("crmContacts")),
+    counselContactId: v.optional(v.id("crmContacts")),
+
     // Notes
     notes: v.optional(v.string()),
 
@@ -523,4 +563,64 @@ export default defineSchema({
     .index("by_company", ["companyId"])
     .index("by_type", ["type"])
     .index("by_company_type", ["companyId", "type"]),
+
+  // Template definitions — maps to HTML templates in packages/convex/templates/
+  templates: defineTable({
+    title: v.string(),
+    category: v.string(), // "document" | "communication" | "internal"
+    lifecycleStage: v.string(), // "first-touch" | "qualification" | "engagement" | "diligence" | "closing" | "post-close"
+    audience: v.array(v.string()), // ["seller"], ["broker"], ["internal"], etc.
+    status: v.string(), // "exists" | "gap" | "partial"
+    description: v.string(),
+    isRequired: v.boolean(),
+    requiresSignature: v.boolean(),
+    isRecurring: v.optional(v.boolean()),
+    recurrenceRule: v.optional(v.string()), // "weekly" | "monthly" | "quarterly"
+    createdAt: v.number(),
+  })
+    .index("by_title", ["title"])
+    .index("by_stage", ["lifecycleStage", "status"]),
+
+  // Stage requirements — maps templates to pipeline stages for auto-creation
+  stageRequirements: defineTable({
+    stage: v.string(),
+    templateId: v.id("templates"),
+    requiredForAudience: v.array(v.string()),
+    order: v.number(),
+    autoCreate: v.boolean(),
+    recurrenceRule: v.optional(v.string()),
+    // Trigger automation fields
+    trigger: v.optional(v.string()),
+    triggerGate: v.optional(v.string()),
+    daysOffset: v.optional(v.number()),
+  })
+    .index("by_stage", ["stage"]),
+
+  // Workflow tasks — auto-created from stage requirements per deal
+  workflowTasks: defineTable({
+    templateId: v.id("templates"),
+    companyId: v.id("crmCompanies"),
+    contactId: v.optional(v.id("crmContacts")),
+    direction: v.union(v.literal("outbound"), v.literal("inbound")),
+    status: v.union(
+      v.literal("pending"),
+      v.literal("completed"),
+      v.literal("skipped"),
+      v.literal("cancelled")
+    ),
+    dueDate: v.number(),
+    recurrenceRule: v.optional(v.string()),
+    recurrenceParentId: v.optional(v.id("workflowTasks")),
+    recurrenceInstanceNumber: v.optional(v.number()),
+    completedAt: v.optional(v.number()),
+    completedBy: v.optional(v.string()),
+    notes: v.optional(v.string()),
+    priority: v.optional(v.union(v.literal("high"), v.literal("normal"), v.literal("low"))),
+    createdAt: v.number(),
+    updatedAt: v.optional(v.number()),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_parent", ["recurrenceParentId"])
+    .index("by_company_template", ["companyId", "templateId"])
+    .index("by_status", ["status"]),
 });

@@ -13,5 +13,10 @@
   },
   "devDependencies": {
     "turbo": "^2.4.4"
+  },
+  "pnpm": {
+    "overrides": {
+      "effect": "^3.20.1"
+    }
   }
 }
