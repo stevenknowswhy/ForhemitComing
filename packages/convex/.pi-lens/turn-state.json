@@ -1,0 +1,248 @@
+{
+  "files": {
+    "convex/lib/requireAuth.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 19
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-25T21:09:26.804Z"
+    },
+    "convex/auditLogs.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 126
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:09:26.891Z"
+    },
+    "convex/agentOutputs.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 188
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:09:26.977Z"
+    },
+    "convex/agentQueue.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 361
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:09:27.059Z"
+    },
+    "convex/documentTemplates.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 464
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:17:02.555Z"
+    },
+    "convex/feeCalculator.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 255
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:17:02.642Z"
+    },
+    "convex/stages.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 256
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:09.941Z"
+    },
+    "convex/templateRules.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 159
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:09.691Z"
+    },
+    "convex/triggers.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 187
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:09.776Z"
+    },
+    "convex/workflowService.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 186
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:09.858Z"
+    },
+    "convex/workflowTasks.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 494
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:10.030Z"
+    },
+    "convex/companyFinancials.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 101
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:45.699Z"
+    },
+    "convex/crmActivities.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 199
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:45.946Z"
+    },
+    "convex/crmContacts.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 171
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:45.863Z"
+    },
+    "convex/crmTasks.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 248
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:46.114Z"
+    },
+    "convex/dealDocuments.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 97
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:45.782Z"
+    },
+    "convex/dealEngine.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 161
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:14:46.029Z"
+    },
+    "convex/gates.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 276
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:17:02.728Z"
+    },
+    "convex/generatedDocuments.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 70
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:17:02.813Z"
+    },
+    "convex/notes.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 246
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:17:02.898Z"
+    },
+    "convex/emailEvents.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 199
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:22:02.808Z"
+    },
+    "convex/formSubmissions.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 120
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:22:02.635Z"
+    },
+    "convex/documentPipeline.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 327
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:22:02.896Z"
+    },
+    "convex/opensign.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 197
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-25T21:22:02.722Z"
+    }
+  },
+  "turnCycles": 0,
+  "maxCycles": 3,
+  "lastUpdated": "2026-05-25T21:22:02.896Z",
+  "sessionId": "lens-mplpn8up-412b1277"
+}
