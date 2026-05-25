@@ -576,6 +576,10 @@ export default defineSchema({
     requiresSignature: v.boolean(),
     isRecurring: v.optional(v.boolean()),
     recurrenceRule: v.optional(v.string()), // "weekly" | "monthly" | "quarterly"
+    source: v.optional(v.string()), // e.g. "auto-generated", "imported"
+    content: v.optional(v.string()), // template body content
+    version: v.optional(v.number()),
+    updatedAt: v.optional(v.number()),
     createdAt: v.number(),
   })
     .index("by_title", ["title"])
@@ -593,8 +597,13 @@ export default defineSchema({
     trigger: v.optional(v.string()),
     triggerGate: v.optional(v.string()),
     daysOffset: v.optional(v.number()),
+    // Additional fields used by deal engine
+    feeMilestone: v.optional(v.string()),
+    autoSend: v.optional(v.boolean()),
+    blockingGate: v.optional(v.string()),
   })
-    .index("by_stage", ["stage"]),
+    .index("by_stage", ["stage"])
+    .index("by_trigger", ["trigger"]),
 
   // Workflow tasks — auto-created from stage requirements per deal
   workflowTasks: defineTable({
@@ -604,9 +613,14 @@ export default defineSchema({
     direction: v.union(v.literal("outbound"), v.literal("inbound")),
     status: v.union(
       v.literal("pending"),
+      v.literal("sent"),
+      v.literal("delivered"),
+      v.literal("opened"),
+      v.literal("received"),
       v.literal("completed"),
       v.literal("skipped"),
-      v.literal("cancelled")
+      v.literal("cancelled"),
+      v.literal("overdue")
     ),
     dueDate: v.number(),
     recurrenceRule: v.optional(v.string()),
@@ -614,13 +628,74 @@ export default defineSchema({
     recurrenceInstanceNumber: v.optional(v.number()),
     completedAt: v.optional(v.number()),
     completedBy: v.optional(v.string()),
+    sentAt: v.optional(v.number()),
+    receivedAt: v.optional(v.number()),
     notes: v.optional(v.string()),
+    privateNotes: v.optional(v.string()),
+    meetingAgenda: v.optional(v.string()),
+    meetingHeldAt: v.optional(v.number()),
     priority: v.optional(v.union(v.literal("high"), v.literal("normal"), v.literal("low"))),
+    // Document/e-sign fields
+    resendId: v.optional(v.string()),
+    opensignEnvelopeId: v.optional(v.string()),
+    opensignStatus: v.optional(v.string()),
+    signedDocumentUrl: v.optional(v.string()),
+    responseData: v.optional(v.any()),
     createdAt: v.number(),
     updatedAt: v.optional(v.number()),
   })
     .index("by_company", ["companyId"])
     .index("by_parent", ["recurrenceParentId"])
     .index("by_company_template", ["companyId", "templateId"])
-    .index("by_status", ["status"]),
+    .index("by_status", ["status"])
+    .index("by_opensign", ["opensignEnvelopeId"]),
+
+  // Notes — general-purpose notes on companies, contacts, and tasks
+  notes: defineTable({
+    companyId: v.id("crmCompanies"),
+    contactId: v.optional(v.id("crmContacts")),
+    authorId: v.optional(v.id("users")),
+    content: v.string(),
+    type: v.string(), // "internal" | "external" | "meeting" etc.
+    isPrivate: v.optional(v.boolean()),
+    workflowTaskId: v.optional(v.id("workflowTasks")),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_company", ["companyId"])
+    .index("by_contact", ["contactId"])
+    .index("by_task", ["workflowTaskId"])
+    .index("by_type", ["type"]),
+
+  // Email events — log of all inbound/outbound emails
+  emailEvents: defineTable({
+    direction: v.string(), // "outbound" | "inbound"
+    from: v.string(),
+    to: v.string(),
+    subject: v.string(),
+    templateId: v.optional(v.string()),
+    resendId: v.optional(v.string()),
+    status: v.string(), // "sent" | "received" | "bounced" | "delivered" etc.
+    relatedCompanyId: v.optional(v.id("crmCompanies")),
+    relatedContactId: v.optional(v.id("crmContacts")),
+    metadata: v.optional(v.any()),
+    createdAt: v.number(),
+  })
+    .index("by_createdAt", ["createdAt"])
+    .index("by_company", ["relatedCompanyId"])
+    .index("by_template", ["templateId"])
+    .index("by_from", ["from"])
+    .index("by_to", ["to"]),
+
+  // Queue tasks — trigger-based task queue
+  queueTasks: defineTable({
+    companyId: v.id("crmCompanies"),
+    templateId: v.id("templates"),
+    priority: v.string(), // "normal" | "high" | "low"
+    status: v.string(), // "pending" | "completed" | "cancelled"
+    metadata: v.optional(v.any()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_company_template", ["companyId", "templateId"]),
 });
