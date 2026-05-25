@@ -67,7 +67,6 @@ export async function sendEmail(payload: EmailPayload): Promise<{ success: boole
       return { success: false, error: data.message || "Failed to send email" };
     }
 
-    console.log("Email sent successfully:", data.id);
     return { success: true, id: data.id };
   } catch (error) {
     console.error("Error sending email:", error);

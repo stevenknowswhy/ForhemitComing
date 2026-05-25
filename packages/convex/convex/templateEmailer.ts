@@ -81,8 +81,6 @@ export const sendTemplateEmail = action({
   handler: async (ctx, args): Promise<{ success: boolean; emailId?: string; error?: string }> => {
     const { to, subject, html, from, attachments, templateId, templateVersion } = args;
 
-    console.log(`Sending email to ${to}...`);
-
     try {
       const emailResult = await ctx.runAction(
         api.emails.sendTemplateEmailAction,
@@ -102,7 +100,6 @@ export const sendTemplateEmail = action({
         return { success: false, error: emailResult.error };
       }
 
-      console.log(`Email sent successfully to ${to}`);
       return { success: true, emailId: emailResult.id };
     } catch (error) {
       console.error("Email send error:", error);
