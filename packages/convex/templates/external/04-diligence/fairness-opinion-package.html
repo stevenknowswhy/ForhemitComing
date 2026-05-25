@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Fairness Opinion Package</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Fairness Opinion Package</div>
+  <div class="dst">Trustee's Independent Financial Advisor Review</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Trustee</div><div class="cvc-v">{{trusteeName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Financial Advisor</div><div class="cvc-v">{{financialAdvisorName}}</div></div>
+  </div>
+
+  <!-- § 01 Engagement Summary -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Engagement Summary</span></div><div class="sb">
+    <p>The independent financial advisor was engaged by the ESOP trustee to render a fairness opinion in connection with the proposed acquisition of 100% of the outstanding stock of {{companyName}} by the {{companyName}} Employee Stock Ownership Plan.</p>
+    <div class="fr"><label>Engaging Party</label><span style="flex:1;">{{trusteeName}}, Independent ESOP Trustee</span></div>
+    <div class="fr"><label>Engagement Date</label><span style="flex:1;">{{engagementDate}}</span></div>
+    <div class="fr"><label>Opinion Date</label><span style="flex:1;">{{opinionDate}}</span></div>
+    <div class="fr"><label>Scope of Work</span><span style="flex:1;">Fairness opinion — financial terms of the proposed transaction</span></div>
+    <div class="co"><strong>Independence Confirmation:</strong> The financial advisor confirms that it has no material financial interest in the outcome of the transaction, has not provided investment banking services to the company within the past two years, and is independent of all parties to the transaction.</div>
+  </div></div>
+
+  <!-- § 02 Transaction Description -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Transaction Description</span></div><div class="sb">
+    <p>The proposed transaction involves the acquisition by the {{companyName}} Employee Stock Ownership Plan of 100% of the outstanding equity interests in {{companyName}}, a {{state}}-based company operating in the {{industry}} industry.</p>
+    <div class="fr"><label>Acquirer</label><span style="flex:1;">{{companyName}} Employee Stock Ownership Plan</span></div>
+    <div class="fr"><label>Seller</label><span style="flex:1;">{{sellerName}}</span></div>
+    <div class="fr"><label>Purchase Price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+    <div class="fr"><label>SBA Loan</label><span style="flex:1;">{{sbaLoanAmount}} — {{sbaLenderName}}</span></div>
+    <div class="fr"><label>Seller Note</label><span style="flex:1;">{{sellerNoteAmount}} at {{sellerNoteRate}} over {{sellerNoteTerm}}</span></div>
+    <div class="fr"><label>Closing Date</label><span style="flex:1;">{{closingDate}}</span></div>
+    <div class="co"><strong>Transaction Structure:</strong> The acquisition is financed through a combination of SBA 7(a) senior debt and a subordinated seller note. The seller note is fully subordinated to the SBA loan and includes a conversion feature or repayment schedule consistent with ESOP debt service capacity.</div>
+  </div></div>
+
+  <!-- § 03 Valuation Methodology -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Valuation Methodology</span></div><div class="sb">
+    <p>The financial advisor employed multiple valuation approaches to assess the fairness of the purchase price to ESOP participants. The analysis was based on the Quality of Earnings report, management financial projections, and comparable market data.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Income Approach.</strong> Discounted cash flow analysis using management projections for {{projectionYears}} years and a terminal growth rate of {{terminalGrowthRate}}. Discount rate applied: {{discountRate}}.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Market Approach — Guideline Companies.</strong> Analysis of {{comparableCompanyCount}} comparable publicly traded companies in the {{industry}} sector. Valuation multiples applied to normalized EBITDA and revenue.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Market Approach — Precedent Transactions.</strong> Review of {{precedentTransactionCount}} comparable acquisition transactions within the past {{precedentPeriod}}. Transaction multiples adjusted for size, growth, and profitability differences.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Asset Approach.</strong> Net asset value considered as a floor valuation, particularly relevant for tangible-asset-heavy operations. Adjusted book value of {{adjustedBookValue}}.</span></div>
+    </div>
+    <div class="co"><strong>QofE Adjustments Reviewed:</strong> The financial advisor reviewed the independent Quality of Earnings report, which identified {{qofeAdjustmentCount}} material adjustments to reported EBITDA. Normalized EBITDA of {{normalizedEBITDA}} was used as the basis for valuation.</div>
+  </div></div>
+
+  <!-- § 04 Fairness Conclusion -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Fairness Conclusion</span></div><div class="sb">
+    <p>Based upon and subject to the assumptions, limitations, and qualifications set forth herein, it is the opinion of the financial advisor that, as of the date of this opinion, the consideration to be paid by the ESOP for 100% of the outstanding stock of {{companyName}} is fair, from a financial point of view, to the participants of the ESOP.</p>
+    <div class="co"><strong>Conclusion Rationale:</strong> {{fairnessRationale}}</div>
+    <div class="fr"><label>Purchase Price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+    <div class="fr"><label>Implied EBITDA Multiple</label><span style="flex:1;">{{impliedMultiple}}</span></div>
+    <div class="fr"><label>Fair Value Range</label><span style="flex:1;">{{fairValueLow}} — {{fairValueHigh}}</span></div>
+    <div class="fr"><label>Premium / (Discount)</label><span style="flex:1;">{{premiumDiscount}}</span></div>
+  </div></div>
+
+  <!-- § 05 Key Assumptions -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Key Assumptions</span></div><div class="sb">
+    <p>The fairness opinion is based on the following key assumptions, representations, and projections:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Financial Projections.</strong> Management's financial projections for fiscal years {{projectionStartYear}} through {{projectionEndYear}} were reviewed and relied upon. The advisor has not independently verified these projections.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Discount Rate.</strong> A weighted average cost of capital of {{discountRate}} was applied, reflecting the company's size, industry risk, capital structure, and projected growth profile.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Terminal Value.</strong> A terminal growth rate of {{terminalGrowthRate}} was assumed, consistent with long-term industry growth expectations and GDP growth assumptions.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Industry Outlook.</strong> The {{industry}} industry is expected to {{industryOutlook}} based on current market conditions and analyst forecasts.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Management Representations.</strong> The advisor relied upon representations from management regarding the accuracy and completeness of financial data, absence of undisclosed liabilities, and reasonableness of operating assumptions.</span></div>
+    </div>
+  </div></div>
+
+  <!-- § 06 Limitations & Qualifications -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Limitations &amp; Qualifications</span></div><div class="sb">
+    <p>The fairness opinion is subject to the following limitations and qualifications:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Scope Limitation.</strong> This opinion addresses only the fairness, from a financial point of view, of the consideration to be paid by the ESOP. It does not address the fairness of any other terms of the transaction, the underlying decision to establish the ESOP, or any tax, legal, or accounting consequences.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Reliance on Management Data.</strong> The financial advisor has relied upon the accuracy and completeness of financial statements, projections, and other information provided by management and third parties without independent verification.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Market Conditions.</strong> Valuation analysis reflects market conditions as of the opinion date. Material changes in economic conditions, industry dynamics, or company performance may affect the conclusions reached.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Not a Valuation or Solvency Opinion.</strong> This opinion does not constitute a valuation of the company or any of its securities, nor does it opine on the solvency of the company or the ESOP's ability to meet its debt obligations.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>No Third-Party Reliance.</strong> This opinion is provided solely for the benefit of the trustee in connection with the proposed transaction and may not be relied upon by any other party without the prior written consent of the financial advisor.</span></div>
+    </div>
+  </div></div>
+
+  <!-- § 07 Supporting Analysis -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Supporting Analysis</span></div><div class="sb">
+    <p>The following supporting analyses and exhibits are attached to or referenced in this opinion package:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Exhibit A — Guideline Company Analysis.</strong> Comparable public company trading multiples, selected companies, and implied valuation range.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Exhibit B — Discounted Cash Flow Analysis.</strong> Management projection assumptions, discount rate derivation, terminal value calculation, and present value of projected cash flows.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Exhibit C — Precedent Transaction Analysis.</strong> Selected comparable transactions, transaction multiples, and implied valuation range adjusted for company-specific factors.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Exhibit D — Quality of Earnings Summary.</strong> Normalized EBITDA reconciliation, material adjustments, and working capital analysis.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Exhibit E — Capital Structure Analysis.</strong> Sources and uses, debt service coverage ratios, sensitivity analysis on key assumptions, and repurchase obligation projections.</span></div>
+      <div class="si"><span class="si-n">F.</span><span><strong>Exhibit F — ESOP Affordability Analysis.</strong> Projected debt repayment schedule, repurchase obligation funding, and stress scenarios demonstrating ESOP sustainability.</span></div>
+    </div>
+  </div></div>
+
+  <!-- Signature Block — Financial Advisor -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Financial Advisor</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">{{financialAdvisorName}}<br><span style="font-size:0.78rem;color:var(--muted);">{{financialAdvisorTitle}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Prepared for trustee review only.</div>
+  </div>
+</div>
+
+</body>
+</html>
