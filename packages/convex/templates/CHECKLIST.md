@@ -64,6 +64,8 @@
 | 104 | Broker NDA / confidentiality agreement | broker | ✅ DONE | OpenClaude | Deal flow, referral terms, seller identity protection |
 | 117 | No-fit decline — seller | seller | ✅ DONE | OpenClaude | Polite decline when deal doesn't qualify |
 | 118 | No-fit decline — broker | broker | ✅ DONE | OpenClaude | Professional decline, maintains broker relationship |
+| 119 | Exit strategy benchmark | seller | ✅ DONE | OpenClaude | ESOP vs PE vs strategic sale vs family succession; captures non-financial goals (legacy, employee welfare) |
+| 120 | Employee communications plan | seller, internal | ✅ DONE | OpenClaude | Pre- and post-close messaging framework; guides cultural transition from Day 1 announcement through Year 1 |
 
 ### 03-engagement
 
@@ -86,6 +88,7 @@
 | 106 | NDA (mutual — deal team) | seller, broker, counsel | ✅ DONE | OpenClaude | Covers seller, broker, Forhemit, advisors in shared deal room |
 | 107 | Retainer agreement (company → ERISA counsel) | counsel | ✅ DONE | OpenClaude | Owner-executed; Forhemit not a party — ERISA independence |
 | 108 | Retainer agreement (company → trustee) | trustee | ✅ DONE | OpenClaude | Owner-executed; trustee selection before lender/appraiser contact |
+| 121 | Trustee RFP | trustee | ✅ DONE | OpenClaude | Formal RFP with independence criteria, mandate to document prudent process, fee structure |
 
 ---
 
@@ -107,6 +110,7 @@
 | 58 | Broker pipeline status | broker | ✅ DONE | OpenClaude | Gate milestones |
 | 109 | Turnover cost calculator | seller, trustee, lender | ✅ DONE | OpenClaude | Key man risk quantification for trustee and lender presentations |
 | 110 | Deal economics model (internal) | internal | ✅ DONE | OpenClaude | Full pro forma — EBITDA, debt service, Forhemit fee, net to seller |
+| 122 | Fairness opinion package | trustee, seller | ✅ DONE | OpenClaude | Trustee's financial advisor formal fairness opinion — central fiduciary review, often legally required |
 
 ### 05-closing
 
@@ -117,6 +121,8 @@
 | 61 | Broker commission confirmation | broker | ✅ DONE | OpenClaude | Wire timing |
 | 62 | Employee announcement | seller | ✅ DONE | OpenClaude | ESOP announcement |
 | 63 | Press release | seller | ✅ DONE | OpenClaude | Optional |
+| 123 | First Day as ESOP town hall agenda | seller, internal | ✅ DONE | OpenClaude | Employee-facing meeting agenda + FAQ explaining "what's in it for me" — manages cultural transition |
+| 124 | Trustee welcome letter to employees | trustee, seller | ✅ DONE | OpenClaude | Letter from independent trustee to all employees explaining their ownership rights and protections |
 
 ### 06-post-close
 
@@ -131,6 +137,9 @@
 | 70 | COOP completion letter | seller | ✅ DONE | OpenClaude | Month 24 |
 | 71 | Anniversary note | seller | ✅ DONE | OpenClaude | Year 1 |
 | 72 | Case study request | seller | ✅ DONE | OpenClaude | Anonymized |
+| 125 | Repurchase obligation study | seller, trustee | ✅ DONE | OpenClaude | Formal repurchase liability projection — fundamental for long-term ESOP financial planning |
+| 126 | Distribution policy | seller, trustee | ✅ DONE | OpenClaude | Rules for employee payout timing, vesting, diversification — required for ESOP administration |
+| 127 | ESOP satisfaction survey | seller, internal | ✅ DONE | OpenClaude | Annual employee feedback instrument — measures understanding, satisfaction, engagement with ESOP |
 
 ---
 
@@ -204,13 +213,13 @@
 
 | Status | Count |
 |--------|-------|
-| ✅ DONE | 118 |
+| ✅ DONE | 127 |
 | 🔄 ACCEPTED | 0 |
 | ⏳ IN PROGRESS | 0 |
 | ❌ NOT STARTED | 0 |
-| **Total** | **118** |
+| **Total** | **127** |
 
-All 118 tracked templates are built.
+All 127 tracked templates are built.
 
 ---
 
