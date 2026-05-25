@@ -1,88 +1,101 @@
 "use client";
 
 import React from "react";
-import { RenderedLetter } from "../../types";
+import DOMPurify from "isomorphic-dompurify";
+import type { RenderedLetter } from "../../types";
 
 interface LetterPreviewProps {
-  letter: RenderedLetter;
+	letter: RenderedLetter;
 }
 
 export function LetterPreview({ letter }: LetterPreviewProps) {
-  return (
-    <div className="ilg-letter">
-      {/* Letter Header */}
-      <div className="ilg-letter-header">
-        <div className="ilg-letter-logo-block">
-          <div className="ilg-letter-company">Forhemit</div>
-          <div className="ilg-letter-tagline">Transition Stewardship</div>
-        </div>
-        <div
-          className="ilg-letter-contact-info"
-          dangerouslySetInnerHTML={{
-            __html: `${letter.addressHtml}<br>${letter.senderPhone} &nbsp;|&nbsp; ${letter.senderEmail}<br>${letter.senderWeb}`,
-          }}
-        />
-      </div>
+	return (
+		<div className="ilg-letter">
+			{/* Letter Header */}
+			<div className="ilg-letter-header">
+				<div className="ilg-letter-logo-block">
+					<div className="ilg-letter-company">Forhemit</div>
+					<div className="ilg-letter-tagline">Transition Stewardship</div>
+				</div>
+				<div
+					className="ilg-letter-contact-info"
+					dangerouslySetInnerHTML={{
+						__html: DOMPurify.sanitize(
+							`${letter.addressHtml}<br>${letter.senderPhone} &nbsp;|&nbsp; ${letter.senderEmail}<br>${letter.senderWeb}`,
+						),
+					}}
+				/>
+			</div>
 
-      {/* Date */}
-      <div className="ilg-letter-date">{letter.date}</div>
+			{/* Date */}
+			<div className="ilg-letter-date">{letter.date}</div>
 
-      {/* Recipient */}
-      <div className="ilg-letter-recipient">
-        <div className="ilg-contact-name">{letter.contactName}</div>
-        <div className="ilg-contact-title">{letter.contactTitle}</div>
-        <div className="ilg-contact-company">{letter.contactCompany}</div>
-        <div className="ilg-contact-company">{letter.contactCity}</div>
-      </div>
+			{/* Recipient */}
+			<div className="ilg-letter-recipient">
+				<div className="ilg-contact-name">{letter.contactName}</div>
+				<div className="ilg-contact-title">{letter.contactTitle}</div>
+				<div className="ilg-contact-company">{letter.contactCompany}</div>
+				<div className="ilg-contact-company">{letter.contactCity}</div>
+			</div>
 
-      {/* Subject */}
-      <div className="ilg-letter-subject">{letter.subject}</div>
+			{/* Subject */}
+			<div className="ilg-letter-subject">{letter.subject}</div>
 
-      {/* Body */}
-      <div className="ilg-letter-body">
-        <p>{letter.greeting}</p>
+			{/* Body */}
+			<div className="ilg-letter-body">
+				<p>{letter.greeting}</p>
 
-        <p dangerouslySetInnerHTML={{ __html: letter.opening.replace(/\n/g, "<br>") }} />
+				<p
+					dangerouslySetInnerHTML={{
+						__html: DOMPurify.sanitize(letter.opening.replace(/\n/g, "<br>")),
+					}}
+				/>
 
-        <div className="ilg-section-header">What We Do</div>
-        <p>
-          Forhemit is a stewardship management firm that guides business owners through the full
-          lifecycle of ownership transitions. We combine transaction advisory, operational
-          readiness, and relationship management to deliver outcomes that are financially sound
-          and legacy-conscious. Our work spans acquisitions, divestitures, management buyouts,
-          ESOP advisory, and succession planning — always with the goal of protecting what was
-          built while positioning what comes next.
-        </p>
+				<div className="ilg-section-header">What We Do</div>
+				<p>
+					Forhemit is a stewardship management firm that guides business owners
+					through the full lifecycle of ownership transitions. We combine
+					transaction advisory, operational readiness, and relationship
+					management to deliver outcomes that are financially sound and
+					legacy-conscious. Our work spans acquisitions, divestitures,
+					management buyouts, ESOP advisory, and succession planning — always
+					with the goal of protecting what was built while positioning what
+					comes next.
+				</p>
 
-        <div className="ilg-section-header">{letter.valueHeader}</div>
-        <ul>
-          {letter.valuePoints.map((point, idx) => (
-            <li key={idx}>{point}</li>
-          ))}
-        </ul>
+				<div className="ilg-section-header">{letter.valueHeader}</div>
+				<ul>
+					{letter.valuePoints.map((point, idx) => (
+						<li key={idx}>{point}</li>
+					))}
+				</ul>
 
-        <p dangerouslySetInnerHTML={{ __html: letter.cta.replace(/\n/g, "<br>") }} />
-      </div>
+				<p
+					dangerouslySetInnerHTML={{
+						__html: DOMPurify.sanitize(letter.cta.replace(/\n/g, "<br>")),
+					}}
+				/>
+			</div>
 
-      {/* Sign-off */}
-      <div className="ilg-letter-sign-off">
-        <div className="ilg-sign-close">With appreciation,</div>
-        <div className="ilg-sign-name">{letter.senderName}</div>
-        <div className="ilg-sign-title">
-          {letter.senderTitle} &nbsp;·&nbsp; Forhemit
-        </div>
-        <div className="ilg-sign-contact">
-          {letter.senderPhone}
-          <br />
-          {letter.senderEmail}
-        </div>
-      </div>
+			{/* Sign-off */}
+			<div className="ilg-letter-sign-off">
+				<div className="ilg-sign-close">With appreciation,</div>
+				<div className="ilg-sign-name">{letter.senderName}</div>
+				<div className="ilg-sign-title">
+					{letter.senderTitle} &nbsp;·&nbsp; Forhemit
+				</div>
+				<div className="ilg-sign-contact">
+					{letter.senderPhone}
+					<br />
+					{letter.senderEmail}
+				</div>
+			</div>
 
-      {/* Footer */}
-      <div className="ilg-letter-footer">
-        <span>Forhemit · Transition Stewardship</span>
-        <span>Confidential Introduction</span>
-      </div>
-    </div>
-  );
+			{/* Footer */}
+			<div className="ilg-letter-footer">
+				<span>Forhemit · Transition Stewardship</span>
+				<span>Confidential Introduction</span>
+			</div>
+		</div>
+	);
 }
