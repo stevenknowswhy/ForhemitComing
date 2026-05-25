@@ -114,7 +114,7 @@ export const wireTriggers = mutation({
 		gateName: v.optional(v.string()),
 		newStage: v.optional(v.string()),
 	},
-	handler: async (ctx, args) => {
+	handler: async (ctx, args): Promise<{ created: number; tasks: any[] }> => {
 		await requireAuth(ctx);
 		// 1. Update the appropriate state based on the event
 		if (args.event === "stage_change") {
