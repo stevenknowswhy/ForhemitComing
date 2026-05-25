@@ -34,7 +34,8 @@ export function useCrmStats(): UseCrmStatsReturn {
       Dead: "#ff5f5f",
     };
 
-    return Object.entries(stats.stageDistribution)
+    const stageEntries = Object.entries(stats.stageDistribution ?? {}) as [string, number][];
+    return stageEntries
       .map(([name, count]) => ({
         name,
         count,

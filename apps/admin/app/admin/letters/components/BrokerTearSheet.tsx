@@ -81,7 +81,7 @@ export default function BrokerTearSheet() {
     message: "",
   });
 
-  const sendBrokerEmail = useAction(api.emails.sendBrokerTearSheet);
+  const sendBrokerEmail = useAction(api.brokerEmails.sendBrokerTearSheet);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Two-Track Cost Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.calc-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+.calc-table th { text-align: left; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 400; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.calc-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; }
+.calc-table td:first-child { font-weight: 400; color: #111; }
+.calc-table .amount { text-align: right; font-family: var(--ff-mono); font-size: 0.75rem; }
+.calc-table tr.total td { border-top: 2px solid var(--line-strong); border-bottom: 2px solid var(--line-strong); font-weight: 400; }
+.calc-table tr.highlight td { background: var(--green-bg); font-weight: 400; color: var(--green); }
+.calc-table tr.highlight td:first-child { color: var(--green); }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.track-label { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; font-family: var(--ff-mono); padding: 0.15rem 0.5rem; margin-bottom: 0.6rem; }
+.track-a { background: #f0f8f0; color: var(--green); border: 1px solid #c8e6c9; }
+.track-b { background: #fdf5f4; color: #C0392B; border: 1px solid #f5c6cb; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Two-Track Cost Analysis</div>
+  <div class="dst">ESOP vs Traditional M&A — Comprehensive Cost Comparison</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{generatedDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <!-- Section 1: Overview -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Executive Summary</span></div><div class="sb">
+    <p>This analysis compares the total cost of an ESOP transaction (Track A) against a traditional M&A sale (Track B) over a five-year horizon. Both tracks are modeled on the same enterprise value. The ESOP track includes one-time transaction costs and ongoing annual administration. The M&A track includes broker fees, legal, accounting, and due diligence costs typical of a middle-market sale.</p>
+    <div class="co"><strong>Key Finding:</strong> The ESOP path delivers estimated savings of <strong>{{savings}}</strong> over five years compared to traditional M&A, driven primarily by the elimination of the sell-side broker fee and favorable tax treatment under IRC &sect;1042.</div>
+  </div></div>
+
+  <!-- Section 2: Track A — ESOP -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Track A: ESOP Transaction Costs</span></div><div class="sb">
+    <div class="track-label track-a">Track A &mdash; ESOP</div>
+    <p>The ESOP track includes transaction setup costs incurred at closing, plus ongoing annual plan administration and compliance costs.</p>
+
+    <table class="calc-table">
+      <tr><th>Cost Item</th><th class="amount">Amount</th></tr>
+      <tr><td>Forhemit stewardship fee</td><td class="amount">{{esopTransactionCosts}}</td></tr>
+      <tr><td>Independent trustee engagement</td><td class="amount">{{esopTrusteeFee}}</td></tr>
+      <tr><td>ERISA counsel</td><td class="amount">{{esopErisaFee}}</td></tr>
+      <tr><td>Valuation / FMV appraisal</td><td class="amount">{{esopValuationFee}}</td></tr>
+      <tr><td>QofE / financial due diligence</td><td class="amount">{{esopQofeFee}}</td></tr>
+      <tr><td>Plan document &amp; TPA setup</td><td class="amount">{{esopPlanDocFee}}</td></tr>
+      <tr><td>SBA loan packaging &amp; closing</td><td class="amount">{{esopSbaFee}}</td></tr>
+      <tr class="total"><td><strong>Total One-Time Costs</strong></td><td class="amount"><strong>{{esopOneTimeTotal}}</strong></td></tr>
+    </table>
+
+    <table class="calc-table" style="margin-top:1.2rem;">
+      <tr><th>Annual Cost Item</th><th class="amount">Per Year</th></tr>
+      <tr><td>Plan administration &amp; TPA</td><td class="amount">{{esopAnnualAdmin}}</td></tr>
+      <tr><td>Annual valuation update</td><td class="amount">{{esopAnnualValuation}}</td></tr>
+      <tr><td>ERISA compliance &amp; audit</td><td class="amount">{{esopAnnualCompliance}}</td></tr>
+      <tr class="total"><td><strong>Total Annual Costs</strong></td><td class="amount"><strong>{{esopAnnualCosts}}</strong></td></tr>
+    </table>
+
+    <table class="calc-table" style="margin-top:1.2rem;">
+      <tr><th>Five-Year ESOP Total</th><th class="amount">Amount</th></tr>
+      <tr><td>One-time transaction costs</td><td class="amount">{{esopOneTimeTotal}}</td></tr>
+      <tr><td>Annual costs &times; 5 years</td><td class="amount">{{esopFiveYearAnnual}}</td></tr>
+      <tr class="total"><td><strong>ESOP Total (5-Year)</strong></td><td class="amount"><strong>{{esopFiveYearTotal}}</strong></td></tr>
+    </table>
+  </div></div>
+
+  <!-- Section 3: Track B — Traditional M&A -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Track B: Traditional M&A Costs</span></div><div class="sb">
+    <div class="track-label track-b">Track B &mdash; Traditional M&A</div>
+    <p>The traditional M&A track includes sell-side advisory, legal, accounting, and due diligence costs. Broker fees in middle-market transactions typically range from 4% to 8% of enterprise value, with additional professional fees layered on top.</p>
+
+    <table class="calc-table">
+      <tr><th>Cost Component</th><th class="amount">Amount</th></tr>
+      <tr><td>Sell-side broker / M&A advisor fee</td><td class="amount">{{maBrokerFee}}</td></tr>
+      <tr><td>Seller's legal counsel</td><td class="amount">{{maLegalCosts}}</td></tr>
+      <tr><td>Accounting &amp; tax advisory</td><td class="amount">{{maAccountingCosts}}</td></tr>
+      <tr><td>Buyer-side due diligence (seller cost-share)</td><td class="amount">{{maDdCosts}}</td></tr>
+      <tr><td>Data room &amp; transaction management</td><td class="amount">{{maDataRoomCosts}}</td></tr>
+      <tr><td>Representation &amp; warranty insurance</td><td class="amount">{{maRwiCosts}}</td></tr>
+      <tr class="total"><td><strong>M&A Total (at Close)</strong></td><td class="amount"><strong>{{maTotal}}</strong></td></tr>
+    </table>
+    <div class="co"><strong>Note:</strong> Traditional M&A costs are substantially incurred at closing. There are minimal ongoing costs post-close unless an earnout or escrow arrangement creates additional advisory needs.</div>
+  </div></div>
+
+  <!-- Section 4: Net Comparison -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Net Cost Comparison (5-Year)</span></div><div class="sb">
+    <table class="calc-table">
+      <tr><th>Metric</th><th class="amount">Track A: ESOP</th><th class="amount">Track B: M&A</th></tr>
+      <tr><td>Transaction costs (at close)</td><td class="amount">{{esopOneTimeTotal}}</td><td class="amount">{{maTotal}}</td></tr>
+      <tr><td>Ongoing costs (5-year)</td><td class="amount">{{esopFiveYearAnnual}}</td><td class="amount">$0</td></tr>
+      <tr class="total"><td><strong>Total Cost (5-Year)</strong></td><td class="amount"><strong>{{esopFiveYearTotal}}</strong></td><td class="amount"><strong>{{maTotal}}</strong></td></tr>
+      <tr class="highlight"><td><strong>Difference</strong></td><td class="amount" colspan="2" style="text-align:center;"><strong>{{savings}} savings via ESOP</strong></td></tr>
+    </table>
+  </div></div>
+
+  <!-- Section 5: Tax-Adjusted Comparison -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Tax-Adjusted Comparison</span></div><div class="sb">
+    <p>The cost comparison changes materially when tax effects are considered. ESOP transaction costs are deductible as ordinary business expenses. Under IRC &sect;1042, the seller may defer capital gains tax on the sale proceeds, producing a significant after-tax advantage.</p>
+
+    <table class="calc-table">
+      <tr><th>After-Tax Metric</th><th class="amount">Track A: ESOP</th><th class="amount">Track B: M&A</th></tr>
+      <tr><td>Total transaction + ongoing costs</td><td class="amount">{{esopFiveYearTotal}}</td><td class="amount">{{maTotal}}</td></tr>
+      <tr><td>Corporate tax shield (cost deduction)</td><td class="amount">{{esopTaxShield}}</td><td class="amount">{{maTaxShield}}</td></tr>
+      <tr><td>Seller capital gains deferral (&sect;1042)</td><td class="amount">{{sellerTaxDeferral}}</td><td class="amount">$0</td></tr>
+      <tr class="total"><td><strong>Tax-Adjusted Total Cost</strong></td><td class="amount"><strong>{{taxAdjustedESOP}}</strong></td><td class="amount"><strong>{{taxAdjustedMA}}</strong></td></tr>
+      <tr class="highlight"><td><strong>Tax-Adjusted Savings</strong></td><td class="amount" colspan="2" style="text-align:center;"><strong>{{savings}}</strong></td></tr>
+    </table>
+
+    <div class="co"><strong>Important:</strong> Tax-adjusted figures are illustrative and depend on entity type, seller basis, state of incorporation, and applicable federal and state tax rates. The &sect;1042 deferral requires reinvestment in Qualified Replacement Securities. Consult your CPA and tax counsel for personalized analysis.</div>
+  </div></div>
+
+  <!-- Section 6: Qualitative Considerations -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Qualitative Considerations</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Employee retention.</strong> ESOPs create employee ownership culture, reducing turnover and improving productivity &mdash; costs not captured above.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Legacy preservation.</strong> An ESOP maintains the company's name, culture, and community presence. M&A often results in rebranding or consolidation.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Timeline control.</strong> The ESOP process is structured and predictable (120 days). M&A timelines are variable and subject to buyer-driven delays.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Continuity of management.</strong> ESOP sellers can continue running the company post-close. M&A typically requires transition or departure.</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Deal certainty.</strong> ESOP transactions have a known buyer (the trust) and a structured financing path. M&A deals face buyer due diligence renegotiation risk.</span></div>
+    </div>
+  </div></div>
+
+  <!-- Section 7: Next Steps -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Next Steps</span></div><div class="sb">
+    <p>To refine these estimates with actual figures for {{companyName}}:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>QofE engagement.</strong> Engage a quality-of-earnings provider to normalize TTM EBITDA. This drives enterprise value on both tracks.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Entity structure review.</strong> Confirm entity type (C-corp, S-corp, LLC) and any conversion requirements for &sect;1042 eligibility.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Tax modeling.</strong> Your CPA should run personalized tax scenarios based on your basis, filing status, and state of residence.</span></div>
+    </div>
+    <div class="fr"><label>Email</label><span style="flex:1;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <!-- Signature block -->
+  <div class="sec"><div class="sh"><span class="sn">&mdash;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">INDICATIVE ONLY &mdash; NOT TAX ADVICE<br>Consult your CPA for specific tax calculations.<br>Final costs depend on deal structure and professional team fees.</div>
+  </div>
+</div>
+</body>
+</html>

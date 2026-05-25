@@ -353,10 +353,10 @@ export const getDealWorkflow = query({
         const contact = task.contactId ? await ctx.db.get(task.contactId) : null;
         return {
           ...task,
-          templateTitle: template?.title || "Unknown",
+          templateTitle: (template as any)?.title || "Unknown",
           templateCategory: template?.category,
           templateDescription: template?.description,
-          contactName: contact ? `${contact.firstName} ${contact.lastName}` : null,
+          contactName: contact ? `${(contact as any).firstName} ${(contact as any).lastName}` : null,
           contactEmail: contact?.email,
         };
       })
@@ -409,9 +409,9 @@ export const getAllWorkflowTasks = query({
         const contact = task.contactId ? await ctx.db.get(task.contactId) : null;
         return {
           ...task,
-          templateTitle: template?.title || "Unknown",
-          companyName: company?.name || "Unknown",
-          contactName: contact ? `${contact.firstName} ${contact.lastName}` : null,
+          templateTitle: (template as any)?.title || "Unknown",
+          companyName: (company as any)?.name || "Unknown",
+          contactName: contact ? `${(contact as any).firstName} ${(contact as any).lastName}` : null,
         };
       })
     );

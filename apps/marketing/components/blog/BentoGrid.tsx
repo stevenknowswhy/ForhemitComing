@@ -4,19 +4,19 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { usePathway } from "@/hooks/useBlog";
 import { ArticleCard, QuickTakeCard } from "@/components/ui/CustomCard";
-import {
-  filterListByPathway,
+import { filterListByPathway,
   postDocToListItem,
 } from "@/lib/blog-map";
+import type { Doc } from "@/convex/_generated/dataModel";
 
 export function BentoGrid() {
   const { pathway } = usePathway();
   const posts = useQuery(api.posts.listPublished, { limit: 50 });
 
   const listItems =
-    posts?.map((doc) => postDocToListItem(doc)) ?? [];
+    posts?.map((doc: Doc<"posts">) => postDocToListItem(doc)) ?? [];
 
-  const filteredArticles = filterListByPathway(listItems, pathway);
+  const filteredArticles = filterListByPathway(listItems, pathway) as ReturnType<typeof postDocToListItem>[];
 
   const featured = filteredArticles.filter((_, i) => i < 2);
   const standard = filteredArticles.filter((_, i) => i >= 2 && i < 6);

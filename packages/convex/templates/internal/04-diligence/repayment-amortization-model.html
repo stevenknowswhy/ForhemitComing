@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Repayment &amp; Amortization Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.metrics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2rem; }
+.metric { padding: 0.8rem 1rem; border-right: 1px solid var(--line); text-align: center; }
+.metric:last-child { border-right: none; }
+.metric-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.metric-v { font-family: var(--ff-display); font-size: 1.1rem; font-weight: 400; color: #111; }
+.amort-table { width: 100%; border-collapse: collapse; font-size: 0.68rem; margin: 0.8rem 0; }
+.amort-table th { text-align: right; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); font-weight: 400; padding: 0.45rem 0.5rem; border-bottom: 2px solid var(--line-strong); }
+.amort-table th:first-child { text-align: left; }
+.amort-table td { text-align: right; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; font-family: var(--ff-mono); font-size: 0.65rem; }
+.amort-table td:first-child { text-align: left; font-family: 'Jost', system-ui, sans-serif; font-size: 0.68rem; }
+.amort-table tr:last-child td { border-bottom: 2px solid var(--line-strong); font-weight: 500; }
+.sensitivity-table { width: 100%; border-collapse: collapse; font-size: 0.72rem; margin: 0.8rem 0; }
+.sensitivity-table th { text-align: center; font-size: 0.55rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); font-weight: 400; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.sensitivity-table th:first-child { text-align: left; }
+.sensitivity-table td { text-align: center; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; }
+.sensitivity-table td:first-child { text-align: left; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Repayment &amp; Amortization Model</div>
+  <div class="dst">Internal &#8212; Debt Service Schedule</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Lender</div><div class="cvc-v">{{lenderName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Generated</div><div class="cvc-v">{{generatedDate}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Loan Summary</span></div><div class="sb">
+    <div class="fr"><label>Principal</label><span style="flex:1;">{{principal}}</span></div>
+    <div class="fr"><label>Interest rate</label><span style="flex:1;">{{interestRate}}</span></div>
+    <div class="fr"><label>Term</label><span style="flex:1;">{{term}}</span></div>
+    <div class="fr"><label>Payment frequency</label><span style="flex:1;">{{paymentFrequency}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Key Metrics</span></div><div class="sb">
+    <div class="metrics-grid">
+      <div class="metric"><div class="metric-l">Monthly Payment</div><div class="metric-v">{{monthlyPayment}}</div></div>
+      <div class="metric"><div class="metric-l">Total Interest</div><div class="metric-v">{{totalInterest}}</div></div>
+      <div class="metric"><div class="metric-l">Payoff Date</div><div class="metric-v">{{payoffDate}}</div></div>
+      <div class="metric"><div class="metric-l">DSCR</div><div class="metric-v">{{dscr}}</div></div>
+    </div>
+    <div class="co"><strong>DSCR note:</strong> A debt service coverage ratio above 1.25x is generally required by SBA lenders. The DSCR should be calculated against trailing twelve-month cash flow (EBITDA minus owner adjustments).</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Amortization Schedule</span></div><div class="sb">
+    <table class="amort-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Period</th>
+          <th>Payment</th>
+          <th>Principal</th>
+          <th>Interest</th>
+          <th>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{amortizationTable}}
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Sensitivity Analysis</span></div><div class="sb">
+    <p>Impact of interest rate changes on monthly payment and total interest over the life of the loan.</p>
+    <table class="sensitivity-table">
+      <thead>
+        <tr>
+          <th style="text-align:left;">Scenario</th>
+          <th>Rate</th>
+          <th>Monthly Payment</th>
+          <th>Total Interest</th>
+          <th>DSCR Impact</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Base case</td><td>{{interestRate}}</td><td>{{monthlyPayment}}</td><td>{{totalInterest}}</td><td>{{dscr}}</td></tr>
+        <tr><td>+100 bps</td><td>{{ratePlus100}}</td><td>{{paymentPlus100}}</td><td>{{interestPlus100}}</td><td>{{dscrPlus100}}</td></tr>
+        <tr><td>+200 bps</td><td>{{ratePlus200}}</td><td>{{paymentPlus200}}</td><td>{{interestPlus200}}</td><td>{{dscrPlus200}}</td></tr>
+        <tr><td>-100 bps</td><td>{{rateMinus100}}</td><td>{{paymentMinus100}}</td><td>{{interestMinus100}}</td><td>{{dscrMinus100}}</td></tr>
+      </tbody>
+    </table>
+    <div class="co"><strong>Model assumptions:</strong> All scenarios assume level amortization over the full term. Actual payments may vary based on rate reset provisions, prepayment activity, or SBA fee adjustments.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Prepared By</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>INTERNAL &#8212; DO NOT DISTRIBUTE</div>
+    <div class="df-conf">{{ref}}</div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — SBA Intake Form</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+
+/* ── Form-specific ── */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem 2rem;
+  margin-bottom: 0.6rem;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.form-field label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 400;
+}
+.form-field .f-line {
+  border-bottom: 1px solid var(--line-strong);
+  height: 1.8rem;
+  min-width: 100%;
+}
+.form-field-full {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.6rem;
+}
+.form-field-full label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  font-weight: 400;
+}
+.form-field-full .f-line {
+  border-bottom: 1px solid var(--line-strong);
+  height: 1.8rem;
+}
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+  font-weight: 300;
+  color: #333;
+}
+.check-box {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--line-strong);
+  flex-shrink: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">SBA Intake Form</div>
+  <div class="dst">ESOP Lender Application — SBA 7(a) Program</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">EIN</div><div class="cvc-v">{{ein}}</div></div>
+    <div class="cvc"><div class="cvc-l">Contact</div><div class="cvc-v">{{contactName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Loan Amount</div><div class="cvc-v">{{loanAmount}}</div></div>
+  </div>
+
+  <div class="co"><strong>Instructions:</strong> Complete all fields. This form is pre-populated where possible from Forhemit's transaction files. Verify all values before submission. Attach supporting documents per the checklist in Section 06.</div>
+
+  <!-- §01: Borrower Information -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Borrower Information</span></div><div class="sb">
+    <div class="form-row">
+      <div class="form-field"><label>Legal Entity Name</label><div class="f-line">{{companyName}}</div></div>
+      <div class="form-field"><label>DBA (if applicable)</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>EIN</label><div class="f-line">{{ein}}</div></div>
+      <div class="form-field"><label>Entity Type</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-field-full"><label>Principal Address</label><div class="f-line">{{address}}</div></div>
+    <div class="form-row">
+      <div class="form-field"><label>Primary Contact</label><div class="f-line">{{contactName}}</div></div>
+      <div class="form-field"><label>Title</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Phone</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Email</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Year Founded</label><div class="f-line"></div></div>
+      <div class="form-field"><label>State of Incorporation</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>NAICS Code</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Total Employees</label><div class="f-line"></div></div>
+    </div>
+  </div></div>
+
+  <!-- §02: Loan Request -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Loan Request</span></div><div class="sb">
+    <div class="form-row">
+      <div class="form-field"><label>Loan Amount Requested</label><div class="f-line">{{loanAmount}}</div></div>
+      <div class="form-field"><label>Loan Program</label><div class="f-line">SBA 7(a)</div></div>
+    </div>
+    <div class="form-field-full"><label>Loan Purpose</label><div class="f-line">{{loanPurpose}}</div></div>
+    <div class="form-row">
+      <div class="form-field"><label>Requested Term</label><div class="f-line">{{loanTerm}}</div></div>
+      <div class="form-field"><label>Desired Rate Structure</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-field-full"><label>Collateral Description</label><div class="f-line"></div></div>
+    <div class="form-row">
+      <div class="form-field"><label>Collateral Value (Est.)</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Personal Guarantee Provided?</label><div class="f-line"></div></div>
+    </div>
+  </div></div>
+
+  <!-- §03: Financial Summary -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Financial Summary</span></div><div class="sb">
+    <div class="co"><strong>Note:</strong> All figures below are based on QofE-adjusted trailing twelve months (TTM) unless otherwise noted. Supporting QofE report is attached.</div>
+    <div class="form-row">
+      <div class="form-field"><label>Annual Revenue (TTM)</label><div class="f-line">{{revenue}}</div></div>
+      <div class="form-field"><label>Gross Profit</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>EBITDA (QofE Adjusted)</label><div class="f-line">{{ebitda}}</div></div>
+      <div class="form-field"><label>EBITDA Margin %</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Debt Service Coverage Ratio</label><div class="f-line">{{dscr}}</div></div>
+      <div class="form-field"><label>Total Existing Debt</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Net Worth (Borrower)</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Liquidity (Cash + Equivalents)</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Revenue (Prior Year)</label><div class="f-line"></div></div>
+      <div class="form-field"><label>EBITDA (Prior Year)</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Revenue (2 Years Prior)</label><div class="f-line"></div></div>
+      <div class="form-field"><label>EBITDA (2 Years Prior)</label><div class="f-line"></div></div>
+    </div>
+  </div></div>
+
+  <!-- §04: Ownership Structure -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Ownership Structure</span></div><div class="sb">
+    <p>Current ownership structure and proposed post-ESOP structure.</p>
+    <div class="co"><strong>Pre-Transaction:</strong> List all owners with 20%+ ownership, their percentage stake, and role in the company.</div>
+    <div class="form-row">
+      <div class="form-field"><label>Owner 1 — Name</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Ownership %</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Owner 2 — Name</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Ownership %</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Owner 3 — Name</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Ownership %</label><div class="f-line"></div></div>
+    </div>
+    <div class="co"><strong>Post-Transaction:</strong> The ESOP trust will acquire 100% of the outstanding equity. The trustee will hold shares on behalf of eligible employees per the plan document.</div>
+  </div></div>
+
+  <!-- §05: Sources and Uses -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Sources &amp; Uses of Funds</span></div><div class="sb">
+    <div class="co"><strong>Sources:</strong></div>
+    <div class="form-row">
+      <div class="form-field"><label>SBA 7(a) Loan</label><div class="f-line">{{loanAmount}}</div></div>
+      <div class="form-field"><label>Seller Note</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Equity / Cash</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Other Sources</label><div class="f-line"></div></div>
+    </div>
+    <div class="co"><strong>Uses:</strong></div>
+    <div class="form-row">
+      <div class="form-field"><label>Purchase Price (Equity)</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Debt Refinancing</label><div class="f-line"></div></div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Transaction Costs</label><div class="f-line"></div></div>
+      <div class="form-field"><label>Working Capital</label><div class="f-line"></div></div>
+    </div>
+  </div></div>
+
+  <!-- §06: Required Documents Checklist -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Required Documents Checklist</span></div><div class="sb">
+    <p>The following documents must accompany this intake form. Check each item when attached.</p>
+    <div class="check-row"><div class="check-box"></div><span>Federal tax returns — business (last 3 years)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Federal tax returns — personal, all guarantors (last 3 years)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Year-to-date financial statements (balance sheet and income statement)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Accounts receivable and payable aging schedules</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Quality of Earnings (QofE) report</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Independent appraisal (fair market value)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>ESOP plan document (draft or final)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Trust agreement</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Articles of incorporation / organization</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Operating agreement or bylaws</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Business licenses and permits</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Insurance certificates (key man, general liability, property)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Environmental report (if applicable)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Franchise agreement (if applicable)</span></div>
+    <div class="check-row"><div class="check-box"></div><span>Repurchase obligation study</span></div>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Borrower Certification</span></div><div class="sb">
+    <p>The undersigned certifies that all information provided in this form and accompanying documents is true, accurate, and complete. The borrower understands that any material misrepresentation may result in denial of the loan application or revocation of any commitment.</p>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">{{companyName}}</div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Signatory</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This form contains proprietary financial information.</div>
+  </div>
+</div>
+
+</body>
+</html>

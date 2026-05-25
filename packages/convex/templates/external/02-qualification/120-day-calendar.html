@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — 120-Day Transaction Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+
+/* ── Calendar-specific ── */
+.cal-phase {
+  border: 1px solid var(--line-strong);
+  margin-bottom: 1.2rem;
+  break-inside: avoid;
+}
+.cal-phase-hd {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.6rem 0.9rem;
+  background: var(--callout-bg);
+  border-bottom: 1px solid var(--line-strong);
+}
+.cal-phase-title {
+  font-family: var(--ff-display);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #111;
+}
+.cal-phase-range {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  color: var(--brass);
+}
+.cal-weeks {
+  display: grid;
+  gap: 0;
+}
+.cal-week {
+  display: grid;
+  grid-template-columns: 70px 1fr 100px;
+  align-items: start;
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.76rem;
+  font-weight: 300;
+  color: #333;
+}
+.cal-week:last-child { border-bottom: none; }
+.cal-wk-label {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  color: var(--brass);
+  padding-top: 0.05rem;
+}
+.cal-wk-tasks { line-height: 1.7; }
+.cal-wk-owner {
+  text-align: right;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-milestone {
+  display: grid;
+  grid-template-columns: 70px 1fr 100px;
+  align-items: start;
+  padding: 0.55rem 0.9rem;
+  background: var(--green-bg);
+  border-bottom: 1px solid rgba(46,125,50,0.2);
+  font-size: 0.76rem;
+  font-weight: 300;
+}
+.cal-milestone:last-child { border-bottom: none; }
+.cal-ms-icon {
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  color: var(--green);
+  font-weight: 400;
+}
+.cal-ms-label {
+  font-weight: 400;
+  color: #111;
+}
+.cal-ms-date {
+  text-align: right;
+  font-family: var(--ff-mono);
+  font-size: 0.62rem;
+  color: var(--green);
+}
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">120-Day Transaction Calendar</div>
+  <div class="dst">ESOP Acquisition Timeline for {{companyName}}</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">LOI Signing</div><div class="cvc-v">{{loiDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Gate 1 Target</div><div class="cvc-v">{{gate1Date}}</div></div>
+    <div class="cvc"><div class="cvc-l">Closing Target</div><div class="cvc-v">{{closingDate}}</div></div>
+  </div>
+
+  <!-- Phase 1 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Phase 1 — Mobilization</span></div><div class="sb">
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 1–2: Engagement &amp; Team Assembly</span><span class="cal-phase-range">Day 1–14</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 1</span><span class="cal-wk-tasks">Engagement letter signed; ERISA counsel retained; independent trustee selected; project kickoff call</span><span class="cal-wk-owner">Forhemit</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 2</span><span class="cal-wk-tasks">Initial document request issued; seller financials collected; QofE firm engaged; lender shortlist drafted</span><span class="cal-wk-owner">Forhemit</span></div>
+      </div>
+    </div>
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 3–4: Preliminary Valuation &amp; Financial Review</span><span class="cal-phase-range">Day 15–28</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 3</span><span class="cal-wk-tasks">Management presentations; site visit; preliminary valuation analysis; initial capital stack modeling</span><span class="cal-wk-owner">Forhemit + Seller</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 4</span><span class="cal-wk-tasks">QofE draft received; preliminary valuation range confirmed; lender outreach initiated</span><span class="cal-wk-owner">Forhemit + Appraiser</span></div>
+        <div class="cal-milestone"><span class="cal-ms-icon">&#9670;</span><span class="cal-ms-label"><strong>Gate 1:</strong> Valuation confirmed; proceed to formal diligence</span><span class="cal-ms-date">{{gate1Date}}</span></div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- Phase 2 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Phase 2 — Diligence</span></div><div class="sb">
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 5–6: Financial &amp; Legal Diligence</span><span class="cal-phase-range">Day 29–42</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 5</span><span class="cal-wk-tasks">Financial model finalized; tax structure analysis complete; ERISA counsel review of plan documents begins</span><span class="cal-wk-owner">Forhemit + Counsel</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 6</span><span class="cal-wk-tasks">Lender term sheets received and compared; collateral analysis; insurance review; HR/employee census verified</span><span class="cal-wk-owner">Forhemit + Lenders</span></div>
+      </div>
+    </div>
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 7–8: Lender Selection &amp; Plan Design</span><span class="cal-phase-range">Day 43–56</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 7</span><span class="cal-wk-tasks">Lender selected; commitment letter executed; ESOP plan document drafted; trustee review of plan terms</span><span class="cal-wk-owner">Forhemit + Lender</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 8</span><span class="cal-wk-tasks">Repurchase obligation study initiated; employee communication plan drafted; DOL advisory opinion requested if needed</span><span class="cal-wk-owner">Forhemit + Trustee</span></div>
+        <div class="cal-milestone"><span class="cal-ms-icon">&#9670;</span><span class="cal-ms-label"><strong>Gate 2:</strong> Lender committed; plan design approved by trustee</span><span class="cal-ms-date">{{gate2Date}}</span></div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- Phase 3 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Phase 3 — Documentation</span></div><div class="sb">
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 9–10: Transaction Documents</span><span class="cal-phase-range">Day 57–70</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 9</span><span class="cal-wk-tasks">Stock purchase agreement drafted; seller representations and warranties negotiated; escrow terms finalized</span><span class="cal-wk-owner">Counsel + Forhemit</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 10</span><span class="cal-wk-tasks">Loan documents drafted; security agreements; guarantees; intercreditor agreements (if applicable)</span><span class="cal-wk-owner">Lender + Counsel</span></div>
+      </div>
+    </div>
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 11–12: Regulatory &amp; Final Approvals</span><span class="cal-phase-range">Day 71–84</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 11</span><span class="cal-wk-tasks">Final appraisal delivered; IRS determination letter application filed (if needed); insurance binder confirmed</span><span class="cal-wk-owner">Appraiser + Counsel</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 12</span><span class="cal-wk-tasks">All closing conditions reviewed; outstanding diligence items resolved; pre-closing checklist completed</span><span class="cal-wk-owner">Forhemit</span></div>
+        <div class="cal-milestone"><span class="cal-ms-icon">&#9670;</span><span class="cal-ms-label"><strong>Gate 3:</strong> All documents finalized; closing conditions satisfied</span><span class="cal-ms-date">{{gate3Date}}</span></div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- Phase 4 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Phase 4 — Closing &amp; Transition</span></div><div class="sb">
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Week 13: Pre-Closing</span><span class="cal-phase-range">Day 85–98</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 13</span><span class="cal-wk-tasks">Final closing checklist executed; funds flow memo circulated; all parties confirm readiness; employee communication materials finalized</span><span class="cal-wk-owner">Forhemit + All Parties</span></div>
+      </div>
+    </div>
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 14–15: Closing</span><span class="cal-phase-range">Day 99–112</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 14</span><span class="cal-wk-tasks">Closing: stock purchased by ESOP trust; loan funded; seller proceeds wired; escrow released</span><span class="cal-wk-owner">All Parties</span></div>
+        <div class="cal-milestone"><span class="cal-ms-icon">&#9733;</span><span class="cal-ms-label"><strong>CLOSING</strong></span><span class="cal-ms-date">{{closingDate}}</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 15</span><span class="cal-wk-tasks">Post-closing filings; employee announcement; transition plan activated; 1042 election deadline tracked</span><span class="cal-wk-owner">Forhemit + Seller</span></div>
+      </div>
+    </div>
+    <div class="cal-phase">
+      <div class="cal-phase-hd"><span class="cal-phase-title">Weeks 16–17: Post-Close Stabilization</span><span class="cal-phase-range">Day 113–120+</span></div>
+      <div class="cal-weeks">
+        <div class="cal-week"><span class="cal-wk-label">Wk 16</span><span class="cal-wk-tasks">First trustee meeting; repurchase obligation monitoring initiated; accounting transition to ESOP reporting</span><span class="cal-wk-owner">Trustee + Forhemit</span></div>
+        <div class="cal-week"><span class="cal-wk-label">Wk 17</span><span class="cal-wk-tasks">90-day check-in scheduled; ongoing governance framework established; annual valuation process documented</span><span class="cal-wk-owner">Forhemit</span></div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- §05: Dependencies -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Critical Path &amp; Dependencies</span></div><div class="sb">
+    <p>The following items are on the critical path. Delays in any of these will push the closing date.</p>
+    <div class="co"><strong>Critical path items:</strong> (1) Timely delivery of seller financials and tax returns, (2) QofE completion within the first 4 weeks, (3) Lender term sheet by week 6, (4) Trustee approval of plan documents by week 8, (5) Final appraisal delivery by week 11.</div>
+    <div class="co"><strong>External dependencies:</strong> IRS determination letter timelines (if required), DOL advisory opinion (if requested), third-party consents and regulatory approvals specific to {{companyName}}'s industry.</div>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Project Lead</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This calendar is a planning document. Actual dates may vary.</div>
+  </div>
+</div>
+
+</body>
+</html>

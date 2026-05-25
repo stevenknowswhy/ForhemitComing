@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Voicemail Script</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.script-block { background: #f8f8f8; border: 1px solid var(--line); padding: 1.2rem; margin: 1rem 0; font-size: 0.85rem; line-height: 1.8; color: #333; border-left: 3px solid var(--brass); }
+.script-block p { margin-bottom: 0.6rem; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: #faf7f0; }
+.co strong { color: #111; font-weight: 500; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-FIRST-TOUCH-002</div><div>Voicemail Script</div></div>
+  </div>
+  <div class="dt">Voicemail Script</div>
+  <div class="dst">Retell AI &amp; Live Voicemail</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Used when leaving voicemails for prospects, missed calls, and Retell AI voice agent responses</p>
+      <p><strong>Duration:</strong> Keep under 20 seconds for Retell AI; under 30 seconds for live voicemail</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Standard Voicemail (Live)</span></div><div class="sb">
+    <div class="script-block">
+      <p>"Hi, this is {{callerName}} from Forhemit. I'm reaching out regarding {{context}}. I'd love to connect and share how we help business owners explore employee ownership transitions. Please call me back at (415) 555-0100, or I'll try you again soon. Thank you."</p>
+    </div>
+    <div class="co"><strong>Key points:</strong> Say "employee ownership transitions" not "ESOP" on first contact. Keep it under 25 seconds. Always leave callback number.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Retell AI Script</span></div><div class="sb">
+    <div class="script-block">
+      <p>"Thank you for calling Forhemit. We facilitate employee ownership transitions for business owners. I can help you schedule a consultation or answer basic questions about our services. How can I help you today?"</p>
+    </div>
+    <div class="co"><strong>Retell AI Notes:</strong> Program to handle: (1) scheduling requests → book calendar, (2) general questions → provide overview, (3) urgent matters → transfer to live agent</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Follow-Up Voicemail</span></div><div class="sb">
+    <div class="script-block">
+      <p>"Hi, this is {{callerName}} from Forhemit again. I wanted to follow up on my previous message about employee ownership transitions. If you're interested in learning how this could work for your business, I'd be happy to schedule a brief call at your convenience. You can reach me at (415) 555-0100. Thank you."</p>
+    </div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Template — Not for external distribution<br>Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-FIRST-TOUCH-002</div>
+  </div>
+</div>
+</body>
+</html>

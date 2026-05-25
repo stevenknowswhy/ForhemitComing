@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Conflict of Interest Log</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: var(--callout-bg); }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.conflict-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.conflict-table th { text-align: left; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); padding: 0.6rem 0.5rem; border-bottom: 2px solid var(--line-strong); font-weight: 400; }
+.conflict-table td { padding: 0.6rem 0.5rem; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; vertical-align: top; }
+.conflict-table tr:last-child td { border-bottom: none; }
+.status-clear { color: var(--green); font-weight: 400; }
+.status-conflict { color: #c62828; font-weight: 400; }
+.status-waiver { color: #e65100; font-weight: 400; }
+.summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--line-strong); margin: 1.2rem 0; }
+.summary-cell { padding: 0.8rem; text-align: center; border-right: 1px solid var(--line); }
+.summary-cell:last-child { border-right: none; }
+.summary-label { font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+.summary-value { font-family: var(--ff-display); font-size: 1.4rem; font-weight: 400; color: #111; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-ENG-006</div><div>Deal: {{ref}}</div><div>{{generatedDate}}</div></div>
+  </div>
+  <div class="dt">Conflict of Interest Log</div>
+  <div class="dst">Internal Log — Advisor Conflict Check Tracker</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal — Do Not Distribute</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Created at deal kick-off; updated as each advisor conflict check is completed</p>
+      <p><strong>Purpose:</strong> Maintain a consolidated record of all advisor conflict checks for compliance and audit trail</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Deal Reference</span></div><div class="sb">
+    <div class="cvg">
+      <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+      <div class="cvc"><div class="cvc-l">Deal Ref</div><div class="cvc-v">{{ref}}</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Summary</span></div><div class="sb">
+    <div class="summary-grid">
+      <div class="summary-cell"><div class="summary-label">Total Checked</div><div class="summary-value">{{totalChecked}}</div></div>
+      <div class="summary-cell"><div class="summary-label">Clear</div><div class="summary-value status-clear">{{totalClear}}</div></div>
+      <div class="summary-cell"><div class="summary-label">Conflicts</div><div class="summary-value status-conflict">{{totalConflicts}}</div></div>
+      <div class="summary-cell"><div class="summary-label">Waivers</div><div class="summary-value status-waiver">{{totalWaivers}}</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Conflict Check Entries</span></div><div class="sb">
+    <table class="conflict-table">
+      <thead>
+        <tr>
+          <th>Advisor Name</th>
+          <th>Firm</th>
+          <th>Role</th>
+          <th>Check Date</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{conflictEntries}}
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Status Definitions</span></div><div class="sb">
+    <p><strong class="status-clear">Clear</strong> — No conflict identified; advisor may proceed</p>
+    <p><strong class="status-conflict">Conflict</strong> — Conflict identified; must be resolved or advisor replaced before proceeding</p>
+    <p><strong class="status-waiver">Waiver</strong> — Conflict identified but formally waived by all parties with informed consent</p>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal — Forhemit Stewardship Management Co.<br>Generated {{generatedDate}}</div>
+    <div class="df-conf">INTERNAL — DO NOT DISTRIBUTE<br>REF: {{ref}}</div>
+  </div>
+</div>
+</body>
+</html>

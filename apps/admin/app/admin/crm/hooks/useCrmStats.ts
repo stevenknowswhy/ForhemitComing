@@ -1,7 +1,7 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useMemo } from "react";
-import { PipelineStats } from "../types";
+import type { PipelineStats } from "../types";
 
 // ============================================
 // CRM Stats Hook
@@ -37,11 +37,11 @@ export function useCrmStats(): UseCrmStatsReturn {
     return Object.entries(stats.stageDistribution)
       .map(([name, count]) => ({
         name,
-        count,
+        count: Number(count),
         color: stageColors[name] || "#94a3b8",
       }))
-      .filter((s) => s.count > 0)
-      .sort((a, b) => b.count - a.count);
+      .filter((s: any) => s.count > 0)
+      .sort((a: any, b: any) => b.count - a.count);
   }, [stats?.stageDistribution]);
 
   // Process NDA data for charts

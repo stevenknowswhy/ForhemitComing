@@ -26,7 +26,18 @@ const defaultAuthor: Author = {
 };
 
 /** Card grid + filters (BentoGrid). */
-export function postDocToListItem(post: Doc<"posts">) {
+export function postDocToListItem(post: Doc<"posts">): {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string;
+  pathway: Exclude<Pathway, "all">;
+  category: string;
+  readTime: { overview: number; deepDive: number; methodology: number };
+  excerpt: string;
+  imageUrl: string | undefined;
+  relatedPathways: Exclude<Pathway, "all">[];
+} {
   const pathway = resolvePathway(post.pathway);
   const subtitle =
     (post.subtitle?.trim() || post.excerpt?.trim() || "").slice(0, 220) ||

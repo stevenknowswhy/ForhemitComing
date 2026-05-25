@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, Table2, Calendar, BarChart3 } from "lucide-react";
+import { LayoutGrid, Table2, Calendar, BarChart3, ListTodo } from "lucide-react";
 import { CrmView } from "../../types";
 
 // ============================================
@@ -17,6 +17,7 @@ const VIEWS: { id: CrmView; label: string; icon: typeof Table2 }[] = [
   { id: "kanban", label: "Pipeline", icon: LayoutGrid },
   { id: "calendar", label: "Calendar", icon: Calendar },
   { id: "analytics", label: "Analytics", icon: BarChart3 },
+  { id: "queue", label: "Queue", icon: ListTodo },
 ];
 
 export function ViewToggle({ currentView, onChange }: ViewToggleProps) {

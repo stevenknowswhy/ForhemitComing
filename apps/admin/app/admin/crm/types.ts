@@ -34,7 +34,7 @@ export const ACTIVITY_TYPES = ["note", "call", "email", "meeting", "stage_change
 export type ActivityType = (typeof ACTIVITY_TYPES)[number];
 
 // CRM Views
-export const CRM_VIEWS = ["table", "kanban", "calendar", "analytics"] as const;
+export const CRM_VIEWS = ["table", "kanban", "calendar", "analytics", "queue"] as const;
 export type CrmView = (typeof CRM_VIEWS)[number];
 
 // Task priorities

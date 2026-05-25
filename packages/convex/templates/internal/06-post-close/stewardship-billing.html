@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Stewardship Billing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.invoice-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.invoice-table th { text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); padding: 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.invoice-table td { padding: 0.6rem; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+.invoice-table td:last-child { text-align: right; }
+.invoice-total td { border-top: 2px solid var(--line-strong); font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: #faf7f0; }
+.co strong { color: #111; font-weight: 500; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>Invoice #{{invoiceNumber}}</div><div>Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Stewardship Invoice</div>
+  <div class="dst">Annual COOP Fee — {{companyName}}</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Generated annually during stewardship period</p>
+      <p><strong>Purpose:</strong> Invoice for annual stewardship fee (2.5% of EBITDA)</p>
+    </div>
+  </div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Bill To</div><div class="cvc-v">{{companyName}}<br>{{companyAddress}}</div></div>
+    <div class="cvc"><div class="cvc-l">Invoice Date</div><div class="cvc-v">{{invoiceDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Due Date</div><div class="cvc-v">{{dueDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Stewardship Year</div><div class="cvc-v">Year {{yearNumber}} of {{totalYears}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Invoice Details</span></div><div class="sb">
+    <table class="invoice-table">
+      <thead>
+        <tr><th>Description</th><th>Period</th><th>Amount</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>COOP Stewardship Fee</td><td>{{billingPeriod}}</td><td>{{stewardshipFee}}</td></tr>
+        <tr><td>EBITDA Basis</td><td>—</td><td>{{ebitdaBasis}}</td></tr>
+        <tr><td>Rate</td><td>—</td><td>2.5%</td></tr>
+        <tr class="invoice-total"><td colspan="2"><strong>Total Due</strong></td><td><strong>{{totalDue}}</strong></td></tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Payment Instructions</span></div><div class="sb">
+    <div class="fr"><label>Bank</label><span style="flex:1;">Novo Bank</span></div>
+    <div class="fr"><label>Account name</label><span style="flex:1;">Forhemit Stewardship Management Co.</span></div>
+    <div class="fr"><label>Routing</label><span style="flex:1;">{{routingNumber}}</span></div>
+    <div class="fr"><label>Account</label><span style="flex:1;">{{accountNumber}}</span></div>
+    <div class="co"><strong>Note:</strong> Please reference invoice number {{invoiceNumber}} with your payment. This is a tax-deductible business expense.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Stewardship Summary</span></div><div class="sb">
+    <div class="fr"><label>Current month</label><span style="flex:1;">Month {{monthNumber}} of {{totalMonths}}</span></div>
+    <div class="fr"><label>Next check-in</label><span style="flex:1;">{{nextCheckinDate}}</span></div>
+    <div class="fr"><label>Next quarterly report</label><span style="flex:1;">{{nextQuarterlyReportDate}}</span></div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Forhemit Stewardship Management Co.<br>deals@forhemit.com | forhemit.com</div>
+    <div class="df-conf">INVOICE #{{invoiceNumber}}<br>REF: {{ref}}</div>
+  </div>
+</div>
+</body>
+</html>

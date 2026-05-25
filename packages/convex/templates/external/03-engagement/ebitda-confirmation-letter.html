@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — EBITDA Confirmation Letter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: #faf7f0; }
+.co strong { color: #111; font-weight: 500; }
+.co.g { border-color: var(--green); background: var(--green-bg); }
+.co.g strong { color: var(--green); }
+.confirm-block { border: 1px solid var(--green); padding: 1.2rem 1.4rem; margin: 1.5rem 0; position: relative; background: var(--green-bg); }
+.confirm-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--green); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">EBITDA Confirmation Letter</div>
+  <div class="dst">Exhibit A-1 to Engagement Agreement</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">CPA Firm</div><div class="cvc-v">{{cpaFirm}}</div></div>
+    <div class="cvc"><div class="cvc-l">Effective Date</div><div class="cvc-v">{{effectiveDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Engagement Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Purpose</span></div><div class="sb">
+    <p>This letter formalizes the agreement between the Company's independent Certified Public Accountant and Forhemit Stewardship Management Co. ("Forhemit") on the Quality of Earnings ("QofE")-normalized Trailing Twelve Month ("TTM") Earnings Before Interest, Taxes, Depreciation, and Amortization ("EBITDA") figure that will serve as the basis for the Company's engagement fee tier assignment under the Engagement Letter dated {{engagementDate}}.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Confirmed EBITDA Figure</span></div><div class="sb">
+    <div class="confirm-block">
+      <div class="confirm-badge">Confirmed</div>
+      <div class="fr" style="margin-top:0.4rem;"><label>QofE-Normalized TTM EBITDA</label><span style="flex:1;font-weight:500;font-size:1rem;">{{ebitdaAmount}}</span></div>
+      <div class="fr"><label>Measurement Period</label><span style="flex:1;">{{measurementPeriod}}</span></div>
+      <div class="fr"><label>Fee Tier Assignment</label><span style="flex:1;">{{feeTier}}</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Normalization Adjustments</span></div><div class="sb">
+    <p>The following adjustments were applied to arrive at the normalized TTM EBITDA figure:</p>
+    <div class="fr"><label>Reported net income</label><span style="flex:1;">{{reportedNetIncome}}</span></div>
+    <div class="fr"><label>Add back: Interest</label><span style="flex:1;">{{addBackInterest}}</span></div>
+    <div class="fr"><label>Add back: Taxes</label><span style="flex:1;">{{addBackTaxes}}</span></div>
+    <div class="fr"><label>Add back: Depreciation</label><span style="flex:1;">{{addBackDepreciation}}</span></div>
+    <div class="fr"><label>Add back: Amortization</label><span style="flex:1;">{{addBackAmortization}}</span></div>
+    <div class="fr"><label>Owner adjustments</label><span style="flex:1;">{{ownerAdjustments}}</span></div>
+    <div class="fr"><label>Non-recurring items</label><span style="flex:1;">{{nonRecurringItems}}</span></div>
+    <div class="fr"><label style="font-weight:500;color:#111;">Normalized TTM EBITDA</label><span style="flex:1;font-weight:500;">{{ebitdaAmount}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Fee Tier Implications</span></div><div class="sb">
+    <p>Based on the confirmed EBITDA figure of <strong>{{ebitdaAmount}}</strong>, the engagement is assigned to <strong>{{feeTier}}</strong>, resulting in the following fee structure:</p>
+    <div class="fr"><label>Total engagement fee</label><span style="flex:1;">{{totalFee}}</span></div>
+    <div class="fr"><label>Engagement retainer</label><span style="flex:1;">{{retainerAmount}}</span></div>
+    <div class="fr"><label>Validation fee</label><span style="flex:1;">{{validationAmount}}</span></div>
+    <div class="fr"><label>Commitment fee</label><span style="flex:1;">{{commitmentAmount}}</span></div>
+    <div class="fr"><label>Success balance</label><span style="flex:1;">{{successAmount}}</span></div>
+    <div class="fr"><label>Annual stewardship</label><span style="flex:1;">{{stewardshipRate}}</span></div>
+    <div class="co"><strong>Note:</strong> These amounts will be incorporated into the Engagement Letter (Exhibit A) upon execution by both parties.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Representations</span></div><div class="sb">
+    <p>By signing below, the CPA confirms that:</p>
+    <p>(a) The financial statements used in the QofE analysis are prepared in accordance with the applicable financial reporting framework;</p>
+    <p>(b) The normalization adjustments represent the CPA's professional judgment regarding recurring, sustainable earnings capacity;</p>
+    <p>(c) No material undisclosed adjustments, contingencies, or events subsequent to the measurement period would materially affect the confirmed figure.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Effect</span></div><div class="sb">
+    <p>This Confirmation Letter is incorporated by reference into the Engagement Letter between the Company and Forhemit. In the event of any conflict between this letter and the Engagement Letter regarding the EBITDA figure or fee tier, this letter governs.</p>
+    <div class="co g"><strong>Agreement:</strong> Execution of this letter by both parties constitutes agreement on the EBITDA figure and fee tier for all purposes under the Engagement Letter.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">—</span><span class="st">Signatures</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-title">Certified Public Accountant</div>
+        <div class="sb-entity">{{cpaFirm}}<br><span style="font-size:0.78rem;color:var(--muted);">Independent CPA for {{companyName}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:#111;">{{cpaName}}, {{cpaCredentials}}</div>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-title">Forhemit Transition Stewardship</div>
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:#111;">Stefano Stokes, Founder &amp; Managing Director</div>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &middot; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Exhibit A-1 to Engagement Agreement</div>
+  </div>
+</div>
+</body>
+</html>

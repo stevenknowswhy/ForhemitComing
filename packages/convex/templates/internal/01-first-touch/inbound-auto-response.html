@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Inbound Inquiry Auto-Response</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.template-block { background: #f8f8f8; border: 1px solid var(--line); padding: 1.2rem; margin: 1rem 0; font-size: 0.85rem; line-height: 1.8; color: #333; }
+.template-block p { margin-bottom: 0.6rem; }
+.template-block p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); }
+.co strong { color: #111; font-weight: 500; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-FIRST-TOUCH-001</div><div>Auto-Response Template</div></div>
+  </div>
+  <div class="dt">Inbound Inquiry Auto-Response</div>
+  <div class="dst">Email Template — Website &amp; deals@ Inquiries</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Automatically sent when a new inquiry is received via website contact form or deals@forhemit.com</p>
+      <p><strong>CRM Action:</strong> Create contact record if new, log activity, assign follow-up task (1 business day)</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Email Template</span></div><div class="sb">
+    <div class="template-block">
+      <p><strong>Subject:</strong> Thank you for contacting Forhemit — We received your inquiry</p>
+      <p><strong>From:</strong> deals@forhemit.com</p>
+      <p><strong>To:</strong> {{senderEmail}}</p>
+      <p style="margin-top:1rem;">Dear {{senderName}},</p>
+      <p>Thank you for reaching out to Forhemit. We have received your inquiry and wanted to confirm that it is being reviewed by our team.</p>
+      <p><strong>What happens next:</strong></p>
+      <p>1. A member of our team will review your inquiry within 1 business day</p>
+      <p>2. We will contact you to discuss your situation and answer any initial questions</p>
+      <p>3. If appropriate, we will schedule a more detailed consultation</p>
+      <p><strong>Your inquiry reference:</strong> {{inquiryId}}</p>
+      <p>If you have additional information to share or questions in the meantime, please reply to this email or call us at (415) 555-0100.</p>
+      <p style="margin-top:1rem;">Best regards,<br><strong>Forhemit Team</strong><br>Forhemit Stewardship Management Co.<br>deals@forhemit.com | forhemit.com</p>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Escalation Rules</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Urgent:</strong> If inquiry mentions "urgent" or "time-sensitive", notify deal team lead via Slack immediately</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Broker:</strong> Route directly to broker relations team</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Media:</strong> Route to Stefano directly</span></div>
+    </div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Template — Not for external distribution<br>Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-FIRST-TOUCH-001</div>
+  </div>
+</div>
+</body>
+</html>

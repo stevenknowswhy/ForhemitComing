@@ -112,7 +112,7 @@ export default function BrokerIntroductionEmail() {
     message: "",
   });
 
-  const sendBrokerEmail = useAction(api.emails.sendBrokerIntroductionEmail);
+  const sendBrokerEmail = useAction(api.brokerEmails.sendBrokerIntroductionEmail);
 
   const updateField = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));

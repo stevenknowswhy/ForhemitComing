@@ -7,7 +7,7 @@ export async function fetchPublishedPostSlugs(
 ): Promise<{ slug: string }[]> {
   try {
     const posts = await fetchQuery(api.posts.listPublished, { limit });
-    return posts.map((p) => ({ slug: p.slug }));
+    return posts.map((p: Doc<"posts">) => ({ slug: p.slug }));
   } catch {
     return [];
   }

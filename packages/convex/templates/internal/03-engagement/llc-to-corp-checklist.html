@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — LLC-to-C-Corp Conversion Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">LLC-to-C-Corp Conversion</div>
+  <div class="dst">Internal Checklist — State-Specific Requirements</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">State</div><div class="cvc-v">{{state}}</div></div>
+    <div class="cvc"><div class="cvc-l">Current Entity</div><div class="cvc-v">{{currentEntityType}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Conversion Path</span></div><div class="sb">
+    <div class="fr"><label>Current entity</label><span style="flex:1;">{{currentEntityType}}</span></div>
+    <div class="fr"><label>Target entity</label><span style="flex:1;">C-Corporation</span></div>
+    <div class="fr"><label>Conversion method</label><span style="flex:1;">{{conversionMethod}}</span></div>
+    <div class="fr"><label>State statute</label><span style="flex:1;">{{stateStatute}}</span></div>
+    <div class="co"><strong>Key decision:</strong> Some states allow direct entity conversion (statutory conversion). Others require a merger into a newly formed C-Corp. The method affects the filing requirements and tax treatment. CPA and counsel must agree on the path before filing.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">State Filing Checklist</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Articles of Conversion</strong> — Filed with {{stateSecretary}}. Fee: {{stateFee}}. Processing time: {{processingTime}}.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Articles of Incorporation</strong> — New C-Corp articles filed simultaneously with conversion. Include: name, registered agent, authorized shares, incorporator.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Bylaws</strong> — Draft C-Corp bylaws. Must include: board structure, officer roles, meeting requirements, ESOP provisions.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Initial board resolution</strong> — Officers elected, bank accounts authorized, ESOP authorized.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Share issuance</strong> — Issue shares to the seller (pre-ESOP). Shares will be sold to the ESOP trust at closing.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>EIN update</strong> — Apply for new EIN if entity type change requires it (check IRS rules). Update with IRS using Form 8822-B.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>State tax registration</strong> — Update registration with state tax authority. Some states require new registration for entity change.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Business licenses</strong> — Update all business licenses, permits, and registrations to reflect new entity name/type.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Bank accounts</strong> — Update authorized signers and entity name with all banks. New signature cards required.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Insurance policies</strong> — Update named insured on all policies (GL, D&O, E&O, property, workers' comp).</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Contracts</strong> — Notify all material contract counterparties of entity change. Assign or novate contracts as needed.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Tax Election Checklist</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Check-the-box election</strong> — If converting from LLC (taxed as partnership or disregarded entity), file Form 8832 to elect C-Corp treatment. Timing: must be effective before ESOP transaction closes.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>S-Corp revocation</strong> — If currently an S-Corp, file Form 1128 to revoke the S election. Revocation must be effective before ESOP transaction. Note: S-Corp revocation triggers a 5-year waiting period for §1042 eligibility — confirm timing with CPA.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Final partnership return</strong> — If converting from partnership/LLP, file final Form 1065 for the period ending on the conversion date.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>Built-in gains</strong> — If converting from S-Corp to C-Corp, the 5-year built-in gains tax applies to appreciated assets. CPA should model the exposure.</span></div>
+      <div class="si"><span class="si-n">&#9744;</span><span><strong>State tax elections</strong> — Some states require separate entity classification elections. Verify state conformity with federal election.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Timeline</span></div><div class="sb">
+    <div class="fr"><label>Conversion filed</label><span style="flex:1;">{{conversionFiledDate}}</span></div>
+    <div class="fr"><label>Conversion effective</label><span style="flex:1;">{{conversionEffectiveDate}}</span></div>
+    <div class="fr"><label>ESOP transaction close</label><span style="flex:1;">{{closingDate}}</span></div>
+    <div class="fr"><label>Must be C-Corp by</label><span style="flex:1;">At least 30 days before closing</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">INTERNAL USE ONLY<br>State-specific requirements — verify with local counsel before filing.</div>
+  </div>
+</div>
+</body>
+</html>

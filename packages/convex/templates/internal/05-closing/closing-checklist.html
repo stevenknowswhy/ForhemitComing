@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Closing Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.checklist { margin: 1rem 0; }
+.checklist-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.6rem 0; border-bottom: 1px solid var(--line); }
+.checklist-box { width: 18px; height: 18px; border: 2px solid var(--line-strong); flex-shrink: 0; margin-top: 0.1rem; }
+.checklist-box.checked { background: var(--green); border-color: var(--green); }
+.checklist-content { font-size: 0.85rem; line-height: 1.6; color: #333; }
+.checklist-content strong { color: #111; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-CLOSE-001</div><div>Closing Checklist</div></div>
+  </div>
+  <div class="dt">Closing Checklist</div>
+  <div class="dst">Day-Of Sequence — {{companyName}}</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Generated 48 hours before scheduled closing</p>
+      <p><strong>Purpose:</strong> Ensure all closing items are completed in sequence</p>
+    </div>
+  </div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Closing Date</div><div class="cvc-v">{{closingDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Deal Manager</div><div class="cvc-v">{{dealManager}}</div></div>
+    <div class="cvc"><div class="cvc-l">Ref</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Pre-Closing (48 Hours Before)</span></div><div class="sb">
+    <div class="checklist">
+      <div class="checklist-item"><div class="checklist-box {{#if pre1}}checked{{/if}}"></div><div class="checklist-content"><strong>Final document review:</strong> All closing documents reviewed and approved by counsel</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if pre2}}checked{{/if}}"></div><div class="checklist-content"><strong>Wire instructions:</strong> Verified wire instructions from all parties</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if pre3}}checked{{/if}}"></div><div class="checklist-content"><strong>SBA commitment:</strong> SBA commitment letter received and conditions satisfied</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if pre4}}checked{{/if}}"></div><div class="checklist-content"><strong>Board resolutions:</strong> Final board resolutions executed</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if pre5}}checked{{/if}}"></div><div class="checklist-content"><strong>Insurance:</strong> Updated insurance certificates naming ESOP trust</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if pre6}}checked{{/if}}"></div><div class="checklist-content"><strong>Retainer payments:</strong> ERISA counsel and trustee retainer payments confirmed</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Closing Day — Morning</span></div><div class="sb">
+    <div class="checklist">
+      <div class="checklist-item"><div class="checklist-box {{#if day1}}checked{{/if}}"></div><div class="checklist-content"><strong>Final call:</strong> Pre-closing call with all parties at {{morningCallTime}}</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if day2}}checked{{/if}}"></div><div class="checklist-content"><strong>Document execution:</strong> All parties sign closing documents</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if day3}}checked{{/if}}"></div><div class="checklist-content"><strong>SBA funding:</strong> SBA lender confirms funding authorization</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if day4}}checked{{/if}}"></div><div class="checklist-content"><strong>Seller note:</strong> Seller note documents executed</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Closing Day — Funding</span></div><div class="sb">
+    <div class="checklist">
+      <div class="checklist-item"><div class="checklist-box {{#if fund1}}checked{{/if}}"></div><div class="checklist-content"><strong>Wire initiation:</strong> SBA lender initiates wire transfer</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if fund2}}checked{{/if}}"></div><div class="checklist-content"><strong>Wire confirmation:</strong> Seller confirms receipt of funds</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if fund3}}checked{{/if}}"></div><div class="checklist-content"><strong>Stock transfer:</strong> ESOP trust receives stock certificates</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if fund4}}checked{{/if}}"></div><div class="checklist-content"><strong>Commission payment:</strong> Broker commission wire initiated</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if fund5}}checked{{/if}}"></div><div class="checklist-content"><strong>Forhemit fee:</strong> Success balance wire initiated</div></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Post-Closing (Same Day)</span></div><div class="sb">
+    <div class="checklist">
+      <div class="checklist-item"><div class="checklist-box {{#if post1}}checked{{/if}}"></div><div class="checklist-content"><strong>Confirmation:</strong> Send closing congratulations to seller</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if post2}}checked{{/if}}"></div><div class="checklist-content"><strong>Broker notification:</strong> Confirm commission received by broker</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if post3}}checked{{/if}}"></div><div class="checklist-content"><strong>Internal announcement:</strong> Post to Slack #deals channel</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if post4}}checked{{/if}}"></div><div class="checklist-content"><strong>CRM update:</strong> Move deal to "Closed" stage</div></div>
+      <div class="checklist-item"><div class="checklist-box {{#if post5}}checked{{/if}}"></div><div class="checklist-content"><strong>COOP scheduling:</strong> Schedule COOP kickoff for Day 121</div></div>
+    </div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Checklist — Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-CLOSE-001</div>
+  </div>
+</div>
+</body>
+</html>

@@ -31,6 +31,7 @@ import {
   KanbanView,
   CalendarView,
   AnalyticsView,
+  DealQueueView,
   CompanyDetailPanel,
   CompanyModal,
 } from "./components";
@@ -246,18 +247,20 @@ export function EngagementTracker() {
 
       {/* Main Content */}
       <div className="flex flex-1 min-h-0 overflow-hidden relative">
-        <FilterSidebar
-          filters={filters}
-          onFilterChange={handleFilterChangeAndCloseDrawer}
-          stageCounts={stageCounts}
-          ndaCounts={ndaCounts}
-          mobileOpen={mobileFiltersOpen}
-          onMobileClose={() => setMobileFiltersOpen(false)}
-        />
+        {currentView !== "queue" && (
+          <FilterSidebar
+            filters={filters}
+            onFilterChange={handleFilterChangeAndCloseDrawer}
+            stageCounts={stageCounts}
+            ndaCounts={ndaCounts}
+            mobileOpen={mobileFiltersOpen}
+            onMobileClose={() => setMobileFiltersOpen(false)}
+          />
+        )}
 
         {/* Content */}
         <div className="flex-1 flex flex-col overflow-hidden min-w-0">
-          {currentView !== "table" && (
+          {currentView !== "table" && currentView !== "queue" && (
             <div className="flex lg:hidden items-center px-3 max-[375px]:px-2 py-2 max-[375px]:py-1.5 border-b border-[var(--border)] bg-[var(--surface)] shrink-0">
               <button
                 type="button"
@@ -311,6 +314,7 @@ export function EngagementTracker() {
               />
             )}
             {currentView === "analytics" && <AnalyticsView stats={stats} />}
+            {currentView === "queue" && <DealQueueView />}
           </div>
         </div>
       </div>
