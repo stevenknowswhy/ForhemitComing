@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Seller Exit Interview</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.rating-row { display: flex; align-items: center; gap: 0; margin-bottom: 0.4rem; }
+.rating-label { font-size: 0.78rem; font-weight: 300; color: #333; min-width: 200px; }
+.rating-scale { display: flex; gap: 0; }
+.rating-box { width: 2.2rem; height: 1.6rem; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; font-family: var(--ff-mono); font-size: 0.65rem; color: var(--muted); }
+.rating-box:first-child { border-left: 1px solid var(--line); }
+.write-line { border-bottom: 1px solid var(--line); height: 2rem; margin-bottom: 0.2rem; }
+.write-line-lg { height: 3rem; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Seller Exit Interview</div>
+  <div class="dst">Post-COOP Feedback — Confidential</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Closing Date</div><div class="cvc-v">{{closingDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">COOP Completion</div><div class="cvc-v">{{coopCompletionDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Recipient</div><div class="cvc-v">{{recipientName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="co"><strong>Purpose:</strong> This exit interview captures your honest feedback on the ESOP transaction process from first contact through COOP completion. Your responses help us improve how we serve future business owners. All feedback is confidential and will not be shared without your written permission.</div>
+
+  <!-- § 01 Overall Experience -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Overall Experience</span></div><div class="sb">
+    <p>On a scale of 1&ndash;10, how would you rate your overall experience with Forhemit throughout the ESOP transaction and stewardship process?</p>
+    <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0;">
+      <span style="font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;">1 (Poor)</span>
+      <div class="rating-scale">
+        <div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div>
+        <div class="rating-box">6</div><div class="rating-box">7</div><div class="rating-box">8</div><div class="rating-box">9</div><div class="rating-box">10</div>
+      </div>
+      <span style="font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;">10 (Excellent)</span>
+    </div>
+    <p style="margin-top:1rem;">How would you describe the ESOP process to another business owner considering the same path?</p>
+    <div class="write-line write-line-lg"></div>
+    <div class="write-line write-line-lg"></div>
+  </div></div>
+
+  <!-- § 02 Process Evaluation -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Process Evaluation</span></div><div class="sb">
+    <p>Please rate each phase of the transaction on a scale of 1&ndash;5 (1 = Poor, 5 = Excellent):</p>
+    <div style="margin-top:0.8rem;">
+      <div class="rating-row">
+        <span class="rating-label">Qualification &amp; Feasibility</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Engagement &amp; Onboarding</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Diligence &amp; Gate Process</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Closing</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">COOP Stewardship</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">Which phase was strongest, and why?</p>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+    <p>Which phase could have been improved, and how?</p>
+    <div class="write-line"></div>
+    <div class="write-line"></div>
+  </div></div>
+
+  <!-- § 03 Team Performance -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Team Performance</span></div><div class="sb">
+    <p>Rate the Forhemit team on the following dimensions (1&ndash;5):</p>
+    <div style="margin-top:0.8rem;">
+      <div class="rating-row">
+        <span class="rating-label">Communication Quality</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Responsiveness</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">ESOP Expertise</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+      <div class="rating-row">
+        <span class="rating-label">Problem-Solving</span>
+        <div class="rating-scale"><div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div></div>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">Was there a specific team member who stood out? If so, please share what made them exceptional.</p>
+    <div class="write-line write-line-lg"></div>
+  </div></div>
+
+  <!-- § 04 What Worked Well -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">What Worked Well</span></div><div class="sb">
+    <p>What are the top three things Forhemit did well during your ESOP transaction?</p>
+    <div style="margin-top:0.5rem;">
+      <div style="display:flex;gap:0.6rem;align-items:start;margin-bottom:0.6rem;">
+        <span style="font-family:var(--ff-mono);font-size:0.7rem;color:var(--brass);margin-top:0.3rem;">1.</span>
+        <div style="flex:1;"><div class="write-line write-line-lg"></div></div>
+      </div>
+      <div style="display:flex;gap:0.6rem;align-items:start;margin-bottom:0.6rem;">
+        <span style="font-family:var(--ff-mono);font-size:0.7rem;color:var(--brass);margin-top:0.3rem;">2.</span>
+        <div style="flex:1;"><div class="write-line write-line-lg"></div></div>
+      </div>
+      <div style="display:flex;gap:0.6rem;align-items:start;margin-bottom:0.6rem;">
+        <span style="font-family:var(--ff-mono);font-size:0.7rem;color:var(--brass);margin-top:0.3rem;">3.</span>
+        <div style="flex:1;"><div class="write-line write-line-lg"></div></div>
+      </div>
+    </div>
+  </div></div>
+
+  <!-- § 05 Areas for Improvement -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Areas for Improvement</span></div><div class="sb">
+    <p>If you could change one thing about the process, what would it be?</p>
+    <div class="write-line write-line-lg"></div>
+    <div class="write-line write-line-lg"></div>
+    <p style="margin-top:0.8rem;">Were there any moments where you felt confused, underserved, or wished for more support?</p>
+    <div class="write-line write-line-lg"></div>
+    <div class="write-line write-line-lg"></div>
+  </div></div>
+
+  <!-- § 06 Recommendation -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Recommendation</span></div><div class="sb">
+    <p>How likely are you to recommend Forhemit to another business owner considering an ESOP? (Net Promoter Score, 1&ndash;10)</p>
+    <div style="display:flex;align-items:center;gap:1rem;margin:1rem 0;">
+      <span style="font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;">1 (Not likely)</span>
+      <div class="rating-scale">
+        <div class="rating-box">1</div><div class="rating-box">2</div><div class="rating-box">3</div><div class="rating-box">4</div><div class="rating-box">5</div>
+        <div class="rating-box">6</div><div class="rating-box">7</div><div class="rating-box">8</div><div class="rating-box">9</div><div class="rating-box">10</div>
+      </div>
+      <span style="font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;">10 (Extremely likely)</span>
+    </div>
+    <div class="co"><strong>Permission:</strong> May we use your feedback (anonymized, with your approval on final wording) in Forhemit marketing materials or case studies?</div>
+    <div style="display:flex;gap:2rem;margin-top:0.6rem;">
+      <div style="display:flex;align-items:center;gap:0.4rem;">
+        <div style="width:0.9rem;height:0.9rem;border:1px solid var(--line-strong);"></div>
+        <span style="font-size:0.78rem;color:#333;">Yes, with approval on final wording</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.4rem;">
+        <div style="width:0.9rem;height:0.9rem;border:1px solid var(--line-strong);"></div>
+        <span style="font-size:0.78rem;color:#333;">No, keep my feedback confidential</span>
+      </div>
+    </div>
+    <p style="margin-top:1rem;">Any additional comments or testimonials you would like to share?</p>
+    <div class="write-line write-line-lg"></div>
+    <div class="write-line write-line-lg"></div>
+    <div class="write-line write-line-lg"></div>
+  </div></div>
+
+  <!-- § 07 Contact -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Contact</span></div><div class="sb">
+    <p>If you would like to discuss your feedback in person, or if there is anything we can do to support your continued ESOP success, please reach out:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Feedback will not be shared without written permission.</div>
+  </div>
+</div>
+
+</body>
+</html>
