@@ -102,7 +102,7 @@ export const templates: Record<string, TemplateEntry> = {
     pipeline: "external",
     stage: "01-first-touch",
     audience: ["seller"],
-    status: "gap",
+    status: "exists",
     requiresSignature: false,
     isRequired: false,
     isRecurring: false,
@@ -474,6 +474,36 @@ export const templates: Record<string, TemplateEntry> = {
     isRecurring: false,
     description:
       "Day 5 — first check-in, how are things going, any questions",
+  },
+
+  "external/03-engagement/trustee-retainer": {
+    id: "external/03-engagement/trustee-retainer",
+    name: "Trustee retainer agreement (company → trustee)",
+    path: "./external/03-engagement/trustee-retainer.html",
+    pipeline: "external",
+    stage: "03-engagement",
+    audience: ["trustee"],
+    status: "exists",
+    requiresSignature: true,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Owner-executed retainer for independent ESOP trustee; Forhemit not a party",
+  },
+
+  "external/03-engagement/erisa-counsel-retainer": {
+    id: "external/03-engagement/erisa-counsel-retainer",
+    name: "ERISA counsel retainer agreement (company → counsel)",
+    path: "./external/03-engagement/erisa-counsel-retainer.html",
+    pipeline: "external",
+    stage: "03-engagement",
+    audience: ["counsel"],
+    status: "gap",
+    requiresSignature: true,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Owner-executed retainer for ERISA counsel; Forhemit not a party — ERISA independence",
   },
 
   // ── 04-diligence ───────────────────────────────────────────────────────────
