@@ -34,7 +34,7 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
   const createMutation = useMutation(api.crmCompanies.create);
   const updateMutation = useMutation(api.crmCompanies.update);
   const deleteMutation = useMutation(api.crmCompanies.remove);
-  const wireTriggersMutation = useMutation(api.dealEngine.wireTriggers);
+  const wireTriggersMutation = useMutation(api.triggers.wireTriggers);
 
 
   // Apply filters and sorting
@@ -98,7 +98,6 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
         wireTriggersMutation({
           companyId: id,
           event: "stage_change",
-          previousStage,
           newStage: data.stage,
         }).catch((err) => console.warn("Failed to wire triggers on stage change:", err));
       }

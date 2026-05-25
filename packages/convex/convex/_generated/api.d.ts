@@ -40,6 +40,7 @@ import type * as gates from "../gates.js";
 import type * as generatedDocuments from "../generatedDocuments.js";
 import type * as jobApplications from "../jobApplications.js";
 import type * as lib_requireAdmin from "../lib/requireAdmin.js";
+import type * as lib_requireAuth from "../lib/requireAuth.js";
 import type * as notes from "../notes.js";
 import type * as notifications from "../notifications.js";
 import type * as opensign from "../opensign.js";
@@ -98,6 +99,7 @@ declare const fullApi: ApiFromModules<{
   generatedDocuments: typeof generatedDocuments;
   jobApplications: typeof jobApplications;
   "lib/requireAdmin": typeof lib_requireAdmin;
+  "lib/requireAuth": typeof lib_requireAuth;
   notes: typeof notes;
   notifications: typeof notifications;
   opensign: typeof opensign;

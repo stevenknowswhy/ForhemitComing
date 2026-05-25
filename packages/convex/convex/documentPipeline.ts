@@ -146,7 +146,8 @@ export const logGeneratedDocument = mutation({
 	handler: async (ctx, args) => {
 		await requireAuth(ctx);
 		await ctx.db.insert("generatedDocuments", {
-			templateId: args.templateId as any,
+			// TODO: Schema mismatch — generatedDocuments.templateId references "documentTemplates" but args.templateId is from "templates"
+		templateId: args.templateId as any,
 			templateName: args.templateName,
 			formData: args.formData,
 			action: "pdf-download-server" as const,
@@ -181,7 +182,7 @@ export const generateAndSendDocument = action({
 		htmlBody: v.optional(v.string()),
 		generatedBy: v.optional(v.string()),
 	},
-	handler: async (ctx, args) => {
+	handler: async (ctx, args): Promise<{ success: boolean; resendId?: string; templateVersion?: number }> => {
 		const {
 			templateId,
 			to,
@@ -193,7 +194,7 @@ export const generateAndSendDocument = action({
 		} = args;
 
 		// 1. Read template from templates table (not documentTemplates)
-		const template = await ctx.runQuery("documentPipeline:getTemplate" as any, {
+		const template = await ctx.runQuery(api.documentPipeline.getTemplate, {
 			templateId,
 		});
 		if (!template) throw new Error(`Template ${templateId} not found`);
@@ -233,17 +234,17 @@ export const generateAndSendDocument = action({
 		}
 
 		// 5. Log to generatedDocuments
-		await ctx.runMutation("documentPipeline:logGeneratedDocument" as any, {
+		await ctx.runMutation(api.documentPipeline.logGeneratedDocument, {
 			templateId,
 			templateName: template.title,
-			templateVersion: template.version,
+			templateVersion: template.version ?? 1,
 			formData: JSON.stringify(data),
 			generatedBy,
 		});
 
 		// 6. Update workflowTask if linked
 		if (workflowTaskId && emailResult.id) {
-			await ctx.runMutation("documentPipeline:markWorkflowTaskSent" as any, {
+			await ctx.runMutation(api.documentPipeline.markWorkflowTaskSent, {
 				workflowTaskId,
 				resendId: emailResult.id,
 			});
@@ -252,7 +253,7 @@ export const generateAndSendDocument = action({
 		return {
 			success: true,
 			resendId: emailResult.id,
-			templateVersion: template.version,
+			...(template.version !== undefined ? { templateVersion: template.version } : {}),
 		};
 	},
 });
@@ -272,7 +273,7 @@ export const generateStageDocuments = action({
 		const { stage, to, data, generatedBy } = args;
 
 		const requirements = await ctx.runQuery(
-			"documentPipeline:getStageRequirements" as any,
+			api.documentPipeline.getStageRequirements,
 			{ stage },
 		);
 
@@ -282,7 +283,7 @@ export const generateStageDocuments = action({
 		for (const req of requirements) {
 			try {
 				const template = await ctx.runQuery(
-					"documentPipeline:getTemplate" as any,
+					api.documentPipeline.getTemplate,
 					{ templateId: req.templateId },
 				);
 				if (!template) {
@@ -300,7 +301,7 @@ export const generateStageDocuments = action({
 					continue;
 				}
 
-				await ctx.runAction("documentPipeline:generateAndSendDocument" as any, {
+				await ctx.runAction(api.documentPipeline.generateAndSendDocument, {
 					templateId: req.templateId,
 					to,
 					subject: `Forhemit — ${template.title}`,
