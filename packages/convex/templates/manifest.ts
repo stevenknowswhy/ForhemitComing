@@ -151,6 +151,34 @@ export const templates: Record<string, TemplateEntry> = {
     description:
       "After an ecosystem call (trustee, lender, advisor) where no deal was discussed — maintains relationship",
   },
+  "external/01-first-touch/exit-strategy-benchmark": {
+    id: "external/01-first-touch/exit-strategy-benchmark",
+    name: "Exit strategy benchmark (ESOP vs PE vs strategic vs succession)",
+    path: "./external/01-first-touch/exit-strategy-benchmark.html",
+    pipeline: "external",
+    stage: "01-first-touch",
+    audience: ["seller"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: false,
+    isRecurring: false,
+    description:
+      "Benchmarks ESOP against other exit strategies; captures seller's non-financial goals (legacy, employee welfare) to tailor the entire process",
+  },
+  "external/01-first-touch/employee-communications-plan": {
+    id: "external/01-first-touch/employee-communications-plan",
+    name: "Employee communications plan (pre- and post-close)",
+    path: "./external/01-first-touch/employee-communications-plan.html",
+    pipeline: "external",
+    stage: "01-first-touch",
+    audience: ["seller", "internal"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: false,
+    isRecurring: false,
+    description:
+      "Messaging framework from Day 1 announcement through Year 1 — guides cultural transition throughout the ESOP lifecycle",
+  },
 
   // ── 02-qualification ────────────────────────────────────────────────────────
   "external/02-qualification/nda-mutual": {
@@ -505,6 +533,20 @@ export const templates: Record<string, TemplateEntry> = {
     description:
       "Owner-executed retainer for ERISA counsel; Forhemit not a party — ERISA independence",
   },
+  "external/03-engagement/trustee-rfp": {
+    id: "external/03-engagement/trustee-rfp",
+    name: "Trustee RFP (formal request for proposal)",
+    path: "./external/03-engagement/trustee-rfp.html",
+    pipeline: "external",
+    stage: "03-engagement",
+    audience: ["trustee"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: false,
+    isRecurring: false,
+    description:
+      "Formal RFP for independent ESOP trustee with independence criteria, mandate to document prudent process, and fee structure requirements",
+  },
 
   // ── 04-diligence ───────────────────────────────────────────────────────────
   "external/04-diligence/gate1-passage-confirmation": {
@@ -680,6 +722,20 @@ export const templates: Record<string, TemplateEntry> = {
     description:
       "Key man risk quantification tool — cost of employee departure for trustee and lender presentations",
   },
+  "external/04-diligence/fairness-opinion-package": {
+    id: "external/04-diligence/fairness-opinion-package",
+    name: "Fairness opinion package (trustee's financial advisor)",
+    path: "./external/04-diligence/fairness-opinion-package.html",
+    pipeline: "external",
+    stage: "04-diligence",
+    audience: ["trustee", "seller"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Formal fairness opinion from trustee's independent financial advisor — central to fiduciary review, often legally required for ESOP transactions",
+  },
 
   // ── 05-closing ─────────────────────────────────────────────────────────────
   "external/05-closing/closing-date-confirmation": {
@@ -765,6 +821,34 @@ export const templates: Record<string, TemplateEntry> = {
     isRecurring: false,
     description:
       "For sellers who want to announce publicly — positions as employee ownership milestone, not M&A",
+  },
+  "external/05-closing/esop-town-hall-agenda": {
+    id: "external/05-closing/esop-town-hall-agenda",
+    name: "First Day as ESOP town hall agenda + employee FAQ",
+    path: "./external/05-closing/esop-town-hall-agenda.html",
+    pipeline: "external",
+    stage: "05-closing",
+    audience: ["seller", "internal"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Employee-facing meeting agenda and FAQ explaining 'what's in it for me' — manages the cultural transition on announcement day",
+  },
+  "external/05-closing/trustee-welcome-letter": {
+    id: "external/05-closing/trustee-welcome-letter",
+    name: "Trustee welcome letter to employees",
+    path: "./external/05-closing/trustee-welcome-letter.html",
+    pipeline: "external",
+    stage: "05-closing",
+    audience: ["trustee", "seller"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: false,
+    isRecurring: false,
+    description:
+      "Letter from independent trustee to all employees explaining their ownership rights, protections, and what the ESOP means for them",
   },
 
   // ── 06-post-close ──────────────────────────────────────────────────────────
@@ -895,6 +979,49 @@ export const templates: Record<string, TemplateEntry> = {
     isRecurring: false,
     description:
       "Asks seller for permission to use the deal as an anonymized case study — used in broker and CPA outreach",
+  },
+  "external/06-post-close/repurchase-obligation-study": {
+    id: "external/06-post-close/repurchase-obligation-study",
+    name: "Repurchase obligation study",
+    path: "./external/06-post-close/repurchase-obligation-study.html",
+    pipeline: "external",
+    stage: "06-post-close",
+    audience: ["seller", "trustee"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Formal projection of ESOP repurchase liability — fundamental for long-term financial planning and DOL compliance",
+  },
+  "external/06-post-close/distribution-policy": {
+    id: "external/06-post-close/distribution-policy",
+    name: "ESOP distribution policy",
+    path: "./external/06-post-close/distribution-policy.html",
+    pipeline: "external",
+    stage: "06-post-close",
+    audience: ["seller", "trustee"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: true,
+    isRecurring: false,
+    description:
+      "Rules governing employee payout timing, vesting schedules, diversification rights, and distribution methods — required for ESOP administration",
+  },
+  "external/06-post-close/esop-satisfaction-survey": {
+    id: "external/06-post-close/esop-satisfaction-survey",
+    name: "ESOP satisfaction survey (annual, employees)",
+    path: "./external/06-post-close/esop-satisfaction-survey.html",
+    pipeline: "external",
+    stage: "06-post-close",
+    audience: ["seller", "internal"],
+    status: "exists",
+    requiresSignature: false,
+    isRequired: false,
+    isRecurring: true,
+    recurrenceRule: "annually",
+    description:
+      "Annual employee feedback instrument measuring ESOP understanding, satisfaction, and engagement — identifies communication gaps early",
   },
 
   // ============================================================================
