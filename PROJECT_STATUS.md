@@ -131,10 +131,10 @@ Both apps (`forhemit-admin`, `forhemit-coming-soon`) now build successfully.
 
 - [ ] **Reduce email complexity** — `email-config.ts` (complexity: 148) and `emails.ts` (complexity: 138) need registry pattern refactor
 - [ ] **Audit duplicate domain functions** — `styleCheckOpt` (4 files), `toggleBroker` (4 files), `syncShared` (4 files) — extract to shared package if identical
-- [ ] **Add ESLint** — currently no linter configured. `next lint` was removed in Next.js 16.
+- [x] **Add ESLint** — done 2026-05-25 (`fbbb499`). ESLint 10 with flat config, typescript-eslint, react-hooks, @next/eslint-plugin-next. 84 errors → 0 errors, 1436 warnings for incremental cleanup.
 - [ ] **Increase test coverage** — 7 test files across 1,373 source files (0.5%)
-- [ ] **Create `.env.example`** — document required environment variables
-- [ ] **Resolve Convex build errors** — ~21 remaining type errors from schema drift (down from 124, 83% reduction)
+- [x] **Create `.env.example`** — already exists with detailed instructions for admin, marketing, and convex packages
+- [x] **Resolve Convex build errors** — done (124 → 0 TS errors)
 - [x] **Clean stale worktrees** — all 6 worktrees removed 2026-05-25
 
 ### P3 — Architecture (Strategic)
