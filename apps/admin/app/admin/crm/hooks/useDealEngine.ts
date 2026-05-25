@@ -48,8 +48,7 @@ export function useDealEngine(companyId: Id<"crmCompanies"> | null) {
   // Wire triggers for a stage change or gate pass
   const trigger = useCallback(
     async (args: {
-      event: "stage_change" | "gate_pass" | "time_check" | "post_close";
-      previousStage?: string;
+      event: "stage_change" | "gate_passed";
       newStage?: string;
       gateName?: "gate1" | "gate2" | "gate3" | "gate4";
     }) => {
