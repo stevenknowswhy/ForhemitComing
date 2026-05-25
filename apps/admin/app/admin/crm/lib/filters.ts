@@ -1,4 +1,4 @@
-import { Company, CompanyFilters, SortConfig } from "../types";
+import type { Company, CompanyFilters, SortConfig } from "../types";
 import { daysUntil } from "./formatters";
 import { PIPELINE_STAGES } from "../types";
 
@@ -76,7 +76,7 @@ export function sortCompanies(
   sort: SortConfig
 ): Company[] {
   return [...companies].sort((a, b) => {
-    let comparison = 0;
+    let comparison: number;
 
     switch (sort.field) {
       case "company":

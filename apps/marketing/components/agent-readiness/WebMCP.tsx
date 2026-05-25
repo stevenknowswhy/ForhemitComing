@@ -18,7 +18,9 @@ export function WebMCP() {
           parameters: {},
         })
       }
-    } catch {}
+    } catch {
+      // WebMCP not available
+    }
   }, [])
 
   return null
