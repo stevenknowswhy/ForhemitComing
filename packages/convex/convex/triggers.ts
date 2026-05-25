@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import type { Id } from "./_generated/dataModel";
 import { api } from "./_generated/api";
 import { requireAuth } from "./lib/requireAuth";
 import { calculateStageTriggerDueDate } from "./stages";
@@ -68,7 +69,7 @@ export const createTriggeredTasks = mutation({
 			return false;
 		});
 
-		const createdTasks = [];
+		const createdTasks: Id<"queueTasks">[] = [];
 		for (const req of matches) {
 			const existing = await ctx.db
 				.query("queueTasks")

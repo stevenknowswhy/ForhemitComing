@@ -406,9 +406,9 @@ export const getDealWorkflow = query({
 
 		const enriched = await Promise.all(
 			tasks.map(async (task) => {
-				const template = await ctx.db.get(task.templateId);
+				const template = (await ctx.db.get(task.templateId)) as { title?: string; category?: string; description?: string } | null;
 				const contact = task.contactId
-					? await ctx.db.get(task.contactId)
+					? ((await ctx.db.get(task.contactId)) as { firstName?: string; lastName?: string; email?: string } | null)
 					: null;
 				return {
 					...task,
@@ -472,10 +472,10 @@ export const getAllWorkflowTasks = query({
 
 		const enriched = await Promise.all(
 			tasks.map(async (task) => {
-				const template = await ctx.db.get(task.templateId);
-				const company = await ctx.db.get(task.companyId);
+				const template = (await ctx.db.get(task.templateId)) as { title?: string } | null;
+				const company = (await ctx.db.get(task.companyId)) as { name?: string } | null;
 				const contact = task.contactId
-					? await ctx.db.get(task.contactId)
+					? ((await ctx.db.get(task.contactId)) as { firstName?: string; lastName?: string } | null)
 					: null;
 				return {
 					...task,
