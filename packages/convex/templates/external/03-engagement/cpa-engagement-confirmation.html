@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — CPA Engagement Confirmation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body {
+  color: #111; background: #fff;
+  font-family: 'Jost', system-ui, sans-serif;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+
+:root {
+  --brass: #7A5C20;
+  --brass-dim: #bbb;
+  --muted: #666;
+  --line: #ddd;
+  --line-strong: #bbb;
+  --green: #2E7D32;
+  --green-bg: #f0f8f0;
+  --callout-bg: #faf7f0;
+  --badge-bg: #fff;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Jost', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+  --page-w: 720px;
+}
+
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.deal-summary {
+  border: 1px solid var(--line-strong);
+  padding: 1.2rem 1.4rem;
+  margin: 1.2rem 0;
+  break-inside: avoid;
+}
+.deal-summary-title {
+  font-family: var(--ff-display); font-size: 1rem; font-weight: 400;
+  letter-spacing: 0.06em; color: #111; margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--line);
+}
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">CPA Engagement Confirmation</div>
+  <div class="dst">ESOP Transaction &mdash; Tax Coordination</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">CPA</div><div class="cvc-v">{{cpaName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Firm</div><div class="cvc-v">{{cpaFirm}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Transaction Overview</span></div><div class="sb">
+    <p>Dear {{cpaName}},</p>
+    <p>This letter confirms your firm&rsquo;s role as the certified public accountant for {{companyName}} in connection with its planned Employee Stock Ownership Plan (ESOP) transaction. Forhemit Stewardship Management Co. (&ldquo;Forhemit&rdquo;) is serving as the transaction stewardship coordinator for this engagement.</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Transaction Summary</div>
+      <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}}</span></div>
+      <div class="fr"><label>Industry</label><span style="flex:1;">{{industry}}</span></div>
+      <div class="fr"><label>Transaction type</label><span style="flex:1;">100% ESOP &mdash; new plan</span></div>
+      <div class="fr"><label>Entity type</label><span style="flex:1;">{{entityType}}</span></div>
+      <div class="fr"><label>Expected close</label><span style="flex:1;">{{expectedCloseDate}}</span></div>
+      <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+    </div>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">CPA Role &amp; Responsibilities</span></div><div class="sb">
+    <p>Your firm will serve a critical role throughout the transaction and post-close stewardship. The key responsibilities include:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>&sect;1042 Election Coordination.</strong> Advising the seller on the Qualified Replacement Property (QRS) election mechanics, reinvestment window (60-day rule), basis implications, and coordination with the closing timeline.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>QofE Data Provision.</strong> Providing financial statements, working papers, and normalization adjustments to the independent QofE (Quality of Earnings) appraiser retained by the ESOP trustee.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Tax Return Preparation.</strong> Preparing or coordinating federal and state tax returns for the company, the seller, and the ESOP trust for the transaction year and subsequent periods.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Entity Conversion Support.</strong> {{#if requiresConversion}}Advising on the {{entityType}}-to-C-Corp conversion, including tax elections (check-the-box, &sect;351), and coordinating with ERISA counsel on timing.{{else}}No entity conversion is required for this transaction.{{/if}}</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Ongoing Consultation.</strong> Providing tax and financial guidance during the ESOP&rsquo;s first plan year, including contribution timing, allocation methodology, and compliance reporting.</span></div>
+    </div>
+    <div class="co"><strong>Independence Note:</strong> Your firm&rsquo;s engagement is with {{companyName}} and its owner(s). Forhemit is not a party to the CPA engagement and does not direct your professional judgment. Any requests from the ESOP trustee or trustee&rsquo;s financial advisor for working papers or data will be coordinated through you.</div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Document Requests</span></div><div class="sb">
+    <p>To support the transaction and the QofE process, we request the following items be provided to the independent QofE appraiser and Forhemit as coordinated:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Federal and state tax returns</strong> &mdash; three most recent years for the company and its owners</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Audited or reviewed financial statements</strong> &mdash; three most recent fiscal years</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Interim financial statements</strong> &mdash; current year-to-date (through most recent month-end)</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>General ledger detail</strong> &mdash; supporting working papers and account reconciliations</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Normalization adjustments schedule</strong> &mdash; owner compensation, one-time items, non-recurring expenses</span></div>
+      <div class="si"><span class="si-n">6.</span><span><strong>Accounts receivable aging</strong> and bad debt history</span></div>
+      <div class="si"><span class="si-n">7.</span><span><strong>Fixed asset schedule</strong> with depreciation detail</span></div>
+      <div class="si"><span class="si-n">8.</span><span><strong>Debt schedule</strong> &mdash; all outstanding loans, lines of credit, and seller notes</span></div>
+    </div>
+    <div class="co"><strong>Timing:</strong> Please provide these items within {{docDeliveryDays}} business days of this confirmation. The QofE appraiser will contact you directly to schedule a working session to review the materials.</div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Timeline &amp; Milestones</span></div><div class="sb">
+    <p>The transaction follows a structured gate system. The key milestones relevant to your role are:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Gate 1 &mdash; Capital Committed.</strong> SBA lender indication of interest received. Document delivery window opens for CPA.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Gate 2 &mdash; Valuation Confirmed.</strong> Independent appraisal completed. CPA provides normalization adjustments and working papers to QofE appraiser. &sect;1042 election planning begins.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Gate 3 &mdash; Operations Cleared.</strong> All financial and operational due diligence complete. CPA confirms readiness for closing tax filings.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Gate 4 &mdash; Legal Clearance.</strong> All legal and financial conditions satisfied. CPA coordinates closing tax package and &sect;1042 filing timeline with seller.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Closing.</strong> Transaction closes. CPA receives closing package for tax return preparation and &sect;1042 election filing.</span></div>
+      <div class="si"><span class="si-n">F.</span><span><strong>Post-Close &mdash; First Plan Year.</strong> CPA prepares ESOP trust tax return, company contribution calculations, and coordinates with plan administrator.</span></div>
+    </div>
+    <div class="co"><strong>Expected close date:</strong> {{expectedCloseDate}}. We will keep you informed of any timeline changes that affect your deliverables.</div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this engagement or the transaction, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+    <p style="margin-top:0.8rem;">Please reference the above number in all correspondence related to this transaction.</p>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>This document does not constitute legal or tax advice.</div>
+  </div>
+</div>
+
+</body>
+</html>
