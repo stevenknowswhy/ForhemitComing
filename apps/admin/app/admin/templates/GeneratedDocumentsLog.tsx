@@ -90,7 +90,7 @@ export default function GeneratedDocumentsLog({
           </tr>
         </thead>
         <tbody>
-          {docs.map((doc) => (
+          {docs.map((doc: { _id: string; templateName: string; action: string; formData: string; createdAt: number; generatedBy?: string }) => (
             <tr key={doc._id}>
               <td className="generated-log-name">{doc.templateName}</td>
               <td>{actionLabel(doc.action)}</td>

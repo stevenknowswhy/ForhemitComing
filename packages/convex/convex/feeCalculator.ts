@@ -82,9 +82,10 @@ export const updateFee = mutation({
 			throw new Error("Deal not initialized — fees are missing");
 
 		const now = Date.now();
-		const fees = company.fees as any;
-		const milestone = {
-			...(fees[args.milestone] || { status: "pending", amount: 0 }),
+		const fees = company.fees;
+		const existingMilestone = (fees as Record<string, unknown>)[args.milestone] as FeeMilestoneData | undefined;
+		const milestone: Partial<FeeMilestoneData> = {
+			...(existingMilestone || { status: "pending" as FeeStatus, amount: 0 }),
 		};
 
 		milestone.status = args.status;
@@ -100,7 +101,7 @@ export const updateFee = mutation({
 		};
 
 		await ctx.db.patch(args.companyId, {
-			fees: updatedFees,
+			fees: updatedFees as typeof company.fees,
 			updatedAt: now,
 		});
 
@@ -130,9 +131,10 @@ export const updateFeeAmount = mutation({
 			throw new Error("Deal not initialized — fees are missing");
 
 		const now = Date.now();
-		const fees = company.fees as any;
-		const milestone = {
-			...(fees[args.milestone] || { status: "pending", amount: 0 }),
+		const fees = company.fees;
+		const existingMilestone = (fees as Record<string, unknown>)[args.milestone] as FeeMilestoneData | undefined;
+		const milestone: Partial<FeeMilestoneData> = {
+			...(existingMilestone || { status: "pending" as FeeStatus, amount: 0 }),
 		};
 
 		milestone.amount = args.amount;
@@ -143,7 +145,7 @@ export const updateFeeAmount = mutation({
 		};
 
 		await ctx.db.patch(args.companyId, {
-			fees: updatedFees,
+			fees: updatedFees as typeof company.fees,
 			updatedAt: now,
 		});
 
