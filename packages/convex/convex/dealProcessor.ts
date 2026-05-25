@@ -1,6 +1,6 @@
-// @ts-nocheck — circular api import causes type inference loop
 import { v } from "convex/values";
 import { action } from "./_generated/server";
+import { api } from "./_generated/api";
 
 /**
  * Deal Queue Task Generator — Action for processing individual workflow tasks.
@@ -16,27 +16,27 @@ export const generateQueueTask = action({
     recipientName: v.string(),
     senderEmail: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<{ success: boolean; emailId?: string; error?: string }> => {
     const now = Date.now();
 
     // 1. Load the workflow task
-    const task= await ctx.runQuery(
-      (await import("./_generated/api")).api.workflowTasks.get,
+    const task = await ctx.runQuery(
+      api.workflowTasks.get,
       { id: args.taskId }
     );
     if (!task) return { success: false, error: "Task not found" };
 
     // 2. Load the company
-    const company= await ctx.runQuery(
-      (await import("./_generated/api")).api.crmCompanies.get,
+    const company = await ctx.runQuery(
+      api.crmCompanies.get,
       { id: task.companyId }
     );
     if (!company?.company) return { success: false, error: "Company not found" };
 
     // 3. Load the template by ID
-    const template= await ctx.runQuery(
-      (await import("./_generated/api")).api.templates.get,
-      { id: task.templateId as any }
+    const template = await ctx.runQuery(
+      api.templates.get,
+      { id: task.templateId }
     );
     if (!template) return { success: false, error: "Template not found" };
 
@@ -57,8 +57,8 @@ export const generateQueueTask = action({
     };
 
     // 5. Generate document via templateGenerator
-    const result= await ctx.runAction(
-      (await import("./_generated/api")).api.templateGenerator.generateDocument,
+    const result = await ctx.runAction(
+      api.templateGenerator.generateDocument,
       {
         templateTitle: template.title,
         recipientEmail: args.recipientEmail,
@@ -71,7 +71,7 @@ export const generateQueueTask = action({
     // 6. Update the task status if successful
     if (result.success) {
       await ctx.runMutation(
-        (await import("./_generated/api")).api.workflowTasks.markTaskSent,
+        api.workflowTasks.markTaskSent,
         {
           workflowTaskId: args.taskId,
           resendId: result.emailId,
@@ -101,7 +101,7 @@ export const generateQueueTask = action({
         `;
 
         await ctx.runAction(
-          (await import("./_generated/api")).api.emails.sendTemplateEmailAction,
+          api.emails.sendTemplateEmailAction,
           {
             to: args.senderEmail,
             subject: `Action Required: Review & Send — ${template.title} — ${company.company.name}`,
