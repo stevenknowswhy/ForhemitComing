@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Trustee Request for Proposal</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Trustee Request for Proposal</div>
+  <div class="dst">Independent ESOP Trustee Selection</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Transaction Size</div><div class="cvc-v">{{transactionSize}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Response Deadline</div><div class="cvc-v">{{responseDeadline}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Transaction Overview</span></div><div class="sb">
+    <p>{{companyName}} is a {{industry}} company based in {{city}}, {{state}}, employing {{employeeCount}} people. The company has been in operation since {{foundingYear}} and specializes in {{specialization}}.</p>
+    <p>The owner is pursuing a 100% sale to an Employee Stock Ownership Plan (ESOP) trust. The projected adjusted EBITDA is {{projectedEbitda}}, with an anticipated transaction value of {{transactionSize}}. The transaction is expected to close by {{targetCloseDate}}.</p>
+    <div class="fr"><label>Industry</label><span style="flex:1;">{{industry}}</span></div>
+    <div class="fr"><label>Employee Count</label><span style="flex:1;">{{employeeCount}}</span></div>
+    <div class="fr"><label>Projected Adjusted EBITDA</label><span style="flex:1;">{{projectedEbitda}}</span></div>
+    <div class="fr"><label>Transaction Value</label><span style="flex:1;">{{transactionSize}}</span></div>
+    <div class="fr"><label>Target Close Date</label><span style="flex:1;">{{targetCloseDate}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Scope of Engagement</span></div><div class="sb">
+    <p>The selected trustee will serve as the independent fiduciary for the ESOP trust, responsible for the following:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Valuation review.</strong> Evaluate the independent FMV appraisal prepared by the valuation firm. Assess methodology, assumptions, and conclusions. Negotiate price on behalf of the ESOP if the appraisal supports a lower valuation than the proposed purchase price.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Transaction approval.</strong> Review and approve all material transaction terms, including the purchase agreement, seller note terms, SBA loan terms, and any related-party arrangements. Represent the interests of ESOP participants throughout negotiations.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Due diligence.</strong> Conduct independent due diligence on the company's financial condition, operations, management, and prospects. Review QofE findings, tax returns, and material contracts.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Closing participation.</strong> Execute all trust-related closing documents on behalf of the ESOP. Confirm that all conditions precedent to closing have been satisfied.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Post-close duties.</strong> Provide ongoing oversight of the ESOP trust, including annual valuation reviews, distribution policy administration, repurchase obligation monitoring, and compliance with ERISA requirements.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Independence Requirements</span></div><div class="sb">
+    <p>The trustee must satisfy all independence standards under ERISA and DOL guidance. Specifically:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>ERISA &#167;408(b)(2) compliance.</strong> The trustee must qualify as an independent fiduciary under ERISA and provide a written disclosure of all direct and indirect compensation in connection with the engagement.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>No prior relationships.</strong> The trustee and its affiliates must have no existing business, personal, or financial relationship with the company, its owner(s), Forhemit, or any member of the deal team that could impair independence.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Conflict disclosure.</strong> The trustee must disclose all potential conflicts of interest, including any prior engagements involving the company, its industry, or any party to the transaction. Any conflict that cannot be cured will disqualify the candidate.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>DOL standards.</strong> The trustee must demonstrate compliance with the Department of Labor's independence standards, including the ability to withstand scrutiny under a DOL examination or prohibited transaction claim.</span></div>
+    </div>
+    <div class="co"><strong>Important:</strong> Independence is non-negotiable. Proposals that do not include a complete independence disclosure will not be considered.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Prudent Process Mandate</span></div><div class="sb">
+    <p>The selected trustee must document a prudent process for every material decision. At minimum, the trustee's file must include:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Due diligence steps.</strong> A contemporaneous record of all due diligence performed, including documents reviewed, interviews conducted, and analyses completed.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Valuation review methodology.</strong> Documentation of how the FMV appraisal was evaluated, including any independent analysis performed and the basis for accepting or challenging the valuation conclusion.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Negotiation record.</strong> A written record of all negotiations conducted on behalf of the ESOP, including offers, counteroffers, and the rationale for the final terms accepted.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Basis for approval.</strong> A written memorandum explaining why the trustee concluded that the transaction is in the best interest of ESOP participants and beneficiaries, considering the totality of the circumstances.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Ongoing monitoring framework.</strong> A description of how the trustee will monitor the ESOP's investment on an ongoing basis, including triggers for additional review or action.</span></div>
+    </div>
+    <div class="co"><strong>Standard:</strong> The trustee should be prepared to produce this documentation in response to a DOL examination or participant complaint. Prudent process documentation is the trustee's primary defense.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Fee Structure Request</span></div><div class="sb">
+    <p>Please provide a complete fee proposal covering the following:</p>
+    <div class="fr"><label>Initial engagement fee</label><span style="flex:1;">{{initialFee}}</span></div>
+    <div class="fr"><label>Fee structure</label><span style="flex:1;">{{feeStructure}}</span></div>
+    <div class="fr"><label>Retainer amount</label><span style="flex:1;">{{retainerAmount}}</span></div>
+    <div class="fr"><label>Milestone payments</label><span style="flex:1;">{{milestonePayments}}</span></div>
+    <div class="fr"><label>Post-close annual fee</label><span style="flex:1;">{{postCloseAnnualFee}}</span></div>
+    <div class="fr"><label>Travel expenses</label><span style="flex:1;">{{travelExpenses}}</span></div>
+    <p>Indicate whether fees are fixed or hourly. If hourly, provide rates for each professional who may work on the engagement. All fees and expenses must be disclosed in accordance with ERISA &#167;408(b)(2).</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Required Qualifications</span></div><div class="sb">
+    <p>Respondents must demonstrate the following qualifications:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>ESOP trustee experience.</strong> Minimum {{minimumYears}} years serving as independent ESOP trustee, with at least {{minimumTransactions}} completed transactions.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Valuation expertise.</strong> Demonstrated ability to evaluate ERISA-compliant FMV appraisals and negotiate purchase prices on behalf of ESOP trusts.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>ERISA counsel relationship.</strong> Access to independent ERISA counsel for legal guidance on fiduciary matters, prohibited transactions, and DOL compliance.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>DOL examination history.</strong> Disclosure of any DOL examinations, investigations, or enforcement actions involving the firm or its principals in the past 10 years.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Professional liability insurance.</strong> Current professional liability (E&amp;O) insurance with minimum coverage of {{insuranceMinimum}}.</span></div>
+      <div class="si"><span class="si-n">F.</span><span><strong>Industry experience.</strong> Preference given to candidates with prior experience in the {{industry}} sector or with companies of comparable size and complexity.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Response Requirements</span></div><div class="sb">
+    <p>Your proposal should include the following materials:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Firm overview.</strong> History, organizational structure, office locations, and number of professionals dedicated to ESOP trustee services.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Team bios.</strong> Resumes of the lead trustee and any professionals who will be directly involved in the engagement.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Relevant experience.</strong> Summary of 5&#8211;10 comparable ESOP trustee engagements, including transaction size, industry, and outcome.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Fee proposal.</strong> Complete fee schedule per &#167; 05 above.</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Independence disclosure.</strong> Written confirmation of independence or disclosure of any potential conflicts per &#167; 03 above.</span></div>
+      <div class="si"><span class="si-n">6.</span><span><strong>References.</strong> Minimum three (3) professional references from companies or advisors for whom you have served as ESOP trustee within the past 5 years.</span></div>
+    </div>
+    <div class="co"><strong>Submit to:</strong> Proposals should be delivered to deals&#64;forhemit.com with the subject line "Trustee RFP Response — {{companyName}}" by {{responseDeadline}}.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Timeline</span></div><div class="sb">
+    <div class="fr"><label>RFP issued</label><span style="flex:1;">{{sentDate}}</span></div>
+    <div class="fr"><label>Questions deadline</label><span style="flex:1;">{{questionsDeadline}}</span></div>
+    <div class="fr"><label>Response deadline</label><span style="flex:1;">{{responseDeadline}}</span></div>
+    <div class="fr"><label>Selection date</label><span style="flex:1;">{{selectionDate}}</span></div>
+    <div class="fr"><label>Engagement start</label><span style="flex:1;">{{engagementStart}}</span></div>
+    <div class="fr"><label>Target close date</label><span style="flex:1;">{{targetCloseDate}}</span></div>
+    <p>Forhemit reserves the right to reject any or all proposals, waive informalities, and negotiate terms with one or more respondents. This RFP does not obligate Forhemit or the company to engage any respondent.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this RFP, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For trustee selection purposes only.</div>
+  </div>
+</div>
+
+</body>
+</html>
