@@ -270,6 +270,11 @@ export default defineSchema({
       stewardshipAnnual: v.optional(v.number()),
       stewardshipTranchesPaid: v.optional(v.number()),
       stewardshipTotalTranches: v.optional(v.number()),
+      // Fee milestones
+      retainer: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
+      validation: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
+      commitment: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
+      success: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
     })),
     sentAt: v.optional(v.number()), // Timestamp when document was sent
 
