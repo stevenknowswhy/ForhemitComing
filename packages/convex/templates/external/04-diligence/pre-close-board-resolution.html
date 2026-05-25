@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Pre-Close Board Resolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: #faf7f0; }
+.co strong { color: #111; font-weight: 500; }
+.co.w { border-color: #C0392B; background: #fdf5f4; }
+.co.w strong { color: #C0392B; }
+.fee-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.fee-table th { text-align: left; font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); padding: 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.fee-table td { padding: 0.6rem; border-bottom: 1px solid var(--line); font-size: 0.85rem; }
+.fee-table td:last-child { text-align: right; }
+.fee-table .total td { border-top: 2px solid var(--line-strong); font-weight: 500; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-title { font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Pre-Close Board Resolution</div>
+  <div class="dst">Fee Authorization &amp; Payment Acknowledgment</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Resolution Date</div><div class="cvc-v">{{resolutionDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Engagement Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Closing Date (Expected)</div><div class="cvc-v">{{expectedClosingDate}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Recitals</span></div><div class="sb">
+    <p><strong>WHEREAS,</strong> the Board of Directors (or equivalent governing body) of {{companyName}} ("Company") authorized the engagement of Forhemit Stewardship Management Co. ("Forhemit") pursuant to an Engagement Letter dated {{engagementDate}};</p>
+    <p><strong>WHEREAS,</strong> the engagement includes a fee schedule comprising four milestone payments plus an annual stewardship fee, as set forth in Exhibit A of the Engagement Letter;</p>
+    <p><strong>WHEREAS,</strong> three milestone payments have been earned and paid as of the date of this Resolution;</p>
+    <p><strong>WHEREAS,</strong> the fourth milestone payment ("Success Balance") is due upon closing of the ESOP transaction;</p>
+    <p><strong>NOW, THEREFORE, BE IT RESOLVED</strong> as follows:</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Prior Payment Acknowledgment</span></div><div class="sb">
+    <p>The Board acknowledges receipt and payment of the following milestone fees:</p>
+    <table class="fee-table">
+      <thead><tr><th>Milestone</th><th>Amount</th><th>Date Paid</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Engagement Retainer</td><td>{{retainerAmount}}</td><td>{{retainerPaidDate}}</td><td style="color:var(--green);">Paid</td></tr>
+        <tr><td>Validation Fee</td><td>{{validationAmount}}</td><td>{{validationPaidDate}}</td><td style="color:var(--green);">Paid</td></tr>
+        <tr><td>Commitment Fee</td><td>{{commitmentAmount}}</td><td>{{commitmentPaidDate}}</td><td style="color:var(--green);">Paid</td></tr>
+      </tbody>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Success Balance Authorization</span></div><div class="sb">
+    <div class="fr"><label>Success Balance Amount</label><span style="flex:1;font-weight:500;">{{successAmount}}</span></div>
+    <div class="fr"><label>Payment Due</label><span style="flex:1;">At closing, prior to ownership transfer</span></div>
+    <div class="fr"><label>Payment Method</label><span style="flex:1;">Wire transfer to Forhemit operating account</span></div>
+    <div class="co"><strong>RESOLVED,</strong> that the Company is hereby authorized to pay the Success Balance of <strong>{{successAmount}}</strong> to Forhemit Stewardship Management Co. upon closing of the ESOP transaction, from the Company's ordinary operating account, as an ordinary business expense of the Company.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Total Fee Summary</span></div><div class="sb">
+    <table class="fee-table">
+      <thead><tr><th>Fee Component</th><th>Amount</th></tr></thead>
+      <tbody>
+        <tr><td>Engagement Retainer</td><td>{{retainerAmount}}</td></tr>
+        <tr><td>Validation Fee</td><td>{{validationAmount}}</td></tr>
+        <tr><td>Commitment Fee</td><td>{{commitmentAmount}}</td></tr>
+        <tr><td>Success Balance</td><td>{{successAmount}}</td></tr>
+        <tr class="total"><td><strong>Total Engagement Fee</strong></td><td><strong>{{totalFee}}</strong></td></tr>
+      </tbody>
+    </table>
+    <div class="fr" style="margin-top:0.6rem;"><label>Annual Stewardship Fee</label><span style="flex:1;">{{stewardshipRate}} — commences Day 121 post-close</span></div>
+    <div class="co w"><strong>Board Acknowledgment:</strong> The Board confirms that all fees are paid by the Company as ordinary operating business expenses. Forhemit does not appear on the seller's closing statement and does not reduce seller proceeds.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Ratification</span></div><div class="sb">
+    <p>All prior actions taken by the officers of the Company in connection with the Forhemit engagement and fee payments are hereby ratified, confirmed, and approved in all respects.</p>
+    <p>This Resolution shall take effect immediately upon adoption and shall remain in full force and effect until superseded by a subsequent resolution of the Board.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">—</span><span class="st">Certification</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-title">Board Chair / Manager</div>
+        <div class="sb-entity">{{companyName}}<br><span style="font-size:0.78rem;color:var(--muted);">Governing Body</span></div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:#111;">{{chairName}}, {{chairTitle}}</div>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-title">Secretary / Authorized Officer</div>
+        <div class="sb-entity">{{companyName}}<br><span style="font-size:0.78rem;color:var(--muted);">Attestation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="font-size:0.85rem;color:#111;">{{secretaryName}}, {{secretaryTitle}}</div>
+        <div class="s-line" style="margin-top:0.5rem;"></div><div class="s-lbl">Date</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &middot; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Board Resolution — Fee Authorization</div>
+  </div>
+</div>
+</body>
+</html>

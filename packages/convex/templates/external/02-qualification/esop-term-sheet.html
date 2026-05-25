@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — ESOP Term Sheet</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">ESOP Term Sheet</div>
+  <div class="dst">Proposed Terms &mdash; 100% ESOP Transaction</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Trustee</div><div class="cvc-v">{{trusteeName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{generatedDate}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Parties</span></div><div class="sb">
+    <div class="fr"><label>Seller</label><span style="flex:1;">{{sellerName}} (the &ldquo;Seller&rdquo;)</span></div>
+    <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}} (the &ldquo;Company&rdquo;)</span></div>
+    <div class="fr"><label>ESOP Trustee</label><span style="flex:1;">{{trusteeName}} (the &ldquo;Trustee&rdquo;)</span></div>
+    <div class="co"><strong>Note:</strong> The Trustee acts as an independent fiduciary for the ESOP and its participants. The Trustee is not an agent of the Seller or the Company.</div>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Transaction Structure</span></div><div class="sb">
+    <div class="fr"><label>Structure</label><span style="flex:1;">100% ESOP acquisition via a newly created employee stock ownership plan</span></div>
+    <div class="fr"><label>Plan Type</label><span style="flex:1;">New ESOP (not a leveraged expansion of an existing plan)</span></div>
+    <div class="fr"><label>Acquirer</label><span style="flex:1;">The ESOP trust, acting through the Trustee</span></div>
+    <div class="fr"><label>Entity Type</label><span style="flex:1;">C-Corporation (required for &sect;1042 election)</span></div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Purchase Price &amp; Valuation</span></div><div class="sb">
+    <div class="fr"><label>Purchase Price</label><span style="flex:1;font-weight:500;color:#111;">{{purchasePrice}}</span></div>
+    <div class="fr"><label>Valuation Basis</label><span style="flex:1;">{{valuationBasis}}</span></div>
+    <div class="fr"><label>Appraisal Standard</label><span style="flex:1;">Fair market value per IRC &sect;401(a)(28)(C) and DOL Regulation &sect;2550.408c-2</span></div>
+    <div class="co"><strong>Adequacy requirement:</strong> The Trustee must independently determine that the purchase price does not exceed fair market value. The Trustee's valuation firm will issue a formal appraisal and FMV adequacy letter prior to closing.</div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Payment Terms</span></div><div class="sb">
+    <div class="fr"><label>Cash at Closing</label><span style="flex:1;">{{cashAtClosing}}</span></div>
+    <div class="fr"><label>Seller Note &mdash; Principal</label><span style="flex:1;">{{sellerNotePrincipal}}</span></div>
+    <div class="fr"><label>Seller Note &mdash; Interest Rate</label><span style="flex:1;">{{sellerNoteRate}}</span></div>
+    <div class="fr"><label>Seller Note &mdash; Term</label><span style="flex:1;">{{sellerNoteTerm}}</span></div>
+    <div class="co"><strong>Seller note terms:</strong> The seller note is subordinated to senior debt. Interest accrues from closing; principal payments begin upon release from subordination. The note is secured by the assets of the Company and guaranteed by the ESOP trust to the extent of its assets.</div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Key Conditions Precedent</span></div><div class="sb">
+    <p>Closing is conditioned upon satisfaction of each of the following:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Financing.</strong> SBA 7(a) loan commitment or equivalent senior financing approved and documented.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Appraisal.</strong> Independent valuation confirms purchase price at or below fair market value; Trustee issues FMV adequacy letter.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>ERISA Compliance.</strong> ERISA counsel confirms the transaction complies with ERISA &sect;406 and applicable prohibited transaction exemptions.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>QofE.</strong> Quality of Earnings report completed; normalized EBITDA within acceptable range of projections.</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Plan Documents.</strong> ESOP plan document, trust agreement, and related documents executed.</span></div>
+      <div class="si"><span class="si-n">6.</span><span><strong>Legal Opinions.</strong> Tax opinion confirming &sect;1042 eligibility; corporate opinion confirming authority and enforceability.</span></div>
+      <div class="si"><span class="si-n">7.</span><span><strong>Due Diligence.</strong> Satisfactory completion of financial, legal, and operational due diligence by the Trustee and lender.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §06 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Timeline &amp; Milestones</span></div><div class="sb">
+    <div class="fr"><label>Term Sheet Execution</label><span style="flex:1;">Upon signing by all parties</span></div>
+    <div class="fr"><label>Exclusivity Period Begins</label><span style="flex:1;">Upon term sheet execution</span></div>
+    <div class="fr"><label>Target Closing Date</label><span style="flex:1;">{{targetClosing}}</span></div>
+    <div class="co"><strong>Process:</strong> Following term sheet execution, Forhemit will coordinate the transaction team through a structured process including Gate reviews at key milestones. The target closing date assumes no material delays in financing, appraisal, or legal review.</div>
+  </div></div>
+
+  <!-- §07 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Exclusivity</span></div><div class="sb">
+    <div class="fr"><label>Exclusivity Period</label><span style="flex:1;">{{exclusivityPeriod}}</span></div>
+    <p>During the Exclusivity Period, the Seller agrees not to solicit, entertain, or negotiate any offer for the sale of the Company or its assets from any third party. The Seller shall promptly notify the Trustee of any unsolicited offer received during this period.</p>
+    <div class="co"><strong>Scope:</strong> Exclusivity applies to the sale of the Company's equity, assets, or any combination thereof. It does not restrict the Company's ordinary business operations.</div>
+  </div></div>
+
+  <!-- §08 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Confidentiality</span></div><div class="sb">
+    <p>All parties agree to maintain strict confidentiality regarding the terms of this term sheet and all information exchanged in connection with the proposed transaction. This obligation survives termination of the term sheet for a period of two (2) years.</p>
+    <p>Notwithstanding the foregoing, each party may disclose confidential information to its professional advisors (legal, tax, financial) who are bound by professional confidentiality obligations, and as required by law or regulation.</p>
+  </div></div>
+
+  <!-- §09 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Non-Binding Nature</span></div><div class="sb">
+    <div class="co"><strong>IMPORTANT:</strong> This term sheet is non-binding and is intended solely as a basis for further negotiation. No party shall have any binding obligation under this term sheet except for the Confidentiality and Exclusivity provisions (&sect;07 and &sect;08), which shall be binding upon execution. A binding agreement will be set forth in a definitive purchase agreement and related transaction documents.</div>
+  </div></div>
+
+  <!-- Signatures -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Signatures</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-title" style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Seller</div>
+        <div class="sb-entity">{{sellerName}}</div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="margin-top:0.5rem;"><div class="s-line"></div><div class="s-lbl">Date</div></div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-title" style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">ESOP Trustee</div>
+        <div class="sb-entity">{{trusteeName}}</div>
+        <div class="s-line"></div><div class="s-lbl">Signature</div>
+        <div style="margin-top:0.5rem;"><div class="s-line"></div><div class="s-lbl">Date</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Company acknowledgment -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Company Acknowledgment</span></div>
+    <div class="sb-block" style="max-width:50%;">
+      <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Company</div>
+      <div class="sb-entity">{{companyName}}</div>
+      <div class="s-line"></div><div class="s-lbl">Authorized Officer Signature</div>
+      <div style="margin-top:0.5rem;"><div class="s-line"></div><div class="s-lbl">Date</div></div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL &mdash; NON-BINDING TERM SHEET<br>Subject to definitive agreement and board/trustee approval.</div>
+  </div>
+</div>
+
+</body>
+</html>

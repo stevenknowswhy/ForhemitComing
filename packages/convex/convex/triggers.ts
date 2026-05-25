@@ -57,7 +57,7 @@ export const createTriggeredTasks = mutation({
       return false;
     });
 
-    const createdTasks = [];
+    const createdTasks: any[] = [];
     for (const req of matches) {
       const existing = await ctx.db
         .query("queueTasks")
@@ -105,7 +105,7 @@ export const wireTriggers = mutation({
     gateName: v.optional(v.string()),
     newStage: v.optional(v.string()),
   },
-  handler: async (ctx, args) => {
+  handler: async (ctx, args): Promise<any> => {
     // 1. Update the appropriate state based on the event
     if (args.event === "stage_change") {
       if (!args.newStage) throw new Error("newStage required for stage_change");

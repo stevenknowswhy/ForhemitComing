@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — COOP Stewardship Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">COOP Stewardship Agreement</div>
+  <div class="dst">Post-Close Engagement</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Engagement Overview</span></div><div class="sb">
+    <p>This COOP Stewardship Agreement establishes the terms under which Forhemit Stewardship Management Co. will provide post-close operational support to {{companyName}} following the completion of the ESOP transaction. The engagement begins on {{startDate}} and continues for a period of {{engagementTerm}} months, concluding on {{endDate}}.</p>
+    <p>The purpose of this engagement is to ensure continuity and stability as {{companyName}} transitions to employee ownership. Forhemit will serve as an embedded advisor across four operational tracks, helping the company build the systems, culture, and governance structures necessary for long-term ESOP success.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Four Tracks</span></div><div class="sb">
+    <p>The stewardship program is organized into four tracks, each addressing a critical aspect of the employee ownership transition:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">T1</span><span><strong>People.</strong> Leadership development, key person retention strategies, employee communication plans, and ownership culture cultivation. Includes quarterly leadership workshops and employee engagement surveys.</span></div>
+      <div class="si"><span class="si-n">T2</span><span><strong>Systems.</strong> Process documentation, technology upgrades, operational resilience improvements, and knowledge transfer protocols. Focus on reducing key-person dependencies and building institutional knowledge.</span></div>
+      <div class="si"><span class="si-n">T3</span><span><strong>Financial.</strong> Reporting cadence establishment, covenant compliance monitoring, debt service management, and ESOP administration support. Includes monthly financial review and lender communication.</span></div>
+      <div class="si"><span class="si-n">T4</span><span><strong>Governance.</strong> Board development, ESOP committee formation, fiduciary compliance, and regulatory reporting. Includes annual governance assessment and trustee coordination.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Deliverables</span></div><div class="sb">
+    <p>Forhemit will provide the following deliverables throughout the engagement:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Monthly Check-Ins.</strong> Scheduled calls to review progress across all four tracks, address challenges, and adjust priorities as needed.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Quarterly Reports.</strong> Written progress reports delivered to the seller and ESOP trustee, covering milestones achieved, open items, and recommendations.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Annual Review.</strong> Comprehensive annual assessment of all four tracks with updated stewardship plan for the following year (if engagement is renewed).</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Gate Milestones.</strong> Targeted deliverables aligned with key milestones in the post-close timeline, including refinance readiness (Month 14-18) and seller note retirement confirmation.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Fee Structure</span></div><div class="sb">
+    <div class="fr"><label>Annual fee</label><span style="flex:1;">{{annualFee}} (2.5% of QofE EBITDA)</span></div>
+    <div class="fr"><label>EBITDA basis</label><span style="flex:1;">{{ebitdaTTM}}</span></div>
+    <div class="fr"><label>Quarterly payment</label><span style="flex:1;">{{quarterlyFee}}</span></div>
+    <div class="fr"><label>Billing</label><span style="flex:1;">Invoiced at the start of each quarter</span></div>
+    <div class="fr"><label>Payment terms</label><span style="flex:1;">Net 30 days</span></div>
+    <div class="co"><strong>Note:</strong> The stewardship fee is a tax-deductible business expense. It is separate from and in addition to any transaction fees paid during the closing process. Fees are reviewed annually and adjusted based on updated EBITDA.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Term &amp; Renewal</span></div><div class="sb">
+    <div class="fr"><label>Initial term</label><span style="flex:1;">12 months from {{startDate}}</span></div>
+    <div class="fr"><label>Renewal</label><span style="flex:1;">Auto-renewal for an additional 12 months unless terminated</span></div>
+    <div class="fr"><label>Termination notice</label><span style="flex:1;">90 days written notice by either party</span></div>
+    <div class="fr"><label>Maximum term</label><span style="flex:1;">{{engagementTerm}} months</span></div>
+    <p style="margin-top:0.8rem;">Either party may elect not to renew at the end of any 12-month period by providing written notice at least 90 days prior to the renewal date. The engagement will conclude no later than {{endDate}} regardless of renewal status.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Roles &amp; Responsibilities</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Forhemit's Role.</strong> Serve as post-close stewardship advisor. Provide strategic guidance, operational support, and accountability across all four tracks. Coordinate with the ESOP trustee, lender, and other advisors as needed.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Company's Role.</strong> Designate a primary point of contact for day-to-day coordination. Implement recommendations in a timely manner. Provide access to financial records, operational data, and personnel as needed for stewardship activities.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Reporting Structure.</strong> Forhemit reports to the seller (or designated board representative). Quarterly reports are shared with the ESOP trustee. Forhemit does not have decision-making authority — all decisions remain with the company's management and board.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Termination</span></div><div class="sb">
+    <p>Either party may terminate this agreement with 90 days written notice. Upon termination:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Prorated refund.</strong> If the company terminates mid-quarter, any prepaid fees for the remaining portion of the quarter will be refunded on a prorated basis.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Transition support.</strong> Forhemit will provide a 30-day transition period to hand off active work items, introduce replacement advisors (if requested), and deliver a final stewardship summary.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Confidentiality.</strong> All confidentiality obligations survive termination. Forhemit will not disclose any company information obtained during the engagement.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this agreement, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Signatures</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">{{sellerName}}<br><span style="font-size:0.78rem;color:var(--muted);">{{companyName}}</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+          <div class="s-line"></div>
+        </div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+        <div style="margin-top:0.8rem;">
+          <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+          <div class="s-line"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>COOP Stewardship — {{engagementTerm}} months</div>
+  </div>
+</div>
+</body>
+</html>

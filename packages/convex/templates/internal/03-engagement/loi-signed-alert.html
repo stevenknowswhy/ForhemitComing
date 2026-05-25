@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — LOI Signed Alert</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.internal-note { border: 2px solid var(--brass); padding: 1rem 1.2rem; margin: 1.5rem 0; background: #faf7f0; }
+.internal-badge { display: inline-block; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0.2rem 0.6rem; background: var(--brass); color: #fff; font-family: var(--ff-mono); margin-bottom: 0.6rem; }
+.internal-content { font-size: 0.85rem; line-height: 1.8; color: #333; }
+.alert-block { border: 1px solid rgba(46,125,50,0.4); background: var(--green-bg); padding: 1.2rem 1.4rem; margin: 1.2rem 0; position: relative; }
+.alert-badge { position: absolute; top: -0.55rem; left: 1rem; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; padding: 0 0.5rem; background: #fff; font-family: var(--ff-mono); color: var(--green); }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Internal Operations</div></div>
+    <div class="dref"><div>INT-ENG-002</div><div>LOI Signed Alert</div></div>
+  </div>
+  <div class="dt">LOI Signed Alert</div>
+  <div class="dst">Internal Notification — Letter of Intent Executed</div>
+
+  <div class="internal-note">
+    <div class="internal-badge">Internal Template</div>
+    <div class="internal-content">
+      <p><strong>Trigger:</strong> Sent when LOI is fully executed (seller signature received)</p>
+      <p><strong>Recipients:</strong> Deal team, Stefano, accounting</p>
+    </div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">LOI Details</span></div><div class="sb">
+    <div class="alert-block">
+      <div class="alert-badge">LOI Executed</div>
+      <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}}</span></div>
+      <div class="fr"><label>Seller</label><span style="flex:1;">{{sellerName}}</span></div>
+      <div class="fr"><label>Ref</label><span style="flex:1;">{{ref}}</span></div>
+      <div class="fr"><label>Execution date</label><span style="flex:1;">{{executionDate}}</span></div>
+      <div class="fr"><label>Purchase price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+      <div class="fr"><label>Exclusivity period</label><span style="flex:1;">{{exclusivityPeriod}}</span></div>
+      <div class="fr"><label>Exclusivity expires</label><span style="flex:1;">{{exclusivityExpiry}}</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Immediate Actions</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Uncash deposit:</strong> Process the $15,000 retainer deposit</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Exclusivity clock:</strong> Set calendar reminder for exclusivity expiry</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Trustee engagement:</strong> Initiate trustee engagement process</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>ERISA counsel:</strong> Send conflict check requests to ERISA counsel</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Lender package:</strong> Begin SBA lender package preparation</span></div>
+      <div class="si"><span class="si-n">6.</span><span><strong>Slack notification:</strong> Post to #deals channel</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Key Deal Terms</span></div><div class="sb">
+    <div class="fr"><label>EBITDA</label><span style="flex:1;">{{ebitda}}</span></div>
+    <div class="fr"><label>Purchase price</label><span style="flex:1;">{{purchasePrice}}</span></div>
+    <div class="fr"><label>Seller note</label><span style="flex:1;">{{sellerNote}}</span></div>
+    <div class="fr"><label>SBA loan</label><span style="flex:1;">{{sbaLoan}}</span></div>
+    <div class="fr"><label>Day 1 cash</label><span style="flex:1;">{{day1Cash}}</span></div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Internal Notification — Forhemit Stewardship Management Co.</div>
+    <div class="df-conf">INT-ENG-002</div>
+  </div>
+</div>
+</body>
+</html>

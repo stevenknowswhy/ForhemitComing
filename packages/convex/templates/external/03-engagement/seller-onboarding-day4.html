@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Seller Onboarding: Meet Your Team</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+/* ── Team roster cards ── */
+.team-card { border: 1px solid var(--line); padding: 1rem 1.2rem; margin: 0.8rem 0; break-inside: avoid; }
+.team-role { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.2rem; font-weight: 400; font-family: var(--ff-mono); }
+.team-name { font-family: var(--ff-display); font-size: 1rem; font-weight: 400; color: #111; margin-bottom: 0.1rem; }
+.team-firm { font-size: 0.75rem; font-weight: 300; color: var(--muted); margin-bottom: 0.5rem; }
+.team-desc { font-size: 0.78rem; font-weight: 300; color: #333; line-height: 1.6; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Meet Your Deal Team</div>
+  <div class="dst">Seller Onboarding — Day 4 of 5</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Seller</div><div class="cvc-v">{{sellerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Day</div><div class="cvc-v">4 of 120</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Your Transaction Team</span></div><div class="sb">
+    <p>Dear {{sellerName}},</p>
+    <p>Your ESOP transaction is managed by a team of independent professionals, each with a specific role. Here's who they are and what they do:</p>
+
+    <div class="team-card">
+      <div class="team-role">Transaction Steward</div>
+      <div class="team-name">Forhemit Stewardship Management Co.</div>
+      <div class="team-firm">deals&#64;forhemit.com</div>
+      <div class="team-desc">Coordinates the entire transaction — timeline, team, documents, gate clearances. Your single point of contact. Does not serve as a fiduciary, broker, or legal advisor.</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Independent ESOP Trustee</div>
+      <div class="team-name">{{trusteeName}}</div>
+      <div class="team-firm">{{trusteeFirm}}</div>
+      <div class="team-desc">Acts on behalf of the ESOP and its future participants. Engages the appraiser, determines FMV, reviews all transaction documents, and executes the purchase on behalf of the ESOP. Independent of Forhemit and the seller.</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">ERISA Counsel</div>
+      <div class="team-name">{{counselName}}</div>
+      <div class="team-firm">{{counselFirm}}</div>
+      <div class="team-desc">Represents the ESOP trustee on legal matters. Reviews transaction structure for ERISA compliance, fiduciary duty, and prohibited transaction issues. Engaged by and reports to the trustee — not to Forhemit or the seller.</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">Independent Appraiser</div>
+      <div class="team-name">{{appraiserName}}</div>
+      <div class="team-firm">{{appraiserFirm}}</div>
+      <div class="team-desc">Determines the Fair Market Value (FMV) of the company. Selected by the trustee. Provides the valuation report that sets the purchase price. ASA-accredited, ESOP-experienced.</div>
+    </div>
+
+    <div class="team-card">
+      <div class="team-role">SBA Lender</div>
+      <div class="team-name">{{lenderName}}</div>
+      <div class="team-firm">{{lenderContact}}</div>
+      <div class="team-desc">Provides the SBA 7(a) financing for the transaction. The operating company is the borrower. Lender underwriting runs in parallel with the trustee's fiduciary review.</div>
+    </div>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Who Does What</span></div><div class="sb">
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Forhemit coordinates. The professionals decide.</strong> Forhemit manages the process, but the trustee decides the price, the lender decides the terms, and counsel advises on the law. We don't override their independent judgment.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Each professional has a client.</strong> The trustee's client is the ESOP. Counsel's client is the trustee. The appraiser's client is the trustee. The lender's client is the operating company. Forhemit's client is you — but we serve as coordinator, not advisor.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Communication flows through Forhemit.</strong> To avoid confusion and duplication, most communication flows through Forhemit. If a team member needs to speak with you directly, we'll coordinate the introduction.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Your Attorney &amp; CPA</span></div><div class="sb">
+    <p>You should also have your own personal advisors engaged:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Your attorney.</strong> Reviews the Engagement Letter, LOI, and Stock Purchase Agreement on your behalf. Advises on personal legal implications, estate planning, and post-close employment terms.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Your CPA.</strong> Advises on §1042 tax deferral, entity conversion implications, and personal tax planning. Coordinates with the appraiser on basis and timing issues.</span></div>
+    </div>
+    <div class="co"><strong>Important:</strong> The deal team (trustee, counsel, appraiser) represents the ESOP — not you personally. Your personal attorney and CPA are your advocates. We strongly recommend you engage them before signing any binding documents.</div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Contact</span></div><div class="sb">
+    <div class="fr"><label>Stewardship lead</label><span style="flex:1;">{{stewardshipLeadName}}</span></div>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <!-- Signature -->
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Stewardship Lead</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Seller Onboarding — Day 4 of 5</div>
+  </div>
+</div>
+
+</body>
+</html>
