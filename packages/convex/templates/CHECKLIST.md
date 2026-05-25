@@ -16,11 +16,11 @@
 
 | # | Document | Audience | Status | Agent | Notes |
 |---|----------|----------|--------|-------|-------|
-| 111 | Cold outreach — broker | broker | ❌ NOT STARTED | — | First-touch email to broker with ESOP-qualifying listings |
-| 112 | Cold outreach — CPA | cpa | ❌ NOT STARTED | — | First-touch email — §1042 and client retention value prop |
-| 113 | Cold outreach — seller | seller | ❌ NOT STARTED | — | Owner-direct first touch, education-first tone |
+| 111 | Cold outreach — broker | broker | ✅ DONE | OpenClaude | First-touch email to broker with ESOP-qualifying listings |
+| 112 | Cold outreach — CPA | cpa | ✅ DONE | OpenClaude | First-touch email — §1042 and client retention value prop |
+| 113 | Cold outreach — seller | seller | ✅ DONE | OpenClaude | Owner-direct first touch, education-first tone |
 | 114 | Referral acknowledgment | referrer | ❌ NOT STARTED | — | Thank referrer, confirm receipt, set expectations |
-| 115 | LinkedIn follow-up | contact | ❌ NOT STARTED | — | Post-connection accept — transition to real conversation |
+| 115 | LinkedIn follow-up | contact | ✅ DONE | OpenClaude | Post-connection accept — transition to real conversation |
 | 116 | Thank-you — ecosystem | contact | ❌ NOT STARTED | — | Post-call thank-you for non-deal ecosystem contacts |
 
 ### 02-qualification
@@ -61,8 +61,8 @@
 | 32 | Intro letter generator | broker | ✅ DONE | — | Personalized letters |
 | 33 | ESOP qualification prompt | internal | ✅ DONE | — | AI prompt |
 | 34 | NDA receipt confirmation | seller, broker | ✅ DONE | — | Receipt acknowledgment |
-| 104 | Broker NDA / confidentiality agreement | broker | ❌ NOT STARTED | — | Deal flow, referral terms, seller identity protection |
-| 117 | No-fit decline — seller | seller | ❌ NOT STARTED | — | Polite decline when deal doesn't qualify |
+| 104 | Broker NDA / confidentiality agreement | broker | ✅ DONE | OpenClaude | Deal flow, referral terms, seller identity protection |
+| 117 | No-fit decline — seller | seller | ✅ DONE | OpenClaude | Polite decline when deal doesn't qualify |
 | 118 | No-fit decline — broker | broker | ❌ NOT STARTED | — | Professional decline, maintains broker relationship |
 
 ### 03-engagement
@@ -83,9 +83,9 @@
 | 46 | Seller onboarding Day 3 | seller | ✅ DONE | OpenClaude | Calendar link |
 | 47 | Seller onboarding Day 4 | seller | ✅ DONE | OpenClaude | Team introduction |
 | 48 | Seller onboarding Day 5 | seller | ✅ DONE | OpenClaude | First check-in |
-| 106 | NDA (mutual — deal team) | seller, broker, counsel | ❌ NOT STARTED | — | Covers seller, broker, Forhemit, advisors in shared deal room |
-| 107 | Retainer agreement (company → ERISA counsel) | counsel | ❌ NOT STARTED | — | Owner-executed; Forhemit not a party — ERISA independence |
-| 108 | Retainer agreement (company → trustee) | trustee | ❌ NOT STARTED | — | Owner-executed; trustee selection before lender/appraiser contact |
+| 106 | NDA (mutual — deal team) | seller, broker, counsel | ✅ DONE | OpenClaude | Covers seller, broker, Forhemit, advisors in shared deal room |
+| 107 | Retainer agreement (company → ERISA counsel) | counsel | ✅ DONE | OpenClaude | Owner-executed; Forhemit not a party — ERISA independence |
+| 108 | Retainer agreement (company → trustee) | trustee | ✅ DONE | OpenClaude | Owner-executed; trustee selection before lender/appraiser contact |
 
 ---
 
@@ -105,8 +105,8 @@
 | 56 | Lender update | lender | ✅ DONE | OpenClaude | Weekly during underwriting |
 | 57 | Trustee update | trustee | ✅ DONE | OpenClaude | During appraisal |
 | 58 | Broker pipeline status | broker | ✅ DONE | OpenClaude | Gate milestones |
-| 109 | Turnover cost calculator | seller, trustee, lender | ❌ NOT STARTED | — | Key man risk quantification for trustee and lender presentations |
-| 110 | Deal economics model (internal) | internal | ❌ NOT STARTED | — | Full pro forma — EBITDA, debt service, Forhemit fee, net to seller |
+| 109 | Turnover cost calculator | seller, trustee, lender | ✅ DONE | OpenClaude | Key man risk quantification for trustee and lender presentations |
+| 110 | Deal economics model (internal) | internal | ✅ DONE | OpenClaude | Full pro forma — EBITDA, debt service, Forhemit fee, net to seller |
 
 ### 05-closing
 
@@ -159,7 +159,7 @@
 | 84 | Deal intake confirmation | internal | ✅ DONE | OpenClaude | CRM notification |
 | 85 | New deal announcement | internal | ✅ DONE | OpenClaude | Slack/email |
 | 86 | Pre-flight checklist sent | internal | ✅ DONE | OpenClaude | Checklist emailed |
-| 105 | Pre-flight checklist (internal version) | internal | ❌ NOT STARTED | — | Forhemit's own readiness check before seller-facing version |
+| 105 | Pre-flight checklist (internal version) | internal | ✅ DONE | OpenClaude | Forhemit's own readiness check before seller-facing version |
 
 ### 03-engagement (Internal)
 
@@ -204,10 +204,10 @@
 
 | Status | Count |
 |--------|-------|
-| ✅ DONE | 99 |
-| 🔄 ACCEPTED | 4 |
+| ✅ DONE | 109 |
+| 🔄 ACCEPTED | 0 |
 | ⏳ IN PROGRESS | 0 |
-| ❌ NOT STARTED | 15 |
+| ❌ NOT STARTED | 9 |
 | **Total** | **118** |
 
 ---
