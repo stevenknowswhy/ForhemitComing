@@ -1,40 +1,8 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
-import { Doc } from "./_generated/dataModel";
 import { requireAuth } from "./lib/requireAuth";
-
-// ============================================
-// Pipeline Stage → Agent Mapping
-// ============================================
-
-/**
- * Maps CRM pipeline stages to the agent + template that should run
- * when a deal enters that stage.
- *
- * "First contact" → no agent (manual intake)
- * "Intro call"    → no agent (relationship building)
- * "NDA sent"      → no agent (legal process)
- * "Feasibility"   → deal-analyst runs Gate 1 assessment
- * "Term sheet"    → capital-structurer designs the capital stack
- * "LOI signed"    → document-producer generates closing docs
- * "Closed"        → steward-monitor begins post-close tracking
- * "On hold"       → no agent
- * "Dead"          → no agent
- */
-const STAGE_AGENT_MAP: Record<
-	string,
-	{ agentId: string; templateId: string; gate: number } | null
-> = {
-	"First contact": null,
-	"Intro call": null,
-	"NDA sent": null,
-	Feasibility: { agentId: "deal-analyst", templateId: "T-04", gate: 1 },
-	"Term sheet": { agentId: "capital-structurer", templateId: "T-08", gate: 2 },
-	"LOI signed": { agentId: "document-producer", templateId: "T-13", gate: 3 },
-	Closed: { agentId: "steward-monitor", templateId: "T-21", gate: 4 },
-	"On hold": null,
-	Dead: null,
-};
+import { STAGE_AGENT_MAP } from "./agentQueueConfig";
+import { buildDealContextSnapshot, logStageChange } from "./agentQueueHelpers";
 
 // ============================================
 // Agent Queue Queries
@@ -272,19 +240,7 @@ export const advanceStage = mutation({
 		});
 
 		// 2. Log the stage change activity
-		await ctx.db.insert("crmActivities", {
-			companyId: args.companyId,
-			type: "stage_change",
-			title: "Stage changed",
-			description: `Stage moved from "${oldStage}" to "${args.newStage}"`,
-			date: new Date().toISOString().split("T")[0],
-			performedBy: args.performedBy,
-			metadata: {
-				oldStage,
-				newStage: args.newStage,
-			},
-			createdAt: now,
-		});
+		await logStageChange(ctx, args.companyId, oldStage, args.newStage, args.performedBy, now);
 
 		// 3. Check if this stage triggers an agent
 		const mapping = STAGE_AGENT_MAP[args.newStage];
@@ -292,51 +248,11 @@ export const advanceStage = mutation({
 			return { success: true, agentQueued: false };
 		}
 
-		// 4. Enqueue agent work (wrapped in try/catch so CRM still works
-		//    if agent tables aren't deployed yet)
+		// 4. Enqueue agent work (CRM still works if agent tables aren't deployed)
 		try {
-			// Build context snapshot for the agent
-			const contacts = await ctx.db
-				.query("crmContacts")
-				.withIndex("by_company", (q) => q.eq("companyId", args.companyId))
-				.collect();
-
-			const recentActivities = await ctx.db
-				.query("crmActivities")
-				.withIndex("by_company_date", (q) => q.eq("companyId", args.companyId))
-				.order("desc")
-				.take(20);
-
-			const contextSnapshot = JSON.stringify({
-				company: {
-					id: company._id,
-					name: company.name,
-					industry: company.industry,
-					size: company.size,
-					revenue: company.revenue,
-					stage: args.newStage,
-					ndaStatus: company.ndaStatus,
-					notes: company.notes,
-				},
-				contacts: contacts.map((c) => ({
-					name: `${c.firstName} ${c.lastName}`,
-					email: c.email,
-					phone: c.phone,
-					role: c.role,
-					isPrimary: c.isPrimary,
-				})),
-				recentActivities: recentActivities.map((a) => ({
-					type: a.type,
-					title: a.title,
-					description: a.description,
-					date: a.date,
-				})),
-				stageTransition: {
-					from: oldStage,
-					to: args.newStage,
-					timestamp: now,
-				},
-			});
+			const contextSnapshot = await buildDealContextSnapshot(
+				ctx, args.companyId, args.newStage, oldStage, now,
+			);
 
 			const jobId = await ctx.db.insert("agentQueue", {
 				companyId: args.companyId,
@@ -352,7 +268,6 @@ export const advanceStage = mutation({
 
 			return { success: true, agentQueued: true, jobId };
 		} catch (e) {
-			// CRM still works if agent tables aren't deployed
 			console.warn("Failed to queue agent work:", e);
 			return { success: true, agentQueued: false, warning: String(e) };
 		}
