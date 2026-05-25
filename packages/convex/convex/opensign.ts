@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { action, mutation, query } from "./_generated/server";
+import { api } from "./_generated/api";
 import { requireAuth } from "./lib/requireAuth";
 
 // ============================================
@@ -50,13 +51,13 @@ export const createEnvelope = action({
 		const envelopeId = data.envelopeId || data.id;
 
 		// Update the workflow task with OpenSign info
-		await ctx.runMutation("workflowTasks:markTaskSent" as any, {
+		await ctx.runMutation(api.workflowTasks.markTaskSent, {
 			workflowTaskId: args.workflowTaskId,
 			opensignEnvelopeId: envelopeId,
 		});
 
 		// Also update OpenSign-specific fields
-		await ctx.runMutation("opensign:updateTaskOpenSign" as any, {
+		await ctx.runMutation(api.opensign.updateTaskOpenSign, {
 			workflowTaskId: args.workflowTaskId,
 			opensignEnvelopeId: envelopeId,
 			opensignStatus: "sent",

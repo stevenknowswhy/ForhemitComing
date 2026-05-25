@@ -105,13 +105,13 @@ export const getNotesByCompany = query({
 				const contact = note.contactId
 					? await ctx.db.get(note.contactId)
 					: null;
-				const authorData = author as any;
-				const contactData = contact as any;
+				const authorData = author as Record<string, unknown> | null;
+				const contactData = contact as Record<string, unknown> | null;
 				return {
 					...note,
 					authorName: authorData
-						? `${authorData.firstName || ""} ${authorData.lastName || ""}`.trim() ||
-							authorData.email
+						? `${(authorData.firstName as string) || ""} ${(authorData.lastName as string) || ""}`.trim() ||
+							(authorData.email as string)
 						: "Unknown",
 					contactName: contactData
 						? `${contactData.firstName} ${contactData.lastName}`
@@ -141,12 +141,12 @@ export const getNotesByContact = query({
 		const enriched = await Promise.all(
 			notes.map(async (note) => {
 				const author = note.authorId ? await ctx.db.get(note.authorId) : null;
-				const authorData = author as any;
+				const authorData = author as Record<string, unknown> | null;
 				return {
 					...note,
 					authorName: authorData
-						? `${authorData.firstName || ""} ${authorData.lastName || ""}`.trim() ||
-							authorData.email
+						? `${(authorData.firstName as string) || ""} ${(authorData.lastName as string) || ""}`.trim() ||
+							(authorData.email as string)
 						: "Unknown",
 				};
 			}),
@@ -173,12 +173,12 @@ export const getNotesByTask = query({
 		const enriched = await Promise.all(
 			notes.map(async (note) => {
 				const author = note.authorId ? await ctx.db.get(note.authorId) : null;
-				const authorData = author as any;
+				const authorData = author as Record<string, unknown> | null;
 				return {
 					...note,
 					authorName: authorData
-						? `${authorData.firstName || ""} ${authorData.lastName || ""}`.trim() ||
-							authorData.email
+						? `${(authorData.firstName as string) || ""} ${(authorData.lastName as string) || ""}`.trim() ||
+							(authorData.email as string)
 						: "Unknown",
 				};
 			}),
@@ -228,14 +228,14 @@ export const getAllNotes = query({
 				const company = note.companyId
 					? await ctx.db.get(note.companyId)
 					: null;
-				const authorData = author as any;
+				const authorData = author as Record<string, unknown> | null;
 				return {
 					...note,
 					authorName: authorData
-						? `${authorData.firstName || ""} ${authorData.lastName || ""}`.trim() ||
-							authorData.email
+						? `${(authorData.firstName as string) || ""} ${(authorData.lastName as string) || ""}`.trim() ||
+							(authorData.email as string)
 						: "Unknown",
-					companyName: (company as any)?.name || null,
+					companyName: (company as Record<string, unknown> | null)?.name || null,
 				};
 			}),
 		);

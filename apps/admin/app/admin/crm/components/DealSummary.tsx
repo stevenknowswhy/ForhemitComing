@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Id } from "@/convex/_generated/dataModel";
-import { Company } from "../types";
+import type { Company } from "../types";
 import { useDealEngine } from "../hooks/useDealEngine";
 
 // ============================================
@@ -56,6 +56,7 @@ export function DealSummary({ company }: DealSummaryProps) {
     milestone: "retainer" | "validation" | "commitment" | "success",
     status: "pending" | "invoiced" | "paid"
   ) => {
+    if (status === "pending") return; // Cannot set back to pending via mutation
     setLoading(true);
     try {
       await markFeeStatus(milestone, status);
