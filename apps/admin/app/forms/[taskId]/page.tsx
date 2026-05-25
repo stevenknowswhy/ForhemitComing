@@ -4,7 +4,8 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
+import DOMPurify from "isomorphic-dompurify";
 
 export default function FormPage() {
   const params = useParams();
@@ -108,7 +109,7 @@ export default function FormPage() {
           {/* Dynamic form fields based on template content */}
           {formData.template?.content ? (
             <div className="prose prose-stone max-w-none mb-6">
-              <div dangerouslySetInnerHTML={{ __html: formData.template.content }} />
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formData.template.content) }} />
             </div>
           ) : (
             <div className="space-y-4 mb-6">
