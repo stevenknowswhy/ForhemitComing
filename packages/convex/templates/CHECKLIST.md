@@ -21,7 +21,7 @@
 | 113 | Cold outreach — seller | seller | ✅ DONE | OpenClaude | Owner-direct first touch, education-first tone |
 | 114 | Referral acknowledgment | referrer | ❌ NOT STARTED | — | Thank referrer, confirm receipt, set expectations |
 | 115 | LinkedIn follow-up | contact | ✅ DONE | OpenClaude | Post-connection accept — transition to real conversation |
-| 116 | Thank-you — ecosystem | contact | ❌ NOT STARTED | — | Post-call thank-you for non-deal ecosystem contacts |
+| 116 | Thank-you — ecosystem | contact | ✅ DONE | OpenClaude | Post-call thank-you for non-deal ecosystem contacts |
 
 ### 02-qualification
 
