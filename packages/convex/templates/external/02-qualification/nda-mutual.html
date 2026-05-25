@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Mutual Non-Disclosure Agreement</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.sig-group { margin-top: 1.5rem; break-inside: avoid; }
+.sig-title { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.06em; color: #111; margin-bottom: 0.8rem; }
+.sig-row { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 1rem; }
+.sig-field label { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 0.3rem; }
+.sig-field .s-line { height: 2rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Mutual Non-Disclosure Agreement</div>
+  <div class="dst">Deal Team Confidentiality</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Status</div><div class="cvc-v">Pending</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Parties</span></div><div class="sb">
+    <p>This Mutual Non-Disclosure Agreement is entered into among the following parties in connection with the evaluation of a potential ESOP transaction for {{companyName}}:</p>
+    <div class="fr"><label>Seller</label><span style="flex:1;">{{sellerName}}</span></div>
+    <div class="fr"><label>Broker</label><span style="flex:1;">{{brokerName}}</span></div>
+    <div class="fr"><label>Steward</label><span style="flex:1;">Forhemit Stewardship Management Co.</span></div>
+    <div class="fr"><label>Advisors</label><span style="flex:1;">{{advisors}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Purpose</span></div><div class="sb">
+    <p>The parties wish to explore and evaluate a potential ESOP transaction involving {{companyName}}. In connection with this evaluation, each party may disclose Confidential Information to the other parties. This Agreement establishes the obligations of each party with respect to such information.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Confidential Information</span></div><div class="sb">
+    <p>&ldquo;Confidential Information&rdquo; means any non-public information disclosed by any party in connection with the potential transaction, including but not limited to:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Financial data, projections, tax returns, and quality-of-earnings analysis</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Employee information, compensation data, and organizational structure</span></div>
+      <div class="si"><span class="si-n">C.</span><span>Trade secrets, customer lists, vendor relationships, and proprietary processes</span></div>
+      <div class="si"><span class="si-n">D.</span><span>Deal terms, valuations, capital structure, and negotiation positions</span></div>
+      <div class="si"><span class="si-n">E.</span><span>The identity of the seller and the existence of the potential transaction</span></div>
+      <div class="si"><span class="si-n">F.</span><span>Any materials marked or identified as confidential, whether written, electronic, or oral</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Mutual Obligations</span></div><div class="sb">
+    <p>Each party agrees to:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Hold in confidence.</strong> Maintain all Confidential Information in strict confidence and protect it with at least the same degree of care used for its own confidential information, but no less than reasonable care.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Limit use.</strong> Use Confidential Information solely for the purpose of evaluating and facilitating the potential transaction described herein.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Limit disclosure.</strong> Not disclose Confidential Information to any person who is not a party to this Agreement, except as permitted under Section 05.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>No copies.</strong> Not reproduce or copy Confidential Information except as reasonably necessary for the permitted purpose.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Permitted Disclosures</span></div><div class="sb">
+    <p>A party may disclose Confidential Information to:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Professional advisors.</strong> Its own attorneys, accountants, and financial advisors who have a professional duty of confidentiality and who need to know the information in connection with the transaction.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Legal requirement.</strong> As required by law, regulation, or court order, provided the disclosing party gives prompt notice to the other parties (to the extent legally permitted) and cooperates in seeking a protective order.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Exclusions</span></div><div class="sb">
+    <p>Confidential Information does not include information that:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Is or becomes publicly available through no fault of the receiving party</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Was already known to the receiving party prior to disclosure, as documented by written records</span></div>
+      <div class="si"><span class="si-n">C.</span><span>Is independently developed by the receiving party without use of the Confidential Information</span></div>
+      <div class="si"><span class="si-n">D.</span><span>Is received from a third party who is not bound by a confidentiality obligation with respect to such information</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Term</span></div><div class="sb">
+    <p>This Agreement is effective as of the date first written above and shall remain in effect for a period of twenty-four (24) months, or until the transaction closes or is formally terminated, whichever occurs first. The obligations of confidentiality survive termination for a period of two (2) years.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Return &amp; Destruction</span></div><div class="sb">
+    <p>Upon written request by a disclosing party, or upon termination of the transaction, each receiving party shall promptly return or destroy all Confidential Information in its possession, including all copies, notes, and summaries. Upon request, a receiving party shall certify in writing that it has complied with this obligation.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">No Obligation</span></div><div class="sb">
+    <p>Nothing in this Agreement obligates any party to proceed with the transaction, to enter into any further agreement, or to disclose any particular information. Each party reserves the right to withdraw from discussions at any time.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 10</span><span class="st">Governing Law</span></div><div class="sb">
+    <div class="fr"><label>Governing law</label><span style="flex:1;">{{governingState}}</span></div>
+    <p>Any disputes arising under this Agreement shall be resolved in the courts of {{governingState}}.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 11</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this agreement, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Signatures</span></div>
+    <div class="sb">
+      <p>By signing below, each party agrees to the terms of this Mutual Non-Disclosure Agreement.</p>
+    </div>
+
+    <div class="sig-group">
+      <div class="sig-title">Seller</div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Name</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Signature</label><div class="s-line"></div></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Date</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Title</label><div class="s-line"></div></div>
+      </div>
+    </div>
+
+    <div class="sig-group">
+      <div class="sig-title">Broker</div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Company</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Name</label><div class="s-line"></div></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Signature</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Date</label><div class="s-line"></div></div>
+      </div>
+    </div>
+
+    <div class="sig-group">
+      <div class="sig-title">Forhemit Stewardship Management Co.</div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Authorized Representative</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Signature</label><div class="s-line"></div></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Date</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Title</label><div class="s-line"></div></div>
+      </div>
+    </div>
+
+    <div class="sig-group">
+      <div class="sig-title">Advisors</div>
+      <div class="sb" style="margin-bottom:1rem;">
+        <div class="fr"><label>Listed advisors</label><span style="flex:1;">{{advisors}}</span></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Name</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Signature</label><div class="s-line"></div></div>
+      </div>
+      <div class="sig-row">
+        <div class="sig-field"><label>Firm / Role</label><div class="s-line"></div></div>
+        <div class="sig-field"><label>Date</label><div class="s-line"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For authorized deal team members only.</div>
+  </div>
+</div>
+</body>
+</html>
