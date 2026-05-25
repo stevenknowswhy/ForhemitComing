@@ -78,7 +78,8 @@ export const updateFee = mutation({
     if (!company.fees) throw new Error("Deal not initialized — fees are missing");
 
     const now = Date.now();
-    const milestone = { ...company.fees[args.milestone] };
+    const fees = company.fees as any;
+    const milestone = { ...(fees[args.milestone] || { status: "pending", amount: 0 }) };
 
     milestone.status = args.status;
     if (args.status === "invoiced") {
@@ -88,7 +89,7 @@ export const updateFee = mutation({
     }
 
     const updatedFees = {
-      ...company.fees,
+      ...fees,
       [args.milestone]: milestone,
     };
 
@@ -121,12 +122,13 @@ export const updateFeeAmount = mutation({
     if (!company.fees) throw new Error("Deal not initialized — fees are missing");
 
     const now = Date.now();
-    const milestone = { ...company.fees[args.milestone] };
+    const fees = company.fees as any;
+    const milestone = { ...(fees[args.milestone] || { status: "pending", amount: 0 }) };
 
     milestone.amount = args.amount;
 
     const updatedFees = {
-      ...company.fees,
+      ...fees,
       [args.milestone]: milestone,
     };
 
