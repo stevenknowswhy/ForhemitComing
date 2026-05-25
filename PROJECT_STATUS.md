@@ -122,24 +122,10 @@ Both apps (`forhemit-admin`, `forhemit-coming-soon`) now build successfully.
 
 ### P1 — Next Sprint (Code Quality)
 
-- [ ] **Delete all `" 2"` duplicate directories** in `apps/admin/` — removes ~4,800 lines of dead code and halves CI compile errors:
-  - `apps/admin/app/(auth)/sign-in 2/`
-  - `apps/admin/app/(auth)/sign-up 2/`
-  - `apps/admin/app/admin/components 2/`
-  - `apps/admin/app/admin/esop-partners/components 2/`
-  - `apps/admin/app/admin/esop-partners/hooks 2/`
-  - `apps/admin/app/admin/crm/components 2/`
-  - `apps/admin/app/admin/crm/styles 2/`
-  - `apps/admin/app/admin/deal-flow-system/hooks 2/`
-  - `apps/admin/app/admin/components 2/`
-  - `apps/admin/styles/forms 2/`
-  - (plus any others found with `find . -name "* 2" -type d`)
-- [ ] **Consolidate engagement letter templates** — merge `engagement-letter.html` and `engagement-letter-standalone.html` into a single source
-- [ ] **Break circular dependencies** — `ContactModal.tsx ↔ page.tsx`, `DetailPanel.tsx ↔ ESOPPartnerCRM.tsx`. Extract shared types/utilities to a third module.
-- [ ] **Split `agentQueue.ts`** (49 functions, 1,206 lines) into focused modules:
-  - `agentQueue.mutations.ts`
-  - `agentQueue.queries.ts`
-  - `agentQueue.scheduler.ts`
+- [x] **Delete all `" 2"` duplicate directories** — already done in commit `ebbef77`
+- [ ] **Consolidate engagement letter templates** — investigated 2026-05-25: NOT simple duplicates. `packages/convex/templates/external/03-engagement/engagement-letter.html` is the canonical template for PDF generation (referenced by `manifest.ts`). `apps/admin/public/forms/engagement-letter-standalone.html` is the interactive form served via iframe (referenced by `StandaloneEngagementLetterForm.tsx`). Both are actively used. Consolidation would require architectural decision.
+- [ ] **Break circular dependencies** — investigated 2026-05-25: no circular dependencies found in `esop-partners/components/`. `ESOPPartnerCRM` → `DetailPanel` + `ContactModal` is one-way. `ContactModal` and `DetailPanel` import only from `../types`, `../lib/formatters`, `../lib/calculations`. False positive from CodeFlow analysis.
+- [ ] **Split `agentQueue.ts`** — investigated 2026-05-25: file is 360 lines with 8 exports (not 1,206 lines / 49 functions as originally estimated). 5 queries + 3 mutations. No immediate need to split.
 
 ### P2 — Backlog (Tech Debt)
 
@@ -166,8 +152,9 @@ Both apps (`forhemit-admin`, `forhemit-coming-soon`) now build successfully.
 |--------|--------|-------------|
 | `feature/convex-auth-guards` | ✅ Merged (`ae2c8e3`) | Auth guards on 23 Convex files |
 | `feature/xss-sanitization` | ✅ Merged (`e74d5d6`) | DOMPurify on 5 dangerouslySetInnerHTML files |
-| `main` | Current | At `838c872` |
-| `feature/*` worktrees | ✅ Cleaned | All 6 stale worktrees removed |
+| `main` | Current | At `151069b` |
+| `feature/type-safety-cleanup` | Active | At `d4708a9` — @ts-nocheck removal, .env.example, backup cleanup |
+| Other feature branches | Active | `deploy-config`, `observability`, `security-rate-limiting`, `agent-wiring`, `blog-convex-admin-seed` |
 
 ## Known Issues
 
