@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Deal Economics Model</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.calc-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.8rem; }
+.calc-table th { text-align: left; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); font-weight: 400; padding: 0.5rem 0.6rem; border-bottom: 2px solid var(--line-strong); }
+.calc-table td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; }
+.calc-table td:first-child { font-weight: 400; color: #111; }
+.calc-table .amount { text-align: right; font-family: var(--ff-mono); font-size: 0.75rem; }
+.calc-table tr.total td { border-top: 2px solid var(--line-strong); border-bottom: 2px solid var(--line-strong); font-weight: 400; }
+.calc-table tr.highlight td { background: var(--green-bg); font-weight: 400; color: var(--green); }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Deal Economics Model</div>
+  <div class="dst">Internal Pro Forma Analysis</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+    <div class="cvc"><div class="cvc-l">Status</div><div class="cvc-v">Internal Use Only</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Valuation Summary</span></div><div class="sb">
+    <p>Indicative valuation based on trailing twelve-month (TTM) financials and comparable transaction multiples.</p>
+    <div class="fr"><label>QofE EBITDA (TTM)</label><span style="flex:1;">{{ebitdaTTM}}</span></div>
+    <div class="fr"><label>Valuation multiple</label><span style="flex:1;">{{multiple}}</span></div>
+    <div class="fr"><label>Fair Market Value (FMV)</label><span style="flex:1;">{{fmv}}</span></div>
+    <div class="fr"><label>Revenue growth assumption</label><span style="flex:1;">{{revenueGrowthPct}}</span></div>
+    <div class="co"><strong>Note:</strong> FMV is indicative until confirmed by the independent ESOP appraiser. The QofE analysis may adjust EBITDA for one-time items, owner compensation normalization, and non-recurring expenses.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Capital Stack</span></div><div class="sb">
+    <p>Proposed financing structure for the ESOP acquisition.</p>
+    <table class="calc-table">
+      <tr><th>Source</th><th class="amount">Amount</th><th class="amount">Rate</th><th class="amount">Term</th></tr>
+      <tr><td>SBA 7(a) loan</td><td class="amount">{{sbaLoanAmount}}</td><td class="amount">{{sbaRate}}</td><td class="amount">{{sbaTerm}}</td></tr>
+      <tr><td>Seller note (subordinated)</td><td class="amount">{{sellerNoteAmount}}</td><td class="amount">{{sellerNoteRate}}</td><td class="amount">{{sellerNoteTerm}}</td></tr>
+      <tr class="total"><td>Total capital</td><td class="amount" colspan="3" style="text-align:center;">{{fmv}}</td></tr>
+    </table>
+    <div class="co"><strong>Structure note:</strong> The seller note is fully subordinated to the SBA loan during the initial subordination period. Interest accrues but is not paid until subordination is released (typically when DSCR exceeds the release threshold).</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Year 1–5 Pro Forma</span></div><div class="sb">
+    <p>Five-year projection under base-case assumptions. EBITDA growth at {{revenueGrowthPct}} annually.</p>
+    <table class="calc-table">
+      <tr><th>Line Item</th><th class="amount">Year 1</th><th class="amount">Year 2</th><th class="amount">Year 3</th><th class="amount">Year 4</th><th class="amount">Year 5</th></tr>
+      <tr><td>Revenue</td><td class="amount">{{year1Revenue}}</td><td class="amount">{{year2Revenue}}</td><td class="amount">{{year3Revenue}}</td><td class="amount">{{year4Revenue}}</td><td class="amount">{{year5Revenue}}</td></tr>
+      <tr><td>EBITDA</td><td class="amount">{{year1Ebitda}}</td><td class="amount">{{year2Ebitda}}</td><td class="amount">{{year3Ebitda}}</td><td class="amount">{{year4Ebitda}}</td><td class="amount">{{year5Ebitda}}</td></tr>
+      <tr><td>Debt service (SBA)</td><td class="amount">{{year1SbaPayment}}</td><td class="amount">{{year2SbaPayment}}</td><td class="amount">{{year3SbaPayment}}</td><td class="amount">{{year4SbaPayment}}</td><td class="amount">{{year5SbaPayment}}</td></tr>
+      <tr><td>Debt service (seller note)</td><td class="amount">{{year1SellerPayment}}</td><td class="amount">{{year2SellerPayment}}</td><td class="amount">{{year3SellerPayment}}</td><td class="amount">{{year4SellerPayment}}</td><td class="amount">{{year5SellerPayment}}</td></tr>
+      <tr><td>Forhemit fee (2.5% EBITDA)</td><td class="amount">{{year1ForhemitFee}}</td><td class="amount">{{year2ForhemitFee}}</td><td class="amount">{{year3ForhemitFee}}</td><td class="amount">{{year4ForhemitFee}}</td><td class="amount">{{year5ForhemitFee}}</td></tr>
+      <tr class="highlight"><td>Net to company</td><td class="amount">{{year1Net}}</td><td class="amount">{{year2Net}}</td><td class="amount">{{year3Net}}</td><td class="amount">{{year4Net}}</td><td class="amount">{{year5Net}}</td></tr>
+      <tr><td>Net to ESOP trust</td><td class="amount">{{year1Esop}}</td><td class="amount">{{year2Esop}}</td><td class="amount">{{year3Esop}}</td><td class="amount">{{year4Esop}}</td><td class="amount">{{year5Esop}}</td></tr>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Forhemit Revenue</span></div><div class="sb">
+    <p>Fee schedule for Forhemit's stewardship services across the engagement lifecycle.</p>
+    <table class="calc-table">
+      <tr><th>Fee Component</th><th class="amount">Amount</th><th class="amount">Timing</th></tr>
+      <tr><td>Engagement fee</td><td class="amount">{{engagementFee}}</td><td class="amount">Upon signing</td></tr>
+      <tr><td>Closing fee</td><td class="amount">{{closingFee}}</td><td class="amount">At closing</td></tr>
+      <tr><td>COOP stewardship (annual)</td><td class="amount">{{coopFeeAnnual}}</td><td class="amount">Quarterly, years 1–2</td></tr>
+      <tr class="total"><td>Total Forhemit revenue (5 years)</td><td class="amount" colspan="2" style="text-align:center;">{{totalForhemitRevenue}}</td></tr>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Seller Economics</span></div><div class="sb">
+    <p>Total seller proceeds from the ESOP transaction, including tax deferral benefits under §1042.</p>
+    <div class="fr"><label>Day 1 cash (SBA proceeds)</label><span style="flex:1;">{{day1Cash}}</span></div>
+    <div class="fr"><label>Seller note principal</label><span style="flex:1;">{{sellerNoteAmount}}</span></div>
+    <div class="fr"><label>Seller note total payments</label><span style="flex:1;">{{sellerNoteTotalPayments}}</span></div>
+    <div class="fr"><label>§1042 tax deferral benefit</label><span style="flex:1;">{{taxDeferralBenefit}}</span></div>
+    <div class="fr"><label>Total seller proceeds (pre-tax)</label><span style="flex:1;">{{totalSellerProceeds}}</span></div>
+    <div class="co"><strong>§1042 note:</strong> If the seller elects §1042 treatment and reinvests 100% of proceeds in Qualified Replacement Securities (QRS), federal capital gains tax is deferred until the QRS are sold. State tax treatment varies.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Employee Economics</span></div><div class="sb">
+    <p>Projected ESOP allocation and vesting for plan participants.</p>
+    <div class="fr"><label>Total ESOP participants</label><span style="flex:1;">{{participantCount}}</span></div>
+    <div class="fr"><label>Initial share allocation</label><span style="flex:1;">{{initialShareAllocation}}</span></div>
+    <div class="fr"><label>Vesting schedule</label><span style="flex:1;">{{vestingSchedule}}</span></div>
+    <div class="fr"><label>Projected share value (Year 5)</label><span style="flex:1;">{{year5ShareValue}}</span></div>
+    <div class="fr"><label>Projected per-participant value</label><span style="flex:1;">{{perParticipantValue}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Sensitivity Analysis</span></div><div class="sb">
+    <p>Impact of key variable changes on deal economics and Forhemit revenue.</p>
+    <table class="calc-table">
+      <tr><th>Scenario</th><th class="amount">EBITDA</th><th class="amount">FMV</th><th class="amount">Forhemit Fee</th><th class="amount">Net to Seller</th></tr>
+      <tr><td>Base case</td><td class="amount">{{baseEbitda}}</td><td class="amount">{{baseFmv}}</td><td class="amount">{{baseFee}}</td><td class="amount">{{baseNetSeller}}</td></tr>
+      <tr><td>EBITDA +10%</td><td class="amount">{{upEbitda}}</td><td class="amount">{{upFmv}}</td><td class="amount">{{upFee}}</td><td class="amount">{{upNetSeller}}</td></tr>
+      <tr><td>EBITDA −10%</td><td class="amount">{{downEbitda}}</td><td class="amount">{{downFmv}}</td><td class="amount">{{downFee}}</td><td class="amount">{{downNetSeller}}</td></tr>
+      <tr><td>Multiple compression (−1x)</td><td class="amount">{{baseEbitda}}</td><td class="amount">{{compFmv}}</td><td class="amount">{{compFee}}</td><td class="amount">{{compNetSeller}}</td></tr>
+      <tr><td>Rate increase (+1%)</td><td class="amount">{{baseEbitda}}</td><td class="amount">{{baseFmv}}</td><td class="amount">{{baseFee}}</td><td class="amount">{{rateNetSeller}}</td></tr>
+    </table>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Risk Factors</span></div><div class="sb">
+    <p>Key risks that could affect deal economics and execution.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Key person risk.</strong> {{keyPersonRisk}} — dependence on founder or key employees for revenue generation, client relationships, or technical expertise.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Customer concentration.</strong> {{customerConcentration}} — percentage of revenue from top 3 customers. Concentration above 40% increases lender scrutiny.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Market risk.</strong> {{marketRisk}} — industry cyclicality, regulatory changes, or competitive disruption that could impact EBITDA projections.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Regulatory risk.</strong> {{regulatoryRisk}} — ESOP compliance requirements, DOL scrutiny, and ERISA fiduciary obligations that could create post-close liability.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Recommendation</span></div><div class="sb">
+    <p>Internal assessment based on the analysis above.</p>
+    <div class="fr"><label>Recommendation</label><span style="flex:1;">{{recommendation}}</span></div>
+    <div class="fr"><label>Rationale</label><span style="flex:1;">{{rationale}}</span></div>
+    <div class="fr"><label>Conditions (if applicable)</label><span style="flex:1;">{{conditions}}</span></div>
+    <div class="fr"><label>Prepared by</label><span style="flex:1;">{{preparedBy}}</span></div>
+    <div class="fr"><label>Reviewed by</label><span style="flex:1;">{{reviewedBy}}</span></div>
+    <div class="co"><strong>Decision framework:</strong> Proceed if FMV supports the capital stack with adequate DSCR (≥1.35x), seller note is manageable within subordination period, and key person risk is mitigated. Proceed with conditions if one factor requires remediation before closing. Do not proceed if EBITDA cannot support debt service or key person risk is unmitigated.</div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">INTERNAL USE ONLY<br>Do not share outside Forhemit without authorization.</div>
+  </div>
+</div>
+</body>
+</html>
