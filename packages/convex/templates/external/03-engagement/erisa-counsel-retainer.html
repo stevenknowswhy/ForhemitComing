@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Retainer Agreement (ERISA Counsel)</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Retainer Agreement</div>
+  <div class="dst">ERISA Counsel Engagement</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Counsel Firm</div><div class="cvc-v">{{counselFirm}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
+  </div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Parties</span></div><div class="sb">
+    <p>This Retainer Agreement is entered into between:</p>
+    <div class="fr"><label>Client</label><span style="flex:1;">{{companyName}} (represented by {{ownerName}})</span></div>
+    <div class="fr"><label>Counsel</label><span style="flex:1;">{{counselFirm}}</span></div>
+    <div class="co"><strong>Independence note:</strong> Forhemit Stewardship Management Co. is not a party to this agreement. This preserves the independence of ERISA counsel's advice to the company and its ESOP plan participants.</div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Scope of Engagement</span></div><div class="sb">
+    <p>The Company retains Counsel to provide legal advice and representation in connection with the establishment and implementation of an Employee Stock Ownership Plan, including:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Plan document review.</strong> Drafting and reviewing the ESOP plan document, trust agreement, and related instruments to ensure compliance with ERISA and the Internal Revenue Code.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>ERISA compliance.</strong> Advising on fiduciary duty, prohibited transaction rules, and Department of Labor requirements applicable to the ESOP transaction.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Fiduciary duty analysis.</strong> Advising the Company's board of directors and plan fiduciaries on their obligations, including the duty of loyalty, prudence, and diversification.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>DOL interaction.</strong> Assisting with any Department of Labor inquiries, investigations, or advisory opinions related to the ESOP transaction.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Tax qualification.</strong> Advising on IRC §401(a), §4975, and §1042 requirements to ensure the plan qualifies for favorable tax treatment.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Independence Requirement</span></div><div class="sb">
+    <p>Counsel's professional obligation is to the Company and its ESOP plan participants. Counsel must exercise independent professional judgment at all times.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Counsel's duty of loyalty runs to the Company and the plan participants, not to Forhemit, the trustee, the lender, or any other deal party.</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Counsel must not allow the interests of any third party — including Forhemit — to compromise independent legal advice to the Company.</span></div>
+      <div class="si"><span class="si-n">C.</span><span>Counsel has no obligation to Forhemit and Forhemit has no authority to direct Counsel's work product or legal opinions.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Fee Structure</span></div><div class="sb">
+    <div class="fr"><label>Hourly rate</label><span style="flex:1;">{{hourlyRate}}</span></div>
+    <div class="fr"><label>Retainer amount</label><span style="flex:1;">{{retainerAmount}}</span></div>
+    <div class="fr"><label>Billing frequency</label><span style="flex:1;">Monthly, against retainer</span></div>
+    <p>The retainer is payable upon execution of this agreement. Fees are billed against the retainer on a monthly basis. If fees exceed the retainer amount, the Company will be invoiced for the difference. Unused retainer amounts are refundable upon termination, less any outstanding fees.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Conflict Disclosure</span></div><div class="sb">
+    <p>Counsel represents and warrants that, to the best of its knowledge after reasonable inquiry:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Counsel has no existing attorney-client relationship with Forhemit Stewardship Management Co., the proposed ESOP trustee, or the proposed SBA lender that would impair Counsel's independent advice to the Company.</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Counsel has no financial interest in the outcome of the ESOP transaction beyond the fees described in this agreement.</span></div>
+      <div class="si"><span class="si-n">C.</span><span>If any conflict of interest arises during the engagement, Counsel will promptly disclose it to the Company and, if necessary, withdraw from the engagement.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Communication</span></div><div class="sb">
+    <p>Counsel will communicate directly with the Company regarding all matters in this engagement.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Forhemit may be copied on non-privileged communications for coordination purposes. Privileged communications must never be shared with Forhemit or other deal parties without the Company's express written consent.</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Counsel will provide regular status updates to the Company at mutually agreed intervals, and promptly advise of any material issues or developments.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Term</span></div><div class="sb">
+    <p>This engagement begins on the date of execution and continues through the closing of the ESOP transaction, or the termination of the transaction, whichever occurs first.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 08</span><span class="st">Termination</span></div><div class="sb">
+    <p>Either party may terminate this agreement with fifteen (15) days' written notice to the other party. Upon termination:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>All earned and accrued fees through the termination date remain due and payable.</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Counsel will return all Company files and materials within ten (10) business days of termination.</span></div>
+      <div class="si"><span class="si-n">C.</span><span>Any unused retainer balance will be refunded within thirty (30) days.</span></div>
+    </div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 09</span><span class="st">Governing Law</span></div><div class="sb">
+    <p>This agreement is governed by the laws of the State of {{governingState}}, without regard to its conflict of laws provisions.</p>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#167; 10</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this engagement:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Signatures</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">{{companyName}}<br><span style="font-size:0.78rem;color:var(--muted);">Client</span></div>
+        <div class="s-line"></div><div class="s-lbl">Owner / Authorized Representative</div>
+        <div style="margin-top:0.8rem;"><div class="s-line"></div><div class="s-lbl">Date</div></div>
+      </div>
+      <div class="sb-block">
+        <div class="sb-entity">{{counselFirm}}<br><span style="font-size:0.78rem;color:var(--muted);">ERISA Counsel</span></div>
+        <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
+        <div style="margin-top:0.8rem;"><div class="s-line"></div><div class="s-lbl">Date</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>Client&#8211;Counsel Privileged</div>
+  </div>
+</div>
+</body>
+</html>
