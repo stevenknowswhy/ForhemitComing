@@ -498,7 +498,7 @@ export const templates: Record<string, TemplateEntry> = {
     pipeline: "external",
     stage: "03-engagement",
     audience: ["counsel"],
-    status: "gap",
+    status: "exists",
     requiresSignature: true,
     isRequired: true,
     isRecurring: false,
@@ -668,7 +668,7 @@ export const templates: Record<string, TemplateEntry> = {
 
   "external/04-diligence/turnover-cost-calculator": {
     id: "external/04-diligence/turnover-cost-calculator",
-    name: "Turnover cost calculator u2014 key person risk assessment",
+    name: "Turnover cost calculator — key person risk assessment",
     path: "./external/04-diligence/turnover-cost-calculator.html",
     pipeline: "external",
     stage: "04-diligence",
@@ -678,10 +678,10 @@ export const templates: Record<string, TemplateEntry> = {
     isRequired: false,
     isRecurring: false,
     description:
-      "Key man risk quantification tool u2014 cost of employee departure for trustee and lender presentations",
+      "Key man risk quantification tool — cost of employee departure for trustee and lender presentations",
   },
 
-  // u2500u2500 05-closing ─────────────────────────────────────────────────────────────
+  // ── 05-closing ─────────────────────────────────────────────────────────────
   "external/05-closing/closing-date-confirmation": {
     id: "external/05-closing/closing-date-confirmation",
     name: "Closing date confirmation (seller)",
@@ -1274,22 +1274,8 @@ export const templates: Record<string, TemplateEntry> = {
       "Tracks SBA EIDL payoff / subordination progress — shared with lender when resolved",
   },
 
-  "external/04-diligence/turnover-cost-calculator": {
-    id: "external/04-diligence/turnover-cost-calculator",
-    name: "Turnover cost calculator u2014 key person risk assessment",
-    path: "./external/04-diligence/turnover-cost-calculator.html",
-    pipeline: "external",
-    stage: "04-diligence",
-    audience: ["seller", "trustee", "lender"],
-    status: "exists",
-    requiresSignature: false,
-    isRequired: false,
-    isRecurring: false,
-    description:
-      "Key man risk quantification tool u2014 cost of employee departure for trustee and lender presentations",
-  },
 
-  // u2500u2500 05-closing ─────────────────────────────────────────────────────────────
+  // ── 05-closing ─────────────────────────────────────────────────────────────
   "internal/05-closing/gate4-legal-clearance": {
     id: "internal/05-closing/gate4-legal-clearance",
     name: "Gate 4 / legal clearance memo (internal)",
