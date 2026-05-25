@@ -63,7 +63,7 @@
 | 34 | NDA receipt confirmation | seller, broker | ✅ DONE | — | Receipt acknowledgment |
 | 104 | Broker NDA / confidentiality agreement | broker | ✅ DONE | OpenClaude | Deal flow, referral terms, seller identity protection |
 | 117 | No-fit decline — seller | seller | ✅ DONE | OpenClaude | Polite decline when deal doesn't qualify |
-| 118 | No-fit decline — broker | broker | ❌ NOT STARTED | — | Professional decline, maintains broker relationship |
+| 118 | No-fit decline — broker | broker | ✅ DONE | OpenClaude | Professional decline, maintains broker relationship |
 
 ### 03-engagement
 
