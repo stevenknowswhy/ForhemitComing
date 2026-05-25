@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Ownership Culture Workshop Guide</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+.check { display: grid; grid-template-columns: 18px 1fr; gap: 0.5rem; align-items: start; padding: 0.45rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.check-box { width: 14px; height: 14px; border: 1px solid var(--line-strong); margin-top: 0.15rem; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Ownership Culture Workshop Guide</div>
+  <div class="dst">Facilitator Resource &mdash; Quarterly Employee Engagement</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Workshop Quarter</div><div class="cvc-v">{{workshopQuarter}}</div></div>
+    <div class="cvc"><div class="cvc-l">Prepared For</div><div class="cvc-v">{{recipientName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+  </div>
+
+  <div class="co"><strong>Purpose:</strong> This guide provides a structured framework for running quarterly ownership mindset workshops. Regular workshops build employee understanding of the ESOP, strengthen the ownership culture, and identify concerns early.</div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Workshop Overview</span></div><div class="sb">
+    <div class="fr"><label>Recommended frequency</label><span style="flex:1;">Quarterly (4 per year)</span></div>
+    <div class="fr"><label>Duration</label><span style="flex:1;">90 minutes</span></div>
+    <div class="fr"><label>Attendees</label><span style="flex:1;">All employees (or department-level groups of 15&ndash;30)</span></div>
+    <div class="fr"><label>Facilitator</label><span style="flex:1;">Designated internal champion or senior leader</span></div>
+    <div class="fr"><label>Setting</label><span style="flex:1;">Conference room, large break room, or video call</span></div>
+    <p style="margin-top:0.8rem;">The workshop is interactive, not a lecture. The facilitator guides discussion rather than delivering a presentation. Employees should leave feeling more connected to the company&rsquo;s mission and more confident about how the ESOP works.</p>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Preparation Checklist</span></div><div class="sb">
+    <p>Complete these items at least one week before the workshop.</p>
+    <div class="sl">
+      <div class="check"><div class="check-box"></div><span><strong>Room or video link reserved</strong> &mdash; quiet space with whiteboard or screen</span></div>
+      <div class="check"><div class="check-box"></div><span><strong>Materials printed</strong> &mdash; this facilitator guide, activity handouts, pens and markers</span></div>
+      <div class="check"><div class="check-box"></div><span><strong>Pre-survey distributed</strong> &mdash; short 3&ndash;5 question survey to gauge current sentiment</span></div>
+      <div class="check"><div class="check-box"></div><span><strong>Pre-read completed</strong> &mdash; review last quarter&rsquo;s Employee Feedback Tracker for themes</span></div>
+      <div class="check"><div class="check-box"></div><span><strong>ESOP education materials ready</strong> &mdash; current stock value, account growth examples, distribution timeline</span></div>
+      <div class="check"><div class="check-box"></div><span><strong>Attendance confirmed</strong> &mdash; calendar invite sent, manager reminders, coverage for shift workers</span></div>
+    </div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Workshop Agenda</span></div><div class="sb">
+    <p>90-minute timed breakdown. Adjust timings as needed but keep the total under 90 minutes.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Welcome &amp; Icebreaker (10 min).</strong> Open with a brief check-in: &ldquo;In one word, how are you feeling about being an owner today?&rdquo; Capture responses on a whiteboard. This sets the tone and surfaces immediate concerns.</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>ESOP Education Module (20 min).</strong> Cover one focused topic per quarter (see Discussion Topics below). Use simple language, real numbers from the company, and avoid jargon. Include a brief Q&amp;A.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Group Discussion (30 min).</strong> Break into small groups of 4&ndash;6. Give each group a discussion question related to the quarterly theme. Each group reports back one key insight. Facilitator captures themes on a whiteboard.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Ownership Activity (20 min).</strong> Run one activity from the Activities section below. Choose the activity that best fits the quarterly theme and group size.</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>Wrap-Up &amp; Action Items (10 min).</strong> Summarize key takeaways. Announce any actions the company will take based on today&rsquo;s discussion. Remind employees of resources (ESOP booklet, HR contacts, trustee). Collect quick exit feedback.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Discussion Topics</span></div><div class="sb">
+    <p>Use one topic per quarter. Rotate through these themes annually, adding company-specific examples each time.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">Q1.</span><span><strong>&ldquo;What does ownership mean to you?&rdquo;</strong><br>Education focus: Introduction to the ESOP &mdash; what it is, how accounts grow, how company performance connects to personal wealth. Reference the &ldquo;Welcome to Your ESOP&rdquo; booklet.</span></div>
+      <div class="si"><span class="si-n">Q2.</span><span><strong>&ldquo;How does our work create value?&rdquo;</strong><br>Education focus: Business fundamentals &mdash; how revenue, profit, and share value connect. Explain EBITDA in plain language. Show how efficiency improvements increase stock price for everyone.</span></div>
+      <div class="si"><span class="si-n">Q3.</span><span><strong>&ldquo;Decision-making like an owner.&rdquo;</strong><br>Education focus: Day-to-day ownership mindset &mdash; waste reduction, customer retention, quality. Discuss real scenarios: &ldquo;Would you make a different choice if you owned the company?&rdquo; (They do.)</span></div>
+      <div class="si"><span class="si-n">Q4.</span><span><strong>&ldquo;Celebrating wins and learning from setbacks.&rdquo;</strong><br>Education focus: Year-in-review &mdash; stock value change, company milestones, employee contributions. Discuss repurchase obligation in accessible terms. Preview next year&rsquo;s goals.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Ownership Activities</span></div><div class="sb">
+    <p>Choose one activity per workshop. Each is designed for groups of 15&ndash;30 and takes approximately 20 minutes.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>&ldquo;Cost of Waste&rdquo; Exercise.</strong> Present a real (anonymized) example of waste: a returned shipment, reworked order, overtime cost. Ask: &ldquo;What would an owner do differently?&rdquo; Calculate the annual impact and translate to per-employee share value.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>&ldquo;Customer Impact&rdquo; Mapping.</strong> Pick one customer or contract. Map the chain: who sells, delivers, supports, invoices. Each person identifies how their role affects retention. Discuss: &ldquo;If we lose this customer, what happens to our stock?&rdquo;</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>&ldquo;If I Owned This&rdquo; Scenario.</strong> Present a hypothetical business decision: invest in new equipment, hire for a new role, or change a process? Groups debate and vote. Facilitator reveals what the company actually did and why.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Peer Recognition Round.</strong> Each employee writes one anonymous note recognizing a colleague who &ldquo;acted like an owner&rdquo; this quarter. Notes are collected and read aloud. Best used in Q4 as a year-end wrap-up.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §06 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Facilitator Notes</span></div><div class="sb">
+    <p>Tips for running an effective workshop.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Handling skepticism.</strong> Acknowledge it directly: &ldquo;That&rsquo;s a fair concern. Let&rsquo;s talk about it.&rdquo; Use data and specific examples rather than cheerleading. If you don&rsquo;t know the answer, say so and follow up.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Managing dominant voices.</strong> Use small group breakouts to ensure quieter employees contribute. Set ground rules: &ldquo;Everyone shares one idea before anyone shares a second.&rdquo;</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Keeping it constructive.</strong> If discussion turns negative, redirect: &ldquo;What would make this better?&rdquo; Focus on what employees can influence, not what they can&rsquo;t.</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Capturing feedback.</strong> Assign someone to take notes. Record themes, not names. Log all concerns and questions in the Employee Feedback Tracker for the next Forhemit stewardship review.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Avoiding legal pitfalls.</strong> Do not promise specific stock values, returns, or timelines. Say &ldquo;the value depends on company performance&rdquo; not &ldquo;your account will be worth $X.&rdquo; Refer tax or legal questions to the appropriate professional.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §07 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Post-Workshop Actions</span></div><div class="sb">
+    <p>After each workshop, complete these follow-up steps within one week.</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>Distribute a brief feedback survey.</strong> 3&ndash;5 questions: was the workshop valuable, what topic should we cover next, any unanswered questions?</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>Follow up on action items.</strong> Any commitments made during the workshop should be tracked and communicated back to employees within two weeks.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Log feedback in the Employee Feedback Tracker.</strong> Record questions, concerns, and positive feedback for the next quarterly Forhemit stewardship review.</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>Report to Forhemit stewardship lead.</strong> Share a summary of themes, sentiment, and any escalated items with your Forhemit contact.</span></div>
+    </div>
+    <div class="co"><strong>Reminder:</strong> The Employee Feedback Tracker template is available at <code>internal/06-post-close/employee-feedback-tracker.html</code>. Use it to consolidate feedback across all channels before each quarterly review.</div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For company leadership use. Do not distribute to employees.</div>
+  </div>
+</div>
+
+</body>
+</html>

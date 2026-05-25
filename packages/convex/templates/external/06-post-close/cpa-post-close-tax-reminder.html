@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Post-Close Tax Reminder</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+:root { --brass: #7A5C20; --brass-dim: #bbb; --muted: #666; --line: #ddd; --line-strong: #bbb; --green: #2E7D32; --green-bg: #f0f8f0; --callout-bg: #faf7f0; --badge-bg: #fff; --ff-display: 'Cormorant Garamond', Georgia, serif; --ff-body: 'Jost', system-ui, sans-serif; --ff-mono: 'DM Mono', monospace; --page-w: 720px; }
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 160px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.78rem; }
+th { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--brass); font-weight: 400; text-align: left; padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--line-strong); }
+td { padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--line); font-weight: 300; color: #333; }
+tr:last-child td { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Post-Close Tax Reminder</div>
+  <div class="dst">ESOP Plan Tax Filing &amp; §1042 Election Coordination</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
+    <div class="cvc"><div class="cvc-l">CPA</div><div class="cvc-v">{{cpaName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Tax Year</div><div class="cvc-v">{{taxYear}}</div></div>
+  </div>
+
+  <div class="co"><strong>Purpose:</strong> This reminder outlines the key tax filing requirements and deadlines for the {{companyName}} ESOP following the transaction close on {{closingDate}}. Please review each item and confirm your coordination timeline with Forhemit.</div>
+
+  <!-- § 01 ESOP Plan Tax Filing Requirements -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 01</span><span class="st">ESOP Plan Tax Filing Requirements</span></div>
+    <div class="sb">
+      <p>As the ESOP trust is now a qualified retirement plan under IRC §401(a), the following annual filings are required:</p>
+      <div class="sl">
+        <div class="si"><span class="si-n">A.</span><span><strong>Form 5500 — Annual Return/Report.</strong> Due the last day of the seventh month after the plan year ends (July 31 for calendar-year plans). First filing covers the short plan year from {{closingDate}} to December 31, {{taxYear}}. Must include Schedule H (financial information) and Schedule I (small plan financial information, if applicable).</span></div>
+        <div class="si"><span class="si-n">B.</span><span><strong>Form 8955-SSA — Annual Registration Statement.</strong> Due the last day of the seventh month after the plan year ends. Reports participants who separated from service with a deferred vested benefit. Coordinate with the plan recordkeeper for participant data.</span></div>
+        <div class="si"><span class="si-n">C.</span><span><strong>Form 5500-SF (if eligible).</strong> Plans with fewer than 100 participants and meeting other criteria may file the simplified Form 5500-SF. Confirm eligibility with the plan's third-party administrator.</span></div>
+        <div class="si"><span class="si-n">D.</span><span><strong>Trust tax return — Form 1120 or 990-T.</strong> The ESOP trust itself may need to file if it has unrelated business taxable income (UBTI). Consult with the trust's tax advisor on filing requirements.</span></div>
+        <div class="si"><span class="si-n">E.</span><span><strong>State filings.</strong> Verify any state-level retirement plan registration or reporting requirements applicable to {{companyState}}. Some states require additional disclosures for employee benefit plans.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 02 §1042 Election Status -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 02</span><span class="st">§1042 Election Status</span></div>
+    <div class="sb">
+      <p>If the selling shareholder elected to defer capital gains under IRC §1042, the following deadlines and requirements apply:</p>
+      <div class="fr"><label>Selling shareholder</label><span style="flex:1;">{{sellerName}}</span></div>
+      <div class="fr"><label>Sale date</label><span style="flex:1;">{{closingDate}}</span></div>
+      <div class="fr"><label>Sale proceeds</label><span style="flex:1;">{{saleProceeds}}</span></div>
+      <div class="fr"><label>§1042 election deadline</label><span style="flex:1;">{{section1042Deadline}}</span></div>
+      <div class="fr"><label>Qualified replacement property</label><span style="flex:1;">{{qrpStatus}}</span></div>
+      <div class="sl">
+        <div class="si"><span class="si-n">A.</span><span><strong>Election timing.</strong> The §1042 election must be made on the seller's original tax return for the year of the sale (or on a timely filed amended return). For {{taxYear}}, the deadline is {{section1042Deadline}}.</span></div>
+        <div class="si"><span class="si-n">B.</span><span><strong>Qualified replacement property (QRP).</strong> The seller must acquire QRP within a 3-month window before or after the sale date. QRP includes domestic operating company stocks and bonds. Verify that the seller's investment qualifies and that the holding period requirements are documented.</span></div>
+        <div class="si"><span class="si-n">C.</span><span><strong>C corporation requirement.</strong> The company must be a C corporation at the time of the sale. If the company converted from an LLC, confirm the conversion was effective before the ESOP transaction date.</span></div>
+        <div class="si"><span class="si-n">D.</span><span><strong>30% ownership threshold.</strong> The ESOP must acquire at least 30% of the company's outstanding stock. Confirm this threshold was met with the independent appraiser.</span></div>
+        <div class="si"><span class="si-n">E.</span><span><strong>C recapture exposure.</strong> If any of the seller's stock was acquired before 1984 and has C corporation earnings and profits, the §1042 election may not be available for those shares. Review the seller's basis schedule with your tax counsel.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 03 Company Contribution Timing -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 03</span><span class="st">Company Contribution Timing</span></div>
+    <div class="sb">
+      <p>Contributions to the ESOP trust are tax-deductible to the company under IRC §404, subject to the following limits and timing rules:</p>
+      <div class="fr"><label>Annual contribution limit</label><span style="flex:1;">{{annualContributionLimit}}</span></div>
+      <div class="fr"><label>Current year contributions</label><span style="flex:1;">{{currentYearContributions}}</span></div>
+      <div class="fr"><label>Contribution type</label><span style="flex:1;">{{contributionType}}</span></div>
+      <div class="sl">
+        <div class="si"><span class="si-n">A.</span><span><strong>Deductible limit.</strong> The company may deduct contributions up to 25% of covered payroll for stock contributions, or 25% for cash contributions used to repay ESOP loan principal. Combined limit for stock and cash: 25% of covered payroll.</span></div>
+        <div class="si"><span class="si-n">B.</span><span><strong>Cash contributions for loan repayment.</strong> Cash used to repay ESOP acquisition debt is deductible up to 10% of covered payroll in addition to the 25% stock contribution limit. Verify the loan amortization schedule and timing of payments.</span></div>
+        <div class="si"><span class="si-n">C.</span><span><strong>Timing for tax year {{taxYear}}.</span> Contributions must be made by the due date of the company's tax return (including extensions) to be deductible for {{taxYear}}. For calendar-year filers: {{companyFilingDeadline}}.</span></div>
+        <div class="si"><span class="si-n">D.</span><span><strong>Stock vs. cash contributions.</span> If the company contributed stock to the ESOP (e.g., newly issued shares), the deduction equals the fair market value at the time of contribution. For cash contributions, the deduction is the cash amount. Document the contribution date, type, and FMV for the trust records.</span></div>
+        <div class="si"><span class="si-n">E.</span><span><strong>Excess contributions.</span> If contributions exceed the 25% limit, the excess may be carried forward and deducted in subsequent years. Track any carry-forward amounts and report on the company's tax return.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 04 Participant Statements -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 04</span><span class="st">Participant Statements</span></div>
+    <div class="sb">
+      <p>Under ERISA, the plan administrator must provide annual benefit statements to ESOP participants. Coordinate with the plan recordkeeper to ensure timely distribution:</p>
+      <div class="fr"><label>Total participants</label><span style="flex:1;">{{totalParticipants}}</span></div>
+      <div class="fr"><label>Statement deadline</label><span style="flex:1;">{{statementDeadline}}</span></div>
+      <div class="fr"><label>Recordkeeper</label><span style="flex:1;">{{recordkeeperName}}</span></div>
+      <div class="sl">
+        <div class="si"><span class="si-n">A.</span><span><strong>Quarterly statements.</strong> Participants must receive quarterly statements within 45 days of the end of each quarter, showing account balance and allocation of contributions.</span></div>
+        <div class="si"><span class="si-n">B.</span><span><strong>Annual statement.</strong> The annual statement must include the participant's total account balance, vested balance, diversification rights (for participants age 55+ with 10+ years of service), and a summary of plan terms.</span></div>
+        <div class="si"><span class="si-n">C.</span><span><strong>Diversification notice.</strong> Participants who are age 55 or older and have completed 10 years of plan participation must be notified annually of their right to diversify up to 25% (50% in the sixth year) of their account balance.</span></div>
+        <div class="si"><span class="si-n">D.</span><span><strong>Summary plan description (SPD).</strong> If the ESOP is new, the SPD must be distributed to all participants within 90 days of becoming a participant. Confirm the SPD has been finalized and distributed.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- § 05 Key Deadlines -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 05</span><span class="st">Key Deadlines — {{taxYear}}</span></div>
+    <div class="sb">
+      <p>The following table summarizes the critical tax filing and compliance deadlines for the {{companyName}} ESOP:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Deadline</th>
+            <th>Action Required</th>
+            <th>Responsible Party</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>{{qrpDeadline}}</td><td>QRP acquisition window closes (§1042)</td><td>Seller + CPA</td></tr>
+          <tr><td>{{firstForm5500Due}}</td><td>First Form 5500 due (short plan year)</td><td>TPA + CPA</td></tr>
+          <tr><td>{{participantStatementQ1}}</td><td>Q1 participant statements due</td><td>Recordkeeper</td></tr>
+          <tr><td>{{participantStatementQ2}}</td><td>Q2 participant statements due</td><td>Recordkeeper</td></tr>
+          <tr><td>{{diversificationNotice}}</td><td>Diversification notice to eligible participants</td><td>Plan administrator</td></tr>
+          <tr><td>{{companyFilingDeadline}}</td><td>Company tax return due (extensions apply)</td><td>CPA</td></tr>
+          <tr><td>{{section1042Deadline}}</td><td>§1042 election filing deadline</td><td>CPA + Seller</td></tr>
+          <tr><td>{{annualAppraisalDue}}</td><td>Annual FMV appraisal due</td><td>Trustee + Appraiser</td></tr>
+        </tbody>
+      </table>
+      <div class="co"><strong>Extension note:</strong> If the company files for an automatic extension (Form 7004), the contribution and filing deadlines are extended accordingly. Confirm extension filing with your CPA to preserve deduction timing flexibility.</div>
+    </div>
+  </div>
+
+  <!-- § 06 Contact -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#167; 06</span><span class="st">Contact</span></div>
+    <div class="sb">
+      <p>For questions about ESOP tax filing requirements or coordination with Forhemit's stewardship team, please contact:</p>
+      <div class="fr"><label>Email</label><span style="flex:1;">deals&#64;forhemit.com</span></div>
+      <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+    </div>
+  </div>
+
+  <!-- Signature Block -->
+  <div class="sec">
+    <div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
+    <div class="sg">
+      <div class="sb-block">
+        <div class="sb-entity">Forhemit Stewardship Management Co.<br><span style="font-size:0.78rem;color:var(--muted);">California Public Benefit Corporation</span></div>
+        <div class="s-line"></div><div class="s-lbl">Prepared By</div>
+      </div>
+      <div class="sb-block">
+        <div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div>
+        <div class="s-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For tax coordination between Forhemit and seller's CPA.</div>
+  </div>
+</div>
+
+</body>
+</html>

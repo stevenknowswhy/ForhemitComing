@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Forhemit — Trustee Annual Review Agenda</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+@page { size: letter; margin: 0.75in; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 10pt; }
+body {
+  color: #111; background: #fff;
+  font-family: 'Jost', system-ui, sans-serif;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+
+:root {
+  --brass: #7A5C20;
+  --brass-dim: #bbb;
+  --muted: #666;
+  --line: #ddd;
+  --line-strong: #bbb;
+  --green: #2E7D32;
+  --green-bg: #f0f8f0;
+  --callout-bg: #faf7f0;
+  --badge-bg: #fff;
+  --ff-display: 'Cormorant Garamond', Georgia, serif;
+  --ff-body: 'Jost', system-ui, sans-serif;
+  --ff-mono: 'DM Mono', monospace;
+  --page-w: 720px;
+}
+
+.pw { max-width: var(--page-w); margin: 0 auto; padding: 0; }
+.dh { border-bottom: 1px solid var(--line-strong); padding-bottom: 1.5rem; margin-bottom: 2rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; }
+.db-name { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 300; letter-spacing: 0.28em; text-transform: uppercase; color: #111; }
+.db-sub { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--brass); font-weight: 400; }
+.dref { text-align: right; font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); line-height: 1.8; }
+.dt { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; letter-spacing: 0.04em; color: #111; margin-bottom: 0.4rem; }
+.dst { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+.cvg { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-strong); margin-bottom: 2.5rem; }
+.cvc { padding: 0.8rem 1rem; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); }
+.cvc:nth-child(even) { border-right: none; }
+.cvc:nth-last-child(-n+2) { border-bottom: none; }
+.cvc-l { font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--brass); margin-bottom: 0.3rem; font-weight: 400; }
+.cvc-v { font-size: 0.88rem; font-weight: 300; color: #111; min-height: 1.2em; }
+.sec { margin-bottom: 2rem; break-inside: avoid; }
+.sh { display: flex; align-items: baseline; gap: 0.8rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--line); break-after: avoid; }
+.sn { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--brass); font-weight: 300; flex-shrink: 0; letter-spacing: 0.08em; }
+.st { font-family: var(--ff-display); font-size: 1.05rem; font-weight: 400; letter-spacing: 0.06em; color: #111; }
+.sb { font-size: 0.83rem; font-weight: 300; line-height: 1.85; color: #333; }
+.sb p { margin-bottom: 0.8rem; }
+.sb p:last-child { margin-bottom: 0; }
+.co { border-left: 2px solid var(--brass); padding: 0.6rem 0.9rem; margin: 0.8rem 0; font-size: 0.78rem; line-height: 1.7; color: #333; background: var(--callout-bg); break-inside: avoid; }
+.co strong { color: #111; font-weight: 500; }
+.deal-summary {
+  border: 1px solid var(--line-strong);
+  padding: 1.2rem 1.4rem;
+  margin: 1.2rem 0;
+  break-inside: avoid;
+}
+.deal-summary-title {
+  font-family: var(--ff-display); font-size: 1rem; font-weight: 400;
+  letter-spacing: 0.06em; color: #111; margin-bottom: 0.8rem;
+  padding-bottom: 0.5rem; border-bottom: 1px solid var(--line);
+}
+.fr { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.fr label { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); white-space: nowrap; min-width: 140px; }
+.sl { margin: 0.8rem 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.si { display: grid; grid-template-columns: 26px 1fr; gap: 0.6rem; align-items: start; padding: 0.55rem 0; border-bottom: 1px solid var(--line); font-size: 0.8rem; font-weight: 300; color: #333; }
+.si-n { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); padding-top: 0.1rem; }
+.sg { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.sb-block { display: flex; flex-direction: column; gap: 0.8rem; }
+.sb-entity { font-family: var(--ff-display); font-size: 0.95rem; font-weight: 300; color: #111; line-height: 1.4; }
+.s-line { border-bottom: 1px solid var(--line-strong); height: 2.5rem; margin-top: 0.3rem; }
+.s-lbl { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-top: 0.3rem; }
+.df { border-top: 1px solid var(--line); padding-top: 1.2rem; margin-top: 2.5rem; display: flex; justify-content: space-between; align-items: center; break-inside: avoid; }
+.df-note { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); line-height: 1.8; }
+.df-conf { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--brass); text-align: right; }
+</style>
+</head>
+<body>
+
+<div class="pw">
+  <div class="dh">
+    <div><div class="db-name">Forhemit</div><div class="db-sub">Transition Stewardship</div></div>
+    <div class="dref"><div>forhemit.com</div><div>deals&#64;forhemit.com</div><div style="margin-top:0.4rem;color:var(--brass);">Ref: {{ref}}</div></div>
+  </div>
+  <div class="dt">Trustee Annual Review Agenda</div>
+  <div class="dst">ESOP Plan Health &amp; Compliance Review</div>
+
+  <div class="cvg">
+    <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Trustee</div><div class="cvc-v">{{trusteeName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Review Year</div><div class="cvc-v">{{reviewYear}}</div></div>
+    <div class="cvc"><div class="cvc-l">Meeting Date</div><div class="cvc-v">{{meetingDate}}</div></div>
+  </div>
+
+  <!-- §01 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Attendees</span></div><div class="sb">
+    <p>The following individuals are expected to attend the annual trustee review meeting:</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Expected Attendees</div>
+      <div class="fr"><label>Independent Trustee</label><span style="flex:1;">{{trusteeName}}</span></div>
+      <div class="fr"><label>Company Management</label><span style="flex:1;">{{sellerName}}, {{sellerTitle}}</span></div>
+      <div class="fr"><label>Forhemit Stewardship</label><span style="flex:1;">{{forhemitContactName}}</span></div>
+      <div class="fr"><label>ERISA Counsel</label><span style="flex:1;">{{counselName}}</span></div>
+      <div class="fr"><label>Valuation Firm</label><span style="flex:1;">{{appraiserName}}</span></div>
+      <div class="fr"><label>Plan Administrator</label><span style="flex:1;">{{planAdminName}}</span></div>
+    </div>
+    <div class="co"><strong>Pre-read materials:</strong> Please review the repurchase obligation study, most recent valuation report, and Form 5500 filing prior to the meeting.</div>
+  </div></div>
+
+  <!-- §02 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 02</span><span class="st">Plan Financial Health</span></div><div class="sb">
+    <p>A summary of the ESOP plan&rsquo;s current financial position:</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Plan Financial Summary</div>
+      <div class="fr"><label>Total plan assets</label><span style="flex:1;">{{totalPlanAssets}}</span></div>
+      <div class="fr"><label>Current stock value (FMV)</label><span style="flex:1;">{{currentStockValue}}</span></div>
+      <div class="fr"><label>Shares allocated</label><span style="flex:1;">{{sharesAllocated}} of {{totalShares}}</span></div>
+      <div class="fr"><label>Participants</label><span style="flex:1;">{{participantCount}}</span></div>
+      <div class="fr"><label>Year-over-year change</label><span style="flex:1;">{{yoyChange}}</span></div>
+    </div>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Funding status.</strong> {{fundingStatusDescription}}</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Contribution history.</strong> Total company contributions in the review period: {{totalContributions}}. Employer stock contribution: {{stockContribution}}. Cash contribution: {{cashContribution}}.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Participant accounts.</strong> Average account balance: {{avgAccountBalance}}. Largest account: {{largestAccount}}. Vesting schedule: {{vestingSchedule}}.</span></div>
+    </div>
+  </div></div>
+
+  <!-- §03 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Repurchase Obligation Update</span></div><div class="sb">
+    <p>The repurchase obligation represents the ESOP&rsquo;s liability to purchase shares from participants upon separation from service. This is a critical long-term planning item.</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Repurchase Liability Summary</div>
+      <div class="fr"><label>Current estimated liability</label><span style="flex:1;">{{currentRepurchaseLiability}}</span></div>
+      <div class="fr"><label>Projected liability (5-year)</label><span style="flex:1;">{{projected5YearLiability}}</span></div>
+      <div class="fr"><label>Projected liability (10-year)</label><span style="flex:1;">{{projected10YearLiability}}</span></div>
+      <div class="fr"><label>Funding strategy</label><span style="flex:1;">{{fundingStrategy}}</span></div>
+    </div>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Anticipated distributions.</strong> {{anticipatedDistributions}} &mdash; estimated participants eligible for distribution in the next 12 months.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Funding adequacy.</strong> {{fundingAdequacyAssessment}} &mdash; current reserves and projected cash flow to meet obligations.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Risk factors.</strong> {{riskFactors}} &mdash; key assumptions and sensitivities in the projection model.</span></div>
+    </div>
+    <div class="co"><strong>Full study available:</strong> The complete repurchase obligation study was prepared on {{studyDate}} and is available for review. Contact Forhemit for the latest version.</div>
+  </div></div>
+
+  <!-- §04 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Valuation Review</span></div><div class="sb">
+    <p>A summary of the most recent independent valuation and historical trends:</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Valuation Summary</div>
+      <div class="fr"><label>Most recent appraisal date</label><span style="flex:1;">{{appraisalDate}}</span></div>
+      <div class="fr"><label>Fair market value per share</label><span style="flex:1;">{{fmvPerShare}}</span></div>
+      <div class="fr"><label>Total equity value</label><span style="flex:1;">{{totalEquityValue}}</span></div>
+      <div class="fr"><label>Valuation methodology</label><span style="flex:1;">{{valuationMethodology}}</span></div>
+      <div class="fr"><label>Prior year FMV</label><span style="flex:1;">{{priorYearFMV}}</span></div>
+    </div>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Year-over-year trend.</strong> {{valuationTrend}} &mdash; key drivers of change include {{valuationDrivers}}.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Trustee review.</strong> {{trusteeValuationNotes}} &mdash; the trustee has reviewed the appraisal and {{trusteeValuationAction}}.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>Concerns or observations.</strong> {{valuationConcerns}}</span></div>
+    </div>
+  </div></div>
+
+  <!-- §05 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Compliance &amp; Regulatory</span></div><div class="sb">
+    <p>Status of key compliance items and regulatory filings:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span><strong>Form 5500.</strong> Filed for plan year {{form5500PlanYear}} on {{form5500FilingDate}}. {{form5500Status}}.</span></div>
+      <div class="si"><span class="si-n">B.</span><span><strong>Summary Annual Report (SAR).</strong> {{sarStatus}} &mdash; distributed to participants on {{sarDistributionDate}}.</span></div>
+      <div class="si"><span class="si-n">C.</span><span><strong>DOL audit status.</strong> {{dolAuditStatus}}</span></div>
+      <div class="si"><span class="si-n">D.</span><span><strong>Plan document amendments.</strong> {{planAmendmentStatus}} &mdash; any required amendments based on regulatory changes or operational modifications.</span></div>
+      <div class="si"><span class="si-n">E.</span><span><strong>Participant statements.</strong> Annual statements distributed on {{statementDistributionDate}}. {{statementNotes}}</span></div>
+      <div class="si"><span class="si-n">F.</span><span><strong>Diversification compliance.</strong> {{diversificationStatus}} &mdash; eligible participants notified of diversification rights.</span></div>
+    </div>
+    <div class="co"><strong>Counsel input requested:</strong> ERISA counsel to confirm all plan amendments are current and advise on any pending regulatory guidance affecting the ESOP.</div>
+  </div></div>
+
+  <!-- §06 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Action Items</span></div><div class="sb">
+    <p>The following items require trustee decision or approval at this meeting:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">1.</span><span><strong>{{actionItem1}}</strong> &mdash; {{actionItem1Detail}}</span></div>
+      <div class="si"><span class="si-n">2.</span><span><strong>{{actionItem2}}</strong> &mdash; {{actionItem2Detail}}</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>{{actionItem3}}</strong> &mdash; {{actionItem3Detail}}</span></div>
+      <div class="si"><span class="si-n">4.</span><span><strong>{{actionItem4}}</strong> &mdash; {{actionItem4Detail}}</span></div>
+      <div class="si"><span class="si-n">5.</span><span><strong>{{actionItem5}}</strong> &mdash; {{actionItem5Detail}}</span></div>
+    </div>
+  </div></div>
+
+  <!-- §07 -->
+  <div class="sec"><div class="sh"><span class="sn">&#167; 07</span><span class="st">Next Meeting</span></div><div class="sb">
+    <p>The next annual trustee review meeting is tentatively scheduled for:</p>
+    <div class="deal-summary">
+      <div class="deal-summary-title">Next Meeting</div>
+      <div class="fr"><label>Proposed date</label><span style="flex:1;">{{nextMeetingDate}}</span></div>
+      <div class="fr"><label>Proposed location</label><span style="flex:1;">{{nextMeetingLocation}}</span></div>
+    </div>
+    <p>Preliminary agenda items for the next meeting:</p>
+    <div class="sl">
+      <div class="si"><span class="si-n">A.</span><span>Updated repurchase obligation projection</span></div>
+      <div class="si"><span class="si-n">B.</span><span>Next annual valuation review</span></div>
+      <div class="si"><span class="si-n">C.</span><span>Plan compliance and regulatory updates</span></div>
+      <div class="si"><span class="si-n">D.</span><span>Participant account and distribution review</span></div>
+    </div>
+    <div class="co"><strong>Reminder:</strong> Materials for the next meeting should be distributed at least 14 days in advance to allow adequate review time for all attendees.</div>
+  </div></div>
+
+  <!-- Contact -->
+  <div class="sec"><div class="sh"><span class="sn">&#167;</span><span class="st">Contact</span></div><div class="sb">
+    <p>For questions about this agenda or the annual review process, please contact:</p>
+    <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
+    <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
+  </div></div>
+
+  <div class="df">
+    <div class="df-note">Generated: {{generatedDate}}<br>deals&#64;forhemit.com &#183; forhemit.com</div>
+    <div class="df-conf">CONFIDENTIAL<br>For trustee and plan fiduciary review only.</div>
+  </div>
+</div>
+
+</body>
+</html>

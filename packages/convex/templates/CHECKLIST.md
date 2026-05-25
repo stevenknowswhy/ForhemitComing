@@ -1,6 +1,6 @@
 # Forhemit Template Build Checklist
 
-**Last updated:** 2026-05-24
+**Last updated:** 2026-05-24 (expanded to 142 with audience coverage gap templates)
 
 **Status key:**
 - ✅ **DONE** — Built, tested, and accepted
@@ -89,6 +89,7 @@
 | 107 | Retainer agreement (company → ERISA counsel) | counsel | ✅ DONE | OpenClaude | Owner-executed; Forhemit not a party — ERISA independence |
 | 108 | Retainer agreement (company → trustee) | trustee | ✅ DONE | OpenClaude | Owner-executed; trustee selection before lender/appraiser contact |
 | 121 | Trustee RFP | trustee | ✅ DONE | OpenClaude | Formal RFP with independence criteria, mandate to document prudent process, fee structure |
+| 128 | CPA engagement confirmation | cpa | ✅ DONE | OpenClaude | Confirms CPA role in ESOP transaction, §1042 coordination, QofE data requests, timeline |
 
 ---
 
@@ -111,6 +112,9 @@
 | 109 | Turnover cost calculator | seller, trustee, lender | ✅ DONE | OpenClaude | Key man risk quantification for trustee and lender presentations |
 | 110 | Deal economics model (internal) | internal | ✅ DONE | OpenClaude | Full pro forma — EBITDA, debt service, Forhemit fee, net to seller |
 | 122 | Fairness opinion package | trustee, seller | ✅ DONE | OpenClaude | Trustee's financial advisor formal fairness opinion — central fiduciary review, often legally required |
+| 129 | CPA tax coordination update | cpa | ✅ DONE | OpenClaude | Periodic update during diligence — QofE progress, tax election timing, document needs |
+| 133 | Trustee diligence log | internal | ✅ DONE | OpenClaude | Documents fiduciary process — prudent steps, independence confirmed, decisions made |
+| 135 | Counsel legal status update request | counsel | ✅ DONE | OpenClaude | Proactive request for document drafting status, open issues, timeline to Gate 4 |
 
 ### 05-closing
 
@@ -123,6 +127,8 @@
 | 63 | Press release | seller | ✅ DONE | OpenClaude | Optional |
 | 123 | First Day as ESOP town hall agenda | seller, internal | ✅ DONE | OpenClaude | Employee-facing meeting agenda + FAQ explaining "what's in it for me" — manages cultural transition |
 | 124 | Trustee welcome letter to employees | trustee, seller | ✅ DONE | OpenClaude | Letter from independent trustee to all employees explaining their ownership rights and protections |
+| 137 | Manager briefing talking points | seller | ✅ DONE | OpenClaude | Pre-announcement Q&A guide for leadership team — handles common employee questions |
+| 138 | Welcome to Your ESOP booklet | seller | ✅ DONE | OpenClaude | Employee-facing leave-behind: ESOP basics, how accounts grow, distribution rules, what's next |
 
 ### 06-post-close
 
@@ -140,6 +146,13 @@
 | 125 | Repurchase obligation study | seller, trustee | ✅ DONE | OpenClaude | Formal repurchase liability projection — fundamental for long-term ESOP financial planning |
 | 126 | Distribution policy | seller, trustee | ✅ DONE | OpenClaude | Rules for employee payout timing, vesting, diversification — required for ESOP administration |
 | 127 | ESOP satisfaction survey | seller, internal | ✅ DONE | OpenClaude | Annual employee feedback instrument — measures understanding, satisfaction, engagement with ESOP |
+| 130 | CPA post-close tax reminder | cpa | ✅ DONE | OpenClaude | Year-end reminder: ESOP plan tax returns, §1042 election deadline, contribution timing |
+| 131 | Broker referral nurture package | broker | ✅ DONE | OpenClaude | Anonymized closed-deal summary + testimonial request — reinforces referral relationship |
+| 132 | Seller exit interview | seller | ✅ DONE | OpenClaude | Post-COOP feedback on entire process — what worked, what didn't, would they recommend |
+| 134 | Trustee annual review agenda | trustee | ✅ DONE | OpenClaude | Annual meeting agenda: repurchase obligation status, valuation update, plan health, compliance |
+| 136 | Counsel annual compliance reminder | counsel | ✅ DONE | OpenClaude | Annual reminder: plan document amendments, regulatory updates, filing deadlines |
+| 139 | Annual benefit statement cover letter | seller | ✅ DONE | OpenClaude | Cover letter template for annual ESOP participant statements — explains account growth |
+| 140 | Ownership culture workshop guide | seller | ✅ DONE | OpenClaude | Facilitator guide for quarterly ownership mindset workshops — discussion topics, activities |
 
 ---
 
@@ -198,6 +211,7 @@
 | 98 | Gate 4 legal clearance | internal | ✅ DONE | OpenClaude | Triggers closing |
 | 99 | Closing checklist | internal | ✅ DONE | OpenClaude | Day-of sequence |
 | 100 | Closing confirmation | internal | ✅ DONE | OpenClaude | Funds settled |
+| 141 | Employee communication strategy checklist | internal | ✅ DONE | OpenClaude | Forhemit's internal checklist for planning, legal review, and executing employee comms |
 
 ### 06-post-close (Internal)
 
@@ -206,6 +220,7 @@
 | 101 | Lessons learned memo | internal | ✅ DONE | OpenClaude | After every close |
 | 102 | COOP intake forms | internal | ✅ DONE | — | 4 tracks |
 | 103 | COOP delivery tracker | internal | ✅ DONE | OpenClaude | V1.0-V4.0 |
+| 142 | Employee feedback tracker | internal | ✅ DONE | OpenClaude | Tracks employee questions, concerns, sentiment from stewardship check-ins |
 
 ---
 
@@ -213,13 +228,13 @@
 
 | Status | Count |
 |--------|-------|
-| ✅ DONE | 127 |
+| ✅ DONE | 142 |
 | 🔄 ACCEPTED | 0 |
 | ⏳ IN PROGRESS | 0 |
 | ❌ NOT STARTED | 0 |
-| **Total** | **127** |
+| **Total** | **142** |
 
-All 127 tracked templates are built.
+All 142 tracked templates are built.
 
 ---
 
