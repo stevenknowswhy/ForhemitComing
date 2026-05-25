@@ -7,3 +7,5 @@ node_modules/
 .vercel
 .antigravitycli/
 .claude/
+# Local Pi runtime state
+.atl/
