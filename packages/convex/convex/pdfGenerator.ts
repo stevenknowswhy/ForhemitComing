@@ -47,9 +47,9 @@ export const generatePdf = action({
       console.log(`PDF generated: ${(pdfSize / 1024).toFixed(1)}KB`);
 
       return { pdfBase64, pdfSize };
-    } catch (fetchError) {
+    } catch (fetchError: unknown) {
       console.error("PDF generation fetch error:", fetchError);
-      throw new Error(`Could not reach PDF generation endpoint at ${pdfEndpoint}. Is the Next.js server running?`);
+      throw new Error(`Could not reach PDF generation endpoint at ${pdfEndpoint}. Is the Next.js server running?`, { cause: fetchError });
     }
   },
 });

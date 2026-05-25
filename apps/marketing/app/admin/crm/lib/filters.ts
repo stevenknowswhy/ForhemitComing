@@ -76,7 +76,7 @@ export function sortCompanies<T extends Company>(
   sort: SortConfig
 ): T[] {
   return [...companies].sort((a, b) => {
-    let comparison = 0;
+    let comparison: number;
 
     switch (sort.field) {
       case "company":
