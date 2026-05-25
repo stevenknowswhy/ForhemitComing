@@ -123,7 +123,7 @@ Both apps (`forhemit-admin`, `forhemit-coming-soon`) now build successfully.
 ### P1 — Next Sprint (Code Quality)
 
 - [x] **Delete all `" 2"` duplicate directories** — already done in commit `ebbef77`
-- [ ] **Consolidate engagement letter templates** — investigated 2026-05-25: NOT simple duplicates. `packages/convex/templates/external/03-engagement/engagement-letter.html` is the canonical template for PDF generation (referenced by `manifest.ts`). `apps/admin/public/forms/engagement-letter-standalone.html` is the interactive form served via iframe (referenced by `StandaloneEngagementLetterForm.tsx`). Both are actively used. Consolidation would require architectural decision.
+- [x] **Consolidate engagement letter templates** — done 2026-05-25 (`68f811d`). Added `data-pdf` CSS rules to canonical template, replaced standalone HTML with symlink to canonical. Single source of truth for engagement letter HTML/CSS/JS.
 - [ ] **Break circular dependencies** — investigated 2026-05-25: no circular dependencies found in `esop-partners/components/`. `ESOPPartnerCRM` → `DetailPanel` + `ContactModal` is one-way. `ContactModal` and `DetailPanel` import only from `../types`, `../lib/formatters`, `../lib/calculations`. False positive from CodeFlow analysis.
 - [ ] **Split `agentQueue.ts`** — investigated 2026-05-25: file is 360 lines with 8 exports (not 1,206 lines / 49 functions as originally estimated). 5 queries + 3 mutations. No immediate need to split.
 
