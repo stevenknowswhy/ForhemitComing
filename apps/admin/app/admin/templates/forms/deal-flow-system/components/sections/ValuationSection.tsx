@@ -5,7 +5,7 @@ import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
 import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   SelectInput,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import { FINANCIAL_QUALITY_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface ValuationSectionProps {

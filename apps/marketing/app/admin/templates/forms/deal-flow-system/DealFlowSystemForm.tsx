@@ -26,7 +26,7 @@ import { useDealFlowForm } from "@forhemit/shared/features/deal-flow-system";
 import { STAGES, DEAL_STATUS_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 // Input Components
-import { StageIndicator } from "./components/inputs";
+import { StageIndicator } from "@forhemit/shared/features/deal-flow-system";
 
 // Section Components - Stage 1
 import {

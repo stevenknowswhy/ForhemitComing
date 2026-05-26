@@ -3,7 +3,7 @@
 import React from "react";
 import type { Stage3Data } from "@forhemit/shared/features/deal-flow-system";
 import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
-import { Checkbox } from "../inputs";
+import { Checkbox } from "@forhemit/shared/features/deal-flow-system";
 
 interface Rollover1042SectionProps {
   data: Stage3Data["rollover1042"];

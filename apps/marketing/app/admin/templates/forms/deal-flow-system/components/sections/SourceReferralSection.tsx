@@ -7,7 +7,7 @@ import {
   TextInput,
   SelectInput,
   RadioGroup,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import {
   DEAL_SOURCE_OPTIONS,
   ENGAGEMENT_LETTER_OPTIONS,

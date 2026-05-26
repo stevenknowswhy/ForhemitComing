@@ -7,7 +7,7 @@ import {
   SelectInput,
   NumberInput,
   Checkbox,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import {
   HEADCOUNT_OPTIONS,
   REVENUE_OPTIONS,

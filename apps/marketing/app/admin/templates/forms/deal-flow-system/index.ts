@@ -92,7 +92,7 @@ export {
   CheckboxGroup,
   RadioGroup,
   StageIndicator,
-} from "./components/inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 
 export {
   SourceReferralSection,
