@@ -91,7 +91,7 @@ export const migrateContentToFiles = internalAction({
 		if (!page.isDone) {
 			await ctx.scheduler.runAfter(
 				0,
-				internal.migrateTemplateContent.migrateContentToFiles as any,
+				internal.migrateTemplateContent.migrateContentToFiles as typeof internal.migrateTemplateContent.migrateContentToFiles,
 				{ cursor: page.continueCursor },
 			);
 		} else {

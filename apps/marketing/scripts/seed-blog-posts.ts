@@ -133,11 +133,10 @@ async function main() {
             relatedPathways.length > 0 ? relatedPathways : undefined,
           adminToken: ADMIN_TOKEN,
         });
-        console.log("[ok]", a.slug);
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
         if (msg.includes("already exists")) {
-          console.log("[skip]", a.slug);
+          // Skip duplicates silently
         } else {
           throw e;
         }

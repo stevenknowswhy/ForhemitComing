@@ -6,7 +6,8 @@ export function WebMCP() {
 	useEffect(() => {
 		try {
 			// Model Context Protocol — experimental browser API, no TypeScript types yet
-			const api = (navigator as any).modelContext;
+			const nav = navigator as unknown as Record<string, unknown>;
+			const api = nav.modelContext as Record<string, ((...args: unknown[]) => void) | undefined> | undefined;
 			if (api?.registerTool) {
 				api.registerTool({
 					name: "get_page_content",
