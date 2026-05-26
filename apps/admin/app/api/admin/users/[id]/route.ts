@@ -2,6 +2,7 @@ import { auth } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
 import { isSuperAdmin } from '@/lib/clerk';
 import { NextResponse } from 'next/server';
+import { normalLimiter, getClientIp, checkRateLimit } from '@/lib/ratelimit';
 
 export async function DELETE(
   req: Request,
@@ -13,6 +14,10 @@ export async function DELETE(
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    // Rate limit by userId
+    const rateLimitResponse = await checkRateLimit(normalLimiter, userId ?? getClientIp(req));
+    if (rateLimitResponse) return rateLimitResponse;
 
     // Check if user is super admin
     const email = sessionClaims?.email as string | undefined;

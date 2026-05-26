@@ -2,14 +2,19 @@ import { auth } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
 import { isSuperAdmin } from '@/lib/clerk';
 import { NextResponse } from 'next/server';
+import { normalLimiter, getClientIp, checkRateLimit } from '@/lib/ratelimit';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const { userId, sessionClaims } = await auth();
     
     if (!userId) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    // Rate limit by userId (falls back to IP if somehow null)
+    const rateLimitResponse = await checkRateLimit(normalLimiter, userId ?? getClientIp(request));
+    if (rateLimitResponse) return rateLimitResponse;
 
     // Check if user is super admin
     const email = sessionClaims?.email as string | undefined;
