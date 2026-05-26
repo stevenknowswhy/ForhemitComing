@@ -8,7 +8,7 @@ import {
   SelectInput,
   NumberInput,
   CheckboxGroup,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import {
   OWNER_OBJECTIVES,
   CONTROL_OPTIONS,
