@@ -17,7 +17,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
 } from "react";
-import type { TemplateFormHandle } from "../../registry";
+import type { TemplateFormHandle } from "@forhemit/shared/features/deal-flow-system";
 
 // Hooks
 import { useDealFlowForm } from "@forhemit/shared/features/deal-flow-system";
