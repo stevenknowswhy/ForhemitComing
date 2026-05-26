@@ -15,6 +15,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './'),
       '@/app': path.resolve(__dirname, './app'),
       '@/lib': path.resolve(__dirname, './lib'),
+      '@forhemit/shared': path.resolve(__dirname, '../../packages/shared/src'),
     },
   },
 })
