@@ -1,12 +1,12 @@
 // ── PRELIMINARY VALUATION SECTION ────────────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   SelectInput,
 } from "../inputs";
-import { FINANCIAL_QUALITY_OPTIONS } from "../../constants";
+import { FINANCIAL_QUALITY_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface ValuationSectionProps {
   data: Stage2Data["valuation"];

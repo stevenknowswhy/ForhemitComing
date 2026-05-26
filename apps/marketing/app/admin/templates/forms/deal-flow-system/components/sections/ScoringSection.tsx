@@ -1,15 +1,15 @@
 // ── FEASIBILITY SCORING MATRIX SECTION ───────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
-import { SCORING_CRITERIA, SCORE_MAX } from "../../constants";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
+import { SCORING_CRITERIA, SCORE_MAX } from "@forhemit/shared/features/deal-flow-system";
 import {
   calculateTotalScore,
   calculateScorePercentage,
   getScoreColor,
   getRecommendationLabel,
-} from "../../lib/calculations";
+} from "@forhemit/shared/features/deal-flow-system";
 
 interface ScoringSectionProps {
   data: Stage2Data["scores"];

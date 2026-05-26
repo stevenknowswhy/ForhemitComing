@@ -1,13 +1,13 @@
 // ── NEXT STEPS SECTION ───────────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage1Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage1Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   SelectInput,
   Checkbox,
 } from "../inputs";
-import { TIMEZONE_OPTIONS } from "../../constants";
+import { TIMEZONE_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface NextStepsSectionProps {
   nextSteps: Stage1Data["nextSteps"];
