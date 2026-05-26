@@ -1,6 +1,6 @@
 "use client";
 
-import "../privacy/privacy-page.css";
+import "@forhemit/shared/styles/privacy-page.css";
 
 export function TermsPageClient() {
   return (
