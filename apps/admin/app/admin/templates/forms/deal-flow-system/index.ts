@@ -1,28 +1,8 @@
-// ── ESOP DEAL FLOW SYSTEM FORM ───────────────────────────────────────────────
-//
-// A three-stage form for ESOP deal intake, feasibility study, and due diligence.
-//
-// Stages:
-//   1. First Contact (Intake & Qualification)
-//   2. Feasibility Study (Analysis & Scoring)  
-//   3. Due Diligence (Document Review)
-//
-// Architecture:
-//   - Types in types.ts
-//   - Constants/defaults in constants.ts
-//   - Form state logic in hooks/useDealFlowForm.ts
-//   - Calculations in lib/calculations.ts
-//   - Input components in components/inputs/
-//   - Section components in components/sections/
-//   - Main component: DealFlowSystemForm.tsx
-//
-// ──────────────────────────────────────────────────────────────────────────────
-
 // Main component (default export for registry compatibility)
 export { DealFlowSystemForm } from "./DealFlowSystemForm";
 export { DealFlowSystemForm as default } from "./DealFlowSystemForm";
 
-// Types
+// Re-export shared logic layer
 export type {
   DealFlowInputs,
   DealFlowMeta,
@@ -33,12 +13,15 @@ export type {
   SourceReferral,
   BusinessIdentity,
   KeyContacts,
+  ContactPerson,
   QuickQualifiers,
+  OwnershipStructure,
   Motivation,
   RedFlags,
   NextSteps,
   OwnerObjectives,
   PreliminaryValuation,
+  ValuationScenario,
   EmployeePopulation,
   ESOPStructure,
   FeasibilityRedFlags,
@@ -54,9 +37,8 @@ export type {
   Rollover1042,
   GapItem,
   ValidationErrors,
-} from "./types";
+} from "@forhemit/shared/features/deal-flow-system";
 
-// Constants
 export {
   STAGES,
   DEFAULT_INPUTS,
@@ -92,10 +74,7 @@ export {
   TOTAL_MAX_SCORE,
   SCORE_THRESHOLDS,
   COLORS,
-} from "./constants";
-
-// Calculations
-export {
+  useDealFlowForm,
   calculateTotalScore,
   calculateScorePercentage,
   getScoreRecommendation,
@@ -106,10 +85,7 @@ export {
   clampScore,
   formatScore,
   getScoreBarGradient,
-} from "./lib/calculations";
-
-// Hooks
-export { useDealFlowForm } from "./hooks/useDealFlowForm";
+} from "@forhemit/shared/features/deal-flow-system";
 
 // Components (for advanced usage)
 export {
@@ -123,14 +99,12 @@ export {
 } from "./components/inputs";
 
 export {
-  // Stage 1
   SourceReferralSection,
   BusinessIdentitySection,
   KeyContactsSection,
   QuickQualifiersSection,
   MotivationSection,
   NextStepsSection,
-  // Stage 2
   OwnerObjectivesSection,
   ValuationSection,
   EmployeePopulationSection,
@@ -138,7 +112,6 @@ export {
   FeasibilityFlagsSection,
   ScoringSection,
   GoNoGoSection,
-  // Stage 3
   LegalDocumentsSection,
   HRDocumentsSection,
   FinancialDocumentsSection,
@@ -146,6 +119,5 @@ export {
   InsuranceGovernanceSection,
   Rollover1042Section,
   GapItemsSection,
-  // Output
   DealFlowOutput,
 } from "./components/sections";

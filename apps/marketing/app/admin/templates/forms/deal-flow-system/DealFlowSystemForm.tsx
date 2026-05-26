@@ -20,10 +20,10 @@ import React, {
 import type { TemplateFormHandle } from "../../registry";
 
 // Hooks
-import { useDealFlowForm } from "./hooks/useDealFlowForm";
+import { useDealFlowForm } from "@forhemit/shared/features/deal-flow-system";
 
 // Constants
-import { STAGES, DEAL_STATUS_OPTIONS } from "./constants";
+import { STAGES, DEAL_STATUS_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 // Input Components
 import { StageIndicator } from "./components/inputs";
@@ -133,7 +133,7 @@ function NavButtons({
 
 // ── MASTHEAD COMPONENT ───────────────────────────────────────────────────────
 
-import type { DealFlowMeta } from "./types";
+import type { DealFlowMeta } from "@forhemit/shared/features/deal-flow-system";
 
 interface MastheadProps {
   meta: DealFlowMeta;

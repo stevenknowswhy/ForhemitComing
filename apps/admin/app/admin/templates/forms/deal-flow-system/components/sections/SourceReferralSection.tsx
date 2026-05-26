@@ -1,8 +1,8 @@
 // ── SOURCE & REFERRAL SECTION ────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage1Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage1Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   TextInput,
   SelectInput,
@@ -12,7 +12,7 @@ import {
   DEAL_SOURCE_OPTIONS,
   ENGAGEMENT_LETTER_OPTIONS,
   FOUND_US_OPTIONS,
-} from "../../constants";
+} from "@forhemit/shared/features/deal-flow-system";
 
 interface SourceReferralSectionProps {
   data: Stage1Data["sourceReferral"];

@@ -1,8 +1,8 @@
 // ── OWNER OBJECTIVES SECTION ─────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   TextInput,
   SelectInput,
@@ -13,7 +13,7 @@ import {
   OWNER_OBJECTIVES,
   CONTROL_OPTIONS,
   YES_NO_OPTIONS,
-} from "../../constants";
+} from "@forhemit/shared/features/deal-flow-system";
 
 interface OwnerObjectivesSectionProps {
   data: Stage2Data["ownerObjectives"];
