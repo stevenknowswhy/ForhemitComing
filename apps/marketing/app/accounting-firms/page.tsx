@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./accounting-firms.css";
+import "@forhemit/shared/styles/accounting-firms.css";
 import { AccountingFirmsClient } from "@forhemit/shared/pages/AccountingFirmsClient";
 
 const title = "For Accounting Firms | ESOP Advisory Services";

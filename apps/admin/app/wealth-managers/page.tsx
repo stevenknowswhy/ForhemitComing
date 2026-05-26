@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { WealthManagersPageClient } from "@forhemit/shared/pages/WealthManagersPageClient";
-import "./wealth-managers.css";
+import "@forhemit/shared/styles/wealth-managers.css";
 
 const title = "For Wealth Managers | ESOP Client Opportunities";
 const description =
