@@ -59,16 +59,30 @@ export const getFormData = query({
 		const company = await ctx.db.get(task.companyId);
 		const contact = task.contactId ? await ctx.db.get(task.contactId) : null;
 
+		// Resolve template content: prefer File Storage URL, fall back to inline content
+		let templateData: {
+			title: string;
+			description: string;
+			category: string;
+			contentUrl: string | null;
+			content: string | null;
+		} | null = null;
+		if (template) {
+			const contentUrl = template.contentFileId
+				? await ctx.storage.getUrl(template.contentFileId)
+				: null;
+			templateData = {
+				title: template.title,
+				description: template.description,
+				category: template.category,
+				contentUrl,
+				content: template.content ?? null,
+			};
+		}
+
 		return {
 			task,
-			template: template
-				? {
-						title: template.title,
-						description: template.description,
-						category: template.category,
-						content: template.content,
-					}
-				: null,
+			template: templateData,
 			company: company
 				? {
 						name: company.name,
