@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { ModelMetrics, WaterfallData } from "../../types";
-import { fmtK, fmtX, getDscrColor, getDscrPill } from "../../lib";
+import { ModelMetrics, WaterfallData } from "@forhemit/shared/features/esop-repayment-model";
+import { fmtK, fmtX, getDscrColor, getDscrPill } from "@forhemit/shared/features/esop-repayment-model";
 
 interface MetricsPanelProps {
   metrics: ModelMetrics;

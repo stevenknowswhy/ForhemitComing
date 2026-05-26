@@ -2,8 +2,8 @@
 
 import React, { forwardRef, useRef, useImperativeHandle, useCallback, useEffect } from "react";
 import { TemplateFormHandle } from "../../registry";
-import { useRepaymentModel } from "./hooks/useRepaymentModel";
-import { ViewTab, ScenarioTab } from "./types";
+import { useRepaymentModel } from "@forhemit/shared/features/esop-repayment-model";
+import { ViewTab, ScenarioTab } from "@forhemit/shared/features/esop-repayment-model";
 import {
   StepIndicator,
   DealHeaderSection,
