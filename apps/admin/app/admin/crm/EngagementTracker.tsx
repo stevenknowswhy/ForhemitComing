@@ -13,7 +13,7 @@ import {
   CrmView,
   DueFilter,
   CompanyFormData,
-} from "./types";
+} from "@forhemit/shared/features/crm";
 
 // Hooks
 import {
@@ -37,7 +37,7 @@ import {
 } from "./components";
 
 // Utils
-import { filterCompanies, sortCompanies } from "./lib";
+import { filterCompanies, sortCompanies } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Engagement Tracker Component
@@ -141,7 +141,7 @@ export function EngagementTracker() {
   const handleSaveCompany = useCallback(
     async (data: CompanyFormData) => {
       if (editingCompany) {
-        await updateCompany(editingCompany._id, data);
+        await updateCompany(editingCompany._id as Id<"crmCompanies">, data);
       } else {
         await createCompany(data);
       }
@@ -154,14 +154,14 @@ export function EngagementTracker() {
   const handleDeleteCompany = useCallback(
     async (company: Company) => {
       if (confirm(`Are you sure you want to delete ${company.name}?`)) {
-        await deleteCompany(company._id);
+        await deleteCompany(company._id as Id<"crmCompanies">);
       }
     },
     [deleteCompany]
   );
 
   const handleSelectCompany = useCallback((company: Company) => {
-    setSelectedCompanyId(company._id);
+    setSelectedCompanyId(company._id as Id<"crmCompanies">);
   }, []);
 
   // Keyboard shortcuts
@@ -231,7 +231,7 @@ export function EngagementTracker() {
       {/* Stats Bar */}
       <StatsBar
         stats={stats}
-        activeDueFilter={filters.dueFilter}
+        activeDueFilter={filters.dueFilter ?? "all"}
         onFilterChange={(filter) => handleFilterChange({ dueFilter: filter })}
       />
 
@@ -276,7 +276,7 @@ export function EngagementTracker() {
           {/* Toolbar (only for table view) */}
           {currentView === "table" && (
             <Toolbar
-              searchValue={filters.searchQuery}
+              searchValue={filters.searchQuery ?? ""}
               onSearchChange={(value) => handleFilterChange({ searchQuery: value })}
               sortValue={`${sort.field}_${sort.direction}`}
               onSortChange={(value) => {
