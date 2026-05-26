@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { mutation } from "../../_generated/server";
 import { validateCompanyData } from "./validators";
+import { requireAuth } from "../../lib/requireAuth";
 
 /**
  * Create a new company
@@ -35,6 +36,7 @@ export const create = mutation({
     createdBy: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     // Validate input data
     const validation = validateCompanyData(args);
     if (!validation.valid) {
@@ -88,6 +90,7 @@ export const update = mutation({
     createdBy: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const company = await ctx.db.get(args.id);
     if (!company) {
       throw new Error("Company not found");
@@ -118,6 +121,7 @@ export const update = mutation({
 export const remove = mutation({
   args: { id: v.id("crmCompanies") },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const company = await ctx.db.get(args.id);
     if (!company) {
       throw new Error("Company not found");
