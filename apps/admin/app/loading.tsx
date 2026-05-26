@@ -1,6 +1,6 @@
 "use client";
 
-import "./styles/loading.css";
+import "@forhemit/shared/styles/loading.css";
 
 export default function Loading() {
   return (
