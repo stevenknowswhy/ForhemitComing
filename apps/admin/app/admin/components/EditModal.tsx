@@ -4,7 +4,13 @@ import { useState, useEffect } from "react";
 import { X, Save, Loader2 } from "lucide-react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
+
+// Types matching schema unions
+type ContactType = "business-owner" | "partner" | "existing-business" | "website-visitor" | "marketing";
+type ContactInterest = "esop-transition" | "accounting" | "legal" | "lending" | "broker" | "wealth" | "appraisal" | "career" | "general";
+type ContactStatus = "new" | "in-progress" | "responded" | "closed";
+type ApplicationStatus = "new" | "reviewing" | "interview-scheduled" | "rejected" | "hired";
 
 interface EditModalProps {
   isOpen: boolean;
@@ -90,15 +96,15 @@ export default function EditModal({ isOpen, onClose, entity, entityType, onSucce
       if (entityType === "contactSubmission") {
         await updateContact({
           id: entity._id as Id<"contactSubmissions">,
-          contactType: formData.contactType as any,
+          contactType: formData.contactType as ContactType,
           firstName: formData.firstName as string,
           lastName: formData.lastName as string,
           email: formData.email as string,
           phone: formData.phone as string | undefined,
           company: formData.company as string | undefined,
-          interest: formData.interest as any,
+          interest: formData.interest as ContactInterest,
           message: formData.message as string | undefined,
-          status: formData.status as any,
+          status: formData.status as ContactStatus,
         });
       } else {
         await updateApplication({
@@ -109,7 +115,7 @@ export default function EditModal({ isOpen, onClose, entity, entityType, onSucce
           phone: formData.phone as string,
           position: formData.position as string,
           otherPosition: formData.otherPosition as string | undefined,
-          status: formData.status as any,
+          status: formData.status as ApplicationStatus,
         });
       }
       onSuccess();
