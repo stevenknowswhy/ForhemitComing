@@ -7,7 +7,13 @@
   "exports": {
     ".": "./src/index.ts",
     "./hooks": "./src/hooks/index.ts",
-    "./hooks/*": "./src/hooks/*.ts"
+    "./hooks/*": "./src/hooks/*.ts",
+    "./lib": "./src/lib/index.ts",
+    "./lib/*": "./src/lib/*.ts"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
   },
   "peerDependencies": {
     "react": "^19.0.0",
