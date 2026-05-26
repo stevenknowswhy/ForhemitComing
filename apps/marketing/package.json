@@ -2,6 +2,7 @@
   "name": "forhemit-coming-soon",
   "version": "0.1.0",
   "private": true,
+  "main": "next.config.ts",
   "scripts": {
     "dev": "next dev",
     "dev:webpack": "next dev --webpack",
