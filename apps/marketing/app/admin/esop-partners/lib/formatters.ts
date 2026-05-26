@@ -1,7 +1,7 @@
 // ESOP Partner CRM Formatters
 
-import { NUDGE_DAYS, STAGE_META, TYPE_COLORS, JOURNEY_STEPS, ACTIVITY_COLORS } from '../constants';
-import type { PartnerContact, JourneyStep } from '../types';
+import { NUDGE_DAYS, STAGE_META, TYPE_COLORS, JOURNEY_STEPS, ACTIVITY_COLORS } from '@forhemit/shared/features/esop-partners';
+import type { PartnerContact, JourneyStep } from '@forhemit/shared/features/esop-partners';
 
 export function getInitials(contact: PartnerContact | null): string {
   if (!contact || !contact.first || !contact.last) return '??';

@@ -13,9 +13,9 @@ import { PipelineView } from './PipelineView';
 import { NudgesView } from './NudgesView';
 import { OnboardingView } from './OnboardingView';
 import { Toast } from './Toast';
-import { STAGE_META, STAGE_ORDER } from '../constants';
-import { needsNudge, calculateJourneyProgress } from '../lib/formatters';
-import type { PartnerContact, ViewMode } from '../types';
+import { STAGE_META, STAGE_ORDER } from '@forhemit/shared/features/esop-partners';
+import { needsNudge, calculateJourneyProgress } from '@forhemit/shared/features/esop-partners';
+import type { PartnerContact, ViewMode } from '@forhemit/shared/features/esop-partners';
 
 const VIEW_TITLES: Record<ViewMode, string> = {
   all: 'All partners',

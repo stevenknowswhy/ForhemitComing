@@ -17,7 +17,9 @@
     "./features/deal-flow-system": "./src/features/deal-flow-system/index.ts",
     "./features/deal-flow-system/*": "./src/features/deal-flow-system/*.ts",
     "./features/crm": "./src/features/crm/index.ts",
-    "./features/crm/*": "./src/features/crm/*.ts"
+    "./features/crm/*": "./src/features/crm/*.ts",
+    "./features/esop-partners": "./src/features/esop-partners/index.ts",
+    "./features/esop-partners/*": "./src/features/esop-partners/*.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

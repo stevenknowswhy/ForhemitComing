@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import type { ViewMode } from '../types';
+import type { ViewMode } from '@forhemit/shared/features/esop-partners';
 import { 
   Users, 
   Star, 
