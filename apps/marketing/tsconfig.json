@@ -27,6 +27,9 @@
       ],
       "@/convex/_generated/*": [
         "../../packages/convex/convex/_generated/*"
+      ],
+      "@forhemit/shared/*": [
+        "../../packages/shared/src/*"
       ]
     },
     "target": "ES2017"
