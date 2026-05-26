@@ -1,10 +1,14 @@
 import { Webhook } from 'svix';
 import { headers } from 'next/headers';
-import { WebhookEvent } from '@clerk/nextjs/server';
+import type { WebhookEvent } from '@clerk/nextjs/server';
 import { clerkClient } from '@clerk/nextjs/server';
 import { isAllowedEmail, isSuperAdmin, SUPER_ADMIN_EMAIL } from '@/lib/clerk';
+import { strictLimiter, getClientIp, checkRateLimit } from '@/lib/ratelimit';
 
 export async function POST(req: Request) {
+  // Rate limit by IP
+  const rateLimitResponse = await checkRateLimit(strictLimiter, getClientIp(req));
+  if (rateLimitResponse) return rateLimitResponse;
   // Get the webhook secret from environment variables
   const WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET;
 
