@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Id } from "@/convex/_generated/dataModel";
-import type { Company } from "../types";
+import type { Company } from "@forhemit/shared/features/crm";
 import { useDealEngine } from "../hooks/useDealEngine";
 
 // ============================================
@@ -14,7 +14,7 @@ interface DealSummaryProps {
 }
 
 export function DealSummary({ company }: DealSummaryProps) {
-  const { initialize, passGate, markFeeStatus } = useDealEngine(company._id);
+  const { initialize, passGate, markFeeStatus } = useDealEngine(company._id as Id<"crmCompanies">);
   const [initModalOpen, setInitModalOpen] = useState(false);
   const [ebitdaInput, setEbitdaInput] = useState("");
   const [refInput, setRefInput] = useState("");

@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Check, ChevronDown } from "lucide-react";
-import { SORT_OPTIONS } from "../../constants";
+import { SORT_OPTIONS } from "@forhemit/shared/features/crm";
 
 /** When portaled to `body`, nodes are outside `.crm-container` where CRM tokens live — copy them here. */
 const CRM_TOKEN_NAMES = [

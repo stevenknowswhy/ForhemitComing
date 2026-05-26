@@ -1,7 +1,7 @@
 "use client";
 
 import { Doc } from "@/convex/_generated/dataModel";
-import { Company, SortConfig } from "../../types";
+import { Company, SortConfig } from "@forhemit/shared/features/crm";
 import {
   StageBadge,
   NdaBadge,
@@ -12,7 +12,7 @@ import {
   formatDate,
   getRelativeDate,
   truncateText,
-} from "../../lib";
+} from "@forhemit/shared/features/crm";
 
 // ============================================
 // Table View Component

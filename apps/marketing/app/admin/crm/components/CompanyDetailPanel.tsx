@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Id, Doc } from "@/convex/_generated/dataModel";
-import { Company } from "../types";
+import { Company } from "@forhemit/shared/features/crm";
 import { useCrmCompany, useCrmActivities, useCrmContacts } from "../hooks";
 
 // ============================================
