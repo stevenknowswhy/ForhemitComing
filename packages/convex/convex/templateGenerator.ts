@@ -24,6 +24,7 @@ import { api } from "./_generated/api";
 import { renderTemplate, buildTemplateData } from "./templateRenderer";
 import { generatePdf } from "./pdfGenerator";
 import { sendTemplateEmail, getEmailConfig, formatEmailBody } from "./templateEmailer";
+import { getTemplateContent } from "./lib/templateContent";
 
 /**
  * Generate document from template - orchestrates the full pipeline
@@ -60,16 +61,25 @@ export const generateDocument = action({
       { title: templateTitle }
     );
 
-    if (!template || !template.content) {
-      console.error(`Template not found or has no content: ${templateTitle}`);
+    if (!template) {
+      console.error(`Template not found: ${templateTitle}`);
       return {
         success: false,
-        error: `Template "${templateTitle}" not found or has no content stored.`,
+        error: `Template "${templateTitle}" not found.`,
+      };
+    }
+
+    const templateContent = await getTemplateContent(ctx, template);
+    if (!templateContent) {
+      console.error(`Template has no content: ${templateTitle}`);
+      return {
+        success: false,
+        error: `Template "${templateTitle}" has no content stored.`,
       };
     }
 
     // 2. Replace placeholders
-    const renderedHtml = renderTemplate(template.content, data);
+    const renderedHtml = renderTemplate(templateContent, data);
 
     // 3. Generate PDF
     try {
@@ -158,15 +168,23 @@ export const testTemplateRendering = action({
       { title: templateTitle }
     );
 
-    if (!template || !template.content) {
+    if (!template) {
       return {
         success: false,
         error: `Template "${templateTitle}" not found`,
       };
     }
 
+    const templateContent = await getTemplateContent(ctx, template);
+    if (!templateContent) {
+      return {
+        success: false,
+        error: `Template "${templateTitle}" has no content`,
+      };
+    }
+
     // Render template
-    const renderedHtml = renderTemplate(template.content, data);
+    const renderedHtml = renderTemplate(templateContent, data);
 
     return {
       success: true,
