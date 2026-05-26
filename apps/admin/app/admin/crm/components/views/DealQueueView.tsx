@@ -46,7 +46,7 @@ export function DealQueueView() {
 
 function DealCard({ company }: { company: any }) {
   const pendingTasks = useQuery(api.dealEngine.getDealQueue, { companyId: company._id });
-  const generateTask = useAction((api as any).dealProcessor.generateQueueTask);
+  const generateTask = useAction(api.dealProcessor.generateQueueTask);
   const [generating, setGenerating] = useState<string | null>(null);
   const [generateModal, setGenerateModal] = useState<{ taskId: string; templateName: string } | null>(null);
   const [recipientEmail, setRecipientEmail] = useState("");

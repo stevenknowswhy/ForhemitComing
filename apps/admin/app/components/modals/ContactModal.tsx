@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+
+// Types matching schema unions
+type ContactType = "business-owner" | "partner" | "existing-business" | "website-visitor" | "marketing";
+type ContactInterest = "esop-transition" | "accounting" | "legal" | "lending" | "broker" | "wealth" | "appraisal" | "career" | "general";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
 import "./contact-modal.css";
@@ -91,13 +95,13 @@ export function ContactModal({ isOpen, onClose, source = "website" }: ContactMod
 
       // Submit to Convex
       await submitContact({
-        contactType: formData.contactType as any,
+        contactType: formData.contactType as ContactType,
         firstName: formData.firstName.trim(),
         lastName: formData.lastName.trim(),
         email: formData.email.trim().toLowerCase(),
         phone: formData.phone.trim() || undefined,
         company: formData.company.trim() || undefined,
-        interest: formData.interest as any || undefined,
+        interest: (formData.interest as ContactInterest) || undefined,
         message: formData.message.trim(),
         source,
       });

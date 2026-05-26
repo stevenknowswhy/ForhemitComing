@@ -2,6 +2,8 @@
 // Email Core — shared helpers, no Convex exports
 // ============================================
 
+import type { Id } from "./_generated/dataModel";
+
 // Email configuration
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL || "contact@forhemit.com";
@@ -133,7 +135,7 @@ export async function sendTelegramMessage(text: string): Promise<{ success: bool
 export async function sendAndLogEmail(
   ctx: { runMutation: (fn: any, args: any) => Promise<any> },
   payload: EmailPayload,
-  opts?: { templateId?: string; templateVersion?: number; relatedCompanyId?: string; relatedContactId?: string }
+  opts?: { templateId?: string; templateVersion?: number; relatedCompanyId?: Id<"crmCompanies">; relatedContactId?: Id<"crmContacts"> }
 ): Promise<{ success: boolean; error?: string; id?: string }> {
   const result = await sendEmail(payload);
 
@@ -147,8 +149,8 @@ export async function sendAndLogEmail(
           subject: payload.subject,
           templateId: opts?.templateId,
           resendId: result.id,
-          relatedCompanyId: opts?.relatedCompanyId as any,
-          relatedContactId: opts?.relatedContactId as any,
+          relatedCompanyId: opts?.relatedCompanyId,
+          relatedContactId: opts?.relatedContactId,
           metadata: opts?.templateVersion ? { templateVersion: opts.templateVersion } : undefined,
         }
       );

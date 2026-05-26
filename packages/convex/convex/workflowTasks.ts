@@ -5,6 +5,12 @@ import { api } from "./_generated/api";
 import { shouldCreateWorkflowTask } from "./workflowService";
 import { requireAuth } from "./lib/requireAuth";
 
+// Stage type matching schema union
+type DealStage = "First contact" | "Intro call" | "NDA sent" | "Feasibility" | "Term sheet" | "LOI signed" | "Closed" | "On hold" | "Dead";
+
+// Status type matching schema union
+type WorkflowStatus = "pending" | "sent" | "delivered" | "opened" | "received" | "completed" | "skipped" | "cancelled" | "overdue";
+
 // ============================================
 // get — fetch a single workflow task by ID
 // ============================================
@@ -36,7 +42,7 @@ export const transitionDealStage = mutation({
 
 		// Update company stage
 		await ctx.db.patch(companyId, {
-			stage: newStage as any,
+			stage: newStage as DealStage,
 			updatedAt: Date.now(),
 		});
 
@@ -211,7 +217,7 @@ export const markTaskCompleted = mutation({
 			await ctx.db.insert("notes", {
 				companyId: task.companyId,
 				contactId: task.contactId,
-				authorId: (await ctx.db.query("users").first())?._id as any, // TODO: get from auth
+				authorId: (await ctx.db.query("users").first())?._id,
 				content: args.notes,
 				type: "internal",
 				isPrivate: true,
@@ -464,7 +470,7 @@ export const getAllWorkflowTasks = query({
 		} else if (args.status) {
 			tasks = await ctx.db
 				.query("workflowTasks")
-				.withIndex("by_status", (q) => q.eq("status", args.status as any))
+				.withIndex("by_status", (q) => q.eq("status", args.status as WorkflowStatus))
 				.collect();
 		} else {
 			tasks = await ctx.db.query("workflowTasks").collect();

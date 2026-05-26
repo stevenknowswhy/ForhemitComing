@@ -6,6 +6,9 @@ import { requireAuth } from "./lib/requireAuth";
 import { calculateStageTriggerDueDate } from "./stages";
 import { calculateGateTriggerDueDate } from "./gates";
 
+// Stage type matching schema union
+type DealStage = "First contact" | "Intro call" | "NDA sent" | "Feasibility" | "Term sheet" | "LOI signed" | "Closed" | "On hold" | "Dead";
+
 /**
  * Stage requirements with trigger support
  */
@@ -120,7 +123,7 @@ export const wireTriggers = mutation({
 		if (args.event === "stage_change") {
 			if (!args.newStage) throw new Error("newStage required for stage_change");
 			await ctx.db.patch(args.companyId, {
-				stage: args.newStage as any,
+				stage: args.newStage as DealStage,
 				stageEnteredAt: Date.now(),
 				updatedAt: Date.now(),
 			});
