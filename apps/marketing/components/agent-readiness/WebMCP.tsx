@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 export function WebMCP() {
   useEffect(() => {
     try {
+      // Model Context Protocol — experimental browser API, no TypeScript types yet
       const api = (navigator as any).modelContext
       if (api?.registerTool) {
         api.registerTool({
