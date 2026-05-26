@@ -1,7 +1,7 @@
 "use client";
 
 import type { MutableRefObject } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@forhemit/shared/lib/utils";
 import { DAY_NAMES, MAX_VISIBLE_EVENTS, MONTH_NAMES, TOTAL_DAYS } from "../constants";
 import { GATES } from "../data/gates";
 import { ROLE_META } from "../data/roleMeta";
