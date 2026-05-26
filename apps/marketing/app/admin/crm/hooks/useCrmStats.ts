@@ -1,7 +1,7 @@
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useMemo } from "react";
-import { PipelineStats } from "../types";
+import { PipelineStats } from "@forhemit/shared/features/crm";
 
 // ============================================
 // CRM Stats Hook

@@ -1,35 +1,34 @@
-// ============================================
-// CRM Feature Barrel Export
-// ============================================
+/**
+ * CRM — shared data layer
+ *
+ * Types, constants, and utilities for the CRM feature.
+ * Hooks stay in apps (Convex-dependent).
+ */
 
-// Import styles
-import "./styles/crm-theme.css";
-
-// Main Component
-export { EngagementTracker } from "./EngagementTracker";
-export { EngagementTracker as default } from "./EngagementTracker";
-
-// Re-export shared types + constants + lib
+// Types
 export type {
-  Company,
-  Contact,
-  Activity,
-  Task,
   PipelineStage,
   NdaStatus,
   ActivityType,
   CrmView,
   TaskPriority,
   TaskStatus,
-  StageStyle,
-  CompanyFilters,
+  SortDirection,
+  SortField,
   SortConfig,
+  DueFilter,
+  StageStyle,
+  Company,
+  Contact,
+  Activity,
+  Task,
+  CompanyFilters,
   PipelineStats,
   CompanyFormData,
   ContactFormData,
   ActivityFormData,
   TaskFormData,
-} from "@forhemit/shared/features/crm";
+} from "./types";
 
 export {
   PIPELINE_STAGES,
@@ -37,7 +36,12 @@ export {
   ACTIVITY_TYPES,
   CRM_VIEWS,
   TASK_PRIORITIES,
+  TASK_STATUSES,
   STAGE_STYLES,
+} from "./types";
+
+// Constants
+export {
   DEFAULT_COMPANY_VALUES,
   DEFAULT_ACTIVITY_VALUES,
   DEFAULT_TASK_VALUES,
@@ -52,6 +56,10 @@ export {
   MONTHS,
   COMMON_INDUSTRIES,
   COMMON_ADVISORS,
+} from "./constants";
+
+// Formatters
+export {
   formatDate,
   getRelativeDate,
   daysUntil,
@@ -64,24 +72,22 @@ export {
   highlightText,
   formatNumber,
   formatPercent,
-  filterCompanies,
-  sortCompanies,
-  groupByStage,
-  groupByDueDate,
+} from "./lib/formatters";
+
+// Calculations
+export {
   calculateStats,
   calculateConversionMetrics,
   calculateAvgDaysInStage,
   calculateActivityMetrics,
   calculatePriorityScore,
   sortByPriority,
-} from "@forhemit/shared/features/crm";
+} from "./lib/calculations";
 
-// Hooks (Convex-dependent, stay in app)
+// Filters
 export {
-  useCrmCompanies,
-  useCrmCompany,
-  useCrmStats,
-  useCrmActivities,
-  useCrmContacts,
-  useCrmTasks,
-} from "./hooks";
+  filterCompanies,
+  sortCompanies,
+  groupByStage,
+  groupByDueDate,
+} from "./lib/filters";

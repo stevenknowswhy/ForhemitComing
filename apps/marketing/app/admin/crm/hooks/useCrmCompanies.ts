@@ -2,8 +2,8 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import { useCallback, useMemo } from "react";
-import type { Company, CompanyFilters, SortConfig, CompanyFormData } from "../types";
-import { filterCompanies, sortCompanies } from "../lib";
+import type { Company, CompanyFilters, SortConfig, CompanyFormData } from "@forhemit/shared/features/crm";
+import { filterCompanies, sortCompanies } from "@forhemit/shared/features/crm";
 
 // ============================================
 // CRM Companies Hook
@@ -28,7 +28,9 @@ export function useCrmCompanies(options: UseCrmCompaniesOptions = {}): UseCrmCom
   const { filters, sort } = options;
 
   // Query all companies
-  const companies = useQuery(api.crmCompanies.list);
+  const rawCompanies = useQuery(api.crmCompanies.list);
+  // Cast: Convex Doc<> is structurally compatible with canonical Company
+  const companies = rawCompanies as unknown as Company[] | undefined;
 
   // Mutations
   const createMutation = useMutation(api.crmCompanies.create);

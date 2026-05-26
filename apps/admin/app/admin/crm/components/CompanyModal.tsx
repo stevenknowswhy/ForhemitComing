@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Company, CompanyFormData, PipelineStage } from "../types";
+import { Company, CompanyFormData, PipelineStage } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Company Modal Component

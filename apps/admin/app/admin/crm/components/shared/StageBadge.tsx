@@ -1,6 +1,6 @@
 "use client";
 
-import { PipelineStage, STAGE_STYLES } from "../../types";
+import { PipelineStage, STAGE_STYLES } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Stage Badge Component

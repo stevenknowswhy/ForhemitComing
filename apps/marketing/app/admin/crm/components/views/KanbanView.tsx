@@ -1,8 +1,8 @@
 "use client";
 
-import { Company, PipelineStage, STAGE_STYLES } from "../../types";
+import { Company, PipelineStage, STAGE_STYLES } from "@forhemit/shared/features/crm";
 import { StageBadge, NdaBadge } from "../shared";
-import { daysUntil } from "../../lib";
+import { daysUntil } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Kanban View Component

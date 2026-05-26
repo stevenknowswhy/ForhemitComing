@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import { Company } from "../../types";
-import { daysUntil } from "../../lib";
+import { Company } from "@forhemit/shared/features/crm";
+import { daysUntil } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Calendar View Component

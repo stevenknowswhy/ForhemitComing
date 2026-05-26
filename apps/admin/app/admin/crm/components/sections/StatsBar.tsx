@@ -1,6 +1,6 @@
 "use client";
 
-import { PipelineStats, DueFilter } from "../../types";
+import { PipelineStats, DueFilter } from "@forhemit/shared/features/crm";
 import { StatsCard } from "../shared";
 
 // ============================================

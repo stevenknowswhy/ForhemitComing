@@ -15,7 +15,9 @@
     "./features/esop-repayment-model": "./src/features/esop-repayment-model/index.ts",
     "./features/esop-repayment-model/*": "./src/features/esop-repayment-model/*.ts",
     "./features/deal-flow-system": "./src/features/deal-flow-system/index.ts",
-    "./features/deal-flow-system/*": "./src/features/deal-flow-system/*.ts"
+    "./features/deal-flow-system/*": "./src/features/deal-flow-system/*.ts",
+    "./features/crm": "./src/features/crm/index.ts",
+    "./features/crm/*": "./src/features/crm/*.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
