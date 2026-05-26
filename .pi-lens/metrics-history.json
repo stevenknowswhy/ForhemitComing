@@ -900,7 +900,32 @@
         }
       ],
       "trend": "stable"
+    },
+    "apps/admin/uploadthing.ts": {
+      "latest": {
+        "commit": "aa73746",
+        "timestamp": "2026-05-25T23:57:49.264Z",
+        "mi": 56.4,
+        "cognitive": 0,
+        "nesting": 1,
+        "lines": 18,
+        "maxCyclomatic": 1,
+        "entropy": 4.23
+      },
+      "history": [
+        {
+          "commit": "aa73746",
+          "timestamp": "2026-05-25T23:57:49.264Z",
+          "mi": 56.4,
+          "cognitive": 0,
+          "nesting": 1,
+          "lines": 18,
+          "maxCyclomatic": 1,
+          "entropy": 4.23
+        }
+      ],
+      "trend": "stable"
     }
   },
-  "capturedAt": "2026-05-25T21:20:28.526Z"
+  "capturedAt": "2026-05-25T23:57:54.266Z"
 }

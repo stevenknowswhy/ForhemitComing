@@ -9,10 +9,17 @@
     },
     {
       "type": "TODO",
+      "message": "Schema mismatch — generatedDocuments.templateId references \"documentTemplates\" but args.templateId is from \"templates\"",
+      "file": "packages/convex/convex/documentPipeline.ts",
+      "line": 149,
+      "column": 6
+    },
+    {
+      "type": "TODO",
       "message": "get from auth",
       "file": "packages/convex/convex/workflowTasks.ts",
-      "line": 188,
-      "column": 72
+      "line": 214,
+      "column": 68
     }
   ]
 }
