@@ -94,7 +94,7 @@ export function sortCompanies(
         comparison = compareDates(a.nextStepDate, b.nextStepDate);
         break;
       case "createdAt":
-        comparison = a.createdAt - b.createdAt;
+        comparison = (a.createdAt ?? 0) - (b.createdAt ?? 0);
         break;
       default:
         comparison = a.name.localeCompare(b.name);

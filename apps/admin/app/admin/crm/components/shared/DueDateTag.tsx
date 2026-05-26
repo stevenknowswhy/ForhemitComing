@@ -1,6 +1,6 @@
 "use client";
 
-import { getDueDateStatus } from "../../lib";
+import { getDueDateStatus } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Due Date Tag Component

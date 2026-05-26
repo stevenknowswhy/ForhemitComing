@@ -1,7 +1,7 @@
 "use client";
 
-import { STAGE_OPTIONS, FILTER_LABELS } from "../../constants";
-import { CompanyFilters, DueFilter, PipelineStage, STAGE_STYLES } from "../../types";
+import { STAGE_OPTIONS, FILTER_LABELS } from "@forhemit/shared/features/crm";
+import { CompanyFilters, DueFilter, PipelineStage, STAGE_STYLES } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Filter Sidebar Component

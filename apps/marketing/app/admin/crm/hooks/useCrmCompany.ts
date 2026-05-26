@@ -2,7 +2,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Doc, Id } from "@/convex/_generated/dataModel";
 import { useCallback } from "react";
-import { CompanyFormData } from "../types";
+import { CompanyFormData } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Single CRM Company Hook
