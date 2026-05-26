@@ -4,7 +4,7 @@ import { api } from "./_generated/api";
 import { sendEmail } from "./emailCore";
 import { fillTemplate } from "./templateRenderer";
 import { requireAuth } from "./lib/requireAuth";
-import { getTemplateContent } from "./lib/templateContent";
+import { getTemplateContent, storeTemplateContent } from "./lib/templateContent";
 
 // ============================================
 // Helpers
@@ -53,7 +53,23 @@ export const getStageRequirements = query({
 // Mutations
 // ============================================
 
-/** Seed or update HTML content for a template */
+/** Seed or update HTML content for a template (writes to File Storage) */
+export const seedTemplateContentFromFile = action({
+	args: {
+		templateId: v.id("templates"),
+		content: v.string(),
+	},
+	handler: async (ctx, args) => {
+		const fileId = await storeTemplateContent(ctx, args.content);
+		await ctx.runMutation(api.templates.patchTemplate, {
+			templateId: args.templateId,
+			contentFileId: fileId,
+		});
+		return { success: true, contentFileId: fileId };
+	},
+});
+
+/** @deprecated Use seedTemplateContentFromFile instead */
 export const seedTemplateContent = mutation({
 	args: {
 		templateId: v.id("templates"),
@@ -69,7 +85,50 @@ export const seedTemplateContent = mutation({
 	},
 });
 
-/** Find a template by title, or create it, then set its HTML content */
+/** Find a template by title, or create it, then store content in File Storage */
+export const findOrCreateAndSeedFromFile = action({
+	args: {
+		title: v.string(),
+		content: v.string(),
+		lifecycleStage: v.string(),
+		audience: v.array(v.string()),
+		category: v.union(
+			v.literal("document"),
+			v.literal("communication"),
+			v.literal("meeting"),
+			v.literal("internal"),
+		),
+		description: v.optional(v.string()),
+	},
+	handler: async (ctx, args): Promise<{ id: any; action: string; contentFileId: any }> => {
+		const existing = await ctx.runQuery(api.documentPipeline.getTemplateByTitle, {
+			title: args.title,
+		});
+
+		const fileId = await storeTemplateContent(ctx, args.content);
+
+		if (existing) {
+			await ctx.runMutation(api.templates.patchTemplate, {
+				templateId: existing._id,
+				contentFileId: fileId,
+			});
+			return { id: existing._id, action: "updated" as const, contentFileId: fileId };
+		}
+
+		// Create new template via mutation, then patch with file ID
+		const newId = await ctx.runMutation(api.documentPipeline.findOrCreateAndSeed, {
+			...args,
+			content: "", // placeholder — will be overwritten below
+		});
+		await ctx.runMutation(api.templates.patchTemplate, {
+			templateId: newId.id,
+			contentFileId: fileId,
+		});
+		return { id: newId.id, action: "created" as const, contentFileId: fileId };
+	},
+});
+
+/** @deprecated Use findOrCreateAndSeedFromFile instead */
 export const findOrCreateAndSeed = mutation({
 	args: {
 		title: v.string(),
