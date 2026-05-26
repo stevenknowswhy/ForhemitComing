@@ -1,6 +1,6 @@
 "use client";
 
-import "./legal-practices.css";
+import "@forhemit/shared/styles/legal-practices.css";
 import { useLegalPageAnimations } from "./_hooks/useLegalPageAnimations";
 
 // Import section components
