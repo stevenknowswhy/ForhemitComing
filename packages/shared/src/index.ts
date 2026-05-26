@@ -1,3 +1,4 @@
 export * from "./hooks";
 export * from "./lib";
-export * from "./features/lender-qa-tracker";
+// Features are imported directly via @forhemit/shared/features/<name>
+// to avoid naming conflicts between feature modules.

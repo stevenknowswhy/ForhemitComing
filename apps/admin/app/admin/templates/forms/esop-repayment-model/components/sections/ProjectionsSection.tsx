@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { FinancialProjections } from "../../types";
+import { FinancialProjections } from "@forhemit/shared/features/esop-repayment-model";
 import { NumberInput, SelectInput } from "../inputs";
-import { PROJECTION_METHOD_OPTIONS } from "../../constants";
+import { PROJECTION_METHOD_OPTIONS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface ProjectionsSectionProps {
   projections: FinancialProjections;

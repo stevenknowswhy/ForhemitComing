@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { ScenarioResult } from "../../types";
-import { fmtX, getDscrColor } from "../../lib";
-import { SCENARIOS, MIN_DSCR_COVENANT } from "../../constants";
+import { ScenarioResult } from "@forhemit/shared/features/esop-repayment-model";
+import { fmtX, getDscrColor } from "@forhemit/shared/features/esop-repayment-model";
+import { SCENARIOS, MIN_DSCR_COVENANT } from "@forhemit/shared/features/esop-repayment-model";
 
 interface ScenarioPanelProps {
   scenarios: ScenarioResult[];

@@ -11,7 +11,9 @@
     "./lib": "./src/lib/index.ts",
     "./lib/*": "./src/lib/*.ts",
     "./features/lender-qa-tracker": "./src/features/lender-qa-tracker/index.ts",
-    "./features/lender-qa-tracker/*": "./src/features/lender-qa-tracker/*.ts"
+    "./features/lender-qa-tracker/*": "./src/features/lender-qa-tracker/*.ts",
+    "./features/esop-repayment-model": "./src/features/esop-repayment-model/index.ts",
+    "./features/esop-repayment-model/*": "./src/features/esop-repayment-model/*.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",

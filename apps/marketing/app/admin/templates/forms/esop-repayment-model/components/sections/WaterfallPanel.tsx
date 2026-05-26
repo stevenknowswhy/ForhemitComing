@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { WaterfallData, SubordinationType } from "../../types";
-import { fmt, getDscrPill } from "../../lib";
+import { WaterfallData, SubordinationType } from "@forhemit/shared/features/esop-repayment-model";
+import { fmt, getDscrPill } from "@forhemit/shared/features/esop-repayment-model";
 
 interface WaterfallPanelProps {
   waterfall: WaterfallData;

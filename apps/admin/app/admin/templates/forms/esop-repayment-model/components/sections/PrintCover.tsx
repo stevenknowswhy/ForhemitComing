@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { DealHeader } from "../../types";
-import { fmtK, today } from "../../lib";
+import { DealHeader } from "@forhemit/shared/features/esop-repayment-model";
+import { fmtK, today } from "@forhemit/shared/features/esop-repayment-model";
 
 interface PrintCoverProps {
   header: DealHeader;

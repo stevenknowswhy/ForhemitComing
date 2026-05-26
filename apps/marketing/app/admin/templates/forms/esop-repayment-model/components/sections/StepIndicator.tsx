@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { STEPS } from "../../constants";
+import { STEPS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface StepIndicatorProps {
   currentStep: number;

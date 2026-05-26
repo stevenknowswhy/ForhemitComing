@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { AmortizationRow } from "../../types";
-import { fmt, fmtX, getDscrColor } from "../../lib";
+import { AmortizationRow } from "@forhemit/shared/features/esop-repayment-model";
+import { fmt, fmtX, getDscrColor } from "@forhemit/shared/features/esop-repayment-model";
 
 interface AmortizationTableProps {
   rows: AmortizationRow[];

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { AmortizationRow } from "../../types";
-import { fmtK, fmt } from "../../lib";
+import { AmortizationRow } from "@forhemit/shared/features/esop-repayment-model";
+import { fmtK, fmt } from "@forhemit/shared/features/esop-repayment-model";
 
 interface ChartPanelProps {
   rows: AmortizationRow[];

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { AdvisorTeam } from "../../types";
+import { AdvisorTeam } from "@forhemit/shared/features/esop-repayment-model";
 import { TextInput } from "../inputs";
 
 interface AdvisorTeamSectionProps {

@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { SellerNote } from "../../types";
+import { SellerNote } from "@forhemit/shared/features/esop-repayment-model";
 import { NumberInput, SelectInput, TextInput } from "../inputs";
-import { SN_TERM_OPTIONS, SUBORDINATION_OPTIONS, STANDSTILL_OPTIONS } from "../../constants";
+import { SN_TERM_OPTIONS, SUBORDINATION_OPTIONS, STANDSTILL_OPTIONS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface SellerNoteSectionProps {
   note: SellerNote;

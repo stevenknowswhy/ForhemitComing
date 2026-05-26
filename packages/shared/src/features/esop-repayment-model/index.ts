@@ -1,4 +1,11 @@
-// Re-export shared logic layer
+/**
+ * ESOP Repayment & Amortization Model — shared logic layer
+ *
+ * Types, constants, hooks, and utilities for SBA loan and seller note analysis.
+ * Components remain in each app.
+ */
+
+// Types
 export type {
   RepaymentModelInputs,
   DealHeader,
@@ -18,8 +25,9 @@ export type {
   SubordinationType,
   StandstillPeriod,
   ProjectionMethod,
-} from "@forhemit/shared/features/esop-repayment-model";
+} from "./types";
 
+// Constants
 export {
   STEPS,
   DEFAULT_INPUTS,
@@ -44,7 +52,13 @@ export {
   SBA_LOAN_LIMIT,
   MIN_DSCR_COVENANT,
   TARGET_DSCR,
-  useRepaymentModel,
+} from "./constants";
+
+// Hooks
+export { useRepaymentModel } from "./hooks/useRepaymentModel";
+
+// Library functions
+export {
   pmt,
   calculateSBAPayment,
   buildAmortizationSchedule,
@@ -65,4 +79,4 @@ export {
   fmtNumber,
   fmtYear,
   formatPhone,
-} from "@forhemit/shared/features/esop-repayment-model";
+} from "./lib";
