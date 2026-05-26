@@ -7,6 +7,14 @@
 //
 // ──────────────────────────────────────────────────────────────────────────────
 
+// Generic form handle for template registry (shared across apps)
+export interface TemplateFormHandle {
+  getFormData: () => Record<string, unknown>;
+  getContainerRef: () => HTMLDivElement | null;
+  generatePDF?: () => Promise<void>;
+  printContract?: () => void;
+}
+
 // ═════════════════════════════════════════════════════════════════════════════
 // STAGE 1: FIRST CONTACT
 // ═════════════════════════════════════════════════════════════════════════════

@@ -1,8 +1,7 @@
-// Main component (default export for registry compatibility)
-export { DealFlowSystemForm } from "./DealFlowSystemForm";
-export { DealFlowSystemForm as default } from "./DealFlowSystemForm";
+// Re-export everything from shared
+export { DealFlowSystemForm } from "@forhemit/shared/features/deal-flow-system";
+export { DealFlowSystemForm as default } from "@forhemit/shared/features/deal-flow-system";
 
-// Re-export shared logic layer
 export type {
   DealFlowInputs,
   DealFlowMeta,
@@ -37,6 +36,7 @@ export type {
   Rollover1042,
   GapItem,
   ValidationErrors,
+  TemplateFormHandle,
 } from "@forhemit/shared/features/deal-flow-system";
 
 export {
@@ -85,10 +85,6 @@ export {
   clampScore,
   formatScore,
   getScoreBarGradient,
-} from "@forhemit/shared/features/deal-flow-system";
-
-// Components (for advanced usage)
-export {
   TextInput,
   NumberInput,
   SelectInput,
@@ -96,9 +92,6 @@ export {
   CheckboxGroup,
   RadioGroup,
   StageIndicator,
-} from "@forhemit/shared/features/deal-flow-system";
-
-export {
   SourceReferralSection,
   BusinessIdentitySection,
   KeyContactsSection,
@@ -120,4 +113,4 @@ export {
   Rollover1042Section,
   GapItemsSection,
   DealFlowOutput,
-} from "./components/sections";
+} from "@forhemit/shared/features/deal-flow-system";

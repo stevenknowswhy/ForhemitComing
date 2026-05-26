@@ -41,6 +41,7 @@ export type {
 	Rollover1042,
 	GapItem,
 	ValidationErrors,
+	TemplateFormHandle,
 } from "./types";
 
 // Constants
@@ -109,3 +110,32 @@ export {
   RadioGroup,
   StageIndicator,
 } from "./components/inputs";
+
+// Section components
+export {
+  SourceReferralSection,
+  BusinessIdentitySection,
+  KeyContactsSection,
+  QuickQualifiersSection,
+  MotivationSection,
+  NextStepsSection,
+  OwnerObjectivesSection,
+  ValuationSection,
+  EmployeePopulationSection,
+  ESOPStructureSection,
+  FeasibilityFlagsSection,
+  ScoringSection,
+  GoNoGoSection,
+  LegalDocumentsSection,
+  HRDocumentsSection,
+  FinancialDocumentsSection,
+  LiabilitiesSection,
+  InsuranceGovernanceSection,
+  Rollover1042Section,
+  GapItemsSection,
+  DealFlowOutput,
+} from "./components/sections";
+
+// Form component
+export { DealFlowSystemForm } from "./DealFlowSystemForm";
+export { DealFlowSystemForm as default } from "./DealFlowSystemForm";
