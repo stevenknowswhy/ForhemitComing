@@ -5,7 +5,7 @@ const f = createUploadthing();
 export const ourFileRouter = {
   imageUploader: f({ image: { maxFileSize: "4MB" } })
     .onUploadComplete(async ({ file }) => {
-      console.log("file url", file.url);
+      // Upload complete — file URL available in UploadThing dashboard
     }),
   resumeUploader: f({ 
     "application/pdf": { maxFileSize: "8MB" },
@@ -13,7 +13,6 @@ export const ourFileRouter = {
     "application/vnd.openxmlformats-officedocument.wordprocessingml.document": { maxFileSize: "8MB" }
   })
     .onUploadComplete(async ({ file }) => {
-      console.log("resume url", file.url);
       return { url: file.url };
     }),
 } satisfies FileRouter;
