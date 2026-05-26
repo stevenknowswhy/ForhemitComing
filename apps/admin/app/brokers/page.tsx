@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
+import { useGlobalScrollReveal } from "@forhemit/shared/hooks/useIntersectionObserver";
 import "./brokers.css";
 
 // Section components
