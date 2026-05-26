@@ -1,8 +1,8 @@
 // ── 1042 ROLLOVER CHECKLIST SECTION ──────────────────────────────────────────
 
 import React from "react";
-import type { Stage3Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage3Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import { Checkbox } from "../inputs";
 
 interface Rollover1042SectionProps {

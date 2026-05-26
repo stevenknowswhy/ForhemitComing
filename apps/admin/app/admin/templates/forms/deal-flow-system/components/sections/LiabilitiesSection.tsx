@@ -1,9 +1,9 @@
 // ── LIABILITIES & CONTINGENCIES SECTION ──────────────────────────────────────
 
 import React from "react";
-import type { Stage3Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
-import { LIABILITY_TYPES, YES_NO_OPTIONS } from "../../constants";
+import type { Stage3Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
+import { LIABILITY_TYPES, YES_NO_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface LiabilitiesSectionProps {
   data: Stage3Data["liabilities"];

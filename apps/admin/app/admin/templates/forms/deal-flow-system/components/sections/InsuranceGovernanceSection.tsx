@@ -1,13 +1,13 @@
 // ── INSURANCE & GOVERNANCE SECTION ───────────────────────────────────────────
 
 import React from "react";
-import type { Stage3Data, DDDocument } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage3Data, DDDocument } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   TextInput,
   SelectInput,
 } from "../inputs";
-import { DD_SECTIONS, DD_STATUS_OPTIONS, TRUSTEE_TYPE_OPTIONS, YES_NO_TBD_OPTIONS } from "../../constants";
+import { DD_SECTIONS, DD_STATUS_OPTIONS, TRUSTEE_TYPE_OPTIONS, YES_NO_TBD_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface InsuranceGovernanceSectionProps {
   insurance: Stage3Data["insurance"];

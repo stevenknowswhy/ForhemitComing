@@ -1,14 +1,14 @@
 // ── ESOP STRUCTURE & FINANCING SECTION ───────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   TextInput,
   SelectInput,
   NumberInput,
 } from "../inputs";
-import { SYNTHETIC_EQUITY_OPTIONS } from "../../constants";
+import { SYNTHETIC_EQUITY_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface ESOPStructureSectionProps {
   data: Stage2Data["esopStructure"];

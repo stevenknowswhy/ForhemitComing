@@ -1,7 +1,7 @@
 // ── STAGE INDICATOR (PLATE) COMPONENT ────────────────────────────────────────
 
 import React from "react";
-import { STAGES } from "../../constants";
+import { STAGES } from "@forhemit/shared/features/deal-flow-system";
 
 interface StageIndicatorProps {
   currentStage: number;

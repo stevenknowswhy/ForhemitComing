@@ -1,9 +1,9 @@
 // ── FEASIBILITY RED FLAGS SECTION ────────────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
-import { FEASIBILITY_RED_FLAGS } from "../../constants";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
+import { FEASIBILITY_RED_FLAGS } from "@forhemit/shared/features/deal-flow-system";
 
 interface FeasibilityFlagsSectionProps {
   data: Stage2Data["redFlags"];
