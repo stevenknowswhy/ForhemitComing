@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { requireAuth } from "./lib/requireAuth";
 
 /**
  * Get a template by ID
@@ -7,6 +8,7 @@ import { mutation, query } from "./_generated/server";
 export const get = query({
   args: { id: v.id("templates") },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     return await ctx.db.get(args.id);
   },
 });
@@ -17,6 +19,7 @@ export const get = query({
 export const getByTitle = query({
   args: { title: v.string() },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const results = await ctx.db
       .query("templates")
       .filter((q) => q.eq(q.field("title"), args.title))
@@ -34,6 +37,7 @@ export const getByStageAndTitle = query({
     titleContains: v.string(),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const results = await ctx.db
       .query("templates")
       .filter((q) =>
@@ -56,6 +60,7 @@ export const getByStageAndTitle = query({
 export const getByStage = query({
   args: { lifecycleStage: v.string() },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     return await ctx.db
       .query("templates")
       .filter((q) => q.eq(q.field("lifecycleStage"), args.lifecycleStage))
@@ -69,6 +74,7 @@ export const getByStage = query({
 export const getExisting = query({
   args: {},
   handler: async (ctx) => {
+    await requireAuth(ctx);
     return await ctx.db
       .query("templates")
       .filter((q) => q.eq(q.field("status"), "exists"))
@@ -82,6 +88,7 @@ export const getExisting = query({
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
+    await requireAuth(ctx);
     return await ctx.db.query("templates").collect();
   },
 });
@@ -96,6 +103,7 @@ export const updateContentByTitle = mutation({
     content: v.string(),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const template = await ctx.db
       .query("templates")
       .filter((q) => q.eq(q.field("title"), args.title))
