@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 import { fetchMutation } from "convex/nextjs";
 import { api } from "@/convex/_generated/api";
+import { strictLimiter, getClientIp, checkRateLimit } from "@/lib/ratelimit";
 
 export async function POST(req: Request) {
+  // Rate limit by IP
+  const rateLimitResponse = await checkRateLimit(strictLimiter, getClientIp(req));
+  if (rateLimitResponse) return rateLimitResponse;
   try {
     const payload = await req.json();
 

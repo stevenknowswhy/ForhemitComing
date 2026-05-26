@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { type NextRequest, NextResponse } from 'next/server';
 import puppeteer from 'puppeteer-core';
 import chromium from '@sparticuz/chromium';
+import { strictLimiter, getClientIp, checkRateLimit } from '@/lib/ratelimit';
 
 export const runtime = 'nodejs';
 export const maxDuration = 30; // 30 seconds max for PDF generation
@@ -17,6 +18,10 @@ interface PDFGenerateRequest {
 }
 
 export async function POST(request: NextRequest) {
+  // Rate limit by IP — PDF generation is expensive (puppeteer launch)
+  const rateLimitResponse = await checkRateLimit(strictLimiter, getClientIp(request));
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const body: PDFGenerateRequest = await request.json();
     const { htmlContent, cssContent = '', templateName } = body;
@@ -47,8 +52,8 @@ export async function POST(request: NextRequest) {
           '/usr/bin/chromium-browser',
           '/usr/bin/chromium',
           '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-          'C:\Program Files\Google\Chrome\Application\chrome.exe',
-          'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe',
+          'C:Program FilesGoogleChromeApplicationchrome.exe',
+          'C:Program Files (x86)GoogleChromeApplicationchrome.exe',
         ];
         
         let executablePath = '';
