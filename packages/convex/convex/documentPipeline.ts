@@ -4,6 +4,7 @@ import { api } from "./_generated/api";
 import { sendEmail } from "./emailCore";
 import { fillTemplate } from "./templateRenderer";
 import { requireAuth } from "./lib/requireAuth";
+import { getTemplateContent } from "./lib/templateContent";
 
 // ============================================
 // Helpers
@@ -197,11 +198,13 @@ export const generateAndSendDocument = action({
 			templateId,
 		});
 		if (!template) throw new Error(`Template ${templateId} not found`);
-		if (!template.content)
+
+		const templateContent = await getTemplateContent(ctx, template);
+		if (!templateContent)
 			throw new Error(`Template "${template.title}" has no HTML content`);
 
 		// 2. Fill placeholders
-		const filledHtml = fillTemplate(template.content, data);
+		const filledHtml = fillTemplate(templateContent, data);
 
 		// 3. Generate PDF
 		const pdfResult: any = await ctx.runAction(api.pdfGenerator.generatePdf, {
@@ -292,7 +295,8 @@ export const generateStageDocuments = action({
 					});
 					continue;
 				}
-				if (!template.content) {
+				const hasContent = await getTemplateContent(ctx, template);
+				if (!hasContent) {
 					failed.push({
 						templateId: req.templateId,
 						error: `Template "${template.title}" has no HTML content`,

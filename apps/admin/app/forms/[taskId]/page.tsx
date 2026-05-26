@@ -3,7 +3,7 @@
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useParams, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { Id } from "@/convex/_generated/dataModel";
 import DOMPurify from "isomorphic-dompurify";
 
@@ -18,6 +18,23 @@ export default function FormPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formDataState, setFormDataState] = useState<Record<string, string>>({});
+  const [templateHtml, setTemplateHtml] = useState<string | null>(null);
+
+  // Fetch template content from File Storage URL when available
+  useEffect(() => {
+    if (!formData?.template) return;
+
+    // Prefer File Storage URL (migrated templates)
+    if (formData.template.contentUrl) {
+      fetch(formData.template.contentUrl)
+        .then((res) => res.text())
+        .then((html) => setTemplateHtml(html))
+        .catch(() => setTemplateHtml(formData.template?.content ?? null));
+    } else {
+      // Fall back to inline content (pre-migration)
+      setTemplateHtml(formData.template.content ?? null);
+    }
+  }, [formData]);
 
   if (!formData) {
     return (
@@ -107,9 +124,9 @@ export default function FormPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="bg-white rounded-b-lg shadow-sm border border-stone-200 p-6">
           {/* Dynamic form fields based on template content */}
-          {formData.template?.content ? (
+          {templateHtml ? (
             <div className="prose prose-stone max-w-none mb-6">
-              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(formData.template.content) }} />
+              <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(templateHtml) }} />
             </div>
           ) : (
             <div className="space-y-4 mb-6">
