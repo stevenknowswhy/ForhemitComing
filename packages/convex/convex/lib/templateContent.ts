@@ -30,7 +30,9 @@ export async function getTemplateContent(
 	template: Template,
 ): Promise<string | null> {
 	if (template.contentFileId) {
-		const url = await ctx.storage.getUrl(template.contentFileId as Id<"_storage">);
+		const url = await ctx.storage.getUrl(
+			template.contentFileId as Id<"_storage">,
+		);
 		if (url) {
 			const res = await fetch(url);
 			return await res.text();
