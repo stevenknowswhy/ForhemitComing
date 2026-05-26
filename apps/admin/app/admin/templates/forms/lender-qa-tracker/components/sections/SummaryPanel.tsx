@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { DealHeader } from "../../types";
-import { formatDate, formatCurrency, getLoanTypeLabel } from "../../lib/calculations";
+import { DealHeader } from "@forhemit/shared/features/lender-qa-tracker";
+import { formatDate, formatCurrency, getLoanTypeLabel } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface SummaryPanelProps {
   header: DealHeader;
