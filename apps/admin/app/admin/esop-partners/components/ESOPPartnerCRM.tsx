@@ -304,7 +304,7 @@ export function ESOPPartnerCRM() {
                   const count = stage === 'all' 
                     ? filteredContacts.length 
                     : filteredContacts.filter(c => c.stage === stage).length;
-                  const isActive = (stage === 'all' && !STAGE_ORDER.includes(currentView as any)) || currentView === stage;
+                  const isActive = (stage === 'all' && !(STAGE_ORDER as readonly string[]).includes(currentView)) || currentView === stage;
 
                   return (
                     <button
