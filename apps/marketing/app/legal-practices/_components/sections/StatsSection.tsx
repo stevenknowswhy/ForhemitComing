@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useCountUp } from "@/hooks/useCountUp";
+import { useCountUp } from "@forhemit/shared/hooks/useCountUp";
 
 export function StatsSection() {
   const statsRef = useRef<HTMLDivElement>(null);

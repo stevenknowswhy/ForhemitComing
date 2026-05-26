@@ -1,6 +1,6 @@
 "use client";
 
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useScrollReveal } from "@forhemit/shared/hooks/useScrollReveal";
 
 interface ScrollRevealProps {
   children: React.ReactNode;
