@@ -1,6 +1,8 @@
 {
   "name": "forhemit-monorepo",
   "version": "0.1.0",
+  "description": "Forhemit — ESOP transaction platform connecting business owners with qualified advisors, lenders, and legal counsel",
+  "author": "Forhemit <team@forhemit.com>",
   "private": true,
   "main": "packages/shared/src/index.ts",
   "module": "packages/shared/src/index.ts",
@@ -22,7 +24,8 @@
     "eslint-plugin-next": "^0.0.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "turbo": "^2.4.4",
-    "typescript-eslint": "^8.60.0"
+    "typescript-eslint": "^8.60.0",
+    "vitest": "^4.1.0"
   },
   "pnpm": {
     "overrides": {
