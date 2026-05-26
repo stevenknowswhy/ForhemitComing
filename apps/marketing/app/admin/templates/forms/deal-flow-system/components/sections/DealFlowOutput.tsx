@@ -1,8 +1,8 @@
 // ── DEAL FLOW OUTPUT / SUMMARY SECTION ───────────────────────────────────────
 
 import React from "react";
-import type { DealFlowInputs } from "../../types";
-import { calculateTotalScore, getRecommendationLabel } from "../../lib/calculations";
+import type { DealFlowInputs } from "@forhemit/shared/features/deal-flow-system";
+import { calculateTotalScore, getRecommendationLabel } from "@forhemit/shared/features/deal-flow-system";
 
 interface DealFlowOutputProps {
   inputs: DealFlowInputs;

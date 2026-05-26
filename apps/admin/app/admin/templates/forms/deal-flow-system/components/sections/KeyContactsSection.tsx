@@ -1,8 +1,8 @@
 // ── KEY CONTACTS SECTION ─────────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage1Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage1Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 
 interface KeyContactsSectionProps {
   data: Stage1Data["keyContacts"];

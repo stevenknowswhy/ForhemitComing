@@ -1,9 +1,9 @@
 // ── CRITICAL PATH GAPS & ACTION ITEMS SECTION ────────────────────────────────
 
 import React from "react";
-import type { Stage3Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
-import { GAP_STATUS_OPTIONS } from "../../constants";
+import type { Stage3Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
+import { GAP_STATUS_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface GapItemsSectionProps {
   gapItems: Stage3Data["gapItems"];

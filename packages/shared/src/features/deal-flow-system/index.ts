@@ -1,4 +1,12 @@
-// Re-export shared logic layer
+/**
+ * ESOP Deal Flow System — shared logic layer
+ *
+ * Types, constants, hooks, and utilities for the 3-stage ESOP deal intake,
+ * feasibility study, and due diligence wizard.
+ * Components remain in each app.
+ */
+
+// Types
 export type {
   DealFlowInputs,
   DealFlowMeta,
@@ -33,8 +41,9 @@ export type {
   Rollover1042,
   GapItem,
   ValidationErrors,
-} from "@forhemit/shared/features/deal-flow-system";
+} from "./types";
 
+// Constants
 export {
   STAGES,
   DEFAULT_INPUTS,
@@ -70,7 +79,14 @@ export {
   TOTAL_MAX_SCORE,
   SCORE_THRESHOLDS,
   COLORS,
-  useDealFlowForm,
+} from "./constants";
+
+// Hooks
+export { useDealFlowForm } from "./hooks/useDealFlowForm";
+export type { UseDealFlowFormReturn } from "./hooks/useDealFlowForm";
+
+// Calculations
+export {
   calculateTotalScore,
   calculateScorePercentage,
   getScoreRecommendation,
@@ -81,39 +97,4 @@ export {
   clampScore,
   formatScore,
   getScoreBarGradient,
-} from "@forhemit/shared/features/deal-flow-system";
-
-// Components (for advanced usage)
-export {
-  TextInput,
-  NumberInput,
-  SelectInput,
-  Checkbox,
-  CheckboxGroup,
-  RadioGroup,
-  StageIndicator,
-} from "./components/inputs";
-
-export {
-  SourceReferralSection,
-  BusinessIdentitySection,
-  KeyContactsSection,
-  QuickQualifiersSection,
-  MotivationSection,
-  NextStepsSection,
-  OwnerObjectivesSection,
-  ValuationSection,
-  EmployeePopulationSection,
-  ESOPStructureSection,
-  FeasibilityFlagsSection,
-  ScoringSection,
-  GoNoGoSection,
-  LegalDocumentsSection,
-  HRDocumentsSection,
-  FinancialDocumentsSection,
-  LiabilitiesSection,
-  InsuranceGovernanceSection,
-  Rollover1042Section,
-  GapItemsSection,
-  DealFlowOutput,
-} from "./components/sections";
+} from "./lib/calculations";

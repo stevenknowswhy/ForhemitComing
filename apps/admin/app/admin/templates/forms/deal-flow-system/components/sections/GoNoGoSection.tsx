@@ -1,8 +1,8 @@
 // ── GO/NO-GO DECISION SECTION ────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage2Data } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage2Data } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 
 interface GoNoGoSectionProps {
   data: Stage2Data["goNoGo"];
