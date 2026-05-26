@@ -1,5 +1,7 @@
 "use client";
 
+import { trackCRM } from '@forhemit/shared/lib/analytics';
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/CustomButton';
 import { useScrollDepth } from '@/hooks/useBlog';
@@ -35,12 +37,7 @@ export function DossierBar({ pathway }: DossierBarProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    console.log('[CRM] Dossier download:', {
-      email,
-      role: pathway,
-      walkthroughRequested: walkthrough,
-      timestamp: new Date().toISOString()
-    });
+    trackCRM('dossier_download', { email, role: pathway, walkthroughRequested: walkthrough });
     
     setIsSubmitted(true);
   };
