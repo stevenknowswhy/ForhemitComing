@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import type { PartnerContact, PartnerType, EngagementStage } from '../types';
+import type { PartnerContact, PartnerType, EngagementStage } from '@forhemit/shared/features/esop-partners';
 import { X, Trash2 } from 'lucide-react';
-import { ALL_STATES, JOURNEY_STEPS } from '../constants';
-import { getJourneySteps } from '../lib/formatters';
-import { validateEmail as validateEmailFormat } from '../lib/calculations';
+import { ALL_STATES, JOURNEY_STEPS } from '@forhemit/shared/features/esop-partners';
+import { getJourneySteps } from '@forhemit/shared/features/esop-partners';
+import { validateEmail as validateEmailFormat } from '@forhemit/shared/features/esop-partners';
 
 interface ContactModalProps {
   isOpen: boolean;

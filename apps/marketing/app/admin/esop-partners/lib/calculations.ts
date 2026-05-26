@@ -1,6 +1,6 @@
 // ESOP Partner CRM Calculations
 
-import type { PartnerContact, SortConfig } from '../types';
+import type { PartnerContact, SortConfig } from '@forhemit/shared/features/esop-partners';
 import { getFullName, daysSince, needsNudge, calculateJourneyProgress } from './formatters';
 
 export function filterContacts(

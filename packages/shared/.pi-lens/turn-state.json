@@ -4,15 +4,95 @@
       "modifiedRanges": [
         {
           "start": 1,
-          "end": 3
+          "end": 4
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-26T09:24:10.434Z"
+    },
+    "src/features/lender-qa-tracker/index.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 72
         }
       ],
       "importsChanged": false,
-      "lastEdit": "2026-05-26T08:36:08.375Z"
+      "lastEdit": "2026-05-26T09:02:55.761Z"
+    },
+    "src/features/esop-repayment-model/index.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 83
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-26T09:34:52.271Z"
+    },
+    "src/features/deal-flow-system/index.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 142
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-26T10:45:44.734Z"
+    },
+    "src/features/deal-flow-system/types.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 476
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-26T10:45:44.829Z"
+    },
+    "src/features/crm/types.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 371
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-26T12:10:35.768Z"
+    },
+    "src/features/crm/index.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 94
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-26T11:17:45.527Z"
+    },
+    "src/features/crm/lib/filters.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 165
+        }
+      ],
+      "importsChanged": true,
+      "lastEdit": "2026-05-26T12:16:25.929Z"
+    },
+    "src/features/esop-partners/index.ts": {
+      "modifiedRanges": [
+        {
+          "start": 1,
+          "end": 7
+        }
+      ],
+      "importsChanged": false,
+      "lastEdit": "2026-05-26T13:37:37.324Z"
     }
   },
   "turnCycles": 0,
   "maxCycles": 3,
-  "lastUpdated": "2026-05-26T08:36:08.375Z",
-  "sessionId": "lens-mpm9c81p-17f51b7c"
+  "lastUpdated": "2026-05-26T13:37:37.324Z",
+  "sessionId": "lens-mpmm9f04-5d0f9a43"
 }

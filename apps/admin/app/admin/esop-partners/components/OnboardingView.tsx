@@ -1,7 +1,7 @@
 'use client';
 
-import type { PartnerContact } from '../types';
-import { calculateJourneyProgress, getTypeColors, getInitials, getFullName, formatDate, getJourneySteps, escapeHtml } from '../lib/formatters';
+import type { PartnerContact } from '@forhemit/shared/features/esop-partners';
+import { calculateJourneyProgress, getTypeColors, getInitials, getFullName, formatDate, getJourneySteps, escapeHtml } from '@forhemit/shared/features/esop-partners';
 
 interface OnboardingViewProps {
   contacts: PartnerContact[];

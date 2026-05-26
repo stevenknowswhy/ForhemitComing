@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import type { PartnerContact, ActivityType } from '../types';
+import type { PartnerContact, ActivityType } from '@forhemit/shared/features/esop-partners';
 import { X, Star, Plus, Trash2, ChevronRight } from 'lucide-react';
 import { 
   getInitials, 
@@ -18,8 +18,8 @@ import {
   escapeHtml,
   getTodayDate,
   getCurrentTime
-} from '../lib/formatters';
-import { getNextStage } from '../lib/calculations';
+} from '@forhemit/shared/features/esop-partners';
+import { getNextStage } from '@forhemit/shared/features/esop-partners';
 
 interface DetailPanelProps {
   contact: PartnerContact | null;

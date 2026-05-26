@@ -1,7 +1,7 @@
 'use client';
 
-import type { PartnerContact } from '../types';
-import { NUDGE_ACTIONS, STAGE_META } from '../constants';
+import type { PartnerContact } from '@forhemit/shared/features/esop-partners';
+import { NUDGE_ACTIONS, STAGE_META } from '@forhemit/shared/features/esop-partners';
 import { 
   getInitials, 
   getFullName, 
@@ -9,8 +9,8 @@ import {
   formatDate,
   daysSince,
   escapeHtml
-} from '../lib/formatters';
-import { NUDGE_DAYS } from '../constants';
+} from '@forhemit/shared/features/esop-partners';
+import { NUDGE_DAYS } from '@forhemit/shared/features/esop-partners';
 
 interface NudgesViewProps {
   contacts: PartnerContact[];
