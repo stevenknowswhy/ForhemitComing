@@ -38,14 +38,6 @@ export function WebVitalsReporter() {
   useReportWebVitals((metric: WebVitalMetric) => {
     const { name, value, rating } = metric
 
-    // In development, always log to console for visibility
-    if (process.env.NODE_ENV === 'development') {
-      console.debug(
-        `[Web Vitals] ${name}: ${value.toFixed(2)} (${rating})`,
-        metric,
-      )
-    }
-
     // Report to Sentry when DSN is configured
     if (process.env.NEXT_PUBLIC_SENTRY_DSN) {
       reportToSentry(metric)
