@@ -5,7 +5,7 @@ import { requireAuth } from "./lib/requireAuth";
 // Log a document generation event
 export const create = mutation({
 	args: {
-		templateId: v.id("documentTemplates"),
+		templateId: v.id("templates"),
 		templateName: v.string(),
 		formData: v.string(),
 		action: v.union(
@@ -46,7 +46,7 @@ export const list = query({
 // Get generated documents for a specific template
 export const getByTemplate = query({
 	args: {
-		templateId: v.id("documentTemplates"),
+		templateId: v.id("templates"),
 		limit: v.optional(v.number()),
 	},
 	handler: async (ctx, args) => {

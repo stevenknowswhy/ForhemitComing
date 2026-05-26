@@ -146,8 +146,7 @@ export const logGeneratedDocument = mutation({
 	handler: async (ctx, args) => {
 		await requireAuth(ctx);
 		await ctx.db.insert("generatedDocuments", {
-			// TODO: Schema mismatch — generatedDocuments.templateId references "documentTemplates" but args.templateId is from "templates"
-		templateId: args.templateId as any,
+			templateId: args.templateId,
 			templateName: args.templateName,
 			formData: args.formData,
 			action: "pdf-download-server" as const,
