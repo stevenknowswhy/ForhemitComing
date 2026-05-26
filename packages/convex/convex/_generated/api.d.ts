@@ -10,6 +10,8 @@
 
 import type * as agentOutputs from "../agentOutputs.js";
 import type * as agentQueue from "../agentQueue.js";
+import type * as agentQueueConfig from "../agentQueueConfig.js";
+import type * as agentQueueHelpers from "../agentQueueHelpers.js";
 import type * as auditLogs from "../auditLogs.js";
 import type * as authEmails from "../authEmails.js";
 import type * as brokerEmails from "../brokerEmails.js";
@@ -34,13 +36,17 @@ import type * as earlyAccessSignups from "../earlyAccessSignups.js";
 import type * as emailCore from "../emailCore.js";
 import type * as emailEvents from "../emailEvents.js";
 import type * as emails from "../emails.js";
+import type * as externalDocuments from "../externalDocuments.js";
 import type * as feeCalculator from "../feeCalculator.js";
 import type * as formSubmissions from "../formSubmissions.js";
 import type * as gates from "../gates.js";
 import type * as generatedDocuments from "../generatedDocuments.js";
+import type * as http from "../http.js";
 import type * as jobApplications from "../jobApplications.js";
 import type * as lib_requireAdmin from "../lib/requireAdmin.js";
 import type * as lib_requireAuth from "../lib/requireAuth.js";
+import type * as lib_templateContent from "../lib/templateContent.js";
+import type * as migrateTemplateContent from "../migrateTemplateContent.js";
 import type * as notes from "../notes.js";
 import type * as notifications from "../notifications.js";
 import type * as opensign from "../opensign.js";
@@ -69,6 +75,8 @@ import type {
 declare const fullApi: ApiFromModules<{
   agentOutputs: typeof agentOutputs;
   agentQueue: typeof agentQueue;
+  agentQueueConfig: typeof agentQueueConfig;
+  agentQueueHelpers: typeof agentQueueHelpers;
   auditLogs: typeof auditLogs;
   authEmails: typeof authEmails;
   brokerEmails: typeof brokerEmails;
@@ -93,13 +101,17 @@ declare const fullApi: ApiFromModules<{
   emailCore: typeof emailCore;
   emailEvents: typeof emailEvents;
   emails: typeof emails;
+  externalDocuments: typeof externalDocuments;
   feeCalculator: typeof feeCalculator;
   formSubmissions: typeof formSubmissions;
   gates: typeof gates;
   generatedDocuments: typeof generatedDocuments;
+  http: typeof http;
   jobApplications: typeof jobApplications;
   "lib/requireAdmin": typeof lib_requireAdmin;
   "lib/requireAuth": typeof lib_requireAuth;
+  "lib/templateContent": typeof lib_templateContent;
+  migrateTemplateContent: typeof migrateTemplateContent;
   notes: typeof notes;
   notifications: typeof notifications;
   opensign: typeof opensign;
