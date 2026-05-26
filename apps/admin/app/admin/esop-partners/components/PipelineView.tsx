@@ -1,7 +1,7 @@
 'use client';
 
-import type { PartnerContact } from '../types';
-import { STAGE_META } from '../constants';
+import type { PartnerContact } from '@forhemit/shared/features/esop-partners';
+import { STAGE_META } from '@forhemit/shared/features/esop-partners';
 import { 
   getInitials, 
   getFullName, 
@@ -10,7 +10,7 @@ import {
   formatDaysShort,
   needsNudge,
   escapeHtml
-} from '../lib/formatters';
+} from '@forhemit/shared/features/esop-partners';
 import { Star } from 'lucide-react';
 
 interface PipelineViewProps {

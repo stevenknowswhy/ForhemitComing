@@ -1,6 +1,6 @@
 'use client';
 
-import type { PartnerContact } from '../types';
+import type { PartnerContact } from '@forhemit/shared/features/esop-partners';
 import { 
   getInitials, 
   getFullName, 
@@ -11,7 +11,7 @@ import {
   formatRelativeDate,
   needsNudge,
   escapeHtml
-} from '../lib/formatters';
+} from '@forhemit/shared/features/esop-partners';
 import { Star } from 'lucide-react';
 
 interface ContactCardProps {
