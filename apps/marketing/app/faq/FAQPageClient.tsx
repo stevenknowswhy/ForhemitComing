@@ -2,7 +2,7 @@
 
 import { useGlobalScrollReveal } from "@forhemit/shared/hooks/useIntersectionObserver";
 import "../about/about-page.css";
-import "./faq-page.css";
+import "@forhemit/shared/styles/faq-page.css";
 
 import {
   HeroSection,
