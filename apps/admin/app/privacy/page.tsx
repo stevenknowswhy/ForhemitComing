@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import "./privacy-page.css";
+import "@forhemit/shared/styles/privacy-page.css";
 
 export default function PrivacyPage() {
   return (
