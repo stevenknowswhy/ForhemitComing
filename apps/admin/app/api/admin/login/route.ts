@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { addSession, removeSession } from '../../../../lib/admin-session';
+import { strictLimiter, getClientIp, checkRateLimit } from '@/lib/ratelimit';
 
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
 const ADMIN_COOKIE_NAME = 'admin_session';
@@ -11,6 +12,10 @@ function generateSecureToken(): string {
 }
 
 export async function POST(request: Request) {
+  // Rate limit login attempts by IP (brute-force protection)
+  const rateLimitResponse = await checkRateLimit(strictLimiter, getClientIp(request));
+  if (rateLimitResponse) return rateLimitResponse;
+
   try {
     const { password } = await request.json();
 
