@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { SBALoan } from "../../types";
+import { SBALoan } from "@forhemit/shared/features/esop-repayment-model";
 import { NumberInput, SelectInput, TextInput } from "../inputs";
-import { SBA_TERM_OPTIONS, AMORTIZATION_OPTIONS } from "../../constants";
+import { SBA_TERM_OPTIONS, AMORTIZATION_OPTIONS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface SBALoanSectionProps {
   loan: SBALoan;

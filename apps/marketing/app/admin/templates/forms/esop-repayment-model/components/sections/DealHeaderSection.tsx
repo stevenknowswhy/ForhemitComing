@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { DealHeader } from "../../types";
+import { DealHeader } from "@forhemit/shared/features/esop-repayment-model";
 import { TextInput, NumberInput, SelectInput, DateInput } from "../inputs";
-import { FISCAL_YEAR_OPTIONS } from "../../constants";
+import { FISCAL_YEAR_OPTIONS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface DealHeaderSectionProps {
   header: DealHeader;
