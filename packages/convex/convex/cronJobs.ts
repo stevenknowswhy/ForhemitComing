@@ -1,5 +1,101 @@
 import { internalMutation } from "./_generated/server";
 
+const DAY_MS = 86_400_000;
+
+// ─── Recurrence helpers ───────────────────────────────────────────
+
+const RECURRENCE_INTERVALS: Record<string, number> = {
+  weekly: 7 * DAY_MS,
+  monthly: 30 * DAY_MS,
+  quarterly: 90 * DAY_MS,
+};
+
+const RECURRENCE_THRESHOLDS: Record<string, number> = {
+  weekly: 0.85,
+  monthly: 25,
+  quarterly: 80,
+};
+
+function getRecurrenceDueDate(rule: string | undefined): number {
+  const now = Date.now();
+  return now + (RECURRENCE_INTERVALS[rule ?? ""] ?? 7 * DAY_MS);
+}
+
+// ─── Time-trigger helpers ─────────────────────────────────────────
+
+type TimeTrigger = "DAYS_FROM_STAGE" | "DAYS_FROM_GATE" | "DAYS_BEFORE_CLOSING" | "RECURRING";
+
+interface TriggerRequirement {
+  trigger?: TimeTrigger;
+  daysOffset?: number;
+  triggerGate?: string;
+  stage?: string;
+  templateId: string;
+  recurrenceRule?: string;
+}
+
+interface DealCompany {
+  _id: string;
+  stage: string;
+  stageEnteredAt?: number;
+  expectedCloseDate?: string;
+  gates?: Record<string, { passed?: boolean; passedAt?: number }>;
+}
+
+function matchesTrigger(req: TriggerRequirement, deal: DealCompany, now: number): boolean {
+  switch (req.trigger) {
+    case "DAYS_FROM_STAGE":
+      return !!(req.daysOffset && deal.stageEnteredAt &&
+        deal.stageEnteredAt + req.daysOffset * DAY_MS <= now);
+    case "DAYS_FROM_GATE":
+      if (!req.daysOffset || !req.triggerGate) return false;
+      {
+        const gate = deal.gates?.[req.triggerGate];
+        return !!(gate?.passed && gate.passedAt &&
+          gate.passedAt + req.daysOffset * DAY_MS <= now);
+      }
+    case "DAYS_BEFORE_CLOSING":
+      if (!req.daysOffset || !deal.expectedCloseDate) return false;
+      {
+        const closingMs = new Date(deal.expectedCloseDate).getTime();
+        return !isNaN(closingMs) && closingMs - req.daysOffset * DAY_MS <= now;
+      }
+    case "RECURRING":
+      return req.stage === deal.stage;
+    default:
+      return false;
+  }
+}
+
+function calculateTriggerDueDate(
+  req: TriggerRequirement,
+  deal: DealCompany,
+  now: number,
+): number | undefined {
+  switch (req.trigger) {
+    case "DAYS_FROM_STAGE":
+      if (req.daysOffset && deal.stageEnteredAt)
+        return deal.stageEnteredAt + req.daysOffset * DAY_MS;
+      break;
+    case "DAYS_FROM_GATE":
+      if (req.daysOffset && req.triggerGate) {
+        const gate = deal.gates?.[req.triggerGate];
+        if (gate?.passed && gate.passedAt)
+          return gate.passedAt + req.daysOffset * DAY_MS;
+      }
+      break;
+    case "DAYS_BEFORE_CLOSING":
+      if (req.daysOffset && deal.expectedCloseDate) {
+        const closingMs = new Date(deal.expectedCloseDate).getTime();
+        if (!isNaN(closingMs)) return closingMs - req.daysOffset * DAY_MS;
+      }
+      break;
+    case "RECURRING":
+      return now + 7 * DAY_MS;
+  }
+  return undefined;
+}
+
 // ============================================
 // Create recurring tasks — runs weekly
 // ============================================
@@ -30,23 +126,11 @@ export const createRecurringTasks = internalMutation({
       const lastChild = children[0];
 
       // Determine if we need a new instance
-      let needsNewInstance = false;
-
-      if (!lastChild) {
-        // No children yet — create first instance
-        needsNewInstance = true;
-      } else {
-        // Check if last child was created more than 6 days ago
-        const daysSinceLastCreated = (now - lastChild.createdAt) / oneWeekMs;
-
-        if (parent.recurrenceRule === "weekly" && daysSinceLastCreated >= 0.85) {
-          needsNewInstance = true;
-        } else if (parent.recurrenceRule === "monthly" && daysSinceLastCreated >= 25) {
-          needsNewInstance = true;
-        } else if (parent.recurrenceRule === "quarterly" && daysSinceLastCreated >= 80) {
-          needsNewInstance = true;
-        }
-      }
+      const needsNewInstance = !lastChild || (() => {
+        const weeksSince = (now - lastChild.createdAt) / oneWeekMs;
+        const threshold = RECURRENCE_THRESHOLDS[parent.recurrenceRule ?? ""] ?? Infinity;
+        return weeksSince >= threshold;
+      })();
 
       if (!needsNewInstance) continue;
 
@@ -54,12 +138,7 @@ export const createRecurringTasks = internalMutation({
       const nextNumber = (lastChild?.recurrenceInstanceNumber || 0) + 1;
 
       // Calculate due date based on recurrence
-      let dueDate = now + oneWeekMs; // default: 1 week
-      if (parent.recurrenceRule === "monthly") {
-        dueDate = now + 30 * 24 * 60 * 60 * 1000;
-      } else if (parent.recurrenceRule === "quarterly") {
-        dueDate = now + 90 * 24 * 60 * 60 * 1000;
-      }
+      const dueDate = getRecurrenceDueDate(parent.recurrenceRule);
 
       // Create the new instance
       const taskId = await ctx.db.insert("workflowTasks", {
@@ -119,33 +198,9 @@ export const checkTimeBasedTriggers = internalMutation({
     for (const company of activeDeals) {
       dealsChecked++;
 
-      const matches = timeBasedReqs.filter((req) => {
-        switch (req.trigger) {
-          case "DAYS_FROM_STAGE":
-            if (!req.daysOffset || !company.stageEnteredAt) return false;
-            return company.stageEnteredAt + req.daysOffset * 86_400_000 <= now;
-
-          case "DAYS_FROM_GATE":
-            if (!req.daysOffset || !req.triggerGate) return false;
-            {
-              const gate = company.gates?.[req.triggerGate as keyof typeof company.gates];
-              return !!(gate?.passed && gate.passedAt && gate.passedAt + req.daysOffset * 86_400_000 <= now);
-            }
-
-          case "DAYS_BEFORE_CLOSING":
-            if (!req.daysOffset || !company.expectedCloseDate) return false;
-            {
-              const closingMs = new Date(company.expectedCloseDate).getTime();
-              return !isNaN(closingMs) && closingMs - req.daysOffset * 86_400_000 <= now;
-            }
-
-          case "RECURRING":
-            return req.stage === company.stage;
-
-          default:
-            return false;
-        }
-      });
+      const matches = timeBasedReqs.filter((req) =>
+        matchesTrigger(req as TriggerRequirement, company as DealCompany, now)
+      );
 
       // 4. For each match, deduplicate and create task
       for (const req of matches) {
@@ -163,22 +218,7 @@ export const checkTimeBasedTriggers = internalMutation({
         if (hasActive) continue;
 
         // Calculate dueDate
-        let dueDate: number | undefined;
-        if (req.daysOffset && req.trigger === "DAYS_FROM_STAGE" && company.stageEnteredAt) {
-          dueDate = company.stageEnteredAt + req.daysOffset * 86_400_000;
-        } else if (req.daysOffset && req.trigger === "DAYS_FROM_GATE" && req.triggerGate) {
-          const gate = company.gates?.[req.triggerGate as keyof typeof company.gates];
-          if (gate?.passed && gate.passedAt) {
-            dueDate = gate.passedAt + req.daysOffset * 86_400_000;
-          }
-        } else if (req.daysOffset && req.trigger === "DAYS_BEFORE_CLOSING" && company.expectedCloseDate) {
-          const closingMs = new Date(company.expectedCloseDate).getTime();
-          if (!isNaN(closingMs)) {
-            dueDate = closingMs - req.daysOffset * 86_400_000;
-          }
-        } else if (req.trigger === "RECURRING") {
-          dueDate = now + 7 * 86_400_000; // default: 1 week out
-        }
+        const dueDate = calculateTriggerDueDate(req as TriggerRequirement, company as DealCompany, now);
 
         // Skip if no dueDate could be calculated
         if (dueDate === undefined) continue;
