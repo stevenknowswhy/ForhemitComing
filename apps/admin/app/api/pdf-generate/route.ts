@@ -26,8 +26,6 @@ export async function POST(request: NextRequest) {
     const body: PDFGenerateRequest = await request.json();
     const { htmlContent, cssContent = '', templateName } = body;
     
-    console.log('PDF generation started for:', templateName);
-    
     // Detect if request is from mobile
     const userAgent = request.headers.get('user-agent') || '';
     const isMobile = /mobile|android|iphone|ipad|ipod/i.test(userAgent.toLowerCase());
@@ -35,8 +33,6 @@ export async function POST(request: NextRequest) {
     // Launch headless browser with serverless-compatible chromium
     let browser;
     try {
-      console.log('Launching browser...', 'Production:', isProduction);
-      
       if (isProduction) {
         // Production: Use @sparticuz/chromium
         browser = await puppeteer.launch({
@@ -62,7 +58,6 @@ export async function POST(request: NextRequest) {
             const fs = await import('fs');
             if (fs.existsSync(path)) {
               executablePath = path;
-              console.log('Found Chrome at:', path);
               break;
             }
           } catch {
@@ -81,7 +76,6 @@ export async function POST(request: NextRequest) {
         });
       }
       
-      console.log('Browser launched successfully');
     } catch (browserError) {
       console.error('Browser launch error:', browserError);
       return NextResponse.json(
@@ -291,20 +285,15 @@ export async function POST(request: NextRequest) {
     
     // Set content and wait for fonts to load
     try {
-      console.log('Setting page content...');
       await page.setContent(fullHtml, { 
         waitUntil: ['networkidle0', 'domcontentloaded'] 
       });
-      console.log('Page content set');
-      
       // Wait for fonts to load
       await page.evaluate(() => document.fonts.ready);
       
       // Additional wait for any images or external resources
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      console.log('Generating PDF...');
-
       // Use Letter format for US letter-sized templates, A4 for others
       const isLetterTemplate = templateName.includes('Broker') || templateName.includes('Letter');
       const pdfFormat = isLetterTemplate ? 'Letter' : 'A4';
@@ -321,8 +310,7 @@ export async function POST(request: NextRequest) {
         margin: margins,
         preferCSSPageSize: true,
       });
-      console.log('PDF generated successfully');
-      
+
       await browser.close();
       
       // Return PDF as response
