@@ -11,15 +11,15 @@ import type {
   EngagementStage,
   StorageMeta,
   ExportedData
-} from '../types';
-import { DEFAULT_CONTACTS, STAGE_ORDER } from '../constants';
+} from '@forhemit/shared/features/esop-partners';
+import { DEFAULT_CONTACTS, STAGE_ORDER } from '@forhemit/shared/features/esop-partners';
 import { 
   getTodayDate, 
   getCurrentTime, 
   getCurrentTimestamp, 
   getJourneySteps,
   calculateJourneyProgress 
-} from '../lib/formatters';
+} from '@forhemit/shared/features/esop-partners';
 import { 
   filterContacts, 
   sortContacts, 
@@ -28,7 +28,7 @@ import {
   groupByStage,
   getOnboardingLists,
   validateEmail
-} from '../lib/calculations';
+} from '@forhemit/shared/features/esop-partners';
 
 const STORAGE_KEY = 'esop_crm_contacts';
 const META_KEY = 'esop_crm_meta';

@@ -1,6 +1,6 @@
 'use client';
 
-import type { PartnerContact, SortConfig } from '../types';
+import type { PartnerContact, SortConfig } from '@forhemit/shared/features/esop-partners';
 import { 
   getInitials, 
   getFullName, 
@@ -10,7 +10,7 @@ import {
   formatDate,
   needsNudge,
   escapeHtml
-} from '../lib/formatters';
+} from '@forhemit/shared/features/esop-partners';
 import { Star, ChevronUp, ChevronDown } from 'lucide-react';
 
 interface ContactListProps {
