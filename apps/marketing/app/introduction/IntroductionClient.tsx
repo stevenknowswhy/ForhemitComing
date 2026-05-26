@@ -7,7 +7,7 @@ import { EarlyAccessForm } from "../components/forms/EarlyAccessForm";
 // Lazy load ContactModal for better performance
 const ContactModal = lazy(() => import("../components/modals/ContactModal").then((mod) => ({ default: mod.ContactModal })));
 import { ClientOnly } from "@/components/ClientOnly";
-import "./page.css";
+import "@forhemit/shared/styles/introduction.css";
 
 // Sub-options for Business Introductions
 const businessSubOptions = [

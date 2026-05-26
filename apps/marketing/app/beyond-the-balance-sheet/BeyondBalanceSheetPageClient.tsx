@@ -4,7 +4,7 @@ import { useState, useEffect, lazy } from "react";
 // Lazy load ContactModal for better performance
 const ContactModal = lazy(() => import("../components/modals/ContactModal").then((mod) => ({ default: mod.ContactModal })));
 import { ClientOnly } from "@/components/ClientOnly";
-import "./beyond-balance-sheet.css";
+import "@forhemit/shared/styles/beyond-balance-sheet.css";
 
 export function BeyondBalanceSheetPageClient() {
   const [showContactModal, setShowContactModal] = useState(false);

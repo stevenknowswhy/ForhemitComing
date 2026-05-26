@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useToast } from "../hooks/useToast";
 import { ToastContainer } from "../components/ui/Toast";
 import "@forhemit/shared/styles/privacy-page.css";
-import "./opt-in-page.css";
+import "@forhemit/shared/styles/opt-in-page.css";
 
 export default function OptInPage() {
   const { toasts, removeToast, success, error: showError } = useToast();
