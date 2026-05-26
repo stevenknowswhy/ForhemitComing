@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useToast } from "../hooks/useToast";
 import { ToastContainer } from "../components/ui/Toast";
-import "../privacy/privacy-page.css";
+import "@forhemit/shared/styles/privacy-page.css";
 import "./opt-in-page.css";
 
 export function OptInPageClient() {
