@@ -6,7 +6,7 @@ import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-
 import {
   SelectInput,
   NumberInput,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import { YES_NO_OPTIONS, KEY_PERSON_INS_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface EmployeePopulationSectionProps {

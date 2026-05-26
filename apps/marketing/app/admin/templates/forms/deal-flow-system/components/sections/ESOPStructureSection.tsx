@@ -7,7 +7,7 @@ import {
   TextInput,
   SelectInput,
   NumberInput,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import { SYNTHETIC_EQUITY_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface ESOPStructureSectionProps {

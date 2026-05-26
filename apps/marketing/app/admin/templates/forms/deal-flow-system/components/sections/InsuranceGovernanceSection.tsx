@@ -6,7 +6,7 @@ import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-
 import {
   TextInput,
   SelectInput,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import { DD_SECTIONS, DD_STATUS_OPTIONS, TRUSTEE_TYPE_OPTIONS, YES_NO_TBD_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface InsuranceGovernanceSectionProps {
