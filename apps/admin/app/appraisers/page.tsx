@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { AppraisersPageClient } from "@forhemit/shared/pages/AppraisersPageClient";
-import "./appraisers.css";
+import "@forhemit/shared/styles/appraisers.css";
 
 const title = "For Appraisers | ESOP Valuation Partnerships";
 const description =
