@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { QAItem, QACategory } from "../../types";
-import { CATEGORIES } from "../../constants";
-import { isOverdue, isNearDue } from "../../lib/validation";
-import { formatDate } from "../../lib/calculations";
-import { groupItemsByCategory } from "../../lib/calculations";
+import { QAItem, QACategory } from "@forhemit/shared/features/lender-qa-tracker";
+import { CATEGORIES } from "@forhemit/shared/features/lender-qa-tracker";
+import { isOverdue, isNearDue } from "@forhemit/shared/features/lender-qa-tracker";
+import { formatDate } from "@forhemit/shared/features/lender-qa-tracker";
+import { groupItemsByCategory } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface QAListProps {
   items: (QAItem & { _idx: number })[];

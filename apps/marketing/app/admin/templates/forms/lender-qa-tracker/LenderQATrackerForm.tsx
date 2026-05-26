@@ -2,7 +2,7 @@
 
 import React, { forwardRef, useRef, useImperativeHandle, useCallback } from "react";
 import { TemplateFormHandle } from "../../registry";
-import { useLenderQAForm } from "./hooks/useLenderQAForm";
+import { useLenderQAForm } from "@forhemit/shared/features/lender-qa-tracker";
 import { ValidationSummary } from "./components/inputs";
 import {
   StepIndicator,

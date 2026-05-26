@@ -2,9 +2,9 @@
 
 import React from "react";
 import { TextInput, SelectInput, DateInput } from "../inputs";
-import { DealHeader } from "../../types";
-import { DEAL_STAGE_OPTIONS } from "../../constants";
-import { validateDates } from "../../lib/validation";
+import { DealHeader } from "@forhemit/shared/features/lender-qa-tracker";
+import { DEAL_STAGE_OPTIONS } from "@forhemit/shared/features/lender-qa-tracker";
+import { validateDates } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface TimelineSectionProps {
   header: DealHeader;

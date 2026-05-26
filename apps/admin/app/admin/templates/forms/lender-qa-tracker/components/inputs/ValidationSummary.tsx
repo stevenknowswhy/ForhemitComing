@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ValidationError } from "../../types";
+import { ValidationError } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface ValidationSummaryProps {
   errors: ValidationError[];

@@ -9,7 +9,9 @@
     "./hooks": "./src/hooks/index.ts",
     "./hooks/*": "./src/hooks/*.ts",
     "./lib": "./src/lib/index.ts",
-    "./lib/*": "./src/lib/*.ts"
+    "./lib/*": "./src/lib/*.ts",
+    "./features/lender-qa-tracker": "./src/features/lender-qa-tracker/index.ts",
+    "./features/lender-qa-tracker/*": "./src/features/lender-qa-tracker/*.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
