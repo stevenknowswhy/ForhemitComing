@@ -1,6 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "@/convex/_generated/api";
+import { strictLimiter, getClientIp, checkRateLimit } from "@/lib/ratelimit";
 
 const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
@@ -9,6 +10,9 @@ const convex = new ConvexHttpClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
  * Receives signature status updates from OpenSign
  */
 export async function POST(request: NextRequest) {
+  // Rate limit by IP
+  const rateLimitResponse = await checkRateLimit(strictLimiter, getClientIp(request));
+  if (rateLimitResponse) return rateLimitResponse;
   try {
     // Verify webhook signature if OpenSign provides one
     const signature = request.headers.get("x-opensign-signature");
