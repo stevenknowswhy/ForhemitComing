@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { FILTER_OPTIONS } from "../../constants";
-import { QAFilter } from "../../types";
+import { FILTER_OPTIONS } from "@forhemit/shared/features/lender-qa-tracker";
+import { QAFilter } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface FilterBarProps {
   activeFilter: QAFilter;

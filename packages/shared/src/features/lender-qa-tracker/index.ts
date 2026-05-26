@@ -1,6 +1,11 @@
-export { default, LenderQATrackerForm } from "./LenderQATrackerForm";
+/**
+ * Lender Q&A Tracker — shared logic layer
+ *
+ * Types, constants, hooks, and utilities for the 3-step lender Q&A wizard.
+ * Components remain in each app (may diverge for layout/styling).
+ */
 
-// Re-export shared logic layer
+// Types
 export type {
 	LenderQAInputs,
 	DealHeader,
@@ -15,8 +20,9 @@ export type {
 	ValidationError,
 	MetricsData,
 	CategoryProgress,
-} from "@forhemit/shared/features/lender-qa-tracker";
+} from "./types";
 
+// Constants
 export {
 	CATEGORIES,
 	LOAN_TYPE_OPTIONS,
@@ -31,7 +37,14 @@ export {
 	DEFAULT_INPUTS,
 	STEPS,
 	ESOP_TEMPLATE_ITEMS,
-	useLenderQAForm,
+} from "./constants";
+
+// Hooks
+export { useLenderQAForm } from "./hooks/useLenderQAForm";
+export type { UseLenderQAFormReturn } from "./hooks/useLenderQAForm";
+
+// Validation utilities
+export {
 	validateEmail,
 	validateDealId,
 	validatePositiveNumber,
@@ -43,6 +56,10 @@ export {
 	validateQAItem,
 	isOverdue,
 	isNearDue,
+} from "./lib/validation";
+
+// Calculation utilities
+export {
 	calculateMetrics,
 	calculateCategoryProgress,
 	generateItemId,
@@ -51,4 +68,4 @@ export {
 	getLoanTypeLabel,
 	filterItems,
 	groupItemsByCategory,
-} from "@forhemit/shared/features/lender-qa-tracker";
+} from "./lib/calculations";

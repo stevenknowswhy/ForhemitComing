@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { STEPS } from "../../constants";
+import { STEPS } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface StepIndicatorProps {
   currentStep: number;
