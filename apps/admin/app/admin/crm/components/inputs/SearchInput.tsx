@@ -1,7 +1,7 @@
 "use client";
 
 import { AdminSearchInput } from "@/app/admin/components/AdminSearchInput";
-import { cn } from "@/lib/utils";
+import { cn } from "@forhemit/shared/lib/utils";
 
 // ============================================
 // Search Input Component (CRM)
