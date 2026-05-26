@@ -61,18 +61,15 @@ export async function POST(req: Request) {
     )?.email_address;
 
     if (!primaryEmail) {
-      console.log('No primary email found for user:', id);
       return new Response('No email found', { status: 200 });
     }
 
     // Check if email is from allowed domain
     if (!isAllowedEmail(primaryEmail)) {
-      console.log('User with non-allowed email attempted sign-up:', primaryEmail);
       // Get clerk client and delete the user
       try {
         const client = await clerkClient();
         await client.users.deleteUser(id);
-        console.log('Deleted user with unauthorized email:', primaryEmail);
       } catch (error) {
         console.error('Failed to delete unauthorized user:', error);
       }
@@ -91,7 +88,6 @@ export async function POST(req: Request) {
             isAdmin: true,
           },
         });
-        console.log('Assigned super-admin role to:', primaryEmail);
       } catch (error) {
         console.error('Failed to assign super-admin role:', error);
       }
@@ -104,7 +100,6 @@ export async function POST(req: Request) {
             isAdmin: true,
           },
         });
-        console.log('Assigned admin role to:', primaryEmail);
       } catch (error) {
         console.error('Failed to assign admin role:', error);
       }

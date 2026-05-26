@@ -248,8 +248,6 @@ export const seed = mutation({
 		const existingTemplates = await ctx.db.query("documentTemplates").collect();
 
 		const existingSlugs = new Set(existingTemplates.map((t) => t.slug));
-		console.log("Existing templates:", existingSlugs);
-
 		for (const template of templatesToSeed) {
 			if (existingSlugs.has(template.slug)) {
 				// Find existing and update it
