@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent } from '@forhemit/shared/lib/analytics';
+
 import { useScrollProgress } from '@/hooks/useBlog';
 
 export function ProgressSentinel() {
@@ -38,7 +40,7 @@ export function ArticleSidebar() {
           <button 
             className="flex items-center gap-2 text-sm text-stone hover:text-sage transition-colors"
             onClick={() => {
-              console.log('[Analytics] Cite this article clicked');
+              trackEvent('cite_article');
               navigator.clipboard.writeText('Citation copied');
               alert('Citation copied to clipboard');
             }}

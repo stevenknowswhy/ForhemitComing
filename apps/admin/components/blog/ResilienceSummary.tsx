@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent } from '@forhemit/shared/lib/analytics';
+
 import { PathwayBadge } from '@/components/ui/CustomBadge';
 import { Button } from '@/components/ui/CustomButton';
 
@@ -20,7 +22,7 @@ interface ResilienceSummaryProps {
 
 export function ResilienceSummary({ summary, pathway, author, reviewedBy }: ResilienceSummaryProps) {
   const handleCite = () => {
-    console.log('[Analytics] Cite this article clicked');
+    trackEvent('cite_article');
     alert('Citation copied to clipboard (APA format)');
   };
 

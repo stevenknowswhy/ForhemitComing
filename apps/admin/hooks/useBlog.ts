@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, createContext, useContext } from 'react';
-import { Pathway } from '@/lib/blog-data';
+import type { Pathway } from '@/lib/blog-data';
+import { trackEvent, trackCRM } from '@forhemit/shared/lib/analytics';
 
 const STORAGE_KEY = 'forhemit-pathway';
 
@@ -56,10 +57,7 @@ export function usePathwayProvider() {
       window.history.pushState({}, '', url);
     }
     
-    console.log('[Analytics] Pathway selected:', { 
-      pathway: newPathway, 
-      timestamp: new Date().toISOString() 
-    });
+    trackEvent('pathway_selected', { pathway: newPathway });
   }, []);
 
   return { pathway, setPathway, isInitialized };
@@ -107,11 +105,7 @@ export function useScrollDepth(thresholds: number[] = [25, 50, 75, 90]) {
       thresholds.forEach((threshold) => {
         if (scrollPercent >= threshold && !firedThresholds.includes(threshold)) {
           setFiredThresholds((prev) => [...prev, threshold]);
-          console.log('[Analytics] Scroll threshold reached:', { 
-            threshold, 
-            scrollPercent: Math.round(scrollPercent),
-            timestamp: new Date().toISOString()
-          });
+          trackEvent('scroll_threshold_reached', { threshold, scrollPercent: Math.round(scrollPercent) });
         }
       });
     };
@@ -153,12 +147,7 @@ export function useDossierForm() {
     
     setIsSubmitting(true);
     
-    console.log('[CRM] Dossier download:', {
-      email,
-      role,
-      walkthroughRequested,
-      timestamp: new Date().toISOString()
-    });
+    trackCRM('dossier_download', { email, role, walkthroughRequested });
     
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
