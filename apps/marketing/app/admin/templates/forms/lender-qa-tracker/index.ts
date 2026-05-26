@@ -1,6 +1,4 @@
-export { default, LenderQATrackerForm } from "./LenderQATrackerForm";
-
-// Types
+// Re-export shared logic layer
 export type {
   LenderQAInputs,
   DealHeader,
@@ -15,9 +13,8 @@ export type {
   ValidationError,
   MetricsData,
   CategoryProgress,
-} from "./types";
+} from "@forhemit/shared/features/lender-qa-tracker";
 
-// Constants
 export {
   CATEGORIES,
   LOAN_TYPE_OPTIONS,
@@ -32,13 +29,7 @@ export {
   DEFAULT_INPUTS,
   STEPS,
   ESOP_TEMPLATE_ITEMS,
-} from "./constants";
-
-// Hooks
-export { useLenderQAForm } from "./hooks/useLenderQAForm";
-
-// Utils
-export {
+  useLenderQAForm,
   validateEmail,
   validateDealId,
   validatePositiveNumber,
@@ -50,9 +41,6 @@ export {
   validateQAItem,
   isOverdue,
   isNearDue,
-} from "./lib/validation";
-
-export {
   calculateMetrics,
   calculateCategoryProgress,
   generateItemId,
@@ -61,4 +49,4 @@ export {
   getLoanTypeLabel,
   filterItems,
   groupItemsByCategory,
-} from "./lib/calculations";
+} from "@forhemit/shared/features/lender-qa-tracker";

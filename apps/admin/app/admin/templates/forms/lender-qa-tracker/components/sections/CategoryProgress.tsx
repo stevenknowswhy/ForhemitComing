@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { calculateCategoryProgress } from "../../lib/calculations";
-import { QAItem } from "../../types";
+import { calculateCategoryProgress } from "@forhemit/shared/features/lender-qa-tracker";
+import { QAItem } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface CategoryProgressProps {
   items: QAItem[];

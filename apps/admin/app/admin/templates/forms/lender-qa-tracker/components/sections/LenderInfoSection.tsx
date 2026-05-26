@@ -2,7 +2,7 @@
 
 import React from "react";
 import { TextInput } from "../inputs";
-import { DealHeader } from "../../types";
+import { DealHeader } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface LenderInfoSectionProps {
   header: DealHeader;

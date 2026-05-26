@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { MetricsData } from "../../types";
+import { MetricsData } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface MetricsPanelProps {
   metrics: MetricsData;

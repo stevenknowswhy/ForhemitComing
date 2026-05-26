@@ -2,9 +2,9 @@
 
 import React from "react";
 import { TextInput, NumberInput, SelectInput, DateInput } from "../inputs";
-import { DealHeader } from "../../types";
-import { LOAN_TYPE_OPTIONS } from "../../constants";
-import { checkLoanLimit, validateDates } from "../../lib/validation";
+import { DealHeader } from "@forhemit/shared/features/lender-qa-tracker";
+import { LOAN_TYPE_OPTIONS } from "@forhemit/shared/features/lender-qa-tracker";
+import { checkLoanLimit, validateDates } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface DealHeaderSectionProps {
   header: DealHeader;

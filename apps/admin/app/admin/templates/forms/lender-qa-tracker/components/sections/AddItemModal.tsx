@@ -1,15 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { QAItem, QACategory, QAStatus, QAPriority, QASource, ValidationError } from "../../types";
+import { QAItem, QACategory, QAStatus, QAPriority, QASource, ValidationError } from "@forhemit/shared/features/lender-qa-tracker";
 import {
   CATEGORIES,
   QA_STATUS_OPTIONS,
   QA_PRIORITY_OPTIONS,
   QA_SOURCE_OPTIONS,
   DEFAULT_QA_ITEM,
-} from "../../constants";
-import { formatDate } from "../../lib/calculations";
+} from "@forhemit/shared/features/lender-qa-tracker";
+import { formatDate } from "@forhemit/shared/features/lender-qa-tracker";
 
 interface AddItemModalProps {
   isOpen: boolean;
