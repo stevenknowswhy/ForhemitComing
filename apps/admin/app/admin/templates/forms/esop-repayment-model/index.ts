@@ -6,7 +6,7 @@
 // Main component
 export { default, RepaymentModelForm } from "./RepaymentModelForm";
 
-// Types
+// Re-export shared logic layer
 export type {
   RepaymentModelInputs,
   DealHeader,
@@ -26,9 +26,8 @@ export type {
   SubordinationType,
   StandstillPeriod,
   ProjectionMethod,
-} from "./types";
+} from "@forhemit/shared/features/esop-repayment-model";
 
-// Constants
 export {
   STEPS,
   DEFAULT_INPUTS,
@@ -53,13 +52,7 @@ export {
   SBA_LOAN_LIMIT,
   MIN_DSCR_COVENANT,
   TARGET_DSCR,
-} from "./constants";
-
-// Hooks
-export { useRepaymentModel } from "./hooks/useRepaymentModel";
-
-// Library functions
-export {
+  useRepaymentModel,
   pmt,
   calculateSBAPayment,
   buildAmortizationSchedule,
@@ -80,4 +73,4 @@ export {
   fmtNumber,
   fmtYear,
   formatPhone,
-} from "./lib";
+} from "@forhemit/shared/features/esop-repayment-model";

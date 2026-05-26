@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { SellingShareholder } from "../../types";
+import { SellingShareholder } from "@forhemit/shared/features/esop-repayment-model";
 import { TextInput, SelectInput, TextArea } from "../inputs";
-import { SECTION_1042_OPTIONS, POST_CLOSE_ROLE_OPTIONS } from "../../constants";
+import { SECTION_1042_OPTIONS, POST_CLOSE_ROLE_OPTIONS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface SellingShareholderSectionProps {
   seller: SellingShareholder;

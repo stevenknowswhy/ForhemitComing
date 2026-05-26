@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { RepaymentModelInputs, ModelMetrics } from "../../types";
-import { fmt, fmtX, getDscrStatus } from "../../lib";
+import { RepaymentModelInputs, ModelMetrics } from "@forhemit/shared/features/esop-repayment-model";
+import { fmt, fmtX, getDscrStatus } from "@forhemit/shared/features/esop-repayment-model";
 
 interface UnderwritingSummaryProps {
   inputs: RepaymentModelInputs;
