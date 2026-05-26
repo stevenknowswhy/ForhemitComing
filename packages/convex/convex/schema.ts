@@ -3,706 +3,780 @@ import { v } from "convex/values";
 
 // CRM Pipeline Stages
 export const PIPELINE_STAGES = [
-  "First contact",
-  "Intro call",
-  "NDA sent",
-  "Feasibility",
-  "Term sheet",
-  "LOI signed",
-  "Closed",
-  "On hold",
-  "Dead",
+	"First contact",
+	"Intro call",
+	"NDA sent",
+	"Feasibility",
+	"Term sheet",
+	"LOI signed",
+	"Closed",
+	"On hold",
+	"Dead",
 ] as const;
 
 // NDA Status values
 export const NDA_STATUS = ["None", "Pending", "Signed"] as const;
 
 // Activity types for CRM
-export const ACTIVITY_TYPES = ["note", "call", "email", "meeting", "stage_change", "task"] as const;
+export const ACTIVITY_TYPES = [
+	"note",
+	"call",
+	"email",
+	"meeting",
+	"stage_change",
+	"task",
+] as const;
 
 export default defineSchema({
-  // Contact form submissions
-  contactSubmissions: defineTable({
-    // Contact type: who is reaching out
-    contactType: v.union(
-      v.literal("business-owner"),
-      v.literal("partner"),
-      v.literal("existing-business"),
-      v.literal("website-visitor"),
-      v.literal("marketing")
-    ),
-    // Personal information
-    firstName: v.string(),
-    lastName: v.string(),
-    email: v.string(),
-    phone: v.optional(v.string()),
-    company: v.optional(v.string()),
-    // Area of interest
-    interest: v.optional(v.union(
-      v.literal("esop-transition"),
-      v.literal("accounting"),
-      v.literal("legal"),
-      v.literal("lending"),
-      v.literal("broker"),
-      v.literal("wealth"),
-      v.literal("appraisal"),
-      v.literal("career"),
-      v.literal("general")
-    )),
-    // Message content
-    message: v.string(),
-    // Metadata
-    source: v.optional(v.string()), // e.g., "homepage", "brokers-page", etc.
-    status: v.optional(v.union(
-      v.literal("new"),
-      v.literal("in-progress"),
-      v.literal("responded"),
-      v.literal("closed")
-    )),
-    createdAt: v.number(), // timestamp
-    updatedAt: v.optional(v.number()), // timestamp when last edited
-    ipAddress: v.optional(v.string()),
-    userAgent: v.optional(v.string()),
-    /** Internal admin-only notes (not shown to submitter) */
-    adminNotes: v.optional(
-      v.array(
-        v.object({
-          id: v.string(),
-          text: v.string(),
-          createdAt: v.number(),
-        })
-      )
-    ),
-  })
-    .index("by_email", ["email"])
-    .index("by_status", ["status"])
-    .index("by_contactType", ["contactType"])
-    .index("by_createdAt", ["createdAt"]),
+	// Contact form submissions
+	contactSubmissions: defineTable({
+		// Contact type: who is reaching out
+		contactType: v.union(
+			v.literal("business-owner"),
+			v.literal("partner"),
+			v.literal("existing-business"),
+			v.literal("website-visitor"),
+			v.literal("marketing"),
+		),
+		// Personal information
+		firstName: v.string(),
+		lastName: v.string(),
+		email: v.string(),
+		phone: v.optional(v.string()),
+		company: v.optional(v.string()),
+		// Area of interest
+		interest: v.optional(
+			v.union(
+				v.literal("esop-transition"),
+				v.literal("accounting"),
+				v.literal("legal"),
+				v.literal("lending"),
+				v.literal("broker"),
+				v.literal("wealth"),
+				v.literal("appraisal"),
+				v.literal("career"),
+				v.literal("general"),
+			),
+		),
+		// Message content
+		message: v.string(),
+		// Metadata
+		source: v.optional(v.string()), // e.g., "homepage", "brokers-page", etc.
+		status: v.optional(
+			v.union(
+				v.literal("new"),
+				v.literal("in-progress"),
+				v.literal("responded"),
+				v.literal("closed"),
+			),
+		),
+		createdAt: v.number(), // timestamp
+		updatedAt: v.optional(v.number()), // timestamp when last edited
+		ipAddress: v.optional(v.string()),
+		userAgent: v.optional(v.string()),
+		/** Internal admin-only notes (not shown to submitter) */
+		adminNotes: v.optional(
+			v.array(
+				v.object({
+					id: v.string(),
+					text: v.string(),
+					createdAt: v.number(),
+				}),
+			),
+		),
+	})
+		.index("by_email", ["email"])
+		.index("by_status", ["status"])
+		.index("by_contactType", ["contactType"])
+		.index("by_createdAt", ["createdAt"]),
 
-  // Early access email signups
-  earlyAccessSignups: defineTable({
-    email: v.string(),
-    source: v.optional(v.string()), // e.g., "hero-section", "footer", etc.
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-    ipAddress: v.optional(v.string()),
-    userAgent: v.optional(v.string()),
-  })
-    .index("by_email", ["email"])
-    .index("by_createdAt", ["createdAt"]),
+	// Early access email signups
+	earlyAccessSignups: defineTable({
+		email: v.string(),
+		source: v.optional(v.string()), // e.g., "hero-section", "footer", etc.
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+		ipAddress: v.optional(v.string()),
+		userAgent: v.optional(v.string()),
+	})
+		.index("by_email", ["email"])
+		.index("by_createdAt", ["createdAt"]),
 
-  // Job applications
-  jobApplications: defineTable({
-    // Personal information
-    firstName: v.string(),
-    lastName: v.string(),
-    email: v.string(),
-    phone: v.string(),
-    // Position applied for
-    position: v.string(),
-    otherPosition: v.optional(v.string()), // if position is "Other"
-    // Resume
-    resumeUrl: v.optional(v.string()),
-    // Application status
-    status: v.optional(v.union(
-      v.literal("new"),
-      v.literal("reviewing"),
-      v.literal("interview-scheduled"),
-      v.literal("rejected"),
-      v.literal("hired")
-    )),
-    // Metadata
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-    ipAddress: v.optional(v.string()),
-    userAgent: v.optional(v.string()),
-  })
-    .index("by_email", ["email"])
-    .index("by_status", ["status"])
-    .index("by_position", ["position"])
-    .index("by_createdAt", ["createdAt"]),
+	// Job applications
+	jobApplications: defineTable({
+		// Personal information
+		firstName: v.string(),
+		lastName: v.string(),
+		email: v.string(),
+		phone: v.string(),
+		// Position applied for
+		position: v.string(),
+		otherPosition: v.optional(v.string()), // if position is "Other"
+		// Resume
+		resumeUrl: v.optional(v.string()),
+		// Application status
+		status: v.optional(
+			v.union(
+				v.literal("new"),
+				v.literal("reviewing"),
+				v.literal("interview-scheduled"),
+				v.literal("rejected"),
+				v.literal("hired"),
+			),
+		),
+		// Metadata
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+		ipAddress: v.optional(v.string()),
+		userAgent: v.optional(v.string()),
+	})
+		.index("by_email", ["email"])
+		.index("by_status", ["status"])
+		.index("by_position", ["position"])
+		.index("by_createdAt", ["createdAt"]),
 
-  // Admin tracking for form submissions (optional analytics)
-  submissionStats: defineTable({
-    date: v.string(), // YYYY-MM-DD format
-    contactSubmissions: v.number(),
-    earlyAccessSignups: v.number(),
-    jobApplications: v.number(),
-    lastUpdated: v.number(),
-  })
-    .index("by_date", ["date"]),
+	// Admin tracking for form submissions (optional analytics)
+	submissionStats: defineTable({
+		date: v.string(), // YYYY-MM-DD format
+		contactSubmissions: v.number(),
+		earlyAccessSignups: v.number(),
+		jobApplications: v.number(),
+		lastUpdated: v.number(),
+	}).index("by_date", ["date"]),
 
-  // Document templates metadata
-  documentTemplates: defineTable({
-    name: v.string(),
-    slug: v.string(),
-    description: v.string(),
-    version: v.string(),
-    status: v.union(
-      v.literal("active"),
-      v.literal("draft"),
-      v.literal("archived")
-    ),
-    category: v.optional(v.string()),
-    formKey: v.optional(v.string()), // <--- NEW: maps to form registry
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  })
-    .index("by_slug", ["slug"])
-    .index("by_status", ["status"]),
+	// Document templates metadata
+	documentTemplates: defineTable({
+		name: v.string(),
+		slug: v.string(),
+		description: v.string(),
+		version: v.string(),
+		status: v.union(
+			v.literal("active"),
+			v.literal("draft"),
+			v.literal("archived"),
+		),
+		category: v.optional(v.string()),
+		formKey: v.optional(v.string()), // <--- NEW: maps to form registry
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+	})
+		.index("by_slug", ["slug"])
+		.index("by_status", ["status"]),
 
-  // Log of all generated/downloaded/printed documents
-  generatedDocuments: defineTable({
-    // Option A: reference templates (HTML content). If form-level tracking needed,
-    // migrate to v.id("documentTemplates") and add lookup in logGeneratedDocument.
-    templateId: v.id("templates"),
-    templateName: v.string(),
-    formData: v.string(), // JSON snapshot of form inputs at generation time
-    action: v.union(
-      v.literal("pdf-download"),
-      v.literal("pdf-download-server"),
-      v.literal("pdf-download-client"),
-      v.literal("print"),
-      v.literal("preview"),
-      v.literal("export-csv"),
-      v.literal("export-json")
-    ),
-    generatedBy: v.optional(v.string()),
-    createdAt: v.number(),
-  })
-    .index("by_template", ["templateId"])
-    .index("by_createdAt", ["createdAt"]),
+	// Log of all generated/downloaded/printed documents
+	generatedDocuments: defineTable({
+		// Option A: reference templates (HTML content). If form-level tracking needed,
+		// migrate to v.id("documentTemplates") and add lookup in logGeneratedDocument.
+		templateId: v.id("templates"),
+		templateName: v.string(),
+		formData: v.string(), // JSON snapshot of form inputs at generation time
+		action: v.union(
+			v.literal("pdf-download"),
+			v.literal("pdf-download-server"),
+			v.literal("pdf-download-client"),
+			v.literal("print"),
+			v.literal("preview"),
+			v.literal("export-csv"),
+			v.literal("export-json"),
+		),
+		generatedBy: v.optional(v.string()),
+		createdAt: v.number(),
+	})
+		.index("by_template", ["templateId"])
+		.index("by_createdAt", ["createdAt"]),
 
-  // Audit log for tracking all admin changes
-  auditLogs: defineTable({
-    action: v.union(
-      v.literal("create"),
-      v.literal("update"),
-      v.literal("delete")
-    ),
-    entityType: v.union(
-      v.literal("contactSubmission"),
-      v.literal("earlyAccessSignup"),
-      v.literal("jobApplication"),
-      v.literal("documentTemplate"),
-      v.literal("generatedDocument"),
-      v.literal("agentJob"),
-      v.literal("post"),
-      v.literal("user"),
-      v.literal("agentOutput")
-    ),
-    entityId: v.string(), // The ID of the affected entity
-    changes: v.optional(v.array(v.object({
-      field: v.string(),
-      oldValue: v.optional(v.string()),
-      newValue: v.optional(v.string()),
-    }))), // Track what fields changed
-    timestamp: v.number(),
-    performedBy: v.optional(v.string()), // Could be extended with admin user info
-  })
-    .index("by_entity", ["entityType", "entityId"])
-    .index("by_timestamp", ["timestamp"])
-    .index("by_action", ["action"]),
+	// Audit log for tracking all admin changes
+	auditLogs: defineTable({
+		action: v.union(
+			v.literal("create"),
+			v.literal("update"),
+			v.literal("delete"),
+		),
+		entityType: v.union(
+			v.literal("contactSubmission"),
+			v.literal("earlyAccessSignup"),
+			v.literal("jobApplication"),
+			v.literal("documentTemplate"),
+			v.literal("generatedDocument"),
+			v.literal("agentJob"),
+			v.literal("post"),
+			v.literal("user"),
+			v.literal("agentOutput"),
+		),
+		entityId: v.string(), // The ID of the affected entity
+		changes: v.optional(
+			v.array(
+				v.object({
+					field: v.string(),
+					oldValue: v.optional(v.string()),
+					newValue: v.optional(v.string()),
+				}),
+			),
+		), // Track what fields changed
+		timestamp: v.number(),
+		performedBy: v.optional(v.string()), // Could be extended with admin user info
+	})
+		.index("by_entity", ["entityType", "entityId"])
+		.index("by_timestamp", ["timestamp"])
+		.index("by_action", ["action"]),
 
-  // ============================================
-  // CRM - Engagement Tracker Tables
-  // ============================================
+	// ============================================
+	// CRM - Engagement Tracker Tables
+	// ============================================
 
-  // Companies/Deals in the pipeline
-  crmCompanies: defineTable({
-    // Company Information
-    name: v.string(),
-    industry: v.optional(v.string()),
-    size: v.optional(v.string()), // e.g., "150 employees"
-    revenue: v.optional(v.string()), // e.g., "$22M"
-    website: v.optional(v.string()),
-    address: v.optional(v.string()),
+	// Companies/Deals in the pipeline
+	crmCompanies: defineTable({
+		// Company Information
+		name: v.string(),
+		industry: v.optional(v.string()),
+		size: v.optional(v.string()), // e.g., "150 employees"
+		revenue: v.optional(v.string()), // e.g., "$22M"
+		website: v.optional(v.string()),
+		address: v.optional(v.string()),
 
-    // Pipeline Status
-    stage: v.union(
-      v.literal("First contact"),
-      v.literal("Intro call"),
-      v.literal("NDA sent"),
-      v.literal("Feasibility"),
-      v.literal("Term sheet"),
-      v.literal("LOI signed"),
-      v.literal("Closed"),
-      v.literal("On hold"),
-      v.literal("Dead")
-    ),
-    ndaStatus: v.union(v.literal("None"), v.literal("Pending"), v.literal("Signed")),
+		// Pipeline Status
+		stage: v.union(
+			v.literal("First contact"),
+			v.literal("Intro call"),
+			v.literal("NDA sent"),
+			v.literal("Feasibility"),
+			v.literal("Term sheet"),
+			v.literal("LOI signed"),
+			v.literal("Closed"),
+			v.literal("On hold"),
+			v.literal("Dead"),
+		),
+		ndaStatus: v.union(
+			v.literal("None"),
+			v.literal("Pending"),
+			v.literal("Signed"),
+		),
 
-    // Source/Advisor
-    advisor: v.optional(v.string()), // e.g., "Morgan Stanley", "Self-sourced"
-    referralSource: v.optional(v.string()),
+		// Source/Advisor
+		advisor: v.optional(v.string()), // e.g., "Morgan Stanley", "Self-sourced"
+		referralSource: v.optional(v.string()),
 
-    // Important Dates
-    lastContactDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
-    nextStep: v.optional(v.string()),
-    nextStepDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
-    expectedCloseDate: v.optional(v.string()),
+		// Important Dates
+		lastContactDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
+		nextStep: v.optional(v.string()),
+		nextStepDate: v.optional(v.string()), // ISO date string YYYY-MM-DD
+		expectedCloseDate: v.optional(v.string()),
 
-    // Deal Engine Gates (4 hard-stop checkpoints)
-    gates: v.optional(v.object({
-      gate1: v.optional(v.object({
-        passed: v.boolean(),
-        passedAt: v.optional(v.number()),
-      })),
-      gate2: v.optional(v.object({
-        passed: v.boolean(),
-        passedAt: v.optional(v.number()),
-      })),
-      gate3: v.optional(v.object({
-        passed: v.boolean(),
-        passedAt: v.optional(v.number()),
-      })),
-      gate4: v.optional(v.object({
-        passed: v.boolean(),
-        passedAt: v.optional(v.number()),
-      })),
-    })),
+		// Deal Engine Gates (4 hard-stop checkpoints)
+		gates: v.optional(
+			v.object({
+				gate1: v.optional(
+					v.object({
+						passed: v.boolean(),
+						passedAt: v.optional(v.number()),
+					}),
+				),
+				gate2: v.optional(
+					v.object({
+						passed: v.boolean(),
+						passedAt: v.optional(v.number()),
+					}),
+				),
+				gate3: v.optional(
+					v.object({
+						passed: v.boolean(),
+						passedAt: v.optional(v.number()),
+					}),
+				),
+				gate4: v.optional(
+					v.object({
+						passed: v.boolean(),
+						passedAt: v.optional(v.number()),
+					}),
+				),
+			}),
+		),
 
-    // Deal Engine Fields
-    ref: v.optional(v.string()), // Deal reference number
-    stageEnteredAt: v.optional(v.number()), // Timestamp when stage was entered
-    fees: v.optional(v.object({
-      tier: v.string(),
-      ebitda: v.optional(v.number()),
-      totalFee: v.optional(v.number()),
-      stewardshipAnnual: v.optional(v.number()),
-      stewardshipTranchesPaid: v.optional(v.number()),
-      stewardshipTotalTranches: v.optional(v.number()),
-      // Fee milestones
-      retainer: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
-      validation: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
-      commitment: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
-      success: v.optional(v.object({ status: v.string(), amount: v.number(), invoicedAt: v.optional(v.number()), paidAt: v.optional(v.number()) })),
-    })),
-    sentAt: v.optional(v.number()), // Timestamp when document was sent
+		// Deal Engine Fields
+		ref: v.optional(v.string()), // Deal reference number
+		stageEnteredAt: v.optional(v.number()), // Timestamp when stage was entered
+		fees: v.optional(
+			v.object({
+				tier: v.string(),
+				ebitda: v.optional(v.number()),
+				totalFee: v.optional(v.number()),
+				stewardshipAnnual: v.optional(v.number()),
+				stewardshipTranchesPaid: v.optional(v.number()),
+				stewardshipTotalTranches: v.optional(v.number()),
+				// Fee milestones
+				retainer: v.optional(
+					v.object({
+						status: v.string(),
+						amount: v.number(),
+						invoicedAt: v.optional(v.number()),
+						paidAt: v.optional(v.number()),
+					}),
+				),
+				validation: v.optional(
+					v.object({
+						status: v.string(),
+						amount: v.number(),
+						invoicedAt: v.optional(v.number()),
+						paidAt: v.optional(v.number()),
+					}),
+				),
+				commitment: v.optional(
+					v.object({
+						status: v.string(),
+						amount: v.number(),
+						invoicedAt: v.optional(v.number()),
+						paidAt: v.optional(v.number()),
+					}),
+				),
+				success: v.optional(
+					v.object({
+						status: v.string(),
+						amount: v.number(),
+						invoicedAt: v.optional(v.number()),
+						paidAt: v.optional(v.number()),
+					}),
+				),
+			}),
+		),
+		sentAt: v.optional(v.number()), // Timestamp when document was sent
 
-    // Contact IDs for different roles
-    sellerContactId: v.optional(v.id("crmContacts")),
-    brokerContactId: v.optional(v.id("crmContacts")),
-    lenderContactId: v.optional(v.id("crmContacts")),
-    trusteeContactId: v.optional(v.id("crmContacts")),
-    counselContactId: v.optional(v.id("crmContacts")),
+		// Contact IDs for different roles
+		sellerContactId: v.optional(v.id("crmContacts")),
+		brokerContactId: v.optional(v.id("crmContacts")),
+		lenderContactId: v.optional(v.id("crmContacts")),
+		trusteeContactId: v.optional(v.id("crmContacts")),
+		counselContactId: v.optional(v.id("crmContacts")),
 
-    // Notes
-    notes: v.optional(v.string()),
+		// Notes
+		notes: v.optional(v.string()),
 
-    // Metadata
-    createdAt: v.number(),
-    updatedAt: v.number(),
-    createdBy: v.optional(v.string()),
-  })
-    .index("by_stage", ["stage"])
-    .index("by_ndaStatus", ["ndaStatus"])
-    .index("by_advisor", ["advisor"])
-    .index("by_createdAt", ["createdAt"])
-    .index("by_nextStepDate", ["nextStepDate"])
-    .index("by_name", ["name"]),
+		// Metadata
+		createdAt: v.number(),
+		updatedAt: v.number(),
+		createdBy: v.optional(v.string()),
+	})
+		.index("by_stage", ["stage"])
+		.index("by_ndaStatus", ["ndaStatus"])
+		.index("by_advisor", ["advisor"])
+		.index("by_createdAt", ["createdAt"])
+		.index("by_nextStepDate", ["nextStepDate"])
+		.index("by_name", ["name"]),
 
-  // Contacts associated with companies
-  crmContacts: defineTable({
-    companyId: v.id("crmCompanies"),
-    firstName: v.string(),
-    lastName: v.string(),
-    email: v.optional(v.string()),
-    phone: v.optional(v.string()),
-    role: v.optional(v.string()), // e.g., "Owner", "CEO"
-    isPrimary: v.optional(v.boolean()), // Primary contact flag
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_email", ["email"]),
+	// Contacts associated with companies
+	crmContacts: defineTable({
+		companyId: v.id("crmCompanies"),
+		firstName: v.string(),
+		lastName: v.string(),
+		email: v.optional(v.string()),
+		phone: v.optional(v.string()),
+		role: v.optional(v.string()), // e.g., "Owner", "CEO"
+		isPrimary: v.optional(v.boolean()), // Primary contact flag
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_email", ["email"]),
 
-  // Activity log for companies (calls, meetings, notes, stage changes)
-  crmActivities: defineTable({
-    companyId: v.id("crmCompanies"),
-    type: v.union(
-      v.literal("note"),
-      v.literal("call"),
-      v.literal("email"),
-      v.literal("meeting"),
-      v.literal("stage_change"),
-      v.literal("task")
-    ),
-    title: v.string(),
-    description: v.optional(v.string()),
-    date: v.string(), // ISO date string YYYY-MM-DD
-    performedBy: v.optional(v.string()),
-    metadata: v.optional(v.object({
-      oldStage: v.optional(v.string()),
-      newStage: v.optional(v.string()),
-      duration: v.optional(v.number()), // for calls/meetings
-    })),
-    createdAt: v.number(),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_date", ["date"])
-    .index("by_type", ["type"])
-    .index("by_company_date", ["companyId", "date"]),
+	// Activity log for companies (calls, meetings, notes, stage changes)
+	crmActivities: defineTable({
+		companyId: v.id("crmCompanies"),
+		type: v.union(
+			v.literal("note"),
+			v.literal("call"),
+			v.literal("email"),
+			v.literal("meeting"),
+			v.literal("stage_change"),
+			v.literal("task"),
+		),
+		title: v.string(),
+		description: v.optional(v.string()),
+		date: v.string(), // ISO date string YYYY-MM-DD
+		performedBy: v.optional(v.string()),
+		metadata: v.optional(
+			v.object({
+				oldStage: v.optional(v.string()),
+				newStage: v.optional(v.string()),
+				duration: v.optional(v.number()), // for calls/meetings
+			}),
+		),
+		createdAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_date", ["date"])
+		.index("by_type", ["type"])
+		.index("by_company_date", ["companyId", "date"]),
 
-  // Tasks/Reminders for follow-ups
-  crmTasks: defineTable({
-    companyId: v.id("crmCompanies"),
-    title: v.string(),
-    description: v.optional(v.string()),
-    dueDate: v.optional(v.string()),
-    status: v.union(v.literal("pending"), v.literal("completed"), v.literal("overdue")),
-    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
-    assignedTo: v.optional(v.string()),
-    completedAt: v.optional(v.number()),
-    createdAt: v.number(),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_status", ["status"])
-    .index("by_dueDate", ["dueDate"])
-    .index("by_assignedTo", ["assignedTo"]),
+	// Tasks/Reminders for follow-ups
+	crmTasks: defineTable({
+		companyId: v.id("crmCompanies"),
+		title: v.string(),
+		description: v.optional(v.string()),
+		dueDate: v.optional(v.string()),
+		status: v.union(
+			v.literal("pending"),
+			v.literal("completed"),
+			v.literal("overdue"),
+		),
+		priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+		assignedTo: v.optional(v.string()),
+		completedAt: v.optional(v.number()),
+		createdAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_status", ["status"])
+		.index("by_dueDate", ["dueDate"])
+		.index("by_assignedTo", ["assignedTo"]),
 
-  // Clerk-synced users (webhook + upsert fallback; see HARMONIZATION_PLAN)
-  users: defineTable({
-    clerkId: v.string(),
-    email: v.string(),
-    isAdmin: v.boolean(),
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  }).index("by_clerk_id", ["clerkId"]),
+	// Clerk-synced users (webhook + upsert fallback; see HARMONIZATION_PLAN)
+	users: defineTable({
+		clerkId: v.string(),
+		email: v.string(),
+		isAdmin: v.boolean(),
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+	}).index("by_clerk_id", ["clerkId"]),
 
-  // Blog / resources (TipTap JSON in content; validate in mutations)
-  posts: defineTable({
-    title: v.string(),
-    slug: v.string(),
-    excerpt: v.optional(v.string()),
-    content: v.any(),
-    status: v.union(
-      v.literal("draft"),
-      v.literal("published"),
-      v.literal("scheduled")
-    ),
-    publishedAt: v.optional(v.number()),
-    scheduledAt: v.optional(v.number()),
-    version: v.number(),
-    parentId: v.optional(v.id("posts")),
-    authorId: v.optional(v.id("users")),
-    authorDisplayName: v.optional(v.string()),
-    featuredImage: v.optional(v.string()),
-    metaTitle: v.optional(v.string()),
-    metaDescription: v.optional(v.string()),
-    ogImage: v.optional(v.string()),
-    /** Marketing blog: audience filter & cards */
-    pathway: v.optional(
-      v.union(
-        v.literal("founders"),
-        v.literal("attorneys"),
-        v.literal("lenders"),
-        v.literal("cpas"),
-        v.literal("employees")
-      )
-    ),
-    category: v.optional(v.string()),
-    subtitle: v.optional(v.string()),
-    readTimeOverview: v.optional(v.number()),
-    readTimeDeepDive: v.optional(v.number()),
-    readTimeMethodology: v.optional(v.number()),
-    depthLevel: v.optional(
-      v.union(
-        v.literal("overview"),
-        v.literal("detailed"),
-        v.literal("comprehensive")
-      )
-    ),
-    resilienceSummary: v.optional(v.array(v.string())),
-    relatedPathways: v.optional(
-      v.array(
-        v.union(
-          v.literal("founders"),
-          v.literal("attorneys"),
-          v.literal("lenders"),
-          v.literal("cpas"),
-          v.literal("employees")
-        )
-      )
-    ),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  })
-    .index("by_slug", ["slug"])
-    .index("by_status_publishedAt", ["status", "publishedAt"])
-    .index("by_author", ["authorId"])
-    .index("by_updatedAt", ["updatedAt"]),
+	// Blog / resources (TipTap JSON in content; validate in mutations)
+	posts: defineTable({
+		title: v.string(),
+		slug: v.string(),
+		excerpt: v.optional(v.string()),
+		content: v.any(),
+		status: v.union(
+			v.literal("draft"),
+			v.literal("published"),
+			v.literal("scheduled"),
+		),
+		publishedAt: v.optional(v.number()),
+		scheduledAt: v.optional(v.number()),
+		version: v.number(),
+		parentId: v.optional(v.id("posts")),
+		authorId: v.optional(v.id("users")),
+		authorDisplayName: v.optional(v.string()),
+		featuredImage: v.optional(v.string()),
+		metaTitle: v.optional(v.string()),
+		metaDescription: v.optional(v.string()),
+		ogImage: v.optional(v.string()),
+		/** Marketing blog: audience filter & cards */
+		pathway: v.optional(
+			v.union(
+				v.literal("founders"),
+				v.literal("attorneys"),
+				v.literal("lenders"),
+				v.literal("cpas"),
+				v.literal("employees"),
+			),
+		),
+		category: v.optional(v.string()),
+		subtitle: v.optional(v.string()),
+		readTimeOverview: v.optional(v.number()),
+		readTimeDeepDive: v.optional(v.number()),
+		readTimeMethodology: v.optional(v.number()),
+		depthLevel: v.optional(
+			v.union(
+				v.literal("overview"),
+				v.literal("detailed"),
+				v.literal("comprehensive"),
+			),
+		),
+		resilienceSummary: v.optional(v.array(v.string())),
+		relatedPathways: v.optional(
+			v.array(
+				v.union(
+					v.literal("founders"),
+					v.literal("attorneys"),
+					v.literal("lenders"),
+					v.literal("cpas"),
+					v.literal("employees"),
+				),
+			),
+		),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_slug", ["slug"])
+		.index("by_status_publishedAt", ["status", "publishedAt"])
+		.index("by_author", ["authorId"])
+		.index("by_updatedAt", ["updatedAt"]),
 
-  // Phone messages from Retell AI webhook
-  phoneMessages: defineTable({
-    callId: v.string(), // Unique call identifier from Retell
-    agentId: v.optional(v.string()), // The agent that handled the call
-    callerNumber: v.optional(v.string()),
-    transcript: v.optional(v.string()), // Full call transcript
-    recordingUrl: v.optional(v.string()), // URL to the call audio
-    status: v.optional(v.union(
-      v.literal("completed"),
-      v.literal("failed"),
-      v.literal("in-progress"),
-      v.literal("missed")
-    )),
-    duration: v.optional(v.number()), // Duration in seconds
-    summary: v.optional(v.string()), // AI generated summary
-    metadata: v.optional(v.any()), // Store full webhook payload here
-    createdAt: v.number(),
-    read: v.optional(v.boolean()), // Whether the admin has reviewed this message
-  })
-    .index("by_callId", ["callId"])
-    .index("by_createdAt", ["createdAt"])
-    .index("by_status", ["status"])
-    .index("by_read", ["read"]),
+	// Phone messages from Retell AI webhook
+	phoneMessages: defineTable({
+		callId: v.string(), // Unique call identifier from Retell
+		agentId: v.optional(v.string()), // The agent that handled the call
+		callerNumber: v.optional(v.string()),
+		transcript: v.optional(v.string()), // Full call transcript
+		recordingUrl: v.optional(v.string()), // URL to the call audio
+		status: v.optional(
+			v.union(
+				v.literal("completed"),
+				v.literal("failed"),
+				v.literal("in-progress"),
+				v.literal("missed"),
+			),
+		),
+		duration: v.optional(v.number()), // Duration in seconds
+		summary: v.optional(v.string()), // AI generated summary
+		metadata: v.optional(v.any()), // Store full webhook payload here
+		createdAt: v.number(),
+		read: v.optional(v.boolean()), // Whether the admin has reviewed this message
+	})
+		.index("by_callId", ["callId"])
+		.index("by_createdAt", ["createdAt"])
+		.index("by_status", ["status"])
+		.index("by_read", ["read"]),
 
-  // ============================================
-  // AI Agent Layer
-  // ============================================
+	// ============================================
+	// AI Agent Layer
+	// ============================================
 
-  // Agent output artifacts — every agent-produced draft/model/memo
-  agentOutputs: defineTable({
-    companyId: v.id("crmCompanies"),
-    agentId: v.string(), // e.g. "deal-analyst", "capital-structurer"
-    templateId: v.string(), // e.g. "T-04", "T-08"
-    gate: v.number(), // 1-4, or 0 for pre-pipeline
-    content: v.string(), // markdown, JSON, or structured data
-    contentType: v.union(v.literal("markdown"), v.literal("json"), v.literal("structured")),
-    status: v.union(
-      v.literal("pending_review"),
-      v.literal("approved"),
-      v.literal("rejected"),
-      v.literal("superseded"),
-      v.literal("simulation")
-    ),
-    provider: v.string(), // "openrouter", "opengateway", etc.
-    model: v.string(), // model ID used
-    usage: v.object({
-      promptTokens: v.number(),
-      completionTokens: v.number(),
-      totalTokens: v.number(),
-    }),
-    costUsd: v.number(),
-    source: v.union(v.literal("claude"), v.literal("kimi")),
-    supersedes: v.optional(v.string()), // prior output _id
-    reviewNotes: v.optional(v.string()),
-    createdAt: v.number(),
-  })
-    .index("by_company", ["companyId", "gate"])
-    .index("by_agent", ["agentId", "companyId"])
-    .index("by_status", ["status", "companyId"])
-    .index("by_template", ["templateId", "companyId"]),
+	// Agent output artifacts — every agent-produced draft/model/memo
+	agentOutputs: defineTable({
+		companyId: v.id("crmCompanies"),
+		agentId: v.string(), // e.g. "deal-analyst", "capital-structurer"
+		templateId: v.string(), // e.g. "T-04", "T-08"
+		gate: v.number(), // 1-4, or 0 for pre-pipeline
+		content: v.string(), // markdown, JSON, or structured data
+		contentType: v.union(
+			v.literal("markdown"),
+			v.literal("json"),
+			v.literal("structured"),
+		),
+		status: v.union(
+			v.literal("pending_review"),
+			v.literal("approved"),
+			v.literal("rejected"),
+			v.literal("superseded"),
+			v.literal("simulation"),
+		),
+		provider: v.string(), // "openrouter", "opengateway", etc.
+		model: v.string(), // model ID used
+		usage: v.object({
+			promptTokens: v.number(),
+			completionTokens: v.number(),
+			totalTokens: v.number(),
+		}),
+		costUsd: v.number(),
+		source: v.union(v.literal("claude"), v.literal("kimi")),
+		supersedes: v.optional(v.string()), // prior output _id
+		reviewNotes: v.optional(v.string()),
+		createdAt: v.number(),
+	})
+		.index("by_company", ["companyId", "gate"])
+		.index("by_agent", ["agentId", "companyId"])
+		.index("by_status", ["status", "companyId"])
+		.index("by_template", ["templateId", "companyId"]),
 
-  // Agent job queue — pending/in-progress agent work
-  agentQueue: defineTable({
-    companyId: v.id("crmCompanies"),
-    agentId: v.string(),
-    templateId: v.string(),
-    gate: v.number(),
-    status: v.union(
-      v.literal("pending"),
-      v.literal("in_progress"),
-      v.literal("completed"),
-      v.literal("failed"),
-      v.literal("simulation")
-    ),
-    priority: v.number(), // lower = higher priority
-    isSimulation: v.boolean(),
-    context: v.optional(v.string()), // deal data snapshot
-    error: v.optional(v.string()),
-    createdAt: v.number(),
-    startedAt: v.optional(v.number()),
-    completedAt: v.optional(v.number()),
-  })
-    .index("by_status_priority", ["status", "priority"])
-    .index("by_company", ["companyId", "gate"])
-    .index("by_agent", ["agentId", "status"]),
+	// Agent job queue — pending/in-progress agent work
+	agentQueue: defineTable({
+		companyId: v.id("crmCompanies"),
+		agentId: v.string(),
+		templateId: v.string(),
+		gate: v.number(),
+		status: v.union(
+			v.literal("pending"),
+			v.literal("in_progress"),
+			v.literal("completed"),
+			v.literal("failed"),
+			v.literal("simulation"),
+		),
+		priority: v.number(), // lower = higher priority
+		isSimulation: v.boolean(),
+		context: v.optional(v.string()), // deal data snapshot
+		error: v.optional(v.string()),
+		createdAt: v.number(),
+		startedAt: v.optional(v.number()),
+		completedAt: v.optional(v.number()),
+	})
+		.index("by_status_priority", ["status", "priority"])
+		.index("by_company", ["companyId", "gate"])
+		.index("by_agent", ["agentId", "status"]),
 
-  // ============================================
-  // Phase 3 — Financial Data & Documents
-  // ============================================
+	// ============================================
+	// Phase 3 — Financial Data & Documents
+	// ============================================
 
-  // Historical financial data for deals — agents read this for QofE, capital structure, valuation
-  companyFinancials: defineTable({
-    companyId: v.id("crmCompanies"),
-    year: v.number(), // e.g. 2024
-    revenue: v.number(),
-    ebitda: v.number(),
-    netIncome: v.optional(v.number()),
-    freeCashFlow: v.optional(v.number()),
-    ownerCompensation: v.optional(v.number()),
-    ownerBenefits: v.optional(v.number()),
-    totalDebt: v.optional(v.number()),
-    tangibleAssets: v.optional(v.number()),
-    currentAssets: v.optional(v.number()),
-    currentLiabilities: v.optional(v.number()),
-    notes: v.optional(v.string()),
-    source: v.optional(v.string()), // e.g. "tax-return", "financial-statement", "management"
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_company_year", ["companyId", "year"]),
+	// Historical financial data for deals — agents read this for QofE, capital structure, valuation
+	companyFinancials: defineTable({
+		companyId: v.id("crmCompanies"),
+		year: v.number(), // e.g. 2024
+		revenue: v.number(),
+		ebitda: v.number(),
+		netIncome: v.optional(v.number()),
+		freeCashFlow: v.optional(v.number()),
+		ownerCompensation: v.optional(v.number()),
+		ownerBenefits: v.optional(v.number()),
+		totalDebt: v.optional(v.number()),
+		tangibleAssets: v.optional(v.number()),
+		currentAssets: v.optional(v.number()),
+		currentLiabilities: v.optional(v.number()),
+		notes: v.optional(v.string()),
+		source: v.optional(v.string()), // e.g. "tax-return", "financial-statement", "management"
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_company_year", ["companyId", "year"]),
 
-  // Due diligence documents — metadata for uploaded files
-  dealDocuments: defineTable({
-    companyId: v.id("crmCompanies"),
-    name: v.string(),
-    type: v.union(
-      v.literal("appraisal"),
-      v.literal("plan-document"),
-      v.literal("tax-return"),
-      v.literal("financial-statement"),
-      v.literal("legal"),
-      v.literal("lender-doc"),
-      v.literal("compliance"),
-      v.literal("other")
-    ),
-    url: v.optional(v.string()),
-    storageId: v.optional(v.string()), // Convex file storage ID
-    uploadedBy: v.optional(v.string()),
-    fileSize: v.optional(v.number()),
-    mimeType: v.optional(v.string()),
-    notes: v.optional(v.string()),
-    createdAt: v.number(),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_type", ["type"])
-    .index("by_company_type", ["companyId", "type"]),
+	// Due diligence documents — metadata for uploaded files
+	dealDocuments: defineTable({
+		companyId: v.id("crmCompanies"),
+		name: v.string(),
+		type: v.union(
+			v.literal("appraisal"),
+			v.literal("plan-document"),
+			v.literal("tax-return"),
+			v.literal("financial-statement"),
+			v.literal("legal"),
+			v.literal("lender-doc"),
+			v.literal("compliance"),
+			v.literal("other"),
+		),
+		url: v.optional(v.string()),
+		storageId: v.optional(v.string()), // Convex file storage ID
+		uploadedBy: v.optional(v.string()),
+		fileSize: v.optional(v.number()),
+		mimeType: v.optional(v.string()),
+		notes: v.optional(v.string()),
+		createdAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_type", ["type"])
+		.index("by_company_type", ["companyId", "type"]),
 
-  // Template definitions — maps to HTML templates in packages/convex/templates/
-  templates: defineTable({
-    title: v.string(),
-    category: v.string(), // "document" | "communication" | "internal"
-    lifecycleStage: v.string(), // "first-touch" | "qualification" | "engagement" | "diligence" | "closing" | "post-close"
-    audience: v.array(v.string()), // ["seller"], ["broker"], ["internal"], etc.
-    status: v.string(), // "exists" | "gap" | "partial"
-    description: v.string(),
-    isRequired: v.boolean(),
-    requiresSignature: v.boolean(),
-    isRecurring: v.optional(v.boolean()),
-    recurrenceRule: v.optional(v.string()), // "weekly" | "monthly" | "quarterly"
-    source: v.optional(v.string()), // e.g. "auto-generated", "imported"
-    content: v.optional(v.string()), // template body content
-    version: v.optional(v.number()),
-    updatedAt: v.optional(v.number()),
-    createdAt: v.number(),
-  })
-    .index("by_title", ["title"])
-    .index("by_stage", ["lifecycleStage", "status"]),
+	// Template definitions — maps to HTML templates in packages/convex/templates/
+	templates: defineTable({
+		title: v.string(),
+		category: v.string(), // "document" | "communication" | "internal"
+		lifecycleStage: v.string(), // "first-touch" | "qualification" | "engagement" | "diligence" | "closing" | "post-close"
+		audience: v.array(v.string()), // ["seller"], ["broker"], ["internal"], etc.
+		status: v.string(), // "exists" | "gap" | "partial"
+		description: v.string(),
+		isRequired: v.boolean(),
+		requiresSignature: v.boolean(),
+		isRecurring: v.optional(v.boolean()),
+		recurrenceRule: v.optional(v.string()), // "weekly" | "monthly" | "quarterly"
+		source: v.optional(v.string()), // e.g. "auto-generated", "imported"
+		content: v.optional(v.string()), // DEPRECATED: inline HTML content (kept for migration fallback)
+		contentFileId: v.optional(v.id("_storage")), // File Storage reference for template HTML
+		version: v.optional(v.number()),
+		updatedAt: v.optional(v.number()),
+		createdAt: v.number(),
+	})
+		.index("by_title", ["title"])
+		.index("by_stage", ["lifecycleStage", "status"]),
 
-  // Stage requirements — maps templates to pipeline stages for auto-creation
-  stageRequirements: defineTable({
-    stage: v.string(),
-    templateId: v.id("templates"),
-    requiredForAudience: v.array(v.string()),
-    order: v.number(),
-    autoCreate: v.boolean(),
-    recurrenceRule: v.optional(v.string()),
-    // Trigger automation fields
-    trigger: v.optional(v.string()),
-    triggerGate: v.optional(v.string()),
-    daysOffset: v.optional(v.number()),
-    // Additional fields used by deal engine
-    feeMilestone: v.optional(v.string()),
-    autoSend: v.optional(v.boolean()),
-    blockingGate: v.optional(v.string()),
-  })
-    .index("by_stage", ["stage"])
-    .index("by_trigger", ["trigger"]),
+	// Stage requirements — maps templates to pipeline stages for auto-creation
+	stageRequirements: defineTable({
+		stage: v.string(),
+		templateId: v.id("templates"),
+		requiredForAudience: v.array(v.string()),
+		order: v.number(),
+		autoCreate: v.boolean(),
+		recurrenceRule: v.optional(v.string()),
+		// Trigger automation fields
+		trigger: v.optional(v.string()),
+		triggerGate: v.optional(v.string()),
+		daysOffset: v.optional(v.number()),
+		// Additional fields used by deal engine
+		feeMilestone: v.optional(v.string()),
+		autoSend: v.optional(v.boolean()),
+		blockingGate: v.optional(v.string()),
+	})
+		.index("by_stage", ["stage"])
+		.index("by_trigger", ["trigger"]),
 
-  // Workflow tasks — auto-created from stage requirements per deal
-  workflowTasks: defineTable({
-    templateId: v.id("templates"),
-    companyId: v.id("crmCompanies"),
-    contactId: v.optional(v.id("crmContacts")),
-    direction: v.union(v.literal("outbound"), v.literal("inbound")),
-    status: v.union(
-      v.literal("pending"),
-      v.literal("sent"),
-      v.literal("delivered"),
-      v.literal("opened"),
-      v.literal("received"),
-      v.literal("completed"),
-      v.literal("skipped"),
-      v.literal("cancelled"),
-      v.literal("overdue")
-    ),
-    dueDate: v.number(),
-    recurrenceRule: v.optional(v.string()),
-    recurrenceParentId: v.optional(v.id("workflowTasks")),
-    recurrenceInstanceNumber: v.optional(v.number()),
-    completedAt: v.optional(v.number()),
-    completedBy: v.optional(v.string()),
-    sentAt: v.optional(v.number()),
-    receivedAt: v.optional(v.number()),
-    notes: v.optional(v.string()),
-    privateNotes: v.optional(v.string()),
-    meetingAgenda: v.optional(v.string()),
-    meetingHeldAt: v.optional(v.number()),
-    priority: v.optional(v.union(v.literal("high"), v.literal("normal"), v.literal("low"))),
-    // Document/e-sign fields
-    resendId: v.optional(v.string()),
-    opensignEnvelopeId: v.optional(v.string()),
-    opensignStatus: v.optional(v.string()),
-    signedDocumentUrl: v.optional(v.string()),
-    responseData: v.optional(v.any()),
-    createdAt: v.number(),
-    updatedAt: v.optional(v.number()),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_parent", ["recurrenceParentId"])
-    .index("by_company_template", ["companyId", "templateId"])
-    .index("by_status", ["status"])
-    .index("by_opensign", ["opensignEnvelopeId"]),
+	// Workflow tasks — auto-created from stage requirements per deal
+	workflowTasks: defineTable({
+		templateId: v.id("templates"),
+		companyId: v.id("crmCompanies"),
+		contactId: v.optional(v.id("crmContacts")),
+		direction: v.union(v.literal("outbound"), v.literal("inbound")),
+		status: v.union(
+			v.literal("pending"),
+			v.literal("sent"),
+			v.literal("delivered"),
+			v.literal("opened"),
+			v.literal("received"),
+			v.literal("completed"),
+			v.literal("skipped"),
+			v.literal("cancelled"),
+			v.literal("overdue"),
+		),
+		dueDate: v.number(),
+		recurrenceRule: v.optional(v.string()),
+		recurrenceParentId: v.optional(v.id("workflowTasks")),
+		recurrenceInstanceNumber: v.optional(v.number()),
+		completedAt: v.optional(v.number()),
+		completedBy: v.optional(v.string()),
+		sentAt: v.optional(v.number()),
+		receivedAt: v.optional(v.number()),
+		notes: v.optional(v.string()),
+		privateNotes: v.optional(v.string()),
+		meetingAgenda: v.optional(v.string()),
+		meetingHeldAt: v.optional(v.number()),
+		priority: v.optional(
+			v.union(v.literal("high"), v.literal("normal"), v.literal("low")),
+		),
+		// Document/e-sign fields
+		resendId: v.optional(v.string()),
+		opensignEnvelopeId: v.optional(v.string()),
+		opensignStatus: v.optional(v.string()),
+		signedDocumentUrl: v.optional(v.string()),
+		responseData: v.optional(v.any()),
+		createdAt: v.number(),
+		updatedAt: v.optional(v.number()),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_parent", ["recurrenceParentId"])
+		.index("by_company_template", ["companyId", "templateId"])
+		.index("by_status", ["status"])
+		.index("by_opensign", ["opensignEnvelopeId"]),
 
-  // Notes — general-purpose notes on companies, contacts, and tasks
-  notes: defineTable({
-    companyId: v.id("crmCompanies"),
-    contactId: v.optional(v.id("crmContacts")),
-    authorId: v.optional(v.id("users")),
-    content: v.string(),
-    type: v.string(), // "internal" | "external" | "meeting" etc.
-    isPrivate: v.optional(v.boolean()),
-    workflowTaskId: v.optional(v.id("workflowTasks")),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  })
-    .index("by_company", ["companyId"])
-    .index("by_contact", ["contactId"])
-    .index("by_task", ["workflowTaskId"])
-    .index("by_type", ["type"]),
+	// Notes — general-purpose notes on companies, contacts, and tasks
+	notes: defineTable({
+		companyId: v.id("crmCompanies"),
+		contactId: v.optional(v.id("crmContacts")),
+		authorId: v.optional(v.id("users")),
+		content: v.string(),
+		type: v.string(), // "internal" | "external" | "meeting" etc.
+		isPrivate: v.optional(v.boolean()),
+		workflowTaskId: v.optional(v.id("workflowTasks")),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_contact", ["contactId"])
+		.index("by_task", ["workflowTaskId"])
+		.index("by_type", ["type"]),
 
-  // Email events — log of all inbound/outbound emails
-  emailEvents: defineTable({
-    direction: v.string(), // "outbound" | "inbound"
-    from: v.string(),
-    to: v.string(),
-    subject: v.string(),
-    templateId: v.optional(v.string()),
-    resendId: v.optional(v.string()),
-    status: v.string(), // "sent" | "received" | "bounced" | "delivered" etc.
-    relatedCompanyId: v.optional(v.id("crmCompanies")),
-    relatedContactId: v.optional(v.id("crmContacts")),
-    metadata: v.optional(v.any()),
-    createdAt: v.number(),
-  })
-    .index("by_createdAt", ["createdAt"])
-    .index("by_company", ["relatedCompanyId"])
-    .index("by_template", ["templateId"])
-    .index("by_from", ["from"])
-    .index("by_to", ["to"]),
+	// Email events — log of all inbound/outbound emails
+	emailEvents: defineTable({
+		direction: v.string(), // "outbound" | "inbound"
+		from: v.string(),
+		to: v.string(),
+		subject: v.string(),
+		templateId: v.optional(v.string()),
+		resendId: v.optional(v.string()),
+		status: v.string(), // "sent" | "received" | "bounced" | "delivered" etc.
+		relatedCompanyId: v.optional(v.id("crmCompanies")),
+		relatedContactId: v.optional(v.id("crmContacts")),
+		metadata: v.optional(v.any()),
+		createdAt: v.number(),
+	})
+		.index("by_createdAt", ["createdAt"])
+		.index("by_company", ["relatedCompanyId"])
+		.index("by_template", ["templateId"])
+		.index("by_from", ["from"])
+		.index("by_to", ["to"]),
 
-  // Queue tasks — trigger-based task queue
-  queueTasks: defineTable({
-    companyId: v.id("crmCompanies"),
-    templateId: v.id("templates"),
-    priority: v.string(), // "normal" | "high" | "low"
-    status: v.string(), // "pending" | "completed" | "cancelled"
-    metadata: v.optional(v.any()),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  })
-    .index("by_company_template", ["companyId", "templateId"]),
+	// Queue tasks — trigger-based task queue
+	queueTasks: defineTable({
+		companyId: v.id("crmCompanies"),
+		templateId: v.id("templates"),
+		priority: v.string(), // "normal" | "high" | "low"
+		status: v.string(), // "pending" | "completed" | "cancelled"
+		metadata: v.optional(v.any()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	}).index("by_company_template", ["companyId", "templateId"]),
 });
