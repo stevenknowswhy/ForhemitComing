@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { AmortizationRow, ScenarioTab } from "../../types";
-import { fmtX, getDscrColor, getDscrPill } from "../../lib";
-import { SCENARIOS } from "../../constants";
+import { AmortizationRow, ScenarioTab } from "@forhemit/shared/features/esop-repayment-model";
+import { fmtX, getDscrColor, getDscrPill } from "@forhemit/shared/features/esop-repayment-model";
+import { SCENARIOS } from "@forhemit/shared/features/esop-repayment-model";
 
 interface DSCRPanelProps {
   rows: AmortizationRow[];
