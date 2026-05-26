@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { LendersPageClient } from "@forhemit/shared/pages/LendersPageClient";
-import "./lenders.css";
+import "@forhemit/shared/styles/lenders.css";
 
 const title = "For Lenders | ESOP Financing Opportunities";
 const description =

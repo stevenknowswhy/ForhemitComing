@@ -20,7 +20,8 @@
     "./features/crm/*": "./src/features/crm/*.ts",
     "./features/esop-partners": "./src/features/esop-partners/index.ts",
     "./features/esop-partners/*": "./src/features/esop-partners/*.ts",
-    "./pages/*": "./src/pages/*.tsx"
+    "./pages/*": "./src/pages/*.tsx",
+    "./styles/*": "./src/styles/*.css"
   },
   "dependencies": {
     "clsx": "^2.1.1",
