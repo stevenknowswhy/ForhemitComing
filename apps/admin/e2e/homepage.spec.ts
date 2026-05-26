@@ -20,11 +20,11 @@ test.describe('Homepage', () => {
   });
 
   test('should show 404 for unknown routes', async ({ page }) => {
-    // The middleware redirects unknown routes to /coming-soon, not 404
+    // The proxy redirects unknown routes to /coming-soon, not 404
     await page.goto('/this-page-does-not-exist?preview=true');
     await page.waitForLoadState('networkidle');
     
-    // Should still load the site (middleware redirects to coming-soon)
+    // Should still load the site (proxy redirects to coming-soon)
     await expect(page.locator('body')).toBeVisible({ timeout: 15000 });
   });
 });
