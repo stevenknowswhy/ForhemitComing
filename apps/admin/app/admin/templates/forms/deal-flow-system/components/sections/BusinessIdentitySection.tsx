@@ -1,14 +1,14 @@
 // ── BUSINESS IDENTITY SECTION ────────────────────────────────────────────────
 
 import React from "react";
-import type { Stage1Data, ValidationErrors } from "../../types";
-import type { UseDealFlowFormReturn } from "../../hooks/useDealFlowForm";
+import type { Stage1Data, ValidationErrors } from "@forhemit/shared/features/deal-flow-system";
+import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-system";
 import {
   TextInput,
   SelectInput,
   NumberInput,
 } from "../inputs";
-import { ENTITY_TYPE_OPTIONS } from "../../constants";
+import { ENTITY_TYPE_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface BusinessIdentitySectionProps {
   data: Stage1Data["businessIdentity"];
