@@ -4,7 +4,10 @@ import { api } from "./_generated/api";
 import { sendEmail } from "./emailCore";
 import { fillTemplate } from "./templateRenderer";
 import { requireAuth } from "./lib/requireAuth";
-import { getTemplateContent, storeTemplateContent } from "./lib/templateContent";
+import {
+	getTemplateContent,
+	storeTemplateContent,
+} from "./lib/templateContent";
 
 // ============================================
 // Helpers
@@ -100,10 +103,16 @@ export const findOrCreateAndSeedFromFile = action({
 		),
 		description: v.optional(v.string()),
 	},
-	handler: async (ctx, args): Promise<{ id: any; action: string; contentFileId: any }> => {
-		const existing = await ctx.runQuery(api.documentPipeline.getTemplateByTitle, {
-			title: args.title,
-		});
+	handler: async (
+		ctx,
+		args,
+	): Promise<{ id: any; action: string; contentFileId: any }> => {
+		const existing = await ctx.runQuery(
+			api.documentPipeline.getTemplateByTitle,
+			{
+				title: args.title,
+			},
+		);
 
 		const fileId = await storeTemplateContent(ctx, args.content);
 
@@ -112,14 +121,21 @@ export const findOrCreateAndSeedFromFile = action({
 				templateId: existing._id,
 				contentFileId: fileId,
 			});
-			return { id: existing._id, action: "updated" as const, contentFileId: fileId };
+			return {
+				id: existing._id,
+				action: "updated" as const,
+				contentFileId: fileId,
+			};
 		}
 
 		// Create new template via mutation, then patch with file ID
-		const newId = await ctx.runMutation(api.documentPipeline.findOrCreateAndSeed, {
-			...args,
-			content: "", // placeholder — will be overwritten below
-		});
+		const newId = await ctx.runMutation(
+			api.documentPipeline.findOrCreateAndSeed,
+			{
+				...args,
+				content: "", // placeholder — will be overwritten below
+			},
+		);
 		await ctx.runMutation(api.templates.patchTemplate, {
 			templateId: newId.id,
 			contentFileId: fileId,
@@ -241,7 +257,14 @@ export const generateAndSendDocument = action({
 		htmlBody: v.optional(v.string()),
 		generatedBy: v.optional(v.string()),
 	},
-	handler: async (ctx, args): Promise<{ success: boolean; resendId?: string; templateVersion?: number }> => {
+	handler: async (
+		ctx,
+		args,
+	): Promise<{
+		success: boolean;
+		resendId?: string;
+		templateVersion?: number;
+	}> => {
 		const {
 			templateId,
 			to,
@@ -314,7 +337,9 @@ export const generateAndSendDocument = action({
 		return {
 			success: true,
 			resendId: emailResult.id,
-			...(template.version !== undefined ? { templateVersion: template.version } : {}),
+			...(template.version !== undefined
+				? { templateVersion: template.version }
+				: {}),
 		};
 	},
 });
@@ -343,10 +368,9 @@ export const generateStageDocuments = action({
 
 		for (const req of requirements) {
 			try {
-				const template = await ctx.runQuery(
-					api.documentPipeline.getTemplate,
-					{ templateId: req.templateId },
-				);
+				const template = await ctx.runQuery(api.documentPipeline.getTemplate, {
+					templateId: req.templateId,
+				});
 				if (!template) {
 					failed.push({
 						templateId: req.templateId,
