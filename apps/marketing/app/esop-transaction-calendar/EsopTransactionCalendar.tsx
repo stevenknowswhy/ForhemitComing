@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@forhemit/shared/lib/utils";
 import { MONTH_NAMES, PHASES, TOTAL_DAYS } from "./constants";
 import { CALENDAR_EVENTS } from "./data/events";
 import { GATES } from "./data/gates";
