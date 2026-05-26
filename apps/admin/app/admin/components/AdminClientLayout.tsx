@@ -119,7 +119,7 @@ export function AdminClientLayout({ children }: AdminClientLayoutProps) {
     );
   }
 
-  // If not authenticated, this should not render due to middleware
+  // If not authenticated, this should not render due to proxy
   if (!user) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
