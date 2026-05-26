@@ -1,5 +1,7 @@
 "use client";
 
+import { trackEvent } from '@forhemit/shared/lib/analytics';
+
 interface ReadingTimePillsProps {
   overview: number;
   deepDive: number;
@@ -18,7 +20,7 @@ export function ReadingTimePills({ overview, deepDive, methodology }: ReadingTim
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      console.log('[Analytics] Reading time pill clicked:', { href });
+      trackEvent('reading_time_pill_clicked', { href });
     }
   };
 
