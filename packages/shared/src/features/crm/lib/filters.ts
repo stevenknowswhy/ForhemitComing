@@ -1,6 +1,6 @@
 import type { Company, CompanyFilters, SortConfig } from "../types";
-import { daysUntil } from "./formatters";
 import { PIPELINE_STAGES } from "../types";
+import { daysUntil } from "./formatters";
 
 // ============================================
 // Company Filtering
@@ -28,7 +28,7 @@ export function filterCompanies(
 		}
 
 		// Due date filter
-		if (filters.dueFilter !== "all") {
+		if (filters.dueFilter && filters.dueFilter !== "all") {
 			const days = daysUntil(company.nextStepDate);
 
 			switch (filters.dueFilter) {
@@ -87,8 +87,7 @@ export function sortCompanies(
 				break;
 			case "stage":
 				comparison =
-					PIPELINE_STAGES.indexOf(a.stage) -
-					PIPELINE_STAGES.indexOf(b.stage);
+					PIPELINE_STAGES.indexOf(a.stage) - PIPELINE_STAGES.indexOf(b.stage);
 				break;
 			case "lastContact":
 				comparison = compareDates(a.lastContactDate, b.lastContactDate);
@@ -111,10 +110,12 @@ export function sortCompanies(
  * Compare two date strings
  */
 function compareDates(a: string | undefined, b: string | undefined): number {
-	if (!a && !b) return 0;
-	if (!a) return 1;
-	if (!b) return -1;
-	return a.localeCompare(b);
+	const da = a || undefined;
+	const db = b || undefined;
+	if (!da && !db) return 0;
+	if (!da) return 1;
+	if (!db) return -1;
+	return da.localeCompare(db);
 }
 
 // ============================================
