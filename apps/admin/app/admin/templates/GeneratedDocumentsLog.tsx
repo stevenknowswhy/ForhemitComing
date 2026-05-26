@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
 interface GeneratedDocumentsLogProps {
-  templateId?: Id<"documentTemplates">;
+  templateId?: Id<"templates">;
   onReprint?: (formData: string) => void;
 }
 
