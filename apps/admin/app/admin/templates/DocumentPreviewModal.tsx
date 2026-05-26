@@ -5,7 +5,7 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 import { getFormEntry, type TemplateFormHandle } from "./registry";
-import { exportToCSV, exportToJSON, exportToExcel } from "@/app/lib/export-utils";
+import { exportToCSV, exportToJSON, exportToExcel } from "@forhemit/shared/lib/export-utils";
 
 interface DocumentPreviewModalProps {
   isOpen: boolean;
