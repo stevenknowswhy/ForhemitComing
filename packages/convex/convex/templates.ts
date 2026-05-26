@@ -1,6 +1,8 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { action, mutation, query } from "./_generated/server";
+import { api } from "./_generated/api";
 import { requireAuth } from "./lib/requireAuth";
+import { storeTemplateContent } from "./lib/templateContent";
 
 /**
  * Get a template by ID
@@ -93,33 +95,68 @@ export const getAll = query({
   },
 });
 
+export const patchTemplate = mutation({
+  args: {
+    templateId: v.id("templates"),
+    contentFileId: v.optional(v.id("_storage")),
+    status: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    await requireAuth(ctx);
+    const patch: Record<string, unknown> = {
+      updatedAt: Date.now(),
+    };
+    if (args.contentFileId !== undefined) {
+      patch.contentFileId = args.contentFileId;
+      patch.content = undefined; // clear inline content
+    }
+    if (args.status) {
+      patch.status = args.status;
+    }
+    await ctx.db.patch(args.templateId, patch);
+  },
+});
+
 /**
  * Update the content field of a template by title.
- * Also sets status to "exists" if it was "gap" or "urgent" (since content is now present).
+ * Writes to File Storage and sets contentFileId.
+ * Also sets status to "exists" if it was "gap" or "urgent".
+ *
+ * Run: npx convex run templates:updateContentByTitle '{"title": "...", "content": "<html>..."}'
  */
-export const updateContentByTitle = mutation({
+export const updateContentByTitle = action({
   args: {
     title: v.string(),
     content: v.string(),
   },
-  handler: async (ctx, args) => {
-    await requireAuth(ctx);
-    const template = await ctx.db
-      .query("templates")
-      .filter((q) => q.eq(q.field("title"), args.title))
-      .first();
+  handler: async (ctx, args): Promise<{ success: boolean; title: string; previousStatus: string; contentFileId: any } | { success: boolean; error: string }> => {
+    const template = await ctx.runQuery(api.templates.getByTitle, {
+      title: args.title,
+    });
     if (!template) {
       return { success: false, error: `Template not found: ${args.title}` };
     }
-    const patch: Record<string, unknown> = {
-      content: args.content,
-      updatedAt: Date.now(),
+
+    // Store content in File Storage
+    const fileId = await storeTemplateContent(ctx, args.content);
+
+    // Patch the doc: set contentFileId, clear inline content, auto-promote status
+    const newStatus =
+      template.status === "gap" || template.status === "urgent"
+        ? "exists"
+        : undefined;
+
+    await ctx.runMutation(api.templates.patchTemplate, {
+      templateId: template._id,
+      contentFileId: fileId,
+      ...(newStatus ? { status: newStatus } : {}),
+    });
+
+    return {
+      success: true,
+      title: args.title,
+      previousStatus: template.status,
+      contentFileId: fileId,
     };
-    // Auto-promote status when content is populated
-    if (template.status === "gap" || template.status === "urgent") {
-      patch.status = "exists";
-    }
-    await ctx.db.patch(template._id, patch);
-    return { success: true, title: args.title, previousStatus: template.status };
   },
 });
