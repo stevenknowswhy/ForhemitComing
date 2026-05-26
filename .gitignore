@@ -4,8 +4,3 @@ node_modules/
 .turbo/
 
 .env.local
-.vercel
-.antigravitycli/
-.claude/
-# Local Pi runtime state
-.atl/
