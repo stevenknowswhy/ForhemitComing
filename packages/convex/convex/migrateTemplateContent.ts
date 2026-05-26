@@ -27,9 +27,7 @@ export const fetchMigrationPage = internalMutation({
 			.paginate({ cursor: args.cursor ?? null, numItems: PAGE_SIZE });
 
 		// Filter to docs that have content but no contentFileId yet
-		const toMigrate = results.page.filter(
-			(t) => t.content && !t.contentFileId,
-		);
+		const toMigrate = results.page.filter((t) => t.content && !t.contentFileId);
 
 		return {
 			docs: toMigrate.map((t) => ({ _id: t._id, content: t.content! })),
@@ -80,16 +78,14 @@ export const migrateContentToFiles = internalAction({
 			);
 
 			// Patch the template doc
-			await ctx.runMutation(
-				internal.migrateTemplateContent.patchWithFileId,
-				{ templateId: doc._id, fileId },
-			);
+			await ctx.runMutation(internal.migrateTemplateContent.patchWithFileId, {
+				templateId: doc._id,
+				fileId,
+			});
 			migrated++;
 		}
 
-		console.log(
-			`[migrate] Batch done: ${migrated} templates migrated (page has ${page.docs.length} candidates)`,
-		);
+		// Migration status tracked via return value
 
 		// 2. Chain next batch if more docs remain
 		if (!page.isDone) {
@@ -99,7 +95,7 @@ export const migrateContentToFiles = internalAction({
 				{ cursor: page.continueCursor },
 			);
 		} else {
-			console.log("[migrate] ✅ All templates migrated to File Storage");
+			// Migration complete — status tracked via return value
 		}
 
 		return { migrated, done: page.isDone };
