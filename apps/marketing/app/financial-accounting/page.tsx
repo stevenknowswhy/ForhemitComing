@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import "./financial-accounting.css";
+import "@forhemit/shared/styles/financial-accounting.css";
 import { FinancialAccountingClient } from "@forhemit/shared/pages/FinancialAccountingClient";
 
 const title = "For Financial & Accounting Professionals | ESOP Advisory";
