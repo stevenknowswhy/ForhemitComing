@@ -9,7 +9,7 @@ import "./styles/crm-theme.css";
 export { EngagementTracker } from "./EngagementTracker";
 export { EngagementTracker as default } from "./EngagementTracker";
 
-// Types
+// Re-export shared types + constants + lib
 export type {
   Company,
   Contact,
@@ -29,7 +29,7 @@ export type {
   ContactFormData,
   ActivityFormData,
   TaskFormData,
-} from "./types";
+} from "@forhemit/shared/features/crm";
 
 export {
   PIPELINE_STAGES,
@@ -38,10 +38,6 @@ export {
   CRM_VIEWS,
   TASK_PRIORITIES,
   STAGE_STYLES,
-} from "./types";
-
-// Constants
-export {
   DEFAULT_COMPANY_VALUES,
   DEFAULT_ACTIVITY_VALUES,
   DEFAULT_TASK_VALUES,
@@ -56,21 +52,6 @@ export {
   MONTHS,
   COMMON_INDUSTRIES,
   COMMON_ADVISORS,
-} from "./constants";
-
-// Hooks
-export {
-  useCrmCompanies,
-  useCrmCompany,
-  useCrmStats,
-  useCrmActivities,
-  useCrmContacts,
-  useCrmTasks,
-} from "./hooks";
-
-// Utilities
-export {
-  // Formatters
   formatDate,
   getRelativeDate,
   daysUntil,
@@ -83,16 +64,24 @@ export {
   highlightText,
   formatNumber,
   formatPercent,
-  // Filters
   filterCompanies,
   sortCompanies,
   groupByStage,
   groupByDueDate,
-  // Calculations
   calculateStats,
   calculateConversionMetrics,
   calculateAvgDaysInStage,
   calculateActivityMetrics,
   calculatePriorityScore,
   sortByPriority,
-} from "./lib";
+} from "@forhemit/shared/features/crm";
+
+// Hooks (Convex-dependent, stay in app)
+export {
+  useCrmCompanies,
+  useCrmCompany,
+  useCrmStats,
+  useCrmActivities,
+  useCrmContacts,
+  useCrmTasks,
+} from "./hooks";

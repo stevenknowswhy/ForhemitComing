@@ -7,11 +7,8 @@
 - **P0** — Root-level hooks → `packages/shared/src/hooks/` (merged 7748db1)
 - **P1** — `cn` utility → `packages/shared/src/lib/utils.ts` (merged 3dfc3e8)
 - **P2a** — `lender-qa-tracker` logic layer → `packages/shared/src/features/lender-qa-tracker/` (968 lines)
-
-### Ready (same pattern as P2a)
-
-- **P2b** — `esop-repayment-model` → `packages/shared/src/features/esop-repayment-model/` (2,912 lines, byte-identical)
-- **P2c** — `deal-flow-system` → `packages/shared/src/features/deal-flow-system/` (5,018 lines, byte-identical)
+- **P2b** — `esop-repayment-model` logic layer → `packages/shared/src/features/esop-repayment-model/` (965 lines)
+- **P2c** — `deal-flow-system` full module → `packages/shared/src/features/deal-flow-system/` (5,018 lines, 3 slices)
 
 ### 🔴 Planned — CRM Type Reconciliation
 

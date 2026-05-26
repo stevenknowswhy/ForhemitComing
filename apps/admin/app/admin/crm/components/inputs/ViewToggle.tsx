@@ -1,7 +1,7 @@
 "use client";
 
 import { LayoutGrid, Table2, Calendar, BarChart3, ListTodo } from "lucide-react";
-import { CrmView } from "../../types";
+import { CrmView } from "@forhemit/shared/features/crm";
 
 // ============================================
 // View Toggle Component

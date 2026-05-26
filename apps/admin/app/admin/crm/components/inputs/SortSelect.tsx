@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { Check, ChevronDown } from "lucide-react";
 import { cn } from "@forhemit/shared/lib/utils";
-import { SORT_OPTIONS } from "../../constants";
+import { SORT_OPTIONS } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Sort Select Component

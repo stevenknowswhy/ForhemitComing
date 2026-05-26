@@ -1,6 +1,6 @@
 "use client";
 
-import { PipelineStats, STAGE_STYLES } from "../../types";
+import { PipelineStats, STAGE_STYLES } from "@forhemit/shared/features/crm";
 
 // ============================================
 // Analytics View Component

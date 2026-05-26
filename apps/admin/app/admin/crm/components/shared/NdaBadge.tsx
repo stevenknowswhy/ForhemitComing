@@ -1,6 +1,6 @@
 "use client";
 
-import { NdaStatus } from "../../types";
+import { NdaStatus } from "@forhemit/shared/features/crm";
 
 // ============================================
 // NDA Badge Component
