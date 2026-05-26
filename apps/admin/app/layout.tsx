@@ -4,6 +4,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import { ConvexClientProvider } from './components/providers/ConvexProvider'
 import { ErrorBoundary } from './components/ErrorBoundary'
+import { WebVitalsReporter } from './components/WebVitalsReporter'
 import { env } from '@/lib/env'
 
 const inter = Inter({
@@ -60,6 +61,7 @@ export default function RootLayout({
     >
       <html lang="en" className={`${inter.variable}`} suppressHydrationWarning>
         <body suppressHydrationWarning className="min-h-screen bg-gray-50">
+          <WebVitalsReporter />
           <ErrorBoundary>
             <ConvexClientProvider convexUrl={env.NEXT_PUBLIC_CONVEX_URL}>
               {children}
