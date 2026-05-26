@@ -7,7 +7,10 @@ import { Edit2, Trash2 } from "lucide-react";
 import { formatPhoneNumber } from "@/app/lib/formatters";
 import EditModal from "../components/EditModal";
 import DeleteConfirmModal from "../components/DeleteConfirmModal";
-import { Id } from "@/convex/_generated/dataModel";
+import type { Id } from "@/convex/_generated/dataModel";
+
+// Type matching schema union
+type ApplicationStatus = "new" | "reviewing" | "interview-scheduled" | "rejected" | "hired";
 import "../admin.css";
 
 interface JobApplication {
@@ -33,7 +36,7 @@ export default function ApplicationsPage() {
 
   const applications = useQuery(
     api.jobApplications.list,
-    { limit: 100, status: (appStatus as any) || undefined }
+    { limit: 100, status: (appStatus as ApplicationStatus) || undefined }
   );
 
   const formatDate = (timestamp: number) => {

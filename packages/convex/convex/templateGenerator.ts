@@ -74,7 +74,8 @@ export const generateDocument = action({
     // 3. Generate PDF
     try {
       const pdfResult: any = await ctx.runAction(api.pdfGenerator.generatePdf, {
-        formData: data as any,
+        // Filter undefined values to match Record<string, string> type
+        formData: Object.fromEntries(Object.entries(data).filter(([_, v]) => v !== undefined)) as Record<string, string>,
         templateId: template._id,
         templateName: templateTitle,
         htmlContent: renderedHtml,
