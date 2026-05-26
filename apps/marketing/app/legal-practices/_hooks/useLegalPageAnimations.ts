@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
+import { useGlobalScrollReveal } from "@forhemit/shared/hooks/useIntersectionObserver";
 
 export function useLegalPageAnimations() {
   // Global scroll reveal for all animated elements

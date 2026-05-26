@@ -1,6 +1,6 @@
 "use client";
 
-import { useGlobalScrollReveal } from "@/hooks/useIntersectionObserver";
+import { useGlobalScrollReveal } from "@forhemit/shared/hooks/useIntersectionObserver";
 import "./about-page.css";
 
 // Section components
