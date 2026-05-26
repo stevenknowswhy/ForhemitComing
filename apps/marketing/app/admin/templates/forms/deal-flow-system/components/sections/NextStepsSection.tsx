@@ -6,7 +6,7 @@ import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-
 import {
   SelectInput,
   Checkbox,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import { TIMEZONE_OPTIONS } from "@forhemit/shared/features/deal-flow-system";
 
 interface NextStepsSectionProps {

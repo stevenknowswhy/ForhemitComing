@@ -6,7 +6,7 @@ import type { UseDealFlowFormReturn } from "@forhemit/shared/features/deal-flow-
 import {
   SelectInput,
   CheckboxGroup,
-} from "../inputs";
+} from "@forhemit/shared/features/deal-flow-system";
 import {
   PRIMARY_MOTIVATIONS,
   ESOP_KNOWLEDGE_OPTIONS,
