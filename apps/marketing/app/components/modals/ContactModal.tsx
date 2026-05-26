@@ -2,7 +2,7 @@
 
 import { ModalDialog } from "../ui/ModalDialog";
 import { ContactFormExperience } from "../contact/ContactFormExperience";
-import "./contact-modal.css";
+import "@forhemit/shared/styles/contact-modal.css";
 
 interface ContactModalProps {
   isOpen: boolean;

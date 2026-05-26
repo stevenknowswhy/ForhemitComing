@@ -9,7 +9,7 @@ type ContactType = "business-owner" | "partner" | "existing-business" | "website
 type ContactInterest = "esop-transition" | "accounting" | "legal" | "lending" | "broker" | "wealth" | "appraisal" | "career" | "general";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
-import "./contact-modal.css";
+import "@forhemit/shared/styles/contact-modal.css";
 
 interface ContactModalProps {
   isOpen: boolean;
