@@ -201,10 +201,30 @@ export interface Company {
 		stewardshipAnnual?: number;
 		stewardshipTranchesPaid?: number;
 		stewardshipTotalTranches?: number;
-		retainer?: { status: string; amount: number; invoicedAt?: number; paidAt?: number };
-		validation?: { status: string; amount: number; invoicedAt?: number; paidAt?: number };
-		commitment?: { status: string; amount: number; invoicedAt?: number; paidAt?: number };
-		success?: { status: string; amount: number; invoicedAt?: number; paidAt?: number };
+		retainer?: {
+			status: string;
+			amount: number;
+			invoicedAt?: number;
+			paidAt?: number;
+		};
+		validation?: {
+			status: string;
+			amount: number;
+			invoicedAt?: number;
+			paidAt?: number;
+		};
+		commitment?: {
+			status: string;
+			amount: number;
+			invoicedAt?: number;
+			paidAt?: number;
+		};
+		success?: {
+			status: string;
+			amount: number;
+			invoicedAt?: number;
+			paidAt?: number;
+		};
 		[milestone: string]: unknown;
 	};
 	gates?: {
