@@ -153,7 +153,9 @@ export default defineSchema({
 
   // Log of all generated/downloaded/printed documents
   generatedDocuments: defineTable({
-    templateId: v.id("documentTemplates"),
+    // Option A: reference templates (HTML content). If form-level tracking needed,
+    // migrate to v.id("documentTemplates") and add lookup in logGeneratedDocument.
+    templateId: v.id("templates"),
     templateName: v.string(),
     formData: v.string(), // JSON snapshot of form inputs at generation time
     action: v.union(

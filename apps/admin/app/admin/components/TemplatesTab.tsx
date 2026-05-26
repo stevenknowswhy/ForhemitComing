@@ -21,7 +21,7 @@ export default function TemplatesTab() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [activeTemplateId, setActiveTemplateId] =
-    useState<Id<"documentTemplates"> | null>(null);
+    useState<Id<"templates"> | null>(null);
   const [activeTemplateName, setActiveTemplateName] = useState("");
   const [activeFormKey, setActiveFormKey] = useState("");
   const [reprintData, setReprintData] = useState<
@@ -97,7 +97,7 @@ export default function TemplatesTab() {
   }, [forceSeedAll, router]);
 
   const openPreview = useCallback(
-    (id: Id<"documentTemplates">, name: string, formKey?: string, data?: string) => {
+    (id: Id<"templates">, name: string, formKey?: string, data?: string) => {
       setActiveTemplateId(id);
       setActiveTemplateName(name);
       setActiveFormKey(formKey || "");

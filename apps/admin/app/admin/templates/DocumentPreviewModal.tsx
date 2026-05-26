@@ -10,7 +10,7 @@ import { exportToCSV, exportToJSON, exportToExcel } from "@/app/lib/export-utils
 interface DocumentPreviewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  templateId: Id<"documentTemplates"> | null;
+  templateId: Id<"templates"> | null;
   templateName: string;
   /** formKey from the Convex template record — determines which form to render */
   formKey?: string;
