@@ -68,8 +68,6 @@ export const generateDocument = action({
       };
     }
 
-    console.log(`Template loaded: ${templateTitle} (v${template.version}, ${(template.content.length / 1024).toFixed(1)}KB)`);
-
     // 2. Replace placeholders
     const renderedHtml = renderTemplate(template.content, data);
 
@@ -82,8 +80,6 @@ export const generateDocument = action({
         htmlContent: renderedHtml,
         mode: "full",
       });
-
-      console.log(`PDF generated: ${(pdfResult.pdfSize / 1024).toFixed(1)}KB`);
 
       // 4. Get email configuration
       const emailConfig = getEmailConfig(templateTitle);
@@ -124,7 +120,6 @@ export const generateDocument = action({
         };
       }
 
-      console.log(`Email sent successfully to ${recipientEmail}`);
       return {
         success: true,
         emailId: emailResult.emailId,

@@ -22,8 +22,6 @@ export const generatePdf = action({
   handler: async (ctx, args): Promise<{ pdfBase64: string; pdfSize: number }> => {
     const { htmlContent, templateName } = args;
 
-    console.log(`Generating PDF for template: ${templateName}`);
-
     const siteUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
     const pdfEndpoint = `${siteUrl}/api/pdf-generate`;
 
@@ -43,8 +41,6 @@ export const generatePdf = action({
       const pdfBuffer = await pdfResponse.arrayBuffer();
       const pdfBase64 = Buffer.from(pdfBuffer).toString("base64");
       const pdfSize = pdfBuffer.byteLength;
-
-      console.log(`PDF generated: ${(pdfSize / 1024).toFixed(1)}KB`);
 
       return { pdfBase64, pdfSize };
     } catch (fetchError: unknown) {
