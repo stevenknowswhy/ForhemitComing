@@ -1,6 +1,7 @@
 import { v } from "convex/values";
 import { query } from "../../_generated/server";
 import { Doc } from "../../_generated/dataModel";
+import { requireAuth } from "../../lib/requireAuth";
 
 /**
  * Get all companies
@@ -8,6 +9,7 @@ import { Doc } from "../../_generated/dataModel";
 export const list = query({
   args: {},
   handler: async (ctx) => {
+    await requireAuth(ctx);
     return await ctx.db.query("crmCompanies").order("desc").collect();
   },
 });
@@ -18,6 +20,7 @@ export const list = query({
 export const get = query({
   args: { id: v.id("crmCompanies") },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const company = await ctx.db.get(args.id);
     if (!company) return null;
 
@@ -69,6 +72,7 @@ export const getByStage = query({
     limit: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const query = ctx.db
       .query("crmCompanies")
       .withIndex("by_stage", (q) => q.eq("stage", args.stage))
@@ -88,6 +92,7 @@ export const getByStage = query({
 export const getStats = query({
   args: {},
   handler: async (ctx) => {
+    await requireAuth(ctx);
     const allCompanies = await ctx.db.query("crmCompanies").collect();
 
     const total = allCompanies.length;
@@ -147,6 +152,7 @@ export const getWithUpcomingTasks = query({
     endDate: v.string(),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const companies = await ctx.db
       .query("crmCompanies")
       .withIndex("by_nextStepDate", (q) =>

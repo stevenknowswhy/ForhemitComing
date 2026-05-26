@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { action, internalAction } from "./_generated/server";
+import { requireAuth } from "./lib/requireAuth";
 import {
   sendEmail,
   sendAndLogEmail,
@@ -44,6 +45,7 @@ export const sendContactFormNotification = action({
     source: v.optional(v.string()),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #F0562E; border-bottom: 2px solid #F0562E; padding-bottom: 10px;">
@@ -157,6 +159,7 @@ export const sendInfrastructureAuditNotification = action({
     }),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const laneLabels: Record<string, string> = {
       resilience: "Lane 1: Resilience",
       stewardship: "Lane 2: Stewardship",
@@ -263,6 +266,7 @@ export const sendEarlyAccessNotification = action({
     source: v.optional(v.string()),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
         <h2 style="color: #F0562E; border-bottom: 2px solid #F0562E; padding-bottom: 10px;">
@@ -346,6 +350,7 @@ export const sendJobApplicationNotification = action({
     resumeUrl: v.optional(v.string()),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const positionDisplay = args.position === "Other" && args.otherPosition
       ? args.otherPosition
       : args.position;
@@ -471,6 +476,7 @@ export const sendConfidentialIntakeNotification = action({
     ndaSigned: v.optional(v.boolean()),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const roleLabels: Record<string, string> = {
       "owner-sole": "Sole Owner",
       "owner-partner": "Partner / Co-owner",
@@ -603,6 +609,7 @@ export const sendClassificationIntakeNotification = action({
     clientType: v.optional(v.string()),
   },
   handler: async (_ctx, args) => {
+    await requireAuth(_ctx);
     const roleLabels: Record<string, string> = {
       owner: "Business Owner",
       broker: "Broker",
@@ -689,6 +696,7 @@ export const sendWithAttachment = action({
     ),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const result = await sendAndLogEmail(ctx, {
       to: args.to,
       subject: args.subject,
@@ -731,6 +739,7 @@ export const sendTemplateEmailAction = action({
     templateVersion: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
+    await requireAuth(ctx);
     const result = await sendAndLogEmail(ctx, {
       to: args.to,
       subject: args.subject,
