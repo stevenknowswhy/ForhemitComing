@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
-import { isAllowedEmail, isSuperAdmin } from './lib/clerk';
+import { isSuperAdmin } from './lib/clerk';
 import { NextResponse } from 'next/server';
 
 // Define public routes that don't require authentication
@@ -52,7 +52,8 @@ export default clerkMiddleware(async (auth, request) => {
     //     { status: 403 }
     //   );
     // }
-    console.log(`Allowing email: ${email} for testing`);
+    // Email domain check disabled for testing
+    // if (!isAllowedEmail(email)) {
 
     // Check super admin for user management APIs
     if (request.nextUrl.pathname.startsWith('/api/admin/users') && !isSuperAdmin(email)) {
