@@ -89,7 +89,7 @@ export const seedTemplateContent = mutation({
 });
 
 /** Find a template by title, or create it, then store content in File Storage */
-export const findOrCreateAndSeedFromFile = action({
+export const findOrCreateAndSeedFromFile: any = action({
 	args: {
 		title: v.string(),
 		content: v.string(),
@@ -103,15 +103,10 @@ export const findOrCreateAndSeedFromFile = action({
 		),
 		description: v.optional(v.string()),
 	},
-	handler: async (
-		ctx,
-		args,
-	): Promise<{ id: any; action: string; contentFileId: any }> => {
+	handler: async (ctx: any, args: any) => {
 		const existing = await ctx.runQuery(
 			api.documentPipeline.getTemplateByTitle,
-			{
-				title: args.title,
-			},
+			{ title: args.title },
 		);
 
 		const fileId = await storeTemplateContent(ctx, args.content);
@@ -128,13 +123,9 @@ export const findOrCreateAndSeedFromFile = action({
 			};
 		}
 
-		// Create new template via mutation, then patch with file ID
 		const newId = await ctx.runMutation(
 			api.documentPipeline.findOrCreateAndSeed,
-			{
-				...args,
-				content: "", // placeholder — will be overwritten below
-			},
+			{ ...args, content: "" },
 		);
 		await ctx.runMutation(api.templates.patchTemplate, {
 			templateId: newId.id,
