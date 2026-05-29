@@ -9,7 +9,7 @@ import { storeTemplateContent } from "./lib/templateContent";
  */
 export const get = query({
 	args: { id: v.id("templates") },
-	handler: async (ctx, args) => {
+	handler: async (ctx: any, args: any) => {
 		await requireAuth(ctx);
 		return await ctx.db.get(args.id);
 	},
@@ -124,23 +124,12 @@ export const patchTemplate = mutation({
  *
  * Run: npx convex run templates:updateContentByTitle '{"title": "...", "content": "<html>..."}'
  */
-export const updateContentByTitle = action({
+export const updateContentByTitle: any = action({
 	args: {
 		title: v.string(),
 		content: v.string(),
 	},
-	handler: async (
-		ctx,
-		args,
-	): Promise<
-		| {
-				success: boolean;
-				title: string;
-				previousStatus: string;
-				contentFileId: any;
-		  }
-		| { success: boolean; error: string }
-	> => {
+	handler: async (ctx, args) => {
 		const template = await ctx.runQuery(api.templates.getByTitle, {
 			title: args.title,
 		});
