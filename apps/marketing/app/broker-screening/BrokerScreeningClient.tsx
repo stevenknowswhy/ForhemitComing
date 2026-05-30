@@ -326,7 +326,7 @@ function calculateScoreStatus(answers: Answers): ScoreStatus {
 
   const percentage = Math.round((coreChecked / coreTotal) * 100);
 
-  let isPassing = failsChecked === 0 && coreChecked >= 13;
+  const isPassing = failsChecked === 0 && coreChecked >= 13;
   let statusText: string;
   let statusClass: ScoreStatus["statusClass"];
 
@@ -385,6 +385,172 @@ function ScoreIndicator({ status }: { status: ScoreStatus }) {
             {status.failsChecked} disqualifier{status.failsChecked > 1 ? "s" : ""}
           </span>
         )}
+      </div>
+    </div>
+  );
+}
+
+/* ── Extracted subcomponents ── */
+
+function VerdictCTA({ verdict }: { verdict: Results["verdict"] }) {
+  switch (verdict) {
+    case "submit":
+      return (
+        <>
+          <h3>Ready to submit?</h3>
+          <p>
+            Send a brief email to{" "}
+            <a href="mailto:deals@forhemit.com">deals@forhemit.com</a> with: (1) business type 
+            and state, (2) approximate EBITDA, (3) number of employees, (4) owner&apos;s timeline, 
+            and (5) a note on any priority signals that apply. Do not include the seller&apos;s 
+            name or business name in the first email.
+          </p>
+        </>
+      );
+    case "discuss":
+      return (
+        <>
+          <h3>Worth a preliminary conversation?</h3>
+          <p>
+            If you believe the gaps are addressable, reach out to{" "}
+            <a href="mailto:deals@forhemit.com">deals@forhemit.com</a> before submitting. 
+            Forhemit can often help you identify what to work through with your client pre-LOI.
+          </p>
+        </>
+      );
+    case "hold":
+      return (
+        <>
+          <h3>One item may be resolvable.</h3>
+          <p>
+            If the disqualifying item is in process of resolution (S-Corp conversion underway, 
+            litigation recently settled, succession candidate identified), call Forhemit before 
+            moving on. Reach out at <a href="mailto:deals@forhemit.com">deals@forhemit.com</a>.
+          </p>
+        </>
+      );
+    case "disqualified":
+      return (
+        <>
+          <h3>Not the right fit at this time.</h3>
+          <p>
+            Two or more disqualifiers means this deal cannot proceed until the underlying issues 
+            are resolved. If circumstances change — financials improve, succession is in place, 
+            litigation resolves — reach out to <a href="mailto:deals@forhemit.com">deals@forhemit.com</a>{" "}
+            to revisit.
+          </p>
+        </>
+      );
+  }
+}
+
+function ResultsCard({ results, onRestart }: { results: Results; onRestart: () => void }) {
+  return (
+    <div className={`bsp-results-card bsp-verdict-${results.verdictClass}`}>
+      <div className="bsp-results-header">
+        <span className="bsp-verdict-label">{results.verdictLabel}</span>
+        <h1 className="bsp-verdict-title">{results.verdictTitle}</h1>
+        <p className="bsp-verdict-sub">{results.verdictSub}</p>
+      </div>
+
+      <div className="bsp-score-grid">
+        <div className="bsp-score-cell">
+          <div className={`bsp-score-number ${results.failCount === 0 ? "bsp-green" : "bsp-red"}`}>
+            {results.failCount}
+          </div>
+          <div className="bsp-score-label">Disqualifiers</div>
+        </div>
+        <div className="bsp-score-cell">
+          <div className="bsp-score-number bsp-amber">{results.signalCount}/7</div>
+          <div className="bsp-score-label">Priority Signals</div>
+        </div>
+        <div className="bsp-score-cell">
+          <div className={`bsp-score-number ${results.corePassCount >= 13 ? "bsp-green" : results.corePassCount >= 9 ? "bsp-amber" : "bsp-red"}`}>
+            {results.corePassCount}/{results.coreTotal}
+          </div>
+          <div className="bsp-score-label">Core Indicators</div>
+        </div>
+      </div>
+
+      <div className="bsp-results-body">
+        {results.checkedFails.length > 0 && (
+          <>
+            <h2 className="bsp-results-section-title">Disqualifiers Present</h2>
+            <ul className="bsp-fail-list">
+              {results.checkedFails.map((title, idx) => (
+                <li key={idx}>{title}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        {results.checkedSignals.length > 0 && (
+          <>
+            <h2 className="bsp-results-section-title">Priority Signals Confirmed</h2>
+            <ul className="bsp-pass-list">
+              {results.checkedSignals.map((title, idx) => (
+                <li key={idx}>{title}</li>
+              ))}
+            </ul>
+          </>
+        )}
+
+        <div className="bsp-cta-box">
+          <VerdictCTA verdict={results.verdict} />
+        </div>
+
+        <button className="bsp-restart-btn" onClick={onRestart}>
+          <RotateCcw size={14} />
+          Start Over
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function SectionQuestion({
+  question,
+  checked,
+  onToggle,
+}: {
+  question: Question;
+  checked: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <div className="bsp-checklist-item" onClick={onToggle}>
+      <div className="bsp-item-main">
+        <div
+          className={`bsp-custom-check ${
+            checked
+              ? question.type === "fail"
+                ? "bsp-checked-fail"
+                : "bsp-checked-pass"
+              : ""
+          }`}
+        >
+          {question.type === "fail" ? (
+            <X size={10} strokeWidth={3} />
+          ) : (
+            <Check size={12} strokeWidth={3} />
+          )}
+        </div>
+        <div className="bsp-item-content">
+          <div className="bsp-item-label">
+            <span className={`bsp-item-type bsp-type-${question.type}`}>
+              {question.type === "fail" && "Disqualifier"}
+              {question.type === "pass" && "Pass"}
+              {question.type === "signal" && "Signal"}
+            </span>
+          </div>
+          <div className="bsp-item-title">{question.title}</div>
+          <div className="bsp-item-desc">{question.description}</div>
+          {question.note && (
+            <div className="bsp-item-note">
+              <strong>Note:</strong> {question.note}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -520,7 +686,6 @@ export function BrokerScreeningClient() {
         <div className="bsp-bg" aria-hidden />
         
         <div className="bsp-wrapper">
-          {/* Header */}
           <header className="bsp-header">
             <Link href="/" className="bsp-logo">
               Forhemit
@@ -528,110 +693,8 @@ export function BrokerScreeningClient() {
             <span className="bsp-logo-sub">Broker Deal Screening</span>
           </header>
 
-          {/* Results */}
-          <div className={`bsp-results-card bsp-verdict-${results.verdictClass}`}>
-            <div className="bsp-results-header">
-              <span className="bsp-verdict-label">{results.verdictLabel}</span>
-              <h1 className="bsp-verdict-title">{results.verdictTitle}</h1>
-              <p className="bsp-verdict-sub">{results.verdictSub}</p>
-            </div>
+          <ResultsCard results={results} onRestart={handleRestart} />
 
-            <div className="bsp-score-grid">
-              <div className="bsp-score-cell">
-                <div className={`bsp-score-number ${results.failCount === 0 ? "bsp-green" : "bsp-red"}`}>
-                  {results.failCount}
-                </div>
-                <div className="bsp-score-label">Disqualifiers</div>
-              </div>
-              <div className="bsp-score-cell">
-                <div className="bsp-score-number bsp-amber">{results.signalCount}/7</div>
-                <div className="bsp-score-label">Priority Signals</div>
-              </div>
-              <div className="bsp-score-cell">
-                <div className={`bsp-score-number ${results.corePassCount >= 13 ? "bsp-green" : results.corePassCount >= 9 ? "bsp-amber" : "bsp-red"}`}>
-                  {results.corePassCount}/{results.coreTotal}
-                </div>
-                <div className="bsp-score-label">Core Indicators</div>
-              </div>
-            </div>
-
-            <div className="bsp-results-body">
-              {results.checkedFails.length > 0 && (
-                <>
-                  <h2 className="bsp-results-section-title">Disqualifiers Present</h2>
-                  <ul className="bsp-fail-list">
-                    {results.checkedFails.map((title, idx) => (
-                      <li key={idx}>{title}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              {results.checkedSignals.length > 0 && (
-                <>
-                  <h2 className="bsp-results-section-title">Priority Signals Confirmed</h2>
-                  <ul className="bsp-pass-list">
-                    {results.checkedSignals.map((title, idx) => (
-                      <li key={idx}>{title}</li>
-                    ))}
-                  </ul>
-                </>
-              )}
-
-              <div className="bsp-cta-box">
-                {results.verdict === "submit" && (
-                  <>
-                    <h3>Ready to submit?</h3>
-                    <p>
-                      Send a brief email to{" "}
-                      <a href="mailto:deals@forhemit.com">deals@forhemit.com</a> with: (1) business type 
-                      and state, (2) approximate EBITDA, (3) number of employees, (4) owner&apos;s timeline, 
-                      and (5) a note on any priority signals that apply. Do not include the seller&apos;s 
-                      name or business name in the first email.
-                    </p>
-                  </>
-                )}
-                {results.verdict === "discuss" && (
-                  <>
-                    <h3>Worth a preliminary conversation?</h3>
-                    <p>
-                      If you believe the gaps are addressable, reach out to{" "}
-                      <a href="mailto:deals@forhemit.com">deals@forhemit.com</a> before submitting. 
-                      Forhemit can often help you identify what to work through with your client pre-LOI.
-                    </p>
-                  </>
-                )}
-                {results.verdict === "hold" && (
-                  <>
-                    <h3>One item may be resolvable.</h3>
-                    <p>
-                      If the disqualifying item is in process of resolution (S-Corp conversion underway, 
-                      litigation recently settled, succession candidate identified), call Forhemit before 
-                      moving on. Reach out at <a href="mailto:deals@forhemit.com">deals@forhemit.com</a>.
-                    </p>
-                  </>
-                )}
-                {results.verdict === "disqualified" && (
-                  <>
-                    <h3>Not the right fit at this time.</h3>
-                    <p>
-                      Two or more disqualifiers means this deal cannot proceed until the underlying issues 
-                      are resolved. If circumstances change — financials improve, succession is in place, 
-                      litigation resolves — reach out to <a href="mailto:deals@forhemit.com">deals@forhemit.com</a>{" "}
-                      to revisit.
-                    </p>
-                  </>
-                )}
-              </div>
-
-              <button className="bsp-restart-btn" onClick={handleRestart}>
-                <RotateCcw size={14} />
-                Start Over
-              </button>
-            </div>
-          </div>
-
-          {/* Footer */}
           <footer className="bsp-footer">
             <p>
               <Link href="/brokers">← Back to Brokers Page</Link>
@@ -728,45 +791,12 @@ export function BrokerScreeningClient() {
 
           <div className="bsp-items-list">
             {currentSection.questions.map((question) => (
-              <div
+              <SectionQuestion
                 key={question.id}
-                className="bsp-checklist-item"
-                onClick={() => handleToggle(question.id)}
-              >
-                <div className="bsp-item-main">
-                  <div
-                    className={`bsp-custom-check ${
-                      answers[question.id]
-                        ? question.type === "fail"
-                          ? "bsp-checked-fail"
-                          : "bsp-checked-pass"
-                        : ""
-                    }`}
-                  >
-                    {question.type === "fail" ? (
-                      <X size={10} strokeWidth={3} />
-                    ) : (
-                      <Check size={12} strokeWidth={3} />
-                    )}
-                  </div>
-                  <div className="bsp-item-content">
-                    <div className="bsp-item-label">
-                      <span className={`bsp-item-type bsp-type-${question.type}`}>
-                        {question.type === "fail" && "Disqualifier"}
-                        {question.type === "pass" && "Pass"}
-                        {question.type === "signal" && "Signal"}
-                      </span>
-                    </div>
-                    <div className="bsp-item-title">{question.title}</div>
-                    <div className="bsp-item-desc">{question.description}</div>
-                    {question.note && (
-                      <div className="bsp-item-note">
-                        <strong>Note:</strong> {question.note}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
+                question={question}
+                checked={!!answers[question.id]}
+                onToggle={() => handleToggle(question.id)}
+              />
             ))}
           </div>
 

@@ -1,5 +1,7 @@
 "use client";
 
+import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
@@ -42,11 +44,8 @@ function FAQItem({
 }
 
 export function LendersPageClient() {
-	const [openFaq, setOpenFaq] = useState<number | null>(0);
+	const [openFaq, toggleFaq] = useFaqToggle<number>(0);
 
-	const toggleFaq = (index: number) => {
-		setOpenFaq(openFaq === index ? null : index);
-	};
 
 	// Scroll reveal animation
 	const observerRef = useRef<IntersectionObserver | null>(null);

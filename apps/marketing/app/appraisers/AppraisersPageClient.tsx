@@ -1,5 +1,7 @@
 "use client";
 
+import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@forhemit/shared/styles/appraisers.css";
@@ -258,11 +260,8 @@ function FeatureCard({
 }
 
 export function AppraisersPageClient() {
-	const [openFaq, setOpenFaq] = useState<number | null>(0);
+	const [openFaq, toggleFaq] = useFaqToggle<number>(0);
 
-	const toggleFaq = (index: number) => {
-		setOpenFaq(openFaq === index ? null : index);
-	};
 
 	// Scroll reveal animation
 	useEffect(() => {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
 import { visionFaqs, financialsFaqs, operationalFaqs, legacyFaqs } from "../../_data/faqs";
 
 interface AboutFAQItemProps {
@@ -68,11 +68,7 @@ function FAQSectionBlock({
 }
 
 export function FAQSection() {
-  const [openFaq, setOpenFaq] = useState<string | null>("vision-0");
-
-  const toggleFaq = (id: string) => {
-    setOpenFaq(openFaq === id ? null : id);
-  };
+  const [openFaq, toggleFaq] = useFaqToggle<string>("vision-0");
 
   return (
     <section className="about-section about-section-faq">

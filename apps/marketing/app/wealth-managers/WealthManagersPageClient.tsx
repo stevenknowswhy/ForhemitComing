@@ -1,5 +1,7 @@
 "use client";
 
+import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import "@forhemit/shared/styles/wealth-managers.css";
@@ -243,12 +245,9 @@ function PartnershipStep({
 }
 
 export function WealthManagersPageClient() {
-	const [openFaq, setOpenFaq] = useState<number | null>(0);
+	const [openFaq, toggleFaq] = useFaqToggle<number>(0);
 	const [scrollY, setScrollY] = useState(0);
 
-	const toggleFaq = (index: number) => {
-		setOpenFaq(openFaq === index ? null : index);
-	};
 
 	// Parallax scroll effect
 	useEffect(() => {
