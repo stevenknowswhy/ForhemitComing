@@ -9,6 +9,15 @@ declare const process: {
 
 const http = httpRouter();
 
+const JSON_HEADERS = { "Content-Type": "application/json" };
+
+// CORS wildcard is intentional — draft HTML emails open from file:// origin
+const CORS_HEADERS = {
+	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Methods": "POST, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type",
+};
+
 /**
  * POST /log-document
  * ─────────────────
@@ -46,7 +55,7 @@ http.route({
 						success: false,
 						error: "Missing required fields: documentType, fileName",
 					}),
-					{ status: 400, headers: { "Content-Type": "application/json" } },
+					{ status: 400, headers: JSON_HEADERS },
 				);
 			}
 
@@ -68,7 +77,7 @@ http.route({
 
 			return new Response(JSON.stringify({ success: true, documentId }), {
 				status: 200,
-				headers: { "Content-Type": "application/json" },
+				headers: JSON_HEADERS,
 			});
 		} catch (error: unknown) {
 			const message = error instanceof Error ? error.message : "Unknown error";
@@ -87,7 +96,7 @@ http.route({
 
 			return new Response(JSON.stringify({ success: false, error: message }), {
 				status: 500,
-				headers: { "Content-Type": "application/json" },
+				headers: JSON_HEADERS,
 			});
 		}
 	}),
@@ -122,7 +131,7 @@ http.route({
 						success: false,
 						error: "Missing required field: errorMessage",
 					}),
-					{ status: 400, headers: { "Content-Type": "application/json" } },
+					{ status: 400, headers: JSON_HEADERS },
 				);
 			}
 
@@ -137,7 +146,7 @@ http.route({
 
 			return new Response(JSON.stringify({ success: true, errorId }), {
 				status: 200,
-				headers: { "Content-Type": "application/json" },
+				headers: JSON_HEADERS,
 			});
 		} catch (error: unknown) {
 			return new Response(
@@ -145,7 +154,7 @@ http.route({
 					success: false,
 					error: error instanceof Error ? error.message : "Unknown error",
 				}),
-				{ status: 500, headers: { "Content-Type": "application/json" } },
+				{ status: 500, headers: JSON_HEADERS },
 			);
 		}
 	}),
@@ -162,7 +171,7 @@ http.route({
 	handler: httpAction(async () => {
 		return new Response(
 			JSON.stringify({ status: "ok", timestamp: Date.now() }),
-			{ status: 200, headers: { "Content-Type": "application/json" } },
+			{ status: 200, headers: JSON_HEADERS },
 		);
 	}),
 });
@@ -184,12 +193,7 @@ http.route({
 http.route({
 	path: "/send-email",
 	method: "POST",
-	handler: httpAction(async (ctx, request) => {
-		const corsHeaders = {
-			"Access-Control-Allow-Origin": "*",
-			"Access-Control-Allow-Methods": "POST, OPTIONS",
-			"Access-Control-Allow-Headers": "Content-Type",
-		};
+	handler: httpAction(async (_ctx, request) => {
 		try {
 			const body = await request.json();
 
@@ -199,10 +203,7 @@ http.route({
 						success: false,
 						error: "Missing required fields: to, subject, html",
 					}),
-					{
-						status: 400,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
+					{ status: 400, headers: { ...CORS_HEADERS, ...JSON_HEADERS } },
 				);
 			}
 
@@ -210,14 +211,8 @@ http.route({
 			const resendKey = process.env.RESEND_API_KEY;
 			if (!resendKey) {
 				return new Response(
-					JSON.stringify({
-						success: false,
-						error: "RESEND_API_KEY not configured",
-					}),
-					{
-						status: 500,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
+					JSON.stringify({ success: false, error: "RESEND_API_KEY not configured" }),
+					{ status: 500, headers: { ...CORS_HEADERS, ...JSON_HEADERS } },
 				);
 			}
 
@@ -247,7 +242,7 @@ http.route({
 				method: "POST",
 				headers: {
 					Authorization: `Bearer ${resendKey}`,
-					"Content-Type": "application/json",
+					...JSON_HEADERS,
 				},
 				body: JSON.stringify(resendBody),
 			});
@@ -260,25 +255,19 @@ http.route({
 						success: false,
 						error: resendData.message || "Resend API error",
 					}),
-					{
-						status: 500,
-						headers: { ...corsHeaders, "Content-Type": "application/json" },
-					},
+					{ status: 500, headers: { ...CORS_HEADERS, ...JSON_HEADERS } },
 				);
 			}
 
 			return new Response(
 				JSON.stringify({ success: true, id: resendData.id }),
-				{
-					status: 200,
-					headers: { ...corsHeaders, "Content-Type": "application/json" },
-				},
+				{ status: 200, headers: { ...CORS_HEADERS, ...JSON_HEADERS } },
 			);
 		} catch (error: unknown) {
 			const message = error instanceof Error ? error.message : "Unknown error";
 			return new Response(JSON.stringify({ success: false, error: message }), {
 				status: 500,
-				headers: { ...corsHeaders, "Content-Type": "application/json" },
+				headers: { ...CORS_HEADERS, ...JSON_HEADERS },
 			});
 		}
 	}),
@@ -293,14 +282,7 @@ http.route({
 	path: "/send-email",
 	method: "OPTIONS",
 	handler: httpAction(async () => {
-		return new Response(null, {
-			status: 204,
-			headers: {
-				"Access-Control-Allow-Origin": "*",
-				"Access-Control-Allow-Methods": "POST, OPTIONS",
-				"Access-Control-Allow-Headers": "Content-Type",
-			},
-		});
+		return new Response(null, { status: 204, headers: CORS_HEADERS });
 	}),
 });
 
@@ -347,7 +329,7 @@ http.route({
 					if (expected !== signature) {
 						return new Response(
 							JSON.stringify({ error: "Invalid signature" }),
-							{ status: 401, headers: { "Content-Type": "application/json" } },
+							{ status: 401, headers: JSON_HEADERS },
 						);
 					}
 				}
@@ -359,7 +341,7 @@ http.route({
 			if (body.type === "webhook_challenge") {
 				return new Response(JSON.stringify({ challenge: body.challenge }), {
 					status: 200,
-					headers: { "Content-Type": "application/json" },
+					headers: JSON_HEADERS,
 				});
 			}
 
@@ -370,7 +352,7 @@ http.route({
 			if (!eventType || !signRequest?.id) {
 				return new Response(
 					JSON.stringify({ error: "Missing event_type or sign_request.id" }),
-					{ status: 400, headers: { "Content-Type": "application/json" } },
+					{ status: 400, headers: JSON_HEADERS },
 				);
 			}
 
@@ -386,7 +368,7 @@ http.route({
 			if (!handledEvents.includes(eventType)) {
 				return new Response(JSON.stringify({ success: true, skipped: true }), {
 					status: 200,
-					headers: { "Content-Type": "application/json" },
+					headers: JSON_HEADERS,
 				});
 			}
 
@@ -402,13 +384,13 @@ http.route({
 
 			return new Response(JSON.stringify({ success: true, result }), {
 				status: 200,
-				headers: { "Content-Type": "application/json" },
+				headers: JSON_HEADERS,
 			});
 		} catch (error: unknown) {
 			const message = error instanceof Error ? error.message : "Unknown error";
 			return new Response(JSON.stringify({ success: false, error: message }), {
 				status: 500,
-				headers: { "Content-Type": "application/json" },
+				headers: JSON_HEADERS,
 			});
 		}
 	}),
