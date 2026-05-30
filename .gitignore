@@ -4,3 +4,34 @@ node_modules/
 .turbo/
 
 .env.local
+
+# Build / cache artifacts
+.next/
+.ruff_cache/
+*.tsbuildinfo
+
+# Vercel local link state
+.vercel/
+
+# Editor / IDE local state
+.vscode/
+.idea/
+
+# AI agent / assistant local state
+.atl/
+.agents/
+.antigravitycli/
+.claude/
+.codex/
+.cursor/
+.gemini/
+.openclaude/
+.tessl/
+.pi/
+.pi-lens/
+.github/skills/
+**/.pi-lens/
+
+# Local tool configs (machine-specific)
+.mcp.json
+tessl.json
