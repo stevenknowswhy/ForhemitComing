@@ -38,7 +38,6 @@ import type * as emailCore from "../emailCore.js";
 import type * as emailEvents from "../emailEvents.js";
 import type * as emails from "../emails.js";
 import type * as exportTemplates from "../exportTemplates.js";
-import type * as externalDocuments from "../externalDocuments.js";
 import type * as feeCalculator from "../feeCalculator.js";
 import type * as formSubmissions from "../formSubmissions.js";
 import type * as gates from "../gates.js";
@@ -106,7 +105,6 @@ declare const fullApi: ApiFromModules<{
   emailEvents: typeof emailEvents;
   emails: typeof emails;
   exportTemplates: typeof exportTemplates;
-  externalDocuments: typeof externalDocuments;
   feeCalculator: typeof feeCalculator;
   formSubmissions: typeof formSubmissions;
   gates: typeof gates;
