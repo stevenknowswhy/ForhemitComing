@@ -350,6 +350,11 @@ export default defineSchema({
 		// Notes
 		notes: v.optional(v.string()),
 
+		// Box.com integration
+		boxFolderId: v.optional(v.string()),
+		boxSignRequestId: v.optional(v.string()),
+		boxSignStatus: v.optional(v.string()),
+
 		// Metadata
 		createdAt: v.number(),
 		updatedAt: v.number(),
