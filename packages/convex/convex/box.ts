@@ -14,10 +14,9 @@ import { api } from "./_generated/api";
 import {
 	getOrCreateFolder,
 	uploadFile,
-	downloadFile,
 	getRootFolderId,
 } from "./lib/box";
-import type { Id } from "./_generated/dataModel";
+import { requireAuth } from "./lib/requireAuth";
 
 // Stage folder names — mirror the pipeline
 const STAGE_FOLDERS = [
@@ -29,6 +28,22 @@ const STAGE_FOLDERS = [
 	"06-post-close",
 ];
 
+// Map CRM pipeline stages to Box folder names
+const STAGE_TO_FOLDER: Record<string, string> = {
+	"First contact": "01-first-touch",
+	"Intro call": "01-first-touch",
+	"NDA sent": "02-qualification",
+	"Feasibility": "02-qualification",
+	"Term sheet": "03-engagement",
+	"LOI signed": "04-diligence",
+	"Closed": "05-closing",
+	"On hold": "05-closing",
+};
+
+function getStageFolder(stage: string): string {
+	return STAGE_TO_FOLDER[stage] || "03-engagement";
+}
+
 // ============================================
 // ensureDealFolders — create Box folder hierarchy for a deal
 // ============================================
@@ -37,7 +52,10 @@ export const ensureDealFolders = action({
 	args: {
 		companyId: v.id("crmCompanies"),
 	},
-	handler: async (ctx, args): Promise<{ folderId: string; created: boolean }> => {
+	handler: async (
+		ctx,
+		args,
+	): Promise<{ folderId: string; created: boolean }> => {
 		// Check if already provisioned
 		const company = await ctx.runQuery(api.box.getCompanyBoxInfo, {
 			companyId: args.companyId,
@@ -86,10 +104,7 @@ export const uploadDealDocument = action({
 		// Content passed as base64 to avoid binary encoding issues in Convex args
 		contentBase64: v.string(),
 	},
-	handler: async (
-		ctx,
-		args,
-	): Promise<{ fileId: string; fileName: string }> => {
+	handler: async (ctx, args): Promise<{ fileId: string; fileName: string }> => {
 		const company = await ctx.runQuery(api.box.getCompanyBoxInfo, {
 			companyId: args.companyId,
 		});
@@ -101,9 +116,7 @@ export const uploadDealDocument = action({
 		}
 
 		// Find the stage subfolder
-		const stageFolderName = STAGE_FOLDERS.find((s) =>
-			s.includes(args.stage),
-		) || args.stage;
+		const stageFolderName = getStageFolder(args.stage);
 
 		const { getOrCreateFolder: findOrCreate } = await import("./lib/box");
 		const stageFolder = await findOrCreate(
@@ -265,5 +278,129 @@ export const updateCompanySignStatus = mutation({
 			boxSignStatus: args.boxSignStatus,
 			updatedAt: Date.now(),
 		});
+	},
+});
+
+// ============================================
+// updateTaskBoxSign — patch Box sign fields on a workflow task
+// ============================================
+
+export const updateTaskBoxSign = mutation({
+	args: {
+		workflowTaskId: v.id("workflowTasks"),
+		boxFileId: v.string(),
+		boxSignRequestId: v.string(),
+		boxSignStatus: v.string(),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		await ctx.db.patch(args.workflowTaskId, {
+			boxFileId: args.boxFileId,
+			boxSignRequestId: args.boxSignRequestId,
+			boxSignStatus: args.boxSignStatus,
+			status: "sent",
+			sentAt: Date.now(),
+			updatedAt: Date.now(),
+		});
+	},
+});
+
+// ============================================
+// signWorkflowTask — upload + send for signature + update task
+// ============================================
+
+export const signWorkflowTask = action({
+	args: {
+		workflowTaskId: v.id("workflowTasks"),
+		contentBase64: v.string(),
+		fileName: v.string(),
+		signerEmail: v.string(),
+		signerName: v.string(),
+		emailSubject: v.optional(v.string()),
+		emailMessage: v.optional(v.string()),
+	},
+	handler: async (
+		ctx,
+		args,
+	): Promise<{ signRequestId: string; fileId: string; status: string }> => {
+		// 1. Get the task
+		const task = await ctx.runQuery(api.box.getTaskBoxInfo, {
+			workflowTaskId: args.workflowTaskId,
+		});
+		if (!task) throw new Error(`Workflow task ${args.workflowTaskId} not found`);
+
+		// 2. Ensure deal folders exist
+		const { folderId } = await ctx.runAction(api.box.ensureDealFolders, {
+			companyId: task.companyId,
+		});
+
+		// 3. Upload PDF to Box
+		const { fileId } = await ctx.runAction(api.box.uploadDealDocument, {
+			companyId: task.companyId,
+			stage: task.stage || "engagement",
+			fileName: args.fileName,
+			contentBase64: args.contentBase64,
+		});
+
+		// 4. Create Box Sign request
+		const { boxFetch } = await import("./lib/box");
+
+		interface SignRequestResponse {
+			id: string;
+			status: string;
+		}
+
+		const signResult = await boxFetch<SignRequestResponse>("/sign_requests", {
+			method: "POST",
+			body: {
+				signers: [
+					{
+						role: "signer",
+						email: args.signerEmail,
+						name: args.signerName,
+					},
+				],
+				source_files: [{ type: "file", id: fileId }],
+				parent_folder: { type: "folder", id: folderId },
+				...(args.emailSubject && { email_subject: args.emailSubject }),
+				...(args.emailMessage && { email_message: args.emailMessage }),
+				are_text_signatures_enabled: true,
+			},
+		});
+
+		// 5. Update the workflow task
+		await ctx.runMutation(api.box.updateTaskBoxSign, {
+			workflowTaskId: args.workflowTaskId,
+			boxFileId: fileId,
+			boxSignRequestId: signResult.id,
+			boxSignStatus: signResult.status,
+		});
+
+		return {
+			signRequestId: signResult.id,
+			fileId,
+			status: signResult.status,
+		};
+	},
+});
+
+// ============================================
+// getTaskBoxInfo — query task + company for Box operations
+// ============================================
+
+export const getTaskBoxInfo = query({
+	args: { workflowTaskId: v.id("workflowTasks") },
+	handler: async (ctx, args) => {
+		const task = await ctx.db.get(args.workflowTaskId);
+		if (!task) return null;
+		const company = await ctx.db.get(task.companyId);
+		return {
+			companyId: task.companyId,
+			stage: company?.stage || "Engagement",
+			status: task.status,
+			boxFileId: task.boxFileId,
+			boxSignRequestId: task.boxSignRequestId,
+			boxSignStatus: task.boxSignStatus,
+		};
 	},
 });
