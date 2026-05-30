@@ -1,0 +1,108 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - WINDOW OF OPPORTUNITY SECTION
+   ───────────────────────────────────────────────────────────────────────────── */
+
+.window-section {
+  padding: var(--space-2xl) 0;
+  background: linear-gradient(180deg, var(--color-brand-subtle) 0%, transparent 100%);
+  border-top: 1px solid var(--af-border-accent);
+}
+
+.window-section h2 {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Window Content ── */
+.window-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.window-warning {
+  font-size: var(--text-lg);
+  color: var(--af-text-primary);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  padding: var(--space-md) var(--space-lg);
+  background: var(--af-accent-subtle);
+  border: 1px solid var(--af-border-accent);
+  border-radius: 12px;
+}
+
+.window-path-intro {
+  font-size: var(--text-base);
+  color: var(--af-text-secondary);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* ── Superior Path Grid ── */
+.superior-path-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.path-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 12px;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.path-item:hover {
+  border-color: var(--af-border-accent);
+  transform: translateY(-2px);
+}
+
+.path-item.highlight {
+  background: var(--af-accent-subtle);
+  border-color: var(--af-border-accent);
+}
+
+.path-item.highlight:hover {
+  box-shadow: var(--shadow-glow);
+}
+
+.path-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--af-accent);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+}
+
+.path-item div {
+  flex: 1;
+}
+
+.path-item strong {
+  display: block;
+  font-size: var(--text-sm);
+  color: var(--af-text-primary);
+  margin-bottom: 0.25rem;
+}
+
+.path-item p {
+  font-size: var(--text-xs);
+  color: var(--af-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Mobile: Stack to single column ── */
+@media (max-width: 640px) {
+  .superior-path-grid {
+    grid-template-columns: 1fr;
+  }
+}
