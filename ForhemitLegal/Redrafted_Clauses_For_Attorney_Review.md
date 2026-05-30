@@ -1,3 +1,7 @@
+05/30/26 06:50 AM PT
+05/30/26 06:50 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # REDRAFTED CLAUSE LANGUAGE
 ## For Attorney Adaptation — Forhemit Engagement Letter
 
@@ -643,7 +647,7 @@ Notices shall be sent to the addresses set forth below or to such other address 
 may designate by notice given in accordance with this Section:
 
 If to Forhemit:
-Forhemit Stewardship Management Co.
+Forhemit Transition Stewardship
 [Address]
 Email: deals@forhemit.com
 Attention: [Name]
