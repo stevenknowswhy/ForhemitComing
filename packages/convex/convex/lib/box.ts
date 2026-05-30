@@ -92,7 +92,9 @@ export async function boxFetch<T>(
 
 	if (!response.ok) {
 		const error = await response.text();
-		throw new Error(`Box API ${options.method || "GET"} ${path} failed: ${response.status} ${error}`);
+		throw new Error(
+			`Box API ${options.method || "GET"} ${path} failed: ${response.status} ${error}`,
+		);
 	}
 
 	return response.json() as Promise<T>;
@@ -168,14 +170,11 @@ export async function uploadFile(
 		name,
 	);
 
-	const response = await fetch(
-		"https://upload.box.com/api/2.0/files/content",
-		{
-			method: "POST",
-			headers: { Authorization: `Bearer ${token}` },
-			body: formData,
-		},
-	);
+	const response = await fetch("https://upload.box.com/api/2.0/files/content", {
+		method: "POST",
+		headers: { Authorization: `Bearer ${token}` },
+		body: formData,
+	});
 
 	if (!response.ok) {
 		const error = await response.text();
@@ -195,9 +194,12 @@ export async function uploadFile(
 export async function downloadFile(fileId: string): Promise<Uint8Array> {
 	const token = await getAccessToken();
 
-	const response = await fetch(`https://api.box.com/2.0/files/${fileId}/content`, {
-		headers: { Authorization: `Bearer ${token}` },
-	});
+	const response = await fetch(
+		`https://api.box.com/2.0/files/${fileId}/content`,
+		{
+			headers: { Authorization: `Bearer ${token}` },
+		},
+	);
 
 	if (!response.ok) {
 		const error = await response.text();

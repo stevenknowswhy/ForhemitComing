@@ -1,0 +1,98 @@
+/* ── CSS VARIABLES ── */
+
+:root {
+  /* Executive Manuscript Design Tokens */
+  /* Canvas & Backgrounds */
+  --canvas: #F9F7F2;
+  --parchment: #F0EBE3;
+  --deep-dive-bg: #1E2A1E;
+  
+  /* Text Hierarchy */
+  --ink: #1A1A1A;
+  --stone: #5A5A5A;
+  --stone-light: #7A7A7A;
+  
+  /* Brand Accents - Executive Manuscript */
+  --sage: #2C3E2D;
+  --sage-light: #A8C3A8;
+  --sage-muted: #C5CEBD;
+  
+  /* Conversion (Use Sparingly) */
+  --alert-clay: #B87D5E;
+  
+  /* Utility */
+  --border-light: #E0D9D0;
+  --border-medium: #D0CCC4;
+  --shadow-subtle: 0 2px 8px rgba(26,26,24,0.04);
+  --shadow-hover: 0 8px 24px rgba(26,26,24,0.08);
+  
+  /* Selection */
+  --selection-bg: #2C3E2D;
+  --selection-text: #F9F7F2;
+  
+  /* Font Display */
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  
+  /* Transitions */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Legacy compatibility aliases */
+  --primary-orange: var(--sage);
+  --primary-red: var(--alert-clay);
+  --dark-bg: var(--deep-dive-bg);
+  --light-text: var(--ink);
+  --muted-text: var(--stone);
+  --glass-bg: var(--parchment);
+  --glass-border: var(--border-light);
+}
+
+/* Ambient Mode (Dark) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --canvas: #1F2521;
+    --parchment: #2A3028;
+    --ink: #E8E6E1;
+    --stone: #A8A5A0;
+    --stone-light: #8A8580;
+    --sage: #8FA88F;
+    --sage-light: #C5D4C5;
+    --sage-muted: #3D4A3D;
+    --border-light: #3A423A;
+    --border-medium: #4A524A;
+    --selection-bg: #8FA88F;
+    --selection-text: #1F2521;
+  }
+}
+
+/* Manual dark mode class override */
+.dark {
+  --canvas: #1F2521;
+  --parchment: #2A3028;
+  --ink: #E8E6E1;
+  --stone: #A8A5A0;
+  --stone-light: #8A8580;
+  --sage: #8FA88F;
+  --sage-light: #C5D4C5;
+  --sage-muted: #3D4A3D;
+  --border-light: #3A423A;
+  --border-medium: #4A524A;
+  --selection-bg: #8FA88F;
+  --selection-text: #1F2521;
+}
+
+/* Light theme override */
+[data-theme="light"] {
+  --canvas: #F9F7F2;
+  --parchment: #F0EBE3;
+  --ink: #1A1A1A;
+  --stone: #5A5A5A;
+  --stone-light: #7A7A7A;
+  --sage: #2C3E2D;
+  --sage-light: #A8C3A8;
+  --sage-muted: #C5CEBD;
+  --border-light: #E0D9D0;
+  --border-medium: #D0CCC4;
+  --selection-bg: #2C3E2D;
+  --selection-text: #F9F7F2;
+}
