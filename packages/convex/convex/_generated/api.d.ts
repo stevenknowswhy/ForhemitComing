@@ -31,6 +31,7 @@ import type * as crons from "../crons.js";
 import type * as dealDocuments from "../dealDocuments.js";
 import type * as dealEngine from "../dealEngine.js";
 import type * as dealProcessor from "../dealProcessor.js";
+import type * as documentAudit from "../documentAudit.js";
 import type * as documentPipeline from "../documentPipeline.js";
 import type * as earlyAccessSignups from "../earlyAccessSignups.js";
 import type * as emailCore from "../emailCore.js";
@@ -97,6 +98,7 @@ declare const fullApi: ApiFromModules<{
   dealDocuments: typeof dealDocuments;
   dealEngine: typeof dealEngine;
   dealProcessor: typeof dealProcessor;
+  documentAudit: typeof documentAudit;
   documentPipeline: typeof documentPipeline;
   earlyAccessSignups: typeof earlyAccessSignups;
   emailCore: typeof emailCore;
