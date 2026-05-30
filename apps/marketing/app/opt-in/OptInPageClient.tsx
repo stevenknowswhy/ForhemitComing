@@ -7,6 +7,101 @@ import { ToastContainer } from "../components/ui/Toast";
 import "@forhemit/shared/styles/privacy-page.css";
 import "@forhemit/shared/styles/opt-in-page.css";
 
+/** Opt-out form — extracted to reduce main component verbosity */
+function OptOutForm({
+	withdrawEmail, setWithdrawEmail,
+	withdrawPhone, setWithdrawPhone,
+	withdrawTypes, handleWithdrawTypeChange,
+	isWithdrawing, handleWithdraw,
+	handlePhoneChange,
+}: {
+	withdrawEmail: string; setWithdrawEmail: (v: string) => void;
+	withdrawPhone: string; setWithdrawPhone: (v: string) => void;
+	withdrawTypes: { email: boolean; sms: boolean; phone: boolean };
+	handleWithdrawTypeChange: (key: "email" | "sms" | "phone") => void;
+	isWithdrawing: boolean; handleWithdraw: (e: React.FormEvent) => void;
+	handlePhoneChange: (e: React.ChangeEvent<HTMLInputElement>, setter: (v: string) => void) => void;
+}) {
+	return (
+                <form onSubmit={handleWithdraw} className="opt-out-form">
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label htmlFor="withdraw-email">Email Address</label>
+                      <input
+                        type="email"
+                        id="withdraw-email"
+                        value={withdrawEmail}
+                        onChange={(e) => setWithdrawEmail(e.target.value)}
+                        placeholder="your@email.com"
+                      />
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="withdraw-phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="withdraw-phone"
+                        value={withdrawPhone}
+                        onChange={(e) => handlePhoneChange(e, setWithdrawPhone)}
+                        placeholder="(555) 123-4567"
+                        maxLength={14}
+                      />
+                    </div>
+                  </div>
+
+                  <p className="opt-out-label">Select communication types to opt out of:</p>
+                  <div className="consent-options">
+                    <label className="consent-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={withdrawTypes.email}
+                        onChange={() => handleWithdrawTypeChange("email")}
+                      />
+                      <span className="checkmark"></span>
+                      <span className="consent-label">
+                        <strong>Email Communications</strong>
+                        <span>Unsubscribe from all marketing and promotional emails</span>
+                      </span>
+                    </label>
+
+                    <label className="consent-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={withdrawTypes.sms}
+                        onChange={() => handleWithdrawTypeChange("sms")}
+                      />
+                      <span className="checkmark"></span>
+                      <span className="consent-label">
+                        <strong>SMS/Text Messages</strong>
+                        <span>Stop receiving text messages (you can also reply STOP to any message)</span>
+                      </span>
+                    </label>
+
+                    <label className="consent-checkbox">
+                      <input
+                        type="checkbox"
+                        checked={withdrawTypes.phone}
+                        onChange={() => handleWithdrawTypeChange("phone")}
+                      />
+                      <span className="checkmark"></span>
+                      <span className="consent-label">
+                        <strong>Phone Calls</strong>
+                        <span>Opt out of marketing and promotional phone calls</span>
+                      </span>
+                    </label>
+                  </div>
+
+                  <button 
+                    type="submit" 
+                    className="opt-out-btn"
+                    disabled={isWithdrawing}
+                  >
+                    {isWithdrawing ? "Processing..." : "Opt Out of Selected Communications"}
+                  </button>
+                </form>
+	);
+}
+
 export function OptInPageClient() {
   const { toasts, removeToast, success, error: showError } = useToast();
   const [email, setEmail] = useState("");
@@ -248,82 +343,13 @@ export function OptInPageClient() {
                   transactional communications related to any active business relationship.
                 </p>
 
-                <form onSubmit={handleWithdraw} className="opt-out-form">
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="withdraw-email">Email Address</label>
-                      <input
-                        type="email"
-                        id="withdraw-email"
-                        value={withdrawEmail}
-                        onChange={(e) => setWithdrawEmail(e.target.value)}
-                        placeholder="your@email.com"
-                      />
-                    </div>
-
-                    <div className="form-group">
-                      <label htmlFor="withdraw-phone">Phone Number</label>
-                      <input
-                        type="tel"
-                        id="withdraw-phone"
-                        value={withdrawPhone}
-                        onChange={(e) => handlePhoneChange(e, setWithdrawPhone)}
-                        placeholder="(555) 123-4567"
-                        maxLength={14}
-                      />
-                    </div>
-                  </div>
-
-                  <p className="opt-out-label">Select communication types to opt out of:</p>
-                  <div className="consent-options">
-                    <label className="consent-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={withdrawTypes.email}
-                        onChange={() => handleWithdrawTypeChange("email")}
-                      />
-                      <span className="checkmark"></span>
-                      <span className="consent-label">
-                        <strong>Email Communications</strong>
-                        <span>Unsubscribe from all marketing and promotional emails</span>
-                      </span>
-                    </label>
-
-                    <label className="consent-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={withdrawTypes.sms}
-                        onChange={() => handleWithdrawTypeChange("sms")}
-                      />
-                      <span className="checkmark"></span>
-                      <span className="consent-label">
-                        <strong>SMS/Text Messages</strong>
-                        <span>Stop receiving text messages (you can also reply STOP to any message)</span>
-                      </span>
-                    </label>
-
-                    <label className="consent-checkbox">
-                      <input
-                        type="checkbox"
-                        checked={withdrawTypes.phone}
-                        onChange={() => handleWithdrawTypeChange("phone")}
-                      />
-                      <span className="checkmark"></span>
-                      <span className="consent-label">
-                        <strong>Phone Calls</strong>
-                        <span>Opt out of marketing and promotional phone calls</span>
-                      </span>
-                    </label>
-                  </div>
-
-                  <button 
-                    type="submit" 
-                    className="opt-out-btn"
-                    disabled={isWithdrawing}
-                  >
-                    {isWithdrawing ? "Processing..." : "Opt Out of Selected Communications"}
-                  </button>
-                </form>
+					<OptOutForm
+						withdrawEmail={withdrawEmail} setWithdrawEmail={setWithdrawEmail}
+						withdrawPhone={withdrawPhone} setWithdrawPhone={setWithdrawPhone}
+						withdrawTypes={withdrawTypes} handleWithdrawTypeChange={handleWithdrawTypeChange}
+						isWithdrawing={isWithdrawing} handleWithdraw={handleWithdraw}
+						handlePhoneChange={handlePhoneChange}
+					/>
 
                 <div className="opt-out-help">
                   <h4>Quick Opt-Out Options</h4>
