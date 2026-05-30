@@ -470,6 +470,26 @@ export const handleBoxWebhook = mutation({
 			createdAt: Date.now(),
 		});
 
+		// SOC 2 audit log
+		const auditActionMap: Record<string, string> = {
+			"SIGN_REQUEST.SENT": "shared",
+			"SIGN_REQUEST.COMPLETED": "signed",
+			"SIGN_REQUEST.DECLINED": "declined",
+			"SIGN_REQUEST.EXPIRED": "expired",
+		};
+		const auditAction = auditActionMap[args.eventType];
+		if (auditAction) {
+			await ctx.db.insert("documentAudit", {
+				companyId: task.companyId,
+				taskId: task._id,
+				documentType: "document",
+				action: auditAction as "shared" | "signed" | "declined" | "expired",
+				actor: "box-webhook",
+				metadata: JSON.stringify({ signRequestId: args.signRequestId, eventType: args.eventType }),
+				createdAt: Date.now(),
+			});
+		}
+
 		return { success: true, taskId: task._id, newStatus };
 	},
 });
