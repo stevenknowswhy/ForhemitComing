@@ -144,26 +144,6 @@ export default defineSchema({
 		lastUpdated: v.number(),
 	}).index("by_date", ["date"]),
 
-	// Log of all generated/downloaded/printed documents
-	generatedDocuments: defineTable({
-		templateId: v.id("templates"),
-		templateName: v.string(),
-		formData: v.string(), // JSON snapshot of form inputs at generation time
-		action: v.union(
-			v.literal("pdf-download"),
-			v.literal("pdf-download-server"),
-			v.literal("pdf-download-client"),
-			v.literal("print"),
-			v.literal("preview"),
-			v.literal("export-csv"),
-			v.literal("export-json"),
-		),
-		generatedBy: v.optional(v.string()),
-		createdAt: v.number(),
-	})
-		.index("by_template", ["templateId"])
-		.index("by_createdAt", ["createdAt"]),
-
 	// Audit log for tracking all admin changes
 	auditLogs: defineTable({
 		action: v.union(
