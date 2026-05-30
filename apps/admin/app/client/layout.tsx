@@ -14,14 +14,16 @@ export default function ClientLayout({
 
 	if (!isLoaded) {
 		return (
-			<div style={{
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				minHeight: "100vh",
-				fontFamily: "Jost, sans-serif",
-				color: "#6b7280",
-			}}>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					minHeight: "100vh",
+					fontFamily: "Jost, sans-serif",
+					color: "#6b7280",
+				}}
+			>
 				Loading…
 			</div>
 		);
@@ -29,22 +31,26 @@ export default function ClientLayout({
 
 	if (!isSignedIn) {
 		return (
-			<div style={{
-				display: "flex",
-			 flexDirection: "column",
-				alignItems: "center",
-				justifyContent: "center",
-				minHeight: "100vh",
-				fontFamily: "Jost, sans-serif",
-				gap: "24px",
-			}}>
+			<div
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					justifyContent: "center",
+					minHeight: "100vh",
+					fontFamily: "Jost, sans-serif",
+					gap: "24px",
+				}}
+			>
 				<div style={{ textAlign: "center" }}>
-					<h1 style={{
-						fontSize: "24px",
-						fontWeight: 600,
-						color: "#1B2A4A",
-						marginBottom: "8px",
-					}}>
+					<h1
+						style={{
+							fontSize: "24px",
+							fontWeight: 600,
+							color: "#1B2A4A",
+							marginBottom: "8px",
+						}}
+					>
 						Forhemit Client Portal
 					</h1>
 					<p style={{ color: "#6b7280", fontSize: "14px" }}>
@@ -72,14 +78,16 @@ export default function ClientLayout({
 	return (
 		<div style={{ minHeight: "100vh", fontFamily: "Jost, sans-serif" }}>
 			{/* Header */}
-			<header style={{
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "space-between",
-				padding: "16px 32px",
-				borderBottom: "1px solid #e5e7eb",
-				background: "white",
-			}}>
+			<header
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+					padding: "16px 32px",
+					borderBottom: "1px solid #e5e7eb",
+					background: "white",
+				}}
+			>
 				<div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
 					<Link
 						href="/client"
@@ -97,9 +105,13 @@ export default function ClientLayout({
 							href="/client/documents"
 							style={{
 								fontSize: "14px",
-								color: pathname.startsWith("/client/documents") ? "#FF6B00" : "#6b7280",
+								color: pathname.startsWith("/client/documents")
+									? "#FF6B00"
+									: "#6b7280",
 								textDecoration: "none",
-								fontWeight: pathname.startsWith("/client/documents") ? 600 : 400,
+								fontWeight: pathname.startsWith("/client/documents")
+									? 600
+									: 400,
 							}}
 						>
 							Documents

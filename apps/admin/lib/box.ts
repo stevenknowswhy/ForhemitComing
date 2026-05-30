@@ -126,9 +126,7 @@ export async function listFolderItems(
 /**
  * Get a shared link for a file. Creates one if it doesn't exist.
  */
-export async function getFileSharedLink(
-	fileId: string,
-): Promise<string> {
+export async function getFileSharedLink(fileId: string): Promise<string> {
 	try {
 		const data = await boxFetch<BoxSharedLink>(
 			`/files/${fileId}?fields=shared_link`,
@@ -160,9 +158,7 @@ export async function getFileSharedLink(
 /**
  * Get a shared link for a folder. Creates one if it doesn't exist.
  */
-export async function getFolderSharedLink(
-	folderId: string,
-): Promise<string> {
+export async function getFolderSharedLink(folderId: string): Promise<string> {
 	try {
 		const data = await boxFetch<BoxSharedLink>(
 			`/folders/${folderId}?fields=shared_link`,
@@ -193,9 +189,7 @@ export async function getFolderSharedLink(
 /**
  * Get a direct download URL for a file (authenticated, expires).
  */
-export async function getFileDownloadUrl(
-	fileId: string,
-): Promise<string> {
+export async function getFileDownloadUrl(fileId: string): Promise<string> {
 	const data = await boxFetch<{ download_url: string }>(
 		`/files/${fileId}?fields=download_url`,
 	);
