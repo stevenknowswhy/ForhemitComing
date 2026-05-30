@@ -1,5 +1,7 @@
 "use client";
 
+import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
+
 import { lazy, Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ClientOnly } from "@/components/ClientOnly";
@@ -17,14 +19,11 @@ const TwoMinuteCheckModal = lazy(() =>
 
 export function BusinessOwnersPageClient() {
   const router = useRouter();
-  const [openFaq, setOpenFaq] = useState<string | null>(null);
+  const [openFaq, toggleFaq] = useFaqToggle<string>(null);
   const [showTwoMinuteCheck, setShowTwoMinuteCheck] = useState(false);
   const [showIntake, setShowIntake] = useState(false);
   const [intakePath, setIntakePath] = useState<"nda" | "light" | null>(null);
 
-  const toggleFaq = (id: string) => {
-    setOpenFaq(openFaq === id ? null : id);
-  };
 
   const openIntake = (path?: "nda" | "light") => {
     setIntakePath(path ?? null);
