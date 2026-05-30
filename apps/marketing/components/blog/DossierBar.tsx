@@ -4,7 +4,7 @@ import { trackCRM } from "@forhemit/shared/lib/analytics";
 
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/CustomButton";
-import { useScrollDepth } from "@/hooks/useBlog";
+import { useScrollDepth } from "@forhemit/shared/hooks/useBlog";
 
 interface DossierBarProps {
 	pathway: string;
