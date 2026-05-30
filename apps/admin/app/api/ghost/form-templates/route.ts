@@ -28,7 +28,8 @@ export async function GET(request: Request) {
 			params.push(status);
 		}
 
-		const where = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
+		const where =
+			conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
 		const rows = await queryGhost(
 			`SELECT id, form_key, name, description, category, version, status, is_active, created_at, updated_at

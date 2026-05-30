@@ -5,18 +5,28 @@ import Link from "next/link";
 export default function ClientPortalPage() {
 	return (
 		<div>
-			<h1 style={{ fontSize: "24px", fontWeight: 600, color: "#1B2A4A", marginBottom: "8px" }}>
+			<h1
+				style={{
+					fontSize: "24px",
+					fontWeight: 600,
+					color: "#1B2A4A",
+					marginBottom: "8px",
+				}}
+			>
 				Welcome to your Client Portal
 			</h1>
 			<p style={{ color: "#6b7280", fontSize: "14px", marginBottom: "32px" }}>
-				Access your transaction documents, track progress, and manage your engagement.
+				Access your transaction documents, track progress, and manage your
+				engagement.
 			</p>
 
-			<div style={{
-				display: "grid",
-				gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-				gap: "16px",
-			}}>
+			<div
+				style={{
+					display: "grid",
+					gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+					gap: "16px",
+				}}
+			>
 				<Link
 					href="/client/documents"
 					style={{
@@ -29,11 +39,19 @@ export default function ClientPortalPage() {
 					}}
 				>
 					<div style={{ fontSize: "32px", marginBottom: "12px" }}>📁</div>
-					<h2 style={{ fontSize: "16px", fontWeight: 600, color: "#1B2A4A", marginBottom: "4px" }}>
+					<h2
+						style={{
+							fontSize: "16px",
+							fontWeight: 600,
+							color: "#1B2A4A",
+							marginBottom: "4px",
+						}}
+					>
 						Documents
 					</h2>
 					<p style={{ fontSize: "13px", color: "#6b7280" }}>
-						View and download your transaction documents, agreements, and reports.
+						View and download your transaction documents, agreements, and
+						reports.
 					</p>
 				</Link>
 			</div>
