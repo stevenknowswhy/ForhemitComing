@@ -676,7 +676,7 @@ export const sendClassificationIntakeNotification = action({
 
 /**
  * Send an email with attachments — public wrapper for sendAndLogEmail.
- * Used by templateGenerator for PDF attachment delivery.
+ * Used for PDF attachment delivery.
  */
 export const sendWithAttachment = action({
   args: {
@@ -716,7 +716,7 @@ export const sendWithAttachment = action({
 });
 
 /**
- * Send an email with template metadata — used by templateGenerator.
+ * Send an email with template metadata.
  * Wraps sendAndLogEmail with templateVersion tracking.
  */
 export const sendTemplateEmailAction = action({
