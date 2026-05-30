@@ -1,6 +1,6 @@
 "use client";
 
-import "@forhemit/shared/styles/legal-practices.css";
+import "./legal-practices.css";
 import { useLegalPageAnimations } from "./_hooks/useLegalPageAnimations";
 
 // Import section components
@@ -19,28 +19,28 @@ import { UrgencySection } from "./_components/sections/UrgencySection";
 import { CTASection } from "./_components/sections/CTASection";
 
 export default function LegalPractices() {
-  // Initialize page animations
-  useLegalPageAnimations();
+	// Initialize page animations
+	useLegalPageAnimations();
 
-  return (
-    <div className="legal-wrapper">
-      <div className="legal-background"></div>
+	return (
+		<div className="legal-wrapper">
+			<div className="legal-background"></div>
 
-      <main className="legal-main">
-        <HeroSection />
-        <StatsSection />
-        <QuestionsSection />
-        <RiskSection />
-        <CostSection />
-        <StewardshipSection />
-        <BenefitsSection />
-        <WhyDifferentSection />
-        <ProcessSection />
-        <FitSection />
-        <FAQSection />
-        <UrgencySection />
-        <CTASection />
-      </main>
-    </div>
-  );
+			<main className="legal-main">
+				<HeroSection />
+				<StatsSection />
+				<QuestionsSection />
+				<RiskSection />
+				<CostSection />
+				<StewardshipSection />
+				<BenefitsSection />
+				<WhyDifferentSection />
+				<ProcessSection />
+				<FitSection />
+				<FAQSection />
+				<UrgencySection />
+				<CTASection />
+			</main>
+		</div>
+	);
 }
