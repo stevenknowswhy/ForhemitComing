@@ -2,7 +2,7 @@
 
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { usePathway } from "@/hooks/useBlog";
+import { usePathway } from "@forhemit/shared/hooks/useBlog";
 import { ArticleCard, QuickTakeCard } from "@/components/ui/CustomCard";
 import { filterListByPathway,
   postDocToListItem,
