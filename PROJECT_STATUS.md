@@ -1,3 +1,6 @@
+05/29/26 08:03 PM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # Forhemit Project Status
 
 > Last updated: 2026-05-25 (smoke test verified)
@@ -38,7 +41,7 @@ Created `packages/convex/convex/lib/requireAuth.ts` — a lightweight auth guard
 | Email/Events | `emailEvents`, `formSubmissions`, `templateRules`, `templates` |
 | Agents | `agentQueue`, `agentOutputs` |
 | Financials | `feeCalculator` |
-| Other | `auditLogs`, `notes`, `opensign`, `generatedDocuments`, `triggers` |
+| Other | `auditLogs`, `notes`, `generatedDocuments`, `triggers` |
 
 **6 files correctly skipped** (internal service actions called via `ctx.runAction()` — adding auth would break cron jobs and internal flows):
 
