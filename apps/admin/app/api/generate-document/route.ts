@@ -45,7 +45,10 @@ export async function POST(request: Request) {
 
 		if (!templateTitle || !recipientName) {
 			return NextResponse.json(
-				{ success: false, error: "Missing required fields: templateTitle, recipientName" },
+				{
+					success: false,
+					error: "Missing required fields: templateTitle, recipientName",
+				},
 				{ status: 400 },
 			);
 		}
@@ -76,11 +79,13 @@ export async function POST(request: Request) {
 			...dealData,
 			recipientName,
 			recipientEmail,
-			generatedDate: dealData.generatedDate || new Date().toLocaleDateString("en-US", {
-				year: "numeric",
-				month: "long",
-				day: "numeric",
-			}),
+			generatedDate:
+				dealData.generatedDate ||
+				new Date().toLocaleDateString("en-US", {
+					year: "numeric",
+					month: "long",
+					day: "numeric",
+				}),
 		};
 
 		const renderResult = callTemplateService("render", {
@@ -90,7 +95,10 @@ export async function POST(request: Request) {
 
 		if (!renderResult.success || !renderResult.rendered_html) {
 			return NextResponse.json(
-				{ success: false, error: `Render failed: ${renderResult.error || "no output"}` },
+				{
+					success: false,
+					error: `Render failed: ${renderResult.error || "no output"}`,
+				},
 				{ status: 500 },
 			);
 		}
@@ -98,26 +106,29 @@ export async function POST(request: Request) {
 		const renderedHtml = renderResult.rendered_html;
 
 		// ── 3. Generate PDF via Puppeteer ─────────────────────────────
-		const pdfResponse = await fetch(
-			`${getBaseUrl()}/api/pdf-generate`,
-			{
-				method: "POST",
-				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({
-					htmlContent: renderedHtml,
-					templateName: templateTitle,
-					templateId: String(template.id),
-					formData: renderData,
-					mode: "full",
-				}),
-			},
-		);
+		const pdfResponse = await fetch(`${getBaseUrl()}/api/pdf-generate`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				htmlContent: renderedHtml,
+				templateName: templateTitle,
+				templateId: String(template.id),
+				formData: renderData,
+				mode: "full",
+			}),
+		});
 
 		if (!pdfResponse.ok) {
 			const errorText = await pdfResponse.text();
-			console.error(`PDF generation failed (${pdfResponse.status}):`, errorText);
+			console.error(
+				`PDF generation failed (${pdfResponse.status}):`,
+				errorText,
+			);
 			return NextResponse.json(
-				{ success: false, error: `PDF generation failed: ${pdfResponse.status}` },
+				{
+					success: false,
+					error: `PDF generation failed: ${pdfResponse.status}`,
+				},
 				{ status: 502 },
 			);
 		}
@@ -134,7 +145,9 @@ export async function POST(request: Request) {
 			try {
 				boxFileId = await uploadToBox({
 					folderId: body.boxFolderId,
-					fileName: sanitizeFilename(`${templateTitle}-${dealData.ref || "document"}.pdf`),
+					fileName: sanitizeFilename(
+						`${templateTitle}-${dealData.ref || "document"}.pdf`,
+					),
 					contentBase64: pdfBase64,
 				});
 			} catch (err) {
@@ -152,6 +165,25 @@ export async function POST(request: Request) {
 			action: boxFileId ? "generate-and-upload" : "generate",
 			generatedBy: "admin-api",
 		});
+
+		// ── 5b. Audit log (SOC 2) ───────────────────────────────────
+		try {
+			await queryGhost(
+				`INSERT INTO document_audit (company_id, task_id, document_type, action, actor, metadata)
+				 VALUES ($1, $2, $3, $4, $5, $6)`,
+				[
+					body.companyId || null,
+					body.taskId || null,
+					templateTitle,
+					"generated",
+					"admin-api",
+					JSON.stringify({ boxFileId, pdfSize, templateId: template.id }),
+				],
+			);
+		} catch (auditErr) {
+			console.error("Audit log write failed:", auditErr);
+			// Don't fail the request for audit log issues
+		}
 
 		// ── 6. Return result ─────────────────────────────────────────
 		return NextResponse.json({
@@ -191,14 +223,11 @@ function callTemplateService(
 	const scriptPath = findScript("template_service.py");
 
 	try {
-		const stdout = execSync(
-			`python3 ${scriptPath} ${command} ${cliArgs}`,
-			{
-				timeout: 15_000,
-				encoding: "utf-8",
-				cwd: process.cwd(),
-			},
-		);
+		const stdout = execSync(`python3 ${scriptPath} ${command} ${cliArgs}`, {
+			timeout: 15_000,
+			encoding: "utf-8",
+			cwd: process.cwd(),
+		});
 
 		if (command === "render") {
 			return { success: true, rendered_html: stdout };
@@ -240,14 +269,11 @@ async function uploadToBox(params: {
 		params.fileName,
 	);
 
-	const response = await fetch(
-		"https://upload.box.com/api/2.0/files/content",
-		{
-			method: "POST",
-			headers: { Authorization: `Bearer ${accessToken}` },
-			body: formData,
-		},
-	);
+	const response = await fetch("https://upload.box.com/api/2.0/files/content", {
+		method: "POST",
+		headers: { Authorization: `Bearer ${accessToken}` },
+		body: formData,
+	});
 
 	if (!response.ok) {
 		const error = await response.text();
@@ -334,7 +360,9 @@ function findScript(name: string): string {
 		if (existsSync(p)) return p;
 	}
 
-	throw new Error(`Script not found: ${name}. Looked in: ${candidates.join(", ")}`);
+	throw new Error(
+		`Script not found: ${name}. Looked in: ${candidates.join(", ")}`,
+	);
 }
 
 /**
