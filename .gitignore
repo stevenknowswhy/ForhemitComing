@@ -35,3 +35,13 @@ node_modules/
 # Local tool configs (machine-specific)
 .mcp.json
 tessl.json
+
+# Python
+__pycache__/
+*.pyc
+
+# Python
+__pycache__/
+*.pyc
+__pycache__/
+*.pyc
