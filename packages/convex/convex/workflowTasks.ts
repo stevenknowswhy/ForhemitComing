@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query, action } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import type { Id } from "./_generated/dataModel";
 import { api } from "./_generated/api";
 import { shouldCreateWorkflowTask } from "./workflowService";
@@ -250,7 +250,6 @@ export const markTaskSent = mutation({
 	args: {
 		workflowTaskId: v.id("workflowTasks"),
 		resendId: v.optional(v.string()),
-		opensignEnvelopeId: v.optional(v.string()),
 		responseData: v.optional(v.any()),
 	},
 	handler: async (ctx, args) => {
@@ -259,7 +258,6 @@ export const markTaskSent = mutation({
 			status: "sent",
 			sentAt: Date.now(),
 			resendId: args.resendId,
-			opensignEnvelopeId: args.opensignEnvelopeId,
 			responseData: args.responseData,
 			updatedAt: Date.now(),
 		});

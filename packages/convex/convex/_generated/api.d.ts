@@ -49,7 +49,6 @@ import type * as lib_templateContent from "../lib/templateContent.js";
 import type * as migrateTemplateContent from "../migrateTemplateContent.js";
 import type * as notes from "../notes.js";
 import type * as notifications from "../notifications.js";
-import type * as opensign from "../opensign.js";
 import type * as pdfGenerator from "../pdfGenerator.js";
 import type * as phoneMessages from "../phoneMessages.js";
 import type * as posts from "../posts.js";
@@ -114,7 +113,6 @@ declare const fullApi: ApiFromModules<{
   migrateTemplateContent: typeof migrateTemplateContent;
   notes: typeof notes;
   notifications: typeof notifications;
-  opensign: typeof opensign;
   pdfGenerator: typeof pdfGenerator;
   phoneMessages: typeof phoneMessages;
   posts: typeof posts;
