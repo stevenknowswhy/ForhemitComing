@@ -11,11 +11,7 @@
 import { v } from "convex/values";
 import { action, mutation, query } from "./_generated/server";
 import { api } from "./_generated/api";
-import {
-	getOrCreateFolder,
-	uploadFile,
-	getRootFolderId,
-} from "./lib/box";
+import { getOrCreateFolder, uploadFile, getRootFolderId } from "./lib/box";
 import { requireAuth } from "./lib/requireAuth";
 
 // Stage folder names — mirror the pipeline
@@ -33,10 +29,10 @@ const STAGE_TO_FOLDER: Record<string, string> = {
 	"First contact": "01-first-touch",
 	"Intro call": "01-first-touch",
 	"NDA sent": "02-qualification",
-	"Feasibility": "02-qualification",
+	Feasibility: "02-qualification",
 	"Term sheet": "03-engagement",
 	"LOI signed": "04-diligence",
-	"Closed": "05-closing",
+	Closed: "05-closing",
 	"On hold": "05-closing",
 };
 
@@ -327,7 +323,8 @@ export const signWorkflowTask = action({
 		const task = await ctx.runQuery(api.box.getTaskBoxInfo, {
 			workflowTaskId: args.workflowTaskId,
 		});
-		if (!task) throw new Error(`Workflow task ${args.workflowTaskId} not found`);
+		if (!task)
+			throw new Error(`Workflow task ${args.workflowTaskId} not found`);
 
 		// 2. Ensure deal folders exist
 		const { folderId } = await ctx.runAction(api.box.ensureDealFolders, {
@@ -402,5 +399,76 @@ export const getTaskBoxInfo = query({
 			boxSignRequestId: task.boxSignRequestId,
 			boxSignStatus: task.boxSignStatus,
 		};
+	},
+});
+
+// ============================================
+// handleBoxWebhook — update task status from Box webhook event
+// ============================================
+
+export const handleBoxWebhook = mutation({
+	args: {
+		signRequestId: v.string(),
+		eventType: v.string(),
+		signStatus: v.optional(v.string()),
+		signedFileId: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		// Find the workflow task by sign request ID
+		const task = await ctx.db
+			.query("workflowTasks")
+			.withIndex("by_box_sign", (q) =>
+				q.eq("boxSignRequestId", args.signRequestId),
+			)
+			.first();
+
+		if (!task) {
+			console.warn(
+				`No workflow task found for Box sign request: ${args.signRequestId}`,
+			);
+			return { success: false, error: "Task not found" };
+		}
+
+		// Map Box event to task status
+		const statusMap: Record<string, string> = {
+			"SIGN_REQUEST.SENT": "sent",
+			"SIGN_REQUEST.VIEWED": "opened",
+			"SIGN_REQUEST.SIGNED": "received",
+			"SIGN_REQUEST.COMPLETED": "received",
+			"SIGN_REQUEST.DECLINED": "skipped",
+			"SIGN_REQUEST.EXPIRED": "overdue",
+		};
+
+		const newStatus = statusMap[args.eventType] || task.status;
+		const updates: Record<string, unknown> = {
+			boxSignStatus: args.signStatus || args.eventType.split(".")[1]?.toLowerCase(),
+			status: newStatus,
+			updatedAt: Date.now(),
+		};
+
+		if (
+			args.eventType === "SIGN_REQUEST.SIGNED" ||
+			args.eventType === "SIGN_REQUEST.COMPLETED"
+		) {
+			updates.receivedAt = Date.now();
+			if (args.signedFileId) {
+				updates.signedDocumentUrl = `https://app.box.com/file/${args.signedFileId}`;
+			}
+		}
+
+		await ctx.db.patch(task._id, updates);
+
+		// Log activity
+		await ctx.db.insert("crmActivities", {
+			companyId: task.companyId,
+			type: "email",
+			title: `Document ${args.eventType.split(".")[1]?.toLowerCase() || "updated"}`,
+			description: `Box Sign request ${args.signRequestId} — ${args.eventType}`,
+			date: new Date().toISOString().split("T")[0],
+			performedBy: "system",
+			createdAt: Date.now(),
+		});
+
+		return { success: true, taskId: task._id, newStatus };
 	},
 });
