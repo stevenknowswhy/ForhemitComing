@@ -47,11 +47,16 @@ export function DealQueueView() {
 function DealCard({ company }: { company: any }) {
   const pendingTasks = useQuery(api.dealEngine.getDealQueue, { companyId: company._id });
   const generateTask = useAction(api.dealProcessor.generateQueueTask);
+  const signTask = useAction(api.box.signWorkflowTask);
   const [generating, setGenerating] = useState<string | null>(null);
+  const [signing, setSigning] = useState<string | null>(null);
   const [generateModal, setGenerateModal] = useState<{ taskId: string; templateName: string } | null>(null);
+  const [signModal, setSignModal] = useState<{ taskId: string; templateName: string; contentBase64: string } | null>(null);
   const [recipientEmail, setRecipientEmail] = useState("");
   const [recipientName, setRecipientName] = useState("");
   const [senderEmail, setSenderEmail] = useState("");
+  const [signerEmail, setSignerEmail] = useState("");
+  const [signerName, setSignerName] = useState("");
 
   const formatCurrency = (amount: number) =>
     new Intl.NumberFormat("en-US", {
@@ -92,6 +97,27 @@ function DealCard({ company }: { company: any }) {
     }
   }, [generateModal, recipientEmail, recipientName, senderEmail, generateTask]);
 
+  const handleSign = useCallback(async () => {
+    if (!signModal || !signerEmail || !signerName) return;
+    setSigning(signModal.taskId);
+    try {
+      await signTask({
+        workflowTaskId: signModal.taskId as Id<"workflowTasks">,
+        contentBase64: signModal.contentBase64,
+        fileName: `${signModal.templateName}.pdf`,
+        signerEmail,
+        signerName,
+      });
+      setSignModal(null);
+      setSignerEmail("");
+      setSignerName("");
+    } catch (err) {
+      console.error("Failed to send for signature:", err);
+    } finally {
+      setSigning(null);
+    }
+  }, [signModal, signerEmail, signerName, signTask]);
+
   return (
     <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg overflow-hidden">
       {/* Header */}
@@ -130,7 +156,13 @@ function DealCard({ company }: { company: any }) {
                 setSenderEmail("");
                 setGenerateModal({ taskId, templateName });
               }}
+              onSign={(taskId, templateName) => {
+                setSignerEmail("");
+                setSignerName("");
+                setSignModal({ taskId, templateName, contentBase64: "" });
+              }}
               isGenerating={generating === task.taskId}
+              isSigning={signing === task.taskId}
             />
           ))}
         </div>
@@ -153,7 +185,13 @@ function DealCard({ company }: { company: any }) {
                 setSenderEmail("");
                 setGenerateModal({ taskId, templateName });
               }}
+              onSign={(taskId, templateName) => {
+                setSignerEmail("");
+                setSignerName("");
+                setSignModal({ taskId, templateName, contentBase64: "" });
+              }}
               isGenerating={generating === task.taskId}
+              isSigning={signing === task.taskId}
             />
           ))}
           {pending.length > 10 && (
@@ -239,6 +277,63 @@ function DealCard({ company }: { company: any }) {
           </div>
         </div>
       )}
+
+      {/* Sign for Signature Modal */}
+      {signModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          onClick={() => setSignModal(null)}
+        >
+          <div
+            className="bg-[var(--surface)] rounded-xl p-6 w-full max-w-md mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-semibold text-[var(--text)] mb-1">Send for Signature</h3>
+            <p className="text-[12px] text-[var(--text3)] mb-4">{signModal.templateName}</p>
+            <div className="space-y-3">
+              <div>
+                <label className="text-[11px] uppercase tracking-[1px] text-[var(--text3)] block mb-1">
+                  Signer Email *
+                </label>
+                <input
+                  type="email"
+                  value={signerEmail}
+                  onChange={(e) => setSignerEmail(e.target.value)}
+                  placeholder="seller@example.com"
+                  className="w-full"
+                />
+              </div>
+              <div>
+                <label className="text-[11px] uppercase tracking-[1px] text-[var(--text3)] block mb-1">
+                  Signer Name *
+                </label>
+                <input
+                  type="text"
+                  value={signerName}
+                  onChange={(e) => setSignerName(e.target.value)}
+                  placeholder="John Smith"
+                  className="w-full"
+                />
+              </div>
+              <p className="text-[10px] text-[var(--text3)]">
+                Box Sign will email the signer a link to review and sign the document.
+              </p>
+            </div>
+            <div className="flex gap-2 mt-6">
+              <button onClick={() => setSignModal(null)} className="flex-1 btn btn-ghost">
+                Cancel
+              </button>
+              <button
+                onClick={handleSign}
+                disabled={!signerEmail || !signerName || signing !== null}
+                className="flex-1 btn btn-primary disabled:opacity-50"
+              >
+                {signing ? "Sending..." : "Send for Signature"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -251,12 +346,16 @@ function TaskRow({
   task,
   variant,
   onGenerate,
+  onSign,
   isGenerating,
+  isSigning,
 }: {
   task: any;
   variant: "overdue" | "pending";
   onGenerate: (taskId: string, templateName: string) => void;
+  onSign?: (taskId: string, templateName: string) => void;
   isGenerating: boolean;
+  isSigning?: boolean;
 }) {
   const formatDueDate = (ms: number) => {
     const date = new Date(ms);
@@ -265,6 +364,17 @@ function TaskRow({
       day: "numeric",
     });
   };
+
+  const signStatusMap: Record<string, { label: string; color: string }> = {
+    sent: { label: "Sent", color: "bg-blue-500/20 text-blue-400" },
+    viewed: { label: "Viewed", color: "bg-purple-500/20 text-purple-400" },
+    signed: { label: "Signed", color: "bg-green-500/20 text-green-400" },
+    completed: { label: "Completed", color: "bg-green-500/20 text-green-400" },
+    declined: { label: "Declined", color: "bg-red-500/20 text-red-400" },
+    expired: { label: "Expired", color: "bg-red-500/20 text-red-400" },
+  };
+
+  const signStatus = task.boxSignStatus ? signStatusMap[task.boxSignStatus] : null;
 
   return (
     <div
@@ -283,6 +393,11 @@ function TaskRow({
             {Array.isArray(task.audience) ? task.audience[0] : task.audience}
           </span>
         )}
+        {task.requiresSignature && (
+          <span className="text-[9px] px-1.5 py-0.5 rounded bg-[var(--brand)]/10 text-[var(--brand)] shrink-0">
+            ✍ Signature
+          </span>
+        )}
       </div>
       <div className="flex items-center gap-2 shrink-0">
         {task.dueDate && (
@@ -294,23 +409,40 @@ function TaskRow({
             {formatDueDate(task.dueDate)}
           </span>
         )}
-        <span
-          className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
-            variant === "overdue"
-              ? "bg-red-500/20 text-red-400"
-              : "bg-yellow-500/20 text-yellow-400"
-          }`}
-        >
-          {variant === "overdue" ? "Overdue" : "Pending"}
-        </span>
-        {task.status !== "sent" && task.status !== "completed" && (
-          <button
-            onClick={() => onGenerate(task.taskId, task.templateName)}
-            disabled={isGenerating}
-            className="text-[10px] px-2 py-0.5 rounded bg-[var(--brass)]/10 text-[var(--brass)] hover:bg-[var(--brass)]/20 transition-colors disabled:opacity-50"
+        {signStatus ? (
+          <span className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${signStatus.color}`}>
+            {signStatus.label}
+          </span>
+        ) : (
+          <span
+            className={`text-[10px] px-2 py-0.5 rounded-full font-medium ${
+              variant === "overdue"
+                ? "bg-red-500/20 text-red-400"
+                : "bg-yellow-500/20 text-yellow-400"
+            }`}
           >
-            {isGenerating ? "..." : "Generate"}
-          </button>
+            {variant === "overdue" ? "Overdue" : "Pending"}
+          </span>
+        )}
+        {task.status !== "sent" && task.status !== "completed" && (
+          <>
+            <button
+              onClick={() => onGenerate(task.taskId, task.templateName)}
+              disabled={isGenerating}
+              className="text-[10px] px-2 py-0.5 rounded bg-[var(--brass)]/10 text-[var(--brass)] hover:bg-[var(--brass)]/20 transition-colors disabled:opacity-50"
+            >
+              {isGenerating ? "..." : "Generate"}
+            </button>
+            {task.requiresSignature && onSign && !task.boxSignStatus && (
+              <button
+                onClick={() => onSign(task.taskId, task.templateName)}
+                disabled={isSigning}
+                className="text-[10px] px-2 py-0.5 rounded bg-[var(--brand)]/10 text-[var(--brand)] hover:bg-[var(--brand)]/20 transition-colors disabled:opacity-50"
+              >
+                {isSigning ? "..." : "Sign"}
+              </button>
+            )}
+          </>
         )}
       </div>
     </div>
