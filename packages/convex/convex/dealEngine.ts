@@ -103,12 +103,16 @@ export const getDealQueue = query({
 		const templateIds = new Set(tasks.map((t) => t.templateId));
 		const templateMap = new Map<
 			string,
-			{ title: string; audience: string[] }
+			{ title: string; audience: string[]; requiresSignature: boolean }
 		>();
 		for (const tid of templateIds) {
 			const tmpl = await ctx.db.get(tid);
 			if (tmpl) {
-				templateMap.set(tid, { title: tmpl.title, audience: tmpl.audience });
+				templateMap.set(tid, {
+					title: tmpl.title,
+					audience: tmpl.audience,
+					requiresSignature: tmpl.requiresSignature ?? false,
+				});
 			}
 		}
 
@@ -134,6 +138,9 @@ export const getDealQueue = query({
 				templateId: task.templateId,
 				templateName: tmpl?.title ?? "Unknown",
 				audience: tmpl?.audience ?? [],
+				requiresSignature: tmpl?.requiresSignature ?? false,
+				boxSignStatus: task.boxSignStatus ?? null,
+				boxFileId: task.boxFileId ?? null,
 				status: isOverdue ? "overdue" : task.status,
 				dueDate: task.dueDate,
 				sentAt: task.sentAt,
