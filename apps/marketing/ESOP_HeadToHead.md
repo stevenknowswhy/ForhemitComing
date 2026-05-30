@@ -1,9 +1,12 @@
+05/30/26 06:50 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESOP Cost Reference Calculator - Forhemit Stewardship Management</title>
+    <title>ESOP Cost Reference Calculator - Forhemit Transition Stewardship</title>
     <style>
         :root {
             --primary: #1a1a1a;
@@ -289,7 +292,7 @@
 <body>
 
 <header>
-    <h1>Forhemit Stewardship Management Co.</h1>
+    <h1>Forhemit Transition Stewardship</h1>
     <div class="subtitle">ESOP Cost Reference Calculator — Version 2 (Interactive)</div>
     <button class="print-btn no-print" onclick="window.print()">Print / Save PDF</button>
 </header>

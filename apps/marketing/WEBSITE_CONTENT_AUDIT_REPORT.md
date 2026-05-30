@@ -1,3 +1,6 @@
+05/30/26 06:50 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # Forhemit Website Content Audit Report
 **Date:** March 24, 2026  
 **Scope:** Complete website content analysis for accuracy and consistency  
@@ -26,7 +29,7 @@ This audit identifies **content inconsistencies, conflicting information, and ar
 | Page | Description Used |
 |------|------------------|
 | `/appraisers` | "human-centric private equity firm that acquires $3M–$15M businesses" |
-| `/lenders` | "Forhemit Stewardship Management Co." / "operational risk partner" |
+| `/lenders` | "Forhemit Transition Stewardship" / "operational risk partner" |
 | `/accounting-firms` | "We are a Stewardship Management Company" |
 | `/about` | "Stewardship Management" |
 | `/business-owners` | ESOP sale facilitator (no explicit business model label) |

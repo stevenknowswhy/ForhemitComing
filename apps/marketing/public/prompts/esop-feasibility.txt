@@ -599,7 +599,7 @@ List every flag from the assessment:
 **Phone:** 424-253-4019
 **Website:** forhemit.com
 
-*Forhemit Stewardship Management Co. is a California Public Benefit Corporation.*
+*Forhemit Transition Stewardship is a California Public Benefit Corporation.*
 *We facilitate 100% employee ownership transitions for founder-led businesses with $3M–$15M EBITDA.*
 *We are not a trustee, appraiser, or ERISA attorney. We coordinate the transaction — your independent advisors protect your interests.*
 *We never hold equity. We never appear as a buyer. Our fees are paid by the operating company as tax-deductible business expenses.*
@@ -655,7 +655,7 @@ Estimated Enterprise Value: $[Mid]M
 
 **SECTION 1 — PARTIES**
 
-*"This Engagement Letter ("Letter") is entered into between Forhemit Stewardship Management Co., a California Public Benefit Corporation ("Forhemit"), and the owner(s) of [industry description] business operating in [primary operating state] ("Owner" or "Client").*
+*"This Engagement Letter ("Letter") is entered into between Forhemit Transition Stewardship, a California Public Benefit Corporation ("Forhemit"), and the owner(s) of [industry description] business operating in [primary operating state] ("Owner" or "Client").*
 
 *This Letter describes the scope of Forhemit's facilitation services, the fee structure, the milestone gate architecture, and the mutual obligations of both parties. It is intended to be reviewed by the Owner's independent legal counsel and CPA prior to execution. Nothing in this Letter constitutes legal, tax, or financial advice.*
 
@@ -811,7 +811,7 @@ FORHEMIT STEWARDSHIP MANAGEMENT CO.
 
 By: _______________________________
     Stefano Stokes, Founder
-    Forhemit Stewardship Management Co.
+    Forhemit Transition Stewardship
     deals@forhemit.com | 424-253-4019
 
 Date: _____________________________
