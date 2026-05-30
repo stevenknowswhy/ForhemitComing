@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
@@ -102,6 +102,60 @@ function DealCard({ company }: { company: DealCompany }) {
 	const logAudit = useMutation(api.documentAudit.logEvent);
 	const [generating, setGenerating] = useState<string | null>(null);
 	const [signing, setSigning] = useState<string | null>(null);
+	const autoProcessedRef = useRef<Set<string>>(new Set());
+
+	// Auto-generate documents for tasks with autoSend: true
+	useEffect(() => {
+		if (!pendingTasks) return;
+
+		const autoSendTasks = pendingTasks.filter(
+			(t: DealTask) => t.autoSend && t.status === "pending" && !autoProcessedRef.current.has(t.taskId),
+		);
+
+		if (autoSendTasks.length === 0) return;
+
+		for (const task of autoSendTasks) {
+			autoProcessedRef.current.add(task.taskId);
+
+			const dealData: Record<string, string> = {
+				companyName: company.name,
+				ref: company.ref || "",
+				ebitda: company.fees?.ebitda?.toLocaleString() || "",
+				stage: company.stage,
+				expectedCloseDate: company.expectedCloseDate || "",
+			};
+
+			fetch("/api/generate-document", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					templateTitle: task.templateName,
+					recipientName: company.name,
+					recipientEmail: "deals@forhemit.com",
+					dealData,
+					companyId: company._id,
+					boxFolderId: company.boxFolderId || undefined,
+					stage: company.stage,
+					taskId: task.taskId,
+				}),
+			})
+				.then((r) => r.json())
+				.then((result) => {
+					if (result.success) {
+						markTaskSent({ workflowTaskId: task.taskId as Id<"workflowTasks"> });
+						logAudit({
+							companyId: company._id,
+							taskId: task.taskId as Id<"workflowTasks">,
+							documentType: task.templateName,
+							action: "generated",
+							actor: "auto-send",
+							metadata: JSON.stringify({ boxFileId: result.boxFileId }),
+						});
+					}
+				})
+				.catch((err) => console.error("Auto-send failed:", err));
+		}
+	}, [pendingTasks, company, markTaskSent, logAudit]);
 	const [generateModal, setGenerateModal] = useState<{
 		taskId: string;
 		templateName: string;
@@ -129,11 +183,11 @@ function DealCard({ company }: { company: DealCompany }) {
 	// Separate pending and overdue tasks
 	const tasks = pendingTasks ?? [];
 	const overdue = tasks.filter(
-		(t) => t.status === "pending" && t.dueDate && t.dueDate < now,
-	);
-	const pending = tasks.filter(
-		(t) => t.status === "pending" && (!t.dueDate || t.dueDate >= now),
-	);
+			(t: DealTask) => t.status === "pending" && t.dueDate && t.dueDate < now,
+		);
+		const pending = tasks.filter(
+			(t: DealTask) => t.status === "pending" && (!t.dueDate || t.dueDate >= now),
+		);
 
 	const handleGenerate = useCallback(async () => {
 		if (!generateModal || !recipientEmail || !recipientName) return;
@@ -212,7 +266,15 @@ function DealCard({ company }: { company: DealCompany }) {
 		} finally {
 			setGenerating(null);
 		}
-	}, [generateModal, recipientEmail, recipientName, senderEmail, company, markTaskSent, logAudit]);
+	}, [
+		generateModal,
+		recipientEmail,
+		recipientName,
+		senderEmail,
+		company,
+		markTaskSent,
+		logAudit,
+	]);
 
 	const handleSign = useCallback(async () => {
 		if (!signModal || !signerEmail || !signerName) return;
