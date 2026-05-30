@@ -1,7 +1,7 @@
 "use client";
 
 import { mockArticles } from '@/lib/blog-data';
-import { usePathway } from '@/hooks/useBlog';
+import { usePathway } from '@forhemit/shared/hooks/useBlog';
 import { ArticleCard, QuickTakeCard } from '@/components/ui/CustomCard';
 
 export function BentoGrid() {
