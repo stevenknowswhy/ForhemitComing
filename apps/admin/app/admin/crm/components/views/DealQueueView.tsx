@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import { useQuery, useAction } from "convex/react";
+import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import type { Id } from "@/convex/_generated/dataModel";
 
@@ -31,6 +31,7 @@ interface DealCompany {
 		totalFee?: number;
 	};
 	createdAt: number;
+	boxFolderId?: string;
 	updatedAt: number;
 }
 
@@ -96,8 +97,9 @@ function DealCard({ company }: { company: DealCompany }) {
 	const pendingTasks = useQuery(api.dealEngine.getDealQueue, {
 		companyId: company._id,
 	});
-	const generateTask = useAction(api.dealProcessor.generateQueueTask);
 	const signTask = useAction(api.box.signWorkflowTask);
+	const markTaskSent = useMutation(api.workflowTasks.markTaskSent);
+	const logAudit = useMutation(api.documentAudit.logEvent);
 	const [generating, setGenerating] = useState<string | null>(null);
 	const [signing, setSigning] = useState<string | null>(null);
 	const [generateModal, setGenerateModal] = useState<{
@@ -137,12 +139,70 @@ function DealCard({ company }: { company: DealCompany }) {
 		if (!generateModal || !recipientEmail || !recipientName) return;
 		setGenerating(generateModal.taskId);
 		try {
-			await generateTask({
-				taskId: generateModal.taskId as Id<"workflowTasks">,
-				recipientEmail,
-				recipientName,
-				senderEmail: senderEmail || undefined,
+			// Build deal data from company context
+			const dealData: Record<string, string> = {
+				companyName: company.name,
+				ref: company.ref || "",
+				ebitda: company.fees?.ebitda?.toLocaleString() || "",
+				stage: company.stage,
+				expectedCloseDate: company.expectedCloseDate || "",
+			};
+
+			// Call the document generation API
+			const resp = await fetch("/api/generate-document", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					templateTitle: generateModal.templateName,
+					recipientName,
+					recipientEmail,
+					dealData,
+					companyId: company._id,
+					boxFolderId: company.boxFolderId || undefined,
+					stage: company.stage,
+					taskId: generateModal.taskId,
+				}),
 			});
+
+			const result = await resp.json();
+
+			if (!result.success) {
+				console.error("Generation failed:", result.error);
+				return;
+			}
+
+			// Mark task as sent in Convex
+			await markTaskSent({
+				workflowTaskId: generateModal.taskId as Id<"workflowTasks">,
+			});
+
+			// Log audit event
+			await logAudit({
+				companyId: company._id,
+				taskId: generateModal.taskId as Id<"workflowTasks">,
+				documentType: generateModal.templateName,
+				action: "generated",
+				actor: "admin",
+				metadata: JSON.stringify({
+					boxFileId: result.boxFileId,
+					pdfSize: result.pdfSize,
+				}),
+			});
+
+			// Download the PDF
+			if (result.pdfBase64) {
+				const binary = atob(result.pdfBase64);
+				const bytes = new Uint8Array(binary.length);
+				for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+				const blob = new Blob([bytes], { type: "application/pdf" });
+				const url = URL.createObjectURL(blob);
+				const a = document.createElement("a");
+				a.href = url;
+				a.download = `${generateModal.templateName.replace(/\s+/g, "-")}.pdf`;
+				a.click();
+				URL.revokeObjectURL(url);
+			}
+
 			setGenerateModal(null);
 			setRecipientEmail("");
 			setRecipientName("");
@@ -152,7 +212,7 @@ function DealCard({ company }: { company: DealCompany }) {
 		} finally {
 			setGenerating(null);
 		}
-	}, [generateModal, recipientEmail, recipientName, senderEmail, generateTask]);
+	}, [generateModal, recipientEmail, recipientName, senderEmail, company, markTaskSent, logAudit]);
 
 	const handleSign = useCallback(async () => {
 		if (!signModal || !signerEmail || !signerName) return;
