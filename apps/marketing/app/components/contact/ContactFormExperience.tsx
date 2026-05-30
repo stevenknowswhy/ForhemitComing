@@ -44,6 +44,61 @@ const PARTNER_INTERESTS = new Set([
 	"appraisal",
 ]);
 
+/** Static contact info sidebar — extracted to reduce main component verbosity */
+function ContactInfoSidebar() {
+	return (
+		<div className="contact-info-section">
+			<div className="contact-info-header">
+				<h2 className="contact-info-title">Let&apos;s Connect</h2>
+				<p className="contact-info-subtitle">
+					Ready to explore partnership opportunities? We&apos;re here to
+					help.
+				</p>
+			</div>
+
+			<div className="contact-info-items">
+				<ContactInfoItem
+					icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>}
+					label="Email"
+					value={<a href="mailto:contact@forhemit.com" className="contact-info-link">contact@forhemit.com</a>}
+				/>
+				<ContactInfoItem
+					icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>}
+					label="Location"
+					value={<span className="contact-info-value">55 9th St., San Francisco, CA</span>}
+				/>
+				<ContactInfoItem
+					icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>}
+					label="Phone"
+					value={<a href="tel:+14242534019" className="contact-info-link">424-253-4019</a>}
+				/>
+			</div>
+
+			<div className="contact-info-divider" />
+
+			<div className="contact-info-note">
+				<p>
+					Whether you&apos;re a business owner exploring ESOP transitions, a
+					professional seeking partnership opportunities, or simply curious
+					about our stewardship model — we&apos;d love to hear from you.
+				</p>
+			</div>
+		</div>
+	);
+}
+
+function ContactInfoItem({ icon, label, value }: { icon: React.ReactNode; label: string; value: React.ReactNode }) {
+	return (
+		<div className="contact-info-item">
+			<div className="contact-info-icon">{icon}</div>
+			<div className="contact-info-text">
+				<span className="contact-info-label">{label}</span>
+				{value}
+			</div>
+		</div>
+	);
+}
+
 export function ContactFormExperience({
 	source,
 	variant,
@@ -288,95 +343,7 @@ export function ContactFormExperience({
 		<>
 			<ToastContainer toasts={toasts} onRemove={removeToast} />
 			<div className={layoutClassName}>
-				<div className="contact-info-section">
-					<div className="contact-info-header">
-						<h2 className="contact-info-title">Let&apos;s Connect</h2>
-						<p className="contact-info-subtitle">
-							Ready to explore partnership opportunities? We&apos;re here to
-							help.
-						</p>
-					</div>
-
-					<div className="contact-info-items">
-						<div className="contact-info-item">
-							<div className="contact-info-icon">
-								<svg
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								>
-									<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-									<polyline points="22,6 12,13 2,6" />
-								</svg>
-							</div>
-							<div className="contact-info-text">
-								<span className="contact-info-label">Email</span>
-								<a
-									href="mailto:contact@forhemit.com"
-									className="contact-info-link"
-								>
-									contact@forhemit.com
-								</a>
-							</div>
-						</div>
-
-						<div className="contact-info-item">
-							<div className="contact-info-icon">
-								<svg
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								>
-									<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-									<circle cx="12" cy="10" r="3" />
-								</svg>
-							</div>
-							<div className="contact-info-text">
-								<span className="contact-info-label">Location</span>
-								<span className="contact-info-value">
-									55 9th St., San Francisco, CA
-								</span>
-							</div>
-						</div>
-
-						<div className="contact-info-item">
-							<div className="contact-info-icon">
-								<svg
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth="1.5"
-								>
-									<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-								</svg>
-							</div>
-							<div className="contact-info-text">
-								<span className="contact-info-label">Phone</span>
-								<a href="tel:+14242534019" className="contact-info-link">
-									424-253-4019
-								</a>
-							</div>
-						</div>
-					</div>
-
-					<div className="contact-info-divider"></div>
-
-					<div className="contact-info-note">
-						<p>
-							Whether you&apos;re a business owner exploring ESOP transitions, a
-							professional seeking partnership opportunities, or simply curious
-							about our stewardship model — we&apos;d love to hear from you.
-						</p>
-					</div>
-				</div>
+				<ContactInfoSidebar />
 
 				<div className="contact-form-section">
 					{revealedSection === "success" ? (
