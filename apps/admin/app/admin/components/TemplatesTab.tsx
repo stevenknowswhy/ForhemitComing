@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, lazy, Suspense, useMemo } from "react";
+import { useState, useEffect, useCallback, lazy, Suspense, useMemo } from "react";
 import { useQuery, useMutation } from "convex/react";
 import { useRouter } from "next/navigation";
 import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
 import DocumentPreviewModal from "../templates/DocumentPreviewModal";
 import GeneratedDocumentsLog from "../templates/GeneratedDocumentsLog";
 import "../templates.css";
@@ -21,7 +20,7 @@ export default function TemplatesTab() {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [activeTemplateId, setActiveTemplateId] =
-    useState<Id<"templates"> | null>(null);
+    useState<string | null>(null);
   const [activeTemplateName, setActiveTemplateName] = useState("");
   const [activeFormKey, setActiveFormKey] = useState("");
   const [reprintData, setReprintData] = useState<
@@ -97,7 +96,7 @@ export default function TemplatesTab() {
   }, [forceSeedAll, router]);
 
   const openPreview = useCallback(
-    (id: Id<"templates">, name: string, formKey?: string, data?: string) => {
+    (id: string, name: string, formKey?: string, data?: string) => {
       setActiveTemplateId(id);
       setActiveTemplateName(name);
       setActiveFormKey(formKey || "");

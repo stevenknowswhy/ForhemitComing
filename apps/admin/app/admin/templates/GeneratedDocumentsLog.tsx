@@ -1,17 +1,25 @@
 "use client";
 
-import React from "react";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
+import React, { useState, useEffect } from "react";
 
 interface GeneratedDocumentsLogProps {
-  templateId?: Id<"templates">;
+  templateId?: string;
   onReprint?: (formData: string) => void;
 }
 
-function formatDateTime(ts: number): string {
-  return new Date(ts).toLocaleString("en-US", {
+interface GenerationRecord {
+  id: string;
+  template_id: string;
+  template_name: string;
+  form_data: string;
+  action: string;
+  generated_by: string | null;
+  status: string;
+  created_at: string;
+}
+
+function formatDateTime(isoString: string): string {
+  return new Date(isoString).toLocaleString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
@@ -25,10 +33,18 @@ function actionLabel(action: string): string {
   switch (action) {
     case "pdf-download":
       return "📄 PDF Download";
+    case "pdf-download-server":
+      return "📄 PDF (Server)";
+    case "pdf-download-client":
+      return "📄 PDF (Client)";
     case "print":
       return "🖨️ Print";
     case "preview":
       return "👁️ Preview";
+    case "export-csv":
+      return "📊 CSV Export";
+    case "export-json":
+      return "🗂️ JSON Export";
     default:
       return action;
   }
@@ -51,15 +67,23 @@ export default function GeneratedDocumentsLog({
   templateId,
   onReprint,
 }: GeneratedDocumentsLogProps) {
-  const allDocs = useQuery(api.generatedDocuments.list, { limit: 50 });
-  const templateDocs = useQuery(
-    api.generatedDocuments.getByTemplate,
-    templateId ? { templateId, limit: 50 } : "skip"
-  );
+  const [docs, setDocs] = useState<GenerationRecord[] | null>(null);
 
-  const docs = templateId ? templateDocs : allDocs;
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (templateId) params.set("templateId", templateId);
+    params.set("limit", "50");
 
-  if (!docs) {
+    fetch(`/api/ghost/generation-log?${params}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setDocs(data.generations);
+        else setDocs([]);
+      })
+      .catch(() => setDocs([]));
+  }, [templateId]);
+
+  if (docs === null) {
     return (
       <div className="generated-log-loading">Loading generation log…</div>
     );
@@ -90,22 +114,22 @@ export default function GeneratedDocumentsLog({
           </tr>
         </thead>
         <tbody>
-          {docs.map((doc: { _id: string; templateName: string; action: string; formData: string; createdAt: number; generatedBy?: string }) => (
-            <tr key={doc._id}>
-              <td className="generated-log-name">{doc.templateName}</td>
+          {docs.map((doc) => (
+            <tr key={doc.id}>
+              <td className="generated-log-name">{doc.template_name}</td>
               <td>{actionLabel(doc.action)}</td>
               <td className="generated-log-params">
-                {summarizeFormData(doc.formData)}
+                {summarizeFormData(doc.form_data)}
               </td>
               <td className="generated-log-time">
-                {formatDateTime(doc.createdAt)}
+                {formatDateTime(doc.created_at)}
               </td>
               <td>
                 {onReprint && (
                   <button
                     type="button"
                     className="generated-log-reprint"
-                    onClick={() => onReprint(doc.formData)}
+                    onClick={() => onReprint(doc.form_data)}
                   >
                     ↻ Reprint
                   </button>
