@@ -233,7 +233,7 @@ export function AssessPageClient() {
             color: "var(--stone-light, var(--stone))",
           }}
         >
-          Forhemit Stewardship Management Co. · California Public Benefit
+          Forhemit Transition Stewardship · California Public Benefit
           Corporation ·{" "}
           <a
             href="https://forhemit.com"

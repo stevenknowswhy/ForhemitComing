@@ -193,7 +193,7 @@ export function emailLayout(opts: {
     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-size: 11px; color: ${BRAND.stone}; line-height: 1.6;">
       <tr>
         <td style="text-align: center; padding-bottom: 2px;">
-          Forhemit Stewardship Management Co. &middot; California Public Benefit Corporation
+          Forhemit Transition Stewardship &middot; California Public Benefit Corporation
           &nbsp;&middot;&nbsp;
           <a href="https://forhemit.com" style="color: ${BRAND.brass}; text-decoration: none; font-weight: 500;">forhemit.com</a>
         </td>
@@ -205,7 +205,7 @@ export function emailLayout(opts: {
       </tr>
       <tr>
         <td style="text-align: center; font-size: 10px; color: #b0a99a;">
-          &copy; ${currentYear} Forhemit Stewardship Management Co. All rights reserved.
+          &copy; ${currentYear} Forhemit Transition Stewardship. All rights reserved.
           &nbsp;&middot;&nbsp;
           <a href="https://forhemit.com/privacy" style="color: ${BRAND.stone}; text-decoration: underline;">Privacy</a>
           &nbsp;&middot;&nbsp;

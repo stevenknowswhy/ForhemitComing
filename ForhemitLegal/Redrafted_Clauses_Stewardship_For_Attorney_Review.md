@@ -1,3 +1,7 @@
+05/30/26 06:50 AM PT
+05/30/26 06:50 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # REDRAFTED CLAUSES — STEWARDSHIP AGREEMENT
 **Document**: Forhemit Transition Stewardship Agreement (Doc 11)
 **Purpose**: Copy-ready language for attorney implementation
@@ -21,7 +25,7 @@ Each section below contains suggested language for missing or problematic provis
 ```
 1.1 Parties. This Transition Stewardship Agreement ("Agreement") is entered into as of ${agreement_date} between:
 
-(a) Forhemit Stewardship Management Co., a California public benefit corporation ("Forhemit"), with its principal place of business at [ADDRESS]; and
+(a) Forhemit Transition Stewardship, a California public benefit corporation ("Forhemit"), with its principal place of business at [ADDRESS]; and
 
 (b) ${company}, a [STATE] [ENTITY TYPE] ("Company"), with its principal place of business at [ADDRESS].
 
@@ -228,7 +232,7 @@ P6 — Succession Progress Reporting: Forhemit shall provide quarterly updates o
 ### 12.1 General Provisions (NEW)
 
 ```
-12.1 Notices. All notices, requests, consents, claims, demands, waivers, and other communications hereunder shall be in writing and shall be deemed to have been given: (a) when delivered by hand; (b) when received by the addressee if sent by a nationally recognized overnight courier; (c) on the date sent by email if sent during normal business hours of the recipient; or (d) on the third day after the date mailed, by certified or registered mail, return receipt requested, postage prepaid. Notices to Forhemit shall be sent to: Forhemit Stewardship Management Co., [ADDRESS], Attention: [NAME], Email: deals@forhemit.com. Notices to Company shall be sent to the email address specified in this Agreement.
+12.1 Notices. All notices, requests, consents, claims, demands, waivers, and other communications hereunder shall be in writing and shall be deemed to have been given: (a) when delivered by hand; (b) when received by the addressee if sent by a nationally recognized overnight courier; (c) on the date sent by email if sent during normal business hours of the recipient; or (d) on the third day after the date mailed, by certified or registered mail, return receipt requested, postage prepaid. Notices to Forhemit shall be sent to: Forhemit Transition Stewardship, [ADDRESS], Attention: [NAME], Email: deals@forhemit.com. Notices to Company shall be sent to the email address specified in this Agreement.
 
 12.2 Amendment and Modification. This Agreement may only be amended, modified, or supplemented by an agreement in writing signed by both parties. No waiver of any provision shall be effective unless in writing and signed by the waiving party.
 

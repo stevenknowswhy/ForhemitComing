@@ -129,7 +129,7 @@ export function formatEmailBody(body: string): string {
         </p>
       </div>
       <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #eee; font-size: 11px; color: #999; text-align: center;">
-        <p>Forhemit Stewardship Management Co. · California Public Benefit Corporation</p>
+        <p>Forhemit Transition Stewardship · California Public Benefit Corporation</p>
         <p>548 Market St, Suite 36451, San Francisco, CA 94104</p>
       </div>
     </div>
