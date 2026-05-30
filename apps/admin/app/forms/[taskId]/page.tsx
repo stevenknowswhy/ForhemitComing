@@ -215,7 +215,7 @@ export default function FormPage() {
 
 				{/* Footer */}
 				<div className="text-center mt-6 text-sm text-stone-400">
-					<p>Forhemit Stewardship Management Co.</p>
+					<p>Forhemit Transition Stewardship</p>
 					<p>548 Market St, Suite 36451, San Francisco, CA 94104</p>
 				</div>
 			</div>

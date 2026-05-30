@@ -1,3 +1,7 @@
+05/30/26 06:50 AM PT
+05/30/26 06:50 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # FORHEMIT ENGAGEMENT LETTER — LEGAL REVIEW PACKAGE
 **Prepared**: March 30, 2026
 **Status**: Attorney Review Required
@@ -137,7 +141,7 @@ _______________________________________________________________
 
 ## CONTACT
 
-**Forhemit Stewardship Management Co.**
+**Forhemit Transition Stewardship**
 deals@forhemit.com
 forhemit.com
 
