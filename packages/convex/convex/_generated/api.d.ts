@@ -32,7 +32,6 @@ import type * as dealDocuments from "../dealDocuments.js";
 import type * as dealEngine from "../dealEngine.js";
 import type * as dealProcessor from "../dealProcessor.js";
 import type * as documentPipeline from "../documentPipeline.js";
-import type * as documentTemplates from "../documentTemplates.js";
 import type * as earlyAccessSignups from "../earlyAccessSignups.js";
 import type * as emailCore from "../emailCore.js";
 import type * as emailEvents from "../emailEvents.js";
@@ -99,7 +98,6 @@ declare const fullApi: ApiFromModules<{
   dealEngine: typeof dealEngine;
   dealProcessor: typeof dealProcessor;
   documentPipeline: typeof documentPipeline;
-  documentTemplates: typeof documentTemplates;
   earlyAccessSignups: typeof earlyAccessSignups;
   emailCore: typeof emailCore;
   emailEvents: typeof emailEvents;
