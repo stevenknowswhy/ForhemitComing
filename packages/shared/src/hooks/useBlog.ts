@@ -7,8 +7,9 @@ import {
 	createContext,
 	useContext,
 } from "react";
-import type { Pathway } from "@/lib/blog-data";
-import { trackEvent, trackCRM } from "@forhemit/shared/lib/analytics";
+/** Supported blog content pathways. */
+export type Pathway = "all" | "founders" | "attorneys" | "lenders" | "cpas" | "employees";
+import { trackEvent, trackCRM } from "../lib/analytics";
 
 const STORAGE_KEY = "forhemit-pathway";
 
@@ -141,24 +142,6 @@ export function useScrollDepth(thresholds: number[] = [25, 50, 75, 90]) {
 	}, [thresholds, firedThresholds]);
 
 	return firedThresholds;
-}
-
-export function useReducedMotion() {
-	const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
-
-	useEffect(() => {
-		const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-		setPrefersReducedMotion(mediaQuery.matches);
-
-		const handler = (event: MediaQueryListEvent) => {
-			setPrefersReducedMotion(event.matches);
-		};
-
-		mediaQuery.addEventListener("change", handler);
-		return () => mediaQuery.removeEventListener("change", handler);
-	}, []);
-
-	return prefersReducedMotion;
 }
 
 export function useDossierForm() {
