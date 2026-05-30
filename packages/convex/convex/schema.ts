@@ -763,4 +763,28 @@ export default defineSchema({
 		createdAt: v.number(),
 		updatedAt: v.number(),
 	}).index("by_company_template", ["companyId", "templateId"]),
+
+	// Document audit log — SOC 2 ready
+	documentAudit: defineTable({
+		companyId: v.optional(v.id("crmCompanies")),
+		taskId: v.optional(v.id("workflowTasks")),
+		documentType: v.string(),
+		action: v.union(
+			v.literal("generated"),
+			v.literal("uploaded"),
+			v.literal("shared"),
+			v.literal("signed"),
+			v.literal("declined"),
+			v.literal("expired"),
+			v.literal("viewed"),
+			v.literal("downloaded"),
+			v.literal("emailed"),
+		),
+		actor: v.string(),
+		metadata: v.optional(v.string()),
+		createdAt: v.number(),
+	})
+		.index("by_company", ["companyId"])
+		.index("by_task", ["taskId"])
+		.index("by_action", ["action"]),
 });
