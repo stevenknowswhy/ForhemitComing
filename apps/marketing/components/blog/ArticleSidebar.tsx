@@ -2,7 +2,7 @@
 
 import { trackEvent } from '@forhemit/shared/lib/analytics';
 
-import { useScrollProgress } from '@/hooks/useBlog';
+import { useScrollProgress } from '@forhemit/shared/hooks/useBlog';
 
 export function ProgressSentinel() {
   const progress = useScrollProgress();

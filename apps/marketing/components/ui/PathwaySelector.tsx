@@ -1,7 +1,7 @@
 "use client";
 
 import { Pathway, pathways } from '@/lib/blog-data';
-import { usePathway } from '@/hooks/useBlog';
+import { usePathway } from '@forhemit/shared/hooks/useBlog';
 
 export function PathwaySelector() {
   const { pathway, setPathway, isInitialized } = usePathway();
