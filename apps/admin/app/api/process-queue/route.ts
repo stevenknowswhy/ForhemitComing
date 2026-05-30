@@ -42,23 +42,20 @@ export async function POST(request: Request) {
 		for (const task of tasks) {
 			try {
 				// Call generate-document for each task
-				const resp = await fetch(
-					`${getBaseUrl()}/api/generate-document`,
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							templateTitle: task.templateTitle,
-							recipientName: task.recipientName,
-							recipientEmail: task.recipientEmail,
-							dealData: task.dealData,
-							companyId: task.companyId,
-							boxFolderId: task.boxFolderId,
-							stage: task.stage,
-							taskId: task.taskId,
-						}),
-					},
-				);
+				const resp = await fetch(`${getBaseUrl()}/api/generate-document`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						templateTitle: task.templateTitle,
+						recipientName: task.recipientName,
+						recipientEmail: task.recipientEmail,
+						dealData: task.dealData,
+						companyId: task.companyId,
+						boxFolderId: task.boxFolderId,
+						stage: task.stage,
+						taskId: task.taskId,
+					}),
+				});
 
 				const result = await resp.json();
 				results.push({

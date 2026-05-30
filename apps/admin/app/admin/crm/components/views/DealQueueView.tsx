@@ -109,7 +109,10 @@ function DealCard({ company }: { company: DealCompany }) {
 		if (!pendingTasks) return;
 
 		const autoSendTasks = pendingTasks.filter(
-			(t: DealTask) => t.autoSend && t.status === "pending" && !autoProcessedRef.current.has(t.taskId),
+			(t: DealTask) =>
+				t.autoSend &&
+				t.status === "pending" &&
+				!autoProcessedRef.current.has(t.taskId),
 		);
 
 		if (autoSendTasks.length === 0) return;
@@ -142,7 +145,9 @@ function DealCard({ company }: { company: DealCompany }) {
 				.then((r) => r.json())
 				.then((result) => {
 					if (result.success) {
-						markTaskSent({ workflowTaskId: task.taskId as Id<"workflowTasks"> });
+						markTaskSent({
+							workflowTaskId: task.taskId as Id<"workflowTasks">,
+						});
 						logAudit({
 							companyId: company._id,
 							taskId: task.taskId as Id<"workflowTasks">,
@@ -183,11 +188,11 @@ function DealCard({ company }: { company: DealCompany }) {
 	// Separate pending and overdue tasks
 	const tasks = pendingTasks ?? [];
 	const overdue = tasks.filter(
-			(t: DealTask) => t.status === "pending" && t.dueDate && t.dueDate < now,
-		);
-		const pending = tasks.filter(
-			(t: DealTask) => t.status === "pending" && (!t.dueDate || t.dueDate >= now),
-		);
+		(t: DealTask) => t.status === "pending" && t.dueDate && t.dueDate < now,
+	);
+	const pending = tasks.filter(
+		(t: DealTask) => t.status === "pending" && (!t.dueDate || t.dueDate >= now),
+	);
 
 	const handleGenerate = useCallback(async () => {
 		if (!generateModal || !recipientEmail || !recipientName) return;

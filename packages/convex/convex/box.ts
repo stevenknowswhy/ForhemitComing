@@ -485,7 +485,10 @@ export const handleBoxWebhook = mutation({
 				documentType: "document",
 				action: auditAction as "shared" | "signed" | "declined" | "expired",
 				actor: "box-webhook",
-				metadata: JSON.stringify({ signRequestId: args.signRequestId, eventType: args.eventType }),
+				metadata: JSON.stringify({
+					signRequestId: args.signRequestId,
+					eventType: args.eventType,
+				}),
 				createdAt: Date.now(),
 			});
 		}

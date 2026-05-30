@@ -64,7 +64,9 @@ export default function CompliancePage() {
 		setLoading(true);
 		try {
 			const [auditResp, retentionResp] = await Promise.all([
-				fetch(`/api/ghost/audit?limit=200&days=${days}${filter !== "all" ? `&action=${filter}` : ""}`),
+				fetch(
+					`/api/ghost/audit?limit=200&days=${days}${filter !== "all" ? `&action=${filter}` : ""}`,
+				),
 				fetch("/api/ghost/retention"),
 			]);
 
@@ -92,7 +94,14 @@ export default function CompliancePage() {
 	return (
 		<div style={{ fontFamily: "Jost, sans-serif", maxWidth: "1200px" }}>
 			<div style={{ marginBottom: "32px" }}>
-				<h1 style={{ fontSize: "24px", fontWeight: 600, color: "#1B2A4A", marginBottom: "4px" }}>
+				<h1
+					style={{
+						fontSize: "24px",
+						fontWeight: 600,
+						color: "#1B2A4A",
+						marginBottom: "4px",
+					}}
+				>
 					Compliance & Audit
 				</h1>
 				<p style={{ color: "#6b7280", fontSize: "14px" }}>
@@ -102,19 +111,41 @@ export default function CompliancePage() {
 
 			{/* Stats cards */}
 			{stats && (
-				<div style={{
-					display: "grid",
-					gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
-					gap: "12px",
-					marginBottom: "24px",
-				}}>
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "repeat(auto-fill, minmax(140px, 1fr))",
+						gap: "12px",
+						marginBottom: "24px",
+					}}
+				>
 					{[
 						{ label: "Total Events", value: stats.total, color: "#1B2A4A" },
-						{ label: "Generated", value: stats.generated, color: ACTION_COLORS.generated },
-						{ label: "Uploaded", value: stats.uploaded, color: ACTION_COLORS.uploaded },
-						{ label: "Shared", value: stats.shared, color: ACTION_COLORS.shared },
-						{ label: "Signed", value: stats.signed, color: ACTION_COLORS.signed },
-						{ label: "Viewed", value: stats.viewed, color: ACTION_COLORS.viewed },
+						{
+							label: "Generated",
+							value: stats.generated,
+							color: ACTION_COLORS.generated,
+						},
+						{
+							label: "Uploaded",
+							value: stats.uploaded,
+							color: ACTION_COLORS.uploaded,
+						},
+						{
+							label: "Shared",
+							value: stats.shared,
+							color: ACTION_COLORS.shared,
+						},
+						{
+							label: "Signed",
+							value: stats.signed,
+							color: ACTION_COLORS.signed,
+						},
+						{
+							label: "Viewed",
+							value: stats.viewed,
+							color: ACTION_COLORS.viewed,
+						},
 					].map((card) => (
 						<div
 							key={card.label}
@@ -125,10 +156,14 @@ export default function CompliancePage() {
 								background: "white",
 							}}
 						>
-							<div style={{ fontSize: "24px", fontWeight: 700, color: card.color }}>
+							<div
+								style={{ fontSize: "24px", fontWeight: 700, color: card.color }}
+							>
 								{card.value}
 							</div>
-							<div style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}>
+							<div
+								style={{ fontSize: "12px", color: "#6b7280", marginTop: "4px" }}
+							>
 								{card.label}
 							</div>
 						</div>
@@ -137,13 +172,15 @@ export default function CompliancePage() {
 			)}
 
 			{/* Filters */}
-			<div style={{
-				display: "flex",
-				alignItems: "center",
-				gap: "12px",
-				marginBottom: "16px",
-				flexWrap: "wrap",
-			}}>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					gap: "12px",
+					marginBottom: "16px",
+					flexWrap: "wrap",
+				}}
+			>
 				<select
 					value={filter}
 					onChange={(e) => setFilter(e.target.value)}
@@ -207,25 +244,35 @@ export default function CompliancePage() {
 			)}
 
 			{events && events.length > 0 && (
-				<div style={{
-					border: "1px solid #e5e7eb",
-					borderRadius: "8px",
-					overflow: "hidden",
-					marginBottom: "32px",
-				}}>
+				<div
+					style={{
+						border: "1px solid #e5e7eb",
+						borderRadius: "8px",
+						overflow: "hidden",
+						marginBottom: "32px",
+					}}
+				>
 					<table style={{ width: "100%", borderCollapse: "collapse" }}>
 						<thead>
-							<tr style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
+							<tr
+								style={{
+									background: "#f9fafb",
+									borderBottom: "1px solid #e5e7eb",
+								}}
+							>
 								{["Time", "Action", "Document", "Actor", "Company"].map((h) => (
-									<th key={h} style={{
-										padding: "10px 14px",
-										textAlign: "left",
-										fontSize: "11px",
-										fontWeight: 600,
-										color: "#6b7280",
-										textTransform: "uppercase",
-										letterSpacing: "0.05em",
-									}}>
+									<th
+										key={h}
+										style={{
+											padding: "10px 14px",
+											textAlign: "left",
+											fontSize: "11px",
+											fontWeight: 600,
+											color: "#6b7280",
+											textTransform: "uppercase",
+											letterSpacing: "0.05em",
+										}}
+									>
 										{h}
 									</th>
 								))}
@@ -234,29 +281,56 @@ export default function CompliancePage() {
 						<tbody>
 							{events.map((ev) => (
 								<tr key={ev.id} style={{ borderBottom: "1px solid #f3f4f6" }}>
-									<td style={{ padding: "10px 14px", fontSize: "13px", color: "#6b7280" }}>
+									<td
+										style={{
+											padding: "10px 14px",
+											fontSize: "13px",
+											color: "#6b7280",
+										}}
+									>
 										{formatDate(ev.created_at)}
 									</td>
 									<td style={{ padding: "10px 14px" }}>
-										<span style={{
-											display: "inline-block",
-											padding: "2px 8px",
-											borderRadius: "4px",
-											fontSize: "12px",
-											fontWeight: 500,
-											background: `${ACTION_COLORS[ev.action] || "#6b7280"}15`,
-											color: ACTION_COLORS[ev.action] || "#6b7280",
-										}}>
+										<span
+											style={{
+												display: "inline-block",
+												padding: "2px 8px",
+												borderRadius: "4px",
+												fontSize: "12px",
+												fontWeight: 500,
+												background: `${ACTION_COLORS[ev.action] || "#6b7280"}15`,
+												color: ACTION_COLORS[ev.action] || "#6b7280",
+											}}
+										>
 											{ev.action}
 										</span>
 									</td>
-									<td style={{ padding: "10px 14px", fontSize: "13px", color: "#1f2937" }}>
+									<td
+										style={{
+											padding: "10px 14px",
+											fontSize: "13px",
+											color: "#1f2937",
+										}}
+									>
 										{ev.document_type}
 									</td>
-									<td style={{ padding: "10px 14px", fontSize: "13px", color: "#6b7280" }}>
+									<td
+										style={{
+											padding: "10px 14px",
+											fontSize: "13px",
+											color: "#6b7280",
+										}}
+									>
 										{ev.actor}
 									</td>
-									<td style={{ padding: "10px 14px", fontSize: "13px", color: "#6b7280", fontFamily: "DM Mono, monospace" }}>
+									<td
+										style={{
+											padding: "10px 14px",
+											fontSize: "13px",
+											color: "#6b7280",
+											fontFamily: "DM Mono, monospace",
+										}}
+									>
 										{ev.company_id ? ev.company_id.slice(0, 8) + "…" : "—"}
 									</td>
 								</tr>
@@ -269,11 +343,14 @@ export default function CompliancePage() {
 			{events && events.length === 0 && !loading && (
 				<div style={{ textAlign: "center", padding: "48px" }}>
 					<div style={{ fontSize: "48px", marginBottom: "16px" }}>📋</div>
-					<h2 style={{ fontSize: "18px", color: "#1B2A4A", marginBottom: "8px" }}>
+					<h2
+						style={{ fontSize: "18px", color: "#1B2A4A", marginBottom: "8px" }}
+					>
 						No audit events
 					</h2>
 					<p style={{ color: "#6b7280", fontSize: "14px" }}>
-						Audit events will appear here as documents are generated, shared, and signed.
+						Audit events will appear here as documents are generated, shared,
+						and signed.
 					</p>
 				</div>
 			)}
@@ -281,27 +358,49 @@ export default function CompliancePage() {
 			{/* Retention policies */}
 			{policies && policies.length > 0 && (
 				<div>
-					<h2 style={{ fontSize: "18px", fontWeight: 600, color: "#1B2A4A", marginBottom: "16px" }}>
+					<h2
+						style={{
+							fontSize: "18px",
+							fontWeight: 600,
+							color: "#1B2A4A",
+							marginBottom: "16px",
+						}}
+					>
 						Retention Policies
 					</h2>
-					<div style={{
-						border: "1px solid #e5e7eb",
-						borderRadius: "8px",
-						overflow: "hidden",
-					}}>
+					<div
+						style={{
+							border: "1px solid #e5e7eb",
+							borderRadius: "8px",
+							overflow: "hidden",
+						}}
+					>
 						<table style={{ width: "100%", borderCollapse: "collapse" }}>
 							<thead>
-								<tr style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
-									{["Document Type", "Retention", "Auto-Delete", "Description"].map((h) => (
-										<th key={h} style={{
-											padding: "10px 14px",
-											textAlign: "left",
-											fontSize: "11px",
-											fontWeight: 600,
-											color: "#6b7280",
-											textTransform: "uppercase",
-											letterSpacing: "0.05em",
-										}}>
+								<tr
+									style={{
+										background: "#f9fafb",
+										borderBottom: "1px solid #e5e7eb",
+									}}
+								>
+									{[
+										"Document Type",
+										"Retention",
+										"Auto-Delete",
+										"Description",
+									].map((h) => (
+										<th
+											key={h}
+											style={{
+												padding: "10px 14px",
+												textAlign: "left",
+												fontSize: "11px",
+												fontWeight: 600,
+												color: "#6b7280",
+												textTransform: "uppercase",
+												letterSpacing: "0.05em",
+											}}
+										>
 											{h}
 										</th>
 									))}
@@ -310,27 +409,48 @@ export default function CompliancePage() {
 							<tbody>
 								{policies.map((p) => (
 									<tr key={p.id} style={{ borderBottom: "1px solid #f3f4f6" }}>
-										<td style={{ padding: "10px 14px", fontSize: "13px", color: "#1f2937", fontWeight: 500 }}>
+										<td
+											style={{
+												padding: "10px 14px",
+												fontSize: "13px",
+												color: "#1f2937",
+												fontWeight: 500,
+											}}
+										>
 											{p.document_type}
 										</td>
-										<td style={{ padding: "10px 14px", fontSize: "13px", color: "#6b7280" }}>
+										<td
+											style={{
+												padding: "10px 14px",
+												fontSize: "13px",
+												color: "#6b7280",
+											}}
+										>
 											{p.retention_days >= 365
 												? `${Math.round(p.retention_days / 365)} years`
 												: `${p.retention_days} days`}
 										</td>
 										<td style={{ padding: "10px 14px", fontSize: "13px" }}>
-											<span style={{
-												display: "inline-block",
-												padding: "2px 8px",
-												borderRadius: "4px",
-												fontSize: "12px",
-												background: p.auto_delete ? "#fef2f2" : "#f0fdf4",
-												color: p.auto_delete ? "#ef4444" : "#16a34a",
-											}}>
+											<span
+												style={{
+													display: "inline-block",
+													padding: "2px 8px",
+													borderRadius: "4px",
+													fontSize: "12px",
+													background: p.auto_delete ? "#fef2f2" : "#f0fdf4",
+													color: p.auto_delete ? "#ef4444" : "#16a34a",
+												}}
+											>
 												{p.auto_delete ? "Yes" : "No"}
 											</span>
 										</td>
-										<td style={{ padding: "10px 14px", fontSize: "13px", color: "#6b7280" }}>
+										<td
+											style={{
+												padding: "10px 14px",
+												fontSize: "13px",
+												color: "#6b7280",
+											}}
+										>
 											{p.description}
 										</td>
 									</tr>

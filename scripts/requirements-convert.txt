@@ -1,0 +1,25 @@
+# Forhemit Document Converter — Python Dependencies
+# Install: pip install -r scripts/requirements-convert.txt
+#
+# Optional (OCR for scanned documents):
+#   brew install tesseract
+#   pip install pytesseract Pillow
+
+# PDF text and table extraction
+pdfplumber>=0.11.0
+
+# Excel spreadsheet parsing
+openpyxl>=3.1.0
+
+# Email message parsing (.msg files)
+extract-msg>=0.48.0
+
+# HTML-to-markdown conversion
+html2text>=2024.2.26
+
+# Pandoc is used via CLI (brew install pandoc) for .docx conversion
+# No Python package needed — the script calls `pandoc` directly
+
+# Optional OCR dependencies (graceful degradation if not installed)
+# pytesseract>=0.3.13
+# Pillow>=10.0.0

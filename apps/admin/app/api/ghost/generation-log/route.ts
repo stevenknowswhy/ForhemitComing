@@ -61,9 +61,18 @@ export async function POST(request: Request) {
 	try {
 		const body = await request.json();
 
-		if (!body.templateId || !body.templateName || !body.formData || !body.action) {
+		if (
+			!body.templateId ||
+			!body.templateName ||
+			!body.formData ||
+			!body.action
+		) {
 			return NextResponse.json(
-				{ success: false, error: "Missing required fields: templateId, templateName, formData, action" },
+				{
+					success: false,
+					error:
+						"Missing required fields: templateId, templateName, formData, action",
+				},
 				{ status: 400 },
 			);
 		}

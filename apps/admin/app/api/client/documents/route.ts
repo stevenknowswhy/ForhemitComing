@@ -29,7 +29,10 @@ export async function GET(request: Request) {
 		const email = user.emailAddresses?.[0]?.emailAddress;
 
 		if (!email) {
-			return NextResponse.json({ error: "No email on account" }, { status: 400 });
+			return NextResponse.json(
+				{ error: "No email on account" },
+				{ status: 400 },
+			);
 		}
 
 		// Find the company this client is associated with
@@ -72,10 +75,7 @@ export async function GET(request: Request) {
 		});
 	} catch (error) {
 		console.error("Client documents error:", error);
-		return NextResponse.json(
-			{ error: String(error) },
-			{ status: 500 },
-		);
+		return NextResponse.json({ error: String(error) }, { status: 500 });
 	}
 }
 
