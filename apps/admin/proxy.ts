@@ -9,6 +9,7 @@ const isPublicRoute = createRouteMatcher([
 	"/api/webhooks/clerk(.*)",
 	"/api/webhooks/(.*)",
 	"/api/email/webhook(.*)",
+	"/api/ghost/(.*)",
 ]);
 
 // Define API routes that need email verification
@@ -31,40 +32,17 @@ export default clerkMiddleware(async (auth, request) => {
 	// Get user email from session claims
 	const email = sessionClaims?.email as string | undefined;
 
-	// For API routes - strict checking required
+	// For API routes
 	if (isApiRoute(request)) {
-		if (!email) {
-			return NextResponse.json(
-				{
-					error: "Configuration Error",
-					message:
-						'Email not found in session claims. Configure Clerk Dashboard → Sessions → Customize session token with: { "email": "{{user.primary_email_address}}" }',
-				},
-				{ status: 500 },
-			);
-		}
-
-		// TEMPORARILY DISABLE DOMAIN CHECK FOR TESTING
-		// if (!isAllowedEmail(email)) {
-		//   return NextResponse.json(
-		//     { error: 'Unauthorized', message: 'Email domain not allowed' },
-		//     { status: 403 }
-		//   );
-		// }
-		// Email domain check disabled for testing
-		// if (!isAllowedEmail(email)) {
-
 		// Check super admin for user management APIs
-		if (
-			request.nextUrl.pathname.startsWith("/api/admin/users") &&
-			!isSuperAdmin(email)
-		) {
-			return NextResponse.json(
-				{ error: "Forbidden", message: "Super admin access required" },
-				{ status: 403 },
-			);
+		if (request.nextUrl.pathname.startsWith("/api/admin/users")) {
+			if (!email || !isSuperAdmin(email)) {
+				return NextResponse.json(
+					{ error: "Forbidden", message: "Super admin access required" },
+					{ status: 403 },
+				);
+			}
 		}
-
 		return;
 	}
 

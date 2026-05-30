@@ -65,6 +65,7 @@ import type * as templateRenderer from "../templateRenderer.js";
 import type * as templateRules from "../templateRules.js";
 import type * as templates from "../templates.js";
 import type * as triggers from "../triggers.js";
+import type * as updateBatchTemplates from "../updateBatchTemplates.js";
 import type * as workflowService from "../workflowService.js";
 import type * as workflowTasks from "../workflowTasks.js";
 
@@ -132,6 +133,7 @@ declare const fullApi: ApiFromModules<{
   templateRules: typeof templateRules;
   templates: typeof templates;
   triggers: typeof triggers;
+  updateBatchTemplates: typeof updateBatchTemplates;
   workflowService: typeof workflowService;
   workflowTasks: typeof workflowTasks;
 }>;
