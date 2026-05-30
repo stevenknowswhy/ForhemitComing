@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from 'react';
-import { PathwayContext, usePathwayProvider } from '@/hooks/useBlog';
+import { PathwayContext, usePathwayProvider } from '@forhemit/shared/hooks/useBlog';
 
 interface PathwayProviderProps {
   children: ReactNode;
