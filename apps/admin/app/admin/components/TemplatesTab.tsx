@@ -1,9 +1,6 @@
 "use client";
 
 import { useState, useEffect, useCallback, lazy, Suspense, useMemo } from "react";
-import { useQuery, useMutation } from "convex/react";
-import { useRouter } from "next/navigation";
-import { api } from "@/convex/_generated/api";
 import DocumentPreviewModal from "../templates/DocumentPreviewModal";
 import GeneratedDocumentsLog from "../templates/GeneratedDocumentsLog";
 import "../templates.css";
@@ -12,88 +9,103 @@ const TemplateBuilderGuide = lazy(() =>
   import("../templates/forms/TemplateBuilderGuide")
 );
 
-export default function TemplatesTab() {
-  const router = useRouter();
-  const templates = useQuery(api.documentTemplates.list, {});
-  const forceSeedAll = useMutation(api.documentTemplates.forceSeedAll);
+interface FormTemplate {
+  id: string;
+  form_key: string;
+  name: string;
+  description: string;
+  category: string;
+  version: number;
+  status: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
 
+export default function TemplatesTab() {
+  const [templates, setTemplates] = useState<FormTemplate[] | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
-  const [activeTemplateId, setActiveTemplateId] =
-    useState<string | null>(null);
+  const [activeTemplateId, setActiveTemplateId] = useState<string | null>(null);
   const [activeTemplateName, setActiveTemplateName] = useState("");
   const [activeFormKey, setActiveFormKey] = useState("");
   const [reprintData, setReprintData] = useState<
     Record<string, unknown> | undefined
   >();
-  const [seeded, setSeeded] = useState(false);
-  
+
   // Search and filter state
   const [searchQuery, setSearchQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
 
-  // Seed templates if less than 2 exist (excluding the guide)
+  // Fetch form templates from Ghost
   useEffect(() => {
-    if (templates && templates.length < 2 && !seeded) {
-      forceSeedAll({}).then(() => setSeeded(true));
-    }
-  }, [templates, seeded, forceSeedAll]);
+    fetch("/api/ghost/form-templates")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setTemplates(data.templates);
+        else setTemplates([]);
+      })
+      .catch(() => setTemplates([]));
+  }, []);
 
-  // Filter out the Template Builder Guide from the cards
-  const baseTemplates = templates?.filter((t: any) => t.slug !== "template-builder-guide") ?? [];
-  
   // Extract unique categories for filter dropdown
   const categories = useMemo(() => {
     const cats = new Set<string>();
-    baseTemplates.forEach((t: any) => {
+    (templates ?? []).forEach((t) => {
       if (t.category) cats.add(t.category);
     });
     return Array.from(cats).sort();
-  }, [baseTemplates]);
-  
+  }, [templates]);
+
   // Filter templates based on search and filters
   const templateCards = useMemo(() => {
-    return baseTemplates.filter((template: any) => {
-      // Search filter (name, description, slug)
+    return (templates ?? []).filter((template) => {
+      // Search filter (name, description, form_key)
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         const matchesSearch =
           template.name.toLowerCase().includes(query) ||
           template.description.toLowerCase().includes(query) ||
-          template.slug.toLowerCase().includes(query);
+          template.form_key.toLowerCase().includes(query);
         if (!matchesSearch) return false;
       }
-      
+
       // Category filter
       if (categoryFilter !== "all" && template.category !== categoryFilter) {
         return false;
       }
-      
+
       // Status filter
       if (statusFilter !== "all" && template.status !== statusFilter) {
         return false;
       }
-      
+
       return true;
     });
-  }, [baseTemplates, searchQuery, categoryFilter, statusFilter]);
-  
+  }, [templates, searchQuery, categoryFilter, statusFilter]);
+
   // Clear all filters
   const clearFilters = useCallback(() => {
     setSearchQuery("");
     setCategoryFilter("all");
     setStatusFilter("all");
   }, []);
-  
+
   // Check if any filters are active
   const hasActiveFilters = searchQuery || categoryFilter !== "all" || statusFilter !== "all";
 
-  // Force refresh templates (add missing ones)
-  const handleRefreshTemplates = useCallback(async () => {
-    await forceSeedAll({});
-    router.refresh();
-  }, [forceSeedAll, router]);
+  // Force refresh from Ghost
+  const handleRefreshTemplates = useCallback(() => {
+    setTemplates(null);
+    fetch("/api/ghost/form-templates")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success) setTemplates(data.templates);
+        else setTemplates([]);
+      })
+      .catch(() => setTemplates([]));
+  }, []);
 
   const openPreview = useCallback(
     (id: string, name: string, formKey?: string, data?: string) => {
@@ -123,7 +135,7 @@ export default function TemplatesTab() {
     [activeTemplateId, activeTemplateName, activeFormKey, openPreview]
   );
 
-  if (!templates) {
+  if (templates === null) {
     return <div className="templates-loading">Loading templates…</div>;
   }
 
@@ -149,7 +161,7 @@ export default function TemplatesTab() {
           </button>
         </div>
       </div>
-      
+
       {/* Search and Filter Controls */}
       <div className="templates-filter-bar">
         <div className="templates-search">
@@ -172,7 +184,7 @@ export default function TemplatesTab() {
             </button>
           )}
         </div>
-        
+
         <div className="templates-filters">
           <select
             value={categoryFilter}
@@ -186,7 +198,7 @@ export default function TemplatesTab() {
               </option>
             ))}
           </select>
-          
+
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
@@ -197,7 +209,7 @@ export default function TemplatesTab() {
             <option value="draft">Draft</option>
             <option value="archived">Archived</option>
           </select>
-          
+
           {hasActiveFilters && (
             <button
               type="button"
@@ -209,18 +221,18 @@ export default function TemplatesTab() {
           )}
         </div>
       </div>
-      
+
       {/* Results Count */}
       <div className="templates-results-info">
-        Showing {templateCards.length} of {baseTemplates.length} templates
+        Showing {templateCards.length} of {templates.length} templates
         {hasActiveFilters && " (filtered)"}
       </div>
 
       {/* Template Cards */}
       {templateCards.length > 0 ? (
         <div className="templates-grid">
-          {templateCards.map((template: any) => (
-            <div key={template._id} className="template-card">
+          {templateCards.map((template) => (
+            <div key={template.id} className="template-card">
               <div className="template-card-header">
                 <div className="template-card-badge">
                   {template.category ?? "Document"}
@@ -237,10 +249,10 @@ export default function TemplatesTab() {
 
               <div className="template-card-meta">
                 <span>v{template.version}</span>
-                {template.updatedAt && (
+                {template.updated_at && (
                   <span>
                     Updated{" "}
-                    {new Date(template.updatedAt).toLocaleDateString()}
+                    {new Date(template.updated_at).toLocaleDateString()}
                   </span>
                 )}
               </div>
@@ -250,7 +262,7 @@ export default function TemplatesTab() {
                   type="button"
                   className="template-btn template-btn-primary"
                   onClick={() =>
-                    openPreview(template._id, template.name, template.formKey)
+                    openPreview(template.id, template.name, template.form_key)
                   }
                 >
                   📝 Preview &amp; Fill
