@@ -211,7 +211,10 @@ http.route({
 			const resendKey = process.env.RESEND_API_KEY;
 			if (!resendKey) {
 				return new Response(
-					JSON.stringify({ success: false, error: "RESEND_API_KEY not configured" }),
+					JSON.stringify({
+						success: false,
+						error: "RESEND_API_KEY not configured",
+					}),
 					{ status: 500, headers: { ...CORS_HEADERS, ...JSON_HEADERS } },
 				);
 			}
