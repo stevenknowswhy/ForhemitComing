@@ -1,3 +1,6 @@
+05/29/26 08:03 PM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 # Convex Architecture Fixes — Revised Plan
 
 ## Context
@@ -16,14 +19,14 @@ The schema doesn't define tables/fields that the code already uses.
 
 **Missing fields on `workflowTasks`:**
 - Status values: `sent`, `received`, `delivered`, `opened`, `overdue` (schema only has `pending|completed|skipped|cancelled`)
-- Fields: `meetingAgenda`, `privateNotes`, `opensignEnvelopeId`, `opensignStatus`, `signedDocumentUrl`, `responseData`, `receivedAt`, `sentAt`, `resendId`
+- Fields: `meetingAgenda`, `privateNotes`, `boxFileId`, `boxSignRequestId`, `boxSignStatus`, `signedDocumentUrl`, `responseData`, `receivedAt`, `sentAt`, `resendId`
 
 **Missing fields on `templates`:**
 - `source`, `content`
 
 **Missing indexes:**
 - `stageRequirements.by_trigger` 
-- `workflowTasks.by_opensign`, `workflowTasks.by_company_template`
+- `workflowTasks.by_box_sign`, `workflowTasks.by_company_template`
 - `notes.by_company`, `notes.by_contact`, `notes.by_task`, `notes.by_type`
 
 ### Category B: Convex Function Call Pattern (20+ errors)
@@ -57,7 +60,7 @@ Update `schema.ts` to match what code expects:
 2. Add `emailEvents` table  
 3. Add `queueTasks` table with all fields + indexes
 4. Expand `workflowTasks` status union: add `sent|received|delivered|opened|overdue`
-5. Add missing fields to `workflowTasks`: `meetingAgenda`, `privateNotes`, `opensignEnvelopeId`, `opensignStatus`, `signedDocumentUrl`, `responseData`, `receivedAt`, `sentAt`, `resendId`
+5. Add missing fields to `workflowTasks`: `meetingAgenda`, `privateNotes`, `boxFileId`, `boxSignRequestId`, `boxSignStatus`, `signedDocumentUrl`, `responseData`, `receivedAt`, `sentAt`, `resendId`
 6. Add missing fields to `templates`: `source`, `content`
 7. Add missing indexes to `stageRequirements` and `workflowTasks`
 8. Add `by_trigger` index to `stageRequirements`
