@@ -115,6 +115,83 @@ function EventCard({ ev, index }: { ev: CalendarEvent; index: number }) {
   );
 }
 
+/** Compute detail panel view state from current detail mode */
+function buildDetailView(
+	detail: DetailState,
+	startDate: Date | null,
+	roleFilter: RoleFilter,
+	visibleCalendarEvents: CalendarEvent[],
+) {
+    if (detail.kind === "closed" || !startDate) {
+      return { open: false, dateLabel: "", title: "", phaseTag: null, body: null as ReactNode };
+    }
+    if (detail.kind === "event") {
+      const ev = detail.event;
+      const calDate = dayToDate(startDate, ev.day);
+      const ph = phaseOf(ev.day);
+      const sameDay = visibleCalendarEvents.filter(
+        (e) => e.day === ev.day && e !== ev && eventMatchesRoleFilter(e, roleFilter),
+      );
+      const gateBlock =
+        ev.gate && GATES[ev.day] ? (
+          <div className="etc-dp-gate-box">
+            <div className="etc-dpg-label">⬥ Hard Gate — Process Stops If Not Cleared</div>
+            <div className="etc-dpg-title">{GATES[ev.day].name}</div>
+            <div className="etc-dpg-desc">{GATES[ev.day].desc}</div>
+          </div>
+        ) : null;
+      const rest =
+        sameDay.length > 0 ? (
+          <>
+            <div className="etc-dp-divider">Also on Day {ev.day}</div>
+            {sameDay.map((e, i) => (
+              <EventCard key={`${e.day}-${e.role}-${e.title}`} ev={e} index={i + 1} />
+            ))}
+          </>
+        ) : null;
+      return {
+        open: true,
+        dateLabel: `Day ${ev.day} of ${TOTAL_DAYS} — ${formatCalendarDate(calDate)}`,
+        title: ev.title,
+        phaseTag: ph ? { label: ph.label, color: ph.color } : null,
+        body: (
+          <>
+            {gateBlock}
+            <EventCard ev={ev} index={0} />
+            {rest}
+          </>
+        ),
+      };
+    }
+    const dayNum = detail.dayNum;
+    const list = visibleCalendarEvents.filter(
+      (e) => e.day === dayNum && eventMatchesRoleFilter(e, roleFilter),
+    );
+    const calDate = dayToDate(startDate, dayNum);
+    const ph = phaseOf(dayNum);
+    const gateBox = GATES[dayNum] ? (
+      <div className="etc-dp-gate-box">
+        <div className="etc-dpg-label">⬥ Hard Gate</div>
+        <div className="etc-dpg-title">{GATES[dayNum].name}</div>
+        <div className="etc-dpg-desc">{GATES[dayNum].desc}</div>
+      </div>
+    ) : null;
+    return {
+      open: true,
+      dateLabel: `Day ${dayNum} of ${TOTAL_DAYS} — ${formatCalendarDate(calDate)}`,
+      title: `${list.length} Events`,
+      phaseTag: ph ? { label: ph.label, color: ph.color } : null,
+      body: (
+        <>
+          {gateBox}
+          {list.map((e, i) => (
+            <EventCard key={`${e.day}-${e.role}-${e.title}`} ev={e} index={i} />
+          ))}
+        </>
+      ),
+    };
+}
+
 export function EsopTransactionCalendar({
   className,
   variant = "embedded",
@@ -238,76 +315,7 @@ export function EsopTransactionCalendar({
     return monthsSpanningTransaction(startDate);
   }, [startDate]);
 
-  const detailView = useMemo(() => {
-    if (detail.kind === "closed" || !startDate) {
-      return { open: false, dateLabel: "", title: "", phaseTag: null, body: null as ReactNode };
-    }
-    if (detail.kind === "event") {
-      const ev = detail.event;
-      const calDate = dayToDate(startDate, ev.day);
-      const ph = phaseOf(ev.day);
-      const sameDay = visibleCalendarEvents.filter(
-        (e) => e.day === ev.day && e !== ev && eventMatchesRoleFilter(e, roleFilter),
-      );
-      const gateBlock =
-        ev.gate && GATES[ev.day] ? (
-          <div className="etc-dp-gate-box">
-            <div className="etc-dpg-label">⬥ Hard Gate — Process Stops If Not Cleared</div>
-            <div className="etc-dpg-title">{GATES[ev.day].name}</div>
-            <div className="etc-dpg-desc">{GATES[ev.day].desc}</div>
-          </div>
-        ) : null;
-      const rest =
-        sameDay.length > 0 ? (
-          <>
-            <div className="etc-dp-divider">Also on Day {ev.day}</div>
-            {sameDay.map((e, i) => (
-              <EventCard key={`${e.day}-${e.role}-${e.title}`} ev={e} index={i + 1} />
-            ))}
-          </>
-        ) : null;
-      return {
-        open: true,
-        dateLabel: `Day ${ev.day} of ${TOTAL_DAYS} — ${formatCalendarDate(calDate)}`,
-        title: ev.title,
-        phaseTag: ph ? { label: ph.label, color: ph.color } : null,
-        body: (
-          <>
-            {gateBlock}
-            <EventCard ev={ev} index={0} />
-            {rest}
-          </>
-        ),
-      };
-    }
-    const dayNum = detail.dayNum;
-    const list = visibleCalendarEvents.filter(
-      (e) => e.day === dayNum && eventMatchesRoleFilter(e, roleFilter),
-    );
-    const calDate = dayToDate(startDate, dayNum);
-    const ph = phaseOf(dayNum);
-    const gateBox = GATES[dayNum] ? (
-      <div className="etc-dp-gate-box">
-        <div className="etc-dpg-label">⬥ Hard Gate</div>
-        <div className="etc-dpg-title">{GATES[dayNum].name}</div>
-        <div className="etc-dpg-desc">{GATES[dayNum].desc}</div>
-      </div>
-    ) : null;
-    return {
-      open: true,
-      dateLabel: `Day ${dayNum} of ${TOTAL_DAYS} — ${formatCalendarDate(calDate)}`,
-      title: `${list.length} Events`,
-      phaseTag: ph ? { label: ph.label, color: ph.color } : null,
-      body: (
-        <>
-          {gateBox}
-          {list.map((e, i) => (
-            <EventCard key={`${e.day}-${e.role}-${e.title}`} ev={e} index={i} />
-          ))}
-        </>
-      ),
-    };
-  }, [detail, startDate, roleFilter, visibleCalendarEvents]);
+	const detailView = buildDetailView(detail, startDate, roleFilter, visibleCalendarEvents);
 
   if (!startDate || !viewMonth) {
     return (
