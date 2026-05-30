@@ -21,10 +21,7 @@ export async function GET(
 		const { fileId } = await params;
 
 		if (!fileId) {
-			return NextResponse.json(
-				{ error: "Missing fileId" },
-				{ status: 400 },
-			);
+			return NextResponse.json({ error: "Missing fileId" }, { status: 400 });
 		}
 
 		// Get or create a shared link for this file
@@ -37,9 +34,6 @@ export async function GET(
 		});
 	} catch (error) {
 		console.error("Client download error:", error);
-		return NextResponse.json(
-			{ error: String(error) },
-			{ status: 500 },
-		);
+		return NextResponse.json({ error: String(error) }, { status: 500 });
 	}
 }

@@ -40,16 +40,21 @@ function fileIcon(type: string, extension?: string): string {
 	if (extension === "pdf") return "📄";
 	if (extension === "docx" || extension === "doc") return "📝";
 	if (extension === "xlsx" || extension === "xls") return "📊";
-	if (extension === "png" || extension === "jpg" || extension === "jpeg") return "🖼️";
+	if (extension === "png" || extension === "jpg" || extension === "jpeg")
+		return "🖼️";
 	return "📎";
 }
 
 export default function ClientDocumentsPage() {
 	const [items, setItems] = useState<BoxItem[] | null>(null);
-	const [company, setCompany] = useState<{ name: string; ref: string } | null>(null);
+	const [company, setCompany] = useState<{ name: string; ref: string } | null>(
+		null,
+	);
 	const [error, setError] = useState<string | null>(null);
 	const [currentFolderId, setCurrentFolderId] = useState<string | null>(null);
-	const [folderStack, setFolderStack] = useState<Array<{ id: string; name: string }>>([]);
+	const [folderStack, setFolderStack] = useState<
+		Array<{ id: string; name: string }>
+	>([]);
 	const [downloading, setDownloading] = useState<string | null>(null);
 
 	const fetchDocuments = useCallback(async (folderId?: string) => {
@@ -80,7 +85,10 @@ export default function ClientDocumentsPage() {
 	}, [fetchDocuments]);
 
 	const handleFolderClick = (folder: BoxItem) => {
-		setFolderStack((prev) => [...prev, { id: currentFolderId!, name: company?.name || "Documents" }]);
+		setFolderStack((prev) => [
+			...prev,
+			{ id: currentFolderId!, name: company?.name || "Documents" },
+		]);
 		fetchDocuments(folder.id);
 	};
 
@@ -125,26 +133,40 @@ export default function ClientDocumentsPage() {
 		<div>
 			{/* Header */}
 			<div style={{ marginBottom: "24px" }}>
-				<h1 style={{ fontSize: "24px", fontWeight: 600, color: "#1B2A4A", marginBottom: "4px" }}>
+				<h1
+					style={{
+						fontSize: "24px",
+						fontWeight: 600,
+						color: "#1B2A4A",
+						marginBottom: "4px",
+					}}
+				>
 					{company ? `${company.name} Documents` : "Your Documents"}
 				</h1>
 				{company?.ref && (
-					<p style={{ color: "#6b7280", fontSize: "13px" }}>Reference: {company.ref}</p>
+					<p style={{ color: "#6b7280", fontSize: "13px" }}>
+						Reference: {company.ref}
+					</p>
 				)}
 			</div>
 
 			{/* Breadcrumb */}
 			{folderStack.length > 0 && (
-				<div style={{
-					display: "flex",
-					alignItems: "center",
-					gap: "8px",
-					marginBottom: "16px",
-					fontSize: "13px",
-				}}>
+				<div
+					style={{
+						display: "flex",
+						alignItems: "center",
+						gap: "8px",
+						marginBottom: "16px",
+						fontSize: "13px",
+					}}
+				>
 					<button
 						type="button"
-						onClick={() => { setFolderStack([]); fetchDocuments(); }}
+						onClick={() => {
+							setFolderStack([]);
+							fetchDocuments();
+						}}
 						style={{
 							background: "none",
 							border: "none",
@@ -157,7 +179,10 @@ export default function ClientDocumentsPage() {
 						Home
 					</button>
 					{folderStack.map((folder, i) => (
-						<span key={folder.id} style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+						<span
+							key={folder.id}
+							style={{ display: "flex", alignItems: "center", gap: "8px" }}
+						>
 							<span style={{ color: "#9ca3af" }}>/</span>
 							<button
 								type="button"
@@ -191,35 +216,86 @@ export default function ClientDocumentsPage() {
 			{items && items.length === 0 && (
 				<div style={{ textAlign: "center", padding: "48px" }}>
 					<div style={{ fontSize: "48px", marginBottom: "16px" }}>📂</div>
-					<h2 style={{ fontSize: "18px", color: "#1B2A4A", marginBottom: "8px" }}>
+					<h2
+						style={{ fontSize: "18px", color: "#1B2A4A", marginBottom: "8px" }}
+					>
 						No documents yet
 					</h2>
 					<p style={{ color: "#6b7280", fontSize: "14px" }}>
-						Documents will appear here as they are generated during your transaction.
+						Documents will appear here as they are generated during your
+						transaction.
 					</p>
 				</div>
 			)}
 
 			{/* File list */}
 			{items && items.length > 0 && (
-				<div style={{
-					border: "1px solid #e5e7eb",
-					borderRadius: "8px",
-					overflow: "hidden",
-				}}>
+				<div
+					style={{
+						border: "1px solid #e5e7eb",
+						borderRadius: "8px",
+						overflow: "hidden",
+					}}
+				>
 					<table style={{ width: "100%", borderCollapse: "collapse" }}>
 						<thead>
-							<tr style={{ background: "#f9fafb", borderBottom: "1px solid #e5e7eb" }}>
-								<th style={{ padding: "12px 16px", textAlign: "left", fontSize: "12px", fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+							<tr
+								style={{
+									background: "#f9fafb",
+									borderBottom: "1px solid #e5e7eb",
+								}}
+							>
+								<th
+									style={{
+										padding: "12px 16px",
+										textAlign: "left",
+										fontSize: "12px",
+										fontWeight: 600,
+										color: "#6b7280",
+										textTransform: "uppercase",
+										letterSpacing: "0.05em",
+									}}
+								>
 									Name
 								</th>
-								<th style={{ padding: "12px 16px", textAlign: "right", fontSize: "12px", fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+								<th
+									style={{
+										padding: "12px 16px",
+										textAlign: "right",
+										fontSize: "12px",
+										fontWeight: 600,
+										color: "#6b7280",
+										textTransform: "uppercase",
+										letterSpacing: "0.05em",
+									}}
+								>
 									Size
 								</th>
-								<th style={{ padding: "12px 16px", textAlign: "right", fontSize: "12px", fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em" }}>
+								<th
+									style={{
+										padding: "12px 16px",
+										textAlign: "right",
+										fontSize: "12px",
+										fontWeight: 600,
+										color: "#6b7280",
+										textTransform: "uppercase",
+										letterSpacing: "0.05em",
+									}}
+								>
 									Modified
 								</th>
-								<th style={{ padding: "12px 16px", textAlign: "right", fontSize: "12px", fontWeight: 600, color: "#6b7280", textTransform: "uppercase", letterSpacing: "0.05em", width: "100px" }}>
+								<th
+									style={{
+										padding: "12px 16px",
+										textAlign: "right",
+										fontSize: "12px",
+										fontWeight: 600,
+										color: "#6b7280",
+										textTransform: "uppercase",
+										letterSpacing: "0.05em",
+										width: "100px",
+									}}
+								>
 									Action
 								</th>
 							</tr>
@@ -232,9 +308,20 @@ export default function ClientDocumentsPage() {
 										borderBottom: "1px solid #f3f4f6",
 										cursor: item.type === "folder" ? "pointer" : "default",
 									}}
-									onClick={item.type === "folder" ? () => handleFolderClick(item) : undefined}
+									onClick={
+										item.type === "folder"
+											? () => handleFolderClick(item)
+											: undefined
+									}
 								>
-									<td style={{ padding: "12px 16px", display: "flex", alignItems: "center", gap: "10px" }}>
+									<td
+										style={{
+											padding: "12px 16px",
+											display: "flex",
+											alignItems: "center",
+											gap: "10px",
+										}}
+									>
 										<span style={{ fontSize: "18px" }}>
 											{fileIcon(item.type, item.extension)}
 										</span>
@@ -242,10 +329,25 @@ export default function ClientDocumentsPage() {
 											{item.name}
 										</span>
 									</td>
-									<td style={{ padding: "12px 16px", textAlign: "right", fontSize: "13px", color: "#6b7280", fontFamily: "DM Mono, monospace" }}>
+									<td
+										style={{
+											padding: "12px 16px",
+											textAlign: "right",
+											fontSize: "13px",
+											color: "#6b7280",
+											fontFamily: "DM Mono, monospace",
+										}}
+									>
 										{item.type === "file" ? formatFileSize(item.size) : "—"}
 									</td>
-									<td style={{ padding: "12px 16px", textAlign: "right", fontSize: "13px", color: "#6b7280" }}>
+									<td
+										style={{
+											padding: "12px 16px",
+											textAlign: "right",
+											fontSize: "13px",
+											color: "#6b7280",
+										}}
+									>
 										{formatDate(item.modifiedAt)}
 									</td>
 									<td style={{ padding: "12px 16px", textAlign: "right" }}>

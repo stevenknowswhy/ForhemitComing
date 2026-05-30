@@ -53,16 +53,12 @@ def render_template(html: str, data: dict[str, str]) -> str:
     result = html
 
     # Step 1: Handle {{#if var}}...{{/if}} and {{#if var}}...{{else}}...{{/if}}
-    if_pattern = re.compile(
-        r"\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}", re.MULTILINE
-    )
+    if_pattern = re.compile(r"\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}", re.MULTILINE)
     max_iterations = 50
     previous = ""
     while result != previous and max_iterations > 0:
         previous = result
-        result = if_pattern.sub(
-            lambda m: _process_if_block(m, data), result
-        )
+        result = if_pattern.sub(lambda m: _process_if_block(m, data), result)
         max_iterations -= 1
 
     # Step 2: Replace simple {{placeholder}} with values
@@ -110,7 +106,9 @@ def build_template_data(
 # ── Template Loading from Ghost ─────────────────────────────────────────────
 
 
-def load_template_from_ghost(template_id: Optional[int] = None, title: Optional[str] = None) -> Optional[dict]:
+def load_template_from_ghost(
+    template_id: Optional[int] = None, title: Optional[str] = None
+) -> Optional[dict]:
     """
     Load a template from Ghost by ID or title.
 
@@ -350,7 +348,9 @@ def main():
     # render command
     render_parser = subparsers.add_parser("render", help="Render a template with data")
     render_parser.add_argument("--title", required=True, help="Template title in Ghost")
-    render_parser.add_argument("--data", required=True, help="JSON data for placeholders")
+    render_parser.add_argument(
+        "--data", required=True, help="JSON data for placeholders"
+    )
     render_parser.add_argument("--output", help="Save rendered HTML to file")
 
     # generate command
@@ -372,6 +372,7 @@ def main():
 
     if args.command == "health":
         from ghost_logger import health_check
+
         ok = health_check()
         print(f"  {'✅' if ok else '❌'} Ghost {'reachable' if ok else 'unreachable'}")
         sys.exit(0 if ok else 1)
@@ -395,7 +396,9 @@ def main():
             rows = [dict(zip(columns, row)) for row in cur.fetchall()]
         conn.close()
         for r in rows:
-            print(f"  {r['sort_key'] or '—':12s}  {r['doc_type'] or '—':15s}  {r['title']}")
+            print(
+                f"  {r['sort_key'] or '—':12s}  {r['doc_type'] or '—':15s}  {r['title']}"
+            )
         sys.exit(0)
 
     elif args.command == "render":
