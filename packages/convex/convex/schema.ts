@@ -719,8 +719,9 @@ export default defineSchema({
 		),
 		// Document/e-sign fields
 		resendId: v.optional(v.string()),
-		opensignEnvelopeId: v.optional(v.string()),
-		opensignStatus: v.optional(v.string()),
+		boxFileId: v.optional(v.string()),
+		boxSignRequestId: v.optional(v.string()),
+		boxSignStatus: v.optional(v.string()),
 		signedDocumentUrl: v.optional(v.string()),
 		responseData: v.optional(v.any()),
 		createdAt: v.number(),
@@ -730,7 +731,7 @@ export default defineSchema({
 		.index("by_parent", ["recurrenceParentId"])
 		.index("by_company_template", ["companyId", "templateId"])
 		.index("by_status", ["status"])
-		.index("by_opensign", ["opensignEnvelopeId"]),
+		.index("by_box_sign", ["boxSignRequestId"]),
 
 	// Notes — general-purpose notes on companies, contacts, and tasks
 	notes: defineTable({
