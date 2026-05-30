@@ -1,16 +1,13 @@
 "use client";
 
 import React, { useRef, useState, useCallback, Suspense, lazy, useMemo } from "react";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import type { Id } from "@/convex/_generated/dataModel";
 import { getFormEntry, type TemplateFormHandle } from "./registry";
 import { exportToCSV, exportToJSON, exportToExcel } from "@forhemit/shared/lib/export-utils";
 
 interface DocumentPreviewModalProps {
   isOpen: boolean;
   onClose: () => void;
-  templateId: Id<"templates"> | null;
+  templateId: string | null;
   templateName: string;
   /** formKey from the Convex template record — determines which form to render */
   formKey?: string;
@@ -28,7 +25,17 @@ export default function DocumentPreviewModal({
   const formRef = useRef<TemplateFormHandle>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [generationError, setGenerationError] = useState<string | null>(null);
-  const logGeneration = useMutation(api.generatedDocuments.create);
+  const logGeneration = useCallback(async (args: { templateId: string; templateName: string; formData: string; action: string; generatedBy?: string }) => {
+    try {
+      await fetch("/api/ghost/generation-log", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(args),
+      });
+    } catch (err) {
+      console.error("Failed to log generation:", err);
+    }
+  }, []);
 
   // Dynamically resolve the form component from the registry
   const FormComponent = useMemo(() => {
