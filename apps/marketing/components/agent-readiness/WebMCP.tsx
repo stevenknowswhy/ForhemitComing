@@ -7,7 +7,9 @@ export function WebMCP() {
 		try {
 			// Model Context Protocol — experimental browser API, no TypeScript types yet
 			const nav = navigator as unknown as Record<string, unknown>;
-			const api = nav.modelContext as Record<string, ((...args: unknown[]) => void) | undefined> | undefined;
+			const api = nav.modelContext as
+				| Record<string, ((...args: unknown[]) => void) | undefined>
+				| undefined;
 			if (api?.registerTool) {
 				api.registerTool({
 					name: "get_page_content",
