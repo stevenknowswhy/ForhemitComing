@@ -1,0 +1,179 @@
+/* ============================================
+   KEY HOOKS SECTION
+   Strategic advantages for CPAs
+   ============================================ */
+
+.hooks-section {
+  padding: 6rem 0;
+  background: var(--accounting-bg-alt);
+}
+
+.hooks-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.hooks-header .section-eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(255, 107, 0, 0.3);
+  background: var(--color-brand-subtle);
+}
+
+.hooks-header h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.hooks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.hook-card {
+  background: var(--accounting-card-bg);
+  border: 1px solid var(--color-brand-subtle);
+  border-radius: 12px;
+  padding: 2rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hook-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 107, 0, 0.4);
+  box-shadow: 0 20px 40px var(--shadow-color), 0 0 30px rgba(255, 107, 0, 0.1);
+}
+
+.hook-number {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  background: var(--accent-color);
+  color: var(--accounting-bg);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  border-radius: 0 12px 0 12px;
+}
+
+.hook-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.hook-card h3 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.hook-card p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.capacity-quote {
+  font-style: italic;
+  border-left: 3px solid var(--accent-color);
+  padding-left: 1rem;
+  margin-left: 0;
+  background: var(--color-brand-subtle);
+  padding: 1rem 1rem 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Hook Difference (Accountant of Record) */
+.hook-difference {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(0, 255, 136, 0.05);
+  border: 1px solid rgba(0, 255, 136, 0.2);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.difference-arrow {
+  font-size: 1.25rem;
+  color: var(--accent-color);
+  font-weight: 700;
+}
+
+.difference-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.difference-text strong {
+  color: #00ff88;
+}
+
+/* Hook Benefit (Capacity Control) */
+.hook-benefit {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: var(--color-brand-subtle);
+  border: 1px solid var(--color-brand-subtle);
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+.benefit-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  font-weight: 600;
+}
+
+.benefit-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hooks-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .hook-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .hook-card {
+    padding: 1.25rem;
+  }
+  
+  .hook-icon {
+    font-size: 2rem;
+  }
+  
+  .hook-card h3 {
+    font-size: 1.1rem;
+  }
+  
+  .hook-difference,
+  .hook-benefit {
+    padding: 0.875rem;
+  }
+}

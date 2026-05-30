@@ -3,7 +3,9 @@ import { httpAction } from "./_generated/server";
 import { api } from "./_generated/api";
 
 // Declare process.env for Convex runtime (Node.js types not in tsconfig)
-declare const process: { env: { RESEND_API_KEY?: string; BOX_WEBHOOK_PRIMARY_KEY?: string } };
+declare const process: {
+	env: { RESEND_API_KEY?: string; BOX_WEBHOOK_PRIMARY_KEY?: string };
+};
 
 const http = httpRouter();
 
@@ -341,9 +343,7 @@ http.route({
 						key,
 						encoder.encode(rawBody),
 					);
-					const expected = btoa(
-						String.fromCharCode(...new Uint8Array(signed)),
-					);
+					const expected = btoa(String.fromCharCode(...new Uint8Array(signed)));
 					if (expected !== signature) {
 						return new Response(
 							JSON.stringify({ error: "Invalid signature" }),
@@ -357,10 +357,10 @@ http.route({
 
 			// Handle webhook challenge (Box sends during setup)
 			if (body.type === "webhook_challenge") {
-				return new Response(
-					JSON.stringify({ challenge: body.challenge }),
-					{ status: 200, headers: { "Content-Type": "application/json" } },
-				);
+				return new Response(JSON.stringify({ challenge: body.challenge }), {
+					status: 200,
+					headers: { "Content-Type": "application/json" },
+				});
 			}
 
 			// Extract sign request data
@@ -384,10 +384,10 @@ http.route({
 			];
 
 			if (!handledEvents.includes(eventType)) {
-				return new Response(
-					JSON.stringify({ success: true, skipped: true }),
-					{ status: 200, headers: { "Content-Type": "application/json" } },
-				);
+				return new Response(JSON.stringify({ success: true, skipped: true }), {
+					status: 200,
+					headers: { "Content-Type": "application/json" },
+				});
 			}
 
 			const signedFileId = signRequest.sign_files?.files?.[0]?.id;
@@ -400,16 +400,16 @@ http.route({
 				signedFileId: signedFileId || undefined,
 			});
 
-			return new Response(
-				JSON.stringify({ success: true, result }),
-				{ status: 200, headers: { "Content-Type": "application/json" } },
-			);
+			return new Response(JSON.stringify({ success: true, result }), {
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			});
 		} catch (error: unknown) {
 			const message = error instanceof Error ? error.message : "Unknown error";
-			return new Response(
-				JSON.stringify({ success: false, error: message }),
-				{ status: 500, headers: { "Content-Type": "application/json" } },
-			);
+			return new Response(JSON.stringify({ success: false, error: message }), {
+				status: 500,
+				headers: { "Content-Type": "application/json" },
+			});
 		}
 	}),
 });

@@ -1,0 +1,249 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   ACCOUNTING FIRMS PAGE - SILVER TSUNAMI & STARK REALITY SECTIONS
+   ───────────────────────────────────────────────────────────────────────────── */
+
+/* ── Silver Tsunami Section ── */
+.tsunami-section {
+  padding: var(--space-xl) 0;
+  background: linear-gradient(180deg, transparent 0%, var(--color-brand-subtle) 50%, transparent 100%);
+}
+
+.tsunami-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.tsunami-text {
+  text-align: left;
+}
+
+.tsunami-lead {
+  font-size: var(--text-lg);
+  color: var(--af-text-primary);
+  margin-bottom: var(--space-md);
+  line-height: 1.7;
+}
+
+.tsunami-question {
+  font-size: var(--text-xl);
+  color: var(--af-text-secondary);
+  line-height: 1.5;
+}
+
+.tsunami-question em {
+  color: var(--af-text-muted);
+  font-style: italic;
+}
+
+.tsunami-question strong {
+  color: var(--af-accent);
+}
+
+.tsunami-cta-link {
+  display: inline-block;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  margin-top: var(--space-md);
+  transition: all 0.3s var(--ease-out-expo);
+  line-height: 1.5;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.tsunami-cta-link:hover {
+  color: var(--af-accent);
+  text-shadow: 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.tsunami-image {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px var(--shadow-color);
+}
+
+.tsunami-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .tsunami-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+/* ── Stark Reality Section ── */
+.reality-section {
+  padding: var(--space-2xl) 0;
+}
+
+.section-context {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--space-xl);
+  font-size: var(--text-base);
+  color: var(--af-text-muted);
+}
+
+/* ── Reality Grid ── */
+.reality-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.reality-grid.visible .reality-card {
+  animation: slideUp 0.6s var(--ease-out-expo) forwards;
+  opacity: 0;
+}
+
+.reality-grid.visible .reality-card:nth-child(1) { animation-delay: 0.1s; }
+.reality-grid.visible .reality-card:nth-child(2) { animation-delay: 0.2s; }
+.reality-grid.visible .reality-card:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Reality Cards ── Compact horizontal layout */
+.reality-card {
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 12px;
+  padding: var(--space-md) var(--space-lg);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+  transition: all 0.3s var(--ease-out-expo);
+}
+
+.reality-card:hover {
+  border-color: var(--af-border-accent);
+  background: var(--color-brand-subtle);
+}
+
+.reality-card:nth-child(2):hover {
+  border-color: var(--af-text-muted);
+}
+
+.reality-card:nth-child(3):hover {
+  border-color: var(--af-accent);
+}
+
+/* ── Reality Stat Column ── */
+.reality-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  padding-right: var(--space-md);
+  border-right: 2px solid var(--af-border);
+}
+
+.stat-number {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--af-accent);
+  line-height: 1;
+}
+
+.stat-icon {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--af-text-muted);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: var(--af-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* ── Reality Content Column ── */
+.reality-content h3 {
+  font-size: var(--text-base);
+  margin-bottom: 0.25rem;
+  color: var(--af-text-primary);
+}
+
+.reality-content p {
+  font-size: var(--text-sm);
+  color: var(--af-text-secondary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Reality Conclusion ── */
+.reality-conclusion {
+  background: var(--af-bg-card);
+  border: 1px solid var(--af-border);
+  border-radius: 12px;
+  padding: var(--space-md) var(--space-lg);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-lg);
+  align-items: center;
+}
+
+.reality-conclusion::before {
+  content: '⚠';
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  color: var(--af-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100px;
+  padding-right: var(--space-md);
+  border-right: 2px solid var(--af-border);
+}
+
+.reality-conclusion p {
+  margin: 0;
+  font-size: var(--text-base);
+  text-align: left;
+}
+
+/* ── Mobile: Stack columns ── */
+@media (max-width: 640px) {
+  .reality-card {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+
+  .reality-stat {
+    border-right: none;
+    border-bottom: 1px solid var(--af-border);
+    padding-right: 0;
+    padding-bottom: var(--space-sm);
+    flex-direction: row;
+    gap: var(--space-sm);
+    justify-content: center;
+  }
+
+  .stat-label {
+    margin-top: 0;
+  }
+}

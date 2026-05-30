@@ -1,0 +1,807 @@
+/* ── Scroll anchor offset for fixed header ── */
+[id^="fmp-"] {
+  scroll-margin-top: 5.5rem;
+}
+
+/* ── Floating Nav ── */
+.fmp-floating-nav {
+  position: sticky;
+  top: 5.5rem;
+  padding: 1.25rem 0 1rem;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-subtle) transparent;
+}
+
+.fmp-floating-nav__title {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0 0 0.85rem;
+  padding: 0 0.75rem;
+}
+
+.fmp-floating-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.fmp-floating-nav__link {
+  display: block;
+  padding: 0.38rem 0.75rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: color 0.25s ease, border-color 0.25s ease, background 0.2s ease;
+}
+
+.fmp-floating-nav__link:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.fmp-floating-nav__link--active {
+  color: var(--color-brand);
+  border-left-color: var(--color-brand);
+  font-weight: 600;
+}
+
+/* ── Why Forhemit — Pillars ── */
+.fmp-pillars-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .fmp-pillars-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.fmp-pillar-shell {
+  position: relative;
+  min-width: 0;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-pillar-shell:hover {
+    background: transparent;
+  }
+}
+
+.fmp-pillar-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-pillar-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-pillar-shell:hover .fmp-pillar-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-pillar-card {
+  position: relative;
+  z-index: 1;
+  margin: 2px;
+  border-radius: 12px;
+  padding: 1.35rem 1.2rem 1.25rem;
+  background: linear-gradient(168deg, var(--bg-secondary) 0%, var(--bg-primary) 42%, var(--bg-primary) 100%);
+  box-shadow: var(--shadow-medium);
+  transition: box-shadow 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-pillar-shell:hover .fmp-pillar-card {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+}
+
+.fmp-pillar-icon {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--color-brand);
+  margin-bottom: 0.75rem;
+}
+
+.fmp-pillar-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  margin: 0 0 0.5rem;
+  color: var(--text-primary);
+}
+
+.fmp-pillar-body {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ── Eligibility + Tax Checklists ── */
+.fmp-elig-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.fmp-elig-item {
+  min-width: 0;
+}
+
+.fmp-elig-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.25s ease, background 0.2s ease, box-shadow 0.3s ease;
+}
+
+.fmp-elig-btn:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 2px 8px var(--color-brand-subtle);
+}
+
+.fmp-elig-btn--checked {
+  border-color: var(--color-brand);
+  background: linear-gradient(90deg, var(--color-brand-subtle) 0%, var(--bg-secondary) 3rem);
+}
+
+.fmp-elig-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 1.35rem;
+  height: 1.35rem;
+  margin-top: 0.1rem;
+  border-radius: 5px;
+  border: 2px solid var(--border-subtle);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-inverse);
+  background: transparent;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+
+.fmp-elig-btn--checked .fmp-elig-check {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  transform: scale(1.1);
+}
+
+.fmp-elig-label {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.fmp-elig-summary {
+  margin-top: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+  animation: fmp-section-fade-in 0.3s ease;
+}
+
+.fmp-elig-summary--strong {
+  border-color: var(--color-brand-border);
+  background: var(--color-brand-subtle);
+}
+
+.fmp-elig-summary--possible {
+  border-color: var(--color-brand-border);
+}
+
+.fmp-elig-summary-text {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+@keyframes fmp-section-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── FAQ Accordion ── */
+.fmp-faq-list {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.fmp-faq-item {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.fmp-faq-item:last-child {
+  border-bottom: none;
+}
+
+.fmp-faq-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.15s ease;
+}
+
+.fmp-faq-trigger:hover {
+  background: var(--bg-secondary);
+}
+
+.fmp-faq-item--open .fmp-faq-trigger {
+  background: var(--bg-secondary);
+}
+
+.fmp-faq-q {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.fmp-faq-chevron {
+  flex-shrink: 0;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.fmp-faq-body {
+  padding: 0 1.15rem 1.15rem;
+  border-top: 1px solid var(--border-subtle);
+  animation: fmp-section-fade-in 0.25s ease;
+}
+
+.fmp-faq-body p {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+/* ── How Money Moves ── */
+.fmp-money-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.fmp-money-card {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.15rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.fmp-money-card:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 4px 16px var(--color-brand-subtle);
+}
+
+.fmp-money-card--open {
+  border-color: var(--color-brand-border);
+  background: linear-gradient(160deg, var(--color-brand-subtle) 0%, var(--bg-secondary) 100%);
+}
+
+.fmp-money-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+}
+
+.fmp-money-pct {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-brand);
+  flex-shrink: 0;
+}
+
+.fmp-money-title {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.fmp-money-summary {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+
+.fmp-money-detail {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+  animation: fmp-section-fade-in 0.25s ease;
+}
+
+.fmp-money-note {
+  margin-top: 1rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-brand-border);
+  border-left: 3px solid var(--color-brand);
+  background: var(--color-brand-subtle);
+}
+
+.fmp-money-note p {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.fmp-money-note strong {
+  color: var(--color-brand);
+}
+
+/* ── Privacy Cards ── */
+.fmp-privacy-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .fmp-privacy-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.fmp-privacy-card {
+  padding: 1.15rem 1.1rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+  transition: border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.fmp-privacy-card:hover {
+  border-color: var(--color-brand-border);
+  box-shadow: 0 4px 16px var(--color-brand-subtle);
+}
+
+.fmp-privacy-icon {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 0.65rem;
+}
+
+.fmp-privacy-card-title {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 0 0 0.4rem;
+}
+
+.fmp-privacy-card p {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* ── Cost at a Glance ── */
+.fmp-cost-card {
+  border: 1px solid var(--color-brand-border);
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--color-brand-subtle) 0%, var(--bg-secondary) 100%);
+  overflow: hidden;
+}
+
+.fmp-cost-card-inner {
+  padding: 1.75rem 1.5rem;
+}
+
+.fmp-cost-range {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--color-brand);
+  margin: 0 0 0.2rem;
+}
+
+.fmp-cost-of {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+}
+
+.fmp-cost-note {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  margin: 0 0 1rem;
+}
+
+.fmp-cost-points {
+  margin: 0 0 1.25rem;
+  padding-left: 1.1rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+.fmp-cost-points li {
+  margin-bottom: 0.35rem;
+}
+
+.fmp-cost-detail-link {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  background: var(--bg-primary);
+  border: 1px solid var(--color-brand-border);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.fmp-cost-detail-link:hover {
+  background: var(--color-brand);
+  color: var(--text-inverse);
+}
+
+/* ── After Close Cards ── */
+.fmp-after-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .fmp-after-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.fmp-after-shell {
+  position: relative;
+  min-width: 0;
+  border-radius: 14px;
+  background: var(--border-subtle);
+  transition: background 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-after-shell:hover {
+    background: transparent;
+  }
+}
+
+.fmp-after-shell__glow {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.fmp-after-shell__glow::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 160%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    var(--color-brand),
+    var(--color-brand-hover),
+    var(--color-brand-subtle),
+    transparent 22%,
+    var(--color-brand-border) 48%,
+    var(--color-brand) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-after-shell:hover .fmp-after-shell__glow::before {
+    opacity: 1;
+    animation: fmp-timeline-border-spin 2.8s linear infinite;
+  }
+}
+
+.fmp-after-card {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: calc(100% - 4px);
+  margin: 2px;
+  padding: 1.1rem 1rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(168deg, var(--bg-secondary) 0%, var(--bg-primary) 42%, var(--bg-primary) 100%);
+  box-shadow: var(--shadow-medium);
+  cursor: pointer;
+  text-align: left;
+  box-sizing: border-box;
+  transition: box-shadow 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .fmp-after-shell:hover .fmp-after-card {
+    box-shadow:
+      var(--shadow-medium),
+      0 0 0 1px var(--color-brand-border),
+      0 12px 36px var(--color-brand-subtle);
+  }
+}
+
+.fmp-after-card-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.3rem 0.75rem;
+}
+
+.fmp-after-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.fmp-after-summary {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.fmp-after-chevron {
+  margin-left: auto;
+  flex-shrink: 0;
+  font-size: 1rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1;
+}
+
+.fmp-after-detail {
+  margin: 0.75rem 0 0;
+  padding-top: 0.65rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  animation: fmp-section-fade-in 0.25s ease;
+}
+
+/* ── First Call Steps ── */
+.fmp-call-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.fmp-call-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.1rem 1.15rem;
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s ease;
+}
+
+.fmp-call-step:last-child {
+  border-bottom: none;
+}
+
+.fmp-call-step:hover {
+  background: var(--bg-secondary);
+}
+
+.fmp-call-step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-brand);
+  color: var(--text-inverse);
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.fmp-call-step-title {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  margin: 0 0 0.3rem;
+}
+
+.fmp-call-step p {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.fmp-call-prepare {
+  padding: 0.85rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-brand-border);
+  border-left: 3px solid var(--color-brand);
+  background: var(--color-brand-subtle);
+}
+
+.fmp-call-prepare-label {
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand);
+  margin: 0 0 0.35rem;
+}
+
+.fmp-call-prepare p {
+  margin: 0;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* ── Hero alternate entry ── */
+.fmp-hero-alternate {
+  margin-top: 1.25rem;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.fmp-hero-alternate-link {
+  color: var(--color-brand);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.fmp-hero-alternate-link:hover {
+  color: var(--color-brand-hover);
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .fmp-elig-summary,
+  .fmp-faq-body,
+  .fmp-money-detail,
+  .fmp-after-detail {
+    animation: none !important;
+  }
+
+  .fmp-elig-btn--checked .fmp-elig-check {
+    transform: none !important;
+  }
+
+  .fmp-pillar-shell:hover,
+  .fmp-after-shell:hover {
+    background: var(--border-subtle) !important;
+  }
+
+  .fmp-pillar-shell__glow::before,
+  .fmp-after-shell__glow::before {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}

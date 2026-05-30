@@ -6,10 +6,28 @@ import { shouldCreateWorkflowTask } from "./workflowService";
 import { requireAuth } from "./lib/requireAuth";
 
 // Stage type matching schema union
-type DealStage = "First contact" | "Intro call" | "NDA sent" | "Feasibility" | "Term sheet" | "LOI signed" | "Closed" | "On hold" | "Dead";
+type DealStage =
+	| "First contact"
+	| "Intro call"
+	| "NDA sent"
+	| "Feasibility"
+	| "Term sheet"
+	| "LOI signed"
+	| "Closed"
+	| "On hold"
+	| "Dead";
 
 // Status type matching schema union
-type WorkflowStatus = "pending" | "sent" | "delivered" | "opened" | "received" | "completed" | "skipped" | "cancelled" | "overdue";
+type WorkflowStatus =
+	| "pending"
+	| "sent"
+	| "delivered"
+	| "opened"
+	| "received"
+	| "completed"
+	| "skipped"
+	| "cancelled"
+	| "overdue";
 
 // ============================================
 // get — fetch a single workflow task by ID
@@ -410,9 +428,17 @@ export const getDealWorkflow = query({
 
 		const enriched = await Promise.all(
 			tasks.map(async (task) => {
-				const template = (await ctx.db.get(task.templateId)) as { title?: string; category?: string; description?: string } | null;
+				const template = (await ctx.db.get(task.templateId)) as {
+					title?: string;
+					category?: string;
+					description?: string;
+				} | null;
 				const contact = task.contactId
-					? ((await ctx.db.get(task.contactId)) as { firstName?: string; lastName?: string; email?: string } | null)
+					? ((await ctx.db.get(task.contactId)) as {
+							firstName?: string;
+							lastName?: string;
+							email?: string;
+						} | null)
 					: null;
 				return {
 					...task,
@@ -468,7 +494,9 @@ export const getAllWorkflowTasks = query({
 		} else if (args.status) {
 			tasks = await ctx.db
 				.query("workflowTasks")
-				.withIndex("by_status", (q) => q.eq("status", args.status as WorkflowStatus))
+				.withIndex("by_status", (q) =>
+					q.eq("status", args.status as WorkflowStatus),
+				)
 				.collect();
 		} else {
 			tasks = await ctx.db.query("workflowTasks").collect();
@@ -476,10 +504,17 @@ export const getAllWorkflowTasks = query({
 
 		const enriched = await Promise.all(
 			tasks.map(async (task) => {
-				const template = (await ctx.db.get(task.templateId)) as { title?: string } | null;
-				const company = (await ctx.db.get(task.companyId)) as { name?: string } | null;
+				const template = (await ctx.db.get(task.templateId)) as {
+					title?: string;
+				} | null;
+				const company = (await ctx.db.get(task.companyId)) as {
+					name?: string;
+				} | null;
 				const contact = task.contactId
-					? ((await ctx.db.get(task.contactId)) as { firstName?: string; lastName?: string } | null)
+					? ((await ctx.db.get(task.contactId)) as {
+							firstName?: string;
+							lastName?: string;
+						} | null)
 					: null;
 				return {
 					...task,
