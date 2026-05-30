@@ -441,7 +441,8 @@ export const handleBoxWebhook = mutation({
 
 		const newStatus = statusMap[args.eventType] || task.status;
 		const updates: Record<string, unknown> = {
-			boxSignStatus: args.signStatus || args.eventType.split(".")[1]?.toLowerCase(),
+			boxSignStatus:
+				args.signStatus || args.eventType.split(".")[1]?.toLowerCase(),
 			status: newStatus,
 			updatedAt: Date.now(),
 		};
