@@ -1,4 +1,5 @@
 05/31/26 01:55 AM PT
+05/31/26 01:55 AM PT
 05/31/26 01:44 AM PT
 05/31/26 01:33 AM PT
 05/31/26 12:55 AM PT
@@ -61,10 +62,7 @@ Purpose: (auto-inserted by pre-commit — please update)
 
 - [x] **Entry templates** — 10 pre-built templates (Trustee Call, Document Review, Valuation Meeting, Tax Discussion, Legal Review, Board Meeting, Signature Request, Due Diligence, Compliance Check, Internal Note)
 
-- [ ] **Bulk entry import** — import entries from calendar/email
-  - Parse calendar events → entries
-  - Parse email threads → entries
-  - Account lead reviews before saving
+- [x] **Bulk entry import** — CSV import with title, description, date, type, theme, effort, visibility
 
 - [ ] **Multi-deal support** — when a client has multiple engagements
   - Add `deals` table (Path B from schema discussion)
