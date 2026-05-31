@@ -100,6 +100,19 @@ export const listByClient = query({
 	},
 });
 
+export const listMilestones = query({
+	args: { journalId: v.id("clientJournals") },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db
+			.query("journalEntries")
+			.withIndex("byJournal", (q) => q.eq("journalId", args.journalId))
+			.filter((q) => q.eq(q.field("entryType"), "milestone"))
+			.order("asc")
+			.collect();
+	},
+});
+
 export const listByChapter = query({
 	args: {
 		journalId: v.id("clientJournals"),
