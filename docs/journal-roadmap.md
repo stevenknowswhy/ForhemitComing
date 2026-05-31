@@ -1,0 +1,106 @@
+05/30/26 07:27 PM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
+# Client Journal — Roadmap
+
+> Transparency engine for ESOP transition and stewardship engagements.
+> Clients never wonder "what are we doing?" — the journal tells them.
+
+## Status
+
+| Phase | Status | Commit |
+|---|---|---|
+| 1. Schema + CRUD | ✅ Done | — |
+| 2. Auto-entry hooks | ✅ Done | — |
+| 3. Admin journal UI | ✅ Done | — |
+| 4. Quick wins (UI polish) | ✅ Done | — |
+| 5. PDF generation | ✅ Done | — |
+| 6. Email digest | ✅ Done | — |
+| 7. Advanced features | 🔄 In progress | — |
+
+---
+
+## Quick Wins (UI Polish)
+
+- [x] **Manual entry form** — account lead logs calls, meetings, decisions from the UI
+- [x] **Entry filtering** — filter by theme, type, auto vs manual, visibility
+- [x] **Outcome field display** — surface `outcome` prominently on entry cards
+- [ ] **Action item tracking** — `dueFrom`/`dueDate` fields exist but no UI
+- [ ] **Milestone progress bar** — visual progress on `milestonesReached`/`totalMilestones`
+
+---
+
+## Core Features (Phase 4–5)
+
+- [x] **PDF generation** — Puppeteer renders journal to branded PDF via Tuesday 2AM cron
+- [x] **Box upload** — PDF uploaded to client's Box folder, versioned file
+- [x] **Email digest** — weekly email with metrics, narrative excerpt, and Box link
+- [ ] **Auto-narrative fallback** — if account lead doesn't mark "ready" by deadline
+- [ ] **Effort-by-theme chart** — proves where time goes
+
+---
+
+## Advanced Features (Future)
+
+- [ ] **Phase close summary** — "chapter book" when transitioning phases
+  - Uses `journalChapters` table
+  - Account lead writes closing narrative
+  - Key accomplishments + by-the-numbers
+  - Separate PDF delivered to client
+
+- [ ] **Client engagement tracking** — did they open the email? View the PDF?
+  - Resend email open tracking
+  - Box file view events (webhook)
+  - Surface in admin UI: "Last viewed: 2 days ago"
+
+- [ ] **Rich text editor** — replace textarea with TipTap (already in codebase)
+  - Markdown support
+  - Preview mode
+  - Template snippets
+
+- [x] **Entry templates** — 10 pre-built templates (Trustee Call, Document Review, Valuation Meeting, Tax Discussion, Legal Review, Board Meeting, Signature Request, Due Diligence, Compliance Check, Internal Note)
+
+- [ ] **Bulk entry import** — import entries from calendar/email
+  - Parse calendar events → entries
+  - Parse email threads → entries
+  - Account lead reviews before saving
+
+- [ ] **Multi-deal support** — when a client has multiple engagements
+  - Add `deals` table (Path B from schema discussion)
+  - Migrate `clientJournals.clientId` → `clientJournals.dealId`
+  - Backfill one deal per client
+
+- [ ] **Client portal** — if shared links aren't enough
+  - Clerk-authenticated portal
+  - Journal history view
+  - Action item completion
+  - Document download
+
+---
+
+## Schema Reference
+
+### Tables
+- `clientJournals` — one per client per type (transition/stewardship)
+- `journalEntries` — individual activity logs (auto + manual)
+- `journalNarratives` — weekly account lead write-ups
+- `journalDigests` — generated PDFs with metrics snapshot
+- `journalChapters` — phase definitions within a journal
+
+### Key Fields
+- `entries.visibleToClient` — controls what the client sees
+- `entries.internalNote` — never shown to client
+- `entries.outcome` — value/impact statement
+- `entries.effortBand` — null on auto-entries, human-judged on manual
+- `narratives.status` — draft → ready → sent
+- `narratives.usedFallback` — true if system generated the summary
+
+### Auto-Entry Hooks
+| Event | Source | Entry Type |
+|---|---|---|
+| Document signed | Box webhook | signature |
+| Signature declined/expired | Box webhook | issue (internal) |
+| Task completed | Convex mutation | work |
+| Stage advanced | Convex mutation | milestone |
+| Document generated | Admin API → Convex HTTP | document |
+| Email sent | Convex action | email |
