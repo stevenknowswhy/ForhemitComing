@@ -84,12 +84,28 @@ export const markDelivered = mutation({
 	args: {
 		id: v.id("journalDigests"),
 		to: v.array(v.string()),
+		resendId: v.optional(v.string()),
 	},
 	handler: async (ctx, args) => {
-		await ctx.db.patch(args.id, {
+		const patch: Record<string, unknown> = {
 			deliveredAt: Date.now(),
 			deliveredTo: args.to,
-		});
+		};
+		if (args.resendId) {
+			patch.resendId = args.resendId;
+		}
+		await ctx.db.patch(args.id, patch);
 		return await ctx.db.get(args.id);
+	},
+});
+
+// getByResendId — find digest by Resend email ID
+export const getByResendId = query({
+	args: { resendId: v.string() },
+	handler: async (ctx, args) => {
+		return await ctx.db
+			.query("journalDigests")
+			.withIndex("byResendId", (q) => q.eq("resendId", args.resendId))
+			.first();
 	},
 });
