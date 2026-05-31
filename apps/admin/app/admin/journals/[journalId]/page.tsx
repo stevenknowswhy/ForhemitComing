@@ -248,6 +248,26 @@ function timeAgo(timestamp?: number): string {
 	return `${Math.floor(days / 30)}mo ago`;
 }
 
+// CSV parser: title,description,date,type,theme,effort,visibility
+function parseCsvEntries(csv: string) {
+	const lines = csv.trim().split("\n").filter(Boolean);
+	if (lines.length < 2) return [];
+	// Skip header
+	return lines.slice(1).map((line) => {
+		const cols = line.match(/(?:"([^"]*)"|([^,]*))/g) || [];
+		const vals = cols.map((c) => c.replace(/^"|"$/g, "").trim());
+		return {
+			title: vals[0] || "Untitled",
+			description: vals[1] || "",
+			occurredAt: vals[2] ? new Date(vals[2]).getTime() : Date.now(),
+			entryType: (ENTRY_TYPES.includes(vals[3] as typeof ENTRY_TYPES[number]) ? vals[3] : "work") as typeof ENTRY_TYPES[number],
+			theme: (THEMES.includes(vals[4] as typeof THEMES[number]) ? vals[4] : "admin") as typeof THEMES[number],
+			effortBand: (EFFORT_BANDS.includes(vals[5] as typeof EFFORT_BANDS[number]) ? vals[5] : undefined) as typeof EFFORT_BANDS[number] | undefined,
+			visibleToClient: vals[6] !== "internal",
+		};
+	});
+}
+
 // ── Page ────────────────────────────────────────────────────────────────────
 
 export default function JournalDetailPage() {
@@ -269,6 +289,7 @@ export default function JournalDetailPage() {
 	const markReady = useMutation(api.journalNarratives.markReady);
 	const createEntry = useMutation(api.journalEntries.create);
 	const updateEntryStatus = useMutation(api.journalEntries.updateStatus);
+	const bulkCreateEntries = useMutation(api.journalEntries.bulkCreate);
 
 	// Narrative state
 	const [narrativeText, setNarrativeText] = useState("");
@@ -293,6 +314,9 @@ export default function JournalDetailPage() {
 		visibility: "client" as "client" | "internal",
 	});
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [showImport, setShowImport] = useState(false);
+	const [importCsv, setImportCsv] = useState("");
+	const [importing, setImporting] = useState(false);
 
 	// Filter state
 	const [filters, setFilters] = useState({
@@ -531,13 +555,12 @@ export default function JournalDetailPage() {
 									className="relative flex items-start gap-4 pl-10"
 								>
 									<div
-										className={`absolute left-2.5 w-3 h-3 rounded-full border-2 z-10 ${
+										className={`absolute left-2.5 w-3 h-3 rounded-full border-2 z-10 $
 											chapter.status === "active"
 												? "bg-orange-500 border-orange-500"
 												: chapter.status === "completed"
 													? "bg-green-500 border-green-500"
-													: "bg-white border-gray-300"
-										}`}
+													: "bg-white border-gray-300"`}
 									/>
 									<div className="flex-1">
 										<div className="flex items-center gap-2">
@@ -545,16 +568,15 @@ export default function JournalDetailPage() {
 												Chapter {chapter.chapterNumber}: {chapter.title}
 											</span>
 											<span
-												className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+												className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium $
 													chapter.status === "active"
 														? "bg-orange-100 text-orange-800"
 														: chapter.status === "completed"
 															? "bg-green-100 text-green-800"
-															: "bg-gray-100 text-gray-600"
-												}`}
-												>
-													{chapter.status}
-												</span>
+															: "bg-gray-100 text-gray-600"`}
+											>
+												{chapter.status}
+											</span>
 											{chapter.closeSummaryGenerated && (
 												<span className="text-xs text-green-600">
 													✓ Close summary generated
@@ -569,12 +591,14 @@ export default function JournalDetailPage() {
 										<div className="flex items-center gap-3 mt-1">
 											{chapter.startedAt && (
 												<span className="text-xs text-gray-400">
-													Started {new Date(chapter.startedAt).toLocaleDateString()}
+													Started{" "}
+													{new Date(chapter.startedAt).toLocaleDateString()}
 												</span>
 											)}
 											{chapter.completedAt && (
 												<span className="text-xs text-gray-400">
-													Completed {new Date(chapter.completedAt).toLocaleDateString()}
+													Completed{" "}
+													{new Date(chapter.completedAt).toLocaleDateString()}
 												</span>
 											)}
 										</div>
@@ -859,6 +883,72 @@ export default function JournalDetailPage() {
 								{isSubmitting ? "Saving..." : "Add Entry"}
 							</button>
 						</div>
+				</div>
+			)}
+			</div>
+
+			{/* Import CSV */}
+			<div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+				<button
+					type="button"
+					onClick={() => setShowImport(!showImport)}
+					className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
+				>
+					<span className="text-lg font-medium text-gray-900">
+						📥 Import Entries (CSV)
+					</span>
+					<span className="text-gray-400">{showImport ? "▲" : "▼"}</span>
+				</button>
+
+				{showImport && (
+					<div className="px-6 pb-6 space-y-4 border-t border-gray-100">
+						<p className="text-sm text-gray-500 mt-4">
+							Paste CSV data with columns: title, description, date, type, theme, effort, visibility
+						</p>
+						<textarea
+							value={importCsv}
+							onChange={(e) => setImportCsv(e.target.value)}
+							placeholder={`"Call with Trustee","Discussed Q2 valuation","2026-05-25","call","trustee_bank","medium","client"
+"Document Review","Reviewed NDA draft","2026-05-26","document","legal","low","client"`}
+							rows={6}
+							className="w-full px-3 py-2 border border-gray-200 rounded-lg font-mono text-xs text-gray-900 placeholder:text-gray-400 resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+						/>
+						<div className="flex items-center gap-3">
+							<button
+								type="button"
+								onClick={async () => {
+									if (!journal || !importCsv.trim()) return;
+									setImporting(true);
+									try {
+										const parsed = parseCsvEntries(importCsv);
+										if (parsed.length === 0) {
+											alert("No valid entries found. Check CSV format.");
+											return;
+										}
+										const result = await bulkCreateEntries({
+											journalId: journal._id,
+											clientId: journal.clientId,
+											entries: parsed,
+										});
+										alert(`Imported ${result.created} entries.`);
+										setImportCsv("");
+										setShowImport(false);
+									} catch (err) {
+										console.error("Import failed:", err);
+										alert("Import failed. Check console for details.");
+									} finally {
+										setImporting(false);
+									}
+								}}
+								disabled={importing || !importCsv.trim()}
+								className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50 text-sm font-medium"
+							>
+								{importing ? "Importing..." : "Import Entries"}
+							</button>
+							<span className="text-xs text-gray-400">
+								{importCsv.trim() ? `${importCsv.trim().split("\n").length - 1} rows detected` : "Paste CSV above"}
+							</span>
+						</div>
 					</div>
 				)}
 			</div>
@@ -1069,7 +1159,7 @@ export default function JournalDetailPage() {
 									<div
 										className="h-full rounded-full transition-all duration-500"
 										style={{
-											width: `${row.percentage}%`,
+											width: `$row.percentage%`,
 											backgroundColor: THEME_COLORS[row.theme] ?? "#6b7280",
 											minWidth: row.percentage > 0 ? "2rem" : undefined,
 										}}
