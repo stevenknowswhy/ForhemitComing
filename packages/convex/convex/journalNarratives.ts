@@ -177,6 +177,29 @@ export const markFallback = mutation({
 	},
 });
 
+// createFallback — internal use only (cron auto-narrative)
+export const createFallback = mutation({
+	args: {
+		journalId: v.id("clientJournals"),
+		clientId: v.id("crmCompanies"),
+		weekStarting: v.number(),
+		weekEnding: v.number(),
+		narrativeText: v.string(),
+	},
+	handler: async (ctx, args) => {
+		const now = Date.now();
+		return await ctx.db.insert("journalNarratives", {
+			...args,
+			authorId: "system",
+			authorName: "Auto-generated",
+			status: "draft",
+			usedFallback: true,
+			createdAt: now,
+			updatedAt: now,
+		});
+	},
+});
+
 // updateStatus — used by digest engine to mark narratives as sent
 export const updateStatus = mutation({
 	args: {

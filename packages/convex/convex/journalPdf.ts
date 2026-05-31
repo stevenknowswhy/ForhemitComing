@@ -20,6 +20,75 @@ function formatLabel(s: string): string {
 	return s.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+// ── Fallback narrative generator ────────────────────────────────────────────
+
+function generateFallbackNarrative(
+	entries: Array<{
+		entryType: string;
+		theme: string;
+		title: string;
+		description: string;
+		clientDescription?: string;
+		outcome?: string;
+	}>,
+	metrics: {
+		touchpoints: {
+			calls: number;
+			emails: number;
+			documents: number;
+			meetings: number;
+			total: number;
+		};
+	},
+	journalType: string,
+): string {
+	const lines: string[] = [];
+	const type = journalType === "transition" ? "transition" : "stewardship";
+	lines.push(
+		`This week on the ${type} track, the Forhemit team completed ${entries.length} activities across the engagement.`,
+	);
+
+	// Highlight touchpoints
+	const { calls, meetings, documents, emails } = metrics.touchpoints;
+	const parts: string[] = [];
+	if (calls > 0) parts.push(`${calls} call${calls > 1 ? "s" : ""}`);
+	if (meetings > 0) parts.push(`${meetings} meeting${meetings > 1 ? "s" : ""}`);
+	if (documents > 0)
+		parts.push(`${documents} document${documents > 1 ? "s" : ""}`);
+	if (emails > 0) parts.push(`${emails} notification${emails > 1 ? "s" : ""}`);
+	if (parts.length > 0) {
+		lines.push(`Key touchpoints included ${parts.join(", ")}.`);
+	}
+
+	// Highlight outcomes
+	const withOutcomes = entries.filter((e) => e.outcome);
+	if (withOutcomes.length > 0) {
+		lines.push("Notable outcomes this week:");
+		for (const e of withOutcomes.slice(0, 5)) {
+			lines.push(`• ${e.title}: ${e.outcome}`);
+		}
+	}
+
+	// Group by theme
+	const byTheme: Record<string, number> = {};
+	for (const e of entries) {
+		byTheme[e.theme] = (byTheme[e.theme] || 0) + 1;
+	}
+	const topThemes = Object.entries(byTheme)
+		.sort(([, a], [, b]) => b - a)
+		.slice(0, 3)
+		.map(([theme, count]) => `${formatLabel(theme)} (${count})`);
+	if (topThemes.length > 0) {
+		lines.push(`Primary areas of focus: ${topThemes.join(", ")}.`);
+	}
+
+	lines.push(
+		"This summary was auto-generated. Your account lead will provide a more detailed update next week.",
+	);
+
+	return lines.join("\n\n");
+}
+
 // ── HTML Template ───────────────────────────────────────────────────────────
 
 function renderJournalHtml(opts: {
@@ -402,6 +471,7 @@ export const generateJournalDigest = internalAction({
 			id: args.journalId,
 		})) as {
 			_id: string;
+			clientId: string;
 			boxFolderId?: string;
 			boxSharedLink?: string;
 			companyName?: string;
@@ -425,7 +495,7 @@ export const generateJournalDigest = internalAction({
 		const narrative = (await ctx.runQuery(
 			api.journalNarratives.getByJournalAndWeek,
 			{ journalId: args.journalId, weekStarting },
-		)) as { _id: string; narrativeText?: string } | null;
+		)) as { _id: string; narrativeText?: string; status?: string } | null;
 
 		// 4. Load client-visible entries for this week
 		const entries = (await ctx.runQuery(api.journalEntries.listByJournal, {
@@ -484,6 +554,49 @@ export const generateJournalDigest = internalAction({
 			milestones: 0,
 		};
 
+		// 5b. Auto-generate fallback narrative if missing or draft
+		let activeNarrative = narrative;
+		const needsFallback =
+			!activeNarrative || activeNarrative.status === "draft";
+
+		if (needsFallback && weekEntries.length > 0) {
+			const fallbackText = generateFallbackNarrative(
+				weekEntries,
+				metrics,
+				journal.journalType,
+			);
+
+			if (activeNarrative) {
+				// Update existing draft with fallback text
+				await ctx.runMutation(api.journalNarratives.update, {
+					id: activeNarrative._id as Id<"journalNarratives">,
+					narrativeText: fallbackText,
+				});
+				await ctx.runMutation(api.journalNarratives.markFallback, {
+					id: activeNarrative._id as Id<"journalNarratives">,
+					reason:
+						"Account lead did not mark narrative as ready before Tuesday deadline",
+				});
+				activeNarrative = { ...activeNarrative, narrativeText: fallbackText };
+			} else {
+				// Create new fallback narrative
+				const newId = await ctx.runMutation(
+					api.journalNarratives.createFallback,
+					{
+						journalId: args.journalId,
+						clientId: journal.clientId as Id<"crmCompanies">,
+						weekStarting,
+						weekEnding,
+						narrativeText: fallbackText,
+					},
+				);
+				activeNarrative = {
+					_id: newId as unknown as string,
+					narrativeText: fallbackText,
+				};
+			}
+		}
+
 		// 6. Generate HTML
 		const html = renderJournalHtml({
 			companyName: journal.companyName || "Client",
@@ -492,7 +605,7 @@ export const generateJournalDigest = internalAction({
 			chapterNumber: journal.chapterNumber,
 			weekStarting,
 			weekEnding,
-			narrativeText: narrative?.narrativeText || "",
+			narrativeText: activeNarrative?.narrativeText || "",
 			entries: weekEntries,
 			metrics,
 		});
@@ -544,7 +657,7 @@ export const generateJournalDigest = internalAction({
 		// 9. Save digest record
 		await ctx.runMutation(api.journalDigests.create, {
 			journalId: args.journalId,
-			narrativeId: narrative?._id as Id<"journalNarratives"> | undefined,
+			narrativeId: activeNarrative?._id as Id<"journalNarratives"> | undefined,
 			weekStarting,
 			weekEnding,
 			boxFileId: boxFileId || "pending",
@@ -555,9 +668,9 @@ export const generateJournalDigest = internalAction({
 		});
 
 		// 10. Update narrative status
-		if (narrative) {
+		if (activeNarrative) {
 			await ctx.runMutation(api.journalNarratives.updateStatus, {
-				id: narrative._id as Id<"journalNarratives">,
+				id: activeNarrative._id as Id<"journalNarratives">,
 				status: "sent",
 			});
 		}
@@ -618,11 +731,11 @@ export const generateJournalDigest = internalAction({
 					</table>`;
 
 				// Add narrative excerpt if available
-				if (narrative?.narrativeText) {
+				if (activeNarrative?.narrativeText) {
 					const excerpt =
-						narrative.narrativeText.length > 300
-							? `${narrative.narrativeText.slice(0, 300)}…`
-							: narrative.narrativeText;
+						activeNarrative.narrativeText.length > 300
+							? `${activeNarrative.narrativeText.slice(0, 300)}…`
+							: activeNarrative.narrativeText;
 					contentHtml += `
 						<div style="border-left: 3px solid ${BRAND.brass}; padding-left: 16px; margin: 20px 0;">
 							<p style="color: ${BRAND.textBody}; font-size: 14px; line-height: 1.7; margin: 0; font-style: italic;">
