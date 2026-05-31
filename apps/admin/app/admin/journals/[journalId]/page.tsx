@@ -257,6 +257,7 @@ export default function JournalDetailPage() {
 	const journal = useQuery(api.clientJournals.get, { id: journalId });
 	const entries = useQuery(api.journalEntries.listByJournal, { journalId });
 	const milestones = useQuery(api.journalEntries.listMilestones, { journalId });
+	const chapters = useQuery(api.journalChapters.listByJournal, { journalId });
 	const weekStarting = getWeekStarting();
 	const narrative = useQuery(api.journalNarratives.getByJournalAndWeek, {
 		journalId,
@@ -506,13 +507,84 @@ export default function JournalDetailPage() {
 							📄 PDF viewed {timeAgo(journal.lastFileViewedAt)}
 						</span>
 					)}
-					{journal.emailOpenCount !== undefined && journal.emailOpenCount > 0 && (
-						<span className="text-xs text-gray-400">
-							({journal.emailOpenCount} opens)
-						</span>
-					)}
+					{journal.emailOpenCount !== undefined &&
+						journal.emailOpenCount > 0 && (
+							<span className="text-xs text-gray-400">
+								({journal.emailOpenCount} opens)
+							</span>
+						)}
 				</div>
 			</div>
+
+			{/* Chapter History */}
+			{chapters && chapters.length > 0 && (
+				<div className="bg-white rounded-lg border border-gray-200 p-6">
+					<h2 className="text-lg font-medium text-gray-900 mb-4">
+						Chapter History
+					</h2>
+					<div className="relative">
+						<div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200" />
+						<div className="space-y-4">
+							{chapters.map((chapter) => (
+								<div
+									key={chapter._id}
+									className="relative flex items-start gap-4 pl-10"
+								>
+									<div
+										className={`absolute left-2.5 w-3 h-3 rounded-full border-2 z-10 ${
+											chapter.status === "active"
+												? "bg-orange-500 border-orange-500"
+												: chapter.status === "completed"
+													? "bg-green-500 border-green-500"
+													: "bg-white border-gray-300"
+										}`}
+									/>
+									<div className="flex-1">
+										<div className="flex items-center gap-2">
+											<span className="text-sm font-medium text-gray-900">
+												Chapter {chapter.chapterNumber}: {chapter.title}
+											</span>
+											<span
+												className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+													chapter.status === "active"
+														? "bg-orange-100 text-orange-800"
+														: chapter.status === "completed"
+															? "bg-green-100 text-green-800"
+															: "bg-gray-100 text-gray-600"
+												}`}
+												>
+													{chapter.status}
+												</span>
+											{chapter.closeSummaryGenerated && (
+												<span className="text-xs text-green-600">
+													✓ Close summary generated
+												</span>
+											)}
+										</div>
+										{chapter.description && (
+											<p className="text-xs text-gray-500 mt-0.5">
+												{chapter.description}
+											</p>
+										)}
+										<div className="flex items-center gap-3 mt-1">
+											{chapter.startedAt && (
+												<span className="text-xs text-gray-400">
+													Started {new Date(chapter.startedAt).toLocaleDateString()}
+												</span>
+											)}
+											{chapter.completedAt && (
+												<span className="text-xs text-gray-400">
+													Completed {new Date(chapter.completedAt).toLocaleDateString()}
+												</span>
+											)}
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
 
 			{/* Milestone Progress */}
 			<MilestoneProgress milestones={milestones ?? []} />
