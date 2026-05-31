@@ -1,3 +1,4 @@
+05/31/26 01:44 AM PT
 05/31/26 01:33 AM PT
 05/31/26 12:55 AM PT
 05/30/26 07:27 PM PT
@@ -44,11 +45,11 @@ Purpose: (auto-inserted by pre-commit — please update)
 
 ## Advanced Features (Future)
 
-- [ ] **Phase close summary** — "chapter book" when transitioning phases
-  - Uses `journalChapters` table
-  - Account lead writes closing narrative
-  - Key accomplishments + by-the-numbers
-  - Separate PDF delivered to client
+- [x] **Phase close summary** — "chapter book" when transitioning phases
+  - Auto-closes chapter + creates new one on stage transition
+  - Generates branded PDF with all chapter entries + metrics
+  - Uploads to Box, marks chapter as completed
+  - Chapter history timeline in admin UI
 
 - [x] **Client engagement tracking** — did they open the email? View the PDF?
   - Resend email open tracking via webhook
