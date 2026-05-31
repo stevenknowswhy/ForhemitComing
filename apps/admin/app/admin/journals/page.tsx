@@ -203,6 +203,9 @@ export default function JournalsPage() {
 								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
 									Created
 								</th>
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+									Client Activity
+								</th>
 							</tr>
 						</thead>
 						<tbody className="bg-white divide-y divide-gray-200">
@@ -230,10 +233,16 @@ export default function JournalsPage() {
 									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
 										{journal.chapterNumber}. {journal.currentChapter}
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-										{new Date(journal.createdAt).toLocaleDateString()}
-									</td>
-								</tr>
+										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+											{new Date(journal.createdAt).toLocaleDateString()}
+										</td>
+										<td className="px-6 py-4 whitespace-nowrap">
+											<EngagementBadge
+												lastEmailOpenedAt={journal.lastEmailOpenedAt}
+												lastFileViewedAt={journal.lastFileViewedAt}
+											/>
+										</td>
+									</tr>
 							))}
 						</tbody>
 					</table>
@@ -400,6 +409,53 @@ function CreateJournalModal({
 					</button>
 				</div>
 			</div>
+		</div>
+	);
+}
+
+function timeAgo(timestamp?: number): string {
+	if (!timestamp) return "";
+	const seconds = Math.floor((Date.now() - timestamp) / 1000);
+	if (seconds < 60) return "just now";
+	const minutes = Math.floor(seconds / 60);
+	if (minutes < 60) return `${minutes}m ago`;
+	const hours = Math.floor(minutes / 60);
+	if (hours < 24) return `${hours}h ago`;
+	const days = Math.floor(hours / 24);
+	if (days === 1) return "yesterday";
+	if (days < 7) return `${days}d ago`;
+	if (days < 30) return `${Math.floor(days / 7)}w ago`;
+	return `${Math.floor(days / 30)}mo ago`;
+}
+
+function EngagementBadge({
+	lastEmailOpenedAt,
+	lastFileViewedAt,
+}: {
+	lastEmailOpenedAt?: number;
+	lastFileViewedAt?: number;
+}) {
+	const lastEmail = timeAgo(lastEmailOpenedAt);
+	const lastFile = timeAgo(lastFileViewedAt);
+
+	if (!lastEmail && !lastFile) {
+		return (
+			<span className="text-xs text-gray-400 italic">No activity yet</span>
+		);
+	}
+
+	return (
+		<div className="flex flex-col gap-0.5">
+			{lastEmail && (
+				<span className="text-xs text-gray-600">
+					📧 Opened {lastEmail}
+				</span>
+			)}
+			{lastFile && (
+				<span className="text-xs text-gray-600">
+					📄 Viewed {lastFile}
+				</span>
+			)}
 		</div>
 	);
 }

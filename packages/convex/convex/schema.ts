@@ -790,6 +790,12 @@ export default defineSchema({
 		deliveryDay: v.optional(v.string()),
 		deliveryHour: v.optional(v.number()),
 
+		// Engagement tracking
+		lastEmailOpenedAt: v.optional(v.number()),
+		lastFileViewedAt: v.optional(v.number()),
+		emailOpenCount: v.optional(v.number()),
+		fileViewCount: v.optional(v.number()),
+
 		createdAt: v.number(),
 		updatedAt: v.number(),
 	})
@@ -962,11 +968,13 @@ export default defineSchema({
 
 		deliveredAt: v.number(),
 		deliveredTo: v.array(v.string()),
+		resendId: v.optional(v.string()),
 
 		createdAt: v.number(),
 	})
 		.index("byJournal", ["journalId"])
-		.index("byWeek", ["journalId", "weekStarting"]),
+		.index("byWeek", ["journalId", "weekStarting"])
+		.index("byResendId", ["resendId"]),
 
 	journalChapters: defineTable({
 		journalId: v.id("clientJournals"),
