@@ -838,3 +838,192 @@ export const processAllJournals = internalAction({
 		return { processed: results.length, results };
 	},
 });
+
+// ── Chapter close summary ───────────────────────────────────────────────────
+
+export const generateCloseSummary = internalAction({
+	args: {
+		journalId: v.id("clientJournals"),
+		chapterId: v.id("journalChapters"),
+	},
+	handler: async (
+		ctx,
+		args,
+	): Promise<
+		| { error: string }
+		| { success: true; boxFileId: string | undefined }
+	> => {
+		// Load journal
+		const journal = (await ctx.runQuery(api.clientJournals.get, {
+			id: args.journalId,
+		})) as {
+			_id: string;
+			clientId: string;
+			boxFolderId?: string;
+			companyName?: string;
+			journalType: string;
+		} | null;
+		if (!journal) return { error: "Journal not found" };
+
+		// Load chapter
+		const chapter = (await ctx.runQuery(api.journalChapters.get, {
+			id: args.chapterId,
+		})) as {
+			_id: string;
+			chapterNumber: number;
+			title: string;
+			description?: string;
+			startedAt?: number;
+			completedAt?: number;
+		} | null;
+		if (!chapter) return { error: "Chapter not found" };
+
+		// Load all entries for this chapter's period
+		const entries = (await ctx.runQuery(api.journalEntries.listByJournal, {
+			journalId: args.journalId,
+		})) as Array<{
+			visibleToClient: boolean;
+			occurredAt: number;
+			entryType: string;
+			theme: string;
+			title: string;
+			description: string;
+			clientDescription?: string;
+			outcome?: string;
+			effortBand?: string;
+			status: string;
+			chapterNumber?: number;
+		}>;
+
+		// Filter to entries in this chapter (by chapterNumber or time range)
+		const chapterEntries = entries.filter((e) => {
+			if (e.chapterNumber !== undefined) {
+				return e.chapterNumber === chapter.chapterNumber;
+			}
+			// Fallback: filter by time range
+			if (chapter.startedAt && chapter.completedAt) {
+				return e.occurredAt >= chapter.startedAt && e.occurredAt <= chapter.completedAt;
+			}
+			return false;
+		});
+
+		const visibleEntries = chapterEntries.filter((e) => e.visibleToClient);
+
+		// Compute metrics
+		const themeCount: Record<string, number> = {};
+		let calls = 0,
+			emails = 0,
+			documents = 0,
+			meetings = 0;
+
+		for (const e of visibleEntries) {
+			themeCount[e.theme] = (themeCount[e.theme] || 0) + 1;
+			if (e.entryType === "call" || e.entryType === "signature") calls++;
+			if (e.entryType === "email" || e.entryType === "notification") emails++;
+			if (e.entryType === "document") documents++;
+			if (e.entryType === "meeting") meetings++;
+		}
+
+		const metrics = {
+			totalEntries: visibleEntries.length,
+			entriesByTheme: themeCount,
+			entriesByEffort: {},
+			touchpoints: {
+				calls,
+				emails,
+				documents,
+				meetings,
+				total: calls + emails + documents + meetings,
+			},
+			actionItemsDue: 0,
+			milestones: 0,
+		};
+
+		// Build narrative summary
+		const summaryLines: string[] = [];
+		summaryLines.push(
+			`Chapter ${chapter.chapterNumber}: ${chapter.title} has been completed.`,
+		);
+		summaryLines.push(
+			`Over the course of this phase, the Forhemit team completed ${visibleEntries.length} documented activities.`,
+		);
+
+		const { calls: c, meetings: m, documents: d } = metrics.touchpoints;
+		const parts: string[] = [];
+		if (c > 0) parts.push(`${c} call${c > 1 ? "s" : ""}`);
+		if (m > 0) parts.push(`${m} meeting${m > 1 ? "s" : ""}`);
+		if (d > 0) parts.push(`${d} document${d > 1 ? "s" : ""}`);
+		if (parts.length > 0) {
+			summaryLines.push(`Key touchpoints: ${parts.join(", ")}.`);
+		}
+
+		const withOutcomes = visibleEntries.filter((e) => e.outcome);
+		if (withOutcomes.length > 0) {
+			summaryLines.push("Notable outcomes:");
+			for (const e of withOutcomes.slice(0, 10)) {
+				summaryLines.push(`• ${e.title}: ${e.outcome}`);
+			}
+		}
+
+		const narrativeText = summaryLines.join("\n\n");
+
+		// Generate HTML using the same template
+		const html = renderJournalHtml({
+			companyName: journal.companyName || "Client",
+			journalType: journal.journalType,
+			chapter: chapter.title,
+			chapterNumber: chapter.chapterNumber,
+			weekStarting: chapter.startedAt || Date.now(),
+			weekEnding: chapter.completedAt || Date.now(),
+			narrativeText,
+			entries: visibleEntries,
+			metrics,
+		});
+
+		// Generate PDF
+		const adminUrl = process.env.ADMIN_APP_URL || "http://localhost:5050";
+		const pdfResponse = await fetch(`${adminUrl}/api/pdf-generate`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				htmlContent: html,
+				templateName: "Chapter Close Summary",
+				templateId: "chapter-close",
+			}),
+		});
+
+		if (!pdfResponse.ok) {
+			const errText = await pdfResponse.text();
+			return { error: `PDF generation failed: ${errText}` };
+		}
+
+		const pdfBuffer = await pdfResponse.arrayBuffer();
+		const pdfBytes = new Uint8Array(pdfBuffer);
+
+		// Upload to Box
+		let boxFileId: string | undefined;
+		if (journal.boxFolderId) {
+			try {
+				const uploadResult = (await ctx.runAction(
+					internal.box.uploadFileToFolder,
+					{
+						folderId: journal.boxFolderId,
+						fileName: `Chapter_${chapter.chapterNumber}_Close_Summary.pdf`,
+						content: Array.from(pdfBytes),
+					},
+				)) as { id: string; name: string } | null;
+				boxFileId = uploadResult?.id;
+			} catch (err) {
+				console.error("Box upload failed:", err);
+			}
+		}
+
+		// Mark chapter as completed with close summary
+		await ctx.runMutation(api.journalChapters.complete, {
+			id: args.chapterId,
+			closeSummaryBoxFileId: boxFileId,
+		});
+
+		return { success: true, boxFileId };
+	},
+});

@@ -1,6 +1,5 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import type { Id } from "./_generated/dataModel";
 import { requireAuth } from "./lib/requireAuth";
 
 // ============================================
@@ -120,5 +119,59 @@ export const complete = mutation({
 			updatedAt: Date.now(),
 		});
 		return await ctx.db.get(args.id);
+	},
+});
+
+// closeAndAdvance — close current chapter and create next one (no auth — internal use)
+export const closeAndAdvance = mutation({
+	args: {
+		journalId: v.id("clientJournals"),
+		oldStage: v.string(),
+		newStage: v.string(),
+		chapterNumber: v.number(),
+	},
+	handler: async (ctx, args) => {
+		const now = Date.now();
+
+		// Close current active chapter
+		const activeChapter = await ctx.db
+			.query("journalChapters")
+			.withIndex("byStatus", (q) =>
+				q.eq("journalId", args.journalId).eq("status", "active"),
+			)
+			.first();
+
+		if (activeChapter) {
+			await ctx.db.patch(activeChapter._id, {
+				status: "completed",
+				completedAt: now,
+				updatedAt: now,
+			});
+		}
+
+		// Create new chapter for the new stage
+		const newChapterId = await ctx.db.insert("journalChapters", {
+			journalId: args.journalId,
+			chapterNumber: args.chapterNumber + 1,
+			title: args.newStage,
+			description: `Phase ${args.chapterNumber + 1}: ${args.newStage}`,
+			status: "active",
+			startedAt: now,
+			closeSummaryGenerated: false,
+			createdAt: now,
+			updatedAt: now,
+		});
+
+		// Update journal's current chapter
+		await ctx.db.patch(args.journalId, {
+			currentChapter: args.newStage,
+			chapterNumber: args.chapterNumber + 1,
+			updatedAt: now,
+		});
+
+		return {
+			closedChapterId: activeChapter?._id,
+			newChapterId,
+		};
 	},
 });
