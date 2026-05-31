@@ -233,6 +233,21 @@ function formatLabel(s: string): string {
 	return s.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
 }
 
+function timeAgo(timestamp?: number): string {
+	if (!timestamp) return "";
+	const seconds = Math.floor((Date.now() - timestamp) / 1000);
+	if (seconds < 60) return "just now";
+	const minutes = Math.floor(seconds / 60);
+	if (minutes < 60) return `${minutes}m ago`;
+	const hours = Math.floor(minutes / 60);
+	if (hours < 24) return `${hours}h ago`;
+	const days = Math.floor(hours / 24);
+	if (days === 1) return "yesterday";
+	if (days < 7) return `${days}d ago`;
+	if (days < 30) return `${Math.floor(days / 7)}w ago`;
+	return `${Math.floor(days / 30)}mo ago`;
+}
+
 // ── Page ────────────────────────────────────────────────────────────────────
 
 export default function JournalDetailPage() {
@@ -480,6 +495,23 @@ export default function JournalDetailPage() {
 				<p className="text-sm text-gray-500 mt-1">
 					Chapter {journal.chapterNumber}: {journal.currentChapter}
 				</p>
+				<div className="flex items-center gap-4 mt-2">
+					{journal.lastEmailOpenedAt && (
+						<span className="text-xs text-gray-500">
+							📧 Email opened {timeAgo(journal.lastEmailOpenedAt)}
+						</span>
+					)}
+					{journal.lastFileViewedAt && (
+						<span className="text-xs text-gray-500">
+							📄 PDF viewed {timeAgo(journal.lastFileViewedAt)}
+						</span>
+					)}
+					{journal.emailOpenCount !== undefined && journal.emailOpenCount > 0 && (
+						<span className="text-xs text-gray-400">
+							({journal.emailOpenCount} opens)
+						</span>
+					)}
+				</div>
 			</div>
 
 			{/* Milestone Progress */}

@@ -203,3 +203,43 @@ export const updateChapter = mutation({
 		return await ctx.db.get(args.id);
 	},
 });
+
+// ============================================
+// recordEmailOpen — track when client opens digest email (no auth — webhook use)
+// ============================================
+
+export const recordEmailOpen = mutation({
+	args: {
+		journalId: v.id("clientJournals"),
+	},
+	handler: async (ctx, args) => {
+		const journal = await ctx.db.get(args.journalId);
+		if (!journal) return null;
+		await ctx.db.patch(args.journalId, {
+			lastEmailOpenedAt: Date.now(),
+			emailOpenCount: (journal.emailOpenCount || 0) + 1,
+			updatedAt: Date.now(),
+		});
+		return await ctx.db.get(args.journalId);
+	},
+});
+
+// ============================================
+// recordFileView — track when client views Box file (no auth — webhook use)
+// ============================================
+
+export const recordFileView = mutation({
+	args: {
+		journalId: v.id("clientJournals"),
+	},
+	handler: async (ctx, args) => {
+		const journal = await ctx.db.get(args.journalId);
+		if (!journal) return null;
+		await ctx.db.patch(args.journalId, {
+			lastFileViewedAt: Date.now(),
+			fileViewCount: (journal.fileViewCount || 0) + 1,
+			updatedAt: Date.now(),
+		});
+		return await ctx.db.get(args.journalId);
+	},
+});

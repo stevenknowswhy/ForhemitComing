@@ -758,7 +758,7 @@ export const generateJournalDigest = internalAction({
 				});
 
 				// Send to all recipients
-				await sendAndLogEmail(
+				const sendResult = await sendAndLogEmail(
 					ctx,
 					{
 						to: journal.digestRecipients,
@@ -771,7 +771,7 @@ export const generateJournalDigest = internalAction({
 					},
 				);
 
-				// Update digest record with delivery info
+				// Update digest record with delivery info + Resend ID
 				const digestRecord = (await ctx.runQuery(
 					api.journalDigests.getByJournalAndWeek,
 					{ journalId: args.journalId, weekStarting },
@@ -780,6 +780,7 @@ export const generateJournalDigest = internalAction({
 					await ctx.runMutation(api.journalDigests.markDelivered, {
 						id: digestRecord._id as Id<"journalDigests">,
 						to: journal.digestRecipients,
+						resendId: sendResult?.id,
 					});
 				}
 			} catch (emailErr) {
