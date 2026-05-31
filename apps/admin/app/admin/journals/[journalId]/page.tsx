@@ -37,6 +37,24 @@ const THEMES = [
 
 const EFFORT_BANDS = ["low", "medium", "high", "spike"] as const;
 
+const EFFORT_WEIGHTS: Record<string, number> = {
+	low: 1,
+	medium: 2,
+	high: 3,
+	spike: 5,
+};
+
+const THEME_COLORS: Record<string, string> = {
+	legal: "#6366f1",
+	finance: "#f59e0b",
+	trustee_bank: "#06b6d4",
+	hr_comms: "#ec4899",
+	governance: "#8b5cf6",
+	tax: "#10b981",
+	signing: "#f97316",
+	admin: "#6b7280",
+};
+
 // ── Entry Templates ─────────────────────────────────────────────────────────
 
 interface EntryTemplate {
@@ -223,6 +241,7 @@ export default function JournalDetailPage() {
 
 	const journal = useQuery(api.clientJournals.get, { id: journalId });
 	const entries = useQuery(api.journalEntries.listByJournal, { journalId });
+	const milestones = useQuery(api.journalEntries.listMilestones, { journalId });
 	const weekStarting = getWeekStarting();
 	const narrative = useQuery(api.journalNarratives.getByJournalAndWeek, {
 		journalId,
@@ -233,6 +252,7 @@ export default function JournalDetailPage() {
 	const updateNarrative = useMutation(api.journalNarratives.update);
 	const markReady = useMutation(api.journalNarratives.markReady);
 	const createEntry = useMutation(api.journalEntries.create);
+	const updateEntryStatus = useMutation(api.journalEntries.updateStatus);
 
 	// Narrative state
 	const [narrativeText, setNarrativeText] = useState("");
@@ -284,6 +304,79 @@ export default function JournalDetailPage() {
 	const visibleEntries = filteredEntries.filter((e) => e.visibleToClient);
 	const internalEntries = filteredEntries.filter((e) => !e.visibleToClient);
 	const hasActiveFilters = Object.values(filters).some((v) => v !== "all");
+
+	// Action items: entries with dueDate populated
+	const now = Date.now();
+	const endOfWeek = (() => {
+		const d = new Date();
+		const day = d.getDay();
+		const daysUntilSunday = day === 0 ? 0 : 7 - day;
+		d.setDate(d.getDate() + daysUntilSunday);
+		d.setHours(23, 59, 59, 999);
+		return d.getTime();
+	})();
+
+	const actionItems = useMemo(() => {
+		if (!entries)
+			return { overdue: [], thisWeek: [], upcoming: [], completed: [] };
+		const withDue = entries.filter(
+			(e) => e.dueDate !== undefined && e.dueDate !== null,
+		);
+		const isCompleted = (e: (typeof withDue)[number]) =>
+			e.status === "completed" || e.status === "canceled";
+		const overdue = withDue.filter((e) => !isCompleted(e) && e.dueDate! < now);
+		const thisWeek = withDue.filter(
+			(e) => !isCompleted(e) && e.dueDate! >= now && e.dueDate! <= endOfWeek,
+		);
+		const upcoming = withDue.filter(
+			(e) => !isCompleted(e) && e.dueDate! > endOfWeek,
+		);
+		const completed = withDue.filter(isCompleted);
+		return { overdue, thisWeek, upcoming, completed };
+	}, [entries, now, endOfWeek]);
+
+	const totalActionItems =
+		actionItems.overdue.length +
+		actionItems.thisWeek.length +
+		actionItems.upcoming.length;
+
+	const handleMarkComplete = async (entryId: string) => {
+		await updateEntryStatus({
+			id: entryId as Id<"journalEntries">,
+			status: "completed",
+		});
+	};
+
+	// Effort distribution by theme
+	const effortDistribution = useMemo(() => {
+		if (!entries)
+			return {
+				rows: [],
+				totalEffort: 0,
+				entriesWithEffort: 0,
+				totalEntries: 0,
+			};
+		const entriesWithEffort = entries.filter((e) => e.effortBand);
+		const grouped: Record<string, number> = {};
+		for (const entry of entriesWithEffort) {
+			const weight = EFFORT_WEIGHTS[entry.effortBand!] ?? 0;
+			grouped[entry.theme] = (grouped[entry.theme] ?? 0) + weight;
+		}
+		const totalEffort = Object.values(grouped).reduce((s, v) => s + v, 0);
+		const rows = Object.entries(grouped)
+			.map(([theme, effort]) => ({
+				theme,
+				effort,
+				percentage: totalEffort > 0 ? (effort / totalEffort) * 100 : 0,
+			}))
+			.sort((a, b) => b.effort - a.effort);
+		return {
+			rows,
+			totalEffort,
+			entriesWithEffort: entriesWithEffort.length,
+			totalEntries: entries.length,
+		};
+	}, [entries]);
 
 	// ── Handlers ─────────────────────────────────────────────────────────
 
@@ -388,6 +481,9 @@ export default function JournalDetailPage() {
 					Chapter {journal.chapterNumber}: {journal.currentChapter}
 				</p>
 			</div>
+
+			{/* Milestone Progress */}
+			<MilestoneProgress milestones={milestones ?? []} />
 
 			{/* Narrative Editor */}
 			<div className="bg-white rounded-lg border border-gray-200 p-6">
@@ -735,6 +831,85 @@ export default function JournalDetailPage() {
 				</div>
 			</div>
 
+			{/* Action Items */}
+			{totalActionItems > 0 && (
+				<div className="bg-white rounded-lg border border-gray-200 p-6">
+					<h2 className="text-lg font-medium text-gray-900 mb-4">
+						Action Items ({totalActionItems})
+					</h2>
+					<div className="space-y-6">
+						{actionItems.overdue.length > 0 && (
+							<div>
+								<h3 className="text-sm font-semibold text-red-700 mb-2 flex items-center gap-2">
+									<span className="inline-block w-2 h-2 rounded-full bg-red-500" />
+									Overdue ({actionItems.overdue.length})
+								</h3>
+								<div className="space-y-2">
+									{actionItems.overdue.map((entry) => (
+										<ActionItemRow
+											key={entry._id}
+											entry={entry}
+											isOverdue
+											onMarkComplete={handleMarkComplete}
+										/>
+									))}
+								</div>
+							</div>
+						)}
+						{actionItems.thisWeek.length > 0 && (
+							<div>
+								<h3 className="text-sm font-semibold text-amber-700 mb-2 flex items-center gap-2">
+									<span className="inline-block w-2 h-2 rounded-full bg-amber-500" />
+									Due This Week ({actionItems.thisWeek.length})
+								</h3>
+								<div className="space-y-2">
+									{actionItems.thisWeek.map((entry) => (
+										<ActionItemRow
+											key={entry._id}
+											entry={entry}
+											onMarkComplete={handleMarkComplete}
+										/>
+									))}
+								</div>
+							</div>
+						)}
+						{actionItems.upcoming.length > 0 && (
+							<div>
+								<h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+									<span className="inline-block w-2 h-2 rounded-full bg-gray-400" />
+									Upcoming ({actionItems.upcoming.length})
+								</h3>
+								<div className="space-y-2">
+									{actionItems.upcoming.map((entry) => (
+										<ActionItemRow
+											key={entry._id}
+											entry={entry}
+											onMarkComplete={handleMarkComplete}
+										/>
+									))}
+								</div>
+							</div>
+						)}
+					</div>
+					{actionItems.completed && actionItems.completed.length > 0 && (
+						<details className="mt-4 pt-4 border-t border-gray-100">
+							<summary className="text-sm text-gray-500 cursor-pointer hover:text-gray-700">
+								Completed ({actionItems.completed.length})
+							</summary>
+							<div className="mt-2 space-y-2">
+								{actionItems.completed.map((entry) => (
+									<ActionItemRow
+										key={entry._id}
+										entry={entry}
+										onMarkComplete={handleMarkComplete}
+									/>
+								))}
+							</div>
+						</details>
+					)}
+				</div>
+			)}
+
 			{/* Client-Visible Entries */}
 			<div className="bg-white rounded-lg border border-gray-200 p-6">
 				<h2 className="text-lg font-medium text-gray-900 mb-4">
@@ -769,6 +944,149 @@ export default function JournalDetailPage() {
 					</div>
 				</div>
 			)}
+
+			{/* Effort Distribution */}
+			<div className="bg-white rounded-lg border border-gray-200 p-6">
+				<h2 className="text-lg font-medium text-gray-900 mb-4">
+					Effort Distribution
+				</h2>
+				{effortDistribution.rows.length === 0 ? (
+					<p className="text-gray-500 text-center py-4">
+						No entries with effort bands set.
+					</p>
+				) : (
+					<div className="space-y-3">
+						{effortDistribution.rows.map((row) => (
+							<div key={row.theme} className="flex items-center gap-3">
+								<span className="w-32 text-sm text-gray-800 text-right shrink-0">
+									{formatLabel(row.theme)}
+								</span>
+								<div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden">
+									<div
+										className="h-full rounded-full transition-all duration-500"
+										style={{
+											width: `${row.percentage}%`,
+											backgroundColor: THEME_COLORS[row.theme] ?? "#6b7280",
+											minWidth: row.percentage > 0 ? "2rem" : undefined,
+										}}
+									/>
+								</div>
+								<span className="w-24 text-sm text-gray-900 shrink-0">
+									{row.effort} ({Math.round(row.percentage)}%)
+								</span>
+							</div>
+						))}
+					</div>
+				)}
+				<div className="mt-4 pt-4 border-t border-gray-100">
+					<p className="text-sm text-gray-800">
+						{effortDistribution.entriesWithEffort} of{" "}
+						{effortDistribution.totalEntries} entries have effort set
+						{effortDistribution.totalEffort > 0 && (
+							<span className="text-gray-900 font-medium">
+								{" · Total effort: "}
+								{effortDistribution.totalEffort}
+							</span>
+						)}
+					</p>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+// ── Milestone Progress ───────────────────────────────────────────────────────
+
+function MilestoneProgress({
+	milestones,
+}: {
+	milestones: {
+		_id: string;
+		title: string;
+		status: string;
+		occurredAt: number;
+	}[];
+}) {
+	if (milestones.length === 0) return null;
+
+	const total = milestones.length;
+	const completed = milestones.filter((m) => m.status === "completed").length;
+	const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+	return (
+		<div className="bg-white rounded-lg border border-gray-200 p-6">
+			<h2 className="text-lg font-medium text-gray-900 mb-4">
+				Milestone Progress
+			</h2>
+			<div className="mb-6">
+				<div className="flex items-center justify-between mb-2">
+					<span className="text-sm text-gray-800">
+						{completed} of {total} milestones completed
+					</span>
+					<span className="text-sm font-medium text-gray-900">
+						{percentage}%
+					</span>
+				</div>
+				<div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+					<div
+						className="h-full bg-orange-500 rounded-full transition-all duration-500"
+						style={{ width: `${percentage}%` }}
+					/>
+				</div>
+			</div>
+			<div className="relative">
+				<div className="absolute top-3 left-3 right-3 h-0.5 bg-gray-200" />
+				<div className="relative flex items-start justify-between">
+					{milestones.map((milestone) => {
+						const isCompleted = milestone.status === "completed";
+						return (
+							<div
+								key={milestone._id}
+								className="flex flex-col items-center"
+								style={{ flex: 1 }}
+							>
+								<div
+									className={`w-6 h-6 rounded-full border-2 flex items-center justify-center z-10 ${
+										isCompleted
+											? "bg-orange-500 border-orange-500"
+											: "bg-white border-gray-300"
+									}`}
+								>
+									{isCompleted && (
+										<svg
+											className="w-3.5 h-3.5 text-white"
+											fill="none"
+											viewBox="0 0 24 24"
+											stroke="currentColor"
+											strokeWidth={3}
+										>
+											<path
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												d="M5 13l4 4L19 7"
+											/>
+										</svg>
+									)}
+								</div>
+								<div className="mt-2 text-center max-w-[120px]">
+									<p className="text-xs font-medium text-gray-900 leading-tight">
+										{milestone.title}
+									</p>
+									<p className="text-xs text-gray-500 mt-0.5">
+										{new Date(milestone.occurredAt).toLocaleDateString(
+											"en-US",
+											{
+												month: "short",
+												day: "numeric",
+											},
+										)}
+									</p>
+								</div>
+							</div>
+						);
+					})}
+				</div>
+			</div>
 		</div>
 	);
 }
@@ -850,6 +1168,91 @@ function EntryCard({
 					})}
 				</span>
 			</div>
+		</div>
+	);
+}
+
+// ── Action Item Row ─────────────────────────────────────────────────────────
+
+function ActionItemRow({
+	entry,
+	isOverdue = false,
+	onMarkComplete,
+}: {
+	entry: {
+		_id: string;
+		title: string;
+		description: string;
+		dueDate?: number;
+		dueFrom?: string[];
+		status: string;
+	};
+	isOverdue?: boolean;
+	onMarkComplete: (id: string) => void;
+}) {
+	const isDone = entry.status === "completed" || entry.status === "canceled";
+	const formattedDate = entry.dueDate
+		? new Date(entry.dueDate).toLocaleDateString("en-US", {
+				month: "short",
+				day: "numeric",
+				year: "numeric",
+			})
+		: "—";
+	const assignee = entry.dueFrom?.[0] ?? null;
+
+	return (
+		<div
+			className={`flex items-center gap-4 p-3 rounded-lg border ${
+				isDone
+					? "border-gray-100 bg-gray-50"
+					: isOverdue
+						? "border-red-200 bg-red-50"
+						: "border-gray-200 bg-white"
+			}`}
+		>
+			<div className="flex-1 min-w-0">
+				<p
+					className={`font-medium ${isDone ? "text-gray-500 line-through" : "text-gray-900"}`}
+				>
+					{entry.title}
+				</p>
+				<div className="flex items-center gap-3 mt-1">
+					<span
+						className={`text-sm ${
+							isOverdue && !isDone
+								? "text-red-600 font-medium"
+								: "text-gray-800"
+						}`}
+					>
+						{formattedDate}
+					</span>
+					{assignee && (
+						<span className="text-sm text-gray-800">· {assignee}</span>
+					)}
+					<span
+						className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
+							isDone
+								? "bg-green-100 text-green-800"
+								: entry.status === "blocked"
+									? "bg-red-100 text-red-800"
+									: entry.status === "in_progress"
+										? "bg-blue-100 text-blue-800"
+										: "bg-amber-100 text-amber-800"
+						}`}
+					>
+						{isDone ? "Completed" : formatLabel(entry.status)}
+					</span>
+				</div>
+			</div>
+			{!isDone && (
+				<button
+					type="button"
+					onClick={() => onMarkComplete(entry._id)}
+					className="shrink-0 px-3 py-1.5 text-sm border border-green-200 text-green-700 rounded-lg hover:bg-green-50 transition-colors"
+				>
+					✓ Complete
+				</button>
+			)}
 		</div>
 	);
 }
