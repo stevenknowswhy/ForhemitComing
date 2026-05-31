@@ -1,0 +1,95 @@
+import { v } from "convex/values";
+import { mutation, query } from "./_generated/server";
+import { requireAuth } from "./lib/requireAuth";
+
+// ============================================
+// Queries
+// ============================================
+
+export const get = query({
+	args: { id: v.id("journalDigests") },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db.get(args.id);
+	},
+});
+
+export const getByJournalAndWeek = query({
+	args: {
+		journalId: v.id("clientJournals"),
+		weekStarting: v.number(),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db
+			.query("journalDigests")
+			.withIndex("byWeek", (q) =>
+				q.eq("journalId", args.journalId).eq("weekStarting", args.weekStarting),
+			)
+			.first();
+	},
+});
+
+export const listByJournal = query({
+	args: { journalId: v.id("clientJournals") },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		const all = await ctx.db.query("journalDigests").collect();
+		return all
+			.filter((d) => d.journalId === args.journalId)
+			.sort((a, b) => b.weekStarting - a.weekStarting);
+	},
+});
+
+// ============================================
+// Mutations
+// ============================================
+
+export const create = mutation({
+	args: {
+		journalId: v.id("clientJournals"),
+		narrativeId: v.optional(v.id("journalNarratives")),
+		weekStarting: v.number(),
+		weekEnding: v.number(),
+		boxFileId: v.string(),
+		boxFileUrl: v.string(),
+		metrics: v.object({
+			totalEntries: v.number(),
+			entriesByTheme: v.any(),
+			entriesByEffort: v.any(),
+			touchpoints: v.object({
+				calls: v.number(),
+				emails: v.number(),
+				documents: v.number(),
+				meetings: v.number(),
+				total: v.number(),
+			}),
+			actionItemsDue: v.number(),
+			milestones: v.number(),
+		}),
+		deliveredAt: v.number(),
+		deliveredTo: v.array(v.string()),
+	},
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return await ctx.db.insert("journalDigests", {
+			...args,
+			createdAt: Date.now(),
+		});
+	},
+});
+
+// markDelivered — update digest with delivery info
+export const markDelivered = mutation({
+	args: {
+		id: v.id("journalDigests"),
+		to: v.array(v.string()),
+	},
+	handler: async (ctx, args) => {
+		await ctx.db.patch(args.id, {
+			deliveredAt: Date.now(),
+			deliveredTo: args.to,
+		});
+		return await ctx.db.get(args.id);
+	},
+});
