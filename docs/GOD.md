@@ -1,6 +1,6 @@
 # God File — Source of Truth for All Project Documentation
 
-Last updated: 05/26/26 01:58 AM PT
+Last updated: 05/31/26 10:00 AM PT
 Purpose: Source of truth for all project documentation — machine-parseable by Document Manager agents
 
 <!-- GOD_SECTION: active_documents -->
@@ -15,6 +15,7 @@ Purpose: Source of truth for all project documentation — machine-parseable by 
 | docs/SENTRY_SETUP.md | Sentry integration setup guide for Forhemit admin app | 2026-05-26T01:58:00-07:00 |
 | docs/completed/herdr-session-2026-05-25.md | Session log of Herdr multi-agent production readiness sprint on 2026-05-25 | 2026-05-26T01:58:00-07:00 |
 | docs/completed/multi-agent-workflow-skill-created.md | Session log documenting creation of multi-agent workflow orchestrator skill | 2026-05-26T01:58:00-07:00 |
+| docs/completed/dark-mode-plan-admin.md | Dark mode implementation plan for admin app — COMPLETED 2026-05-31 | 2026-05-31T10:00:00-07:00 |
 | docs/design/dedup-shared-package-20260525.md | Design doc for code deduplication via packages/shared extraction | 2026-05-26T01:58:00-07:00 |
 | CONVEX_FIXES_PLAN.md | Revised plan for Convex architecture fixes across ~100+ pre-existing TS errors | 2026-05-26T01:58:00-07:00 |
 | PROJECT_STATUS.md | Current Forhemit project status dashboard | 2026-05-26T01:58:00-07:00 |
