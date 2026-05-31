@@ -1,3 +1,4 @@
+05/31/26 01:55 AM PT
 05/31/26 01:44 AM PT
 05/31/26 01:33 AM PT
 05/31/26 12:55 AM PT
@@ -56,10 +57,7 @@ Purpose: (auto-inserted by pre-commit — please update)
   - Engagement badges in admin UI: "📧 Opened 2h ago, 📄 Viewed yesterday"
   - Box file view tracking fields ready (webhook endpoint pending Box app config)
 
-- [ ] **Rich text editor** — replace textarea with TipTap (already in codebase)
-  - Markdown support
-  - Preview mode
-  - Template snippets
+- [x] **Rich text editor** — TipTap with bold/italic/headings/lists/quotes + preview mode
 
 - [x] **Entry templates** — 10 pre-built templates (Trustee Call, Document Review, Valuation Meeting, Tax Discussion, Legal Review, Board Meeting, Signature Request, Due Diligence, Compliance Check, Internal Note)
 
