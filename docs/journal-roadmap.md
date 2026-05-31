@@ -1,3 +1,4 @@
+05/31/26 01:33 AM PT
 05/31/26 12:55 AM PT
 05/30/26 07:27 PM PT
 Purpose: (auto-inserted by pre-commit — please update)
@@ -49,10 +50,10 @@ Purpose: (auto-inserted by pre-commit — please update)
   - Key accomplishments + by-the-numbers
   - Separate PDF delivered to client
 
-- [ ] **Client engagement tracking** — did they open the email? View the PDF?
-  - Resend email open tracking
-  - Box file view events (webhook)
-  - Surface in admin UI: "Last viewed: 2 days ago"
+- [x] **Client engagement tracking** — did they open the email? View the PDF?
+  - Resend email open tracking via webhook
+  - Engagement badges in admin UI: "📧 Opened 2h ago, 📄 Viewed yesterday"
+  - Box file view tracking fields ready (webhook endpoint pending Box app config)
 
 - [ ] **Rich text editor** — replace textarea with TipTap (already in codebase)
   - Markdown support
