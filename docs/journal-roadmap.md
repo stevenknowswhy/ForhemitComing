@@ -1,3 +1,4 @@
+05/31/26 12:55 AM PT
 05/30/26 07:27 PM PT
 Purpose: (auto-inserted by pre-commit — please update)
 
@@ -16,7 +17,7 @@ Purpose: (auto-inserted by pre-commit — please update)
 | 4. Quick wins (UI polish) | ✅ Done | — |
 | 5. PDF generation | ✅ Done | — |
 | 6. Email digest | ✅ Done | — |
-| 7. Advanced features | 🔄 In progress | — |
+| 7. Advanced features | 🔄 In progress | 4b851b2 |
 
 ---
 
@@ -25,8 +26,8 @@ Purpose: (auto-inserted by pre-commit — please update)
 - [x] **Manual entry form** — account lead logs calls, meetings, decisions from the UI
 - [x] **Entry filtering** — filter by theme, type, auto vs manual, visibility
 - [x] **Outcome field display** — surface `outcome` prominently on entry cards
-- [ ] **Action item tracking** — `dueFrom`/`dueDate` fields exist but no UI
-- [ ] **Milestone progress bar** — visual progress on `milestonesReached`/`totalMilestones`
+- [x] **Action item tracking** — entries with dueDate grouped Overdue/Due This Week/Upcoming, mark-complete
+- [x] **Milestone progress bar** — progress bar + timeline for milestone entries
 
 ---
 
@@ -35,8 +36,8 @@ Purpose: (auto-inserted by pre-commit — please update)
 - [x] **PDF generation** — Puppeteer renders journal to branded PDF via Tuesday 2AM cron
 - [x] **Box upload** — PDF uploaded to client's Box folder, versioned file
 - [x] **Email digest** — weekly email with metrics, narrative excerpt, and Box link
-- [ ] **Auto-narrative fallback** — if account lead doesn't mark "ready" by deadline
-- [ ] **Effort-by-theme chart** — proves where time goes
+- [x] **Auto-narrative fallback** — if account lead doesn't mark "ready" by deadline
+- [x] **Effort-by-theme chart** — horizontal bar chart by theme with effort weights
 
 ---
 
