@@ -256,15 +256,15 @@ export const seedAll = mutation({
 		);
 		await addReq(
 			"Feasibility",
-			"SBA lender outreach brief (one-pager)",
+			"Lender outreach brief (one-pager)",
 			["lender"],
 			20,
 			true,
 		);
-		await addReq("Feasibility", "SBA intake form", ["lender"], 21, true);
+		await addReq("Feasibility", "Lender intake form", ["lender"], 21, true);
 		await addReq(
 			"Feasibility",
-			"SBA lender introduction package cover email",
+			"Lender introduction package cover email",
 			["lender"],
 			22,
 			true,

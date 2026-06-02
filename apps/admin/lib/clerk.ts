@@ -1,7 +1,7 @@
 // Clerk configuration and utilities
 
 // Super admin email - full access
-export const SUPER_ADMIN_EMAIL = 'stefano.stokes@forhemit.com';
+export const SUPER_ADMIN_EMAIL = process.env.SUPER_ADMIN_EMAIL ?? "stefano.stokes@forhemit.com";
 
 // Allowed email domain for sign-ups
 export const ALLOWED_EMAIL_DOMAIN = 'forhemit.com';

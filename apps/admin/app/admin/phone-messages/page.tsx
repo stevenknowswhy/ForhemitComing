@@ -146,12 +146,12 @@ export default function PhoneMessagesPage() {
               )}
 
               {msg.transcript && (
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <details className="text-sm text-gray-600">
-                    <summary className="cursor-pointer font-medium text-gray-700 flex items-center gap-1">
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-[#3A423A]">
+                  <details className="text-sm text-gray-600 dark:text-[#A8A5A0]">
+                    <summary className="cursor-pointer font-medium text-gray-700 dark:text-[#C8C5C0] flex items-center gap-1">
                       <FileText size={14} /> View Transcript
                     </summary>
-                    <div className="mt-2 p-3 bg-gray-50 rounded text-xs whitespace-pre-wrap max-h-48 overflow-y-auto">
+                    <div className="mt-2 p-3 bg-gray-50 dark:bg-[#1F2521] rounded text-xs whitespace-pre-wrap max-h-48 overflow-y-auto">
                       {msg.transcript}
                     </div>
                   </details>

@@ -34,6 +34,28 @@ crons.weekly(
 	internal.journalPdf.processAllJournals,
 );
 
+// ============================================
+// Business log purge — runs every Sunday at 2am UTC
+// Purges activity events older than 3 years (compliance events kept forever)
+// ============================================
+
+crons.weekly(
+	"purgeExpiredActivityEvents",
+	{ dayOfWeek: "sunday", hourUTC: 2, minuteUTC: 0 },
+	internal.businessLog.purgeExpiredActivityEvents,
+);
+
+// ============================================
+// Journal checklist + activity log sync — daily at 10am UTC (2am PST)
+// Regenerates phase checklists and activity log PDFs in Box
+// ============================================
+
+crons.daily(
+	"journalChecklistSync",
+	{ hourUTC: 10, minuteUTC: 0 }, // 2am PST = 10am UTC
+	internal.journalBox.syncAllChecklists,
+);
+
 export default crons;
 
 // ============================================

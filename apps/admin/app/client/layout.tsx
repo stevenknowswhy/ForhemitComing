@@ -102,6 +102,19 @@ export default function ClientLayout({
 					</Link>
 					<nav style={{ display: "flex", gap: "16px" }}>
 						<Link
+							href="/client/journal"
+							style={{
+								fontSize: "14px",
+								color: pathname.startsWith("/client/journal")
+									? "#FF6B00"
+									: "#6b7280",
+								textDecoration: "none",
+								fontWeight: pathname.startsWith("/client/journal") ? 600 : 400,
+							}}
+						>
+							Journal
+						</Link>
+						<Link
 							href="/client/documents"
 							style={{
 								fontSize: "14px",

@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "docs_base": "docs/",
+  "default_target": "docs/general/",
+  "rules": [
+    {
+      "id": "RULE-001",
+      "description": "Architecture Decision Records",
+      "target_dir": "docs/decisions/",
+      "match": {
+        "purpose_contains": ["ADR", "decision", "architecture decision"],
+        "h1_contains": ["ADR"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-002",
+      "description": "Setup and local development guides",
+      "target_dir": "docs/guides/",
+      "match": {
+        "purpose_contains": ["setup", "install", "environment", "getting started", "local development"],
+        "h1_contains": ["Setup", "Install", "Getting Started", "Local Development"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-003",
+      "description": "Architecture, design, and schema documents",
+      "target_dir": "docs/architecture/",
+      "match": {
+        "purpose_contains": ["architecture", "design", "system", "schema", "harmonization"],
+        "h1_contains": ["Architecture", "Design", "System", "Schema", "Harmonization"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-004",
+      "description": "Deployment, operations, and monitoring",
+      "target_dir": "docs/operations/",
+      "match": {
+        "purpose_contains": ["deployment", "deploy", "operations", "monitoring", "sentry", "observability"],
+        "h1_contains": ["Deployment", "Deploy", "Sentry", "Operations"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-005",
+      "description": "Plans, reports, and status documents",
+      "target_dir": "docs/plans/",
+      "match": {
+        "purpose_contains": ["plan", "status", "report", "readiness", "analysis"],
+        "h1_contains": ["Plan", "Status", "Report", "Readiness", "Analysis"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-006",
+      "description": "Session logs and completed work",
+      "target_dir": "docs/sessions/",
+      "match": {
+        "purpose_contains": ["session log", "sprint", "completed"],
+        "h1_contains": ["Session", "Sprint"]
+      },
+      "match_mode": "any"
+    },
+    {
+      "id": "RULE-007",
+      "description": "Legal and contractual documents",
+      "target_dir": "docs/legal/",
+      "match": {
+        "purpose_contains": ["legal", "engagement", "contract", "attorney"],
+        "h1_contains": ["Legal", "Engagement", "Contract"]
+      },
+      "match_mode": "any"
+    }
+  ]
+}

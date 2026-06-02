@@ -5,7 +5,8 @@
   "scripts": {
     "convex:dev": "bash scripts/with-env.sh dev",
     "convex:deploy": "bash scripts/with-env.sh deploy --yes",
-    "convex:once": "bash scripts/with-env.sh dev --once"
+    "convex:once": "bash scripts/with-env.sh dev --once",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

@@ -679,7 +679,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
         &lt;div class=&quot;qualification-title&quot;&gt;Qualification Checklist&lt;/div&gt;
         &lt;div class=&quot;qualification-grid&quot;&gt;
           &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; ESOP lending exp.&lt;/div&gt;
-          &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; SBA preferred&lt;/div&gt;
+          &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; Lender preferred&lt;/div&gt;
           &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; Competitive rates&lt;/div&gt;
           &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; Quick underwriting&lt;/div&gt;
           &lt;div class=&quot;qualification-item&quot;&gt;&lt;span class=&quot;check-box&quot;&gt;&lt;/span&gt; Industry fit&lt;/div&gt;
@@ -6883,10 +6883,10 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;p class=&quot;faq-a&quot;&gt;It depends on the company. For the right company — stable revenue, strong EBITDA, good management depth — the FMV is often competitive with or exceeds PE offers. The difference is that PE deals often include earnouts, equity rollovers, and management holdbacks that reduce the effective price. An ESOP is typically a cleaner transaction with fewer strings attached.&lt;/p&gt;
 
     &lt;p class=&quot;faq-q&quot;&gt;&lt;strong&gt;Q: Do I get all the cash at closing?&lt;/strong&gt;&lt;/p&gt;
-    &lt;p class=&quot;faq-a&quot;&gt;Typically not all of it. The deal is usually structured as a combination of: (1) Day 1 cash from the SBA loan, (2) a seller note that pays out over time, and (3) a small escrow holdback. The exact split depends on the deal structure, but you&#x27;ll know the terms before you sign anything.&lt;/p&gt;
+    &lt;p class=&quot;faq-a&quot;&gt;Typically not all of it. The deal is usually structured as a combination of: (1) Day 1 cash from the lender loan, (2) a seller note that pays out over time, and (3) a small escrow holdback. The exact split depends on the deal structure, but you&#x27;ll know the terms before you sign anything.&lt;/p&gt;
 
     &lt;p class=&quot;faq-q&quot;&gt;&lt;strong&gt;Q: What is the seller note?&lt;/strong&gt;&lt;/p&gt;
-    &lt;p class=&quot;faq-a&quot;&gt;The seller note is a loan you make to the company. Instead of receiving all cash at closing, you receive a portion of the purchase price as a promissory note — the company pays you back over time with interest. This is common in ESOP transactions and is subordinated to the SBA loan (meaning the SBA gets paid first).&lt;/p&gt;
+    &lt;p class=&quot;faq-a&quot;&gt;The seller note is a loan you make to the company. Instead of receiving all cash at closing, you receive a portion of the purchase price as a promissory note — the company pays you back over time with interest. This is common in ESOP transactions and is subordinated to the senior loan (meaning the senior lender gets paid first).&lt;/p&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 03&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Tax Benefits&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
@@ -6908,7 +6908,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;p class=&quot;faq-a&quot;&gt;Forhemit is the transaction steward. We coordinate the deal team, manage the timeline, prepare lender and trustee packages, and keep everything moving. We&#x27;re not the buyer, not your attorney, and not a fiduciary. Think of us as the project manager for the transaction.&lt;/p&gt;
 
     &lt;p class=&quot;faq-q&quot;&gt;&lt;strong&gt;Q: Who else is involved?&lt;/strong&gt;&lt;/p&gt;
-    &lt;p class=&quot;faq-a&quot;&gt;The deal team includes: an independent ESOP trustee (acts on behalf of the employees), ERISA counsel (legal advisor to the trustee), an independent appraiser (determines FMV), and an SBA lender (provides financing). Forhemit coordinates all of them.&lt;/p&gt;
+    &lt;p class=&quot;faq-a&quot;&gt;The deal team includes: an independent ESOP trustee (acts on behalf of the employees), ERISA counsel (legal advisor to the trustee), an independent appraiser (determines FMV), and a lender (provides financing). Forhemit coordinates all of them.&lt;/p&gt;
 
     &lt;p class=&quot;faq-q&quot;&gt;&lt;strong&gt;Q: Do I need my own attorney?&lt;/strong&gt;&lt;/p&gt;
     &lt;p class=&quot;faq-a&quot;&gt;Yes. We strongly recommend you have your own personal attorney review the Engagement Letter, LOI, and Stock Purchase Agreement before you sign anything. The deal team (trustee, counsel, appraiser) represents the ESOP — not you. Your attorney is your advocate.&lt;/p&gt;
@@ -8908,7 +8908,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
       &lt;div class=&quot;term-box-title&quot;&gt;Consideration Mix&lt;/div&gt;
       &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Day 1 cash&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{day1Cash}} (SBA 7(a) loan proceeds)&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sellerNoteAmount}} at {{sellerNoteRate}}, {{sellerNoteTerm}} term&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note subordination&lt;/span&gt;&lt;span style=&quot;flex:1;&quot;&gt;Fully subordinated to SBA loan for {{subordinationPeriod}}&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note subordination&lt;/span&gt;&lt;span style=&quot;flex:1;&quot;&gt;Fully subordinated to senior loan for {{subordinationPeriod}}&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;term-box&quot;&gt;
       &lt;div class=&quot;term-box-title&quot;&gt;Entity Requirements&lt;/div&gt;
@@ -8924,16 +8924,16 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;SBA loan amount&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sbaLoanAmount}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;SBA loan rate&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sbaLoanRate}} (estimated; subject to lender terms)&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;SBA loan term&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sbaLoanTerm}}&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Intercreditor agreement&lt;/span&gt;&lt;span style=&quot;flex:1;&quot;&gt;Required between SBA lender and seller&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Intercreditor agreement&lt;/span&gt;&lt;span style=&quot;flex:1;&quot;&gt;Required between lender and seller&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; SBA financing is subject to lender underwriting and SBA approval. Forhemit will coordinate lender outreach and submission, but the Seller acknowledges that financing is not guaranteed until the SBA issues a commitment letter.&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 04&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Timeline&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
     &lt;p&gt;The target transaction timeline is 120 days from LOI execution, structured around four gates:&lt;/p&gt;
     &lt;div class=&quot;sl&quot;&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;1.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 1 — Capital Committed (Day 30).&lt;/strong&gt; SBA lender engagement confirmed, trustee and ERISA counsel retained, appraisal firm engaged.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;1.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 1 — Capital Committed (Day 30).&lt;/strong&gt; Lender engagement confirmed, trustee and ERISA counsel retained, appraisal firm engaged.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;2.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 2 — Valuation Confirmed (Day 60).&lt;/strong&gt; QofE and FMV appraisal completed and accepted by trustee. Purchase price confirmed or adjusted.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 3 — Operations Cleared (Day 90).&lt;/strong&gt; Entity conversion complete, ESOP plan document drafted, SBA loan approved, all due diligence items cleared.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 3 — Operations Cleared (Day 90).&lt;/strong&gt; Entity conversion complete, ESOP plan document drafted, Lender loan approved, all due diligence items cleared.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;4.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Gate 4 — Closing (Day 120).&lt;/strong&gt; All documents executed, funds wired, ESOP trust holds 100% of equity.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Target closing date&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{targetClosingDate}}&lt;/span&gt;&lt;/div&gt;
@@ -9188,7 +9188,7 @@ body {
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;1.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Deposit uncashed and applied.&lt;/strong&gt; Your $15,000 pre-flight deposit is processed and credited toward the Engagement Retainer.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;2.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Exclusivity window opens.&lt;/strong&gt; You agree not to solicit or negotiate with other buyers for the specified exclusivity period.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Diligence deepens.&lt;/strong&gt; Forhemit initiates Gate 2 activities including the formal appraisal, QofE engagement, and SBA lender submission.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Diligence deepens.&lt;/strong&gt; Forhemit initiates Gate 2 activities including the formal appraisal, QofE engagement, and lender submission.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;4.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Team is fully engaged.&lt;/strong&gt; Trustee, ERISA counsel, and appraiser begin substantive work on the transaction.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
@@ -9346,7 +9346,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
         &lt;tr&gt;&lt;th&gt;Source&lt;/th&gt;&lt;th style=&quot;text-align:right;&quot;&gt;Amount&lt;/th&gt;&lt;/tr&gt;
       &lt;/thead&gt;
       &lt;tbody&gt;
-        &lt;tr&gt;&lt;td&gt;Senior Debt (Bank / SBA)&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{seniorDebt}}&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;Senior Debt (Bank / Lender)&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{seniorDebt}}&lt;/td&gt;&lt;/tr&gt;
         &lt;tr&gt;&lt;td&gt;Mezzanine Financing&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{mezzanine}}&lt;/td&gt;&lt;/tr&gt;
         &lt;tr&gt;&lt;td&gt;Seller Note&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{sellerNote}}&lt;/td&gt;&lt;/tr&gt;
         &lt;tr&gt;&lt;td&gt;ESOP Equity&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{esopEquity}}&lt;/td&gt;&lt;/tr&gt;
@@ -9374,7 +9374,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 04&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Timeline&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;LOI Execution Date&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{loiDate}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Target Closing Date&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{targetClosing}}&lt;/span&gt;&lt;/div&gt;
-    &lt;p style=&quot;margin-top:0.8rem;&quot;&gt;These dates are indicative. The closing timeline depends on lender underwriting, trustee appraisal, ERISA counsel review, and SBA approval. Forhemit coordinates all parties to maintain the target schedule.&lt;/p&gt;
+    &lt;p style=&quot;margin-top:0.8rem;&quot;&gt;These dates are indicative. The closing timeline depends on lender underwriting, trustee appraisal, ERISA counsel review, and lender approval. Forhemit coordinates all parties to maintain the target schedule.&lt;/p&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;!-- §05 --&gt;
@@ -11090,7 +11090,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 05&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Conflict Disclosure&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
     &lt;p&gt;Counsel represents and warrants that, to the best of its knowledge after reasonable inquiry:&lt;/p&gt;
     &lt;div class=&quot;sl&quot;&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;Counsel has no existing attorney-client relationship with Forhemit Stewardship Management Co., the proposed ESOP trustee, or the proposed SBA lender that would impair Counsel&#x27;s independent advice to the Company.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;Counsel has no existing attorney-client relationship with Forhemit Stewardship Management Co., the proposed ESOP trustee, or the proposed lender that would impair Counsel&#x27;s independent advice to the Company.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;Counsel has no financial interest in the outcome of the ESOP transaction beyond the fees described in this agreement.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;If any conflict of interest arises during the engagement, Counsel will promptly disclose it to the Company and, if necessary, withdraw from the engagement.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -11385,7 +11385,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;p&gt;The selected trustee will serve as the independent fiduciary for the ESOP trust, responsible for the following:&lt;/p&gt;
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Valuation review.&lt;/strong&gt; Evaluate the independent FMV appraisal prepared by the valuation firm. Assess methodology, assumptions, and conclusions. Negotiate price on behalf of the ESOP if the appraisal supports a lower valuation than the proposed purchase price.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Transaction approval.&lt;/strong&gt; Review and approve all material transaction terms, including the purchase agreement, seller note terms, SBA loan terms, and any related-party arrangements. Represent the interests of ESOP participants throughout negotiations.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Transaction approval.&lt;/strong&gt; Review and approve all material transaction terms, including the purchase agreement, seller note terms, lender loan terms, and any related-party arrangements. Represent the interests of ESOP participants throughout negotiations.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Due diligence.&lt;/strong&gt; Conduct independent due diligence on the company&#x27;s financial condition, operations, management, and prospects. Review QofE findings, tax returns, and material contracts.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;D.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Closing participation.&lt;/strong&gt; Execute all trust-related closing documents on behalf of the ESOP. Confirm that all conditions precedent to closing have been satisfied.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;E.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Post-close duties.&lt;/strong&gt; Provide ongoing oversight of the ESOP trust, including annual valuation reviews, distribution policy administration, repurchase obligation monitoring, and compliance with ERISA requirements.&lt;/span&gt;&lt;/div&gt;
@@ -12470,11 +12470,11 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 03&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Seller Proceeds at Closing&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Total consideration&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{totalConsideration}}&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Day 1 cash (SBA proceeds)&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{day1Cash}}&lt;/span&gt;&lt;/div&gt;
+    &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Day 1 cash (Lender proceeds)&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{day1Cash}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note (deferred)&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sellerNoteAmount}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note interest rate&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sellerNoteRate}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Seller note term&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{sellerNoteTerm}}&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; The seller note is subordinated to the SBA loan. Payments begin after the SBA loan is current. The seller receives interest during the subordination period and principal + interest once subordination is released.&lt;/div&gt;
+    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; The seller note is subordinated to the senior loan. Payments begin after the senior loan is current. The seller receives interest during the subordination period and principal + interest once subordination is released.&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 04&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Debt Service Summary&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
@@ -12483,7 +12483,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Total annual debt service&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{totalAnnualDebtService}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;QofE EBITDA (TTM)&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{ebitdaTTM}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Debt service coverage ratio&lt;/label&gt;&lt;span style=&quot;flex:1;font-weight:400;&quot;&gt;{{dscr}}x&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;SBA requirement:&lt;/strong&gt; Minimum 1.25x DSCR. Current pro forma DSCR of {{dscr}}x {{#if dscrAbove125}}meets{{else}}does not meet{{/if}} this threshold.&lt;/div&gt;
+    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Lender requirement:&lt;/strong&gt; Minimum 1.25x DSCR. Current pro forma DSCR of {{dscr}}x {{#if dscrAbove125}}meets{{else}}does not meet{{/if}} this threshold.&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#8212;&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Forhemit Transition Stewardship&lt;/span&gt;&lt;/div&gt;
@@ -12524,7 +12524,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
             <div class="template-card" data-sort="04.13.1" data-phase="4" data-doc-type="letter" data-priority="R" data-preview="SKIP">
               <div class="card-header">
                 <div class="card-sort">04.13.1</div>
-                <div class="card-title">SBA lender outreach brief (one-pager)</div>
+                <div class="card-title">Lender outreach brief (one-pager)</div>
                 <div class="card-badges">
                   <span class="doc-type-badge" style="background:#E65100">letter</span>
                   <span class="priority-badge" style="background:#C62828">Required</span>
@@ -12709,7 +12709,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
 ">
               <div class="card-header">
                 <div class="card-sort">04.14.1</div>
-                <div class="card-title">SBA lender introduction package cover email</div>
+                <div class="card-title">Lender introduction package cover email</div>
                 <div class="card-badges">
                   <span class="doc-type-badge" style="background:#1565C0">email</span>
                   <span class="priority-badge" style="background:#C62828">Required</span>
@@ -13010,7 +13010,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
 ">
               <div class="card-header">
                 <div class="card-sort">04.15.1</div>
-                <div class="card-title">SBA intake form</div>
+                <div class="card-title">Lender intake form</div>
                 <div class="card-badges">
                   <span class="doc-type-badge" style="background:#C62828">form</span>
                   <span class="priority-badge" style="background:#C62828">Required</span>
@@ -13262,7 +13262,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;qa&quot;&gt;3. Do you have experience with entity conversions (LLC/S-Corp to C-Corp) in connection with ESOPs?&lt;/div&gt;
     &lt;div class=&quot;qa&quot;&gt;4. What is your estimated fee range for a transaction of this size and complexity?&lt;/div&gt;
     &lt;div class=&quot;qa&quot;&gt;5. Will you prepare the DOL prohibited transaction exemption if needed?&lt;/div&gt;
-    &lt;div class=&quot;qa&quot;&gt;6. Can you provide the ERISA opinion letter required by the SBA lender?&lt;/div&gt;
+    &lt;div class=&quot;qa&quot;&gt;6. Can you provide the ERISA opinion letter required by the lender?&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;!-- QofE Firm --&gt;
@@ -13733,7 +13733,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Forhemit reviews.&lt;/strong&gt; We review all documents for completeness and flag any gaps within 3 business days.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;QofE preparation.&lt;/strong&gt; The financial documents are provided to the independent appraiser for QofE (Quality of Earnings) analysis.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender package.&lt;/strong&gt; The financial documents are incorporated into the SBA lender package for preliminary indication.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender package.&lt;/strong&gt; The financial documents are incorporated into the Lender package for preliminary indication.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;D.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Trustee package.&lt;/strong&gt; The financial and operational documents are provided to the independent trustee for fiduciary review.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Confidentiality:&lt;/strong&gt; All documents are treated as confidential and shared only with authorized members of the deal team under NDA.&lt;/div&gt;
@@ -15129,7 +15129,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;table class=&quot;calc-table&quot;&gt;
       &lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th class=&quot;amount&quot;&gt;Amount&lt;/th&gt;&lt;/tr&gt;
       &lt;tr&gt;&lt;td&gt;Total purchase price&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{indicativeFMV}}&lt;/td&gt;&lt;/tr&gt;
-      &lt;tr&gt;&lt;td&gt;Day 1 cash (SBA proceeds)&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{day1Cash}}&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Day 1 cash (Lender proceeds)&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{day1Cash}}&lt;/td&gt;&lt;/tr&gt;
       &lt;tr&gt;&lt;td&gt;Seller note (deferred)&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{sellerNoteAmount}}&lt;/td&gt;&lt;/tr&gt;
       &lt;tr&gt;&lt;td&gt;Seller note interest ({{sellerNoteRate}})&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{sellerNoteInterest}}&lt;/td&gt;&lt;/tr&gt;
       &lt;tr&gt;&lt;td&gt;Total consideration&lt;/td&gt;&lt;td class=&quot;amount&quot;&gt;{{totalConsideration}}&lt;/td&gt;&lt;/tr&gt;
@@ -15173,7 +15173,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Annual payment&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{annualPayment}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Total payments&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{totalPayments}}&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Total interest&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{totalInterest}}&lt;/span&gt;&lt;/div&gt;
-    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; The seller note is subordinated to the SBA loan. Payments begin after the SBA loan is current. During subordination, interest accrues but is not paid. Once subordination is released, principal and interest payments begin.&lt;/div&gt;
+    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Note:&lt;/strong&gt; The seller note is subordinated to the senior loan. Payments begin after the senior loan is current. During subordination, interest accrues but is not paid. Once subordination is released, principal and interest payments begin.&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 06&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Next Steps&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
@@ -15181,7 +15181,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;1.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Get a formal appraisal.&lt;/strong&gt; The independent appraiser will determine the actual FMV based on QofE analysis.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;2.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Consult your CPA.&lt;/strong&gt; Have your CPA verify the tax calculations using your actual basis, filing status, and state.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Review the capital stack.&lt;/strong&gt; The final Day 1 cash depends on the SBA loan terms, which are confirmed after lender underwriting.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;3.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Review the capital stack.&lt;/strong&gt; The final Day 1 cash depends on the lender loan terms, which are confirmed after lender underwriting.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Email&lt;/label&gt;&lt;span style=&quot;flex:1;color:#111;&quot;&gt;deals&amp;#64;forhemit.com&lt;/span&gt;&lt;/div&gt;
     &lt;div class=&quot;fr&quot;&gt;&lt;label&gt;Reference&lt;/label&gt;&lt;span style=&quot;flex:1;&quot;&gt;{{ref}}&lt;/span&gt;&lt;/div&gt;
@@ -15315,7 +15315,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
       &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;metric-l&quot;&gt;Payoff Date&lt;/div&gt;&lt;div class=&quot;metric-v&quot;&gt;{{payoffDate}}&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;metric&quot;&gt;&lt;div class=&quot;metric-l&quot;&gt;DSCR&lt;/div&gt;&lt;div class=&quot;metric-v&quot;&gt;{{dscr}}&lt;/div&gt;&lt;/div&gt;
     &lt;/div&gt;
-    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;DSCR note:&lt;/strong&gt; A debt service coverage ratio above 1.25x is generally required by SBA lenders. The DSCR should be calculated against trailing twelve-month cash flow (EBITDA minus owner adjustments).&lt;/div&gt;
+    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;DSCR note:&lt;/strong&gt; A debt service coverage ratio above 1.25x is generally required by lenders. The DSCR should be calculated against trailing twelve-month cash flow (EBITDA minus owner adjustments).&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 03&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Amortization Schedule&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
@@ -15354,7 +15354,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
         &lt;tr&gt;&lt;td&gt;-100 bps&lt;/td&gt;&lt;td&gt;{{rateMinus100}}&lt;/td&gt;&lt;td&gt;{{paymentMinus100}}&lt;/td&gt;&lt;td&gt;{{interestMinus100}}&lt;/td&gt;&lt;td&gt;{{dscrMinus100}}&lt;/td&gt;&lt;/tr&gt;
       &lt;/tbody&gt;
     &lt;/table&gt;
-    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Model assumptions:&lt;/strong&gt; All scenarios assume level amortization over the full term. Actual payments may vary based on rate reset provisions, prepayment activity, or SBA fee adjustments.&lt;/div&gt;
+    &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Model assumptions:&lt;/strong&gt; All scenarios assume level amortization over the full term. Actual payments may vary based on rate reset provisions, prepayment activity, or lender fee adjustments.&lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#8212;&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Forhemit Transition Stewardship&lt;/span&gt;&lt;/div&gt;
@@ -15545,7 +15545,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;p&gt;Key person risk is a primary concern for all parties evaluating an ESOP transition:&lt;/p&gt;
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Trustee fairness assessment.&lt;/strong&gt; The independent trustee must evaluate whether the company can sustain operations and debt service without the seller. Key person concentration increases the risk premium applied to the valuation.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender underwriting.&lt;/strong&gt; SBA lenders assess key person risk as part of credit analysis. Documented retention plans and succession strategies strengthen the loan application.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender underwriting.&lt;/strong&gt; Lenders assess key person risk as part of credit analysis. Documented retention plans and succession strategies strengthen the loan application.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Employee morale post-close.&lt;/strong&gt; ESOP participants need confidence that leadership continuity is assured. Transparent communication about transition plans builds trust.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
     &lt;div class=&quot;co&quot;&gt;&lt;strong&gt;Net effect:&lt;/strong&gt; A well-structured ESOP with documented retention and succession plans actually &lt;em&gt;reduces&lt;/em&gt; key person risk over time by creating ownership alignment and vesting incentives that traditional structures lack.&lt;/div&gt;
@@ -18505,7 +18505,7 @@ body {
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;FMV Adequacy:&lt;/strong&gt; The independent trustee has issued the FMV Adequacy Letter&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;QofE Complete:&lt;/strong&gt; The Quality of Earnings analysis confirms normalized EBITDA&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Purchase Price:&lt;/strong&gt; The appraised value supports the agreed purchase price&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;D.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender Confidence:&lt;/strong&gt; The SBA lender can proceed with underwriting based on confirmed valuation&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;D.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Lender Confidence:&lt;/strong&gt; The lender can proceed with underwriting based on confirmed valuation&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
@@ -19648,7 +19648,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;checklist&quot;&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre1}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Final document review:&lt;/strong&gt; All closing documents reviewed and approved by counsel&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre2}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Wire instructions:&lt;/strong&gt; Verified wire instructions from all parties&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre3}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;SBA commitment:&lt;/strong&gt; SBA commitment letter received and conditions satisfied&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre3}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Lender commitment:&lt;/strong&gt; Lender commitment letter received and conditions satisfied&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre4}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Board resolutions:&lt;/strong&gt; Final board resolutions executed&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre5}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Insurance:&lt;/strong&gt; Updated insurance certificates naming ESOP trust&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if pre6}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Retainer payments:&lt;/strong&gt; ERISA counsel and trustee retainer payments confirmed&lt;/div&gt;&lt;/div&gt;
@@ -19659,14 +19659,14 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;div class=&quot;checklist&quot;&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if day1}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Final call:&lt;/strong&gt; Pre-closing call with all parties at {{morningCallTime}}&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if day2}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Document execution:&lt;/strong&gt; All parties sign closing documents&lt;/div&gt;&lt;/div&gt;
-      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if day3}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;SBA funding:&lt;/strong&gt; SBA lender confirms funding authorization&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if day3}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Lender funding:&lt;/strong&gt; Lender confirms funding authorization&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if day4}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Seller note:&lt;/strong&gt; Seller note documents executed&lt;/div&gt;&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;&lt;/div&gt;
 
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 03&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;Closing Day — Funding&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
     &lt;div class=&quot;checklist&quot;&gt;
-      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if fund1}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Wire initiation:&lt;/strong&gt; SBA lender initiates wire transfer&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if fund1}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Wire initiation:&lt;/strong&gt; Lender initiates wire transfer&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if fund2}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Wire confirmation:&lt;/strong&gt; Seller confirms receipt of funds&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if fund3}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Stock transfer:&lt;/strong&gt; ESOP trust receives stock certificates&lt;/div&gt;&lt;/div&gt;
       &lt;div class=&quot;checklist-item&quot;&gt;&lt;div class=&quot;checklist-box {{#if fund4}}checked{{/if}}&quot;&gt;&lt;/div&gt;&lt;div class=&quot;checklist-content&quot;&gt;&lt;strong&gt;Commission payment:&lt;/strong&gt; Broker commission wire initiated&lt;/div&gt;&lt;/div&gt;
@@ -19811,7 +19811,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
     &lt;p&gt;The closing will proceed in the following order:&lt;/p&gt;
     &lt;div class=&quot;sl&quot;&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;A.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Document execution.&lt;/strong&gt; All parties execute the stock purchase agreement, ESOP trust agreement, and ancillary documents.&lt;/span&gt;&lt;/div&gt;
-      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Wire transfers.&lt;/strong&gt; SBA lender funds, seller note proceeds, and all other consideration are wired per the settlement statement.&lt;/span&gt;&lt;/div&gt;
+      &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;B.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Wire transfers.&lt;/strong&gt; Lender funds, seller note proceeds, and all other consideration are wired per the settlement statement.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;C.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Ownership transfer.&lt;/strong&gt; Stock certificates are delivered to the ESOP trustee. Company governance transitions to the new board.&lt;/span&gt;&lt;/div&gt;
       &lt;div class=&quot;si&quot;&gt;&lt;span class=&quot;si-n&quot;&gt;D.&lt;/span&gt;&lt;span&gt;&lt;strong&gt;Confirmation.&lt;/strong&gt; Forhemit will send a closing confirmation to all parties once funds settle and documents are recorded.&lt;/span&gt;&lt;/div&gt;
     &lt;/div&gt;
@@ -19975,7 +19975,7 @@ body { color: #111; background: #fff; font-family: &#x27;Jost&#x27;, system-ui, 
 
   &lt;!-- §04 --&gt;
   &lt;div class=&quot;sec&quot;&gt;&lt;div class=&quot;sh&quot;&gt;&lt;span class=&quot;sn&quot;&gt;&amp;#167; 04&lt;/span&gt;&lt;span class=&quot;st&quot;&gt;A Personal Note&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;sb&quot;&gt;
-    &lt;p&gt;Completing an ESOP transaction is one of the most complex and consequential decisions a business owner can make. You navigated a 120-day process involving a dozen professionals, four hard-stop gates, SBA underwriting, independent appraisal, and ERISA compliance — and you did it while running your business.&lt;/p&gt;
+    &lt;p&gt;Completing an ESOP transaction is one of the most complex and consequential decisions a business owner can make. You navigated a 120-day process involving a dozen professionals, four hard-stop gates, Lender underwriting, independent appraisal, and ERISA compliance — and you did it while running your business.&lt;/p&gt;
     &lt;p&gt;That deserves recognition. On behalf of the entire Forhemit team, congratulations.&lt;/p&gt;
   &lt;/div&gt;&lt;/div&gt;
 

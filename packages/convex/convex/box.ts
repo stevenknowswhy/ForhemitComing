@@ -13,6 +13,9 @@ import { action, internalAction, mutation, query } from "./_generated/server";
 import { api } from "./_generated/api";
 import { getOrCreateFolder, uploadFile, getRootFolderId } from "./lib/box";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { boxActor, resolveActor } from "./lib/resolveActor";
 
 // Stage folder names — mirror the pipeline
 const STAGE_FOLDERS = [
@@ -25,7 +28,7 @@ const STAGE_FOLDERS = [
 ];
 
 // Map CRM pipeline stages to Box folder names
-const STAGE_TO_FOLDER: Record<string, string> = {
+const STAGE_TO_FOLDER = {
 	"First contact": "01-first-touch",
 	"Intro call": "01-first-touch",
 	"NDA sent": "02-qualification",
@@ -34,10 +37,12 @@ const STAGE_TO_FOLDER: Record<string, string> = {
 	"LOI signed": "04-diligence",
 	Closed: "05-closing",
 	"On hold": "05-closing",
-};
+} as const;
+
+type PipelineStage = keyof typeof STAGE_TO_FOLDER;
 
 function getStageFolder(stage: string): string {
-	return STAGE_TO_FOLDER[stage] || "03-engagement";
+	return STAGE_TO_FOLDER[stage as PipelineStage] ?? "03-engagement";
 }
 
 // ============================================
@@ -255,9 +260,26 @@ export const setCompanyBoxFolderId = mutation({
 		boxFolderId: v.string(),
 	},
 	handler: async (ctx, args) => {
+		await requireAuth(ctx);
 		await ctx.db.patch(args.companyId, {
 			boxFolderId: args.boxFolderId,
 			updatedAt: Date.now(),
+		});
+
+		// Log: Box folder provisioned
+		const actor = await resolveActor(ctx);
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.BOX_FOLDER_PROVISIONED,
+			category: "box",
+			summary: `Box folder provisioned for deal`,
+			clientSummary: `Your deal document folder has been created`,
+			source: "admin_ui",
+			visibility: "external",
+			companyId: args.companyId,
+			scopeType: "company",
+			scopeId: args.companyId,
+			metadata: { boxFolderId: args.boxFolderId },
 		});
 	},
 });
@@ -269,6 +291,7 @@ export const updateCompanySignStatus = mutation({
 		boxSignStatus: v.string(),
 	},
 	handler: async (ctx, args) => {
+		await requireAuth(ctx);
 		await ctx.db.patch(args.companyId, {
 			boxSignRequestId: args.boxSignRequestId,
 			boxSignStatus: args.boxSignStatus,
@@ -430,16 +453,18 @@ export const handleBoxWebhook = mutation({
 		}
 
 		// Map Box event to task status
-		const statusMap: Record<string, string> = {
+		const STATUS_MAP = {
 			"SIGN_REQUEST.SENT": "sent",
 			"SIGN_REQUEST.VIEWED": "opened",
 			"SIGN_REQUEST.SIGNED": "received",
 			"SIGN_REQUEST.COMPLETED": "received",
 			"SIGN_REQUEST.DECLINED": "skipped",
 			"SIGN_REQUEST.EXPIRED": "overdue",
-		};
+		} as const;
 
-		const newStatus = statusMap[args.eventType] || task.status;
+		type BoxEventType = keyof typeof STATUS_MAP;
+		const mappedStatus = STATUS_MAP[args.eventType as BoxEventType];
+		const newStatus = mappedStatus ?? task.status;
 		const updates: Record<string, unknown> = {
 			boxSignStatus:
 				args.signStatus || args.eventType.split(".")[1]?.toLowerCase(),
@@ -471,19 +496,20 @@ export const handleBoxWebhook = mutation({
 		});
 
 		// SOC 2 audit log
-		const auditActionMap: Record<string, string> = {
-			"SIGN_REQUEST.SENT": "shared",
-			"SIGN_REQUEST.COMPLETED": "signed",
-			"SIGN_REQUEST.DECLINED": "declined",
-			"SIGN_REQUEST.EXPIRED": "expired",
+		const AUDIT_ACTION_MAP = {
+			"SIGN_REQUEST.SENT": "shared" as const,
+			"SIGN_REQUEST.COMPLETED": "signed" as const,
+			"SIGN_REQUEST.DECLINED": "declined" as const,
+			"SIGN_REQUEST.EXPIRED": "expired" as const,
 		};
-		const auditAction = auditActionMap[args.eventType];
+		const auditAction =
+			AUDIT_ACTION_MAP[args.eventType as keyof typeof AUDIT_ACTION_MAP];
 		if (auditAction) {
 			await ctx.db.insert("documentAudit", {
 				companyId: task.companyId,
 				taskId: task._id,
 				documentType: "document",
-				action: auditAction as "shared" | "signed" | "declined" | "expired",
+				action: auditAction,
 				actor: "box-webhook",
 				metadata: JSON.stringify({
 					signRequestId: args.signRequestId,
@@ -496,6 +522,65 @@ export const handleBoxWebhook = mutation({
 		// Journal entry for signature events
 		const signatureEvents = ["SIGN_REQUEST.SIGNED", "SIGN_REQUEST.COMPLETED"];
 		const issueEvents = ["SIGN_REQUEST.DECLINED", "SIGN_REQUEST.EXPIRED"];
+
+		// Business log for sign events
+		const boxActorObj = boxActor();
+		if (signatureEvents.includes(args.eventType)) {
+			await logEvent(ctx, {
+				...boxActorObj,
+				eventType: LOG_ACTIONS.DOC_SIGNED,
+				category: "document",
+				summary: `Document signed via Box: ${args.eventType}`,
+				clientSummary: `Your document has been signed`,
+				source: "webhook",
+				visibility: "external",
+				companyId: task.companyId,
+				scopeType: "company",
+				scopeId: task.companyId,
+				idempotencyKey: `box-sign-${args.signRequestId}-${args.eventType}`,
+				metadata: {
+					signRequestId: args.signRequestId,
+					eventType: args.eventType,
+				},
+			});
+		} else if (args.eventType === "SIGN_REQUEST.DECLINED") {
+			await logEvent(ctx, {
+				...boxActorObj,
+				eventType: LOG_ACTIONS.DOC_DECLINED,
+				category: "document",
+				summary: `Box sign event: ${args.eventType}`,
+				clientSummary: `A document was declined`,
+				source: "webhook",
+				visibility: "external",
+				companyId: task.companyId,
+				scopeType: "company",
+				scopeId: task.companyId,
+				severity: "warning",
+				idempotencyKey: `box-sign-${args.signRequestId}-${args.eventType}`,
+				metadata: {
+					signRequestId: args.signRequestId,
+					eventType: args.eventType,
+				},
+			});
+		} else if (issueEvents.includes(args.eventType)) {
+			await logEvent(ctx, {
+				...boxActorObj,
+				eventType: LOG_ACTIONS.DOC_SIGNED,
+				category: "document",
+				summary: `Box sign event: ${args.eventType}`,
+				source: "webhook",
+				visibility: "internal",
+				companyId: task.companyId,
+				scopeType: "company",
+				scopeId: task.companyId,
+				severity: "warning",
+				idempotencyKey: `box-sign-${args.signRequestId}-${args.eventType}`,
+				metadata: {
+					signRequestId: args.signRequestId,
+					eventType: args.eventType,
+				},
+			});
+		}
 
 		if (
 			signatureEvents.includes(args.eventType) ||

@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { internalQuery, mutation, query } from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
 
 // ============================================
@@ -10,6 +10,17 @@ export const get = query({
 	args: { id: v.id("clientJournals") },
 	handler: async (ctx, args) => {
 		await requireAuth(ctx);
+		return await ctx.db.get(args.id);
+	},
+});
+
+// ============================================
+// internalGet — fetch a single journal by ID (no auth, for internal actions/crons)
+// ============================================
+
+export const internalGet = internalQuery({
+	args: { id: v.id("clientJournals") },
+	handler: async (ctx, args) => {
 		return await ctx.db.get(args.id);
 	},
 });
@@ -53,6 +64,15 @@ export const listByStatus = query({
 export const listActive = query({
 	handler: async (ctx) => {
 		await requireAuth(ctx);
+		return await ctx.db
+			.query("clientJournals")
+			.withIndex("byStatus", (q) => q.eq("status", "active"))
+			.collect();
+	},
+});
+
+export const internalListActive = internalQuery({
+	handler: async (ctx) => {
 		return await ctx.db
 			.query("clientJournals")
 			.withIndex("byStatus", (q) => q.eq("status", "active"))

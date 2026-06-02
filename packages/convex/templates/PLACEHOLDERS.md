@@ -47,7 +47,8 @@ All templates use Mustache-style `{{variableName}}` placeholders. Conditional bl
 |-------------|-------------|---------|
 | `{{sellerName}}` | Seller full name | Seller-facing docs |
 | `{{sellerTitle}}` | Seller title/role | Seller-facing docs |
-| `{{brokerName}}` | Broker full name | Broker-facing docs |
+| `{{brokerFirstName}}` | Broker first name | Broker-facing docs |
+| `{{brokerLastName}}` | Broker last name | Broker-facing docs |
 | `{{brokerFirm}}` | Brokerage firm name | Broker-facing docs |
 | `{{lenderName}}` | Lender contact name | Lender-facing docs |
 | `{{lenderContact}}` | Lender contact name | Lender updates |

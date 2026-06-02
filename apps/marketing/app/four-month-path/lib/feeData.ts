@@ -127,11 +127,11 @@ export const FEE_PHASES: FeePhase[] = [
           "Sets up participant accounts, vesting schedules, Form 5500 filing, and repurchase obligation modeling. Ongoing annual TPA cost of $20k–$40k begins in Year 2.",
       },
       {
-        name: "Other: financing fees, SBA packaging, escrow, misc.",
+        name: "Other: financing fees, lender packaging, escrow, misc.",
         range: "$10k – $50k",
         tag: "varies",
         note:
-          "Bank commitment fees, legal opinions, SBA 7(a) packaging (if used), escrow, and miscellaneous closing costs. SBA financing adds minor packaging fees but eliminates the equity injection requirement common in conventional loans.",
+          "Bank commitment fees, legal opinions, lender packaging (if SBA 7(a) used), escrow, and miscellaneous closing costs. lender financing adds minor packaging fees but eliminates the equity injection requirement common in conventional loans.",
       },
     ],
   },

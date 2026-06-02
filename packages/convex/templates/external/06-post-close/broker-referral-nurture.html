@@ -61,14 +61,14 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="dst">Closed Deal Summary &amp; Referral Program</div>
 
   <div class="cvg">
-    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerFirstName}} {{brokerLastName}}</div></div>
     <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
     <div class="cvc"><div class="cvc-l">Deal Reference</div><div class="cvc-v">{{dealRef}}</div></div>
     <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
   </div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Closed Deal Summary</span></div><div class="sb">
-    <p>Dear {{brokerName}},</p>
+    <p>Dear {{brokerFirstName}} {{brokerLastName}},</p>
     <p>We are pleased to share that the {{industry}} transaction you referred has successfully closed. The company is now 100% employee-owned through an ESOP, and the seller has achieved their financial and legacy objectives.</p>
     <div class="sl">
       <div class="si"><span class="si-n">A.</span><span><strong>Industry:</strong> {{industry}}</span></div>

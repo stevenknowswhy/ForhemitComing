@@ -11,7 +11,7 @@ export interface FeeBreakdown {
   totalFee: number;
   retainer: number;      // 20% — due at engagement signing
   validation: number;    // 15% — due at Gate 1 (trustee FMV letter + LOI)
-  commitment: number;    // 15% — due at Gate 2 (SBA commitment letter)
+  commitment: number;    // 15% — due at Gate 2 (Lender commitment letter)
   success: number;       // 50% — due at closing
   stewardshipAnnual: number;   // 2.5% of EBITDA
   stewardshipQuarterly: number; // annual / 4

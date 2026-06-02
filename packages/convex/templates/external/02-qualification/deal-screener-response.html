@@ -128,7 +128,7 @@ body {
   <div class="dst">Qualification Assessment</div>
 
   <div class="cvg">
-    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerFirstName}} {{brokerLastName}}</div></div>
     <div class="cvc"><div class="cvc-l">Firm</div><div class="cvc-v">{{brokerFirm}}</div></div>
     <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
     <div class="cvc"><div class="cvc-l">Response Date</div><div class="cvc-v">{{responseDate}}</div></div>
@@ -136,7 +136,7 @@ body {
 
   <!-- §01 -->
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Assessment Result</span></div><div class="sb">
-    <p>Dear {{brokerName}},</p>
+    <p>Dear {{brokerFirstName}} {{brokerLastName}},</p>
     <p>Thank you for submitting the listing for {{companyName}}. We have completed our initial qualification assessment based on the information provided.</p>
 
     {{#if fitsCriteria}}

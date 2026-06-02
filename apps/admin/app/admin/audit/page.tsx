@@ -1,162 +1,191 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-import { Edit2, Trash2, FileText } from "lucide-react";
+import { Activity, Users, Eye, Link2 } from "lucide-react";
 import "../admin.css";
+import AllActivityTab from "./_components/AllActivityTab";
+import TeamTab from "./_components/TeamTab";
+import ClientTab from "./_components/ClientTab";
+import BoxLinkPanel from "./_components/BoxLinkPanel";
+import type { Id } from "@/convex/_generated/dataModel";
 
-interface AuditLog {
-  _id: string;
-  _creationTime: number;
-  action: "create" | "update" | "delete";
-  entityType: string;
-  entityId: string;
-  timestamp: number;
-  changes?: Array<{
-    field: string;
-    oldValue: string;
-    newValue: string;
-  }>;
-}
+type TabKey = "all" | "team" | "client" | "box";
 
-interface AuditStats {
-  total: number;
-  byAction: {
-    create: number;
-    update: number;
-    delete: number;
-  };
-}
+const TABS: { key: TabKey; label: string; icon: typeof Activity }[] = [
+	{ key: "all", label: "All Activity", icon: Activity },
+	{ key: "team", label: "Team", icon: Users },
+	{ key: "client", label: "Client Preview", icon: Eye },
+	{ key: "box", label: "Box Links", icon: Link2 },
+];
 
 export default function AuditPage() {
-  const auditLogs = useQuery(api.auditLogs?.list, { limit: 100 });
-  const auditStats = useQuery(api.auditLogs?.getStats, {});
+	const [activeTab, setActiveTab] = useState<TabKey>("all");
+	const [boxCompanyId, setBoxCompanyId] = useState<Id<"crmCompanies"> | null>(
+		null,
+	);
 
-  const formatDate = (timestamp: number) => {
-    return new Date(timestamp).toLocaleString("en-US", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
+	const stats = useQuery(api.businessLog.getStats);
+	const companies = useQuery(api.crmCompanies.list, {});
 
-  const getActionIcon = (action: string) => {
-    switch (action) {
-      case "create":
-        return <FileText size={14} style={{ color: "var(--color-success)" }} />;
-      case "update":
-        return <Edit2 size={14} style={{ color: "var(--color-info)" }} />;
-      case "delete":
-        return <Trash2 size={14} style={{ color: "var(--color-error)" }} />;
-      default:
-        return null;
-    }
-  };
+	return (
+		<div className="admin-page-container">
+			{/* Header */}
+			<div className="admin-page-header">
+				<h1 className="admin-page-title">Insights</h1>
+				<p className="admin-page-subtitle">
+					Unified activity feed across all deals, tasks, and documents
+				</p>
+			</div>
 
-  const getEntityTypeLabel = (type: string) => {
-    const labels: Record<string, string> = {
-      contactSubmission: "Contact",
-      jobApplication: "Application",
-      earlyAccessSignup: "Early Access",
-    };
-    return labels[type] || type;
-  };
+			{/* Stats cards */}
+			{stats && (
+				<div
+					style={{
+						display: "grid",
+						gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
+						gap: "1rem",
+						marginBottom: "2rem",
+					}}
+				>
+					<StatCard
+						label="Total Events"
+						value={stats.total}
+						color="var(--text-primary)"
+					/>
+					<StatCard
+						label="Today"
+						value={stats.today}
+						color="var(--color-brand)"
+					/>
+					<StatCard
+						label="Warnings"
+						value={stats.warnings}
+						color="var(--color-warning)"
+					/>
+					<StatCard
+						label="Critical"
+						value={stats.criticals}
+						color="var(--color-error)"
+					/>
+				</div>
+			)}
 
-  return (
-    <div className="admin-page-container">
-      <div className="admin-page-header">
-        <h1 className="admin-page-title">Audit Log</h1>
-        <p className="admin-page-subtitle">
-          Track all changes to submissions and applications
-        </p>
-      </div>
+			{/* Tabs */}
+			<div className="admin-tabs">
+				{TABS.map((tab) => (
+					<button
+						key={tab.key}
+						className={`admin-tab ${activeTab === tab.key ? "active" : ""}`}
+						onClick={() => setActiveTab(tab.key)}
+					>
+						<tab.icon size={14} />
+						{tab.label}
+					</button>
+				))}
+			</div>
 
-      {!auditLogs ? (
-        <div className="admin-loading">Loading audit logs...</div>
-      ) : (
-        <>
-          {auditStats && (
-            <div className="admin-audit-stats">
-              <div className="admin-audit-stat">
-                <span className="admin-audit-stat-value">{auditStats.total}</span>
-                <span className="admin-audit-stat-label">Total Actions</span>
-              </div>
-              <div className="admin-audit-stat">
-                <span
-                  className="admin-audit-stat-value"
-                  style={{ color: "var(--color-success)" }}
-                >
-                  {auditStats.byAction.create}
-                </span>
-                <span className="admin-audit-stat-label">Created</span>
-              </div>
-              <div className="admin-audit-stat">
-                <span
-                  className="admin-audit-stat-value"
-                  style={{ color: "var(--color-info)" }}
-                >
-                  {auditStats.byAction.update}
-                </span>
-                <span className="admin-audit-stat-label">Updated</span>
-              </div>
-              <div className="admin-audit-stat">
-                <span
-                  className="admin-audit-stat-value"
-                  style={{ color: "var(--color-error)" }}
-                >
-                  {auditStats.byAction.delete}
-                </span>
-                <span className="admin-audit-stat-label">Deleted</span>
-              </div>
-            </div>
-          )}
+			{/* Tab content */}
+			<div className="admin-content">
+				{activeTab === "all" && <AllActivityTab />}
+				{activeTab === "team" && <TeamTab />}
+				{activeTab === "client" && <ClientTab />}
+				{activeTab === "box" && (
+					<div>
+						{/* Company selector for Box panel */}
+						<div
+							style={{
+								display: "flex",
+								gap: "0.75rem",
+								marginBottom: "1.5rem",
+							}}
+						>
+							<select
+								className="filter-select"
+								value={boxCompanyId ?? ""}
+								onChange={(e) =>
+									setBoxCompanyId(
+										(e.target.value || null) as Id<"crmCompanies"> | null,
+									)
+								}
+							>
+								<option value="">Select a company...</option>
+								{companies?.map((c: { _id: string; name: string }) => (
+									<option key={c._id} value={c._id}>
+										{c.name}
+									</option>
+								))}
+							</select>
+						</div>
 
-          <div className="admin-audit-list">
-            {auditLogs.length === 0 ? (
-              <div className="admin-empty-state">No audit logs found</div>
-            ) : (
-              (auditLogs as AuditLog[]).map((log) => (
-                <div key={log._id} className="admin-audit-item">
-                  <div className="admin-audit-header">
-                    <div className="admin-audit-action">
-                      {getActionIcon(log.action)}
-                      <span className={`admin-action-${log.action}`}>
-                        {log.action}
-                      </span>
-                    </div>
-                    <span className="admin-audit-entity">
-                      {getEntityTypeLabel(log.entityType)}
-                    </span>
-                    <span className="admin-audit-time">
-                      {formatDate(log.timestamp)}
-                    </span>
-                  </div>
-                  {log.changes && log.changes.length > 0 && (
-                    <div className="admin-audit-changes">
-                      {log.changes.map((change, idx) => (
-                        <div key={idx} className="admin-audit-change">
-                          <span className="admin-audit-field">
-                            {change.field}:
-                          </span>
-                          <span className="admin-audit-old">
-                            {change.oldValue || "(empty)"}
-                          </span>
-                          <span className="admin-audit-arrow">→</span>
-                          <span className="admin-audit-new">
-                            {change.newValue || "(empty)"}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))
-            )}
-          </div>
-        </>
-      )}
-    </div>
-  );
+						{boxCompanyId ? (
+							<BoxLinkPanel
+								companyId={boxCompanyId}
+								companyName={
+									companies?.find(
+										(c: { _id: string }) => c._id === boxCompanyId,
+									)?.name ?? "Unknown"
+								}
+							/>
+						) : (
+							<div className="admin-empty-state">
+								Select a company to manage Box embed links
+							</div>
+						)}
+					</div>
+				)}
+			</div>
+		</div>
+	);
+}
+
+// ── Stat card component ──────────────────────────────────
+
+function StatCard({
+	label,
+	value,
+	color,
+}: {
+	label: string;
+	value: number;
+	color: string;
+}) {
+	return (
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				gap: "0.25rem",
+				padding: "1rem 1.25rem",
+				background: "var(--bg-glass)",
+				border: "1px solid var(--border-subtle)",
+				borderRadius: "8px",
+			}}
+		>
+			<span
+				style={{
+					fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+					fontSize: "2rem",
+					fontWeight: 400,
+					color,
+					lineHeight: 1,
+				}}
+			>
+				{value.toLocaleString()}
+			</span>
+			<span
+				style={{
+					fontFamily: "var(--font-dm-mono), 'DM Mono', monospace",
+					fontSize: "0.65rem",
+					color: "var(--text-secondary)",
+					textTransform: "uppercase",
+					letterSpacing: "0.05em",
+				}}
+			>
+				{label}
+			</span>
+		</div>
+	);
 }

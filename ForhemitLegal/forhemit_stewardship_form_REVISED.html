@@ -411,11 +411,11 @@ body { font-family: var(--ff-b); color: var(--ink); background: var(--linen); mi
         </tbody>
       </table>
 
-      <div class="field-warn">The Stewardship Fee is paid from Company operating cash flow. It is not paid from ESOP trust assets or SBA loan proceeds. It is disclosed to the SBA lender as a recurring operating expense in the underwriting DSCR model prior to close.</div>
+      <div class="field-warn">The Stewardship Fee is paid from Company operating cash flow. It is not paid from ESOP trust assets or lender loan proceeds. It is disclosed to the lender as a recurring operating expense in the underwriting DSCR model prior to close.</div>
       <div class="ack-block">
         <label class="ack-check">
           <input type="checkbox" id="ack_fee" onchange="checkSection('sec3')">
-          <span class="ack-text">I confirm the EBITDA baseline entered above. The annual Stewardship Fee of <strong id="ack_fee_val">2.5% of the stated EBITDA</strong> is payable by the Company from operating cash flow, disclosed to the SBA lender, and does not reduce seller proceeds or affect ESOP trust assets.</span>
+          <span class="ack-text">I confirm the EBITDA baseline entered above. The annual Stewardship Fee of <strong id="ack_fee_val">2.5% of the stated EBITDA</strong> is payable by the Company from operating cash flow, disclosed to the lender, and does not reduce seller proceeds or affect ESOP trust assets.</span>
         </label>
       </div>
     </div>
@@ -495,11 +495,11 @@ body { font-family: var(--ff-b); color: var(--ink); background: var(--linen); mi
     <div class="section-body">
       <div class="field-grid">
         <div class="field">
-          <label>SBA Lender Name <span class="req">*</span></label>
+          <label>Lender Name <span class="req">*</span></label>
           <input type="text" id="lender_name" placeholder="Live Oak Bank" oninput="checkSection('sec5')">
         </div>
         <div class="field">
-          <label>SBA Lender Relationship Manager</label>
+          <label>Lender Relationship Manager</label>
           <input type="text" id="lender_rm" placeholder="Name, title">
         </div>
         <div class="field">
@@ -514,7 +514,7 @@ body { font-family: var(--ff-b); color: var(--ink); background: var(--linen); mi
       <div class="ack-block">
         <label class="ack-check">
           <input type="checkbox" id="ack_disclosure" onchange="checkSection('sec5')">
-          <span class="ack-text">I confirm that this Agreement <strong>will be provided in full to the SBA lender and ESOP trustee</strong> as a disclosed document prior to the Closing Date, and that the Stewardship Fee is reflected in the lender's DSCR underwriting model. The Section 408(b)(2) disclosure will be delivered to the trustee as a separate instrument before execution.</span>
+          <span class="ack-text">I confirm that this Agreement <strong>will be provided in full to the lender and ESOP trustee</strong> as a disclosed document prior to the Closing Date, and that the Stewardship Fee is reflected in the lender's DSCR underwriting model. The Section 408(b)(2) disclosure will be delivered to the trustee as a separate instrument before execution.</span>
         </label>
       </div>
       <div class="field-note">Forhemit is a service provider to the Company — not a fiduciary of the ESOP plan. The trustee acknowledgment signature on this document confirms receipt of disclosure only; the trustee assumes no obligations under this Agreement.</div>
@@ -582,7 +582,7 @@ body { font-family: var(--ff-b); color: var(--ink); background: var(--linen); mi
             <option>10 business days after Company non-response</option>
             <option>Immediate — concurrent with Company notification</option>
           </select>
-          <div class="field-hint">When Forhemit may notify the SBA lender if a material risk is identified and the Company does not respond.</div>
+          <div class="field-hint">When Forhemit may notify the lender if a material risk is identified and the Company does not respond.</div>
         </div>
         <div class="field">
           <label>Termination for Convenience Notice</label>
@@ -1072,7 +1072,7 @@ function generatePDF(d) {
   const coverFields = [
     ['Company', d.company], ['Engagement Reference', d.eng_ref],
     ['Closing Date', d.closing_date], ['Agreement Date', d.agreement_date],
-    ['Stewardship Term', d.term + ' months'], ['SBA Lender', d.lender_name],
+    ['Stewardship Term', d.term + ' months'], ['Lender', d.lender_name],
     ['ESOP Trustee', d.trustee_name],
   ];
   coverFields.forEach(([label,value]) => {
@@ -1083,7 +1083,7 @@ function generatePDF(d) {
   });
   rule(y+10); y+=30;
   pdf.setFontSize(8); pdf.setFont('helvetica','italic'); pdf.setTextColor(...MUTED);
-  pdf.text('This Agreement is disclosed to the SBA lender and ESOP trustee as a disclosed operating expense.', W/2, y+10, {align:'center', maxWidth:CW});
+  pdf.text('This Agreement is disclosed to the lender and ESOP trustee as a disclosed operating expense.', W/2, y+10, {align:'center', maxWidth:CW});
   pdf.text('Forhemit Transition Stewardship  |  forhemit.com  |  deals@forhemit.com', W/2, 720, {align:'center'});
 
   // Content
@@ -1095,7 +1095,7 @@ function generatePDF(d) {
   pdf.text('ARTICLE 1 — PARTIES AND RELATIONSHIP', ML, y); y+=6;
   rule(y, BRASS, 1); y+=14;
   block(`This Transition Stewardship Agreement is entered into as of ${d.agreement_date} between Forhemit Transition Stewardship, a California public benefit corporation ("Forhemit"), and ${d.company} ("Company"). The Company completed a sale to an ESOP on ${d.closing_date}.`, {after:10});
-  block(`Forhemit is an independent contractor service provider to the Company. Forhemit is NOT: (a) a fiduciary of the ESOP benefit plan; (b) an employee, agent, or manager of the Company; (c) a party to the SBA loan; or (d) responsible for the Company's operations.`, {after:10});
+  block(`Forhemit is an independent contractor service provider to the Company. Forhemit is NOT: (a) a fiduciary of the ESOP benefit plan; (b) an employee, agent, or manager of the Company; (c) a party to the financing; or (d) responsible for the Company's operations.`, {after:10});
 
   // Article 2 - Term
   checkY(60); y+=20;
@@ -1113,7 +1113,7 @@ function generatePDF(d) {
   block(`Annual Fee: 2.5% of QofE Adjusted EBITDA of ${d.ebitda} = ${d.annual_fee} annually (${d.quarterly_fee}/quarter).`, {after:8});
   block(`Fee Schedule: Months 1–6: ${d.t1_fee} (60%) | Months 7–12: ${d.t2_fee} (20%) | Months 13–18: ${d.t3_fee} (10%) | Months 19–24: ${d.t4_fee} (10%).`, {after:8});
   block(`Payment Terms: Due within 30 days of invoice. Late payments accrue interest at 1.5% per month. Forhemit may suspend services for non-payment after 30 days.`, {after:8});
-  block(`Fee Source: Paid from Company operating cash flow. Not paid from ESOP trust assets or SBA loan proceeds.`, {after:8});
+  block(`Fee Source: Paid from Company operating cash flow. Not paid from ESOP trust assets or lender loan proceeds.`, {after:8});
 
   // Article 4 - Service Scope
   checkY(80); y+=20;
@@ -1150,10 +1150,10 @@ function generatePDF(d) {
   pdf.setFontSize(11); pdf.setFont('helvetica','bold'); pdf.setTextColor(...NAVY);
   pdf.text('ARTICLE 7 — LENDER & TRUSTEE DISCLOSURE', ML, y); y+=6;
   rule(y, BRASS, 1); y+=14;
-  block(`SBA Lender: ${d.lender_name}${d.lender_rm ? ' (RM: ' + d.lender_rm + ')' : ''}.`, {after:8});
+  block(`Lender: ${d.lender_name}${d.lender_rm ? ' (RM: ' + d.lender_rm + ')' : ''}.`, {after:8});
   block(`ESOP Trustee: ${d.trustee_name}${d.trustee_contact ? ' (' + d.trustee_contact + ')' : ''}.`, {after:8});
   block(`ERISA Status: Forhemit is not a fiduciary within the meaning of ERISA Section 3(21) with respect to the ESOP or its assets.`, {after:8});
-  block(`Material Risk (for lender notification): (a) DSCR below 1.25x for two consecutive months; (b) actual or projected covenant breach; (c) loss of key person without qualified successor; or (d) condition that could result in SBA loan acceleration.`, {after:8});
+  block(`Material Risk (for lender notification): (a) DSCR below 1.25x for two consecutive months; (b) actual or projected covenant breach; (c) loss of key person without qualified successor; or (d) condition that could result in lender loan acceleration.`, {after:8});
 
   // Article 8 - Termination
   checkY(100); y+=20;

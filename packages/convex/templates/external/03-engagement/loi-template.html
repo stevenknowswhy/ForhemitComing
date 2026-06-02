@@ -82,9 +82,9 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
     </div>
     <div class="term-box">
       <div class="term-box-title">Consideration Mix</div>
-      <div class="fr"><label>Day 1 cash</label><span style="flex:1;">{{day1Cash}} (SBA 7(a) loan proceeds)</span></div>
+      <div class="fr"><label>Day 1 cash</label><span style="flex:1;">{{day1Cash}} (lender loan proceeds)</span></div>
       <div class="fr"><label>Seller note</label><span style="flex:1;">{{sellerNoteAmount}} at {{sellerNoteRate}}, {{sellerNoteTerm}} term</span></div>
-      <div class="fr"><label>Seller note subordination</span><span style="flex:1;">Fully subordinated to SBA loan for {{subordinationPeriod}}</span></div>
+      <div class="fr"><label>Seller note subordination</span><span style="flex:1;">Fully subordinated to senior loan for {{subordinationPeriod}}</span></div>
     </div>
     <div class="term-box">
       <div class="term-box-title">Entity Requirements</div>
@@ -95,21 +95,21 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Financing</span></div><div class="sb">
-    <p>The transaction will be financed through a combination of SBA 7(a) loan proceeds and a subordinated seller note:</p>
-    <div class="fr"><label>SBA lender</label><span style="flex:1;">{{sbaLenderName}} (to be confirmed during underwriting)</span></div>
-    <div class="fr"><label>SBA loan amount</label><span style="flex:1;">{{sbaLoanAmount}}</span></div>
-    <div class="fr"><label>SBA loan rate</label><span style="flex:1;">{{sbaLoanRate}} (estimated; subject to lender terms)</span></div>
-    <div class="fr"><label>SBA loan term</label><span style="flex:1;">{{sbaLoanTerm}}</span></div>
-    <div class="fr"><label>Intercreditor agreement</span><span style="flex:1;">Required between SBA lender and seller</span></div>
-    <div class="co"><strong>Note:</strong> SBA financing is subject to lender underwriting and SBA approval. Forhemit will coordinate lender outreach and submission, but the Seller acknowledges that financing is not guaranteed until the SBA issues a commitment letter.</div>
+    <p>The transaction will be financed through a combination of lender loan proceeds and a subordinated seller note:</p>
+    <div class="fr"><label>Lender</label><span style="flex:1;">{{sbaLenderName}} (to be confirmed during underwriting)</span></div>
+    <div class="fr"><label>Loan amount</label><span style="flex:1;">{{sbaLoanAmount}}</span></div>
+    <div class="fr"><label>Loan rate</label><span style="flex:1;">{{sbaLoanRate}} (estimated; subject to lender terms)</span></div>
+    <div class="fr"><label>Loan term</label><span style="flex:1;">{{sbaLoanTerm}}</span></div>
+    <div class="fr"><label>Intercreditor agreement</span><span style="flex:1;">Required between lender and seller</span></div>
+    <div class="co"><strong>Note:</strong> Lender financing is subject to lender underwriting and approval. Forhemit will coordinate lender outreach and submission, but the Seller acknowledges that financing is not guaranteed until the lender issues a commitment letter.</div>
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Timeline</span></div><div class="sb">
     <p>The target transaction timeline is 120 days from LOI execution, structured around four gates:</p>
     <div class="sl">
-      <div class="si"><span class="si-n">1.</span><span><strong>Gate 1 — Capital Committed (Day 30).</strong> SBA lender engagement confirmed, trustee and ERISA counsel retained, appraisal firm engaged.</span></div>
+      <div class="si"><span class="si-n">1.</span><span><strong>Gate 1 — Capital Committed (Day 30).</strong> Lender engagement confirmed, trustee and ERISA counsel retained, appraisal firm engaged.</span></div>
       <div class="si"><span class="si-n">2.</span><span><strong>Gate 2 — Valuation Confirmed (Day 60).</strong> QofE and FMV appraisal completed and accepted by trustee. Purchase price confirmed or adjusted.</span></div>
-      <div class="si"><span class="si-n">3.</span><span><strong>Gate 3 — Operations Cleared (Day 90).</strong> Entity conversion complete, ESOP plan document drafted, SBA loan approved, all due diligence items cleared.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Gate 3 — Operations Cleared (Day 90).</strong> Entity conversion complete, ESOP plan document drafted, Lender loan approved, all due diligence items cleared.</span></div>
       <div class="si"><span class="si-n">4.</span><span><strong>Gate 4 — Closing (Day 120).</strong> All documents executed, funds wired, ESOP trust holds 100% of equity.</span></div>
     </div>
     <div class="fr"><label>Target closing date</label><span style="flex:1;">{{targetClosingDate}}</span></div>

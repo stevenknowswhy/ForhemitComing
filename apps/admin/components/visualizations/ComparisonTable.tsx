@@ -7,7 +7,7 @@ const rows: ComparisonRow[] = [
   { label: "Broker Commission", traditional: "Standard Fee (Paid at Close)", forhemit: "Standard Fee (Paid at Close)" },
   { label: "Transaction Timeline", traditional: "12 – 24 Months (High uncertainty)", forhemit: "90 – 120 Days (Pre-underwritten)" },
   { label: "Purchase Price", traditional: "Subject to aggressive negotiation", forhemit: "100% of Independent Fair Market Value" },
-  { label: "Capital Stack", traditional: "Buyer Cash + Bank Debt", forhemit: "SBA 7(a) Senior Debt (up to $5M) + Seller Note" },
+  { label: "Capital Stack", traditional: "Buyer Cash + Bank Debt", forhemit: "Lender Senior Debt (up to $5M) + Seller Note" },
   { label: "Tax Advantages", traditional: "Standard Capital Gains", forhemit: "Potential $0 Cap Gains (Sec. 1042 Rollover)" },
   { label: "Employee Outcome", traditional: "High risk of layoffs", forhemit: "100% Employee Ownership; Jobs preserved" },
 ];

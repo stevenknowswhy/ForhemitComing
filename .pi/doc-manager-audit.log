@@ -1,0 +1,40 @@
+{"ts":"2026-05-26T01:58:48-07:00","action":"RUN_START","run_id":"run-20260526-015848","scan_dirs":"docs/,./README.md","first_run":true}
+{"ts":"2026-05-26T01:58:48-07:00","action":"STATE_FILE_CREATED","run_id":"run-20260526-015848","first_run_complete":false}
+{"ts":"2026-05-26T01:58:48-07:00","action":"GOD_FILE_CREATED","path":"docs/GOD.md","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/ADR-001-turborepo-monorepo.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/ADR-001-turborepo-monorepo.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/DEPLOYMENT.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/DEPLOYMENT.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/LOCAL_DEV.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/LOCAL_DEV.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/PRE_MONOREPO_GITHUB_MAIN.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/PRE_MONOREPO_GITHUB_MAIN.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/SCHEMA_DRAFT_POSTS_USERS.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/SCHEMA_DRAFT_POSTS_USERS.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/SENTRY_SETUP.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/SENTRY_SETUP.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/completed/herdr-session-2026-05-25.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/completed/herdr-session-2026-05-25.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/completed/multi-agent-workflow-skill-created.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/completed/multi-agent-workflow-skill-created.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"docs/design/dedup-shared-package-20260525.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"docs/design/dedup-shared-package-20260525.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"CONVEX_FIXES_PLAN.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"CONVEX_FIXES_PLAN.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"PROJECT_STATUS.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"PROJECT_STATUS.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"PLAN.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"PLAN.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"PRODUCTION_READINESS_REPORT.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"PRODUCTION_READINESS_REPORT.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"PRODUCTION_READINESS_DIFF.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"PRODUCTION_READINESS_DIFF.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"TIMESTAMP_ADDED","file":"HARMONIZATION_PLAN.md","reason":"Missing timestamp","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"PURPOSE_ADDED","file":"HARMONIZATION_PLAN.md","reason":"Missing Purpose line","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"FIRST_RUN_GUARD","reason":"Archival skipped on first run regardless of stale_since","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"GOD_FILE_UPDATED","path":"docs/GOD.md","active_count":16,"stale_count":0,"run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"INDEX_REGENERATED","path":".pi/god-index.json","run_id":"run-20260526-015848"}
+{"ts":"2026-05-26T01:58:49-07:00","action":"RUN_COMPLETE","run_id":"run-20260526-015848","exit_code":0,"invariants_passed":8}
+{"ts":"2026-05-26T01:59:30-07:00","action":"RUN_COMPLETE","run_id":"run-20260526-015848","exit_code":0,"invariants_passed":8}

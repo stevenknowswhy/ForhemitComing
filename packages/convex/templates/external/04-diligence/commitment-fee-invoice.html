@@ -64,7 +64,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Gate Clearance Confirmation</span></div><div class="sb">
     <div class="confirm-block">
       <div class="confirm-badge">Gate 2 Cleared</div>
-      <div class="fr" style="margin-top:0.4rem;"><label>SBA Commitment Letter</label><span style="flex:1;">{{commitmentLetterDate}}</span></div>
+      <div class="fr" style="margin-top:0.4rem;"><label>Lender Commitment Letter</label><span style="flex:1;">{{commitmentLetterDate}}</span></div>
       <div class="fr"><label>Lender</label><span style="flex:1;">{{lenderName}}</span></div>
       <div class="fr"><label>Loan Amount</label><span style="flex:1;">{{loanAmount}}</span></div>
     </div>
@@ -74,7 +74,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
     <table class="invoice-table">
       <thead><tr><th>Description</th><th>Fee Tier</th><th>Amount</th></tr></thead>
       <tbody>
-        <tr><td>Commitment Fee — SBA lender commitment milestone</td><td>{{feeTier}}</td><td>{{commitmentAmount}}</td></tr>
+        <tr><td>Commitment Fee — Lender commitment milestone</td><td>{{feeTier}}</td><td>{{commitmentAmount}}</td></tr>
         <tr class="invoice-total"><td colspan="2"><strong>Total Due</strong></td><td><strong>{{commitmentAmount}}</strong></td></tr>
       </tbody>
     </table>

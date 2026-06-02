@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forhemit — Client Letter Previews</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --cream: #f8f5ef;
+        --linen: #ede8df;
+        --linen2: #e5ddd0;
+        --navy: #1a2238;
+        --navy2: #243048;
+        --brass: #9a7540;
+        --brass2: #b89060;
+        --ink: #1c1510;
+        --muted: #7a7060;
+        --rule: #d4cbbf;
+        --ff-display: "Cormorant Garamond", Georgia, serif;
+        --ff-body: "Jost", system-ui, sans-serif;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background: #2a2520;
+        font-family: var(--ff-body);
+        color: var(--ink);
+        min-height: 100vh;
+        padding: 2rem 1rem 5rem;
+      }
+
+      /* ── Page Header ── */
+      .page-header {
+        max-width: 820px;
+        margin: 0 auto 2rem;
+        text-align: center;
+      }
+      .page-header h1 {
+        font-family: var(--ff-display);
+        font-size: 1.6rem;
+        font-weight: 300;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--brass2);
+        margin-bottom: 0.3rem;
+      }
+      .page-header p {
+        font-size: 0.68rem;
+        font-weight: 300;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.3);
+      }
+
+      /* ── Tab Bar ── */
+      .tab-bar {
+        max-width: 820px;
+        margin: 0 auto 1.5rem;
+        display: flex;
+        align-items: stretch;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .tab-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        padding: 0.85rem 1.5rem;
+        font-family: var(--ff-body);
+        font-size: 0.68rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.32);
+        cursor: pointer;
+        transition: all 0.2s;
+        border-bottom: 2px solid transparent;
+        position: relative;
+        top: 1px;
+      }
+      .tab-btn:hover {
+        color: rgba(248, 245, 239, 0.6);
+      }
+      .tab-btn.active {
+        color: var(--brass2);
+        border-bottom-color: var(--brass);
+      }
+      .print-btn {
+        background: none;
+        border: none;
+        border-bottom: 2px solid transparent;
+        position: relative;
+        top: 1px;
+        padding: 0.85rem 1.1rem;
+        font-family: var(--ff-body);
+        font-size: 0.63rem;
+        font-weight: 500;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.22);
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+        white-space: nowrap;
+      }
+      .print-btn:hover {
+        color: rgba(248, 245, 239, 0.5);
+      }
+      .print-btn svg {
+        width: 12px;
+        height: 12px;
+      }
+
+      /* ── Letter Shell ── */
+      .letter-panel {
+        display: none;
+      }
+      .letter-panel.active {
+        display: block;
+      }
+
+      .letter {
+        max-width: 820px;
+        margin: 0 auto;
+        background: var(--cream);
+        box-shadow: 0 12px 60px rgba(0, 0, 0, 0.5);
+      }
+
+      /* ── Letterhead ── */
+      .letter-header {
+        background: var(--navy);
+        padding: 1.5rem 2.6rem 1.3rem;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 1rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .letter-wordmark {
+        font-family: var(--ff-display);
+        font-size: 1.6rem;
+        font-weight: 300;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: #f8f5ef;
+        line-height: 1;
+        margin-bottom: 0.22rem;
+      }
+      .letter-tagline {
+        font-size: 0.58rem;
+        font-weight: 300;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(248, 245, 239, 0.38);
+      }
+      .letter-category {
+        font-size: 0.56rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--brass2);
+        border: 1px solid rgba(184, 144, 96, 0.4);
+        padding: 0.2rem 0.55rem;
+        align-self: center;
+        white-space: nowrap;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .brass-rule {
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--brass) 0%,
+          var(--brass2) 55%,
+          transparent 100%
+        );
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* ── Meta Strip (date / addressee / re-line) ── */
+      .meta-strip {
+        padding: 1.6rem 2.6rem 0;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0 2rem;
+        align-items: start;
+      }
+      .letter-date {
+        font-size: 0.75rem;
+        color: var(--muted);
+        letter-spacing: 0.05em;
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .addressee-block {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        text-align: right;
+        padding-bottom: 1rem;
+      }
+      .addressee-name {
+        font-family: var(--ff-display);
+        font-size: 1.05rem;
+        font-weight: 400;
+        color: var(--navy);
+        line-height: 1.2;
+        margin-bottom: 0.12rem;
+      }
+      .addressee-meta {
+        font-size: 0.73rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      .re-line {
+        grid-column: 1;
+        grid-row: 2;
+        font-size: 0.63rem;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--brass);
+        padding-top: 0.6rem;
+        margin-top: 0.5rem;
+        border-top: 1px solid var(--rule);
+      }
+      .re-line strong {
+        color: var(--navy);
+        font-weight: 500;
+        text-transform: none;
+        letter-spacing: normal;
+        font-size: 0.85rem;
+        font-family: var(--ff-body);
+      }
+      .meta-rule {
+        grid-column: 1 / -1;
+        height: 1px;
+        background: var(--rule);
+        margin-top: 1.2rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* ── Two-Column Body Layout ── */
+      .letter-body {
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        gap: 0;
+      }
+
+      /* Salutation — spans full width */
+      .salutation {
+        grid-column: 1 / -1;
+        padding: 1.6rem 2.6rem 0.8rem;
+        font-size: 0.92rem;
+        color: var(--ink);
+        line-height: 1.7;
+      }
+
+      /* ── Section Row ── */
+      .section-row {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 160px 1fr;
+        border-top: 1px solid var(--rule);
+        margin-top: 0.2rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Left Rail */
+      .section-rail {
+        padding: 1.5rem 1.2rem 1.5rem 2.6rem;
+        border-right: 1px solid var(--rule);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .rail-label {
+        font-size: 0.58rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--brass);
+        line-height: 1.4;
+        display: block;
+      }
+      .rail-note {
+        font-size: 0.7rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.55;
+        margin-top: 0.55rem;
+        font-style: italic;
+      }
+      .rail-number {
+        font-family: var(--ff-display);
+        font-size: 2rem;
+        font-weight: 300;
+        color: var(--navy);
+        line-height: 1;
+        margin-top: 0.5rem;
+        display: block;
+      }
+      .rail-number-label {
+        font-size: 0.58rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-top: 0.2rem;
+        display: block;
+      }
+
+      /* Right Content */
+      .section-content {
+        padding: 1.5rem 2.6rem 1.5rem 1.6rem;
+      }
+      .para {
+        font-size: 0.88rem;
+        line-height: 1.82;
+        color: var(--ink);
+        margin-bottom: 0.9rem;
+      }
+      .para:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Pull quote / highlight box */
+      .callout {
+        background: var(--linen);
+        border-left: 3px solid var(--brass);
+        padding: 0.9rem 1.1rem;
+        margin: 0.8rem 0;
+        font-family: var(--ff-display);
+        font-size: 1.05rem;
+        font-weight: 400;
+        color: var(--navy);
+        line-height: 1.5;
+        font-style: italic;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      /* Stat / highlight chip */
+      .stat-row {
+        display: flex;
+        gap: 1rem;
+        margin: 0.8rem 0;
+        flex-wrap: wrap;
+      }
+      .stat-chip {
+        background: var(--navy);
+        color: #f8f5ef;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.7rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .stat-chip span {
+        font-family: var(--ff-display);
+        font-size: 1.15rem;
+        font-weight: 300;
+        display: block;
+        line-height: 1.1;
+        margin-bottom: 0.1rem;
+        color: var(--brass2);
+      }
+
+      /* Milestone / numbered list */
+      .milestone-list {
+        list-style: none;
+        margin: 0.5rem 0;
+        padding: 0;
+      }
+      .milestone-list li {
+        display: flex;
+        gap: 0.85rem;
+        align-items: baseline;
+        padding: 0.6rem 0;
+        border-bottom: 1px solid rgba(212, 203, 191, 0.55);
+        font-size: 0.86rem;
+        line-height: 1.6;
+        color: var(--ink);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .milestone-list li:first-child {
+        border-top: 1px solid rgba(212, 203, 191, 0.55);
+      }
+      .milestone-num {
+        font-family: var(--ff-display);
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: var(--brass);
+        min-width: 1.2rem;
+        line-height: 1;
+        padding-top: 0.12rem;
+      }
+
+      /* Key point / check list */
+      .point-list {
+        list-style: none;
+        margin: 0.5rem 0;
+        padding: 0;
+      }
+      .point-list li {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.5rem 0;
+        font-size: 0.86rem;
+        line-height: 1.65;
+        color: var(--ink);
+        border-bottom: 1px solid rgba(212, 203, 191, 0.4);
+      }
+      .point-list li:first-child {
+        border-top: 1px solid rgba(212, 203, 191, 0.4);
+      }
+      .point-list li::before {
+        content: "—";
+        color: var(--brass);
+        font-weight: 600;
+        flex-shrink: 0;
+        margin-top: 0.05rem;
+      }
+
+      /* Process steps — horizontal */
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        margin: 0.8rem 0;
+        border: 1px solid var(--rule);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .step {
+        padding: 0.75rem 0.8rem;
+        border-right: 1px solid var(--rule);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .step:last-child {
+        border-right: none;
+      }
+      .step-num {
+        font-family: var(--ff-display);
+        font-size: 1.4rem;
+        font-weight: 300;
+        color: var(--brass2);
+        line-height: 1;
+        margin-bottom: 0.2rem;
+      }
+      .step-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--navy);
+        margin-bottom: 0.15rem;
+        display: block;
+      }
+      .step-detail {
+        font-size: 0.7rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* Closing row */
+      .closing-row {
+        grid-column: 1 / -1;
+        padding: 1.8rem 5.2rem 1.6rem;
+        font-size: 0.88rem;
+        color: var(--ink);
+        border-top: 1px solid var(--rule);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        line-height: 1.8;
+      }
+
+      /* ── Signature Block ── */
+      .sig-block {
+        border-top: 2px solid var(--rule);
+        padding: 1.3rem 2.6rem 1.5rem;
+        background: var(--linen);
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 2rem;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .sig-name {
+        font-family: var(--ff-display);
+        font-size: 1.15rem;
+        font-weight: 400;
+        color: var(--navy);
+        margin-bottom: 0.2rem;
+      }
+      .sig-meta {
+        font-size: 0.7rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+      .sig-contact {
+        font-size: 0.68rem;
+        font-weight: 300;
+        color: var(--muted);
+        line-height: 1.9;
+        text-align: right;
+      }
+      .sig-contact a {
+        color: var(--brass);
+        text-decoration: none;
+      }
+
+      /* ── Print ── */
+      @media print {
+        @page {
+          size: letter;
+          margin: 0.45in 0.55in;
+        }
+        html,
+        body {
+          background: white !important;
+          padding: 0 !important;
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+        .page-header,
+        .tab-bar {
+          display: none !important;
+        }
+        .letter-panel {
+          display: block !important;
+          page-break-after: always;
+          break-after: page;
+        }
+        .letter-panel:last-of-type {
+          page-break-after: avoid;
+          break-after: avoid;
+        }
+        .letter {
+          box-shadow: none !important;
+          max-width: none !important;
+        }
+        .section-row,
+        .point-list li,
+        .milestone-list li {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        .sig-block {
+          page-break-inside: avoid;
+          break-inside: avoid;
+        }
+        * {
+          -webkit-print-color-adjust: exact !important;
+          print-color-adjust: exact !important;
+        }
+      }
+
+      /* ── Mobile ── */
+      @media (max-width: 680px) {
+        .meta-strip {
+          grid-template-columns: 1fr;
+        }
+        .addressee-block {
+          grid-column: 1;
+          grid-row: auto;
+          text-align: left;
+          margin-top: 0.8rem;
+        }
+        .re-line {
+          grid-row: auto;
+        }
+        .letter-body {
+          grid-template-columns: 1fr;
+        }
+        .section-row {
+          grid-template-columns: 1fr;
+        }
+        .section-rail {
+          border-right: none;
+          border-bottom: 1px solid var(--rule);
+          padding: 1rem 1.5rem;
+        }
+        .section-content {
+          padding: 1rem 1.5rem;
+        }
+        .salutation {
+          padding: 1.2rem 1.5rem 0.6rem;
+        }
+        .closing-row {
+          padding: 1rem 1.5rem 0.5rem;
+        }
+        .meta-strip {
+          padding: 1.2rem 1.5rem 0;
+        }
+        .letter-header {
+          padding: 1rem 1.5rem;
+        }
+        .sig-block {
+          padding: 1rem 1.5rem;
+          flex-direction: column;
+          gap: 0.8rem;
+        }
+        .sig-contact {
+          text-align: left;
+        }
+        .process-steps {
+          grid-template-columns: 1fr 1fr;
+        }
+        .step {
+          border-bottom: 1px solid var(--rule);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Forhemit Client Letters</h1>
+      <p>Preview · Print · Review</p>
+    </div>
+
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="showTab('intro', this)">
+        Introduction Letter
+      </button>
+      <button class="tab-btn" onclick="showTab('review', this)">
+        Preliminary Review
+      </button>
+      <button class="print-btn" onclick="window.print()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 6 2 18 2 18 9" />
+          <path
+            d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"
+          />
+          <rect x="6" y="14" width="12" height="8" />
+        </svg>
+        Print
+      </button>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- INTRODUCTION LETTER                            -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="intro" class="letter-panel active">
+      <div class="letter">
+        <div class="letter-header">
+          <div>
+            <div class="letter-wordmark">Forhemit</div>
+            <div class="letter-tagline">Transition Stewardship</div>
+          </div>
+          <div class="letter-category">Introduction</div>
+        </div>
+        <div class="brass-rule"></div>
+
+        <div class="meta-strip">
+          <div class="letter-date">May 31, 2026</div>
+          <div class="re-line">
+            RE: An Introduction to Forhemit Transition Stewardship
+          </div>
+          <div class="meta-rule"></div>
+        </div>
+
+        <div class="letter-body">
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">Your Story</span>
+              <p class="rail-note">Beyond the Purchase Price.</p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                Most business owners who reach this stage have spent years —
+                sometimes decades — building something that cannot be fully
+                captured on a spreadsheet.
+              </p>
+              <div class="callout">
+                "The financial results are there, but they tell only part of the
+                story."
+              </div>
+              <p class="para">
+                The team you kept together through difficult years, the
+                reputation you built one relationship at a time, and the
+                decisions you made when no one was watching are all part of the
+                value you’ve created. They deserve to be treated that way.
+              </p>
+            </div>
+          </div>
+
+          <!-- What We Do (continued) -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">What We Do</span>
+              <p class="rail-note">
+                A private-market version of an IPO — without the unknown buyer.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                We help facilitate and transition a private market IPO (initial
+                public offering) to your employees.
+              </p>
+              <div class="callout">
+                "You receive full fair market value (FMV) for your business."
+              </div>
+              <p class="para">
+                You receive the financial benefits of a sale, but instead of
+                transferring ownership to an unknown outside buyer, ownership
+                passes to the employees who helped build the company. Leadership
+                remains in place, the culture stays intact, and the business
+                continues serving the customers and communities that helped make
+                it successful.
+              </p>
+            </div>
+          </div>
+
+          <!-- How We Work -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">How We Work</span>
+              <span class="rail-number">120</span>
+              <span class="rail-number-label">Day structured timeline</span>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                We operate on a structured timeline designed to create clarity
+                and momentum without disrupting the day-to-day operation of your
+                business.
+              </p>
+              <div class="process-steps">
+                <div class="step">
+                  <div class="step-num">01</div>
+                  <span class="step-label">Valuation</span>
+                  <span class="step-detail">Independent FMV appraisal</span>
+                </div>
+                <div class="step">
+                  <div class="step-num">02</div>
+                  <span class="step-label">Financing</span>
+                  <span class="step-detail">Capital stack assembly</span>
+                </div>
+                <div class="step">
+                  <div class="step-num">03</div>
+                  <span class="step-label">Design</span>
+                  <span class="step-detail">Transaction structure</span>
+                </div>
+                <div class="step">
+                  <div class="step-num">04</div>
+                  <span class="step-label">Close</span>
+                  <span class="step-detail">Implementation &amp; transfer</span>
+                </div>
+              </div>
+              <p class="para">
+                Throughout the engagement, you will have access to a live
+                project dashboard that shows exactly where we are at any given
+                time. We meet regularly to review progress, discuss upcoming
+                milestones, and answer questions as they arise.
+              </p>
+              <p class="para">
+                Our job is to manage the complexity so that you can remain
+                focused on your business, your people, and your future.
+              </p>
+            </div>
+          </div>
+
+          <!-- Why It Matters -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">Why It Matters</span>
+              <p class="rail-note">
+                Legacy, people, and continuity — not just the price.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                A business transition is rarely just a financial decision. It is
+                a decision about people, legacy, and what happens to something
+                you spent years building.
+              </p>
+              <ul class="point-list">
+                <li>
+                  Employees who helped build the company benefit directly from
+                  its success
+                </li>
+                <li>
+                  Leadership, culture, and customer relationships stay intact
+                </li>
+                <li>Communities that depend on the business are protected</li>
+                <li>
+                  Your legacy is preserved — not absorbed into a portfolio
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="closing-row">
+            We appreciate the opportunity to introduce ourselves and would
+            welcome a conversation to learn more about your goals and explore
+            whether this approach may be a good fit for you and your company.
+          </div>
+        </div>
+        <!-- /letter-body -->
+
+        <div class="sig-block">
+          <div>
+            <div class="sig-name">Stefano Stokes</div>
+            <div class="sig-meta">
+              Senior Managing Partner · Forhemit Transition Stewardship<br />A
+              California Public Benefit Corporation
+            </div>
+          </div>
+          <div class="sig-contact">
+            <a href="mailto:stefano.stokes@forhemit.com"
+              >stefano.stokes@forhemit.com</a
+            ><br />
+            424-253-4019<br />forhemit.com
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- PRELIMINARY REVIEW LETTER                      -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="review" class="letter-panel">
+      <div class="letter">
+        <div class="letter-header">
+          <div>
+            <div class="letter-wordmark">Forhemit</div>
+            <div class="letter-tagline">Transition Stewardship</div>
+          </div>
+          <div class="letter-category">Preliminary Review</div>
+        </div>
+        <div class="brass-rule"></div>
+
+        <div class="meta-strip">
+          <div class="letter-date">May 31, 2026</div>
+          <div class="re-line">
+            RE: Initial Review and Alignment for
+            <strong>Acme Manufacturing, Inc.</strong>
+          </div>
+          <div class="meta-rule"></div>
+        </div>
+
+        <div class="letter-body">
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">Our Role</span>
+              <p class="rail-note">
+                We are not the buyer. We are the facilitator.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                This letter is meant to do one thing: give you a clear,
+                practical picture of where we believe
+                <strong>Acme Manufacturing, Inc.</strong> stands today and how a
+                Forhemit engagement would work.
+              </p>
+              <div class="callout">
+                "Forhemit is not acting as the buyer of your business — our role
+                is to facilitate a fair, credible, and defensible purchase price
+                and employee stock offering."
+              </div>
+              <p class="para">
+                We often describe the structure as a private IPO: ownership
+                moves to the employees who helped build the company, while
+                leadership, culture, and operations remain steady. Our
+                incentives are tied to the success of the transition, not to
+                moving the final price up or down.
+              </p>
+            </div>
+          </div>
+
+          <!-- Valuation -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">Initial Valuation</span>
+              <span class="rail-number">$20M</span>
+              <span class="rail-number-label">Preliminary estimate</span>
+              <p class="rail-note">
+                Final price set by independent FMV appraisal.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                After weeks of discussing your company with
+                <strong>Martin &amp; Associates</strong> and conducting our own
+                internal review, we anticipate a preliminary starting valuation
+                of approximately <strong>$20 million</strong>.
+              </p>
+              <ul class="point-list">
+                <li>
+                  This is not a formal valuation and not the final purchase
+                  price
+                </li>
+                <li>
+                  The official price is set by an independent, third-party FMV
+                  appraisal
+                </li>
+                <li>
+                  You review the FMV determination before deciding whether to
+                  proceed
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Fee Structure -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">Fee Structure</span>
+              <p class="rail-note">
+                Milestone-tied. We only earn when you reach defined checkpoints.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                We believe our compensation should be tied to meaningful
+                progress and successful outcomes. After an initial retainer,
+                remaining fees are tied directly to specific milestones:
+              </p>
+              <ol class="milestone-list">
+                <li>
+                  <span class="milestone-num">1</span>When you approve the Fair
+                  Market Value determination letter
+                </li>
+                <li>
+                  <span class="milestone-num">2</span>When we secure a lender
+                  loan commitment acceptable to you
+                </li>
+                <li>
+                  <span class="milestone-num">3</span>When the transaction
+                  successfully closes
+                </li>
+              </ol>
+              <p class="para">
+                This structure ensures that we are working toward the same goal:
+                a successful transition that works for you, the company, and the
+                employees who will carry it forward.
+              </p>
+            </div>
+          </div>
+
+          <!-- How We Are Paid -->
+          <div class="section-row">
+            <div class="section-rail">
+              <span class="rail-label">How We Are Paid</span>
+              <p class="rail-note">
+                Company pays as a business expense — not deducted from your
+                proceeds.
+              </p>
+            </div>
+            <div class="section-content">
+              <p class="para">
+                Because Forhemit is providing transition and stewardship
+                services, our fees are paid by the company as a business
+                expense, subject to review by your tax and legal advisors.
+              </p>
+              <ol class="milestone-list">
+                <li>
+                  <span class="milestone-num">1</span>Our fees are
+                  <strong>not deducted</strong> from the amount you receive at
+                  closing
+                </li>
+                <li>
+                  <span class="milestone-num">2</span>Forhemit is not the buyer
+                  and is not reducing your purchase price
+                </li>
+                <li>
+                  <span class="milestone-num">3</span>You retain the ability to
+                  consider outside offers while building a credible
+                  employee-ownership path — real optionality, not a closed
+                  process
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="closing-row">
+            We would welcome the opportunity to review this framework with you
+            and answer any questions. If it feels aligned with your goals, the
+            next step would be a brief call to discuss timing, priorities, and
+            what would be needed to move forward.
+          </div>
+        </div>
+        <!-- /letter-body -->
+
+        <div class="sig-block">
+          <div>
+            <div class="sig-name">Stefano Stokes</div>
+            <div class="sig-meta">
+              Senior Managing Partner · Forhemit Transition Stewardship<br />A
+              California Public Benefit Corporation
+            </div>
+          </div>
+          <div class="sig-contact">
+            <a href="mailto:stefano.stokes@forhemit.com"
+              >stefano.stokes@forhemit.com</a
+            ><br />
+            424-253-4019<br />forhemit.com
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function showTab(id, btn) {
+        document
+          .querySelectorAll(".letter-panel")
+          .forEach((p) => p.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+        btn.classList.add("active");
+      }
+    </script>
+  </body>
+</html>

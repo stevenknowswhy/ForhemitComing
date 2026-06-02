@@ -3,7 +3,7 @@
  * Uses Clerk identity from ConvexProviderWithClerk; optional ADMIN_TOKEN on the
  * deployment for scripts. Keep rules in sync with lib/clerk.ts.
  */
-const SUPER_ADMIN_EMAIL = "stefano.stokes@forhemit.com";
+const SUPER_ADMIN_EMAIL = process.env.SUPER_ADMIN_EMAIL ?? "stefano.stokes@forhemit.com";
 const ALLOWED_EMAIL_DOMAIN = "forhemit.com";
 
 function isAdminEmail(email: string): boolean {

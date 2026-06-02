@@ -1,5 +1,10 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import {
+	internalMutation,
+	internalQuery,
+	mutation,
+	query,
+} from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
 
 // ============================================
@@ -173,5 +178,34 @@ export const closeAndAdvance = mutation({
 			closedChapterId: activeChapter?._id,
 			newChapterId,
 		};
+	},
+});
+
+// ============================================
+// Internal versions (no auth, for internal actions/crons)
+// ============================================
+
+export const internalGet = internalQuery({
+	args: { id: v.id("journalChapters") },
+	handler: async (ctx, args) => {
+		return await ctx.db.get(args.id);
+	},
+});
+
+export const internalComplete = internalMutation({
+	args: {
+		id: v.id("journalChapters"),
+		closeSummaryBoxFileId: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const patch: Record<string, unknown> = {
+			status: "completed",
+			completedAt: Date.now(),
+		};
+		if (args.closeSummaryBoxFileId) {
+			patch.closeSummaryBoxFileId = args.closeSummaryBoxFileId;
+		}
+		await ctx.db.patch(args.id, patch);
+		return await ctx.db.get(args.id);
 	},
 });

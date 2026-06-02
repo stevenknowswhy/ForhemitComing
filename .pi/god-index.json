@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-05-26T02:20:00-07:00",
+  "active_documents": [
+    {
+      "path": "docs/ADR-001-turborepo-monorepo.md",
+      "purpose": "Architecture Decision Record for Turborepo monorepo structure with single Convex package",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:23a6f150c8bd32f40f243f9183afd4fc08b186665c35ddaf1270693ef1d8f531",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/DEPLOYMENT.md",
+      "purpose": "Operational deployment checklist for Forhemit production surfaces",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:4e3b59a6d68d13bf2ba9da9b1e92ff77682a446bc9995f23ef3ad732d3629743",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/LOCAL_DEV.md",
+      "purpose": "Local development environment setup guide for Turborepo monorepo",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:0740268d90d7cece8de1610655a7d0b8bff4ab50b1859dd0f8699be965d22078",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/PRE_MONOREPO_GITHUB_MAIN.md",
+      "purpose": "Historical record of pre-force-push GitHub main branch history",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:1afb6362b404155eb768738add033979df9fdf261e8755f827172f09b0f62ba1",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/SCHEMA_DRAFT_POSTS_USERS.md",
+      "purpose": "Draft Convex schema additions for posts and users — review before implementation",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:8b722d1a7521b69f0d8763f237986d81600f838ad7223c27b9a66e3bba11e225",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/SENTRY_SETUP.md",
+      "purpose": "Sentry integration setup guide for Forhemit admin app",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:f699725f2bd4b4899c90ba4677704c7cdb45dcff1ec70f5d3805171113689e77",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/completed/herdr-session-2026-05-25.md",
+      "purpose": "Session log of Herdr multi-agent production readiness sprint on 2026-05-25",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:aa91ddf5f819470ca5bc61e77eb34ee4062375a9d8dafa2f9fde4a6b96f0c61c",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/completed/multi-agent-workflow-skill-created.md",
+      "purpose": "Session log documenting creation of multi-agent workflow orchestrator skill",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:d60ecafbfee208759c0f3d94a7f2f7c636f674bb483a5da3e5e39c95a0c8946d",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "docs/design/dedup-shared-package-20260525.md",
+      "purpose": "Design doc for code deduplication via packages/shared extraction",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:2428a7e7e8178d2694e2ca4dafce7314e6695dbd97a832125c14563de593c040",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "CONVEX_FIXES_PLAN.md",
+      "purpose": "Revised plan for Convex architecture fixes across ~100+ pre-existing TS errors",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:279443fa445dd594824a5daf441803f906edaff29cecfacdd8f8bf04ae240b51",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "PROJECT_STATUS.md",
+      "purpose": "Current Forhemit project status dashboard",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:606f1848b5a2a2f06e353ddc4d29c15cad1d0d4ff93da0aa5655be5a1e209b88",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "PLAN.md",
+      "purpose": "Analysis and resolution plan for 25 circular dependencies reported by CodeFlow",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:5b424c32a71c02376ab173523255cc5277bee895352579ebe790b273c356c1a1",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "PRODUCTION_READINESS_REPORT.md",
+      "purpose": "Production readiness assessment with issue inventory and remediation status",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:9d36d9df226e7756eec9060b8fb95fa6c3d4ce4ee6612c19175d99e634c48863",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "PRODUCTION_READINESS_DIFF.md",
+      "purpose": "Diff-based production readiness tracking against baseline report",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:15b2ae82dce85c23d0363811507b9a6a386ec8ff3795160c5c20da02e52469d8",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md",
+      "purpose": "AI-generated legal analysis of engagement letter — not legal advice, review with attorney",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:982c09a572bac0880b4b88334240f572e905bcdccc60246d040f1443de65075c",
+      "state": "ACTIVE"
+    },
+    {
+      "path": "HARMONIZATION_PLAN.md",
+      "purpose": "Complete harmonization plan for Forhemit admin, marketing, resources, and blog alignment",
+      "last_verified_iso": "2026-05-26T01:58:00-07:00",
+      "last_verified_display": "05/26/26 01:58 AM PT",
+      "content_hash": "sha256:4c30ee8ae3abe5e69b3701ba2212f9fafd167f94dd1ac575b4b2bf69b8e98ab5",
+      "state": "ACTIVE"
+    }
+  ],
+  "overrides": [],
+  "stale_deprecated": [],
+  "deprecation_registry": []
+}

@@ -1,6 +1,9 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent as logBusinessEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { resolveActor } from "./lib/resolveActor";
 
 /**
  * Document Audit Log — SOC 2 ready.
@@ -38,6 +41,74 @@ export const logEvent = mutation({
 			metadata: args.metadata,
 			createdAt: Date.now(),
 		});
+
+		// Map document audit action to business log event type
+		const actionMap: Record<string, string> = {
+			generated: LOG_ACTIONS.DOC_GENERATED,
+			uploaded: LOG_ACTIONS.DOC_UPLOADED,
+			shared: LOG_ACTIONS.DOC_SHARED,
+			signed: LOG_ACTIONS.DOC_SIGNED,
+			declined: LOG_ACTIONS.DOC_DECLINED,
+			viewed: LOG_ACTIONS.DOC_VIEWED,
+			downloaded: LOG_ACTIONS.DOC_DOWNLOADED,
+			emailed: LOG_ACTIONS.DOC_EMAILED,
+		};
+
+		const eventType = actionMap[args.action];
+		if (eventType && args.companyId) {
+			const actorObj = await resolveActor(ctx);
+			if (args.action === "signed") {
+				await logBusinessEvent(ctx, {
+					...actorObj,
+					eventType,
+					category: "document",
+					summary: `Document ${args.action}: ${args.documentType}`,
+					clientSummary: `Your document has been signed`,
+					source: "webhook",
+					visibility: "external",
+					companyId: args.companyId,
+					scopeType: "company",
+					scopeId: args.companyId,
+					entityType: "documentAudit",
+					entityId: id,
+					metadata: { documentType: args.documentType, action: args.action },
+				});
+			} else if (args.action === "declined") {
+				await logBusinessEvent(ctx, {
+					...actorObj,
+					eventType,
+					category: "document",
+					summary: `Document ${args.action}: ${args.documentType}`,
+					clientSummary: `A document requires attention`,
+					source: "webhook",
+					visibility: "external",
+					companyId: args.companyId,
+					scopeType: "company",
+					scopeId: args.companyId,
+					entityType: "documentAudit",
+					entityId: id,
+					severity: "warning",
+					metadata: { documentType: args.documentType, action: args.action },
+				});
+			} else {
+				await logBusinessEvent(ctx, {
+					...actorObj,
+					eventType,
+					category: "document",
+					summary: `Document ${args.action}: ${args.documentType}`,
+					clientSummary: `Document ${args.action}: ${args.documentType}`,
+					source: "admin_ui",
+					visibility: "external",
+					companyId: args.companyId,
+					scopeType: "company",
+					scopeId: args.companyId,
+					entityType: "documentAudit",
+					entityId: id,
+					metadata: { documentType: args.documentType, action: args.action },
+				});
+			}
+		}
+
 		return id;
 	},
 });

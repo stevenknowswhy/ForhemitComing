@@ -121,3 +121,17 @@ export const getStats = query({
 		return stats;
 	},
 });
+
+// Get audit logs by correlation ID (for businessLog deep-link)
+export const getByCorrelationId = query({
+	args: { correlationId: v.string() },
+	handler: async (ctx, args) => {
+		await requireAuth(ctx);
+		return ctx.db
+			.query("auditLogs")
+			.withIndex("by_correlation", (q) =>
+				q.eq("correlationId", args.correlationId),
+			)
+			.collect();
+	},
+});

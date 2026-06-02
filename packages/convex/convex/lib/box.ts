@@ -211,6 +211,62 @@ export async function downloadFile(fileId: string): Promise<Uint8Array> {
 }
 
 /**
+ * Create a shared link on a folder.
+ * Returns the shared link URL.
+ */
+export async function createSharedLink(
+	folderId: string,
+	access: "open" | "company" | "collaborators" = "open",
+): Promise<{ url: string; downloadUrl: string }> {
+	interface SharedLinkResponse {
+		shared_link: {
+			url: string;
+			download_url: string;
+			access: string;
+		};
+	}
+
+	const result = await boxFetch<SharedLinkResponse>(`/folders/${folderId}`, {
+		method: "PUT",
+		body: {
+			shared_link: {
+				access: access,
+				permissions: {
+					can_download: true,
+					can_preview: true,
+				},
+			},
+		},
+	});
+
+	return {
+		url: result.shared_link.url,
+		downloadUrl: result.shared_link.download_url,
+	};
+}
+
+/**
+ * List items in a folder (files and subfolders).
+ */
+export async function listFolderItems(folderId: string): Promise<
+	Array<{
+		id: string;
+		type: "file" | "folder";
+		name: string;
+	}>
+> {
+	const data = await boxFetch<{
+		entries: Array<{ id: string; type: string; name: string }>;
+	}>(`/folders/${folderId}/items?limit=1000&fields=id,type,name`);
+
+	return data.entries.map((e) => ({
+		id: e.id,
+		type: e.type as "file" | "folder",
+		name: e.name,
+	}));
+}
+
+/**
  * Get the root folder ID from environment.
  */
 export function getRootFolderId(): string {

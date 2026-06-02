@@ -11,6 +11,7 @@ const isPublicRoute = createRouteMatcher([
 	"/api/email/webhook(.*)",
 	"/api/resend/(.*)",
 	"/api/ghost/(.*)",
+	"/templates/(.*)",
 ]);
 
 // Define API routes that need email verification

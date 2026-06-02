@@ -467,7 +467,7 @@ export const generateJournalDigest = internalAction({
 		const weekEnding = weekStarting + 6 * 86400000;
 
 		// 1. Load journal
-		const journal = (await ctx.runQuery(api.clientJournals.get, {
+		const journal = (await ctx.runQuery(internal.clientJournals.internalGet, {
 			id: args.journalId,
 		})) as {
 			_id: string;
@@ -484,7 +484,7 @@ export const generateJournalDigest = internalAction({
 
 		// 2. Check if already sent (skip unless forced)
 		const existing = (await ctx.runQuery(
-			api.journalDigests.getByJournalAndWeek,
+			internal.journalDigests.internalGetByJournalAndWeek,
 			{ journalId: args.journalId, weekStarting },
 		)) as Record<string, unknown> | null;
 		if (existing && !args.force) {
@@ -493,14 +493,17 @@ export const generateJournalDigest = internalAction({
 
 		// 3. Load narrative
 		const narrative = (await ctx.runQuery(
-			api.journalNarratives.getByJournalAndWeek,
+			internal.journalNarratives.internalGetByJournalAndWeek,
 			{ journalId: args.journalId, weekStarting },
 		)) as { _id: string; narrativeText?: string; status?: string } | null;
 
 		// 4. Load client-visible entries for this week
-		const entries = (await ctx.runQuery(api.journalEntries.listByJournal, {
-			journalId: args.journalId,
-		})) as Array<{
+		const entries = (await ctx.runQuery(
+			internal.journalEntries.internalListByJournal,
+			{
+				journalId: args.journalId,
+			},
+		)) as Array<{
 			visibleToClient: boolean;
 			occurredAt: number;
 			entryType: string;
@@ -568,11 +571,11 @@ export const generateJournalDigest = internalAction({
 
 			if (activeNarrative) {
 				// Update existing draft with fallback text
-				await ctx.runMutation(api.journalNarratives.update, {
+				await ctx.runMutation(internal.journalNarratives.internalUpdate, {
 					id: activeNarrative._id as Id<"journalNarratives">,
 					narrativeText: fallbackText,
 				});
-				await ctx.runMutation(api.journalNarratives.markFallback, {
+				await ctx.runMutation(internal.journalNarratives.internalMarkFallback, {
 					id: activeNarrative._id as Id<"journalNarratives">,
 					reason:
 						"Account lead did not mark narrative as ready before Tuesday deadline",
@@ -581,7 +584,7 @@ export const generateJournalDigest = internalAction({
 			} else {
 				// Create new fallback narrative
 				const newId = await ctx.runMutation(
-					api.journalNarratives.createFallback,
+					internal.journalNarratives.internalCreateFallback,
 					{
 						journalId: args.journalId,
 						clientId: journal.clientId as Id<"crmCompanies">,
@@ -610,52 +613,55 @@ export const generateJournalDigest = internalAction({
 			metrics,
 		});
 
-		// 7. Call PDF generation service
-		const adminUrl = process.env.ADMIN_APP_URL || "http://localhost:5050";
-		const pdfResponse = await fetch(`${adminUrl}/api/pdf-generate`, {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				htmlContent: html,
-				templateName: "Journal",
-				templateId: "journal",
-			}),
-		});
-
-		if (!pdfResponse.ok) {
-			const errText = await pdfResponse.text();
-			return { error: `PDF generation failed: ${errText}` };
-		}
-
-		const pdfBuffer = await pdfResponse.arrayBuffer();
-		const pdfBytes = new Uint8Array(pdfBuffer);
-
-		// 8. Upload to Box
+		// 7. Generate PDF and upload to Box (graceful — digest created even if PDF fails)
 		let boxFileId: string | undefined;
 		let boxFileUrl: string | undefined;
 
-		if (journal.boxFolderId) {
-			try {
-				const uploadResult = (await ctx.runAction(
-					internal.box.uploadFileToFolder,
-					{
-						folderId: journal.boxFolderId,
-						fileName: `Journal_Week_${new Date(weekStarting).toISOString().split("T")[0]}.pdf`,
-						content: Array.from(pdfBytes),
-					},
-				)) as { id: string; name: string } | null;
-				boxFileId = uploadResult?.id;
-				boxFileUrl = uploadResult?.id
-					? `https://app.box.com/file/${uploadResult.id}`
-					: undefined;
-			} catch (err) {
-				console.error("Box upload failed:", err);
-				// Continue — PDF is generated, Box upload can be retried
+		try {
+			const adminUrl = process.env.ADMIN_APP_URL || "http://localhost:5050";
+			const pdfResponse = await fetch(`${adminUrl}/api/pdf-generate`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					htmlContent: html,
+					templateName: "Journal",
+					templateId: "journal",
+				}),
+			});
+
+			if (!pdfResponse.ok) {
+				const errText = await pdfResponse.text();
+				console.warn(`PDF generation failed (non-fatal): ${errText}`);
+			} else {
+				const pdfBuffer = await pdfResponse.arrayBuffer();
+				const pdfBytes = new Uint8Array(pdfBuffer);
+
+				// 8. Upload to Box
+				if (journal.boxFolderId) {
+					try {
+						const uploadResult = (await ctx.runAction(
+							internal.box.uploadFileToFolder,
+							{
+								folderId: journal.boxFolderId,
+								fileName: `Journal_Week_${new Date(weekStarting).toISOString().split("T-")[0]}.pdf`,
+								content: Array.from(pdfBytes),
+							},
+						)) as { id: string; name: string } | null;
+						boxFileId = uploadResult?.id;
+						boxFileUrl = uploadResult?.id
+							? `https://app.box.com/file/${uploadResult.id}`
+							: undefined;
+					} catch (err) {
+						console.error("Box upload failed:", err);
+					}
+				}
 			}
+		} catch (err) {
+			console.warn("PDF generation unavailable (non-fatal):", err);
 		}
 
 		// 9. Save digest record
-		await ctx.runMutation(api.journalDigests.create, {
+		await ctx.runMutation(internal.journalDigests.internalCreate, {
 			journalId: args.journalId,
 			narrativeId: activeNarrative?._id as Id<"journalNarratives"> | undefined,
 			weekStarting,
@@ -669,7 +675,7 @@ export const generateJournalDigest = internalAction({
 
 		// 10. Update narrative status
 		if (activeNarrative) {
-			await ctx.runMutation(api.journalNarratives.updateStatus, {
+			await ctx.runMutation(internal.journalNarratives.internalUpdateStatus, {
 				id: activeNarrative._id as Id<"journalNarratives">,
 				status: "sent",
 			});
@@ -773,11 +779,11 @@ export const generateJournalDigest = internalAction({
 
 				// Update digest record with delivery info + Resend ID
 				const digestRecord = (await ctx.runQuery(
-					api.journalDigests.getByJournalAndWeek,
+					internal.journalDigests.internalGetByJournalAndWeek,
 					{ journalId: args.journalId, weekStarting },
 				)) as { _id: string } | null;
 				if (digestRecord) {
-					await ctx.runMutation(api.journalDigests.markDelivered, {
+					await ctx.runMutation(internal.journalDigests.internalMarkDelivered, {
 						id: digestRecord._id as Id<"journalDigests">,
 						to: journal.digestRecipients,
 						resendId: sendResult?.id,
@@ -810,7 +816,7 @@ export const processAllJournals = internalAction({
 		results: Array<Record<string, unknown>>;
 	}> => {
 		const journals = (await ctx.runQuery(
-			api.clientJournals.listActive,
+			internal.clientJournals.internalListActive,
 			{},
 		)) as Array<{ _id: string }>;
 		const weekStarting = getWeekStarting();
@@ -850,8 +856,7 @@ export const generateCloseSummary = internalAction({
 		ctx,
 		args,
 	): Promise<
-		| { error: string }
-		| { success: true; boxFileId: string | undefined }
+		{ error: string } | { success: true; boxFileId: string | undefined }
 	> => {
 		// Load journal
 		const journal = (await ctx.runQuery(api.clientJournals.get, {
@@ -866,7 +871,7 @@ export const generateCloseSummary = internalAction({
 		if (!journal) return { error: "Journal not found" };
 
 		// Load chapter
-		const chapter = (await ctx.runQuery(api.journalChapters.get, {
+		const chapter = (await ctx.runQuery(internal.journalChapters.internalGet, {
 			id: args.chapterId,
 		})) as {
 			_id: string;
@@ -879,9 +884,12 @@ export const generateCloseSummary = internalAction({
 		if (!chapter) return { error: "Chapter not found" };
 
 		// Load all entries for this chapter's period
-		const entries = (await ctx.runQuery(api.journalEntries.listByJournal, {
-			journalId: args.journalId,
-		})) as Array<{
+		const entries = (await ctx.runQuery(
+			internal.journalEntries.internalListByJournal,
+			{
+				journalId: args.journalId,
+			},
+		)) as Array<{
 			visibleToClient: boolean;
 			occurredAt: number;
 			entryType: string;
@@ -902,7 +910,10 @@ export const generateCloseSummary = internalAction({
 			}
 			// Fallback: filter by time range
 			if (chapter.startedAt && chapter.completedAt) {
-				return e.occurredAt >= chapter.startedAt && e.occurredAt <= chapter.completedAt;
+				return (
+					e.occurredAt >= chapter.startedAt &&
+					e.occurredAt <= chapter.completedAt
+				);
 			}
 			return false;
 		});
@@ -1019,7 +1030,7 @@ export const generateCloseSummary = internalAction({
 		}
 
 		// Mark chapter as completed with close summary
-		await ctx.runMutation(api.journalChapters.complete, {
+		await ctx.runMutation(internal.journalChapters.internalComplete, {
 			id: args.chapterId,
 			closeSummaryBoxFileId: boxFileId,
 		});

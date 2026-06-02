@@ -147,7 +147,7 @@ export function DealWaterfallTable({ results, state }: Props) {
         PE rollover equity ($
         {Math.round(results.peRolloverFV / 1000)}k future value) assumes 1.8× return over 6 years with no
         governance rights and no guaranteed liquidity. Actual return may be materially less. ESOP seller
-        note (20–40%) not shown separately — held until the SBA loan is fully repaid.
+        note (20–40%) not shown separately — held until the senior loan is fully repaid.
       </p>
     </div>
   );

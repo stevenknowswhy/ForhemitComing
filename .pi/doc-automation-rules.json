@@ -1,0 +1,188 @@
+{
+  "version": "1.0.0",
+  "description": "Automation rules for Document Manager and Document Organizer. Controls when skills fire automatically, what scope they cover, and whether human approval is required.",
+
+  "manager": {
+    "skill": "document-manager",
+    "version": "3.3.0",
+
+    "triggers": {
+      "pre_commit": {
+        "enabled": true,
+        "description": "Runs on every commit when staged .md files are detected. Blocks commits with missing timestamps or Purpose lines.",
+        "scope": "staged_files_only",
+        "mode": "auto-clean",
+        "blocks_commit": true,
+        "checks": ["timestamp_present", "purpose_present", "god_file_consistent"],
+        "skip_if_no_md": true
+      },
+
+      "post_merge": {
+        "enabled": true,
+        "description": "Runs after git merge or rebase completes. Reconciles God file with any path changes.",
+        "scope": "docs/,README.md",
+        "mode": "auto-clean",
+        "blocks_commit": false,
+        "trigger_command": "git merge HEAD || git rebase --abort"
+      },
+
+      "post_organizer": {
+        "enabled": true,
+        "description": "Runs after the Organizer completes a live move. Reconciles manifest, updates paths, rewrites links.",
+        "scope": "docs/,README.md",
+        "mode": "auto-clean",
+        "blocks_commit": false,
+        "reads_manifest": true
+      },
+
+      "nightly_cron": {
+        "enabled": false,
+        "description": "Nightly drift detection. Catches stale files, orphan candidates, missing timestamps.",
+        "scope": "docs/,README.md",
+        "mode": "auto-clean",
+        "notify": true,
+        "schedule": "0 2 * * *"
+      },
+
+      "session_resume": {
+        "enabled": true,
+        "description": "Runs when resuming work after a crash or interrupt. Verifies invariants.",
+        "scope": "docs/,README.md",
+        "mode": "auto-clean",
+        "blocks_commit": false
+      },
+
+      "pre_release": {
+        "enabled": true,
+        "description": "Full audit before release or deploy. Dry-run only — reports issues without fixing.",
+        "scope": "docs/,README.md",
+        "mode": "dry-run",
+        "blocks_commit": false,
+        "notify": true
+      }
+    }
+  },
+
+  "organizer": {
+    "skill": "document-organizer",
+    "version": "1.2.0",
+
+    "triggers": {
+      "new_file_detected": {
+        "enabled": true,
+        "description": "Runs when new .md files are detected at root level or in unclassified locations. Classifies and suggests moves.",
+        "scope": {
+          "scan_dirs": ["./"],
+          "include_patterns": ["*.md"],
+          "exclude_patterns": ["docs/**", "apps/**", "packages/**", ".pi/**", ".atl/**", ".worktrees/**", ".git/**", "node_modules/**"]
+        },
+        "mode": "auto-move",
+        "requires_manager_first": true,
+        "requires_approval": false,
+        "auto_rules_file": ".pi/organizer-rules.json"
+      },
+
+      "docs_internal_reorganize": {
+        "enabled": true,
+        "description": "Runs when flat files inside docs/ should be reclassified into subdirectories.",
+        "scope": {
+          "scan_dirs": ["docs/"],
+          "include_patterns": ["*.md"],
+          "exclude_patterns": ["docs/GOD.md", "docs/.GOD.md.bak", "docs/archive/**"]
+        },
+        "mode": "auto-move",
+        "requires_manager_first": true,
+        "requires_approval": false,
+        "auto_rules_file": ".pi/organizer-rules.json"
+      },
+
+      "nightly_cron": {
+        "enabled": false,
+        "description": "Nightly classification pass. Catches new unclassified files.",
+        "scope": {
+          "scan_dirs": ["./"],
+          "exclude_patterns": ["apps/**", "packages/**", ".pi/**", ".atl/**", ".worktrees/**"]
+        },
+        "mode": "auto-move",
+        "requires_manager_first": true,
+        "requires_approval": false,
+        "schedule": "0 3 * * *"
+      }
+    },
+
+    "auto_scope_rules": {
+      "description": "Defines which files the Organizer can automatically move without human approval.",
+      "allowed_auto_move": [
+        "Root-level .md files not matching code_dir patterns",
+        "Files inside docs/ that need reclassification into docs/ subdirectories"
+      ],
+      "never_auto_move": [
+        "Files inside apps/, packages/, src/, lib/ (code-co-located)",
+        "Files inside .pi/, .atl/, .pi-lens/, .worktrees/ (tool-internal)",
+        "docs/GOD.md and docs/.GOD.md.bak (protected)",
+        "Any file listed in the God file Active Documents table that has been active for < 7 days",
+        "Any file that would produce a collision resolution (same filename exists at target)"
+      ],
+      "collision_policy": "If a move would produce a collision, skip the file and log COLLISION_SKIPPED. Do not auto-rename."
+    }
+  },
+
+  "pipeline": {
+    "description": "Defines the full Manager → Organizer → Manager pipeline for manual invocation.",
+
+    "full_reorganize": {
+      "steps": [
+        {
+          "step": 1,
+          "skill": "document-manager",
+          "args": "--auto-clean",
+          "description": "Initial scan: timestamps, Purpose, God file, lifecycle state"
+        },
+        {
+          "step": 2,
+          "skill": "document-organizer",
+          "args": "--dry-run",
+          "scope": "new_file_detected,docs_internal_reorganize",
+          "description": "Classify files, report planned moves. No filesystem changes."
+        },
+        {
+          "step": 3,
+          "skill": "human_approval",
+          "description": "Human reviews planned moves. Approves or rejects."
+        },
+        {
+          "step": 4,
+          "skill": "document-organizer",
+          "args": "--auto-move",
+          "scope": "approved_moves_only",
+          "description": "Execute approved moves. Write manifest."
+        },
+        {
+          "step": 5,
+          "skill": "document-manager",
+          "args": "--auto-clean",
+          "description": "Reconcile manifest. Update paths. Rewrite links. Final report."
+        }
+      ]
+    }
+  },
+
+  "enforcement": {
+    "pre_commit_strict_mode": {
+      "description": "When true, the pre-commit hook blocks commits. When false, it only warns.",
+      "block_on_missing_timestamp": true,
+      "block_on_missing_purpose": true,
+      "block_on_stale_god_file": false,
+      "auto_fix_before_commit": true,
+      "auto_fix_scope": "timestamp_and_purpose_only"
+    },
+
+    "skip_conditions": {
+      "skip_if_ci": true,
+      "ci_env_var": "CI",
+      "skip_if_merge_conflict": true,
+      "skip_if_rebase_in_progress": true,
+      "skip_if_no_md_staged": true
+    }
+  }
+}

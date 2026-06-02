@@ -7,15 +7,27 @@
 
 // Pipeline stages (admin's sales-process stages — reflects actual business flow)
 export const PIPELINE_STAGES = [
+	// Legacy
 	"First contact",
 	"Intro call",
 	"NDA sent",
 	"Feasibility",
 	"Term sheet",
 	"LOI signed",
-	"Closed",
 	"On hold",
 	"Dead",
+	// Stewardship
+	"Identified",
+	"Connected",
+	"Nurturing",
+	"Exploring",
+	"Engaged",
+	"Committed",
+	"In Process",
+	"Closed",
+	"Not a Fit",
+	"Lost",
+	"Recycled",
 ] as const;
 
 export type PipelineStage = (typeof PIPELINE_STAGES)[number];
@@ -42,6 +54,7 @@ export const CRM_VIEWS = [
 	"calendar",
 	"analytics",
 	"queue",
+	"dashboard",
 ] as const;
 export type CrmView = (typeof CRM_VIEWS)[number];
 
@@ -176,6 +189,7 @@ export interface Company {
 	industry?: string;
 	size?: string;
 	revenue?: string;
+	ebitda?: string;
 	website?: string;
 	address?: string;
 	location?: string;
@@ -327,6 +341,7 @@ export interface CompanyFormData {
 	industry?: string;
 	size?: string;
 	revenue?: string;
+	ebitda?: string;
 	website?: string;
 	address?: string;
 	stage: PipelineStage;

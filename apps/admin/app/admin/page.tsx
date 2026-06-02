@@ -4,8 +4,10 @@ import { useEffect, useMemo, useId, useState } from "react";
 import { useQuery } from "convex/react";
 import { useUser } from "@clerk/nextjs";
 import { api } from "@/convex/_generated/api";
+import type { Id } from "@/convex/_generated/dataModel";
 import { isSuperAdmin } from "@/lib/clerk";
 import Link from "next/link";
+import { Building2 } from "lucide-react";
 
 // Recharts
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
@@ -579,7 +581,27 @@ export default function AdminDashboardPage() {
 	const userEmail = user?.emailAddresses[0]?.emailAddress;
 	const isSuperAdminUser = isSuperAdmin(userEmail);
 
+	// ── Chart mode state ───────────────────────────────────────
+	const [selectedCompanyId, setSelectedCompanyId] =
+		useState<Id<"crmCompanies"> | null>(null);
+
+	// Aggregate data (default)
 	const phaseData = useQuery(api.pipelinePhases.getPhaseStats);
+
+	// Per-deal data (only when company selected)
+	const perDealData = useQuery(
+		api.dealTrackerChart.getPhaseChartStats,
+		selectedCompanyId ? { companyId: selectedCompanyId } : "skip",
+	);
+
+	// Company list for dropdown (active deals only)
+	const companies = useQuery(api.crmCompanies.list);
+	const activeCompanies = useMemo(
+		() =>
+			companies?.filter((c) => c.stage !== "Dead" && c.stage !== "On hold") ??
+			[],
+		[companies],
+	);
 
 	const [ghostData, setGhostData] = useState<GhostDashboardData | null>(null);
 	useEffect(() => {
@@ -649,7 +671,51 @@ export default function AdminDashboardPage() {
 
 			{/* Pipeline Phase Card */}
 			<section>
-				{phaseData?.phases && <PhaseRadialChart phases={phaseData.phases} />}
+				{/* Company selector — always visible */}
+				<div
+					className={`mb-3 flex items-center gap-3 rounded-lg border ${C.border} ${C.card} px-4 py-3`}
+				>
+					<Building2
+						className="w-4 h-4 shrink-0"
+						style={{ color: "var(--stone)" }}
+					/>
+					<Select
+						value={selectedCompanyId ?? "__all__"}
+						onValueChange={(v) =>
+							setSelectedCompanyId(
+								v === "__all__" ? null : (v as Id<"crmCompanies">),
+							)
+						}
+					>
+						<SelectTrigger className={`w-full max-w-xs h-9 text-sm ${C.primary}`}>
+							<SelectValue placeholder="All Deals" />
+						</SelectTrigger>
+						<SelectContent>
+							<SelectItem value="__all__">All Deals</SelectItem>
+							{activeCompanies.map((company) => (
+								<SelectItem key={company._id} value={company._id}>
+									{company.name}
+									{company.ref ? ` (${company.ref})` : ""}
+								</SelectItem>
+							))}
+						</SelectContent>
+					</Select>
+				</div>
+
+				{/* Chart — switches between aggregate and per-deal */}
+				{selectedCompanyId ? (
+					<PhaseRadialChart
+						rings={perDealData?.rings}
+						gates={perDealData?.gates}
+						summary={perDealData?.summary}
+						hasData={perDealData?.hasData}
+						isLoading={perDealData === undefined}
+					/>
+				) : (
+					phaseData?.phases && (
+						<PhaseRadialChart aggregatePhases={phaseData.phases} />
+					)
+				)}
 			</section>
 
 			{/* Charts */}

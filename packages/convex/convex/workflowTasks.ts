@@ -4,6 +4,9 @@ import type { Id } from "./_generated/dataModel";
 import { api, internal } from "./_generated/api";
 import { shouldCreateWorkflowTask } from "./workflowService";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { resolveActor } from "./lib/resolveActor";
 
 // Stage type matching schema union
 type DealStage =
@@ -206,6 +209,22 @@ export const transitionDealStage = mutation({
 			}
 		}
 
+		// Log stage change to business log
+		const actor = await resolveActor(ctx);
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.DEAL_STAGE_CHANGED,
+			category: "deal",
+			summary: `Stage: ${oldStage} → ${newStage}`,
+			clientSummary: `Your deal has advanced to the ${newStage} phase`,
+			source: "admin_ui",
+			visibility: "external",
+			companyId,
+			scopeType: "company",
+			scopeId: companyId,
+			metadata: { oldStage, newStage, tasksCreated: createdTasks.length },
+		});
+
 		// Journal entry for stage transition
 		await ctx.runMutation(api.journalEntries.autoLog, {
 			companyId: args.companyId,
@@ -227,16 +246,15 @@ export const transitionDealStage = mutation({
 				});
 			if (journal) {
 				journalIdForCloseSummary = journal._id;
-				const result: { closedChapterId?: string } =
-					await ctx.runMutation(
-						api.journalChapters.closeAndAdvance,
-						{
-							journalId: journal._id as Id<"clientJournals">,
-							oldStage: oldStage || "Unknown",
-							newStage,
-							chapterNumber: journal.chapterNumber,
-						},
-					);
+				const result: { closedChapterId?: string } = await ctx.runMutation(
+					api.journalChapters.closeAndAdvance,
+					{
+						journalId: journal._id as Id<"clientJournals">,
+						oldStage: oldStage || "Unknown",
+						newStage,
+						chapterNumber: journal.chapterNumber,
+					},
+				);
 				closedChapterId = result.closedChapterId;
 			}
 		} catch (chapterErr) {
@@ -309,6 +327,25 @@ export const markTaskCompleted = mutation({
 		// Journal entry
 		const template = await ctx.db.get(task.templateId);
 		const templateTitle = template?.title || "Task";
+
+		// Log task completion to business log
+		const actor = await resolveActor(ctx);
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.TASK_COMPLETED,
+			category: "task",
+			summary: `Task completed: ${templateTitle}`,
+			clientSummary: `A task has been completed`,
+			source: "admin_ui",
+			visibility: "external",
+			companyId: task.companyId,
+			scopeType: "company",
+			scopeId: task.companyId,
+			entityType: "workflowTask",
+			entityId: args.workflowTaskId,
+			metadata: { templateTitle },
+		});
+
 		await ctx.runMutation(api.journalEntries.autoLog, {
 			companyId: task.companyId,
 			entryType: "work",

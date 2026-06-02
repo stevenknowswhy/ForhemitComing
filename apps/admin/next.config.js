@@ -6,6 +6,10 @@ const nextConfig = {
 	experimental: {
 		externalDir: true,
 	},
+	// Increase max header size — Clerk cookies can exceed the default 16KB limit
+	httpAgentOptions: {
+		maxHeaderSize: 32768,
+	},
 	// Lockfile in a parent directory (e.g. ~/package-lock.json) makes Next pick the wrong root;
 	// without this, dev may never listen / Turbopack resolves the wrong tree.
 	turbopack: {
@@ -35,6 +39,28 @@ const nextConfig = {
 	},
 	async headers() {
 		return [
+			// Embed routes: allow Box to iframe these pages
+			{
+				source: "/embed/:path*",
+				headers: [
+					{
+						key: "Content-Security-Policy",
+						value: [
+							"default-src 'self'",
+							"script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+							"style-src 'self' 'unsafe-inline'",
+							"font-src 'self'",
+							"img-src 'self' data:",
+							"connect-src 'self' https://api.convex.dev https://striped-puma-587.convex.cloud wss://striped-puma-587.convex.cloud",
+							"frame-ancestors https://*.box.com https://app.box.com",
+						].join("; "),
+					},
+					{
+						key: "X-Frame-Options",
+						value: "ALLOW-FROM https://app.box.com",
+					},
+				],
+			},
 			{
 				source: "/(.*)",
 				headers: [

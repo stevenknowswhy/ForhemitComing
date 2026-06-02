@@ -87,7 +87,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
     <table class="calc-table">
       <tr><th>Item</th><th class="amount">Amount</th></tr>
       <tr><td>Total purchase price</td><td class="amount">{{indicativeFMV}}</td></tr>
-      <tr><td>Day 1 cash (SBA proceeds)</td><td class="amount">{{day1Cash}}</td></tr>
+      <tr><td>Day 1 cash (Lender proceeds)</td><td class="amount">{{day1Cash}}</td></tr>
       <tr><td>Seller note (deferred)</td><td class="amount">{{sellerNoteAmount}}</td></tr>
       <tr><td>Seller note interest ({{sellerNoteRate}})</td><td class="amount">{{sellerNoteInterest}}</td></tr>
       <tr><td>Total consideration</td><td class="amount">{{totalConsideration}}</td></tr>
@@ -131,7 +131,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
     <div class="fr"><label>Annual payment</label><span style="flex:1;">{{annualPayment}}</span></div>
     <div class="fr"><label>Total payments</label><span style="flex:1;">{{totalPayments}}</span></div>
     <div class="fr"><label>Total interest</label><span style="flex:1;">{{totalInterest}}</span></div>
-    <div class="co"><strong>Note:</strong> The seller note is subordinated to the SBA loan. Payments begin after the SBA loan is current. During subordination, interest accrues but is not paid. Once subordination is released, principal and interest payments begin.</div>
+    <div class="co"><strong>Note:</strong> The seller note is subordinated to the senior loan. Payments begin after the senior loan is current. During subordination, interest accrues but is not paid. Once subordination is released, principal and interest payments begin.</div>
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 06</span><span class="st">Next Steps</span></div><div class="sb">
@@ -139,7 +139,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
     <div class="sl">
       <div class="si"><span class="si-n">1.</span><span><strong>Get a formal appraisal.</strong> The independent appraiser will determine the actual FMV based on QofE analysis.</span></div>
       <div class="si"><span class="si-n">2.</span><span><strong>Consult your CPA.</strong> Have your CPA verify the tax calculations using your actual basis, filing status, and state.</span></div>
-      <div class="si"><span class="si-n">3.</span><span><strong>Review the capital stack.</strong> The final Day 1 cash depends on the SBA loan terms, which are confirmed after lender underwriting.</span></div>
+      <div class="si"><span class="si-n">3.</span><span><strong>Review the capital stack.</strong> The final Day 1 cash depends on the lender loan terms, which are confirmed after lender underwriting.</span></div>
     </div>
     <div class="fr"><label>Email</label><span style="flex:1;color:#111;">deals&#64;forhemit.com</span></div>
     <div class="fr"><label>Reference</label><span style="flex:1;">{{ref}}</span></div>
