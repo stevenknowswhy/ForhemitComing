@@ -1,3 +1,9 @@
+06/02/26 10:36 AM PT
+06/02/26 10:34 AM PT
+06/02/26 10:31 AM PT
+06/02/26 10:28 AM PT
+Purpose: (auto-inserted by pre-commit — please update)
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -704,7 +710,7 @@ const PHASES = [
 
 const GATES = {
   45:{ name:'Gate 1 — FMV Adequacy Letter', desc:'The trustee\'s appraiser must confirm the purchase price is fair to the ESOP under ERISA. No letter = no LOI. Full stop.' },
-  60:{ name:'Gate 2 — SBA Commitment Letter', desc:'Lender issues formal commitment defining the capital stack. No legal document drafting begins before this arrives.' },
+  60:{ name:'Gate 2 — Lender Commitment Letter', desc:'Lender issues formal commitment defining the capital stack. No legal document drafting begins before this arrives.' },
   75:{ name:'Gate 3 — QofE EBITDA Within 15% of LOI', desc:'Adjusted EBITDA must be within 15% of the LOI assumption. Outside that band: stop, renegotiate the structure, then draft.' },
   90:{ name:'Gate 4 — Trustee COOP Sign-off', desc:'Forhemit delivers this gate. The trustee formally accepts the COOP, confirming the business is operationally viable post-close.' },
 };
@@ -723,7 +729,7 @@ const EVENTS = [
   {day:1,dur:1,role:'owner',type:'Milestone',title:'$25K Retainer Wire',short:'Retainer wire',desc:'The $25,000 non-refundable retainer wire initiates the Forhemit engagement. Covers COOP pre-assessment, deal structuring coordination, and advisor assembly from Day 1 through closing.'},
   {day:1,dur:7,role:'owner',type:'Deliverable',title:'Upload: Tax Returns & Financials',short:'Upload financials',desc:'Last 3 years business tax returns + year-end financials + current YTD P&L, balance sheet, cash flow + AR and AP agings.'},
   {day:1,dur:14,role:'forhemit',type:'Action',title:'COOP Intake — Engagement Begins',short:'COOP intake',desc:'Forhemit retained Day 1. COOP intake across all four tracks begins immediately. Early findings directly inform the FMV appraisal, lender package, and trustee\'s initial risk assessment.'},
-  {day:1,dur:10,role:'lender',type:'Action',title:'SBA Credit Pre-Screen',short:'Credit pre-screen',desc:'Lender credit pre-screen: industry fit, collateral mix, goodwill percentage, deal size vs. SBA limits. Output: Credit fit memo.'},
+  {day:1,dur:10,role:'lender',type:'Action',title:'Lender Credit Pre-Screen',short:'Credit pre-screen',desc:'Lender credit pre-screen: industry fit, collateral mix, goodwill percentage, deal size vs. lender limits. Output: Credit fit memo.'},
   {day:3,dur:10,role:'broker',type:'Action',title:'Marketability Analysis',short:'Marketability analysis',desc:'Broker prepares marketability analysis and preliminary valuation range. Seller expectations check: books, management depth, landlord situation, key contracts.'},
   {day:6,dur:8,role:'owner',type:'Deliverable',title:'Upload: Entity Docs & Org Chart',short:'Entity docs',desc:'Legal entity documents + detailed org chart with titles and reporting lines.'},
   {day:6,dur:8,role:'legal',type:'Action',title:'Corporate Clean-up',short:'Corporate clean-up',desc:'Sell-side counsel: entity verification, minute book, options/warrants review, contract and legal risk inventory.'},
@@ -732,9 +738,9 @@ const EVENTS = [
   {day:10,dur:12,role:'legal',type:'Action',title:'Initial ERISA Review',short:'ERISA review',desc:'ESOP/ERISA counsel reviews corporate structure, preliminary ESOP plan design, ERISA compliance, and 409(p) testing considerations.'},
   {day:12,dur:2,role:'owner',type:'Deliverable',title:'Upload: Facilities & Tech',short:'Facilities/tech',desc:'Real estate info + technology inventory.'},
   {day:13,dur:1,role:'owner',type:'Deliverable',title:'Upload: HR Data & Employee Census',short:'HR data',desc:'Employee census + summary of benefits + employment/non-compete agreements + list of key people.'},
-  {day:7,dur:7,role:'forhemit',type:'Deadline',title:'Trustee & ERISA Counsel Seated',short:'Team seated',desc:'Independent ESOP trustee retained by Day 7. ESOP/ERISA counsel engaged by Day 7. SBA lender confirmed with ESOP-specific vetting call by Day 10.'},
+  {day:7,dur:7,role:'forhemit',type:'Deadline',title:'Trustee & ERISA Counsel Seated',short:'Team seated',desc:'Independent ESOP trustee retained by Day 7. ESOP/ERISA counsel engaged by Day 7. Lender confirmed with ESOP-specific vetting call by Day 10.'},
   {day:1,dur:7,role:'broker',type:'Action',title:'Confirm Listing Agreement Covers ESOP',short:'Listing check',desc:'Verify listing agreement covers ESOP transaction. Commission rate applies regardless of buyer type.'},
-  {day:14,dur:1,role:'forhemit',type:'Milestone',title:'Phase 1 Gate Check',short:'Phase 1 check',desc:'Trustee seated. ERISA counsel engaged. SBA lender confirmed. Entity structure decided. COOP intake complete.'},
+  {day:14,dur:1,role:'forhemit',type:'Milestone',title:'Phase 1 Gate Check',short:'Phase 1 check',desc:'Trustee seated. ERISA counsel engaged. Lender confirmed. Entity structure decided. COOP intake complete.'},
   {day:15,dur:30,role:'forhemit',type:'Action',title:'Full COOP Plan Draft — All 4 Tracks',short:'COOP drafted',desc:'Continuity plans written for all 4 tracks: people, systems, financial systems, governance.'},
   {day:15,dur:11,role:'legal',type:'Action',title:'ERISA Structure Memo',short:'ERISA memo',desc:'ERISA counsel issues preliminary structure memo confirming compliance, 409(p) testing, §1042 issues.'},
   {day:15,dur:6,role:'owner',type:'Deliverable',title:'Upload: Monthly Financials',short:'Monthly financials',desc:'Monthly financials for last 12–24 months + detailed revenue by customer for 3 years.'},
@@ -753,18 +759,18 @@ const EVENTS = [
   {day:48,dur:5,role:'owner',type:'Deliverable',title:'Owner Decisions: Structure & Post-Close Role',short:'Structure decisions',desc:'Owner feedback on structure + post-close role confirmation.'},
   {day:50,dur:20,role:'legal',type:'Action',title:'PSA Drafted (ERISA Counsel)',short:'PSA drafted',desc:'ERISA counsel drafts the Purchase and Sale Agreement.'},
   {day:52,dur:15,role:'broker',type:'Action',title:'LOI Negotiation with Trustee & Lender',short:'LOI negotiation',desc:'Broker runs LOI negotiation loop with trustee and lender input.'},
-  {day:55,dur:10,role:'owner',type:'Deliverable',title:'Upload: SBA Forms & QofE Clarifications',short:'SBA forms',desc:'SBA forms and personal items + additional QofE clarifications.'},
+  {day:55,dur:10,role:'owner',type:'Deliverable',title:'Upload: Lender Forms & QofE Clarifications',short:'Lender forms',desc:'Lender forms and personal items + additional QofE clarifications.'},
   {day:55,dur:15,role:'cpa',type:'Action',title:'QofE Report Preparation',short:'QofE prep',desc:'CPA prepares Quality of Earnings report. Adjusted EBITDA calculation.'},
   {day:55,dur:5,role:'forhemit',type:'Deadline',title:'TPA Engaged',short:'TPA engaged',desc:'Third Party Administrator engaged for annual plan administration.'},
   {day:52,dur:1,role:'owner',type:'Milestone',title:'LOI Executed',short:'LOI signed',desc:'Price, structure, capital stack locked. The deal becomes real.'},
-  {day:60,dur:1,role:'lender',type:'Gate',title:'GATE 2 — SBA Commitment Letter',short:'⬥ Gate 2',desc:'Lender issues formal commitment defining the capital stack.',gate:true},
+  {day:60,dur:1,role:'lender',type:'Gate',title:'GATE 2 — Lender Commitment Letter',short:'⬥ Gate 2',desc:'Lender issues formal commitment defining the capital stack.',gate:true},
   {day:70,dur:5,role:'owner',type:'Deliverable',title:'QofE Follow-up & Key Customer Confirms',short:'QofE follow-up',desc:'Final answers for QofE follow-up requests + key customer confirmations.'},
   {day:75,dur:1,role:'cpa',type:'Gate',title:'GATE 3 — QofE EBITDA Validated',short:'⬥ Gate 3',desc:'QofE adjusted EBITDA must be within 15% of the LOI assumption.',gate:true},
   {day:76,dur:30,role:'trustee',type:'Action',title:'Trustee COOP Review & Counsel Review',short:'Trustee review',desc:'Trustee reviews operational readiness, key-man mitigation, post-close plans.'},
   {day:80,dur:5,role:'owner',type:'Deliverable',title:'Decisions: ESOP Plan Design & Governance',short:'Plan design',desc:'Owner decisions on ESOP plan design + desired governance post-close.'},
   {day:80,dur:20,role:'legal',type:'Action',title:'Seller Note, PSA Resolution & Closing Prep',short:'Legal close prep',desc:'Seller note and subordination agreement drafted. PSA business-point resolution by Day 88.'},
   {day:82,dur:18,role:'broker',type:'Action',title:'Final Terms Negotiation',short:'Final terms',desc:'Broker negotiates final purchase price adjustments, working capital targets, closing conditions.'},
-  {day:85,dur:15,role:'lender',type:'Action',title:'SBA Closing Checklist Issued',short:'SBA checklist',desc:'SBA closing checklist issued listing all required items. Final credit sign-off.'},
+  {day:85,dur:15,role:'lender',type:'Action',title:'Lender Closing Checklist Issued',short:'Lender checklist',desc:'Lender closing checklist issued listing all required items. Final credit sign-off.'},
   {day:88,dur:7,role:'owner',type:'Deliverable',title:'PSA Redlines & Contract Consents',short:'PSA redlines',desc:'Redline feedback on PSA business points + remaining consents.'},
   {day:90,dur:1,role:'forhemit',type:'Gate',title:'GATE 4 — Trustee COOP Sign-off',short:'⬥ Gate 4',desc:'Forhemit delivers Gate 4. Trustee confirms operational viability post-close.',gate:true},
   {day:92,dur:8,role:'owner',type:'Deliverable',title:'Management Agreement Decisions',short:'Mgmt. agreements',desc:'Owner decisions on management and key-employee agreements.'},
@@ -778,8 +784,8 @@ const EVENTS = [
   {day:118,dur:2,role:'broker',type:'Milestone',title:'Commission & Closing Statement Review',short:'Commission review',desc:'Broker reviews closing statement and confirms commission mechanics.'},
   {day:120,dur:1,role:'owner',type:'Gate',title:'CLOSING DAY',short:'⬥ Closing Day',desc:'Seller executes all closing documents. Funds wired same day.',gate:true},
   {day:120,dur:1,role:'forhemit',type:'Milestone',title:'Close Complete — 100% Employee Owned',short:'Close complete',desc:'ESOP plan adopted. Trustee takes title. Every eligible employee is now an owner.'},
-  {day:120,dur:1,role:'broker',type:'Milestone',title:'Commission Paid from Proceeds',short:'Commission paid',desc:'Broker commission paid from SBA loan proceeds at closing.'},
-  {day:120,dur:1,role:'lender',type:'Milestone',title:'SBA Loan Proceeds Wired',short:'Funds wired',desc:'SBA loan proceeds disbursed. All closing costs settled.'},
+  {day:120,dur:1,role:'broker',type:'Milestone',title:'Commission Paid from Proceeds',short:'Commission paid',desc:'Broker commission paid from lender loan proceeds at closing.'},
+  {day:120,dur:1,role:'lender',type:'Milestone',title:'Lender Loan Proceeds Wired',short:'Funds wired',desc:'Lender loan proceeds disbursed. All closing costs settled.'},
 ];
 
 const ROLES = ['forhemit','broker','owner','lender','trustee','legal','cpa'];

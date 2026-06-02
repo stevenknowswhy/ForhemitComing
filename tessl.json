@@ -1,0 +1,15 @@
+{
+  "name": "Forhemit",
+  "mode": "vendored",
+  "dependencies": {
+    "a-pavithraa/springboot-skills-marketplace": {
+      "version": "efa55466f755657b2b77d70daacdb0aadeeecc70",
+      "source": "https://github.com/a-pavithraa/springboot-skills-marketplace",
+      "include": {
+        "skills": [
+          "code-reviewer"
+        ]
+      }
+    }
+  }
+}

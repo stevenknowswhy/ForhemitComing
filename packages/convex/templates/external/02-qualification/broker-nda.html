@@ -58,7 +58,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="dst">Deal Flow &amp; Referral Terms</div>
 
   <div class="cvg">
-    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerFirstName}} {{brokerLastName}}</div></div>
     <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
     <div class="cvc"><div class="cvc-l">Date</div><div class="cvc-v">{{sentDate}}</div></div>
     <div class="cvc"><div class="cvc-l">Reference</div><div class="cvc-v">{{ref}}</div></div>
@@ -66,7 +66,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Parties</span></div><div class="sb">
     <div class="fr"><label>Confidant</label><span style="flex:1;">Forhemit Transition Stewardship</span></div>
-    <div class="fr"><label>Broker</label><span style="flex:1;">{{brokerName}}</span></div>
+    <div class="fr"><label>Broker</label><span style="flex:1;">{{brokerFirstName}} {{brokerLastName}}</span></div>
     <div class="fr"><label>Company</label><span style="flex:1;">{{companyName}}</span></div>
   </div></div>
 
@@ -128,7 +128,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
         <div style="margin-top:1rem;"><div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div><div class="s-line"></div></div>
       </div>
       <div class="sb-block">
-        <div class="sb-entity">{{brokerName}}<br><span style="font-size:0.78rem;color:var(--muted);">Broker</span></div>
+        <div class="sb-entity">{{brokerFirstName}} {{brokerLastName}}<br><span style="font-size:0.78rem;color:var(--muted);">Broker</span></div>
         <div class="s-line"></div><div class="s-lbl">Authorized Representative</div>
         <div style="margin-top:1rem;"><div style="font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--brass);font-weight:400;">Date</div><div class="s-line"></div></div>
       </div>

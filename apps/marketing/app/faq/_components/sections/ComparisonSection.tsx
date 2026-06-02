@@ -6,8 +6,8 @@ const comparisonData = [
   {
     feature: "Governance / Control",
     consultant: "None",
-    partner: "High (Creates regulatory/SBA issues)",
-    forhemit: "None (100% compliant with SBA/ERISA)",
+    partner: "High (Creates regulatory/lender issues)",
+    forhemit: "None (100% compliant with lender/ERISA)",
   },
   {
     feature: "Enforcement Power",

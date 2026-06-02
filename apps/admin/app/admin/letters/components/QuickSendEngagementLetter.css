@@ -1,0 +1,544 @@
+/* ═══════════════════════════════════════════════════════
+   Quick Send — Engagement Letter
+   Uses admin-stitch.css variables for theme consistency
+   ═══════════════════════════════════════════════════════ */
+
+.qsel-container {
+	max-width: 900px;
+	margin: 0 auto;
+	padding: 0 1rem 2rem;
+}
+
+/* ── Header ── */
+
+.qsel-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 1rem;
+	padding-bottom: 1.2rem;
+	border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+	margin-bottom: 1.5rem;
+}
+
+.qsel-wordmark {
+	font-family: var(--font-outfit, sans-serif);
+	font-size: 1.1rem;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-primary, #1f2937);
+}
+
+.qsel-subtitle {
+	font-size: 0.75rem;
+	color: var(--text-muted, #6b7280);
+	margin-top: 0.15rem;
+}
+
+.qsel-header-right {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	flex-shrink: 0;
+}
+
+.qsel-status {
+	font-size: 0.72rem;
+	font-weight: 500;
+	color: var(--text-muted, #6b7280);
+	padding: 0.25rem 0.6rem;
+	border-radius: 4px;
+	background: var(--bg-secondary, #f9fafb);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	white-space: nowrap;
+}
+.qsel-status.success {
+	color: #16a34a;
+	border-color: rgba(22, 163, 74, 0.3);
+	background: rgba(22, 163, 74, 0.06);
+}
+.qsel-status.error {
+	color: #dc2626;
+	border-color: rgba(220, 38, 38, 0.3);
+	background: rgba(220, 38, 38, 0.06);
+}
+
+.qsel-completion {
+	font-size: 0.65rem;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--text-muted, #6b7280);
+	padding: 0.2rem 0.5rem;
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 3px;
+}
+.qsel-completion.complete {
+	color: #16a34a;
+	border-color: rgba(22, 163, 74, 0.3);
+}
+
+/* ── Company Selector ── */
+
+.qsel-section {
+	margin-bottom: 1.5rem;
+}
+
+.qsel-section-label {
+	font-size: 0.65rem;
+	font-weight: 500;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: var(--accent, #b8965a);
+	margin-bottom: 0.5rem;
+}
+
+.qsel-company-row {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+}
+
+.qsel-company-select {
+	flex: 1;
+	padding: 0.5rem 0.7rem;
+	font-size: 0.85rem;
+	font-family: var(--font-outfit, sans-serif);
+	background: var(--bg-primary, #fff);
+	color: var(--text-primary, #1f2937);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 6px;
+	outline: none;
+	cursor: pointer;
+}
+.qsel-company-select:focus {
+	border-color: var(--accent, #b8965a);
+}
+
+.qsel-company-info {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-size: 0.72rem;
+	color: var(--text-muted, #6b7280);
+	margin-top: 0.5rem;
+	padding: 0.4rem 0.7rem;
+	background: var(--bg-secondary, #f9fafb);
+	border-radius: 4px;
+}
+
+.qsel-dot {
+	color: var(--border-subtle, #d1d5db);
+}
+
+.qsel-box-ok {
+	margin-left: auto;
+	font-size: 0.6rem;
+	font-weight: 600;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: #16a34a;
+}
+
+.qsel-box-missing {
+	margin-left: auto;
+	font-size: 0.6rem;
+	font-weight: 500;
+	color: var(--text-muted, #6b7280);
+	font-style: italic;
+}
+
+/* ── Form ── */
+
+.qsel-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+}
+
+.qsel-form-section {
+	background: var(--bg-primary, #fff);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 8px;
+	padding: 1rem 1.2rem;
+}
+
+.qsel-form-section-title {
+	font-size: 0.7rem;
+	font-weight: 600;
+	letter-spacing: 0.15em;
+	text-transform: uppercase;
+	color: var(--accent, #b8965a);
+	margin-bottom: 0.8rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.qsel-field-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 0.8rem;
+}
+
+.qsel-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+.qsel-field-wide {
+	grid-column: 1 / -1;
+}
+
+.qsel-field label {
+	font-size: 0.65rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--text-muted, #6b7280);
+}
+
+.qsel-req {
+	color: #dc2626;
+}
+
+.qsel-field input,
+.qsel-field select {
+	padding: 0.45rem 0.6rem;
+	font-size: 0.85rem;
+	font-family: var(--font-outfit, sans-serif);
+	background: var(--bg-primary, #fff);
+	color: var(--text-primary, #1f2937);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 4px;
+	outline: none;
+	transition: border-color 0.15s;
+}
+.qsel-field input:focus,
+.qsel-field select:focus {
+	border-color: var(--accent, #b8965a);
+}
+.qsel-field input::placeholder {
+	color: var(--text-muted, #9ca3af);
+	font-style: italic;
+}
+
+.qsel-textarea {
+	width: 100%;
+	padding: 0.5rem 0.7rem;
+	font-size: 0.85rem;
+	font-family: var(--font-outfit, sans-serif);
+	background: var(--bg-primary, #fff);
+	color: var(--text-primary, #1f2937);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 4px;
+	outline: none;
+	resize: vertical;
+	min-height: 44px;
+}
+.qsel-textarea:focus {
+	border-color: var(--accent, #b8965a);
+}
+
+.qsel-money-input {
+	display: flex;
+	align-items: baseline;
+	gap: 0.3rem;
+}
+.qsel-money-prefix {
+	font-size: 0.85rem;
+	color: var(--text-muted, #6b7280);
+}
+.qsel-money-input input {
+	flex: 1;
+}
+
+.qsel-toggle-label {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	cursor: pointer;
+	font-size: 0.82rem;
+	font-weight: 400;
+	color: var(--text-primary, #1f2937);
+	text-transform: none;
+	letter-spacing: 0;
+}
+.qsel-toggle-label input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.qsel-tier-summary {
+	display: flex;
+	align-items: center;
+	gap: 0.8rem;
+	margin-top: 0.8rem;
+	padding: 0.6rem 0.8rem;
+	background: var(--bg-secondary, #f9fafb);
+	border-radius: 4px;
+	font-size: 0.75rem;
+}
+
+.qsel-tier-label {
+	font-weight: 600;
+	color: var(--text-primary, #1f2937);
+}
+
+.qsel-tier-total {
+	font-weight: 600;
+	color: var(--accent, #b8965a);
+	margin-left: auto;
+}
+
+.qsel-tier-detail {
+	color: var(--text-muted, #6b7280);
+	font-size: 0.7rem;
+}
+
+/* ── Action Bar ── */
+
+.qsel-actions {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+	margin-top: 1.5rem;
+	padding-top: 1.2rem;
+	border-top: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+.qsel-btn {
+	padding: 0.55rem 1rem;
+	font-size: 0.72rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	font-family: var(--font-outfit, sans-serif);
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.15s;
+	border: 1px solid transparent;
+	white-space: nowrap;
+}
+.qsel-btn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+}
+
+.qsel-btn-primary {
+	background: var(--accent, #b8965a);
+	color: #fff;
+	border-color: var(--accent, #b8965a);
+}
+.qsel-btn-primary:hover:not(:disabled) {
+	opacity: 0.9;
+}
+
+.qsel-btn-secondary {
+	background: var(--bg-primary, #fff);
+	color: var(--text-primary, #1f2937);
+	border-color: var(--border-subtle, #e5e7eb);
+}
+.qsel-btn-secondary:hover:not(:disabled) {
+	border-color: var(--accent, #b8965a);
+	color: var(--accent, #b8965a);
+}
+
+.qsel-btn-ghost {
+	background: transparent;
+	color: var(--text-muted, #6b7280);
+	border-color: transparent;
+}
+.qsel-btn-ghost:hover:not(:disabled) {
+	color: var(--text-primary, #1f2937);
+	background: var(--bg-secondary, #f9fafb);
+}
+
+.qsel-btn-sign {
+	background: #1a2238;
+	color: #fff;
+	border-color: #1a2238;
+}
+.qsel-btn-sign:hover:not(:disabled) {
+	background: #243050;
+}
+
+/* ── Modals ── */
+
+.qsel-modal-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 1000;
+	backdrop-filter: blur(2px);
+}
+
+.qsel-modal {
+	background: var(--bg-primary, #fff);
+	border-radius: 10px;
+	width: 560px;
+	max-width: 95vw;
+	max-height: 85vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.qsel-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1rem 1.2rem;
+	border-bottom: 1px solid var(--border-subtle, #e5e7eb);
+}
+.qsel-modal-header h3 {
+	font-size: 0.95rem;
+	font-weight: 600;
+	color: var(--text-primary, #1f2937);
+	margin: 0;
+}
+
+.qsel-modal-close {
+	background: none;
+	border: none;
+	font-size: 1.1rem;
+	cursor: pointer;
+	color: var(--text-muted, #6b7280);
+	padding: 0.25rem;
+}
+.qsel-modal-close:hover {
+	color: var(--text-primary, #1f2937);
+}
+
+.qsel-modal-body {
+	padding: 1.2rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.8rem;
+	overflow-y: auto;
+}
+
+.qsel-modal-field {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.qsel-modal-field label {
+	font-size: 0.65rem;
+	font-weight: 500;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--text-muted, #6b7280);
+}
+.qsel-modal-field input,
+.qsel-modal-field textarea {
+	padding: 0.5rem 0.7rem;
+	font-size: 0.85rem;
+	font-family: var(--font-outfit, sans-serif);
+	background: var(--bg-primary, #fff);
+	color: var(--text-primary, #1f2937);
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 4px;
+	outline: none;
+}
+.qsel-modal-field input:focus,
+.qsel-modal-field textarea:focus {
+	border-color: var(--accent, #b8965a);
+}
+.qsel-modal-field textarea {
+	resize: vertical;
+	min-height: 100px;
+}
+
+.qsel-modal-note {
+	font-size: 0.72rem;
+	color: var(--text-muted, #6b7280);
+	line-height: 1.5;
+	font-style: italic;
+	padding: 0.5rem 0;
+}
+
+.qsel-modal-footer {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	padding: 0.8rem 1.2rem;
+	border-top: 1px solid var(--border-subtle, #e5e7eb);
+}
+
+/* ── Broker Source ── */
+
+.qsel-broker-source {
+	display: flex;
+	gap: 0;
+	border: 1px solid var(--border-subtle, #e5e7eb);
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.qsel-radio-opt {
+	flex: 1;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.55rem 0.8rem;
+	font-size: 0.78rem;
+	font-weight: 400;
+	color: var(--text-muted, #6b7280);
+	cursor: pointer;
+	transition: all 0.15s;
+	border-right: 1px solid var(--border-subtle, #e5e7eb);
+	user-select: none;
+}
+.qsel-radio-opt:last-child {
+	border-right: none;
+}
+.qsel-radio-opt.active {
+	background: var(--bg-secondary, #f9fafb);
+	color: var(--text-primary, #1f2937);
+	font-weight: 500;
+}
+.qsel-radio-opt input[type="radio"] {
+	width: 14px;
+	height: 14px;
+	cursor: pointer;
+	accent-color: var(--accent, #b8965a);
+}
+
+.qsel-field-hint {
+	font-size: 0.68rem;
+	color: var(--text-muted, #9ca3af);
+	font-style: italic;
+	margin-top: 0.15rem;
+}
+.qsel-field-hint.qsel-warn {
+	color: #d97706;
+	font-style: normal;
+}
+
+/* ── Mobile ── */
+
+@media (max-width: 640px) {
+	.qsel-header {
+		flex-direction: column;
+	}
+	.qsel-field-grid {
+		grid-template-columns: 1fr;
+	}
+	.qsel-actions {
+		flex-direction: column;
+	}
+	.qsel-company-row {
+		flex-direction: column;
+	}
+	.qsel-tier-summary {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 0.3rem;
+	}
+}

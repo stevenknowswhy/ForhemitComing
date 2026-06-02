@@ -88,7 +88,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
       <tr><td>Seller note (subordinated)</td><td class="amount">{{sellerNoteAmount}}</td><td class="amount">{{sellerNoteRate}}</td><td class="amount">{{sellerNoteTerm}}</td></tr>
       <tr class="total"><td>Total capital</td><td class="amount" colspan="3" style="text-align:center;">{{fmv}}</td></tr>
     </table>
-    <div class="co"><strong>Structure note:</strong> The seller note is fully subordinated to the SBA loan during the initial subordination period. Interest accrues but is not paid until subordination is released (typically when DSCR exceeds the release threshold).</div>
+    <div class="co"><strong>Structure note:</strong> The seller note is fully subordinated to the senior loan during the initial subordination period. Interest accrues but is not paid until subordination is released (typically when DSCR exceeds the release threshold).</div>
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Year 1–5 Pro Forma</span></div><div class="sb">
@@ -118,7 +118,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 05</span><span class="st">Seller Economics</span></div><div class="sb">
     <p>Total seller proceeds from the ESOP transaction, including tax deferral benefits under §1042.</p>
-    <div class="fr"><label>Day 1 cash (SBA proceeds)</label><span style="flex:1;">{{day1Cash}}</span></div>
+    <div class="fr"><label>Day 1 cash (Lender proceeds)</label><span style="flex:1;">{{day1Cash}}</span></div>
     <div class="fr"><label>Seller note principal</label><span style="flex:1;">{{sellerNoteAmount}}</span></div>
     <div class="fr"><label>Seller note total payments</label><span style="flex:1;">{{sellerNoteTotalPayments}}</span></div>
     <div class="fr"><label>§1042 tax deferral benefit</label><span style="flex:1;">{{taxDeferralBenefit}}</span></div>

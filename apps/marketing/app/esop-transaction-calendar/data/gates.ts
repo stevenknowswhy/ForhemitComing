@@ -7,7 +7,7 @@ export const GATES: Record<number, GateInfo> = {
     desc: "The trustee's appraiser must confirm the purchase price is fair to the ESOP under ERISA. No letter = no LOI. Full stop.",
   },
   60: {
-    name: "Gate 2 — SBA Commitment Letter",
+    name: "Gate 2 — Lender Commitment Letter",
     desc: "Lender issues formal commitment defining the capital stack. No legal document drafting begins before this arrives.",
   },
   75: {

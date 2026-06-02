@@ -1,6 +1,14 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import {
+	internalMutation,
+	internalQuery,
+	mutation,
+	query,
+} from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { resolveActor } from "./lib/resolveActor";
 
 // ============================================
 // Queries
@@ -143,7 +151,32 @@ export const markSent = mutation({
 			sentAt: Date.now(),
 			updatedAt: Date.now(),
 		});
-		return await ctx.db.get(args.id);
+
+		const narrative = await ctx.db.get(args.id);
+
+		if (narrative) {
+			const actor = await resolveActor(ctx);
+			await logEvent(ctx, {
+				...actor,
+				eventType: LOG_ACTIONS.JOURNAL_DIGEST,
+				category: "journal",
+				summary: `Journal digest delivered for week ${new Date(narrative.weekStarting).toISOString().slice(0, 10)}`,
+				clientSummary: `Your weekly journal digest has been delivered`,
+				source: "scheduler",
+				visibility: "external",
+				companyId: narrative.clientId,
+				scopeType: "company",
+				scopeId: narrative.clientId,
+				entityType: "journalNarrative",
+				entityId: args.id,
+				metadata: {
+					weekStarting: narrative.weekStarting,
+					weekEnding: narrative.weekEnding,
+				},
+			});
+		}
+
+		return narrative;
 	},
 });
 
@@ -202,6 +235,105 @@ export const createFallback = mutation({
 
 // updateStatus — used by digest engine to mark narratives as sent
 export const updateStatus = mutation({
+	args: {
+		id: v.id("journalNarratives"),
+		status: v.union(
+			v.literal("draft"),
+			v.literal("ready"),
+			v.literal("sent"),
+			v.literal("skipped"),
+		),
+	},
+	handler: async (ctx, args) => {
+		const patch: Record<string, unknown> = {
+			status: args.status,
+			updatedAt: Date.now(),
+		};
+		if (args.status === "sent") {
+			patch.sentAt = Date.now();
+		}
+		await ctx.db.patch(args.id, patch);
+		return await ctx.db.get(args.id);
+	},
+});
+
+// ============================================
+// Internal versions (no auth, for internal actions/crons)
+// ============================================
+
+export const internalGetByJournalAndWeek = internalQuery({
+	args: {
+		journalId: v.id("clientJournals"),
+		weekStarting: v.number(),
+	},
+	handler: async (ctx, args) => {
+		return await ctx.db
+			.query("journalNarratives")
+			.withIndex("byWeek", (q) =>
+				q.eq("journalId", args.journalId).eq("weekStarting", args.weekStarting),
+			)
+			.first();
+	},
+});
+
+export const internalUpdate = internalMutation({
+	args: {
+		id: v.id("journalNarratives"),
+		narrativeText: v.optional(v.string()),
+		authorId: v.optional(v.string()),
+		authorName: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const { id, ...patch } = args;
+		const cleanPatch: Record<string, unknown> = { updatedAt: Date.now() };
+		for (const [key, value] of Object.entries(patch)) {
+			if (value !== undefined) {
+				cleanPatch[key] = value;
+			}
+		}
+		await ctx.db.patch(id, cleanPatch);
+		return await ctx.db.get(id);
+	},
+});
+
+export const internalMarkFallback = internalMutation({
+	args: {
+		id: v.id("journalNarratives"),
+		reason: v.string(),
+	},
+	handler: async (ctx, args) => {
+		await ctx.db.patch(args.id, {
+			usedFallback: true,
+			fallbackReason: args.reason,
+			updatedAt: Date.now(),
+		});
+		return await ctx.db.get(args.id);
+	},
+});
+
+export const internalCreateFallback = internalMutation({
+	args: {
+		journalId: v.id("clientJournals"),
+		clientId: v.id("crmCompanies"),
+		weekStarting: v.number(),
+		weekEnding: v.number(),
+		narrativeText: v.string(),
+	},
+	handler: async (ctx, args) => {
+		const now = Date.now();
+		return await ctx.db.insert("journalNarratives", {
+			...args,
+			authorId: "system",
+			authorName: "Auto-generated",
+			status: "draft",
+			usedFallback: true,
+			createdAt: now,
+			updatedAt: now,
+		});
+	},
+});
+
+export const internalUpdateStatus = internalMutation({
 	args: {
 		id: v.id("journalNarratives"),
 		status: v.union(

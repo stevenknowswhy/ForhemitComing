@@ -408,7 +408,8 @@ html[data-pdf="true"] .pw {
       <label class="tg-sw"><input type="checkbox" id="f-broker-tog"><span class="tg-slider"></span></label>
       <span style="font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);" id="broker-tog-lbl">No broker</span>
     </div>
-    <div class="cg broker-section hidden" id="cg-bn"><div class="cg-label">Broker Name</div><input type="text" id="f-bn" placeholder="Broker name"></div>
+    <div class="cg broker-section hidden" id="cg-bfn"><div class="cg-label">Broker First Name</div><input type="text" id="f-bfn" placeholder="First name"></div>
+    <div class="cg broker-section hidden" id="cg-bln"><div class="cg-label">Broker Last Name</div><input type="text" id="f-bln" placeholder="Last name"></div>
     <div class="cg broker-section hidden" id="cg-bf"><div class="cg-label">Broker Firm</div><input type="text" id="f-bf" placeholder="Brokerage firm"></div>
 
     <div class="cg full"><div class="cg-label">Additional Terms (Optional)</div><textarea id="f-ad" placeholder="Deal-specific terms, conditions, or modifications..." rows="2"></textarea></div>
@@ -442,8 +443,8 @@ html[data-pdf="true"] .pw {
   <div class="sec"><div class="sh"><span class="sn">§ 02</span><span class="st">Scope of Services</span></div><div class="sb">
     <p>Forhemit's engagement encompasses the following services across a structured 120-day transaction process, organized into five phases with four Hard Stop gates:</p>
     <div class="sl">
-      <div class="si"><span class="si-n">01</span><span><strong>Transaction Coordination</strong> — Assembly and management of the full professional team including trustee, ERISA counsel, appraiser, QofE provider, and SBA lender.</span></div>
-      <div class="si"><span class="si-n">02</span><span><strong>Lender Package Preparation</strong> — Compilation of financial, operational, and legal documentation required for SBA 7(a) underwriting and trustee review.</span></div>
+      <div class="si"><span class="si-n">01</span><span><strong>Transaction Coordination</strong> — Assembly and management of the full professional team including trustee, ERISA counsel, appraiser, QofE provider, and lender.</span></div>
+      <div class="si"><span class="si-n">02</span><span><strong>Lender Package Preparation</strong> — Compilation of financial, operational, and legal documentation required for lender underwriting and trustee review.</span></div>
       <div class="si"><span class="si-n">03</span><span><strong>COOP Development</strong> — Continuity of Operations Plan across four progressive versions (v1–v4) from Day 11 through Day 90, culminating in trustee sign-off at Gate 4.</span></div>
       <div class="si"><span class="si-n">04</span><span><strong>Process Management</strong> — Timeline governance including four Hard Stop gates at Days 11, 35, 63, and 90.</span></div>
       <div class="si"><span class="si-n">05</span><span><strong>Post-Close Stewardship</strong> — Operational support for 12–24 months beginning Day 121, at the Annual Stewardship Fee set forth in §04.</span></div>
@@ -472,7 +473,7 @@ html[data-pdf="true"] .pw {
     <table class="ft"><thead><tr><th style="width:22%;">Milestone</th><th>Trigger / Gate Condition</th><th style="width:10%;text-align:center;">Timing</th><th style="width:12%;text-align:right;">Amount</th><th style="width:13%;text-align:right;">Cumulative</th></tr></thead><tbody>
       <tr><td><span id="rl-txt"><strong>Engagement Retainer</strong></span><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 1 of 4</span></td><td id="rd-txt">COOP intake initiated; earned in full at signing.</td><td style="text-align:center;">Day 1</td><td style="text-align:right;" id="fd-r"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-1"><span style="color:var(--muted);">—</span></td></tr>
       <tr><td><strong>Validation Fee</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 2 of 4</span></td><td>Trustee issues FMV Adequacy Letter; LOI executed.</td><td style="text-align:center;">Day 45–46</td><td style="text-align:right;" id="fd-v"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-2"><span style="color:var(--muted);">—</span></td></tr>
-      <tr><td><strong>Commitment Fee</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 3 of 4</span></td><td>SBA Commitment Letter issued; Close Prep Phase launched.</td><td style="text-align:center;">Day 60</td><td style="text-align:right;" id="fd-c"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-3"><span style="color:var(--muted);">—</span></td></tr>
+      <tr><td><strong>Commitment Fee</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 3 of 4</span></td><td>Lender Commitment Letter issued; Close Prep Phase launched.</td><td style="text-align:center;">Day 60</td><td style="text-align:right;" id="fd-c"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-3"><span style="color:var(--muted);">—</span></td></tr>
       <tr><td><strong>Success Balance</strong><br><span style="font-size:0.7rem;color:var(--muted);">Milestone 4 of 4</span></td><td>Closing executed; Day 121 Readiness confirmed.</td><td style="text-align:center;">Day 120</td><td style="text-align:right;" id="fd-s"><span style="color:var(--muted);">—</span></td><td style="text-align:right;" id="fc-4"><span style="color:var(--muted);">—</span></td></tr>
       <tr style="border-top:1px solid var(--line);"><td>Annual Stewardship</td><td colspan="2">2.5% of EBITDA, beginning Day 121. Billed annually.</td><td style="text-align:right;">2.5% / yr</td><td style="text-align:right;color:var(--muted);">—</td></tr>
       <tr class="tr-total"><td colspan="3"><strong>Total Engagement Fee</strong></td><td colspan="2" style="text-align:right;" id="fd-tot"><strong style="color:var(--muted);">Select tier</strong></td></tr>
@@ -613,7 +614,7 @@ $('f-broker-tog').addEventListener('change',function(){
   });
   var wb=$('wb-block');
   if(wb){wb.classList.toggle('hidden',!on);wb.classList.toggle('visible',on);}
-  if(!on){$('f-bn').value='';$('f-bf').value='';}
+  if(!on){$('f-bfn').value='';$('f-bln').value='';$('f-bf').value='';}
   sync();
 });
 
@@ -649,7 +650,8 @@ function sync(){
   var eb=$('f-eb').value, ti=$('f-ti').value, ra=$('f-ra').value;
   var pm=$('f-pm').value, pd=$('f-pd').value, gs=$('f-gs').value;
   var ac=$('f-ac').value, tl=$('f-tl').value;
-  var bn=$('f-bn').value, bf=$('f-bf').value, ad=$('f-ad').value;
+  var bfn=$('f-bfn').value, bln=$('f-bln').value, bf=$('f-bf').value, ad=$('f-ad').value;
+  var bn = [bfn, bln].filter(Boolean).join(' ');
 
   setDV('co',co,'[Company Name]');
   setDV('of-full',ofFull,'[Authorized Officer]');
