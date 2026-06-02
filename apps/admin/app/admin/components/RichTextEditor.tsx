@@ -28,7 +28,8 @@ export function RichTextEditor({
 		content: value || "",
 		editorProps: {
 			attributes: {
-				class: "prose prose-sm max-w-none focus:outline-none min-h-[12rem] p-4",
+				class:
+					"prose prose-sm max-w-none dark:prose-invert focus:outline-none min-h-[12rem] p-4",
 			},
 		},
 		onUpdate: ({ editor: e }) => {
@@ -51,13 +52,15 @@ export function RichTextEditor({
 	}, [isPreview, editor]);
 
 	if (!editor) {
-		return <div className="h-48 bg-gray-100 animate-pulse rounded-lg" />;
+		return (
+			<div className="h-48 bg-gray-100 dark:bg-[#1F2521] animate-pulse rounded-lg" />
+		);
 	}
 
 	return (
 		<div className={className}>
 			{/* Toolbar */}
-			<div className="flex items-center gap-1 px-3 py-2 border border-gray-200 border-b-0 rounded-t-lg bg-gray-50">
+			<div className="flex items-center gap-1 px-3 py-2 border border-gray-200 dark:border-[#3A423A] border-b-0 rounded-t-lg bg-gray-50 dark:bg-[#1F2521]">
 				<ToolbarButton
 					onClick={() => setIsPreview(!isPreview)}
 					active={isPreview}
@@ -68,7 +71,7 @@ export function RichTextEditor({
 
 				{!isPreview && (
 					<>
-						<div className="w-px h-5 bg-gray-300 mx-1" />
+						<div className="w-px h-5 bg-gray-300 dark:bg-[#4A524A] mx-1" />
 						<ToolbarButton
 							onClick={() => editor.chain().focus().toggleBold().run()}
 							active={editor.isActive("bold")}
@@ -90,7 +93,7 @@ export function RichTextEditor({
 						>
 							<s>S</s>
 						</ToolbarButton>
-						<div className="w-px h-5 bg-gray-300 mx-1" />
+						<div className="w-px h-5 bg-gray-300 dark:bg-[#4A524A] mx-1" />
 						<ToolbarButton
 							onClick={() =>
 								editor.chain().focus().toggleHeading({ level: 2 }).run()
@@ -109,7 +112,7 @@ export function RichTextEditor({
 						>
 							H3
 						</ToolbarButton>
-						<div className="w-px h-5 bg-gray-300 mx-1" />
+						<div className="w-px h-5 bg-gray-300 dark:bg-[#4A524A] mx-1" />
 						<ToolbarButton
 							onClick={() => editor.chain().focus().toggleBulletList().run()}
 							active={editor.isActive("bulletList")}
@@ -124,7 +127,7 @@ export function RichTextEditor({
 						>
 							1. List
 						</ToolbarButton>
-						<div className="w-px h-5 bg-gray-300 mx-1" />
+						<div className="w-px h-5 bg-gray-300 dark:bg-[#4A524A] mx-1" />
 						<ToolbarButton
 							onClick={() => editor.chain().focus().toggleBlockquote().run()}
 							active={editor.isActive("blockquote")}
@@ -138,8 +141,8 @@ export function RichTextEditor({
 
 			{/* Editor */}
 			<div
-				className={`border border-gray-200 border-t-0 rounded-b-lg ${
-					isPreview ? "bg-gray-50" : ""
+				className={`border border-gray-200 dark:border-[#3A423A] border-t-0 rounded-b-lg ${
+					isPreview ? "bg-gray-50 dark:bg-[#1F2521]" : ""
 				}`}
 			>
 				<EditorContent editor={editor} placeholder={placeholder} />
@@ -164,8 +167,10 @@ function ToolbarButton({
 			type="button"
 			onClick={onClick}
 			title={title}
-			className={`px-2 py-1 text-sm rounded hover:bg-gray-200 transition-colors ${
-				active ? "bg-gray-200 text-gray-900" : "text-gray-600"
+			className={`px-2 py-1 text-sm rounded hover:bg-gray-200 dark:hover:bg-[#3A423A] transition-colors ${
+				active
+					? "bg-gray-200 dark:bg-[#3A423A] text-gray-900 dark:text-[#E8E6E1]"
+					: "text-gray-600 dark:text-[#A8A5A0]"
 			}`}
 		>
 			{children}

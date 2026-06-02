@@ -66,14 +66,14 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="dst">Weekly Gate Milestone Update</div>
 
   <div class="cvg">
-    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerFirstName}} {{brokerLastName}}</div></div>
     <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
     <div class="cvc"><div class="cvc-l">Current Gate</div><div class="cvc-v">{{currentGate}}</div></div>
     <div class="cvc"><div class="cvc-l">Days Elapsed</div><div class="cvc-v">{{daysElapsed}} of 120</div></div>
   </div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Gate Milestone Status</span></div><div class="sb">
-    <p>Dear {{brokerName}},</p>
+    <p>Dear {{brokerFirstName}} {{brokerLastName}},</p>
     <p>Here is the current gate milestone status for {{companyName}}.</p>
 
     <div class="status-block">

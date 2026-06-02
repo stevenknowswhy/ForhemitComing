@@ -13,7 +13,7 @@ const JSON_HEADERS = { "Content-Type": "application/json" };
 
 // CORS wildcard is intentional — draft HTML emails open from file:// origin
 const CORS_HEADERS = {
-	"Access-Control-Allow-Origin": "*",
+	"Access-Control-Allow-Origin": process.env.CORS_ALLOWED_ORIGINS ?? "https://forhemit.website,https://admin.forhemit.website",
 	"Access-Control-Allow-Methods": "POST, OPTIONS",
 	"Access-Control-Allow-Headers": "Content-Type",
 };

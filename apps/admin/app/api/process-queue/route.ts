@@ -1,19 +1,6 @@
 import { NextResponse } from "next/server";
 import { queryGhost } from "@/lib/ghost";
-
-/**
- * POST /api/process-queue
- *
- * Processes pending auto-send workflow tasks.
- * Called by DealQueueView on load to auto-generate documents
- * for tasks marked with autoSend: true.
- *
- * Body (JSON):
- *   { taskId, templateTitle, recipientName, recipientEmail, dealData, companyId, boxFolderId, stage }
- *
- * Or for batch processing:
- *   { tasks: [{ taskId, templateTitle, ... }, ...] }
- */
+import { env } from "@/lib/env";
 
 interface QueueTask {
 	taskId: string;
@@ -27,6 +14,11 @@ interface QueueTask {
 }
 
 export async function POST(request: Request) {
+	const adminToken = request.headers.get("x-admin-token");
+	if (!adminToken || adminToken !== env.ADMIN_TOKEN) {
+		return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+	}
+
 	try {
 		const body = await request.json();
 

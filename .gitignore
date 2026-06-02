@@ -1,47 +1,56 @@
-.DS_Store
-Thumbs.db
-node_modules/
-.turbo/
+1|.DS_Store
+2|Thumbs.db
+3|node_modules/
+4|.turbo/
+5|
+6|.env.local
+7|
+8|# Build / cache artifacts
+9|.next/
+10|.ruff_cache/
+11|*.tsbuildinfo
+12|
+13|# Vercel local link state
+14|.vercel/
+15|
+16|# Editor / IDE local state
+17|.vscode/
+18|.idea/
+19|
+20|# AI agent / assistant local state
+21|.atl/
+22|.agents/
+23|.antigravitycli/
+24|.claude/
+25|.codex/
+26|.cursor/
+27|.gemini/
+28|.openclaude/
+29|.tessl/
+30|.pi/
+31|.pi-lens/
+32|.github/skills/
+33|**/.pi-lens/
+34|
+35|# Local tool configs (machine-specific)
+36|.mcp.json
+37|tessl.json
+38|
+39|# Python
+40|__pycache__/
+41|*.pyc
+42|
+43|# Python
+44|__pycache__/
+45|*.pyc
+46|__pycache__/
+47|*.pyc
+48|
 
-.env.local
-
-# Build / cache artifacts
-.next/
-.ruff_cache/
-*.tsbuildinfo
-
-# Vercel local link state
-.vercel/
-
-# Editor / IDE local state
-.vscode/
-.idea/
-
-# AI agent / assistant local state
-.atl/
-.agents/
-.antigravitycli/
-.claude/
-.codex/
-.cursor/
-.gemini/
-.openclaude/
-.tessl/
-.pi/
-.pi-lens/
-.github/skills/
-**/.pi-lens/
-
-# Local tool configs (machine-specific)
-.mcp.json
-tessl.json
-
-# Python
-__pycache__/
-*.pyc
-
-# Python
-__pycache__/
-*.pyc
-__pycache__/
-*.pyc
+# Per-app secrets
+apps/**/.env.local
+packages/**/.env.local
+.membrane
+.prettierrc
+.eslintrc.json
+freellmapi/

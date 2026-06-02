@@ -22,7 +22,6 @@ module.exports = {
 				"alert-clay": "var(--alert-clay)",
 				"deep-dive": "var(--deep-dive-bg)",
 				"deep-slate": "var(--deep-slate)",
-				/* shadcn/ui CSS variable colors */
 				border: {
 					DEFAULT: "var(--border)",
 					light: "var(--border-light)",
@@ -60,32 +59,81 @@ module.exports = {
 					DEFAULT: "var(--card)",
 					foreground: "var(--card-foreground)",
 				},
+				sidebar: {
+					DEFAULT: "hsl(var(--sidebar-background))",
+					foreground: "hsl(var(--sidebar-foreground))",
+					primary: "hsl(var(--sidebar-primary))",
+					"primary-foreground": "hsl(var(--sidebar-primary-foreground))",
+					accent: "hsl(var(--sidebar-accent))",
+					"accent-foreground": "hsl(var(--sidebar-accent-foreground))",
+					border: "hsl(var(--sidebar-border))",
+					ring: "hsl(var(--sidebar-ring))",
+				},
 			},
 			fontFamily: {
-				serif: ["var(--font-cormorant)", "Georgia", "serif"],
-				sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+				serif: ["var(--font-libre-baskerville)", "Georgia", "serif"],
+				sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+				mono: ["var(--font-ibm-plex-mono)", "'Courier New'", "monospace"],
 			},
 			fontSize: {
 				display: [
 					"clamp(2.5rem, 5vw, 4.5rem)",
-					{ lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "300" },
+					{
+						lineHeight: "1.1",
+						letterSpacing: "-0.02em",
+						fontWeight: "300",
+					},
 				],
 				h1: [
 					"clamp(2rem, 4vw, 2.625rem)",
-					{ lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "400" },
+					{
+						lineHeight: "1.2",
+						letterSpacing: "-0.01em",
+						fontWeight: "400",
+					},
 				],
 				h2: [
 					"clamp(1.5rem, 3vw, 2rem)",
-					{ lineHeight: "1.3", fontWeight: "500" },
+					{
+						lineHeight: "1.3",
+						fontWeight: "500",
+					},
 				],
-				h3: ["1.5rem", { lineHeight: "1.4", fontWeight: "500" }],
-				body: ["1.0625rem", { lineHeight: "1.7" }],
+				h3: [
+					"1.5rem",
+					{
+						lineHeight: "1.4",
+						fontWeight: "500",
+					},
+				],
+				body: [
+					"1.0625rem",
+					{
+						lineHeight: "1.7",
+					},
+				],
 				ui: [
 					"0.875rem",
-					{ lineHeight: "1.4", letterSpacing: "0.02em", fontWeight: "500" },
+					{
+						lineHeight: "1.4",
+						letterSpacing: "0.02em",
+						fontWeight: "500",
+					},
 				],
-				meta: ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.01em" }],
-				pull: ["1.5rem", { lineHeight: "1.4", fontWeight: "400" }],
+				meta: [
+					"0.8125rem",
+					{
+						lineHeight: "1.5",
+						letterSpacing: "0.01em",
+					},
+				],
+				pull: [
+					"1.5rem",
+					{
+						lineHeight: "1.4",
+						fontWeight: "400",
+					},
+				],
 			},
 			spacing: {
 				18: "4.5rem",
@@ -122,24 +170,46 @@ module.exports = {
 			},
 			keyframes: {
 				fadeIn: {
-					"0%": { opacity: "0" },
-					"100%": { opacity: "1" },
+					"0%": {
+						opacity: "0",
+					},
+					"100%": {
+						opacity: "1",
+					},
 				},
 				slideUp: {
-					"0%": { opacity: "0", transform: "translateY(20px)" },
-					"100%": { opacity: "1", transform: "translateY(0)" },
+					"0%": {
+						opacity: "0",
+						transform: "translateY(20px)",
+					},
+					"100%": {
+						opacity: "1",
+						transform: "translateY(0)",
+					},
 				},
 				progressFill: {
-					"0%": { height: "0%" },
-					"100%": { height: "var(--progress)" },
+					"0%": {
+						height: "0%",
+					},
+					"100%": {
+						height: "var(--progress)",
+					},
 				},
 				"accordion-down": {
-					from: { height: "0" },
-					to: { height: "var(--radix-accordion-content-height)" },
+					from: {
+						height: "0",
+					},
+					to: {
+						height: "var(--radix-accordion-content-height)",
+					},
 				},
 				"accordion-up": {
-					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: "0" },
+					from: {
+						height: "var(--radix-accordion-content-height)",
+					},
+					to: {
+						height: "0",
+					},
 				},
 			},
 		},

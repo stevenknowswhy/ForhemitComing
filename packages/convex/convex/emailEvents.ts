@@ -1,6 +1,9 @@
 import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { resolveActor } from "./lib/resolveActor";
 
 // ============================================
 // Email Event Logging
@@ -22,7 +25,7 @@ export const logOutbound = mutation({
 	},
 	handler: async (ctx, args) => {
 		await requireAuth(ctx);
-		return await ctx.db.insert("emailEvents", {
+		const id = await ctx.db.insert("emailEvents", {
 			direction: "outbound",
 			from: args.from,
 			to: args.to,
@@ -35,6 +38,30 @@ export const logOutbound = mutation({
 			metadata: args.metadata,
 			createdAt: Date.now(),
 		});
+
+		if (args.relatedCompanyId) {
+			const actor = await resolveActor(ctx);
+			await logEvent(ctx, {
+				...actor,
+				eventType: LOG_ACTIONS.EMAIL_SENT,
+				category: "email",
+				summary: `Email sent: ${args.subject}`,
+				clientSummary: `Email sent: ${args.subject}`,
+				source: "admin_ui",
+				visibility: "external",
+				companyId: args.relatedCompanyId,
+				scopeType: "company",
+				scopeId: args.relatedCompanyId,
+				idempotencyKey: args.resendId, // Resend message ID for dedup
+				metadata: {
+					to: args.to,
+					subject: args.subject,
+					resendId: args.resendId,
+				},
+			});
+		}
+
+		return id;
 	},
 });
 
@@ -83,7 +110,51 @@ export const updateStatus = mutation({
 	},
 	handler: async (ctx, args) => {
 		await requireAuth(ctx);
+		const emailEvent = await ctx.db.get(args.id);
 		await ctx.db.patch(args.id, { status: args.status });
+
+		// Log delivery/bounce to business log
+		if (emailEvent?.relatedCompanyId) {
+			const statusMap: Record<string, string> = {
+				delivered: LOG_ACTIONS.EMAIL_DELIVERED,
+				bounced: LOG_ACTIONS.EMAIL_BOUNCED,
+			};
+			const eventType = statusMap[args.status];
+			if (eventType) {
+				const actor = await resolveActor(ctx);
+				if (args.status === "delivered") {
+					await logEvent(ctx, {
+						...actor,
+						eventType,
+						category: "email",
+						summary: `Email ${args.status}: ${emailEvent.subject}`,
+						clientSummary: `Email delivered: ${emailEvent.subject}`,
+						source: "webhook",
+						visibility: "external",
+						companyId: emailEvent.relatedCompanyId,
+						scopeType: "company",
+						scopeId: emailEvent.relatedCompanyId,
+						idempotencyKey: emailEvent.resendId,
+						metadata: { status: args.status, subject: emailEvent.subject },
+					});
+				} else {
+					await logEvent(ctx, {
+						...actor,
+						eventType,
+						category: "email",
+						summary: `Email ${args.status}: ${emailEvent.subject}`,
+						source: "webhook",
+						visibility: "internal",
+						companyId: emailEvent.relatedCompanyId,
+						scopeType: "company",
+						scopeId: emailEvent.relatedCompanyId,
+						idempotencyKey: emailEvent.resendId,
+						severity: "warning",
+						metadata: { status: args.status, subject: emailEvent.subject },
+					});
+				}
+			}
+		}
 	},
 });
 

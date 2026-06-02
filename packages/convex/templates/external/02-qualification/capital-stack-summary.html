@@ -71,7 +71,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Sources of Funds</span></div><div class="sb">
     <table class="stack-table">
       <tr><th>Source</th><th>Amount</th><th>% of Total</th></tr>
-      <tr><td>SBA 7(a) term loan</td><td class="source-amount">{{sbaAmount}}</td><td class="source-pct">{{sbaPct}}%</td></tr>
+      <tr><td>Senior lender term loan</td><td class="source-amount">{{sbaAmount}}</td><td class="source-pct">{{sbaPct}}%</td></tr>
       <tr><td>Seller subordinated note</td><td class="source-amount">{{sellerNoteAmount}}</td><td class="source-pct">{{sellerNotePct}}%</td></tr>
       <tr class="total"><td>Total Sources</td><td class="source-amount">{{totalSources}}</td><td class="source-pct">100%</td></tr>
     </table>
@@ -89,20 +89,20 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 03</span><span class="st">Seller Proceeds at Closing</span></div><div class="sb">
     <div class="fr"><label>Total consideration</label><span style="flex:1;">{{totalConsideration}}</span></div>
-    <div class="fr"><label>Day 1 cash (SBA proceeds)</label><span style="flex:1;">{{day1Cash}}</span></div>
+    <div class="fr"><label>Day 1 cash (Lender proceeds)</label><span style="flex:1;">{{day1Cash}}</span></div>
     <div class="fr"><label>Seller note (deferred)</label><span style="flex:1;">{{sellerNoteAmount}}</span></div>
     <div class="fr"><label>Seller note interest rate</label><span style="flex:1;">{{sellerNoteRate}}</span></div>
     <div class="fr"><label>Seller note term</label><span style="flex:1;">{{sellerNoteTerm}}</span></div>
-    <div class="co"><strong>Note:</strong> The seller note is subordinated to the SBA loan. Payments begin after the SBA loan is current. The seller receives interest during the subordination period and principal + interest once subordination is released.</div>
+    <div class="co"><strong>Note:</strong> The seller note is subordinated to the senior loan. Payments begin after the senior loan is current. The seller receives interest during the subordination period and principal + interest once subordination is released.</div>
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#167; 04</span><span class="st">Debt Service Summary</span></div><div class="sb">
-    <div class="fr"><label>SBA annual debt service</label><span style="flex:1;">{{sbaAnnualDebtService}}</span></div>
+    <div class="fr"><label>Lender annual debt service</label><span style="flex:1;">{{sbaAnnualDebtService}}</span></div>
     <div class="fr"><label>Seller note annual payment</label><span style="flex:1;">{{sellerNoteAnnualPayment}}</span></div>
     <div class="fr"><label>Total annual debt service</label><span style="flex:1;">{{totalAnnualDebtService}}</span></div>
     <div class="fr"><label>QofE EBITDA (TTM)</label><span style="flex:1;">{{ebitdaTTM}}</span></div>
     <div class="fr"><label>Debt service coverage ratio</label><span style="flex:1;font-weight:400;">{{dscr}}x</span></div>
-    <div class="co"><strong>SBA requirement:</strong> Minimum 1.25x DSCR. Current pro forma DSCR of {{dscr}}x {{#if dscrAbove125}}meets{{else}}does not meet{{/if}} this threshold.</div>
+    <div class="co"><strong>Lender requirement:</strong> Minimum 1.25x DSCR. Current pro forma DSCR of {{dscr}}x {{#if dscrAbove125}}meets{{else}}does not meet{{/if}} this threshold.</div>
   </div></div>
 
   <div class="sec"><div class="sh"><span class="sn">&#8212;</span><span class="st">Forhemit Transition Stewardship</span></div>
