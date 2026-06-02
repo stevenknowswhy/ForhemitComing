@@ -59,7 +59,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
   <div class="dst">Closing Day Wire Instructions</div>
 
   <div class="cvg">
-    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerName}}</div></div>
+    <div class="cvc"><div class="cvc-l">Broker</div><div class="cvc-v">{{brokerFirstName}} {{brokerLastName}}</div></div>
     <div class="cvc"><div class="cvc-l">Firm</div><div class="cvc-v">{{brokerFirm}}</div></div>
     <div class="cvc"><div class="cvc-l">Company</div><div class="cvc-v">{{companyName}}</div></div>
     <div class="cvc"><div class="cvc-l">Closing Date</div><div class="cvc-v">{{closingDate}}</div></div>
@@ -67,7 +67,7 @@ body { color: #111; background: #fff; font-family: 'Jost', system-ui, sans-serif
 
   <!-- §01 -->
   <div class="sec"><div class="sh"><span class="sn">&#167; 01</span><span class="st">Commission Confirmed</span></div><div class="sb">
-    <p>Dear {{brokerName}},</p>
+    <p>Dear {{brokerFirstName}} {{brokerLastName}},</p>
     <p>The employee ownership transition of {{companyName}} closed today. This letter confirms your broker commission details and wire timing.</p>
 
     <div class="confirm-block">

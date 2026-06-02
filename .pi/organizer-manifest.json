@@ -1,0 +1,1011 @@
+{
+  "version": "1.1.0",
+  "generated_at": "2026-05-26T05:31:30-07:00",
+  "run_id": "org-20260526-053130",
+  "mode": "dry-run",
+  "moves": [
+    {
+      "old_path": ".atl/skill-registry.md",
+      "new_path": "docs/general/skill-registry.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".pi/agent/memory/session-2026-05-25-production-readiness.md",
+      "new_path": "docs/plans/session-2026-05-25-production-readiness.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".pi/memory-capture-2026-05-25-part2.md",
+      "new_path": "docs/sessions/memory-capture-2026-05-25-part2.md",
+      "rule_id": "RULE-006",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".pi/memory-capture-2026-05-25-session.md",
+      "new_path": "docs/sessions/memory-capture-2026-05-25-session.md",
+      "rule_id": "RULE-006",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".pi/memory-capture-2026-05-25.md",
+      "new_path": "docs/general/memory-capture-2026-05-25.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".pi-lens/reviews/booboo-2026-05-25T16-34-05.md",
+      "new_path": "docs/general/booboo-2026-05-25T16-34-05.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".worktrees/convex-auth/.atl/skill-registry.md",
+      "new_path": "docs/general/skill-registry-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": ".worktrees/xss-fix/.atl/skill-registry.md",
+      "new_path": "docs/general/skill-registry-3.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "CONVEX_FIXES_PLAN.md",
+      "new_path": "docs/architecture/CONVEX_FIXES_PLAN.md",
+      "rule_id": "RULE-003",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/00_INDEX_AND_SUMMARY.md",
+      "new_path": "docs/legal/00_INDEX_AND_SUMMARY.md",
+      "rule_id": "RULE-007",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/00_STEWARDSHIP_INDEX_AND_SUMMARY.md",
+      "new_path": "docs/legal/00_STEWARDSHIP_INDEX_AND_SUMMARY.md",
+      "rule_id": "RULE-007",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/ACCESSIBILITY_IMPROVEMENTS_APPLIED.md",
+      "new_path": "docs/general/ACCESSIBILITY_IMPROVEMENTS_APPLIED.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Attorney_Revision_Checklist_Engagement_Letter.md",
+      "new_path": "docs/general/Attorney_Revision_Checklist_Engagement_Letter.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Attorney_Revision_Checklist_Stewardship_Agreement.md",
+      "new_path": "docs/general/Attorney_Revision_Checklist_Stewardship_Agreement.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Forhemit_Engagement_Letter_REVISED.md",
+      "new_path": "docs/general/Forhemit_Engagement_Letter_REVISED.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Forhemit_Stewardship_Agreement_REVISED.md",
+      "new_path": "docs/general/Forhemit_Stewardship_Agreement_REVISED.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Redrafted_Clauses_For_Attorney_Review.md",
+      "new_path": "docs/general/Redrafted_Clauses_For_Attorney_Review.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Redrafted_Clauses_Stewardship_For_Attorney_Review.md",
+      "new_path": "docs/general/Redrafted_Clauses_Stewardship_For_Attorney_Review.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitLegal/Stewardship_Comprehensive_Legal_Review_2026-03-30.md",
+      "new_path": "docs/legal/Stewardship_Comprehensive_Legal_Review_2026-03-30.md",
+      "rule_id": "RULE-007",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "ForhemitTemplates/ESOP_QUALIFICATION_PROMPT.md",
+      "new_path": "docs/general/ESOP_QUALIFICATION_PROMPT.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md",
+      "new_path": "docs/plans/Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md",
+      "rule_id": "RULE-005",
+      "classification_source": "purpose",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "HARMONIZATION_PLAN.md",
+      "new_path": "docs/architecture/HARMONIZATION_PLAN.md",
+      "rule_id": "RULE-003",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "PLAN.md",
+      "new_path": "docs/plans/PLAN.md",
+      "rule_id": "RULE-005",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "PRODUCTION_READINESS_DIFF.md",
+      "new_path": "docs/plans/PRODUCTION_READINESS_DIFF.md",
+      "rule_id": "RULE-005",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "PRODUCTION_READINESS_REPORT.md",
+      "new_path": "docs/plans/PRODUCTION_READINESS_REPORT.md",
+      "rule_id": "RULE-005",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "PROJECT_STATUS.md",
+      "new_path": "docs/plans/PROJECT_STATUS.md",
+      "rule_id": "RULE-005",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/.clerk/.tmp/README.md",
+      "new_path": "docs/general/README.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/.kilo/plans/faq-shadcn-migration.md",
+      "new_path": "docs/plans/faq-shadcn-migration.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/AGENTS.md",
+      "new_path": "docs/general/AGENTS.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/AUDIT_CHECKLIST.md",
+      "new_path": "docs/general/AUDIT_CHECKLIST.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/AUDIT_COMPLETE.md",
+      "new_path": "docs/general/AUDIT_COMPLETE.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/EMAIL_TELEGRAM_SETUP.md",
+      "new_path": "docs/general/EMAIL_TELEGRAM_SETUP.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/ESOP_Cost_Reference_Form.md",
+      "new_path": "docs/general/ESOP_Cost_Reference_Form.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/ESOP_HeadToHead.md",
+      "new_path": "docs/general/ESOP_HeadToHead.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/IMPLEMENTATION_ROADMAP.md",
+      "new_path": "docs/general/IMPLEMENTATION_ROADMAP.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/MODULAR_DESIGN.md",
+      "new_path": "docs/architecture/MODULAR_DESIGN.md",
+      "rule_id": "RULE-003",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/ORANGE_THEME_UPDATE.md",
+      "new_path": "docs/general/ORANGE_THEME_UPDATE.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/PERFORMANCE_OPTIMIZATIONS.md",
+      "new_path": "docs/general/PERFORMANCE_OPTIMIZATIONS.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/PHASE1_QUICKSTART.md",
+      "new_path": "docs/general/PHASE1_QUICKSTART.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/README.md",
+      "new_path": "docs/general/README-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/REFACTORING_PLAN.md",
+      "new_path": "docs/plans/REFACTORING_PLAN.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/REMEDIATION_TRACKER.md",
+      "new_path": "docs/general/REMEDIATION_TRACKER.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/REPO_SPLIT_COMPLETE.md",
+      "new_path": "docs/general/REPO_SPLIT_COMPLETE.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/STRUCTURE_ANALYSIS.md",
+      "new_path": "docs/plans/STRUCTURE_ANALYSIS.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/TEMPLATE_ANALYSIS_PLAN.md",
+      "new_path": "docs/plans/TEMPLATE_ANALYSIS_PLAN.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/THEME_ANALYSIS_AND_FIXES.md",
+      "new_path": "docs/plans/THEME_ANALYSIS_AND_FIXES.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/THEME_FIXES_COMPLETE.md",
+      "new_path": "docs/general/THEME_FIXES_COMPLETE.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/THEME_FIXES_SUMMARY.md",
+      "new_path": "docs/general/THEME_FIXES_SUMMARY.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/TROUBLESHOOTING.md",
+      "new_path": "docs/general/TROUBLESHOOTING.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/USER_MANAGEMENT.md",
+      "new_path": "docs/general/USER_MANAGEMENT.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/audit-reports/phase-1-structure.md",
+      "new_path": "docs/general/phase-1-structure.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/audit-reports/phase-2-inconsistencies.md",
+      "new_path": "docs/general/phase-2-inconsistencies.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/audit-reports/phase-3-remediation.md",
+      "new_path": "docs/plans/phase-3-remediation.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/audit-reports/summary-executive.md",
+      "new_path": "docs/general/summary-executive.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/admin/scripts/README.md",
+      "new_path": "docs/general/README-3.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/.kilo/plans/faq-shadcn-migration.md",
+      "new_path": "docs/plans/faq-shadcn-migration-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/AGENTS.md",
+      "new_path": "docs/general/AGENTS-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/AUDIT_CHECKLIST.md",
+      "new_path": "docs/general/AUDIT_CHECKLIST-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/AUDIT_COMPLETE.md",
+      "new_path": "docs/general/AUDIT_COMPLETE-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/Calendar_updated.md",
+      "new_path": "docs/general/Calendar_updated.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/EMAIL_SETUP_GUIDE.md",
+      "new_path": "docs/guides/EMAIL_SETUP_GUIDE.md",
+      "rule_id": "RULE-002",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/ESOP_Cost_Reference_Form.md",
+      "new_path": "docs/general/ESOP_Cost_Reference_Form-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/ESOP_HeadToHead.md",
+      "new_path": "docs/general/ESOP_HeadToHead-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/FORM_NOTIFICATION_AUDIT_COMPLETE.md",
+      "new_path": "docs/general/FORM_NOTIFICATION_AUDIT_COMPLETE.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/IMPLEMENTATION_ROADMAP.md",
+      "new_path": "docs/general/IMPLEMENTATION_ROADMAP-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/MODULAR_DESIGN.md",
+      "new_path": "docs/architecture/MODULAR_DESIGN-2.md",
+      "rule_id": "RULE-003",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/ORANGE_THEME_UPDATE.md",
+      "new_path": "docs/general/ORANGE_THEME_UPDATE-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/PERFORMANCE_OPTIMIZATIONS.md",
+      "new_path": "docs/general/PERFORMANCE_OPTIMIZATIONS-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/PHASE1_QUICKSTART.md",
+      "new_path": "docs/general/PHASE1_QUICKSTART-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/README.md",
+      "new_path": "docs/general/README-4.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/REFACTORING_PLAN.md",
+      "new_path": "docs/plans/REFACTORING_PLAN-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/REMEDIATION_TRACKER.md",
+      "new_path": "docs/general/REMEDIATION_TRACKER-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/REPO_SPLIT_COMPLETE.md",
+      "new_path": "docs/general/REPO_SPLIT_COMPLETE-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/STRUCTURE_ANALYSIS.md",
+      "new_path": "docs/plans/STRUCTURE_ANALYSIS-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/TEMPLATE_ANALYSIS_PLAN.md",
+      "new_path": "docs/plans/TEMPLATE_ANALYSIS_PLAN-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/THEME_ANALYSIS_AND_FIXES.md",
+      "new_path": "docs/plans/THEME_ANALYSIS_AND_FIXES-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/THEME_FIXES_COMPLETE.md",
+      "new_path": "docs/general/THEME_FIXES_COMPLETE-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/THEME_FIXES_SUMMARY.md",
+      "new_path": "docs/general/THEME_FIXES_SUMMARY-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/Transcript_SalesQues.md",
+      "new_path": "docs/general/Transcript_SalesQues.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/WEBSITE_CONTENT_AUDIT_REPORT.md",
+      "new_path": "docs/plans/WEBSITE_CONTENT_AUDIT_REPORT.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/audit-reports/phase-1-structure.md",
+      "new_path": "docs/general/phase-1-structure-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/audit-reports/phase-2-inconsistencies.md",
+      "new_path": "docs/general/phase-2-inconsistencies-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/audit-reports/phase-3-remediation.md",
+      "new_path": "docs/plans/phase-3-remediation-2.md",
+      "rule_id": "RULE-005",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/audit-reports/summary-executive.md",
+      "new_path": "docs/general/summary-executive-2.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "apps/marketing/scripts/README.md",
+      "new_path": "docs/general/README-5.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/ADR-001-turborepo-monorepo.md",
+      "new_path": "docs/decisions/ADR-001-turborepo-monorepo.md",
+      "rule_id": "RULE-001",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/DEPLOYMENT.md",
+      "new_path": "docs/operations/DEPLOYMENT.md",
+      "rule_id": "RULE-004",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/LOCAL_DEV.md",
+      "new_path": "docs/guides/LOCAL_DEV.md",
+      "rule_id": "RULE-002",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/PRE_MONOREPO_GITHUB_MAIN.md",
+      "new_path": "docs/general/PRE_MONOREPO_GITHUB_MAIN.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/SCHEMA_DRAFT_POSTS_USERS.md",
+      "new_path": "docs/architecture/SCHEMA_DRAFT_POSTS_USERS.md",
+      "rule_id": "RULE-003",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/SENTRY_SETUP.md",
+      "new_path": "docs/guides/SENTRY_SETUP.md",
+      "rule_id": "RULE-002",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/completed/herdr-session-2026-05-25.md",
+      "new_path": "docs/plans/herdr-session-2026-05-25.md",
+      "rule_id": "RULE-005",
+      "classification_source": "purpose",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/completed/multi-agent-workflow-skill-created.md",
+      "new_path": "docs/sessions/multi-agent-workflow-skill-created.md",
+      "rule_id": "RULE-006",
+      "classification_source": "purpose",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/design/dedup-shared-package-20260525.md",
+      "new_path": "docs/architecture/dedup-shared-package-20260525.md",
+      "rule_id": "RULE-003",
+      "classification_source": "both",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/design/p2c-deal-flow-system-20260526.md",
+      "new_path": "docs/architecture/p2c-deal-flow-system-20260526.md",
+      "rule_id": "RULE-003",
+      "classification_source": "h1",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "docs/roadmap.md",
+      "new_path": "docs/general/roadmap.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "packages/convex/templates/CHECKLIST.md",
+      "new_path": "docs/general/CHECKLIST.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "packages/convex/templates/PLACEHOLDERS.md",
+      "new_path": "docs/general/PLACEHOLDERS.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": false,
+      "link_updates": [],
+      "warnings": []
+    },
+    {
+      "old_path": "packages/convex/templates/README.md",
+      "new_path": "docs/general/README-6.md",
+      "rule_id": "default",
+      "classification_source": "default (no purpose or H1 found)",
+      "status": "planned",
+      "collision_resolved": true,
+      "link_updates": [],
+      "warnings": []
+    }
+  ],
+  "summary": {
+    "total_scanned": 99,
+    "already_correct": 0,
+    "planned": 99,
+    "completed": 0,
+    "failed": 0,
+    "skipped": 0,
+    "link_updates_applied": 0,
+    "link_updates_blocked": 0,
+    "link_updates_skipped": 0,
+    "warnings": 0
+  },
+  "handoff_note": "Run document-manager after reviewing this manifest to refresh lifecycle metadata and God file state."
+}

@@ -102,7 +102,7 @@ export default function JournalsPage() {
 	if (journals === undefined) {
 		return (
 			<div className="flex items-center justify-center py-12">
-				<div className="w-8 h-8 border-2 border-gray-200 border-t-orange-500 rounded-full animate-spin" />
+				<div className="w-8 h-8 border-2 border-gray-200 dark:border-[#3A423A] border-t-orange-500 rounded-full animate-spin" />
 			</div>
 		);
 	}
@@ -111,10 +111,10 @@ export default function JournalsPage() {
 		<div className="space-y-6">
 			<div className="flex items-start justify-between">
 				<div>
-					<h1 className="text-2xl font-semibold text-gray-900">
+					<h1 className="text-2xl font-semibold text-gray-900 dark:text-[#E8E6E1]">
 						Client Journals
 					</h1>
-					<p className="text-sm text-gray-500 mt-1">
+					<p className="text-sm text-gray-500 dark:text-[#A8A5A0] mt-1">
 						Manage client transparency journals for transition and stewardship
 						phases.
 					</p>
@@ -161,10 +161,10 @@ export default function JournalsPage() {
 						</div>
 					</div>
 
-					<div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-						<div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-3">
+					<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-8 text-center">
+						<div className="w-12 h-12 bg-gray-100 dark:bg-[#3A423A] rounded-full flex items-center justify-center mx-auto mb-3">
 							<svg
-								className="w-6 h-6 text-gray-400"
+								className="w-6 h-6 text-gray-400 dark:text-[#8A8580]"
 								fill="none"
 								stroke="currentColor"
 								viewBox="0 0 24 24"
@@ -177,7 +177,7 @@ export default function JournalsPage() {
 								/>
 							</svg>
 						</div>
-						<p className="text-gray-500 mb-4">No active journals.</p>
+						<p className="text-gray-500 dark:text-[#A8A5A0] mb-4">No active journals.</p>
 						<button
 							onClick={() => setShowCreate(true)}
 							className="text-orange-600 hover:text-orange-800 text-sm font-medium"
@@ -187,30 +187,30 @@ export default function JournalsPage() {
 					</div>
 				</div>
 			) : (
-				<div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-					<table className="min-w-full divide-y divide-gray-200">
-						<thead className="bg-gray-50">
+				<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] overflow-hidden">
+					<table className="min-w-full divide-y divide-gray-200 dark:divide-[#3A423A]">
+						<thead className="bg-gray-50 dark:bg-[#1F2521]">
 							<tr>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wider">
 									Client
 								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wider">
 									Type
 								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wider">
 									Current Chapter
 								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wider">
 									Created
 								</th>
-								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+								<th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wider">
 									Client Activity
 								</th>
 							</tr>
 						</thead>
-						<tbody className="bg-white divide-y divide-gray-200">
+						<tbody className="bg-white dark:bg-[#2A3028] divide-y divide-gray-200 dark:divide-[#3A423A]">
 							{journals.map((journal) => (
-								<tr key={journal._id} className="hover:bg-gray-50">
+								<tr key={journal._id} className="hover:bg-gray-50 dark:bg-[#1F2521]">
 									<td className="px-6 py-4 whitespace-nowrap">
 										<Link
 											href={`/admin/journals/${journal._id}`}
@@ -230,19 +230,19 @@ export default function JournalsPage() {
 											{journal.journalType}
 										</span>
 									</td>
-									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900 dark:text-[#E8E6E1]">
 										{journal.chapterNumber}. {journal.currentChapter}
 									</td>
-										<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-											{new Date(journal.createdAt).toLocaleDateString()}
-										</td>
-										<td className="px-6 py-4 whitespace-nowrap">
-											<EngagementBadge
-												lastEmailOpenedAt={journal.lastEmailOpenedAt}
-												lastFileViewedAt={journal.lastFileViewedAt}
-											/>
-										</td>
-									</tr>
+									<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-[#A8A5A0]">
+										{new Date(journal.createdAt).toLocaleDateString()}
+									</td>
+									<td className="px-6 py-4 whitespace-nowrap">
+										<EngagementBadge
+											lastEmailOpenedAt={journal.lastEmailOpenedAt}
+											lastFileViewedAt={journal.lastFileViewedAt}
+										/>
+									</td>
+								</tr>
 							))}
 						</tbody>
 					</table>
@@ -298,12 +298,12 @@ function CreateJournalModal({
 				onClick={onClose}
 				onKeyDown={(e) => e.key === "Escape" && onClose()}
 			/>
-			<div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg mx-4 overflow-hidden">
-				<div className="px-6 py-4 border-b border-gray-200">
-					<h2 className="text-lg font-semibold text-gray-900">
+			<div className="relative bg-white dark:bg-[#2A3028] rounded-xl shadow-xl w-full max-w-lg mx-4 overflow-hidden">
+				<div className="px-6 py-4 border-b border-gray-200 dark:border-[#3A423A]">
+					<h2 className="text-lg font-semibold text-gray-900 dark:text-[#E8E6E1]">
 						New Client Journal
 					</h2>
-					<p className="text-sm text-gray-500 mt-1">
+					<p className="text-sm text-gray-500 dark:text-[#A8A5A0] mt-1">
 						Select a client and journal type.
 					</p>
 				</div>
@@ -313,7 +313,7 @@ function CreateJournalModal({
 					<div>
 						<label
 							htmlFor="journal-type"
-							className="block text-sm font-medium text-gray-700 mb-1"
+							className="block text-sm font-medium text-gray-700 dark:text-[#C8C5C0] mb-1"
 						>
 							Journal Type
 						</label>
@@ -324,7 +324,7 @@ function CreateJournalModal({
 								className={`flex-1 px-4 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
 									journalType === "transition"
 										? "border-blue-500 bg-blue-50 text-blue-700"
-										: "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+										: "border-gray-200 dark:border-[#3A423A] bg-white dark:bg-[#2A3028] text-gray-600 dark:text-[#A8A5A0] hover:border-gray-300 dark:border-[#4A524A]"
 								}`}
 							>
 								🔄 Transition
@@ -335,7 +335,7 @@ function CreateJournalModal({
 								className={`flex-1 px-4 py-2.5 rounded-lg border text-sm font-medium transition-colors ${
 									journalType === "stewardship"
 										? "border-green-500 bg-green-50 text-green-700"
-										: "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
+										: "border-gray-200 dark:border-[#3A423A] bg-white dark:bg-[#2A3028] text-gray-600 dark:text-[#A8A5A0] hover:border-gray-300 dark:border-[#4A524A]"
 								}`}
 							>
 								🤝 Stewardship
@@ -347,7 +347,7 @@ function CreateJournalModal({
 					<div>
 						<label
 							htmlFor="company-search"
-							className="block text-sm font-medium text-gray-700 mb-1"
+							className="block text-sm font-medium text-gray-700 dark:text-[#C8C5C0] mb-1"
 						>
 							Client
 						</label>
@@ -357,14 +357,14 @@ function CreateJournalModal({
 							placeholder="Search companies..."
 							value={search}
 							onChange={(e) => setSearch(e.target.value)}
-							className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
+							className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg text-sm focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none"
 						/>
 					</div>
 
 					{/* Company List */}
-					<div className="max-h-48 overflow-y-auto border border-gray-200 rounded-lg">
+					<div className="max-h-48 overflow-y-auto border border-gray-200 dark:border-[#3A423A] rounded-lg">
 						{filtered.length === 0 ? (
-							<div className="px-4 py-3 text-sm text-gray-400 text-center">
+							<div className="px-4 py-3 text-sm text-gray-400 dark:text-[#8A8580] text-center">
 								No companies found.
 							</div>
 						) : (
@@ -373,15 +373,15 @@ function CreateJournalModal({
 									key={c._id}
 									type="button"
 									onClick={() => setSelectedCompany(c._id)}
-									className={`w-full text-left px-4 py-2.5 text-sm border-b border-gray-100 last:border-b-0 transition-colors ${
+									className={`w-full text-left px-4 py-2.5 text-sm border-b border-gray-100 dark:border-[#3A423A] last:border-b-0 transition-colors ${
 										selectedCompany === c._id
 											? "bg-orange-50 text-orange-700"
-											: "bg-white text-gray-700 hover:bg-gray-50"
+											: "bg-white dark:bg-[#2A3028] text-gray-700 dark:text-[#C8C5C0] hover:bg-gray-50 dark:bg-[#1F2521]"
 									}`}
 								>
 									<span className="font-medium">{c.name}</span>
 									{c.stage && (
-										<span className="ml-2 text-xs text-gray-400">
+										<span className="ml-2 text-xs text-gray-400 dark:text-[#8A8580]">
 											{c.stage}
 										</span>
 									)}
@@ -391,10 +391,10 @@ function CreateJournalModal({
 					</div>
 				</div>
 
-				<div className="px-6 py-4 border-t border-gray-200 flex items-center justify-end gap-3">
+				<div className="px-6 py-4 border-t border-gray-200 dark:border-[#3A423A] flex items-center justify-end gap-3">
 					<button
 						onClick={onClose}
-						className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+						className="px-4 py-2 text-sm text-gray-600 dark:text-[#A8A5A0] hover:text-gray-800 dark:text-[#D8D5D0]"
 					>
 						Cancel
 					</button>
@@ -440,21 +440,17 @@ function EngagementBadge({
 
 	if (!lastEmail && !lastFile) {
 		return (
-			<span className="text-xs text-gray-400 italic">No activity yet</span>
+			<span className="text-xs text-gray-400 dark:text-[#8A8580] italic">No activity yet</span>
 		);
 	}
 
 	return (
 		<div className="flex flex-col gap-0.5">
 			{lastEmail && (
-				<span className="text-xs text-gray-600">
-					📧 Opened {lastEmail}
-				</span>
+				<span className="text-xs text-gray-600 dark:text-[#A8A5A0]">📧 Opened {lastEmail}</span>
 			)}
 			{lastFile && (
-				<span className="text-xs text-gray-600">
-					📄 Viewed {lastFile}
-				</span>
+				<span className="text-xs text-gray-600 dark:text-[#A8A5A0]">📄 Viewed {lastFile}</span>
 			)}
 		</div>
 	);

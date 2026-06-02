@@ -3,6 +3,10 @@ import { query, mutation } from "./_generated/server";
 import { requireAuth } from "./lib/requireAuth";
 import { STAGE_AGENT_MAP } from "./agentQueueConfig";
 import { buildDealContextSnapshot, logStageChange } from "./agentQueueHelpers";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { agentActor, resolveActor } from "./lib/resolveActor";
+import { makeCorrelationId } from "./lib/correlationId";
 
 // ============================================
 // Agent Queue Queries
@@ -102,7 +106,7 @@ export const enqueue = mutation({
 		await requireAuth(ctx);
 		const isSimulation = args.isSimulation ?? false;
 
-		return await ctx.db.insert("agentQueue", {
+		const jobId = await ctx.db.insert("agentQueue", {
 			companyId: args.companyId,
 			agentId: args.agentId,
 			templateId: args.templateId,
@@ -113,6 +117,26 @@ export const enqueue = mutation({
 			context: args.context,
 			createdAt: Date.now(),
 		});
+
+		if (!isSimulation) {
+			const actor = agentActor(args.agentId);
+			await logEvent(ctx, {
+				...actor,
+				eventType: LOG_ACTIONS.AGENT_JOB_QUEUED,
+				category: "agent",
+				summary: `Agent job queued: ${args.agentId} for gate ${args.gate}`,
+				source: "agent",
+				visibility: "internal",
+				companyId: args.companyId,
+				scopeType: "company",
+				scopeId: args.companyId,
+				entityType: "agentQueue",
+				entityId: jobId,
+				metadata: { agentId: args.agentId, gate: args.gate },
+			});
+		}
+
+		return jobId;
 	},
 });
 
@@ -156,6 +180,22 @@ export const markCompleted = mutation({
 			status: "completed" as const,
 			completedAt: Date.now(),
 		});
+
+		const actor = agentActor(job.agentId);
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.AGENT_JOB_COMPLETED,
+			category: "agent",
+			summary: `Agent job completed: ${job.agentId}`,
+			source: "agent",
+			visibility: "internal",
+			companyId: job.companyId,
+			scopeType: "company",
+			scopeId: job.companyId,
+			entityType: "agentQueue",
+			entityId: args.id,
+		});
+
 		return args.id;
 	},
 });
@@ -181,6 +221,24 @@ export const markFailed = mutation({
 			error: args.error,
 			completedAt: Date.now(),
 		});
+
+		const actor = agentActor(job.agentId);
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.AGENT_JOB_FAILED,
+			category: "agent",
+			summary: `Agent job failed: ${job.agentId} — ${args.error.slice(0, 80)}`,
+			severity: "warning",
+			source: "agent",
+			visibility: "internal",
+			companyId: job.companyId,
+			scopeType: "company",
+			scopeId: job.companyId,
+			entityType: "agentQueue",
+			entityId: args.id,
+			metadata: { agentId: job.agentId, error: args.error },
+		});
+
 		return args.id;
 	},
 });
@@ -239,8 +297,33 @@ export const advanceStage = mutation({
 			updatedAt: now,
 		});
 
+		// 1b. Log stage change to business log
+		const actor = await resolveActor(ctx);
+		const correlationId = makeCorrelationId("agent_stage");
+		await logEvent(ctx, {
+			...actor,
+			eventType: LOG_ACTIONS.DEAL_STAGE_CHANGED,
+			category: "deal",
+			summary: `Stage: ${oldStage} → ${args.newStage} (via advanceStage)`,
+			clientSummary: `Your deal has advanced to the ${args.newStage} phase`,
+			source: "agent",
+			visibility: "external",
+			companyId: args.companyId,
+			scopeType: "company",
+			scopeId: args.companyId,
+			correlationId,
+			metadata: { oldStage, newStage: args.newStage, isSimulation },
+		});
+
 		// 2. Log the stage change activity
-		await logStageChange(ctx, args.companyId, oldStage, args.newStage, args.performedBy, now);
+		await logStageChange(
+			ctx,
+			args.companyId,
+			oldStage,
+			args.newStage,
+			args.performedBy,
+			now,
+		);
 
 		// 3. Check if this stage triggers an agent
 		const mapping = STAGE_AGENT_MAP[args.newStage];
@@ -251,7 +334,11 @@ export const advanceStage = mutation({
 		// 4. Enqueue agent work (CRM still works if agent tables aren't deployed)
 		try {
 			const contextSnapshot = await buildDealContextSnapshot(
-				ctx, args.companyId, args.newStage, oldStage, now,
+				ctx,
+				args.companyId,
+				args.newStage,
+				oldStage,
+				now,
 			);
 
 			const jobId = await ctx.db.insert("agentQueue", {

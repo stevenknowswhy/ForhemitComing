@@ -691,7 +691,7 @@ Estimated Enterprise Value: $[Mid]M
 
 **Gate 4 — Legal (Day 90):**
 - Purchase agreement in final form
-- SBA commitment letter received
+- Lender commitment letter received
 - ESOP plan documents executed
 - COOP Tracks 3 (Financial) and 4 (Governance) delivered
 
@@ -733,10 +733,10 @@ Determine the correct fee tier from the assessed EBITDA:
 
 *"Each gate is a defined checkpoint. If a gate condition is not met, the timeline extends until it is resolved. Gates are non-negotiable checkpoints, not scheduling suggestions.*
 
-**Gate 1 — Capital (Day 11):** SBA lender has issued a preliminary indication of interest. Deal team is assembled.
+**Gate 1 — Capital (Day 11):** Lender has issued a preliminary indication of interest. Deal team is assembled.
 **Gate 2 — Valuation (Day 35):** Independent FMV appraisal is underway. QoE engagement confirmed. Adjusted EBITDA within 15% of LOI assumption.
 **Gate 3 — Operations (Day 63):** COOP Tracks 1 and 2 complete. Key-person documentation delivered to trustee.
-**Gate 4 — Legal (Day 90):** SBA commitment letter received. Purchase agreement in final form. ESOP plan documents executed. COOP Tracks 3 and 4 delivered.*
+**Gate 4 — Legal (Day 90):** Lender commitment letter received. Purchase agreement in final form. ESOP plan documents executed. COOP Tracks 3 and 4 delivered.*
 
 *If Gate 4 is not cleared by Day 120, both parties will review timeline and determine whether to extend or terminate engagement. Forhemit's fees through the last completed gate are non-refundable."*
 

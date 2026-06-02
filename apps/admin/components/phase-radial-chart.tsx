@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useId } from "react";
+import { useState, useMemo, useId, useEffect } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import {
@@ -10,9 +10,20 @@ import {
 	Cell,
 	ResponsiveContainer,
 } from "recharts";
+import {
+	PHASE_CHART_CONFIG,
+	normalizePhaseKey,
+	gateStatusLabel,
+	gateDotColor,
+} from "@forhemit/shared/lib/phaseChartConfig";
+import type {
+	RingConfig,
+	GateConfig,
+} from "@forhemit/shared/lib/phaseChartConfig";
 
 // ─── Types ──────────────────────────────────────────────────────
 
+/** Aggregate mode — existing shape from pipelinePhases.getPhaseStats */
 interface Category {
 	name: string;
 	done: number;
@@ -28,8 +39,45 @@ interface PhaseData {
 	categories: Category[];
 }
 
+/** Per-deal mode — shape from dealTracker.getPhaseChartStats */
+interface RingData {
+	phase: string;
+	ringIndex: number;
+	taskId: string;
+	label: string;
+	completedSubs: number;
+	totalSubs: number;
+	fillPercent: number;
+	isGate: boolean;
+}
+
+interface GateData {
+	gateIndex: number;
+	label: string;
+	dayTarget: number;
+	status: "cleared" | "pending" | "blocked";
+}
+
+interface SummaryData {
+	completedItems: number;
+	totalItems: number;
+	percent: number;
+}
+
+/** Union props — component infers mode from which data is provided */
 interface PhaseRadialChartProps {
-	phases: PhaseData[];
+	/** Aggregate mode data (existing pipelinePhases shape) */
+	aggregatePhases?: PhaseData[];
+	/** Per-deal mode data */
+	rings?: RingData[];
+	gates?: GateData[];
+	summary?: SummaryData;
+	/** State flags */
+	isLoading?: boolean;
+	hasData?: boolean;
+	/** Display */
+	showTooltips?: boolean;
+	/** Link wrapping the card */
 	href?: string;
 }
 
@@ -61,12 +109,25 @@ const RING_PALETTES: Record<string, { light: string[]; dark: string[] }> = {
 const TRACK_COLOR = "var(--phase-track, #e5e7eb)";
 
 // Shared background for blob + content panel (must match for gooey merge)
-// MUST differ from card bg in both themes:
-//   light: card #F0EBE3 vs surface var(--sage-muted) #c5cebd
-//   dark:  card #2A3028 vs surface var(--sage-muted) #3d4a3d
 const GOOEY_SURFACE = "var(--chart-surface)";
 
-// ─── Custom Tooltip ────────────────────────────────────────────
+// ─── Dark Mode Hook ─────────────────────────────────────────────
+
+function useIsDark() {
+	const [isDark, setIsDark] = useState(false);
+	useEffect(() => {
+		const root = document.documentElement;
+		setIsDark(root.classList.contains("dark"));
+		const observer = new MutationObserver(() => {
+			setIsDark(root.classList.contains("dark"));
+		});
+		observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+		return () => observer.disconnect();
+	}, []);
+	return isDark;
+}
+
+// ─── Tooltip ────────────────────────────────────────────────────
 
 interface TooltipPayloadItem {
 	name?: string;
@@ -77,14 +138,20 @@ interface TooltipPayloadItem {
 function PhaseTooltip({
 	active,
 	payload,
+	mode,
 }: {
 	active?: boolean;
 	payload?: TooltipPayloadItem[];
+	mode: "aggregate" | "per-deal";
 }) {
 	if (!active || !payload?.length) return null;
 	const item = payload[0];
 	const label = (item.payload?.displayName as string) ?? item.name ?? "";
 	const value = item.value ?? 0;
+	const completed = (item.payload?.completed as number) ?? 0;
+	const total = (item.payload?.total as number) ?? 0;
+	const isGate = (item.payload?.isGate as boolean) ?? false;
+	const gateStatus = item.payload?.gateStatus as string | undefined;
 
 	return (
 		<div
@@ -97,76 +164,345 @@ function PhaseTooltip({
 					style={{ backgroundColor: item.payload?.fill as string }}
 				/>
 				<span style={{ color: "var(--stone)" }}>{label}</span>
-				<span
-					className="ml-auto font-mono font-medium tabular-nums"
-					style={{ color: "var(--ink)" }}
+			</div>
+			<div className="mt-1 text-[10px]" style={{ color: "var(--stone-light)" }}>
+				{mode === "aggregate"
+					? `${completed} of ${total} deals completed`
+					: `${completed} of ${total} subtasks complete`}
+			</div>
+			{isGate && gateStatus && (
+				<div
+					className="mt-1 flex items-center gap-1 text-[10px] font-medium"
+					style={{
+						color: gateDotColor(
+							gateStatus as "cleared" | "pending" | "blocked",
+						),
+					}}
 				>
-					{Math.round(value)}%
+					<span>●</span>
+					{gateStatusLabel(gateStatus as "cleared" | "pending" | "blocked")}
+				</div>
+			)}
+		</div>
+	);
+}
+
+// ─── Gate Status Row ────────────────────────────────────────────
+
+function GateStatusRow({ gates }: { gates: GateData[] }) {
+	return (
+		<div className="mt-3 grid grid-cols-4 gap-2">
+			{gates.map((gate) => {
+				const color = gateDotColor(gate.status);
+				const label = gateStatusLabel(gate.status);
+				return (
+					<div
+						key={gate.gateIndex}
+						className="flex flex-col items-center gap-0.5 rounded-md px-2 py-1.5"
+						style={{ backgroundColor: "var(--bg-hover, rgba(0,0,0,0.03))" }}
+					>
+						<span
+							className="text-[9px] font-medium uppercase tracking-wider"
+							style={{ color: "var(--stone-light)" }}
+						>
+							{gate.label}
+						</span>
+						<span className="text-[9px]" style={{ color: "var(--stone)" }}>
+							Day {gate.dayTarget}
+						</span>
+						<span
+							className="flex items-center gap-1 text-[10px] font-medium"
+							style={{ color }}
+						>
+							<span style={{ fontSize: 8 }}>●</span>
+							{label}
+						</span>
+					</div>
+				);
+			})}
+		</div>
+	);
+}
+
+// ─── Loading Skeleton ───────────────────────────────────────────
+
+function ChartSkeleton() {
+	return (
+		<div className="flex items-center justify-center" style={{ height: 260 }}>
+			<div className="flex flex-col items-center gap-2 opacity-30">
+				<div
+					className="rounded-full animate-pulse"
+					style={{
+						width: 160,
+						height: 160,
+						background: "var(--stone-light)",
+					}}
+				/>
+				<span
+					className="text-xs animate-pulse"
+					style={{ color: "var(--stone-light)" }}
+				>
+					Loading...
 				</span>
 			</div>
 		</div>
 	);
 }
 
-// ─── Legend Entry Type ──────────────────────────────────────────
+// ─── Legend Entry ───────────────────────────────────────────────
 
 interface LegendEntry {
 	displayName: string;
 	fill: string;
 	value: number;
+	completed: number;
+	total: number;
+	isGate: boolean;
+	gateStatus?: string;
 }
 
 // ─── Component ──────────────────────────────────────────────────
 
-export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
+export function PhaseRadialChart({
+	aggregatePhases,
+	rings,
+	gates,
+	summary,
+	isLoading = false,
+	hasData = true,
+	showTooltips = true,
+	href,
+}: PhaseRadialChartProps) {
 	const [activeIndex, setActiveIndex] = useState(0);
-	const active = phases[activeIndex];
 	const chartId = useId().replace(/:/g, "");
 	const gooeyId = useId().replace(/:/g, "");
+	const isDark = useIsDark();
 
-	if (!active) return null;
+	// Determine mode
+	const mode: "aggregate" | "per-deal" = rings ? "per-deal" : "aggregate";
 
-	const palette = RING_PALETTES[active.key] ?? RING_PALETTES.ignition;
+	// ── Tab labels ──────────────────────────────────────────────
 
-	// Detect dark mode for chart ring colors
-	const isDark =
-		typeof window !== "undefined" &&
-		(document.documentElement.classList.contains("dark") ||
-			window.matchMedia("(prefers-color-scheme: dark)").matches);
-	const ringColors = isDark ? palette.dark : palette.light;
+	const tabs = useMemo(() => {
+		if (mode === "aggregate" && aggregatePhases) {
+			return aggregatePhases.map((p) => ({
+				key: p.key,
+				label: p.label,
+			}));
+		}
+		return PHASE_CHART_CONFIG.phases.map((p) => ({
+			key: p.key,
+			label: p.label,
+		}));
+	}, [mode, aggregatePhases]);
 
-	const { chartData, legendEntries, gradients, glowFilters } = useMemo(() => {
-		const data: Record<string, unknown>[] = [];
-		const legends: LegendEntry[] = [];
-		const grads: { id: string; color: string }[] = [];
-		const glows: { id: string; color: string }[] = [];
+	// Clamp active index
+	const safeIndex = Math.min(activeIndex, tabs.length - 1);
+	if (safeIndex !== activeIndex) {
+		// Will re-render with clamped value
+	}
 
-		const cats = [...active.categories].reverse();
-		cats.forEach((cat, i) => {
-			const key = `cat-${i}`;
-			const completion =
-				cat.total > 0 ? Math.round((cat.done / cat.total) * 100) : 0;
-			const colorIdx = active.categories.length - 1 - i;
-			const color = ringColors[colorIdx % ringColors.length];
+	const activeTab = tabs[safeIndex];
 
-			data.push({
-				name: key,
-				displayName: cat.name,
-				completion,
-				fill: `url(#${chartId}-grad-${key})`,
-			});
-			legends.push({ displayName: cat.name, fill: color, value: completion });
-			grads.push({ id: `${chartId}-grad-${key}`, color });
-			glows.push({ id: `${chartId}-glow-${key}`, color });
-		});
+	// ── Ring data for active tab ────────────────────────────────
 
-		return {
-			chartData: data,
-			legendEntries: legends,
-			gradients: grads,
-			glowFilters: glows,
-		};
-	}, [active.categories, palette, chartId, active.key, ringColors]);
+	const { chartData, legendEntries, gradients, glowFilters, rightColumn } =
+		useMemo(() => {
+			const data: Record<string, unknown>[] = [];
+			const legends: LegendEntry[] = [];
+			const grads: { id: string; color: string }[] = [];
+			const glows: { id: string; color: string }[] = [];
+
+			const palette =
+				RING_PALETTES[activeTab?.key ?? "ignition"] ?? RING_PALETTES.ignition;
+			const ringColors = isDark ? palette.dark : palette.light;
+
+			if (mode === "aggregate" && aggregatePhases) {
+				// ── Aggregate mode ──────────────────────────────
+				const phase = aggregatePhases[safeIndex];
+				if (!phase)
+					return {
+						chartData: [],
+						legendEntries: [],
+						gradients: [],
+						glowFilters: [],
+						rightColumn: { top: "0", bottom: "deals" },
+					};
+
+				const cats = [...phase.categories].reverse();
+				cats.forEach((cat, i) => {
+					const key = `cat-${i}`;
+					const completion =
+						cat.total > 0 ? Math.round((cat.done / cat.total) * 100) : 0;
+					const colorIdx = phase.categories.length - 1 - i;
+					const color = ringColors[colorIdx % ringColors.length];
+
+					data.push({
+						name: key,
+						displayName: cat.name,
+						completion,
+						fill: `url(#${chartId}-grad-${key})`,
+						completed: cat.done,
+						total: cat.total,
+						isGate: false,
+					});
+					legends.push({
+						displayName: cat.name,
+						fill: color,
+						value: completion,
+						completed: cat.done,
+						total: cat.total,
+						isGate: false,
+					});
+					grads.push({ id: `${chartId}-grad-${key}`, color });
+					glows.push({ id: `${chartId}-glow-${key}`, color });
+				});
+
+				return {
+					chartData: data,
+					legendEntries: legends,
+					gradients: grads,
+					glowFilters: glows,
+					rightColumn: { top: String(phase.count), bottom: "deals" },
+				};
+			}
+
+			if (mode === "per-deal" && rings) {
+				// ── Per-deal mode ───────────────────────────────
+				const phaseKey = activeTab?.key ?? "ignition";
+				const phaseRings = rings.filter(
+					(r) => normalizePhaseKey(r.phase) === phaseKey,
+				);
+
+				// Match config order
+				const configPhase = PHASE_CHART_CONFIG.phases.find(
+					(p) => p.key === phaseKey,
+				);
+				const orderedRings = configPhase
+					? configPhase.rings
+							.map((cfg) => phaseRings.find((r) => r.taskId === cfg.taskId))
+							.filter(Boolean)
+					: phaseRings;
+
+				// Reverse for visual (inner ring = last)
+				const reversed = [...orderedRings].reverse();
+
+				reversed.forEach((ring, i) => {
+					if (!ring) return;
+					const key = `ring-${i}`;
+					const colorIdx = orderedRings.length - 1 - i;
+					const color = ringColors[colorIdx % ringColors.length];
+
+					// Find gate status if this ring is a gate
+					let gateStatus: string | undefined;
+					if (ring.isGate && gates) {
+						const gateConfig = configPhase?.rings.find(
+							(r) => r.taskId === ring.taskId,
+						);
+						if (gateConfig?.isGate && gateConfig.gateIndex !== undefined) {
+							const gate = gates.find(
+								(g) => g.gateIndex === gateConfig.gateIndex,
+							);
+							gateStatus = gate?.status;
+						}
+					}
+
+					data.push({
+						name: key,
+						displayName: ring.label,
+						completion: ring.fillPercent,
+						fill: `url(#${chartId}-grad-${key})`,
+						completed: ring.completedSubs,
+						total: ring.totalSubs,
+						isGate: ring.isGate,
+						gateStatus,
+					});
+					legends.push({
+						displayName: ring.label,
+						fill: color,
+						value: ring.fillPercent,
+						completed: ring.completedSubs,
+						total: ring.totalSubs,
+						isGate: ring.isGate,
+						gateStatus,
+					});
+					grads.push({ id: `${chartId}-grad-${key}`, color });
+					glows.push({ id: `${chartId}-glow-${key}`, color });
+				});
+
+				// Phase summary for right column
+				const phaseTotal = phaseRings.reduce((s, r) => s + r.totalSubs, 0);
+				const phaseCompleted = phaseRings.reduce(
+					(s, r) => s + r.completedSubs,
+					0,
+				);
+				const phasePercent =
+					phaseTotal > 0 ? Math.round((phaseCompleted / phaseTotal) * 100) : 0;
+
+				return {
+					chartData: data,
+					legendEntries: legends,
+					gradients: grads,
+					glowFilters: glows,
+					rightColumn: {
+						top: `${phasePercent}%`,
+						bottom: `${phaseCompleted} of ${phaseTotal} items`,
+					},
+				};
+			}
+
+			return {
+				chartData: [],
+				legendEntries: [],
+				gradients: [],
+				glowFilters: [],
+				rightColumn: { top: "0", bottom: "deals" },
+			};
+		}, [
+			mode,
+			aggregatePhases,
+			rings,
+			gates,
+			safeIndex,
+			activeTab,
+			chartId,
+			isDark,
+		]);
+
+	// ── Empty / Loading states ──────────────────────────────────
+
+	if (isLoading) {
+		return (
+			<div className="relative rounded-lg bg-[#F0EBE3] dark:bg-[#2A3028] border border-[var(--border-light)] dark:border-[#3A423A] p-4">
+				<ChartSkeleton />
+			</div>
+		);
+	}
+
+	if (!hasData && mode === "per-deal") {
+		return (
+			<div className="relative rounded-lg bg-[#F0EBE3] dark:bg-[#2A3028] border border-[var(--border-light)] dark:border-[#3A423A] p-4">
+				<div
+					className="flex flex-col items-center justify-center gap-2"
+					style={{ height: 260 }}
+				>
+					<span
+						className="text-sm font-medium"
+						style={{ color: "var(--stone)" }}
+					>
+						Tracker not yet initialized
+					</span>
+					<span className="text-xs" style={{ color: "var(--stone-light)" }}>
+						No tracker data exists for this company
+					</span>
+				</div>
+			</div>
+		);
+	}
+
+	if (!activeTab) return null;
+
+	// ── Content ─────────────────────────────────────────────────
 
 	const content = (
 		<div className="relative rounded-lg bg-[#F0EBE3] dark:bg-[#2A3028] border border-[var(--border-light)] dark:border-[#3A423A] p-4">
@@ -193,17 +529,17 @@ export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
 				</defs>
 			</svg>
 
-			{/* ── Filtered layer: in normal flow, determines card height ── */}
+			{/* Filtered layer: in normal flow, determines card height */}
 			<div style={{ filter: `url(#gooey-${gooeyId})` }}>
 				{/* Tab row with blob */}
 				<div className="flex w-full">
-					{phases.map((_, i) => (
+					{tabs.map((tab, i) => (
 						<div
-							key={phases[i].key}
+							key={tab.key}
 							className="relative flex-1"
 							style={{ height: 36 }}
 						>
-							{activeIndex === i && (
+							{safeIndex === i && (
 								<motion.div
 									layoutId="phase-tab-blob"
 									className="absolute inset-0 rounded-lg"
@@ -226,7 +562,7 @@ export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
 				>
 					<AnimatePresence mode="popLayout">
 						<motion.div
-							key={activeIndex}
+							key={safeIndex}
 							initial={{ opacity: 0, y: 50, filter: "blur(10px)" }}
 							animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
 							exit={{ opacity: 0, y: -50, filter: "blur(10px)" }}
@@ -339,12 +675,14 @@ export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
 												))}
 											</RadialBar>
 
-											<Tooltip content={<PhaseTooltip />} />
+											{showTooltips && (
+												<Tooltip content={<PhaseTooltip mode={mode} />} />
+											)}
 										</RadialBarChart>
 									</ResponsiveContainer>
 								</div>
 
-								{/* RIGHT: Phase count + subtitle */}
+								{/* RIGHT: Stats */}
 								<div
 									className="flex flex-col items-center justify-center pl-2"
 									style={{ minWidth: 80 }}
@@ -353,13 +691,13 @@ export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
 										className="font-semibold text-2xl tabular-nums"
 										style={{ color: "var(--ink)" }}
 									>
-										{active.count}
+										{rightColumn.top}
 									</p>
 									<p
-										className="text-[10px] font-medium"
+										className="text-[10px] font-medium text-center"
 										style={{ color: "var(--stone-light)" }}
 									>
-										{active.subtitle}
+										{rightColumn.bottom}
 									</p>
 								</div>
 							</div>
@@ -368,32 +706,35 @@ export function PhaseRadialChart({ phases, href }: PhaseRadialChartProps) {
 				</div>
 			</div>
 
-			{/* ── Text overlay: absolute on top of tab row, no filter ── */}
+			{/* Text overlay: absolute on top of tab row, no filter */}
 			<div
 				className="absolute top-1 left-0 right-0 z-10 flex"
 				style={{ height: 36 }}
 			>
-				{phases.map((phase, i) => (
+				{tabs.map((tab, i) => (
 					<button
-						key={phase.key}
+						key={tab.key}
 						type="button"
 						className="flex-1"
 						style={{ height: 36 }}
 						onClick={() => setActiveIndex(i)}
 					>
 						<span
-							className={`flex h-full w-full items-center justify-center text-[10px] font-medium uppercase tracking-wider transition-colors ${
-								activeIndex === i ? "" : ""
-							}`}
+							className="flex h-full w-full items-center justify-center text-[10px] font-medium uppercase tracking-wider transition-colors"
 							style={{
-								color: activeIndex === i ? "var(--ink)" : "var(--stone-light)",
+								color: safeIndex === i ? "var(--ink)" : "var(--stone-light)",
 							}}
 						>
-							{phase.label}
+							{tab.label}
 						</span>
 					</button>
 				))}
 			</div>
+
+			{/* Gate status row — per-deal mode only */}
+			{mode === "per-deal" && gates && gates.length > 0 && (
+				<GateStatusRow gates={gates} />
+			)}
 		</div>
 	);
 

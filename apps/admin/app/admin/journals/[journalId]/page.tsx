@@ -211,7 +211,7 @@ const TYPE_COLORS: Record<string, string> = {
 	email: "bg-purple-100 text-purple-800",
 	call: "bg-cyan-100 text-cyan-800",
 	meeting: "bg-indigo-100 text-indigo-800",
-	work: "bg-gray-100 text-gray-800",
+	work: "bg-gray-100 dark:bg-[#3A423A] text-gray-800 dark:text-[#D8D5D0]",
 	notification: "bg-pink-100 text-pink-800",
 	due_item: "bg-orange-100 text-orange-800",
 	decision: "bg-emerald-100 text-emerald-800",
@@ -260,9 +260,17 @@ function parseCsvEntries(csv: string) {
 			title: vals[0] || "Untitled",
 			description: vals[1] || "",
 			occurredAt: vals[2] ? new Date(vals[2]).getTime() : Date.now(),
-			entryType: (ENTRY_TYPES.includes(vals[3] as typeof ENTRY_TYPES[number]) ? vals[3] : "work") as typeof ENTRY_TYPES[number],
-			theme: (THEMES.includes(vals[4] as typeof THEMES[number]) ? vals[4] : "admin") as typeof THEMES[number],
-			effortBand: (EFFORT_BANDS.includes(vals[5] as typeof EFFORT_BANDS[number]) ? vals[5] : undefined) as typeof EFFORT_BANDS[number] | undefined,
+			entryType: (ENTRY_TYPES.includes(vals[3] as (typeof ENTRY_TYPES)[number])
+				? vals[3]
+				: "work") as (typeof ENTRY_TYPES)[number],
+			theme: (THEMES.includes(vals[4] as (typeof THEMES)[number])
+				? vals[4]
+				: "admin") as (typeof THEMES)[number],
+			effortBand: (EFFORT_BANDS.includes(
+				vals[5] as (typeof EFFORT_BANDS)[number],
+			)
+				? vals[5]
+				: undefined) as (typeof EFFORT_BANDS)[number] | undefined,
 			visibleToClient: vals[6] !== "internal",
 		};
 	});
@@ -293,13 +301,20 @@ export default function JournalDetailPage() {
 
 	// Narrative state
 	const [narrativeText, setNarrativeText] = useState("");
+	const [narrativeMode, setNarrativeMode] = useState<"preview" | "edit">(
+		"preview",
+	);
 	const [isSaving, setIsSaving] = useState(false);
 
 	useEffect(() => {
 		if (narrative?.narrativeText) {
 			setNarrativeText(narrative.narrativeText);
+			setNarrativeMode("preview");
+		} else if (narrative && !narrative.narrativeText) {
+			// New narrative with no content — start in edit mode
+			setNarrativeMode("edit");
 		}
-	}, [narrative?.narrativeText]);
+	}, [narrative?.narrativeText, narrative]);
 
 	// Entry form state
 	const [showForm, setShowForm] = useState(false);
@@ -344,6 +359,12 @@ export default function JournalDetailPage() {
 	const visibleEntries = filteredEntries.filter((e) => e.visibleToClient);
 	const internalEntries = filteredEntries.filter((e) => !e.visibleToClient);
 	const hasActiveFilters = Object.values(filters).some((v) => v !== "all");
+
+	// Week boundaries for entries panel
+	const weekEnding = weekStarting + 6 * 86400000;
+	const weekEntries = visibleEntries.filter(
+		(e) => e.occurredAt >= weekStarting && e.occurredAt <= weekEnding,
+	);
 
 	// Action items: entries with dueDate populated
 	const now = Date.now();
@@ -438,6 +459,7 @@ export default function JournalDetailPage() {
 		setIsSaving(true);
 		try {
 			await updateNarrative({ id: narrative._id, narrativeText });
+			setNarrativeMode("preview");
 		} finally {
 			setIsSaving(false);
 		}
@@ -494,15 +516,15 @@ export default function JournalDetailPage() {
 	if (journal === undefined || entries === undefined) {
 		return (
 			<div className="flex items-center justify-center py-12">
-				<div className="w-8 h-8 border-2 border-gray-200 border-t-orange-500 rounded-full animate-spin" />
+				<div className="w-8 h-8 border-2 border-gray-200 dark:border-[#3A423A] border-t-orange-500 rounded-full animate-spin" />
 			</div>
 		);
 	}
 
 	if (journal === null) {
 		return (
-			<div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-				<p className="text-gray-500">Journal not found.</p>
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-8 text-center">
+				<p className="text-gray-500 dark:text-[#A8A5A0]">Journal not found.</p>
 			</div>
 		);
 	}
@@ -513,27 +535,27 @@ export default function JournalDetailPage() {
 		<div className="space-y-6">
 			{/* Header */}
 			<div>
-				<h1 className="text-2xl font-semibold text-gray-900">
+				<h1 className="text-2xl font-semibold text-gray-900 dark:text-[#E8E6E1]">
 					{journal.journalType === "transition" ? "Transition" : "Stewardship"}{" "}
 					Journal
 				</h1>
-				<p className="text-sm text-gray-500 mt-1">
+				<p className="text-sm text-gray-500 dark:text-[#A8A5A0] mt-1">
 					Chapter {journal.chapterNumber}: {journal.currentChapter}
 				</p>
 				<div className="flex items-center gap-4 mt-2">
 					{journal.lastEmailOpenedAt && (
-						<span className="text-xs text-gray-500">
+						<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
 							📧 Email opened {timeAgo(journal.lastEmailOpenedAt)}
 						</span>
 					)}
 					{journal.lastFileViewedAt && (
-						<span className="text-xs text-gray-500">
+						<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
 							📄 PDF viewed {timeAgo(journal.lastFileViewedAt)}
 						</span>
 					)}
 					{journal.emailOpenCount !== undefined &&
 						journal.emailOpenCount > 0 && (
-							<span className="text-xs text-gray-400">
+							<span className="text-xs text-gray-400 dark:text-[#8A8580]">
 								({journal.emailOpenCount} opens)
 							</span>
 						)}
@@ -542,12 +564,12 @@ export default function JournalDetailPage() {
 
 			{/* Chapter History */}
 			{chapters && chapters.length > 0 && (
-				<div className="bg-white rounded-lg border border-gray-200 p-6">
-					<h2 className="text-lg font-medium text-gray-900 mb-4">
+				<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+					<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 						Chapter History
 					</h2>
 					<div className="relative">
-						<div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200" />
+						<div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-[#3A423A]" />
 						<div className="space-y-4">
 							{chapters.map((chapter) => (
 								<div
@@ -560,11 +582,11 @@ export default function JournalDetailPage() {
 												? "bg-orange-500 border-orange-500"
 												: chapter.status === "completed"
 													? "bg-green-500 border-green-500"
-													: "bg-white border-gray-300"`}
+													: "bg-white dark:bg-[#2A3028] border-gray-300 dark:border-[#4A524A]"`}
 									/>
 									<div className="flex-1">
 										<div className="flex items-center gap-2">
-											<span className="text-sm font-medium text-gray-900">
+											<span className="text-sm font-medium text-gray-900 dark:text-[#E8E6E1]">
 												Chapter {chapter.chapterNumber}: {chapter.title}
 											</span>
 											<span
@@ -573,7 +595,7 @@ export default function JournalDetailPage() {
 														? "bg-orange-100 text-orange-800"
 														: chapter.status === "completed"
 															? "bg-green-100 text-green-800"
-															: "bg-gray-100 text-gray-600"`}
+															: "bg-gray-100 dark:bg-[#3A423A] text-gray-600 dark:text-[#A8A5A0]"`}
 											>
 												{chapter.status}
 											</span>
@@ -584,19 +606,19 @@ export default function JournalDetailPage() {
 											)}
 										</div>
 										{chapter.description && (
-											<p className="text-xs text-gray-500 mt-0.5">
+											<p className="text-xs text-gray-500 dark:text-[#A8A5A0] mt-0.5">
 												{chapter.description}
 											</p>
 										)}
 										<div className="flex items-center gap-3 mt-1">
 											{chapter.startedAt && (
-												<span className="text-xs text-gray-400">
+												<span className="text-xs text-gray-400 dark:text-[#8A8580]">
 													Started{" "}
 													{new Date(chapter.startedAt).toLocaleDateString()}
 												</span>
 											)}
 											{chapter.completedAt && (
-												<span className="text-xs text-gray-400">
+												<span className="text-xs text-gray-400 dark:text-[#8A8580]">
 													Completed{" "}
 													{new Date(chapter.completedAt).toLocaleDateString()}
 												</span>
@@ -613,88 +635,140 @@ export default function JournalDetailPage() {
 			{/* Milestone Progress */}
 			<MilestoneProgress milestones={milestones ?? []} />
 
-			{/* Narrative Editor */}
-			<div className="bg-white rounded-lg border border-gray-200 p-6">
-				<h2 className="text-lg font-medium text-gray-900 mb-4">
-					Weekly Narrative — Week of{" "}
-					{new Date(weekStarting).toLocaleDateString("en-US", {
-						month: "long",
-						day: "numeric",
-						year: "numeric",
-					})}
-				</h2>
+			{/* Narrative Editor + Week Entries */}
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+				{/* Narrative — 2/3 width */}
+				<div className="lg:col-span-2 bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+					<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
+						Weekly Narrative — Week of{" "}
+						{new Date(weekStarting).toLocaleDateString("en-US", {
+							month: "long",
+							day: "numeric",
+							year: "numeric",
+						})}
+					</h2>
 
-				{narrative === undefined ? (
-					<div className="animate-pulse h-32 bg-gray-100 rounded" />
-				) : narrative === null ? (
-					<div className="text-center py-8">
-						<p className="text-gray-500 mb-4">
-							No narrative for this week yet.
-						</p>
-						<button
-							type="button"
-							onClick={handleCreateNarrative}
-							className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
-						>
-							Create Narrative
-						</button>
-					</div>
-				) : (
-					<div className="space-y-4">
-						<RichTextEditor
-							value={narrativeText}
-							onChange={setNarrativeText}
-							placeholder="Write the weekly narrative for the client..."
-						/>
-						<div className="flex items-center gap-3">
+					{narrative === undefined ? (
+						<div className="animate-pulse h-32 bg-gray-100 dark:bg-[#3A423A] rounded" />
+					) : narrative === null ? (
+						<div className="text-center py-8">
+							<p className="text-gray-500 dark:text-[#A8A5A0] mb-4">
+								No narrative for this week yet.
+							</p>
 							<button
 								type="button"
-								onClick={handleSaveNarrative}
-								disabled={isSaving}
-								className="px-4 py-2 bg-gray-100 text-gray-800 rounded-lg hover:bg-gray-200 disabled:opacity-50"
+								onClick={handleCreateNarrative}
+								className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
 							>
-								{isSaving ? "Saving..." : "Save Draft"}
+								Create Narrative
 							</button>
-							<button
-								type="button"
-								onClick={handleMarkReady}
-								disabled={
-									narrative.status === "ready" || narrative.status === "sent"
-								}
-								className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50"
-							>
-								{narrative.status === "ready"
-									? "Ready to Send ✓"
-									: narrative.status === "sent"
-										? "Sent ✓"
-										: "Mark Ready to Send"}
-							</button>
-							<span className="text-sm text-gray-800">
-								Status: {narrative.status}
-							</span>
 						</div>
-					</div>
-				)}
+					) : narrativeMode === "preview" && narrativeText.trim().length > 0 ? (
+						<div className="space-y-4">
+							{/* Preview of saved narrative */}
+							<div
+								className="prose prose-sm max-w-none dark:prose-invert bg-gray-50 dark:bg-[#1F2521] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6 min-h-[8rem]"
+								dangerouslySetInnerHTML={{ __html: narrativeText }}
+							/>
+							<div className="flex items-center gap-3">
+								<button
+									type="button"
+									onClick={() => setNarrativeMode("edit")}
+									className="px-4 py-2 bg-gray-100 dark:bg-[#3A423A] text-gray-800 dark:text-[#D8D5D0] rounded-lg hover:bg-gray-200 dark:hover:bg-[#4A524A] transition-colors"
+								>
+									✏️ Continue Editing
+								</button>
+								<button
+									type="button"
+									onClick={handleMarkReady}
+									disabled={
+										narrative.status === "ready" || narrative.status === "sent"
+									}
+									className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50"
+								>
+									{narrative.status === "ready"
+										? "Ready to Send ✓"
+										: narrative.status === "sent"
+											? "Sent ✓"
+											: "Mark Ready to Send"}
+								</button>
+								<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
+									{narrative.status === "ready"
+										? "Approved — will be included in the next digest"
+										: narrative.status === "sent"
+											? "Delivered to client"
+											: "Draft — not yet visible to client"}
+								</span>
+							</div>
+						</div>
+					) : (
+						<div className="space-y-4">
+							<RichTextEditor
+								value={narrativeText}
+								onChange={setNarrativeText}
+								placeholder="Write the weekly narrative for the client..."
+							/>
+							<div className="flex items-center gap-3">
+								<button
+									type="button"
+									onClick={handleSaveNarrative}
+									disabled={isSaving}
+									className="px-4 py-2 bg-gray-100 dark:bg-[#3A423A] text-gray-800 dark:text-[#D8D5D0] rounded-lg hover:bg-gray-200 dark:hover:bg-[#4A524A] disabled:opacity-50 transition-colors"
+								>
+									{isSaving ? "Saving..." : "Save Draft"}
+								</button>
+								<button
+									type="button"
+									onClick={handleMarkReady}
+									disabled={
+										narrative.status === "ready" || narrative.status === "sent"
+									}
+									className="px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 disabled:opacity-50"
+								>
+									{narrative.status === "ready"
+										? "Ready to Send ✓"
+										: narrative.status === "sent"
+											? "Sent ✓"
+											: "Mark Ready to Send"}
+								</button>
+								<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
+									{narrative.status === "ready"
+										? "Approved — will be included in the next digest"
+										: narrative.status === "sent"
+											? "Delivered to client"
+											: "Draft — not yet visible to client"}
+								</span>
+							</div>
+						</div>
+					)}
+				</div>
+
+				{/* Week Entries Panel — 1/3 width */}
+				<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-5">
+					<WeekEntriesPanel weekEntries={weekEntries} />
+				</div>
 			</div>
 
 			{/* Manual Entry Form */}
-			<div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] overflow-hidden">
 				<button
 					type="button"
 					onClick={() => setShowForm(!showForm)}
-					className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
+					className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:bg-[#1F2521]"
 				>
-					<span className="text-lg font-medium text-gray-900">
+					<span className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1]">
 						Add Manual Entry
 					</span>
-					<span className="text-gray-400">{showForm ? "▲" : "▼"}</span>
+					<span className="text-gray-400 dark:text-[#8A8580]">
+						{showForm ? "▲" : "▼"}
+					</span>
 				</button>
 
 				{showForm && (
-					<div className="px-6 pb-6 space-y-4 border-t border-gray-100">
+					<div className="px-6 pb-6 space-y-4 border-t border-gray-100 dark:border-[#3A423A]">
 						{/* Template Selector */}
 						<div className="mt-4">
-							<label className="block text-sm font-medium text-gray-800 mb-2">
+							<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-2">
 								Quick Templates
 							</label>
 							<div className="flex flex-wrap gap-2">
@@ -714,7 +788,7 @@ export default function JournalDetailPage() {
 												visibility: template.defaultVisibility,
 											})
 										}
-										className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg hover:bg-gray-50 hover:border-orange-300 transition-colors text-gray-800"
+										className="px-3 py-1.5 text-sm border border-gray-200 dark:border-[#3A423A] rounded-lg hover:bg-gray-50 dark:bg-[#1F2521] hover:border-orange-300 transition-colors text-gray-800 dark:text-[#D8D5D0]"
 										title={template.description}
 									>
 										{template.icon} {template.name}
@@ -724,7 +798,7 @@ export default function JournalDetailPage() {
 						</div>
 						<div className="grid grid-cols-2 gap-4 mt-4">
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Title *
 								</label>
 								<input
@@ -732,11 +806,11 @@ export default function JournalDetailPage() {
 									value={form.title}
 									onChange={(e) => setForm({ ...form, title: e.target.value })}
 									placeholder="e.g., Met with Trustee"
-									className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 placeholder:text-gray-500"
+									className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521] placeholder:text-gray-500 dark:placeholder:text-[#A8A5A0]"
 								/>
 							</div>
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Visibility
 								</label>
 								<div className="flex gap-4 mt-2">
@@ -751,7 +825,7 @@ export default function JournalDetailPage() {
 											}
 											className="text-orange-500"
 										/>
-										<span className="text-sm text-gray-800">
+										<span className="text-sm text-gray-800 dark:text-[#D8D5D0]">
 											Client-visible
 										</span>
 									</label>
@@ -766,14 +840,16 @@ export default function JournalDetailPage() {
 											}
 											className="text-orange-500"
 										/>
-										<span className="text-sm text-gray-800">Internal only</span>
+										<span className="text-sm text-gray-800 dark:text-[#D8D5D0]">
+											Internal only
+										</span>
 									</label>
 								</div>
 							</div>
 						</div>
 
 						<div>
-							<label className="block text-sm font-medium text-gray-800 mb-1">
+							<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 								Description *
 							</label>
 							<textarea
@@ -783,13 +859,13 @@ export default function JournalDetailPage() {
 								}
 								placeholder="Full internal detail..."
 								rows={3}
-								className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none"
+								className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521] placeholder:text-gray-500 dark:placeholder:text-[#A8A5A0]"
 							/>
 						</div>
 
 						{form.visibility === "client" && (
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Client Description
 								</label>
 								<textarea
@@ -799,13 +875,13 @@ export default function JournalDetailPage() {
 									}
 									placeholder="What the client sees (if different from description)..."
 									rows={2}
-									className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none text-gray-900 placeholder:text-gray-500"
+									className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent resize-none text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521] placeholder:text-gray-500 dark:placeholder:text-[#A8A5A0]"
 								/>
 							</div>
 						)}
 
 						<div>
-							<label className="block text-sm font-medium text-gray-800 mb-1">
+							<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 								Outcome / Value
 							</label>
 							<input
@@ -813,13 +889,13 @@ export default function JournalDetailPage() {
 								value={form.outcome}
 								onChange={(e) => setForm({ ...form, outcome: e.target.value })}
 								placeholder='e.g., "Identified $47K in tax savings"'
-								className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 placeholder:text-gray-500"
+								className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521] placeholder:text-gray-500 dark:placeholder:text-[#A8A5A0]"
 							/>
 						</div>
 
 						<div className="grid grid-cols-3 gap-4">
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Type
 								</label>
 								<select
@@ -827,7 +903,7 @@ export default function JournalDetailPage() {
 									onChange={(e) =>
 										setForm({ ...form, entryType: e.target.value })
 									}
-									className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900"
+									className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 								>
 									{ENTRY_TYPES.map((t) => (
 										<option key={t} value={t}>
@@ -837,13 +913,13 @@ export default function JournalDetailPage() {
 								</select>
 							</div>
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Theme
 								</label>
 								<select
 									value={form.theme}
 									onChange={(e) => setForm({ ...form, theme: e.target.value })}
-									className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900"
+									className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 								>
 									{THEMES.map((t) => (
 										<option key={t} value={t}>
@@ -853,7 +929,7 @@ export default function JournalDetailPage() {
 								</select>
 							</div>
 							<div>
-								<label className="block text-sm font-medium text-gray-800 mb-1">
+								<label className="block text-sm font-medium text-gray-800 dark:text-[#D8D5D0] mb-1">
 									Effort
 								</label>
 								<select
@@ -861,7 +937,7 @@ export default function JournalDetailPage() {
 									onChange={(e) =>
 										setForm({ ...form, effortBand: e.target.value })
 									}
-									className="w-full px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900"
+									className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 								>
 									<option value="">Not set</option>
 									{EFFORT_BANDS.map((b) => (
@@ -883,27 +959,30 @@ export default function JournalDetailPage() {
 								{isSubmitting ? "Saving..." : "Add Entry"}
 							</button>
 						</div>
-				</div>
-			)}
+					</div>
+				)}
 			</div>
 
 			{/* Import CSV */}
-			<div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] overflow-hidden">
 				<button
 					type="button"
 					onClick={() => setShowImport(!showImport)}
-					className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50"
+					className="w-full px-6 py-4 flex items-center justify-between hover:bg-gray-50 dark:bg-[#1F2521]"
 				>
-					<span className="text-lg font-medium text-gray-900">
+					<span className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1]">
 						📥 Import Entries (CSV)
 					</span>
-					<span className="text-gray-400">{showImport ? "▲" : "▼"}</span>
+					<span className="text-gray-400 dark:text-[#8A8580]">
+						{showImport ? "▲" : "▼"}
+					</span>
 				</button>
 
 				{showImport && (
-					<div className="px-6 pb-6 space-y-4 border-t border-gray-100">
-						<p className="text-sm text-gray-500 mt-4">
-							Paste CSV data with columns: title, description, date, type, theme, effort, visibility
+					<div className="px-6 pb-6 space-y-4 border-t border-gray-100 dark:border-[#3A423A]">
+						<p className="text-sm text-gray-500 dark:text-[#A8A5A0] mt-4">
+							Paste CSV data with columns: title, description, date, type,
+							theme, effort, visibility
 						</p>
 						<textarea
 							value={importCsv}
@@ -911,7 +990,7 @@ export default function JournalDetailPage() {
 							placeholder={`"Call with Trustee","Discussed Q2 valuation","2026-05-25","call","trustee_bank","medium","client"
 "Document Review","Reviewed NDA draft","2026-05-26","document","legal","low","client"`}
 							rows={6}
-							className="w-full px-3 py-2 border border-gray-200 rounded-lg font-mono text-xs text-gray-900 placeholder:text-gray-400 resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+							className="w-full px-3 py-2 border border-gray-200 dark:border-[#3A423A] rounded-lg font-mono text-xs text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521] placeholder:text-gray-400 dark:placeholder:text-[#8A8580] resize-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
 						/>
 						<div className="flex items-center gap-3">
 							<button
@@ -945,8 +1024,10 @@ export default function JournalDetailPage() {
 							>
 								{importing ? "Importing..." : "Import Entries"}
 							</button>
-							<span className="text-xs text-gray-400">
-								{importCsv.trim() ? `${importCsv.trim().split("\n").length - 1} rows detected` : "Paste CSV above"}
+							<span className="text-xs text-gray-400 dark:text-[#8A8580]">
+								{importCsv.trim()
+									? `${importCsv.trim().split("\n").length - 1} rows detected`
+									: "Paste CSV above"}
 							</span>
 						</div>
 					</div>
@@ -954,13 +1035,15 @@ export default function JournalDetailPage() {
 			</div>
 
 			{/* Entry Filters */}
-			<div className="bg-white rounded-lg border border-gray-200 p-4">
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-4">
 				<div className="flex items-center gap-4 flex-wrap">
-					<span className="text-sm font-medium text-gray-800">Filter:</span>
+					<span className="text-sm font-medium text-gray-800 dark:text-[#D8D5D0]">
+						Filter:
+					</span>
 					<select
 						value={filters.theme}
 						onChange={(e) => setFilters({ ...filters, theme: e.target.value })}
-						className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+						className="px-3 py-1.5 text-sm border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 					>
 						<option value="all">All themes</option>
 						{THEMES.map((t) => (
@@ -974,7 +1057,7 @@ export default function JournalDetailPage() {
 						onChange={(e) =>
 							setFilters({ ...filters, entryType: e.target.value })
 						}
-						className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+						className="px-3 py-1.5 text-sm border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 					>
 						<option value="all">All types</option>
 						{ENTRY_TYPES.map((t) => (
@@ -986,7 +1069,7 @@ export default function JournalDetailPage() {
 					<select
 						value={filters.source}
 						onChange={(e) => setFilters({ ...filters, source: e.target.value })}
-						className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+						className="px-3 py-1.5 text-sm border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 					>
 						<option value="all">All sources</option>
 						<option value="auto">Auto-generated</option>
@@ -997,7 +1080,7 @@ export default function JournalDetailPage() {
 						onChange={(e) =>
 							setFilters({ ...filters, visibility: e.target.value })
 						}
-						className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900"
+						className="px-3 py-1.5 text-sm border border-gray-200 dark:border-[#3A423A] rounded-lg focus:ring-2 focus:ring-orange-500 text-gray-900 dark:text-[#E8E6E1] bg-white dark:bg-[#1F2521]"
 					>
 						<option value="all">All visibility</option>
 						<option value="client">Client-visible</option>
@@ -1019,7 +1102,7 @@ export default function JournalDetailPage() {
 							Clear filters
 						</button>
 					)}
-					<span className="text-sm text-gray-600 ml-auto">
+					<span className="text-sm text-gray-600 dark:text-[#A8A5A0] ml-auto">
 						{filteredEntries.length} of {entries?.length ?? 0} entries
 					</span>
 				</div>
@@ -1027,8 +1110,8 @@ export default function JournalDetailPage() {
 
 			{/* Action Items */}
 			{totalActionItems > 0 && (
-				<div className="bg-white rounded-lg border border-gray-200 p-6">
-					<h2 className="text-lg font-medium text-gray-900 mb-4">
+				<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+					<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 						Action Items ({totalActionItems})
 					</h2>
 					<div className="space-y-6">
@@ -1069,7 +1152,7 @@ export default function JournalDetailPage() {
 						)}
 						{actionItems.upcoming.length > 0 && (
 							<div>
-								<h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
+								<h3 className="text-sm font-semibold text-gray-700 dark:text-[#C8C5C0] mb-2 flex items-center gap-2">
 									<span className="inline-block w-2 h-2 rounded-full bg-gray-400" />
 									Upcoming ({actionItems.upcoming.length})
 								</h3>
@@ -1086,8 +1169,8 @@ export default function JournalDetailPage() {
 						)}
 					</div>
 					{actionItems.completed && actionItems.completed.length > 0 && (
-						<details className="mt-4 pt-4 border-t border-gray-100">
-							<summary className="text-sm text-gray-500 cursor-pointer hover:text-gray-700">
+						<details className="mt-4 pt-4 border-t border-gray-100 dark:border-[#3A423A]">
+							<summary className="text-sm text-gray-500 dark:text-[#A8A5A0] cursor-pointer hover:text-gray-700 dark:text-[#C8C5C0]">
 								Completed ({actionItems.completed.length})
 							</summary>
 							<div className="mt-2 space-y-2">
@@ -1105,13 +1188,13 @@ export default function JournalDetailPage() {
 			)}
 
 			{/* Client-Visible Entries */}
-			<div className="bg-white rounded-lg border border-gray-200 p-6">
-				<h2 className="text-lg font-medium text-gray-900 mb-4">
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+				<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 					Client-Visible Entries ({visibleEntries.length})
 				</h2>
 
 				{visibleEntries.length === 0 ? (
-					<p className="text-gray-500 text-center py-4">
+					<p className="text-gray-500 dark:text-[#A8A5A0] text-center py-4">
 						{hasActiveFilters
 							? "No entries match the current filters."
 							: "No client-visible entries yet."}
@@ -1127,8 +1210,8 @@ export default function JournalDetailPage() {
 
 			{/* Internal Entries */}
 			{internalEntries.length > 0 && (
-				<div className="bg-white rounded-lg border border-gray-200 p-6">
-					<h2 className="text-lg font-medium text-gray-900 mb-4">
+				<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+					<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 						Internal Only ({internalEntries.length})
 					</h2>
 					<div className="space-y-3">
@@ -1140,22 +1223,22 @@ export default function JournalDetailPage() {
 			)}
 
 			{/* Effort Distribution */}
-			<div className="bg-white rounded-lg border border-gray-200 p-6">
-				<h2 className="text-lg font-medium text-gray-900 mb-4">
+			<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+				<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 					Effort Distribution
 				</h2>
 				{effortDistribution.rows.length === 0 ? (
-					<p className="text-gray-500 text-center py-4">
+					<p className="text-gray-500 dark:text-[#A8A5A0] text-center py-4">
 						No entries with effort bands set.
 					</p>
 				) : (
 					<div className="space-y-3">
 						{effortDistribution.rows.map((row) => (
 							<div key={row.theme} className="flex items-center gap-3">
-								<span className="w-32 text-sm text-gray-800 text-right shrink-0">
+								<span className="w-32 text-sm text-gray-800 dark:text-[#D8D5D0] text-right shrink-0">
 									{formatLabel(row.theme)}
 								</span>
-								<div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden">
+								<div className="flex-1 bg-gray-100 dark:bg-[#3A423A] rounded-full h-6 overflow-hidden">
 									<div
 										className="h-full rounded-full transition-all duration-500"
 										style={{
@@ -1165,19 +1248,19 @@ export default function JournalDetailPage() {
 										}}
 									/>
 								</div>
-								<span className="w-24 text-sm text-gray-900 shrink-0">
+								<span className="w-24 text-sm text-gray-900 dark:text-[#E8E6E1] shrink-0">
 									{row.effort} ({Math.round(row.percentage)}%)
 								</span>
 							</div>
 						))}
 					</div>
 				)}
-				<div className="mt-4 pt-4 border-t border-gray-100">
-					<p className="text-sm text-gray-800">
+				<div className="mt-4 pt-4 border-t border-gray-100 dark:border-[#3A423A]">
+					<p className="text-sm text-gray-800 dark:text-[#D8D5D0]">
 						{effortDistribution.entriesWithEffort} of{" "}
 						{effortDistribution.totalEntries} entries have effort set
 						{effortDistribution.totalEffort > 0 && (
-							<span className="text-gray-900 font-medium">
+							<span className="text-gray-900 dark:text-[#E8E6E1] font-medium">
 								{" · Total effort: "}
 								{effortDistribution.totalEffort}
 							</span>
@@ -1208,20 +1291,20 @@ function MilestoneProgress({
 	const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
 
 	return (
-		<div className="bg-white rounded-lg border border-gray-200 p-6">
-			<h2 className="text-lg font-medium text-gray-900 mb-4">
+		<div className="bg-white dark:bg-[#2A3028] rounded-lg border border-gray-200 dark:border-[#3A423A] p-6">
+			<h2 className="text-lg font-medium text-gray-900 dark:text-[#E8E6E1] mb-4">
 				Milestone Progress
 			</h2>
 			<div className="mb-6">
 				<div className="flex items-center justify-between mb-2">
-					<span className="text-sm text-gray-800">
+					<span className="text-sm text-gray-800 dark:text-[#D8D5D0]">
 						{completed} of {total} milestones completed
 					</span>
-					<span className="text-sm font-medium text-gray-900">
+					<span className="text-sm font-medium text-gray-900 dark:text-[#E8E6E1]">
 						{percentage}%
 					</span>
 				</div>
-				<div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+				<div className="w-full h-3 bg-gray-200 dark:bg-[#3A423A] rounded-full overflow-hidden">
 					<div
 						className="h-full bg-orange-500 rounded-full transition-all duration-500"
 						style={{ width: `${percentage}%` }}
@@ -1229,7 +1312,7 @@ function MilestoneProgress({
 				</div>
 			</div>
 			<div className="relative">
-				<div className="absolute top-3 left-3 right-3 h-0.5 bg-gray-200" />
+				<div className="absolute top-3 left-3 right-3 h-0.5 bg-gray-200 dark:bg-[#3A423A]" />
 				<div className="relative flex items-start justify-between">
 					{milestones.map((milestone) => {
 						const isCompleted = milestone.status === "completed";
@@ -1243,7 +1326,7 @@ function MilestoneProgress({
 									className={`w-6 h-6 rounded-full border-2 flex items-center justify-center z-10 ${
 										isCompleted
 											? "bg-orange-500 border-orange-500"
-											: "bg-white border-gray-300"
+											: "bg-white dark:bg-[#2A3028] border-gray-300 dark:border-[#4A524A]"
 									}`}
 								>
 									{isCompleted && (
@@ -1263,10 +1346,10 @@ function MilestoneProgress({
 									)}
 								</div>
 								<div className="mt-2 text-center max-w-[120px]">
-									<p className="text-xs font-medium text-gray-900 leading-tight">
+									<p className="text-xs font-medium text-gray-900 dark:text-[#E8E6E1] leading-tight">
 										{milestone.title}
 									</p>
-									<p className="text-xs text-gray-500 mt-0.5">
+									<p className="text-xs text-gray-500 dark:text-[#A8A5A0] mt-0.5">
 										{new Date(milestone.occurredAt).toLocaleDateString(
 											"en-US",
 											{
@@ -1309,7 +1392,7 @@ function EntryCard({
 			className={`p-4 rounded-lg border ${
 				entry.isAutoGenerated
 					? "border-blue-100 bg-blue-50"
-					: "border-gray-200 bg-white"
+					: "border-gray-200 dark:border-[#3A423A] bg-white dark:bg-[#2A3028]"
 			}`}
 		>
 			<div className="flex items-start justify-between">
@@ -1317,19 +1400,20 @@ function EntryCard({
 					<div className="flex items-center gap-2 flex-wrap">
 						<span
 							className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
-								TYPE_COLORS[entry.entryType] || "bg-gray-100 text-gray-800"
+								TYPE_COLORS[entry.entryType] ||
+								"bg-gray-100 dark:bg-[#3A423A] text-gray-800 dark:text-[#D8D5D0]"
 							}`}
 						>
 							{formatLabel(entry.entryType)}
 						</span>
-						<span className="text-xs text-gray-500">
+						<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
 							{formatLabel(entry.theme)}
 						</span>
 						{entry.isAutoGenerated && (
 							<span className="text-xs text-blue-600">auto</span>
 						)}
 						{entry.effortBand && (
-							<span className="text-xs text-gray-400">
+							<span className="text-xs text-gray-400 dark:text-[#8A8580]">
 								effort: {entry.effortBand}
 							</span>
 						)}
@@ -1339,14 +1423,16 @@ function EntryCard({
 									? "text-green-600"
 									: entry.status === "blocked"
 										? "text-red-600"
-										: "text-gray-400"
+										: "text-gray-400 dark:text-[#8A8580]"
 							}`}
 						>
 							{entry.status}
 						</span>
 					</div>
-					<p className="mt-1 font-medium text-gray-900">{entry.title}</p>
-					<p className="mt-1 text-sm text-gray-600">
+					<p className="mt-1 font-medium text-gray-900 dark:text-[#E8E6E1]">
+						{entry.title}
+					</p>
+					<p className="mt-1 text-sm text-gray-600 dark:text-[#A8A5A0]">
 						{entry.clientDescription || entry.description}
 					</p>
 					{entry.outcome && (
@@ -1355,7 +1441,7 @@ function EntryCard({
 						</p>
 					)}
 				</div>
-				<span className="text-xs text-gray-400 ml-4">
+				<span className="text-xs text-gray-400 dark:text-[#8A8580] ml-4">
 					{new Date(entry.occurredAt).toLocaleDateString("en-US", {
 						month: "short",
 						day: "numeric",
@@ -1398,15 +1484,15 @@ function ActionItemRow({
 		<div
 			className={`flex items-center gap-4 p-3 rounded-lg border ${
 				isDone
-					? "border-gray-100 bg-gray-50"
+					? "border-gray-100 dark:border-[#3A423A] bg-gray-50 dark:bg-[#1F2521]"
 					: isOverdue
 						? "border-red-200 bg-red-50"
-						: "border-gray-200 bg-white"
+						: "border-gray-200 dark:border-[#3A423A] bg-white dark:bg-[#2A3028]"
 			}`}
 		>
 			<div className="flex-1 min-w-0">
 				<p
-					className={`font-medium ${isDone ? "text-gray-500 line-through" : "text-gray-900"}`}
+					className={`font-medium ${isDone ? "text-gray-500 dark:text-[#A8A5A0] line-through" : "text-gray-900 dark:text-[#E8E6E1]"}`}
 				>
 					{entry.title}
 				</p>
@@ -1415,13 +1501,15 @@ function ActionItemRow({
 						className={`text-sm ${
 							isOverdue && !isDone
 								? "text-red-600 font-medium"
-								: "text-gray-800"
+								: "text-gray-800 dark:text-[#D8D5D0]"
 						}`}
 					>
 						{formattedDate}
 					</span>
 					{assignee && (
-						<span className="text-sm text-gray-800">· {assignee}</span>
+						<span className="text-sm text-gray-800 dark:text-[#D8D5D0]">
+							· {assignee}
+						</span>
 					)}
 					<span
 						className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${
@@ -1446,6 +1534,97 @@ function ActionItemRow({
 				>
 					✓ Complete
 				</button>
+			)}
+		</div>
+	);
+}
+
+// ── Week Entries Panel ──────────────────────────────────────────────────────
+
+function WeekEntriesPanel({
+	weekEntries,
+}: {
+	weekEntries: Array<{
+		_id: string;
+		entryType: string;
+		theme: string;
+		title: string;
+		description: string;
+		clientDescription?: string;
+		outcome?: string;
+		occurredAt: number;
+		status: string;
+	}>;
+}) {
+	const entriesByTheme = new Map<string, typeof weekEntries>();
+	for (const entry of weekEntries) {
+		const group = entriesByTheme.get(entry.theme) || [];
+		group.push(entry);
+		entriesByTheme.set(entry.theme, group);
+	}
+
+	return (
+		<div className="space-y-4">
+			<div className="flex items-center justify-between">
+				<h3 className="text-sm font-semibold text-gray-900 dark:text-[#E8E6E1]">
+					This Week’s Entries
+				</h3>
+				<span className="text-xs text-gray-500 dark:text-[#A8A5A0]">
+					{weekEntries.length} {weekEntries.length === 1 ? "entry" : "entries"}
+				</span>
+			</div>
+
+			{weekEntries.length === 0 ? (
+				<p className="text-xs text-gray-400 dark:text-[#8A8580] italic">
+					No entries logged this week yet.
+				</p>
+			) : (
+				<div className="space-y-3">
+					{[...entriesByTheme.entries()].map(([theme, entries]) => (
+						<div key={theme}>
+							<div className="flex items-center gap-2 mb-1.5">
+								<span
+									className="w-1.5 h-1.5 rounded-full shrink-0"
+									style={{
+										backgroundColor: THEME_COLORS[theme] ?? "#6b7280",
+									}}
+								/>
+								<span className="text-xs font-medium text-gray-500 dark:text-[#A8A5A0] uppercase tracking-wide">
+									{formatLabel(theme)}
+								</span>
+							</div>
+							<div className="space-y-1.5 pl-3.5">
+								{entries.map((entry) => (
+									<div key={entry._id} className="group">
+										<div className="flex items-start gap-2">
+											<span
+												className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium shrink-0 mt-0.5 ${
+													TYPE_COLORS[entry.entryType] ||
+													"bg-gray-100 dark:bg-[#3A423A] text-gray-800 dark:text-[#D8D5D0]"
+												}`}
+											>
+												{formatLabel(entry.entryType)}
+											</span>
+											<div className="min-w-0">
+												<p className="text-xs font-medium text-gray-900 dark:text-[#E8E6E1] leading-snug">
+													{entry.title}
+												</p>
+												<p className="text-xs text-gray-500 dark:text-[#A8A5A0] leading-snug mt-0.5 line-clamp-2">
+													{entry.clientDescription || entry.description}
+												</p>
+												{entry.outcome && (
+													<p className="text-xs text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
+														→ {entry.outcome}
+													</p>
+												)}
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					))}
+				</div>
 			)}
 		</div>
 	);

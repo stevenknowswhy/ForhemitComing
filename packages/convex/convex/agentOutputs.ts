@@ -2,6 +2,9 @@ import { v } from "convex/values";
 import { query, mutation } from "./_generated/server";
 import type { Doc } from "./_generated/dataModel";
 import { requireAuth } from "./lib/requireAuth";
+import { logEvent } from "./lib/logEvent";
+import { LOG_ACTIONS } from "./lib/logEvents.constants";
+import { agentActor } from "./lib/resolveActor";
 
 // ============================================
 // Agent Outputs Queries
@@ -135,7 +138,7 @@ export const store = mutation({
 		const costUsd = estimateCost(args.model, args.usage);
 		const status = args.isSimulation ? "simulation" : "pending_review";
 
-		return await ctx.db.insert("agentOutputs", {
+		const outputId = await ctx.db.insert("agentOutputs", {
 			companyId: args.companyId,
 			agentId: args.agentId,
 			templateId: args.templateId,
@@ -151,6 +154,31 @@ export const store = mutation({
 			supersedes: args.supersedes,
 			createdAt: Date.now(),
 		});
+
+		if (!args.isSimulation) {
+			const actor = agentActor(args.agentId);
+			await logEvent(ctx, {
+				...actor,
+				eventType: LOG_ACTIONS.AGENT_OUTPUT,
+				category: "agent",
+				summary: `Agent output: ${args.agentId} generated for gate ${args.gate}`,
+				source: "agent",
+				visibility: "internal",
+				companyId: args.companyId,
+				scopeType: "company",
+				scopeId: args.companyId,
+				entityType: "agentOutput",
+				entityId: outputId,
+				metadata: {
+					agentId: args.agentId,
+					gate: args.gate,
+					model: args.model,
+					costUsd,
+				},
+			});
+		}
+
+		return outputId;
 	},
 });
 
@@ -182,6 +210,34 @@ export const updateStatus = mutation({
 		}
 
 		await ctx.db.patch(args.id, updates);
+
+		// Log approval/rejection to business log
+		if (args.status === "approved" || args.status === "rejected") {
+			const actor = agentActor("admin");
+			await logEvent(ctx, {
+				...actor,
+				eventType:
+					args.status === "approved"
+						? LOG_ACTIONS.AGENT_APPROVED
+						: LOG_ACTIONS.AGENT_REJECTED,
+				category: "agent",
+				summary: `Agent output ${args.status}: ${output.agentId} (gate ${output.gate})`,
+				source: "admin_ui",
+				visibility: "internal",
+				companyId: output.companyId,
+				scopeType: "company",
+				scopeId: output.companyId,
+				entityType: "agentOutput",
+				entityId: args.id,
+				metadata: {
+					agentId: output.agentId,
+					gate: output.gate,
+					status: args.status,
+					reviewNotes: args.reviewNotes,
+				},
+			});
+		}
+
 		return args.id;
 	},
 });

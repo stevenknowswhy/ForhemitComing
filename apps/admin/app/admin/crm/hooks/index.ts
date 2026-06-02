@@ -9,3 +9,5 @@ export { useCrmActivities } from "./useCrmActivities";
 export { useCrmContacts } from "./useCrmContacts";
 export { useCrmTasks } from "./useCrmTasks";
 export { useDealEngine } from "./useDealEngine";
+export { useCrmInteractions } from "./useCrmInteractions";
+export { useCompanyWithContacts } from "./useCompanyWithContacts";

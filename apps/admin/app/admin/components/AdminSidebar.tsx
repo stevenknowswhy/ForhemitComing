@@ -20,7 +20,9 @@ import {
 	BookOpen,
 	Menu,
 	PanelLeftClose,
+	ClipboardCheck,
 } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 interface NavItem {
 	href: string;
@@ -65,11 +67,40 @@ export default function AdminSidebar({
 			label: "Dashboard",
 			icon: <LayoutDashboard size={20} />,
 		},
+	];
+
+	const pipelineNavItems: NavItem[] = [
 		{
-			href: "/admin/phone-messages",
-			label: "Phone Messages",
-			icon: <Phone size={20} />,
+			href: "/admin/deal-tracker",
+			label: "Deal Tracker",
+			icon: <ClipboardCheck size={20} />,
 		},
+		{
+			href: "/admin/crm",
+			label: "Business Tracker",
+			icon: <Users size={20} />,
+		},
+		{
+			href: "/admin/esop-partners",
+			label: "ESOP Partners",
+			icon: <Network size={20} />,
+		},
+	];
+
+	const documentsNavItems: NavItem[] = [
+		{
+			href: "/admin/letters",
+			label: "Letters",
+			icon: <PenTool size={20} />,
+		},
+		{
+			href: "/admin/templates",
+			label: "Templates",
+			icon: <FileCode size={20} />,
+		},
+	];
+
+	const intakeNavItems: NavItem[] = [
 		{
 			href: "/admin/contacts",
 			label: "Contact Submissions",
@@ -83,6 +114,11 @@ export default function AdminSidebar({
 			badge: earlyAccessCount,
 		},
 		{
+			href: "/admin/phone-messages",
+			label: "Phone Messages",
+			icon: <Phone size={20} />,
+		},
+		{
 			href: "/admin/applications",
 			label: "Job Applications",
 			icon: <FileText size={20} />,
@@ -90,27 +126,7 @@ export default function AdminSidebar({
 		},
 	];
 
-	const toolsNavItems: NavItem[] = [
-		{
-			href: "/admin/crm",
-			label: "Business Tracker",
-			icon: <Users size={20} />,
-		},
-		{
-			href: "/admin/esop-partners",
-			label: "ESOP Partners",
-			icon: <Network size={20} />,
-		},
-		{
-			href: "/admin/letters",
-			label: "Letters",
-			icon: <PenTool size={20} />,
-		},
-		{
-			href: "/admin/templates",
-			label: "Templates",
-			icon: <FileCode size={20} />,
-		},
+	const insightsNavItems: NavItem[] = [
 		{
 			href: "/admin/stats",
 			label: "Statistics",
@@ -213,9 +229,75 @@ export default function AdminSidebar({
 				</div>
 
 				<div className="sidebar-section">
-					<span className="sidebar-section-title">Tools</span>
+					<span className="sidebar-section-title">Pipeline</span>
 					<ul className="sidebar-menu">
-						{toolsNavItems.map((item) => (
+						{pipelineNavItems.map((item) => (
+							<li key={item.href}>
+								<Link
+									href={item.href}
+									className={`sidebar-link ${isActive(item.href) ? "active" : ""}`}
+									onClick={() => onCloseMobile?.()}
+									title={item.label}
+								>
+									<span className="sidebar-link-icon">{item.icon}</span>
+									<span className="sidebar-link-label">{item.label}</span>
+									{item.badge ? (
+										<span className="sidebar-badge">{item.badge}</span>
+									) : null}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="sidebar-section">
+					<span className="sidebar-section-title">Documents</span>
+					<ul className="sidebar-menu">
+						{documentsNavItems.map((item) => (
+							<li key={item.href}>
+								<Link
+									href={item.href}
+									className={`sidebar-link ${isActive(item.href) ? "active" : ""}`}
+									onClick={() => onCloseMobile?.()}
+									title={item.label}
+								>
+									<span className="sidebar-link-icon">{item.icon}</span>
+									<span className="sidebar-link-label">{item.label}</span>
+									{item.badge ? (
+										<span className="sidebar-badge">{item.badge}</span>
+									) : null}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="sidebar-section">
+					<span className="sidebar-section-title">Intake</span>
+					<ul className="sidebar-menu">
+						{intakeNavItems.map((item) => (
+							<li key={item.href}>
+								<Link
+									href={item.href}
+									className={`sidebar-link ${isActive(item.href) ? "active" : ""}`}
+									onClick={() => onCloseMobile?.()}
+									title={item.label}
+								>
+									<span className="sidebar-link-icon">{item.icon}</span>
+									<span className="sidebar-link-label">{item.label}</span>
+									{item.badge ? (
+										<span className="sidebar-badge">{item.badge}</span>
+									) : null}
+								</Link>
+							</li>
+						))}
+					</ul>
+				</div>
+
+				<div className="sidebar-section">
+					<span className="sidebar-section-title">Insights</span>
+					<ul className="sidebar-menu">
+						{insightsNavItems.map((item) => (
 							<li key={item.href}>
 								<Link
 									href={item.href}
@@ -260,9 +342,10 @@ export default function AdminSidebar({
 			</nav>
 
 			<div className="sidebar-footer">
-				{userButton && (
-					<div className="flex items-center gap-3">{userButton}</div>
-				)}
+				<div className="flex items-center gap-3">
+					<ThemeToggle />
+					{userButton}
+				</div>
 			</div>
 		</aside>
 	);
