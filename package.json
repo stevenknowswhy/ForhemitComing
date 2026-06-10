@@ -14,6 +14,5 @@
     "convex:dev": "pnpm --filter @forhemit/convex run convex:dev",
     "convex:deploy": "pnpm --filter @forhemit/convex run convex:deploy",
     "convex:once": "pnpm --filter @forhemit/convex run convex:once"
-  },
-
+  }
 }
