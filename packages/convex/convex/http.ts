@@ -4,7 +4,11 @@ import { api } from "./_generated/api";
 
 // Declare process.env for Convex runtime (Node.js types not in tsconfig)
 declare const process: {
-	env: { RESEND_API_KEY?: string; BOX_WEBHOOK_PRIMARY_KEY?: string };
+	env: {
+		RESEND_API_KEY?: string;
+		BOX_WEBHOOK_PRIMARY_KEY?: string;
+		CORS_ALLOWED_ORIGINS?: string;
+	};
 };
 
 const http = httpRouter();
