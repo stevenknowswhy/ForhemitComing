@@ -14,9 +14,9 @@ export const teamMembers: TeamMember[] = [
       "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x",
   },
   {
-    name: "Dena Carter",
+    name: "Lena Carter",
     role: "Director, Private Equity",
-    bio: "Dena has more than 10 years of experience in the private equity market. A chartered accountant who qualified with PwC, she has worked across Corporate Finance, Acquisition Finance, and Private Equity. She has led numerous acquisitions via MBOs, growth capital, venture capital, buy-and-builds, and administrations, and has extensive experience in board-level strategic planning, refinancings, and exits. Dena focuses on direct private equity investments, particularly in Education and Software.",
+    bio: "Lena has more than 10 years of experience in the private equity market. A chartered accountant who qualified with PwC, she has worked across Corporate Finance, Acquisition Finance, and Private Equity. She has led numerous acquisitions via MBOs, growth capital, venture capital, buy-and-builds, and administrations, and has extensive experience in board-level strategic planning, refinancings, and exits. Lena focuses on direct private equity investments, particularly in Education and Software.",
     photo:
       "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqF8jvaT0MuDEPsjO39fLSiyQYHJz5c2vqnTg64",
   },

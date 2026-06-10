@@ -30,7 +30,9 @@
       ],
       "@forhemit/shared/*": [
         "../../packages/shared/src/*"
-      ]
+      ],
+      "next": ["./node_modules/next"],
+      "next/*": ["./node_modules/next/*"]
     },
     "target": "ES2017"
   },

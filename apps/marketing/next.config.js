@@ -1,5 +1,17 @@
 const path = require('path');
 
+// Link headers for agent discovery (RFC 8288)
+const linkHeaders = [
+  '</.well-known/api-catalog>; rel="api-catalog"',
+  '</.well-known/openid-configuration>; rel="openid-configuration"',
+  '</.well-known/oauth-authorization-server>; rel="oauth-authorization-server"',
+  '</.well-known/oauth-protected-resource>; rel="oauth-protected-resource"',
+  '</.well-known/mcp.json>; rel="mcp"',
+  '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
+  '</.well-known/agent-card.json>; rel="agent-card"',
+  '</.well-known/agent-skills/index.json>; rel="agent-skills"',
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -76,15 +88,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
-
-// Link headers for agent discovery (RFC 8288)
-const linkHeaders = [
-  '</.well-known/api-catalog>; rel="api-catalog"',
-  '</.well-known/openid-configuration>; rel="openid-configuration"',
-  '</.well-known/oauth-authorization-server>; rel="oauth-authorization-server"',
-  '</.well-known/oauth-protected-resource>; rel="oauth-protected-resource"',
-  '</.well-known/mcp.json>; rel="mcp"',
-  '</.well-known/mcp/server-card.json>; rel="mcp-server-card"',
-  '</.well-known/agent-card.json>; rel="agent-card"',
-  '</.well-known/agent-skills/index.json>; rel="agent-skills"',
-];
