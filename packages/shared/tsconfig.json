@@ -12,7 +12,12 @@
     "isolatedModules": true,
     "resolveJsonModule": true,
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "baseUrl": ".",
+    "paths": {
+      "next": ["node_modules/next"],
+      "next/*": ["node_modules/next/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"]
 }
