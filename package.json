@@ -16,6 +16,6 @@
     "convex:once": "pnpm --filter @forhemit/convex run convex:once"
   },
   "devDependencies": {
-    "next": "^16.2.6"
+    "next": "^15.0.0"
   }
 }
