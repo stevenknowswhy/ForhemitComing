@@ -133,6 +133,7 @@ export function ContactFormExperience({
 
 		const ctRaw = searchParams.get("contactType") ?? searchParams.get("type");
 		const intRaw = searchParams.get("interest");
+		const msgRaw = searchParams.get("message") ?? searchParams.get("about");
 
 		let contactType = ctRaw && VALID_CONTACT_TYPES.has(ctRaw) ? ctRaw : "";
 		const interest = intRaw && VALID_INTERESTS.has(intRaw) ? intRaw : "";
@@ -142,15 +143,18 @@ export function ContactFormExperience({
 			else if (PARTNER_INTERESTS.has(interest)) contactType = "partner";
 		}
 
-		if (!contactType && !interest) return;
+		if (!contactType && !interest && !msgRaw) return;
 
 		setFormData((prev) => ({
 			...prev,
 			...(contactType ? { contactType } : {}),
 			...(interest ? { interest } : {}),
+			...(msgRaw ? { message: msgRaw } : {}),
 		}));
 		if (contactType) {
 			setRevealedSection("contact");
+		} else if (msgRaw) {
+			setRevealedSection("message");
 		}
 	}, [searchParams]);
 
