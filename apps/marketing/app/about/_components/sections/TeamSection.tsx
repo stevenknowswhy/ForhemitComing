@@ -4,7 +4,7 @@ export function TeamSection() {
   const teamMembers = [
     {
       name: "Stefano Stokes",
-      title: "Founder",
+      title: "Senior Managing Partner",
       image:
         "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x"
     },

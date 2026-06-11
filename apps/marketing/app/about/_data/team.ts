@@ -8,7 +8,7 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   {
     name: "Stefano Stokes",
-    role: "Founder",
+    role: "Senior Managing Partner",
     bio: "Stefano's background is in disaster planning and mitigation. He engineered continuity of operations frameworks for the City and County of San Francisco, responsible for the resilience of a 40,000-person municipal workforce and the city's 800,000 residents. He brings that same operational rigor and 'no acceptable excuses for failure' mindset to stewarding founder-led businesses through ESOP transitions.",
     photo:
       "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x",
