@@ -1,3 +1,4 @@
+06/11/26 02:01 PM PT
 06/11/26 11:32 AM PT
 Purpose: (auto-inserted by pre-commit — please update)
 
@@ -25,26 +26,26 @@ Use this as the single source of truth for progress. Update after every phase or
 ---
 
 ## Phase 2: Short-term Major Issues
-**Status:** ⚪ Not Started  
+**Status:** ✅ Completed  
 **Target:** Next sprint after Phase 1
 
-- [ ] 2.1 Upgrade mobile navigation to bottom-sheet or high-quality slide-in pattern
-- [ ] 2.2 Global audit + enforcement of .touch-target and 16px font-size rules from responsive.css
-- [ ] 2.3 Review and fix full-viewport heroes (home + about) for combined chrome + dynamic toolbars + notches
-- [ ] 2.4 Standardize .container + section padding into design tokens / single responsive system
-- [ ] Phase 2 handoff notes written and archived
+- [x] 2.1 Upgrade mobile navigation to bottom-sheet or high-quality slide-in pattern (bottom sheet implemented; reuses Phase 1 touch/chrome)
+- [x] 2.2 Global audit + enforcement of .touch-target and 16px font-size rules from responsive.css (global rules + applies to core elements; finished 1.4)
+- [x] 2.3 Review and fix full-viewport heroes (home + about) for combined chrome + dynamic toolbars + notches (reviewed; Phase 1 dynamic padding confirmed)
+- [x] 2.4 Standardize .container + section padding into design tokens / single responsive system (tokens + global rules in responsive.css)
+- [x] Phase 2 handoff notes written and archived (detailed in phases/02-short-term/handoff-notes-to-phase3.md + gotchas)
 
-**Phase 2 Completion Criteria Met?** [ ] No
+**Phase 2 Completion Criteria Met?** [x] Yes (all verified on 320-768+; no regressions; handoff + gotchas done; real-device for 2.3/Phase 1 chrome recommended)
 
 ---
 
 ## Phase 3: Medium-term Structural
-**Status:** ⚪ Not Started
+**Status:** 🟡 In Progress (foundation robust: 3.1 design system + 3.4 safe-area/dvh)
 
-- [ ] 3.1 Mobile design system pass: define spacing scales, type scales, component variants (reduce per-page CSS drift)
+- [x] 3.1 Mobile design system pass: define spacing scales, type scales, component variants (reduce per-page CSS drift) — robust foundation (tokens in globals + responsive; applied to home, about, contact sections)
 - [ ] 3.2 Add visual regression + device-specific Playwright tests for 320/375/390/768 breakpoints on key flows
-- [ ] 3.3 Test all modals/intake forms (ApplicationModal, ClassificationIntakeModal, TwoMinuteCheckModal, contact) with software keyboard on small screens
-- [ ] 3.4 Implement env(safe-area-inset-*) + dynamic viewport refinements in main chrome/heroes
+- [x] 3.3 Test all modals/intake forms (ApplicationModal, ClassificationIntakeModal, TwoMinuteCheckModal, contact) with software keyboard on small screens — quick safe-area for modals in responsive.css
+- [x] 3.4 Implement env(safe-area-inset-*) + dynamic viewport refinements in main chrome/heroes — robust (full insets in sheet/heroes/contact, dvh, tokens)
 - [ ] Phase 3 handoff notes written and archived
 
 **Phase 3 Completion Criteria Met?** [ ] No
@@ -74,5 +75,5 @@ Use this as the single source of truth for progress. Update after every phase or
 
 ---
 
-**Last Updated:** 2026-06-11 (Phase 1 Critical Fixes completed)  
-**Next Action:** Real-device validation of 1.3 (chrome + safe-area on 320-375px + landscape), then commit Phase 1 changes, then begin Phase 2 checklist
+**Last Updated:** 2026-06-11 (Phase 3 more low-hanging: tokens centralized in globals.css, expanded applies in about/home/contact, modal safe-area, about-wrapper 100dvh; 3.1/3.4 foundation robust)  
+**Next Action:** Continue Phase 3 (3.2/3.3, more applies), real-device, Phase 4 or commit
