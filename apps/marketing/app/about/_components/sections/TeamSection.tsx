@@ -48,12 +48,12 @@ export function TeamSection() {
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {teamMembers.map((member, index) => (
             <div key={index} className="bg-card rounded-lg border">
-              <div className="relative h-64 w-full overflow-hidden rounded-t-lg">
+              <div className="relative h-80 w-full overflow-hidden rounded-t-lg">
                 <Image
                   src={member.image}
                   alt={`Picture of ${member.name}`}
                   fill
-                  className="object-cover rounded-t-lg"
+                  className="object-cover object-top rounded-t-lg"
                 />
               </div>
               <div className="p-4">
