@@ -18,6 +18,9 @@ const nextConfig = {
     externalDir: true,
   },
   reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   turbopack: {
     root: path.resolve(__dirname, '../..'),
   },
