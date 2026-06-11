@@ -9,8 +9,8 @@ export function TeamSection() {
         "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x"
     },
     {
-      name: "Lena Yon",
-      title: "Director, Private Equity",
+      name: "Lena Yon, MBA, CPA, CFE",
+      title: "CFO, Finance Director",
       image:
         "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqFOGW64iafiQV2SmG4nT159rauRoHzcLjx0Y8N"
     },
