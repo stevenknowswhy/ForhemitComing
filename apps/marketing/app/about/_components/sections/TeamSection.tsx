@@ -70,9 +70,9 @@ export function TeamSection() {
                 <p className="text-muted-foreground text-sm">{member.title}</p>
                 <div className="flex gap-3 mt-2">
                   <a
-                    href={`mailto:${member.email}`}
+                    href={`/contact?interest=general&message=${encodeURIComponent(`Inquiry about team member: ${member.name} (${member.title})`)}`}
                     className="text-muted-foreground hover:text-foreground transition-colors"
-                    aria-label={`Email ${member.name}`}
+                    aria-label={`Contact us about ${member.name}`}
                   >
                     <Mail className="w-4 h-4" />
                   </a>
