@@ -36,6 +36,11 @@ const nextConfig = {
         hostname: '618ukecvpc.ufs.sh',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'xdjt53kfvx.ufs.sh',
+        pathname: '/**',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },
