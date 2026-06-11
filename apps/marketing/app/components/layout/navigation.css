@@ -13,6 +13,7 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem 2rem;
+  padding-top: calc(1.5rem + env(safe-area-inset-top));
   pointer-events: none;
 }
 
@@ -247,6 +248,7 @@
 @media (max-width: 768px) {
   .minimal-nav {
     padding: 1rem 1.5rem;
+    padding-top: calc(1rem + env(safe-area-inset-top));
   }
   
   .nav-logo {
@@ -266,10 +268,12 @@
 @media (max-width: 480px) {
   .minimal-nav {
     padding: 0.75rem 1rem;
+    padding-top: calc(0.75rem + env(safe-area-inset-top));
   }
   
+  /* Keep touch targets >=44px even while using small visual icons (utility class on elements provides the min + centering; these rules keep visuals compact) */
   .theme-toggle {
-    padding: 0.35rem;
+    padding: 10px;
   }
   
   .theme-toggle svg {
@@ -278,7 +282,7 @@
   }
   
   .hamburger-btn {
-    padding: 0.35rem;
+    padding: 10px;
     gap: 4px;
   }
   

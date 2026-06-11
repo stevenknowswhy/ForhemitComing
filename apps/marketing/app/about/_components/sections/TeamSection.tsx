@@ -71,19 +71,19 @@ export function TeamSection() {
                 <div className="flex gap-3 mt-2">
                   <a
                     href={`/contact?interest=general&message=${encodeURIComponent(`Inquiry about team member: ${member.name} (${member.title})`)}`}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="touch-target-icon text-muted-foreground hover:text-foreground active:scale-[0.92] active:opacity-70 transition-all"
                     aria-label={`Contact us about ${member.name}`}
                   >
-                    <Mail className="w-4 h-4" />
+                    <Mail className="w-5 h-5" />
                   </a>
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="touch-target-icon text-muted-foreground hover:text-foreground active:scale-[0.92] active:opacity-70 transition-all"
                     aria-label={`LinkedIn profile of ${member.name}`}
                   >
-                    <Linkedin className="w-4 h-4" />
+                    <Linkedin className="w-5 h-5" />
                   </a>
                 </div>
               </div>

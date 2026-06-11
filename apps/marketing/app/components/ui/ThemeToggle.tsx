@@ -9,7 +9,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="theme-toggle"
+      className="theme-toggle touch-target-icon"
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       title={`${isDark ? "Light" : "Dark"} mode (Ctrl/Cmd+Shift+L)`}
       type="button"
