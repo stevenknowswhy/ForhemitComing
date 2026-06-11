@@ -1,8 +1,21 @@
 node_modules
-.next
-.turbo
 .git
-apps/docs
-apps/storybook
-apps/marketing
-static
+tmp
+downloads
+*.log
+*.pdf
+gap-analysis
+ForhemitLegal
+ForhemitTemplates
+.gitignore
+
+# Exclude large tracked files/dirs to keep non-Git deploy under 100MB limit
+node_modules
+.git
+tmp
+downloads
+*.pdf
+*.log
+gap-analysis
+ForhemitLegal
+ForhemitTemplates
