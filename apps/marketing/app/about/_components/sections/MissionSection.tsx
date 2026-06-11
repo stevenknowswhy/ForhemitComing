@@ -6,7 +6,7 @@ export function MissionSection() {
       <div className="container">
         <div className="mission-grid">
           <div className="mission-content">
-            <span className="about-eyebrow">The Founder</span>
+            <span className="about-eyebrow">Senior Managing Partner</span>
             <h2>Our Mission is Our Mandate</h2>
             <p className="lead">
               Stefano&apos;s background isn&apos;t traditional investment banking. It&apos;s disaster
@@ -26,13 +26,7 @@ export function MissionSection() {
               That is disaster planning.
             </p>
           </div>
-          <div className="mission-image-wrapper">
-            <img
-              src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x"
-              alt="Stefano - Founder of Forhemit"
-              className="mission-image"
-            />
-          </div>
+
         </div>
       </div>
     </section>
