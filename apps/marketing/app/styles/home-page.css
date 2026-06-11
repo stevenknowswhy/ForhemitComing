@@ -86,8 +86,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Padding accounts for fixed nav (~80px) and fixed footer (~60px) */
-  padding: 6rem 2rem 5rem;
+  /* Dynamic padding for unified chrome + safe-area (Phase 1.3). 
+     Uses --mobile-chrome-height + env(safe-area-inset-top). Footer is static. */
+  padding: calc( var(--mobile-chrome-height) + env(safe-area-inset-top) ) 2rem 5rem;
   min-height: 100dvh;
   box-sizing: border-box;
 }

@@ -31,6 +31,9 @@
   justify-content: center;
   overflow: hidden;
   background: var(--hch-cream);
+  /* Safe-area + chrome offset for above-the-fold primary content on real devices.
+     --mobile-chrome-height defined in globals.css (Phase 1.3 unification) */
+  padding-top: calc(env(safe-area-inset-top) + var(--mobile-chrome-height));
 }
 
 .hch-hero-bg::before {
@@ -725,7 +728,9 @@ a.hch-path-cta {
   }
 
   .hch-hero-bg {
-    min-height: calc(100dvh - 80px);
+    /* Dynamic: accounts for safe-area + unified mobile chrome height (see --mobile-chrome-height in globals.css) */
+    min-height: 100dvh;
+    padding-top: calc(env(safe-area-inset-top) + var(--mobile-chrome-height));
   }
 
   .hch-hero-headline {

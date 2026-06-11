@@ -455,16 +455,47 @@ button,
    TOUCH TARGET UTILITIES
    ============================================= */
 
-/* Ensure all touch targets meet 44px minimum */
+/* Ensure all touch targets meet 44px minimum (WCAG 2.2) */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px; /* hit slop */
+}
+
+/* Dedicated for small icons/links (e.g. Mail, Linkedin, close buttons) where visual icon stays ~20-22px but tap area is 44px */
+.touch-target-icon {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px; /* generous hit slop for precision */
+}
+
+/* Focus and pressed states for touch targets (Phase 1.4 completion) */
+.touch-target:focus-visible,
+.touch-target-icon:focus-visible {
+  outline: 2px solid var(--color-brand, #c9a227);
+  outline-offset: 2px;
+}
+
+.touch-target:active,
+.touch-target-icon:active {
+  transform: scale(0.96);
+  opacity: 0.85;
 }
 
 /* Larger touch targets for primary actions */
 .touch-target-lg {
   min-height: 48px;
   min-width: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
 }
 
 /* Touch-friendly spacing */

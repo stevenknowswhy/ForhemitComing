@@ -46,6 +46,11 @@
   /* Transitions */
   --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* Mobile top chrome height (for safe-area + dynamic viewport heroes).
+     Set to combined visual height of GlobalHeader logo + Navigation controls on phones.
+     Adjusted per breakpoint if needed. Used in Phase 1.3 chrome unification. */
+  --mobile-chrome-height: 56px;
+
   /* Legacy compatibility */
   --bg-primary: var(--canvas);
   --text-primary: var(--ink);
