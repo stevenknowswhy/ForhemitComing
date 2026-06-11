@@ -21,7 +21,7 @@ export function TeamSection() {
         "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqF3u2zW9lWByw3Aq1t90KI5T6lcPeijoUQvr8V"
     },
     {
-      name: "Ejaz Ahmed",
+      name: "Ejaz Ahmed MBA",
       title: "Operations Lead",
       image:
         "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDkqluSzTiFjEIVDdqcMbun9pyXLi8vQUtwY1o"
