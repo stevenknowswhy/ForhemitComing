@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Mail, Linkedin } from "lucide-react";
 
 export function TeamSection() {
   const teamMembers = [
@@ -6,25 +7,33 @@ export function TeamSection() {
       name: "Stefano Stokes",
       title: "Senior Managing Partner",
       image:
-        "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x"
+        "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDMAmOxFsP54wZ3MdlKIGHYbcXi6ROrhpmgC1x",
+      email: "stefano@forhemit.com",
+      linkedin: "https://www.linkedin.com/in/stefanostokes"
     },
     {
       name: "Lena Yon, MBA, CPA, CFE",
       title: "CFO, Finance Director",
       image:
-        "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqFOGW64iafiQV2SmG4nT159rauRoHzcLjx0Y8N"
+        "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqFOGW64iafiQV2SmG4nT159rauRoHzcLjx0Y8N",
+      email: "lena@forhemit.com",
+      linkedin: "https://www.linkedin.com/in/lenayon"
     },
     {
       name: "Daniel Morgan",
       title: "Business Development Manager",
       image:
-        "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqF3u2zW9lWByw3Aq1t90KI5T6lcPeijoUQvr8V"
+        "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqF3u2zW9lWByw3Aq1t90KI5T6lcPeijoUQvr8V",
+      email: "daniel@forhemit.com",
+      linkedin: "https://www.linkedin.com/in/danielmorgan"
     },
     {
       name: "Ejaz Ahmed MBA",
       title: "Operations Lead",
       image:
-        "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDkqluSzTiFjEIVDdqcMbun9pyXLi8vQUtwY1o"
+        "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDkqluSzTiFjEIVDdqcMbun9pyXLi8vQUtwY1o",
+      email: "ejaz@forhemit.com",
+      linkedin: "https://www.linkedin.com/in/ejazahmed"
     }
   ];
 
@@ -59,6 +68,24 @@ export function TeamSection() {
               <div className="p-4">
                 <h3 className="text-lg font-medium">{member.name}</h3>
                 <p className="text-muted-foreground text-sm">{member.title}</p>
+                <div className="flex gap-3 mt-2">
+                  <a
+                    href={`mailto:${member.email}`}
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={`Email ${member.name}`}
+                  >
+                    <Mail className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={member.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    aria-label={`LinkedIn profile of ${member.name}`}
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                </div>
               </div>
             </div>
           ))}
