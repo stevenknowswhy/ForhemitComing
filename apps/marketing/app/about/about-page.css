@@ -52,53 +52,12 @@
   z-index: 1000;
 }
 
-/* ── Logo Header ── */
-.about-logo-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1001;
-  padding: 1.25rem 1.5rem;
-}
-
-.about-logo-link {
-  position: relative;
-  text-decoration: none;
-  display: inline-block;
-}
-
-.about-logo-text {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--metallic-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  transition: filter 0.4s ease, transform 0.4s ease, background 0.3s ease;
-  display: inline-block;
-}
-
-.about-logo-link:hover .about-logo-text {
-  filter: brightness(1.15);
-  transform: scale(1.03);
-}
-
-.about-logo-underline {
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--about-accent);
-  transition: width 0.3s ease;
-}
-
-.about-logo-link:hover .about-logo-underline {
-  width: 100%;
-}
+/* ── Logo Header (legacy duplicate) ──
+   Deprecated in Phase 1.3 chrome unification.
+   GlobalHeader component (z-1001, left logo) + Navigation now provide the single source of truth for top chrome.
+   These rules were duplicating GlobalHeader.css styles and have been removed to eliminate drift and crowding issues.
+   If any about-specific logo treatment is needed later, scope it narrowly.
+*/
 
 .about-background {
   position: fixed;
@@ -133,16 +92,18 @@
 .about-main {
   position: relative;
   z-index: 1;
-  padding-top: 80px;
+  /* Dynamic for unified chrome (Phase 1.3) */
+  padding-top: calc( var(--mobile-chrome-height) + env(safe-area-inset-top) );
 }
 
 /* ── Hero Section ── */
 .about-hero {
   position: relative;
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding: 8rem 0 6rem;
+  /* Dynamic chrome + safe-area offset (Phase 1.3 unification). Primary content now reliably above fold. */
+  padding: calc( var(--mobile-chrome-height) + env(safe-area-inset-top) ) 0 6rem;
   text-align: center;
   border-bottom: 1px solid var(--about-border);
   background-image: url('/images/about/about-1.webp');
@@ -1852,7 +1813,8 @@
   }
 
   .about-hero {
-    padding: 5rem 0 4rem;
+    /* Respect unified chrome height + safe-area (Phase 1.3) */
+    padding: calc( var(--mobile-chrome-height) + env(safe-area-inset-top) ) 0 4rem;
   }
 
   .about-section {
