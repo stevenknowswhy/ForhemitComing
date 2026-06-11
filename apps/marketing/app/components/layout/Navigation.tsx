@@ -115,21 +115,31 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
         <span className="hamburger-line"></span>
       </button>
 
-      {/* Dropdown Menu */}
+      {/* Bottom Sheet Mobile Nav (Phase 2 upgrade from dropdown) */}
       {isOpen && (
-        <div className="nav-dropdown">
-          {allNavItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              prefetch={navPrefetch}
-              className="nav-dropdown-item"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </div>
+        <>
+          {/* Overlay for dismiss (thumb friendly, respects top chrome) */}
+          <div 
+            className="nav-overlay" 
+            onClick={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+          {/* Full-width bottom sheet — thumb-reachable, reuses Phase 1 touch-target and chrome patterns */}
+          <div className="nav-bottom-sheet">
+            <div className="nav-sheet-handle" aria-hidden="true" />
+            {allNavItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                prefetch={navPrefetch}
+                className="nav-bottom-sheet-item touch-target"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </div>
+        </>
       )}
     </nav>
   );

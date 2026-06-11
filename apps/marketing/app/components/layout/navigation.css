@@ -291,3 +291,96 @@
     height: 1.5px;
   }
 }
+
+/* =============================================
+   PHASE 2: Bottom Sheet Mobile Navigation (replaces cramped dropdown)
+   Thumb-reachable, full-width, reuses Phase 1 .touch-target + chrome patterns
+   ============================================= */
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 900; /* Below GlobalHeader (1001) and sheet */
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nav-bottom-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-radius: 16px 16px 0 0;
+  padding: 0.75rem 1rem; 
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom)); /* Phase 3.4: full safe-area bottom */
+  z-index: 950;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  max-height: 70vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.nav-sheet-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--text-secondary);
+  opacity: 0.4;
+  border-radius: 2px;
+  margin: 0 auto 0.75rem;
+}
+
+.nav-bottom-sheet-item {
+  display: block;
+  padding: 0.875rem 1rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 10px;
+  margin-bottom: 0.25rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  min-height: 44px; /* reinforced by .touch-target */
+}
+
+.nav-bottom-sheet-item:last-child {
+  margin-bottom: 0;
+}
+
+.nav-bottom-sheet-item:hover,
+.nav-bottom-sheet-item:active {
+  background: var(--bg-glass);
+  color: var(--color-brand);
+}
+
+/* Light variant support for the sheet */
+.light-nav .nav-bottom-sheet {
+  background: var(--bg-primary);
+  border-color: var(--border-subtle);
+}
+
+.light-nav .nav-bottom-sheet-item {
+  color: var(--text-primary);
+}
+
+.light-nav .nav-bottom-sheet-item:hover,
+.light-nav .nav-bottom-sheet-item:active {
+  background: var(--bg-glass);
+  color: var(--color-brand);
+}
+
+/* Ensure the old dropdown is not used on very small screens (Phase 2 mobile focus) */
+@media (max-width: 480px) {
+  .nav-dropdown {
+    display: none; /* deprecated in favor of bottom sheet */
+  }
+}
