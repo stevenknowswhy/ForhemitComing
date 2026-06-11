@@ -21,10 +21,10 @@ export function TeamSection() {
         "https://xdjt53kfvx.ufs.sh/f/cAVKl903gHqF3u2zW9lWByw3Aq1t90KI5T6lcPeijoUQvr8V"
     },
     {
-      name: "Ava Wilson",
+      name: "Ejaz Ahmed",
       title: "Operations Lead",
       image:
-        "https://images.unsplash.com/photo-1753828335589-8fee07cb4cec?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        "https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDkqluSzTiFjEIVDdqcMbun9pyXLi8vQUtwY1o"
     }
   ];
 
