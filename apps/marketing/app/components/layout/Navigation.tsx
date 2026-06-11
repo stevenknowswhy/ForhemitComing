@@ -105,7 +105,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
 
       {/* Hamburger Menu Button */}
       <button
-        className={`hamburger-btn ${isOpen ? "open" : ""}`}
+        className={`hamburger-btn touch-target-icon ${isOpen ? "open" : ""}`}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
