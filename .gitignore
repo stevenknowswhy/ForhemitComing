@@ -54,3 +54,4 @@ packages/**/.env.local
 .prettierrc
 .eslintrc.json
 freellmapi/
+.vercel
