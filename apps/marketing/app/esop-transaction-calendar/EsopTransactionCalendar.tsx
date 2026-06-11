@@ -353,16 +353,16 @@ export function EsopTransactionCalendar({
             <span className="etc-header-subtitle">120-Day ESOP Transaction Calendar</span>
           </div>
           <div className="etc-header-nav">
-            <button type="button" className="etc-nav-arrow" onClick={goPrevMonth} aria-label="Previous month">
+            <button type="button" className="etc-nav-arrow touch-target-icon" onClick={goPrevMonth} aria-label="Previous month">
               ‹
             </button>
             <span className="etc-nav-month-label">
               {MONTH_NAMES[viewMonth.getMonth()]} {viewMonth.getFullYear()}
             </span>
-            <button type="button" className="etc-nav-arrow" onClick={goNextMonth} aria-label="Next month">
+            <button type="button" className="etc-nav-arrow touch-target-icon" onClick={goNextMonth} aria-label="Next month">
               ›
             </button>
-            <button type="button" className="etc-nav-today" onClick={goTodayNav}>
+            <button type="button" className="etc-nav-today touch-target" onClick={goTodayNav}>
               Today
             </button>
           </div>
@@ -371,16 +371,16 @@ export function EsopTransactionCalendar({
         <header className="etc-header">
           <div className="etc-header-left" />
           <div className="etc-header-nav">
-            <button type="button" className="etc-nav-arrow" onClick={goPrevMonth} aria-label="Previous month">
+            <button type="button" className="etc-nav-arrow touch-target-icon" onClick={goPrevMonth} aria-label="Previous month">
               ‹
             </button>
             <span className="etc-nav-month-label">
               {MONTH_NAMES[viewMonth.getMonth()]} {viewMonth.getFullYear()}
             </span>
-            <button type="button" className="etc-nav-arrow" onClick={goNextMonth} aria-label="Next month">
+            <button type="button" className="etc-nav-arrow touch-target-icon" onClick={goNextMonth} aria-label="Next month">
               ›
             </button>
-            <button type="button" className="etc-nav-today" onClick={goTodayNav}>
+            <button type="button" className="etc-nav-today touch-target" onClick={goTodayNav}>
               Today
             </button>
           </div>

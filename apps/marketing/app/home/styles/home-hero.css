@@ -95,6 +95,14 @@
   gap: 0.2rem 0.35rem;
 }
 
+/* Phase 2.2: Improve small pro-links on mobile while keeping desktop aesthetic (16px min effective with touch) */
+@media (max-width: 480px) {
+  .hch-hero-pro-links {
+    font-size: 0.75rem; /* floor for readability */
+    gap: 0.25rem 0.5rem;
+  }
+}
+
 .hch-hero-pro-label {
   color: var(--hch-ink-faint);
   font-size: 0.62rem;

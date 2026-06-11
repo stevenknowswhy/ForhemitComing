@@ -495,14 +495,14 @@ export function BusinessOwnersPageClient() {
             <div className="bo-cta-buttons">
               <button
                 type="button"
-                className="cta-button"
+                className="cta-button touch-target"
                 onClick={() => openIntake("nda")}
               >
                 Begin Confidential Intake
               </button>
               <button
                 type="button"
-                className="cta-button-ghost"
+                className="cta-button-ghost touch-target"
                 onClick={() => openIntake("light")}
               >
                 Tell Us a Little First

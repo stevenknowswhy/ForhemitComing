@@ -22,13 +22,13 @@ export default function NotFound() {
             </p>
             
             <div className="not-found-actions">
-              <Link href="/" className="not-found-button primary">
+              <Link href="/" className="not-found-button primary touch-target">
                 <Home size={18} />
                 <span>Go Home</span>
               </Link>
               <button 
                 onClick={handleGoBack} 
-                className="not-found-button secondary"
+                className="not-found-button secondary touch-target"
               >
                 <ArrowLeft size={18} />
                 <span>Go Back</span>
