@@ -67,13 +67,13 @@ export default function Error({
             <div className="error-actions">
               <button 
                 onClick={reset} 
-                className="error-button primary"
+                className="error-button primary touch-target"
               >
                 <RefreshCw size={18} />
                 <span>Try Again</span>
               </button>
               
-              <Link href="/" className="error-button secondary">
+              <Link href="/" className="error-button secondary touch-target">
                 <Home size={18} />
                 <span>Go Home</span>
               </Link>
@@ -83,8 +83,8 @@ export default function Error({
               <p className="error-help-text">
                 If this problem persists, please contact us:
               </p>
-              <a href="mailto:support@forhemit.com" className="error-email">
-                <Mail size={16} />
+              <a href="mailto:support@forhemit.com" className="error-email touch-target-icon">
+                <Mail size={18} />
                 <span>support@forhemit.com</span>
               </a>
             </div>
