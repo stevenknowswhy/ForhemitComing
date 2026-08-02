@@ -112,6 +112,21 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
         <p className={styles.kicker}>Sold and fulfilled by Forhemit</p>
         <h2 id="signal-close">Turn scattered AI answers into auditable client work.</h2>
         <a className={styles.primary} href="#signal-editions">Choose an edition</a>
+        <a
+          className={styles.directoryProof}
+          href="https://www.promptfrenzy.com/directory"
+          target="_blank"
+          rel="noopener"
+          title="Featured on PromptFrenzy AI Directory"
+        >
+          <img
+            src="/promptfrenzy-directory.svg"
+            alt="Featured on PromptFrenzy AI Directory"
+            width="220"
+            height="44"
+            loading="lazy"
+          />
+        </a>
       </section>
     </main>
   );
