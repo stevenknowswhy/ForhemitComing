@@ -16,8 +16,11 @@ test("Signal OS offers the free 15-minute scorecard as a tertiary hero path", as
   assert.ok(actionsIndex >= 0, "expected the existing hero actions");
   assert.ok(scorecardIndex > actionsIndex, "expected the scorecard after the hero buttons");
   assert.ok(pricingNoteIndex > scorecardIndex, "expected the scorecard before the pricing note");
-  assert.match(
-    html,
-    /href="https:\/\/signal-os-evidence\.stefano94103\.chatgpt\.site\/15-minute-ai-visibility-scorecard\?utm_source=forhemit(?:&|&amp;)utm_medium=owned_storefront(?:&|&amp;)utm_campaign=founding72(?:&|&amp;)utm_content=hero_scorecard"/,
+  assert.equal(
+    html.match(
+      /<a href="https:\/\/signal-os-evidence\.stefano94103\.chatgpt\.site\/15-minute-ai-visibility-scorecard\?utm_source=forhemit&amp;utm_medium=owned_storefront&amp;utm_campaign=founding72&amp;utm_content=hero_scorecard">Try the free 15-minute scorecard <span aria-hidden="true">→<\/span><\/a>/g,
+    )?.length,
+    1,
+    "expected one tracked hero scorecard anchor",
   );
 });
