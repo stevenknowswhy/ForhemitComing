@@ -11,6 +11,14 @@ export const tiers: SignalOsTier[] = [
     price: "$99",
     priceAmount: "99",
     fit: "For one operator running a rigorous audit workflow.",
+    features: [
+      "Offline evidence workstation",
+      "Prompt and citation register",
+      "Action prioritization board",
+      "Client-ready report builder",
+      "Filled fictional sample audit",
+      "Solo field manual",
+    ],
   },
   {
     id: "agency",
@@ -18,6 +26,14 @@ export const tiers: SignalOsTier[] = [
     price: "$349",
     priceAmount: "349",
     fit: "For consultants delivering the work commercially to clients.",
+    features: [
+      "Everything in Solo",
+      "Commercial client-use license",
+      "Pricing and margin calculator",
+      "30-day client roadmap",
+      "Monthly reporting workbook",
+      "QA and delivery checklists",
+    ],
   },
   {
     id: "studio",
@@ -25,5 +41,13 @@ export const tiers: SignalOsTier[] = [
     price: "$749",
     priceAmount: "749",
     fit: "For teams standardizing delivery, training, and operations.",
+    features: [
+      "Everything in Agency",
+      "Up to 5 internal team users",
+      "Editable team training deck",
+      "Facilitator talk track",
+      "Roles and handoff model",
+      "Team QA operating manual",
+    ],
   },
 ];
