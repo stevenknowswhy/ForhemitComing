@@ -8,13 +8,16 @@ test("Signal OS serves the PromptFrenzy proof link without changing checkout", a
   assert.equal(pageResponse.status, 200);
 
   const html = await pageResponse.text();
-  const linkStart = html.indexOf(
-    '<a href="https://www.promptfrenzy.com/directory"',
+  const hrefIndex = html.indexOf(
+    'href="https://www.promptfrenzy.com/directory"',
   );
 
-  assert.ok(linkStart >= 0, "expected the static PromptFrenzy directory link");
+  assert.ok(hrefIndex >= 0, "expected the static PromptFrenzy directory link");
 
+  const linkStart = html.lastIndexOf("<a", hrefIndex);
   const linkEnd = html.indexOf("</a>", linkStart);
+  assert.ok(linkStart >= 0, "expected the directory href inside an anchor");
+  assert.ok(linkStart < hrefIndex, "expected the directory href after the anchor start");
   assert.ok(linkEnd > linkStart, "expected the directory link to close");
   const link = html.slice(linkStart, linkEnd);
 
