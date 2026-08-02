@@ -48,12 +48,21 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           <p className={styles.eyebrow}>Illustrative sample · fictional</p>
           <h2 id="signal-sample-title">See the evidence boundary.</h2>
         </div>
-        <dl className={styles.sampleCard}>
-          <div><dt>Business</dt><dd>Fictional B2B analytics studio</dd></div>
-          <div><dt>Buyer question</dt><dd>“Which AI visibility audit workflow is best for a small agency?”</dd></div>
-          <div><dt>Dated observation</dt><dd>The fictional brand was absent; four third-party sources were cited.</dd></div>
-          <div><dt>Supported next action</dt><dd>Publish a comparison page using first-party workflow evidence, then observe again.</dd></div>
-        </dl>
+        <div className={styles.sampleBody}>
+          <dl className={styles.sampleCard}>
+            <div><dt>Business</dt><dd>Fictional B2B analytics studio</dd></div>
+            <div><dt>Buyer question</dt><dd>“Which AI visibility audit workflow is best for a small agency?”</dd></div>
+            <div><dt>Dated observation</dt><dd>The fictional brand was absent; four third-party sources were cited.</dd></div>
+            <div><dt>Supported next action</dt><dd>Publish a comparison page using first-party workflow evidence, then observe again.</dd></div>
+          </dl>
+          <p className={styles.freeResource}>
+            <span>Free · CSV · no account</span>
+            <strong>Test the method before buying.</strong>{" "}
+            <a href="https://github.com/stevenknowswhy/ForhemitComing/tree/main/resources/ai-visibility-audit-evidence-log">
+              Use the free evidence log <span aria-hidden="true">→</span>
+            </a>
+          </p>
+        </div>
       </section>
 
       <section className={`${styles.section} ${styles.blockSection}`} aria-labelledby="signal-editions">
