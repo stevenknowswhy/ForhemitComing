@@ -23,6 +23,12 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           <a className={styles.primary} href="#signal-editions">View editions and buy</a>
           <a className={styles.secondary} href="#signal-sample">Inspect the labeled sample</a>
         </div>
+        <p className={styles.scorecardPath}>
+          Not ready to buy?{" "}
+          <a href="https://signal-os-evidence.stefano94103.chatgpt.site/15-minute-ai-visibility-scorecard?utm_source=forhemit&utm_medium=owned_storefront&utm_campaign=founding72&utm_content=hero_scorecard">
+            Try the free 15-minute scorecard <span aria-hidden="true">→</span>
+          </a>
+        </p>
         <p className={styles.note}>
           {foundingActive
             ? "One-time purchase. Immediate download after Stripe verification. The founding prices below are valid only through August 3, 2026 at 2:22 PM Pacific; Stripe shows the authoritative price before payment."
