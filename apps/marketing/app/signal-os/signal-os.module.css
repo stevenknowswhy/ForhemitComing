@@ -257,6 +257,27 @@
 
 .close h2 { max-width: 760px; margin-bottom: 30px; }
 
+.directoryProof {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 28px;
+  line-height: 0;
+}
+
+.directoryProof img {
+  display: block;
+  width: 220px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.directoryProof:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 @media (max-width: 760px) {
   .hero { padding: 76px 0 60px; }
   .section { grid-template-columns: 1fr; gap: 34px; padding: 58px 0; }
