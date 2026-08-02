@@ -19,6 +19,13 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
         <span className="footer-text">&copy; {currentYear} Forhemit PBC</span>
         <span className="footer-dot" />
         <span className="footer-text">All Rights Reserved</span>
+        <span className="footer-dot" />
+        <Link
+          href="/signal-os?utm_source=forhemit&utm_medium=owned_site&utm_campaign=founding72&utm_content=global_footer"
+          className="footer-link"
+        >
+          Signal OS
+        </Link>
         
         {onSitemapClick && (
           <>
