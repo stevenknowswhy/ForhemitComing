@@ -11,7 +11,7 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
       />
 
       <section className={styles.hero} aria-labelledby="signal-title">
-        <p className={styles.kicker}>Forhemit Labs · Signal OS</p>
+        <p className={styles.kicker}>Forhemit PBC · Signal OS</p>
         <h1 id="signal-title">Run AI visibility audits you can defend.</h1>
         <p className={styles.lede}>
           Signal OS is a downloadable, local-first workstation for freelancers,
@@ -76,6 +76,21 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           <p className={styles.eyebrow}>Choose by delivery model</p>
           <h2 id="signal-editions">One system, three licenses.</h2>
         </div>
+        <aside className={styles.purchaseTrust} aria-label="Seller, support, and refund information">
+          <p>
+            <strong>Signal OS is sold and fulfilled by Forhemit PBC.</strong>{" "}
+            Product and purchase support:{" "}
+            <a href="mailto:signal-os-concierge@agentmail.to?subject=Signal%20OS%20purchase%20support">
+              signal-os-concierge@agentmail.to
+            </a>.
+          </p>
+          <p>
+            For refund requests, contact product support with your Stripe receipt and the issue.
+            Requests are considered under applicable law and the facts of the order. A fully
+            refunded order loses private download access. Read <a href="/terms">Forhemit’s terms</a>{" "}
+            and <a href="/privacy">privacy notice</a> before purchasing.
+          </p>
+        </aside>
         <div className={styles.grid}>
           {tiers.map((tier) => (
             <article className={styles.card} key={tier.id}>
