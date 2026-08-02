@@ -1,0 +1,24 @@
+# Forhemit PBC
+
+> Forhemit PBC publishes Signal OS, a manual, local-first workstation for evidence-based AEO and GEO audits.
+
+Last updated: 2026-08-02
+
+## Product
+
+- [Signal OS](https://www.forhemit.com/signal-os): A one-time-purchase, offline workstation for consultants and agencies to capture AI answers, prompts, cited sources, dates, findings, and next actions, then assemble client-ready reports.
+- Editions: Solo, Agency, and Studio. The Studio edition supports up to five internal team users.
+- Scope: Signal OS is a manual evidence workstation. It is not continuous monitoring and does not automate rankings.
+- Outcomes: No citation, ranking, traffic, lead, sales, or revenue result is guaranteed. Buyers should use the storefront as the current source of truth for pricing and included materials.
+
+## Free resource
+
+- [15-minute AI Visibility Scorecard](https://signal-os-evidence.stefano94103.chatgpt.site/15-minute-ai-visibility-scorecard): A free, no-purchase-required scorecard for running a small evidence-based AI visibility check before deciding whether Signal OS fits.
+
+## Purchase and support
+
+- Seller: Forhemit PBC.
+- Checkout: Secure Stripe checkout with private ZIP access after payment verification.
+- Support: signal-os-concierge@agentmail.to
+- [Terms](https://www.forhemit.com/terms)
+- [Privacy](https://www.forhemit.com/privacy)
