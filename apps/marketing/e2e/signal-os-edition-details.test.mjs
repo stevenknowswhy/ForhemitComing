@@ -16,16 +16,28 @@ test("Signal OS explains each edition before its checkout control", async () => 
 
   for (const [name, firstFeature, lastFeature] of editions) {
     const cardStart = html.indexOf(`<h3>${name}</h3>`);
+    const cardEnd = html.indexOf("</article>", cardStart);
+
+    assert.ok(cardStart >= 0, `expected the ${name} edition card`);
+    assert.ok(cardEnd > cardStart, `expected the ${name} edition card to close`);
+
     const firstFeatureIndex = html.indexOf(firstFeature, cardStart);
     const lastFeatureIndex = html.indexOf(lastFeature, cardStart);
     const checkoutIndex = html.indexOf("<form", cardStart);
     const checkoutEnd = html.indexOf("</form>", checkoutIndex);
-    const checkoutForm = html.slice(checkoutIndex, checkoutEnd);
 
-    assert.ok(cardStart >= 0, `expected the ${name} edition card`);
     assert.ok(firstFeatureIndex > cardStart, `expected ${name} edition details`);
     assert.ok(lastFeatureIndex > firstFeatureIndex, `expected the complete ${name} feature list`);
-    assert.ok(checkoutIndex > lastFeatureIndex, `expected ${name} details before checkout`);
+    assert.ok(
+      checkoutIndex > lastFeatureIndex && checkoutIndex < cardEnd,
+      `expected ${name} details before checkout`,
+    );
+    assert.ok(
+      checkoutEnd > checkoutIndex && checkoutEnd < cardEnd,
+      `expected the ${name} checkout form to close inside its edition card`,
+    );
+
+    const checkoutForm = html.slice(checkoutIndex, checkoutEnd);
     assert.match(checkoutForm, /action="\/api\/signal-os\/checkout"/);
     assert.match(checkoutForm, /method="post"/);
   }
