@@ -1,0 +1,13 @@
+prompt_id,buyer_stage,prompt_text,engine,model_or_mode,market,language,run_date,exact_answer_or_reference,brand_mentioned,citations_present,citation_urls,competitors_mentioned,factual_accuracy_notes,interpretation,next_action,owner,next_check_date
+P01,discovery,"What are the best [category] options for [audience]?",,,,,,,,,,,,,,,
+P02,discovery,"Which [category] providers are suitable for [use_case] in [market]?",,,,,,,,,,,,,,,
+P03,discovery,"What should [audience] look for when choosing [category]?",,,,,,,,,,,,,,,
+P04,comparison,"Compare [brand] and [competitor] for [use_case].",,,,,,,,,,,,,,,
+P05,comparison,"What are the alternatives to [brand] for [audience]?",,,,,,,,,,,,,,,
+P06,comparison,"Which [category] option is better for [constraint]?",,,,,,,,,,,,,,,
+P07,risk,"What are the limitations of [brand] for [use_case]?",,,,,,,,,,,,,,,
+P08,risk,"What risks should [audience] consider before buying [category]?",,,,,,,,,,,,,,,
+P09,risk,"Which [category] providers support [requirement] without [constraint]?",,,,,,,,,,,,,,,
+P10,verification,"What does [brand] offer for [use_case]?",,,,,,,,,,,,,,,
+P11,verification,"Does [brand] support [requirement] in [market]?",,,,,,,,,,,,,,,
+P12,verification,"What sources verify [brand]'s claim about [claim]?",,,,,,,,,,,,,,,
