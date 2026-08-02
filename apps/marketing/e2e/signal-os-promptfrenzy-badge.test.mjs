@@ -15,6 +15,7 @@ test("Signal OS serves the PromptFrenzy proof link without changing checkout", a
   assert.ok(linkStart >= 0, "expected the static PromptFrenzy directory link");
 
   const linkEnd = html.indexOf("</a>", linkStart);
+  assert.ok(linkEnd > linkStart, "expected the directory link to close");
   const link = html.slice(linkStart, linkEnd);
 
   assert.match(link, /rel="noopener"/);
@@ -22,10 +23,13 @@ test("Signal OS serves the PromptFrenzy proof link without changing checkout", a
   assert.match(link, /target="_blank"/);
   assert.match(link, /src="\/promptfrenzy-directory\.svg"/);
 
-  const checkoutForms = html.match(
-    /<form[^>]*action="\/api\/signal-os\/checkout"[^>]*method="post"[^>]*>/g,
+  const checkoutForms = html.match(/<form[^>]*>/g) ?? [];
+  const signalCheckoutForms = checkoutForms.filter(
+    (form) =>
+      /action="\/api\/signal-os\/checkout"/.test(form) &&
+      /method="post"/.test(form),
   );
-  assert.equal(checkoutForms?.length, 3);
+  assert.equal(signalCheckoutForms.length, 3);
 
   const badgeResponse = await fetch(
     new URL("/promptfrenzy-directory.svg", baseUrl),
