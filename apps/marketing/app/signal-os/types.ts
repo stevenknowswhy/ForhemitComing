@@ -4,6 +4,7 @@ export type SignalOsTier = {
   price: string;
   priceAmount: string;
   fit: string;
+  features: readonly string[];
 };
 
 export type SignalOsPageProps = {
