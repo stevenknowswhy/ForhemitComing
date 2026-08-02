@@ -18,11 +18,15 @@ test("Signal OS explains each edition before its checkout control", async () => 
     const cardStart = html.indexOf(`<h3>${name}</h3>`);
     const firstFeatureIndex = html.indexOf(firstFeature, cardStart);
     const lastFeatureIndex = html.indexOf(lastFeature, cardStart);
-    const checkoutIndex = html.indexOf('<form method="post" action="/api/signal-os/checkout">', cardStart);
+    const checkoutIndex = html.indexOf("<form", cardStart);
+    const checkoutEnd = html.indexOf("</form>", checkoutIndex);
+    const checkoutForm = html.slice(checkoutIndex, checkoutEnd);
 
     assert.ok(cardStart >= 0, `expected the ${name} edition card`);
     assert.ok(firstFeatureIndex > cardStart, `expected ${name} edition details`);
     assert.ok(lastFeatureIndex > firstFeatureIndex, `expected the complete ${name} feature list`);
     assert.ok(checkoutIndex > lastFeatureIndex, `expected ${name} details before checkout`);
+    assert.match(checkoutForm, /action="\/api\/signal-os\/checkout"/);
+    assert.match(checkoutForm, /method="post"/);
   }
 });
