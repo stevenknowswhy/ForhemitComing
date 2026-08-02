@@ -8,6 +8,7 @@ ESOP deal management platform — streamlining employee stock ownership plan tra
 ## Free AI visibility resource
 
 - [AI Visibility Audit Evidence Log](resources/ai-visibility-audit-evidence-log/) — Free, ungated 18-field CSV template with 12 neutral buyer-prompt starters for recording AI answer-engine mentions, citations, competitors, and factual accuracy.
+- [15-Minute AI Visibility Scorecard](https://signal-os-evidence.stefano94103.chatgpt.site/15-minute-ai-visibility-scorecard.html?utm_source=github&utm_medium=owned_repo&utm_campaign=founding72&utm_content=repository_readme_scorecard) — Free, no-account, manual nine-question worksheet for assessing AI-search presence, citation quality, accuracy, competitive inclusion, and next actions.
 - [Signal OS editions](https://www.forhemit.com/signal-os?utm_source=github&utm_medium=owned_repo&utm_campaign=founding72&utm_content=repository_readme) — The paid local workstation and client-delivery system built around the same evidence workflow.
 
 Signal OS is a Forhemit product. The evidence-log template remains free and does not require an account.
