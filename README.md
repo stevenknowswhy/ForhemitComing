@@ -5,6 +5,14 @@ Purpose: (auto-inserted by pre-commit — please update)
 
 ESOP deal management platform — streamlining employee stock ownership plan transactions from first contact to close.
 
+## Free AI visibility resource
+
+- [AI Visibility Audit Evidence Log](resources/ai-visibility-audit-evidence-log/) — Free, ungated 18-field CSV template with 12 neutral buyer-prompt starters for recording AI answer-engine mentions, citations, competitors, and factual accuracy.
+- [Signal OS editions](https://www.forhemit.com/signal-os?utm_source=github&utm_medium=owned_repo&utm_campaign=founding72&utm_content=repository_readme) — The paid local workstation and client-delivery system built around the same evidence workflow.
+
+Signal OS is a Forhemit product. The evidence-log template remains free and does not require an account.
+
+
 ## Architecture
 
 **Monorepo** managed by Turborepo with pnpm workspaces.
@@ -111,7 +119,7 @@ See `docs/design/` for extraction patterns and conventions.
 ### Backend (Convex)
 
 - `packages/convex/convex/` — Serverless functions
-- `packages/convex/convex/schema.ts` — Database schema
+- `packages/convex/convex/schema.ts` — Backend schema
 - `packages/convex/convex/crm/` — CRM-specific queries/mutations
 
 ## Deployment
