@@ -77,6 +77,9 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
               <p className={styles.priceLabel}>{foundingActive ? "Founding price" : "Current pricing"}</p>
               <p className={styles.price}>{foundingActive ? tier.price : "See Stripe Checkout"}</p>
               <p>{tier.fit}</p>
+              <ul className={styles.features}>
+                {tier.features.map((feature) => <li key={feature}>{feature}</li>)}
+              </ul>
               <form method="post" action="/api/signal-os/checkout">
                 <input type="hidden" name="edition" value={tier.id} />
                 <button className={styles.tierCta} type="submit">

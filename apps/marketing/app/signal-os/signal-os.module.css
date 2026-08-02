@@ -214,6 +214,29 @@
   text-transform: uppercase;
 }
 
+.features {
+  margin: 20px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+}
+
+.features li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  font: 300 0.9rem/1.5 var(--font-outfit), sans-serif;
+}
+
+.features li + li { margin-top: 8px; }
+
+.features li::before {
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  content: "—";
+}
+
 .tierCta {
   display: inline-block;
   margin-top: 12px;
