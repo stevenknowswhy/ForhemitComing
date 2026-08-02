@@ -12,7 +12,6 @@ ESOP deal management platform — streamlining employee stock ownership plan tra
 
 Signal OS is a Forhemit product. The evidence-log template remains free and does not require an account.
 
-
 ## Architecture
 
 **Monorepo** managed by Turborepo with pnpm workspaces.
@@ -119,7 +118,7 @@ See `docs/design/` for extraction patterns and conventions.
 ### Backend (Convex)
 
 - `packages/convex/convex/` — Serverless functions
-- `packages/convex/convex/schema.ts` — Backend schema
+- `packages/convex/convex/schema.ts` — Database schema
 - `packages/convex/convex/crm/` — CRM-specific queries/mutations
 
 ## Deployment
