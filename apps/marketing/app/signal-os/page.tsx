@@ -9,12 +9,19 @@ import {
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Signal OS | Evidence-First AI Visibility Audits",
+  title: "Signal OS | AEO & GEO AI Visibility Audits",
   description:
-    "A local-first audit workstation for consultants and agencies that turns dated AI-answer evidence into transparent priorities and client-ready deliverables.",
+    "Evidence-first, local-first AEO and GEO audit workstation for consultants and agencies that turns dated AI-answer evidence into transparent priorities and client-ready deliverables.",
+  keywords: [
+    "AEO audit",
+    "GEO audit",
+    "AI visibility audit",
+    "answer engine optimization",
+    "generative engine optimization",
+  ],
   alternates: { canonical: canonicalUrl },
   openGraph: {
-    title: "Signal OS | Evidence-First AI Visibility Audits",
+    title: "Signal OS | AEO & GEO AI Visibility Audits",
     description:
       "Capture dated AI-answer evidence, citations, competitors, factual gaps, and next actions without pretending a sample is a customer result.",
     type: "website",
