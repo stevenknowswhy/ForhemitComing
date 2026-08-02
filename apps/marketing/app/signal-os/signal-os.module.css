@@ -144,6 +144,37 @@
   font: 300 1rem/1.6 var(--font-outfit), sans-serif;
 }
 
+.sampleBody { min-width: 0; }
+
+.freeResource {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font: 300 0.96rem/1.6 var(--font-outfit), sans-serif;
+}
+
+.freeResource > span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font: 500 0.7rem/1.4 var(--font-dm-mono), monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.freeResource strong { color: var(--ink); font-weight: 500; }
+
+.freeResource a {
+  color: var(--accent);
+  font: 500 0.8rem/1.4 var(--font-dm-mono), monospace;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.freeResource a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
