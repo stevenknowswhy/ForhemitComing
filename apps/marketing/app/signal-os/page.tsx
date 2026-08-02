@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 
 const canonicalUrl = "https://www.forhemit.com/signal-os";
-const storefrontUrl =
-  "https://signal-os-evidence.stefano94103.chatgpt.site/?utm_source=forhemit&utm_medium=owned&utm_campaign=founding72&utm_content=owned_domain_bridge";
-const sampleUrl =
-  "https://signal-os-evidence.stefano94103.chatgpt.site/?utm_source=forhemit&utm_medium=owned&utm_campaign=founding72&utm_content=owned_domain_sample#sample";
 
 export const metadata: Metadata = {
   title: "Signal OS | Evidence-First AI Visibility Audits",
@@ -37,24 +33,27 @@ const productJsonLd = {
       name: "Signal OS Solo",
       price: "99",
       priceCurrency: "USD",
+      priceValidUntil: "2026-08-03",
       availability: "https://schema.org/InStock",
-      url: `${storefrontUrl}&utm_term=solo#pricing`,
+      url: `${canonicalUrl}#signal-editions`,
     },
     {
       "@type": "Offer",
       name: "Signal OS Agency",
       price: "349",
       priceCurrency: "USD",
+      priceValidUntil: "2026-08-03",
       availability: "https://schema.org/InStock",
-      url: `${storefrontUrl}&utm_term=agency#pricing`,
+      url: `${canonicalUrl}#signal-editions`,
     },
     {
       "@type": "Offer",
       name: "Signal OS Studio",
       price: "749",
       priceCurrency: "USD",
+      priceValidUntil: "2026-08-03",
       availability: "https://schema.org/InStock",
-      url: `${storefrontUrl}&utm_term=studio#pricing`,
+      url: `${canonicalUrl}#signal-editions`,
     },
   ],
 };
@@ -95,16 +94,17 @@ export default function SignalOsPage() {
           that evidence into a client-ready audit.
         </p>
         <div className="signal-actions">
-          <a className="signal-primary" href={`${storefrontUrl}#pricing`}>
+          <a className="signal-primary" href="#signal-editions">
             View editions and buy
           </a>
-          <a className="signal-secondary" href={sampleUrl}>
+          <a className="signal-secondary" href="#signal-sample">
             Inspect the labeled sample
           </a>
         </div>
         <p className="signal-note">
-          One-time purchase. Immediate download after Stripe verification. Founding
-          prices shown below end August 3, 2026 at 2:22 PM Pacific.
+          One-time purchase. Immediate download after Stripe verification. The founding
+          prices below are valid only through August 3, 2026 at 2:22 PM Pacific;
+          Stripe shows the authoritative price before payment.
         </p>
       </section>
 
@@ -121,6 +121,31 @@ export default function SignalOsPage() {
         </ol>
       </section>
 
+      <section className="signal-section signal-sample" id="signal-sample" aria-labelledby="signal-sample-title">
+        <div>
+          <p className="signal-eyebrow">Illustrative sample · fictional</p>
+          <h2 id="signal-sample-title">See the evidence boundary.</h2>
+        </div>
+        <dl className="signal-sample-card">
+          <div>
+            <dt>Business</dt>
+            <dd>Fictional B2B analytics studio</dd>
+          </div>
+          <div>
+            <dt>Buyer question</dt>
+            <dd>“Which AI visibility audit workflow is best for a small agency?”</dd>
+          </div>
+          <div>
+            <dt>Dated observation</dt>
+            <dd>The fictional brand was absent; four third-party sources were cited.</dd>
+          </div>
+          <div>
+            <dt>Supported next action</dt>
+            <dd>Publish a comparison page using first-party workflow evidence, then observe again.</dd>
+          </div>
+        </dl>
+      </section>
+
       <section className="signal-section signal-pricing" aria-labelledby="signal-editions">
         <div>
           <p className="signal-eyebrow">Choose by delivery model</p>
@@ -130,11 +155,15 @@ export default function SignalOsPage() {
           {tiers.map((tier) => (
             <article className="signal-card" key={tier.name}>
               <h3>{tier.name}</h3>
+              <p className="signal-price-label">Founding price</p>
               <p className="signal-price">{tier.price}</p>
               <p>{tier.fit}</p>
-              <a href={`${storefrontUrl}&utm_term=${tier.name.toLowerCase()}#pricing`}>
-                See what is included <span aria-hidden="true">→</span>
-              </a>
+              <form method="post" action="/api/signal-os/checkout">
+                <input type="hidden" name="edition" value={tier.name.toLowerCase()} />
+                <button className="signal-tier-cta" type="submit">
+                  Open secure checkout <span aria-hidden="true">→</span>
+                </button>
+              </form>
             </article>
           ))}
         </div>
@@ -166,8 +195,8 @@ export default function SignalOsPage() {
       <section className="signal-close" aria-labelledby="signal-close">
         <p className="signal-kicker">Sold and fulfilled by Forhemit</p>
         <h2 id="signal-close">Turn scattered AI answers into auditable client work.</h2>
-        <a className="signal-primary" href={`${storefrontUrl}#pricing`}>
-          Explore Signal OS
+        <a className="signal-primary" href="#signal-editions">
+          Choose an edition
         </a>
       </section>
 
@@ -268,6 +297,31 @@ export default function SignalOsPage() {
         }
         .signal-steps strong { display: block; margin-bottom: 6px; }
         .signal-pricing, .signal-boundaries { display: block; }
+        .signal-sample-card {
+          margin: 0;
+          padding: 8px 30px;
+          border: 1px solid var(--line);
+          background: var(--card);
+        }
+        .signal-sample-card div {
+          display: grid;
+          grid-template-columns: 150px 1fr;
+          gap: 22px;
+          padding: 20px 0;
+          border-bottom: 1px solid var(--line);
+        }
+        .signal-sample-card div:last-child { border-bottom: 0; }
+        .signal-sample-card dt {
+          color: var(--accent);
+          font: 500 0.74rem/1.6 var(--font-dm-mono), monospace;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+        }
+        .signal-sample-card dd {
+          margin: 0;
+          color: var(--muted);
+          font: 300 1rem/1.6 var(--font-outfit), sans-serif;
+        }
         .signal-grid {
           display: grid;
           grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -289,15 +343,27 @@ export default function SignalOsPage() {
           font: 300 0.98rem/1.6 var(--font-outfit), sans-serif;
         }
         .signal-card .signal-price {
-          margin: 18px 0 12px;
+          margin: 4px 0 12px;
           color: var(--ink);
           font: 500 2.55rem/1 var(--font-cormorant), serif;
         }
-        .signal-card a {
+        .signal-card .signal-price-label {
+          margin: 18px 0 0;
+          color: var(--accent);
+          font: 500 0.7rem/1.4 var(--font-dm-mono), monospace;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+        }
+        .signal-tier-cta {
           display: inline-block;
           margin-top: 12px;
+          padding: 0;
+          border: 0;
+          background: transparent;
           color: var(--accent);
+          cursor: pointer;
           font: 500 0.8rem/1.4 var(--font-dm-mono), monospace;
+          text-decoration: underline;
           text-underline-offset: 4px;
         }
         .signal-close {
@@ -309,6 +375,7 @@ export default function SignalOsPage() {
           .signal-hero { padding: 76px 0 60px; }
           .signal-section { grid-template-columns: 1fr; gap: 34px; padding: 58px 0; }
           .signal-grid, .signal-grid-two { grid-template-columns: 1fr; }
+          .signal-sample-card div { grid-template-columns: 1fr; gap: 4px; }
           .signal-actions { align-items: stretch; flex-direction: column; }
           .signal-primary, .signal-secondary { width: 100%; }
         }
