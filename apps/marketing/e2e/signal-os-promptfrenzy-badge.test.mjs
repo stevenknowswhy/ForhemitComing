@@ -34,6 +34,27 @@ test("Signal OS serves the PromptFrenzy proof link without changing checkout", a
   );
   assert.equal(signalCheckoutForms.length, 3);
 
+  const proofResponse = await fetch(
+    new URL("/signal-os-directory-proof", baseUrl),
+  );
+  assert.equal(proofResponse.status, 200);
+  assert.match(
+    proofResponse.headers.get("content-type") ?? "",
+    /text\/html/,
+  );
+  assert.match(
+    proofResponse.headers.get("x-robots-tag") ?? "",
+    /noindex,\s*follow/,
+  );
+
+  const proofHtml = await proofResponse.text();
+  assert.match(
+    proofHtml,
+    /href="https:\/\/www\.promptfrenzy\.com\/directory"/,
+  );
+  assert.doesNotMatch(proofHtml, /nofollow|sponsored/);
+  assert.match(proofHtml, /name="robots" content="noindex,follow"/);
+
   const badgeResponse = await fetch(
     new URL("/promptfrenzy-directory.svg", baseUrl),
   );
