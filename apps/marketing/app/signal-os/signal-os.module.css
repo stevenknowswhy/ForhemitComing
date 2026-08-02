@@ -67,6 +67,24 @@
 .primary:hover,
 .secondary:hover { transform: translateY(-1px); }
 
+.scorecardPath {
+  margin: 16px 0 0;
+  color: var(--muted);
+  font: 300 0.92rem/1.5 var(--font-outfit), sans-serif;
+}
+
+.scorecardPath a {
+  color: var(--accent);
+  font: 500 0.78rem/1.4 var(--font-dm-mono), monospace;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.scorecardPath a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .note {
   margin: 18px 0 0;
   color: var(--muted);
