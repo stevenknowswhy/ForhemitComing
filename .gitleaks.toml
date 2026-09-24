@@ -1,0 +1,9 @@
+# Gitleaks configuration for ForhemitComing.
+# Extends the built-in default rule set; the only narrowing is the single
+# verified false positive below. Real findings must still fail the scan.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Application idempotency-key literal in the Convex test script (generated request token, not a service credential) - verified false positive of the generic-api-key rule"
+paths = '''^packages/convex/convex/testBusinessLog\.ts$'''
