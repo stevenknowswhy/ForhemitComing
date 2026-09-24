@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task Detail Template
 
 **Task ID:** [e.g. 1.1]  

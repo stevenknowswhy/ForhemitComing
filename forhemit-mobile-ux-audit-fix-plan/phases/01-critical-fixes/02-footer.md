@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 1.2: Fix Footer Text Size & Tap Targets Collapse on Small Screens
 
 **Task ID:** 1.2  

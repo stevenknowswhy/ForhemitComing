@@ -1,6 +1,3 @@
-06/11/26 02:01 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 2.1: Upgrade Mobile Navigation to Bottom-Sheet Pattern
 
 **Task ID:** 2.1  

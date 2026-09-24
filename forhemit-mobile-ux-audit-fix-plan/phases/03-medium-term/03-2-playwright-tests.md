@@ -1,6 +1,3 @@
-06/11/26 02:01 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 3.2: Add Visual Regression + Device-Specific Playwright Tests
 
 **Task ID:** 3.2  
