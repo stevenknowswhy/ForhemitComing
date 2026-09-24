@@ -4,6 +4,8 @@ node_modules/
 .turbo/
 
 .env.local
+.env*.local
+*.backup
 
 # Build / cache artifacts
 .next/
