@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Phase 01 Gotchas Archive — Critical Fixes
 
 **Purpose:** Permanent record of hard-won lessons from Phase 1. Future agents (and humans) should read this before starting any mobile work.

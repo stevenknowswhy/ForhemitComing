@@ -1,6 +1,3 @@
-05/29/26 08:03 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Forhemit Project Status
 
 > Last updated: 2026-05-25 (smoke test verified)

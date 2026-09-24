@@ -1,9 +1,3 @@
-06/02/26 10:36 AM PT
-06/02/26 10:34 AM PT
-06/02/26 10:31 AM PT
-06/02/26 10:28 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Security, Secrets Handling, Deployment, and Environment Management — Gap Analysis
 
 Focus areas: security posture, secrets hygiene, deployment config, environment validation, CORS, Sentry, and unprotected routes. File paths refer to the monorepo root unless otherwise stated.

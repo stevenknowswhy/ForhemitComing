@@ -1,6 +1,3 @@
-05/26/26 07:50 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # pi-lens Remediation Plan
 
 **Created:** 2026-05-26

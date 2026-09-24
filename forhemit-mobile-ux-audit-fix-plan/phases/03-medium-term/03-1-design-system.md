@@ -1,6 +1,3 @@
-06/11/26 02:01 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 3.1: Mobile Design System Pass – Spacing, Type, Component Variants
 
 **Task ID:** 3.1  

@@ -1,9 +1,3 @@
-06/02/26 10:36 AM PT
-06/02/26 10:34 AM PT
-06/02/26 10:31 AM PT
-06/02/26 10:28 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Tailwind CSS v3 → v4 Migration Plan
 
 **Scope:** `apps/admin` only (marketing app is a separate concern)

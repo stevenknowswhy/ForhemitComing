@@ -1,95 +1,86 @@
-05/26/26 06:54 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Forhemit
 
-ESOP deal management platform — streamlining employee stock ownership plan transactions from first contact to close.
+Monorepo for Forhemit's public marketing site and the internal admin application, plus the shared packages they run on.
+
+## Repository layout
+
+```
+├── apps/
+│   ├── admin/        # Internal admin app — CRM, deal management, templates, document generation (Next.js 16)
+│   └── marketing/    # Public marketing site (Next.js 15)
+├── packages/
+│   ├── shared/       # Shared types, hooks, utilities (@forhemit/shared)
+│   └── convex/       # Convex backend functions + schema (@forhemit/convex)
+├── resources/
+│   └── ai-visibility-audit-evidence-log/   # Free, ungated evidence-log template
+└── docs/             # Architecture decisions, deployment guides, project status
+```
+
+> Note: some public marketing pages (e.g. `/about`, `/accounting-firms`) currently live in `apps/admin` and likely belong in `apps/marketing`. Moving them is a planned follow-up.
 
 ## Free AI visibility resource
 
 - [AI Visibility Audit Evidence Log](resources/ai-visibility-audit-evidence-log/) — Free, ungated 18-field CSV template with 12 neutral buyer-prompt starters for recording AI answer-engine mentions, citations, competitors, and factual accuracy.
-- [15-Minute AI Visibility Scorecard](https://signal-os-evidence.stefano94103.chatgpt.site/15-minute-ai-visibility-scorecard.html?utm_source=github&utm_medium=owned_repo&utm_campaign=founding72&utm_content=repository_readme_scorecard) — Free, no-account, manual nine-question worksheet for assessing AI-search presence, citation quality, accuracy, competitive inclusion, and next actions.
-- [Signal OS editions](https://www.forhemit.com/signal-os?utm_source=github&utm_medium=owned_repo&utm_campaign=founding72&utm_content=repository_readme) — The paid local workstation and client-delivery system built around the same evidence workflow.
 
-Signal OS is a Forhemit product. The evidence-log template remains free and does not require an account.
-
-## Architecture
-
-**Monorepo** managed by Turborepo with pnpm workspaces.
-
-```
-├── apps/
-│   ├── admin/          # Internal admin dashboard (Next.js 15)
-│   └── marketing/      # Public-facing site (Next.js 15)
-├── packages/
-│   ├── shared/         # Shared types, hooks, utilities (@forhemit/shared)
-│   └── convex/         # Backend functions + schema (Convex)
-└── docs/               # Architecture decisions, deployment guides
-```
-
-### Tech Stack
+## Tech stack
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | Next.js 15, React 19, Tailwind CSS, Radix UI |
-| Backend | Convex (realtime DB + serverless functions) |
+| Admin app | Next.js 16, React 19, Tailwind CSS, Radix UI |
+| Marketing site | Next.js 15, React 19, Tailwind CSS |
+| Backend | Convex (realtime database + serverless functions) |
 | Auth | Clerk |
 | Deployment | Vercel (frontend), Convex Cloud (backend) |
-| Package Manager | pnpm with workspaces |
+| Package manager | pnpm 10 (pinned via `packageManager`) |
 | Build | Turborepo |
 
-## Getting Started
+## Getting started
 
 ### Prerequisites
 
 - Node.js 20+
-- pnpm 9+
+- pnpm 10 (Corepack picks it up from `packageManager`; install with `corepack enable`)
 - Convex account ([convex.dev](https://convex.dev))
 - Clerk account ([clerk.com](https://clerk.com))
 
 ### Installation
 
 ```bash
-# Clone and install
 git clone <repo-url>
-cd Forhemit
+cd ForhemitComing
 pnpm install
 
-# Set up environment
+# Environment
 cp apps/admin/.env.example apps/admin/.env.local
 cp apps/marketing/.env.example apps/marketing/.env.local
-# Edit .env.local files with your keys
+# Edit the .env.local files with your keys
 
-# Start development
 pnpm dev
 ```
 
-### Environment Variables
+### Environment variables
 
-See `.env.example` in each app for required variables:
+Each app's `.env.example` lists the required variables:
 
-- **Convex**: `NEXT_PUBLIC_CONVEX_URL`, `CONVEX_DEPLOY_KEY`
-- **Clerk**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`
-- **Email (Resend)**: `RESEND_API_KEY`
+- **Admin**: Clerk keys (`NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`, `CLERK_WEBHOOK_SECRET`, sign-in URL overrides), Convex URLs (`NEXT_PUBLIC_CONVEX_URL`, `NEXT_PUBLIC_CONVEX_SITE_URL`), UploadThing, Unsplash, Sentry, Upstash Redis
+- **Marketing**: Convex URLs (`NEXT_PUBLIC_CONVEX_URL`, `NEXT_PUBLIC_CONVEX_SITE_URL`), UploadThing, Unsplash, Sentry
 
 ## Development
 
 ```bash
-# Start all apps
-pnpm dev
+pnpm dev              # start all apps via Turborepo
+pnpm build            # build all packages
+pnpm lint             # lint all packages
+pnpm test             # run tests
+pnpm convex:dev       # local Convex development
+pnpm convex:deploy    # deploy the Convex backend
 
-# Build all packages
-pnpm build
-
-# Type check
+# Type check a single app
 pnpm --filter forhemit-admin exec tsc --noEmit
 pnpm --filter forhemit-coming-soon exec tsc --noEmit
-
-# Lint
-pnpm lint
 ```
 
-### Shared Package Pattern
+### Shared package pattern
 
 Shared code lives in `packages/shared` and is imported via:
 
@@ -97,51 +88,20 @@ Shared code lives in `packages/shared` and is imported via:
 import { ... } from '@forhemit/shared/features/<feature-name>';
 ```
 
-See `docs/design/` for extraction patterns and conventions.
-
-## Project Structure
-
-### Apps
-
-- **admin** — Internal dashboard for deal management, CRM, document generation, template builder
-- **marketing** — Public site with intake forms, blog, partner directory
-
-### Shared Features
-
-| Feature | Package Path | Description |
-|---------|-------------|-------------|
-| CRM | `features/crm` | Company/contact types, calculations, filters |
-| Deal Flow | `features/deal-flow-system` | Deal pipeline form + sections |
-| ESOP Partners | `features/esop-partners` | Partner CRM types + calculations |
-| Lender QA | `features/lender-qa-tracker` | Lender Q&A tracking form |
-| ESOP Repayment | `features/esop-repayment-model` | Repayment model calculations |
-
-### Backend (Convex)
-
-- `packages/convex/convex/` — Serverless functions
-- `packages/convex/convex/schema.ts` — Database schema
-- `packages/convex/convex/crm/` — CRM-specific queries/mutations
+Feature areas currently shared between apps: CRM, deal flow, ESOP partners, lender QA tracker, and the ESOP repayment model. See `docs/design/` for extraction patterns and conventions.
 
 ## Deployment
 
-See `docs/DEPLOYMENT.md` for detailed deployment instructions.
-
-**Quick deploy:**
-```bash
-# Deploy Convex backend
-pnpm --filter convex deploy
-
-# Deploy frontend (via Vercel CLI or GitHub integration)
-vercel --prod
-```
+See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for detailed deployment instructions. In short: frontend apps deploy on Vercel; the Convex backend deploys with `pnpm convex:deploy`.
 
 ## Documentation
 
-- `docs/ADR-001-turborepo-monorepo.md` — Architecture decision record
-- `docs/DEPLOYMENT.md` — Deployment guide
-- `docs/LOCAL_DEV.md` — Local development setup
-- `docs/SENTRY_SETUP.md` — Error monitoring setup
-- `docs/roadmap.md` — Feature roadmap
+- [docs/PROJECT_STATUS.md](docs/PROJECT_STATUS.md) — current project status dashboard
+- [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) — deployment guide
+- [docs/LOCAL_DEV.md](docs/LOCAL_DEV.md) — local development setup
+- [docs/ADR-001-turborepo-monorepo.md](docs/ADR-001-turborepo-monorepo.md) — architecture decision record
+- [docs/SENTRY_SETUP.md](docs/SENTRY_SETUP.md) — error monitoring setup
+- [docs/roadmap.md](docs/roadmap.md) — feature roadmap
 
 ## License
 
