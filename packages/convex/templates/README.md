@@ -101,7 +101,9 @@ const stats = getTemplateStats();
 - Control bar with toggles and print button
 - Config panel with `data-dv` attribute sync
 - Used for: complex agreements, forms
-- Example: `engagement-letter.html`
+- Example: the interactive pattern is currently exercised by
+  `apps/admin/public/forms/engagement-letter-standalone.html` (canonical copy,
+  served from the admin app); this kit carries no in-tree interactive example
 
 ## Shared Components
 
