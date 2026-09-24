@@ -1,6 +1,3 @@
-05/31/26 02:01 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Client Journals — Next Steps & Production Checklist
 
 Generated 2026-05-30 after session that built the core journal system.

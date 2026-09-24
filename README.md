@@ -1,6 +1,3 @@
-05/26/26 06:54 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Forhemit
 
 ESOP deal management platform — streamlining employee stock ownership plan transactions from first contact to close.

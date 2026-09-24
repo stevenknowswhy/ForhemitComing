@@ -1,9 +1,3 @@
-06/02/26 10:36 AM PT
-06/02/26 10:34 AM PT
-06/02/26 10:31 AM PT
-06/02/26 10:28 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # CRM Refocus — Phase 1: Schema + Types + Constants
 
 > **Goal:** Redesign the data model from a PE deal-tracking CRM to a relationship/nurture stewardship CRM. No UI changes. Schema, types, and constants only.

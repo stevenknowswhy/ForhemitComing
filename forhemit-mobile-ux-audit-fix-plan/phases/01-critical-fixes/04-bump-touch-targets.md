@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 1.4: Bump All Small Buttons, Close Icons & Interactive Elements to ≥44px
 
 **Task ID:** 1.4  
