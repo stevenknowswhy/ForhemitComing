@@ -33,18 +33,13 @@ from typing import Optional
 
 # ── Connection ──────────────────────────────────────────────────────────────
 
-GHOST_CONNECTION_STRING = (
-    "postgresql://tsdbadmin:j3nvynekex3cvlo5"
-    "@jxkcqq6yua.nhbh1fxcou.tsdb.cloud.timescale.com:5432"
-    "/tsdb?sslmode=require"
-)
-
-
 def _get_connection():
     """Get a psycopg3 connection to Ghost."""
     import psycopg
 
-    conn_str = os.environ.get("GHOST_CONNECTION_STRING") or GHOST_CONNECTION_STRING
+    conn_str = os.environ.get("GHOST_CONNECTION_STRING")
+    if not conn_str:
+        raise RuntimeError("GHOST_CONNECTION_STRING environment variable is required")
     return psycopg.connect(conn_str)
 
 
