@@ -5,8 +5,8 @@
 | Document | Purpose |
 |----------|---------|
 | **AGENTS.md** | This file - Quick reference & high-level standards |
-| **MODULAR_DESIGN.md** | Complete modular design policy, patterns, and enforcement |
-| **REFACTORING_PLAN.md** | Legacy refactoring roadmap and architecture decisions |
+| [MODULAR_DESIGN.md](../../docs/MODULAR_DESIGN.md) | Complete modular design policy, patterns, and enforcement |
+| [REFACTORING_PLAN.md](../../docs/REFACTORING_PLAN.md) | Legacy refactoring roadmap and architecture decisions |
 
 ---
 
@@ -175,7 +175,7 @@ function Component() {
 
 For complete policy, patterns, and enforcement:
 
-→ **See [MODULAR_DESIGN.md](./MODULAR_DESIGN.md)**
+→ **See [MODULAR_DESIGN.md](../../docs/MODULAR_DESIGN.md)**
 
 Includes:
 - Complete directory structure specification
@@ -213,4 +213,4 @@ The following MAY exceed 800 lines with justification:
 
 ---
 
-*For complete guidelines, see [MODULAR_DESIGN.md](./MODULAR_DESIGN.md)*
+*For complete guidelines, see [MODULAR_DESIGN.md](../../docs/MODULAR_DESIGN.md)*

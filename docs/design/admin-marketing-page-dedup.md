@@ -1,6 +1,3 @@
-05/30/26 12:55 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Design: Admin/Marketing Page Deduplication
 
 **Session:** 20260526-160000

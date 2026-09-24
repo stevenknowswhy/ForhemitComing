@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Improved Agent Prompt: Mobile UI/UX Audit & Fix Execution
 
 **Use this prompt** when starting any new session to audit or fix mobile UX issues on the Forhemit marketing site (or similar Next.js + Tailwind marketing surfaces). It is an evolution of the original senior mobile-first UX/UI designer prompt, enhanced with phased execution, mandatory knowledge transfer, and agent-friendly structure.

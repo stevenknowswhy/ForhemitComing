@@ -1,7 +1,3 @@
-05/30/26 06:50 AM PT
-05/30/26 06:50 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # FORHEMIT ESOP SELF-SERVE FEASIBILITY ASSESSMENT
 ## Prompt Version 2.0 — Website Copy/Paste Tool
 ### Compatible with: Claude, ChatGPT, Gemini, and most major AI assistants

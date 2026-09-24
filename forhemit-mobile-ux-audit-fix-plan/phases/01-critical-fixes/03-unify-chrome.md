@@ -1,6 +1,3 @@
-06/11/26 11:32 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 1.3: Unify Top Chrome (GlobalHeader + Navigation) + Add Proper Safe-Area / dvh Handling to Heroes
 
 **Task ID:** 1.3  
