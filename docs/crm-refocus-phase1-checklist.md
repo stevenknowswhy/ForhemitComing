@@ -1,9 +1,3 @@
-06/02/26 10:36 AM PT
-06/02/26 10:34 AM PT
-06/02/26 10:31 AM PT
-06/02/26 10:28 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # CRM Refocus — Phase 1 Checklist
 
 > Plan: `docs/crm-refocus-phase1-schema-types.md`

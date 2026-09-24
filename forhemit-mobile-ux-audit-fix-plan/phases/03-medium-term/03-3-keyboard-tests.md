@@ -1,6 +1,3 @@
-06/11/26 02:01 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Task 3.3: Test Modals/Intake Forms with Software Keyboard on Small Screens
 
 **Task ID:** 3.3  
