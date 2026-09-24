@@ -15,7 +15,10 @@ describe("Signal OS founding pricing state", () => {
     const active = buildProductJsonLd(true);
     const expired = buildProductJsonLd(false);
 
-    expect(active.offers).toHaveLength(3);
+    expect("offers" in active).toBe(true);
+    if ("offers" in active) {
+      expect(active.offers).toHaveLength(3);
+    }
     expect(expired).not.toHaveProperty("offers");
   });
 });
