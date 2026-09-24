@@ -1,15 +1,18 @@
 import { Pool } from "pg";
 
-const GHOST_CONNECTION_STRING =
-	process.env.GHOST_CONNECTION_STRING ||
-	"postgresql://tsdbadmin:j3nvynekex3cvlo5@jxkcqq6yua.nhbh1fxcou.tsdb.cloud.timescale.com:5432/tsdb";
-
 let pool: Pool | null = null;
 
 export function getGhostPool(): Pool {
 	if (!pool) {
+		// Fail fast on first use rather than at module init: Next evaluates route
+		// module chunks while collecting page data during `next build`, so a
+		// top-level throw would break builds wherever the env var is not set.
+		const connectionString = process.env.GHOST_CONNECTION_STRING;
+		if (!connectionString) {
+			throw new Error("GHOST_CONNECTION_STRING is required");
+		}
 		pool = new Pool({
-			connectionString: GHOST_CONNECTION_STRING,
+			connectionString,
 			ssl: { rejectUnauthorized: false },
 			max: 5,
 			idleTimeoutMillis: 30000,
