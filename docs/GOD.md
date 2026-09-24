@@ -17,13 +17,21 @@ Purpose: Source of truth for all project documentation — machine-parseable by 
 | docs/completed/multi-agent-workflow-skill-created.md | Session log documenting creation of multi-agent workflow orchestrator skill | 2026-05-26T01:58:00-07:00 |
 | docs/completed/dark-mode-plan-admin.md | Dark mode implementation plan for admin app — COMPLETED 2026-05-31 | 2026-05-31T10:00:00-07:00 |
 | docs/design/dedup-shared-package-20260525.md | Design doc for code deduplication via packages/shared extraction | 2026-05-26T01:58:00-07:00 |
-| CONVEX_FIXES_PLAN.md | Revised plan for Convex architecture fixes across ~100+ pre-existing TS errors | 2026-05-26T01:58:00-07:00 |
-| PROJECT_STATUS.md | Current Forhemit project status dashboard | 2026-05-26T01:58:00-07:00 |
-| PLAN.md | Analysis and resolution plan for 25 circular dependencies reported by CodeFlow | 2026-05-26T01:58:00-07:00 |
-| PRODUCTION_READINESS_REPORT.md | Production readiness assessment with issue inventory and remediation status | 2026-05-26T01:58:00-07:00 |
-| PRODUCTION_READINESS_DIFF.md | Diff-based production readiness tracking against baseline report | 2026-05-26T01:58:00-07:00 |
+| docs/PROJECT_STATUS.md | Current Forhemit project status dashboard | 2026-05-26T01:58:00-07:00 |
+| docs/PRODUCTION_READINESS_REPORT.md | Production readiness assessment with issue inventory and remediation status | 2026-05-26T01:58:00-07:00 |
+| docs/PRODUCTION_READINESS_DIFF.md | Diff-based production readiness tracking against baseline report | 2026-05-26T01:58:00-07:00 |
 | Forhemit_Engagement_Letter_Legal_Review_2026-03-30.md | AI-generated legal analysis of engagement letter — not legal advice, review with attorney | 2026-05-26T01:58:00-07:00 |
-| HARMONIZATION_PLAN.md | Complete harmonization plan for Forhemit admin, marketing, resources, and blog alignment | 2026-05-26T01:58:00-07:00 |
+| docs/HARMONIZATION_PLAN.md | Complete harmonization plan for Forhemit admin, marketing, resources, and blog alignment | 2026-05-26T01:58:00-07:00 |
+| docs/MODULAR_DESIGN.md | Modular design policy, patterns, and enforcement | 2026-05-26T01:58:00-07:00 |
+| docs/REFACTORING_PLAN.md | Legacy refactoring roadmap and architecture decisions | 2026-05-26T01:58:00-07:00 |
+| docs/IMPLEMENTATION_ROADMAP.md | Implementation roadmap | 2026-05-26T01:58:00-07:00 |
+| docs/TROUBLESHOOTING.md | Troubleshooting guide | 2026-05-26T01:58:00-07:00 |
+| docs/USER_MANAGEMENT.md | User management reference | 2026-05-26T01:58:00-07:00 |
+| docs/EMAIL_TELEGRAM_SETUP.md | Email and Telegram notification setup guide | 2026-05-26T01:58:00-07:00 |
+| docs/REMEDIATION_TRACKER.md | Security remediation tracking | 2026-05-26T01:58:00-07:00 |
+| docs/STRUCTURE_ANALYSIS.md | Repository structure analysis | 2026-05-26T01:58:00-07:00 |
+| docs/PERFORMANCE_OPTIMIZATIONS.md | Performance optimization record | 2026-05-26T01:58:00-07:00 |
+| docs/archive/TEMPLATE_ANALYSIS_PLAN.md | Template analysis plan (archived — verify before relying on it) | 2026-05-26T01:58:00-07:00 |
 
 <!-- /GOD_SECTION: active_documents -->
 
@@ -37,6 +45,8 @@ No overrides defined yet. Add overrides here using the `[TOPIC-NNN]` convention 
 
 | Document | Reason | Deprecated On | Archived On |
 |----------|--------|--------------|-------------|
+| PLAN.md | Circular-dependency resolution plan — executed; deleted in 2026-09-24 docs cleanup | 2026-09-24 | 2026-09-24 |
+| CONVEX_FIXES_PLAN.md | Convex fixes plan — executed (CONVEX_FIXES_COMPLETE.md logged completion); deleted in 2026-09-24 docs cleanup | 2026-09-24 | 2026-09-24 |
 
 *(No stale or deprecated documents on first run — all files marked ACTIVE after timestamp/Purpose repair.)*
 

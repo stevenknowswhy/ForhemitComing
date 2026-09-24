@@ -1,6 +1,3 @@
-05/26/26 08:23 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Changelog
 
 All notable changes to the Forhemit monorepo will be documented in this file.

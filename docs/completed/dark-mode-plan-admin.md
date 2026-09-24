@@ -1,6 +1,3 @@
-05/31/26 05:51 AM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Dark Mode Plan — Forhemit Admin
 
 > **Status: ✅ COMPLETED — 2026-05-31**

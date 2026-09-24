@@ -1,6 +1,3 @@
-06/11/26 02:01 PM PT
-Purpose: (auto-inserted by pre-commit — please update)
-
 # Phase 03 Gotchas Archive — Medium-term Structural Improvements
 
 **Purpose:** Permanent record of hard-won lessons from Phase 3. Future agents (and humans) should read this before starting any mobile work.
