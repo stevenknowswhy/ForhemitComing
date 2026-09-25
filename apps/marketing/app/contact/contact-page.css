@@ -1,5 +1,3 @@
-@import "../styles/theme.css";
-
 .contact-page-outer {
   /* Phase 3.1 design system + 3.4 safe-area refinements */
   padding: calc(5.5rem + env(safe-area-inset-top)) var(--space-4) var(--space-6);
@@ -11,10 +9,10 @@
   margin-left: auto;
   margin-right: auto;
   background: linear-gradient(145deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-  border: 1px solid var(--border-accent);
+  border: 1px solid var(--border-light);
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow-soft), 0 0 0 1px var(--color-brand-subtle);
+  box-shadow: var(--shadow-soft);
 }
 
 .contact-page-shell .contact-form-section {
@@ -31,7 +29,7 @@
   .contact-page-shell .contact-info-section {
     display: flex;
     border-right: none;
-    border-bottom: 1px solid var(--border-accent);
+    border-bottom: 1px solid var(--border-light);
   }
 }
 
@@ -41,14 +39,16 @@
   text-align: center;
   font-family: Inter, sans-serif;
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: var(--body-ink);
 }
 
 .contact-page-footnote a {
-  color: var(--color-brand);
-  text-decoration: none;
+  color: var(--body-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-medium);
 }
 
 .contact-page-footnote a:hover {
-  text-decoration: underline;
+  text-decoration-color: var(--body-ink);
 }
