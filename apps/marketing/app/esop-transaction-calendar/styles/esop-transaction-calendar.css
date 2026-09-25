@@ -905,7 +905,18 @@
 
 @media (max-width: 640px) {
   .etc-header {
-    padding: 0 0.75rem;
+    height: auto;
+    min-height: 56px;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Give the month nav its own row so arrows and "Today" stay visible on
+     narrow screens instead of being clipped by .etc-root's overflow. */
+  .etc-header-nav {
+    flex: 1 1 100%;
+    justify-content: space-between;
   }
 
   .etc-controls {

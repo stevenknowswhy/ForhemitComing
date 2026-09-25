@@ -64,6 +64,13 @@
   align-items: start;
 }
 
+/* Grid items default to min-width: auto, so a wide descendant (e.g. the ESOP
+   transaction calendar) would force the column — and the page — wider than the
+   viewport. Allow the column to shrink; children scroll or reflow instead. */
+.fmp-main-col {
+  min-width: 0;
+}
+
 @media (min-width: 1024px) {
   .fmp-layout {
     grid-template-columns: minmax(0, 1fr) 280px;
