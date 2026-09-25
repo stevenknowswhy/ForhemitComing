@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from 'next'
+import { Analytics } from '@vercel/analytics/react'
 import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from './components/layout/Navigation'
@@ -156,6 +157,7 @@ export default function RootLayout({
             </SentryProvider>
           </ErrorBoundary>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   )
