@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import "../styles/home-page.css";
 import "./coming-soon.css";
+import { NotifyCaptureForm } from "./_components/NotifyCaptureForm";
 
 function safeInternalPath(next: string | null): string {
   if (!next || !next.startsWith("/") || next.startsWith("//")) {
@@ -12,9 +13,11 @@ function safeInternalPath(next: string | null): string {
   return next;
 }
 
+type GateView = "landing" | "code" | "notify";
+
 export function ComingSoonGate() {
   const searchParams = useSearchParams();
-  const [showCodeEntry, setShowCodeEntry] = useState(false);
+  const [view, setView] = useState<GateView>("landing");
   const [code, setCode] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -29,7 +32,10 @@ export function ComingSoonGate() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ code: code.trim() }),
       });
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
       if (!res.ok) {
         setError(data.error ?? "Could not verify code. Try again.");
         setPending(false);
@@ -56,24 +62,35 @@ export function ComingSoonGate() {
 
           <div className="coming-soon-divider"></div>
 
-          {!showCodeEntry ? (
+          {view === "landing" ? (
             <>
               <p className="coming-soon-message">
                 We&apos;re building something extraordinary.
                 <br />
-                Public access isn&apos;t open yet—use an invitation code to preview the site.
+                Public access isn&apos;t open yet—use an invitation code to
+                preview the site.
               </p>
               <button
                 type="button"
                 className="coming-soon-cta"
-                onClick={() => setShowCodeEntry(true)}
+                onClick={() => setView("code")}
               >
                 Enter invitation code
               </button>
+              <button
+                type="button"
+                className="coming-soon-secondary"
+                onClick={() => setView("notify")}
+                data-testid="notify-open"
+              >
+                No code? Get notified when we launch
+              </button>
             </>
-          ) : (
+          ) : view === "code" ? (
             <form className="coming-soon-code-form" onSubmit={handleSubmit}>
-              <p className="coming-soon-form-intro">Enter the code you were given to continue.</p>
+              <p className="coming-soon-form-intro">
+                Enter the code you were given to continue.
+              </p>
               <label htmlFor="invite-code" className="sr-only">
                 Invitation code
               </label>
@@ -92,14 +109,18 @@ export function ComingSoonGate() {
               />
               {error ? <p className="coming-soon-error">{error}</p> : null}
               <div className="coming-soon-form-actions">
-                <button type="submit" className="coming-soon-submit" disabled={pending}>
+                <button
+                  type="submit"
+                  className="coming-soon-submit"
+                  disabled={pending}
+                >
                   {pending ? "Checking…" : "Continue to site"}
                 </button>
                 <button
                   type="button"
                   className="coming-soon-back"
                   onClick={() => {
-                    setShowCodeEntry(false);
+                    setView("landing");
                     setError(null);
                     setCode("");
                   }}
@@ -109,12 +130,19 @@ export function ComingSoonGate() {
                 </button>
               </div>
             </form>
+          ) : (
+            <NotifyCaptureForm
+              sourcePage="/coming-soon"
+              onDismiss={() => setView("landing")}
+            />
           )}
         </div>
       </main>
 
       <footer className="coming-soon-footer">
-        <span className="coming-soon-footer-copy">&copy; {new Date().getFullYear()} Forhemit PBC</span>
+        <span className="coming-soon-footer-copy">
+          &copy; {new Date().getFullYear()} Forhemit PBC
+        </span>
       </footer>
     </div>
   );

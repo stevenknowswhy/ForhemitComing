@@ -114,6 +114,15 @@ export default defineSchema({
 		.index("by_email", ["email"])
 		.index("by_createdAt", ["createdAt"]),
 
+	// Coming-soon "Get notified" email capture (P1-8)
+	notifySignups: defineTable({
+		email: v.string(), // normalized: lowercase + trimmed
+		sourcePage: v.string(), // page the signup came from, e.g. "/coming-soon"
+		createdAt: v.number(),
+	})
+		.index("by_email", ["email"])
+		.index("by_createdAt", ["createdAt"]),
+
 	// Job applications
 	jobApplications: defineTable({
 		// Personal information
@@ -166,6 +175,7 @@ export default defineSchema({
 		entityType: v.union(
 			v.literal("contactSubmission"),
 			v.literal("earlyAccessSignup"),
+			v.literal("notifySignup"),
 			v.literal("jobApplication"),
 			v.literal("generatedDocument"),
 			v.literal("agentJob"),
