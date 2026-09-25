@@ -55,7 +55,7 @@ export function ComingSoonGate() {
 
       <main className="hero coming-soon-hero">
         <div className="container">
-          <p className="coming-soon-text">Coming Soon</p>
+          <p className="coming-soon-text eyebrow">Coming Soon</p>
           <h1 className="brand-title">FORHEMIT</h1>
           <p className="brand-corporation">A Public Benefit Corporation</p>
           <p className="brand-subtitle">STEWARDSHIP MANAGEMENT</p>
