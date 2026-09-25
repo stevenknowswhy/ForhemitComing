@@ -5,6 +5,7 @@ import {
   isFoundingPricingActive,
   SignalOsPage,
 } from "./index";
+import { ogMetadata } from "@/lib/og";
 
 export const dynamic = "force-dynamic";
 
@@ -20,13 +21,13 @@ export const metadata: Metadata = {
     "generative engine optimization",
   ],
   alternates: { canonical: canonicalUrl },
-  openGraph: {
+  ...ogMetadata({
+    file: "og-signal-os.png",
     title: "Signal OS | AEO & GEO AI Visibility Audits",
     description:
       "Capture dated AI-answer evidence, citations, competitors, factual gaps, and next actions without pretending a sample is a customer result.",
-    type: "website",
-    url: canonicalUrl,
-  },
+    path: "/signal-os",
+  }),
 };
 
 export default function SignalOsRoute() {

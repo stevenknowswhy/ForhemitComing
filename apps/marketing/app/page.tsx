@@ -1,4 +1,15 @@
+import type { Metadata } from "next";
+import { ogMetadata } from "@/lib/og";
 import { HomeClient } from "./HomeClient";
+
+export const metadata: Metadata = ogMetadata({
+  file: "og-home.png",
+  title:
+    "Forhemit | 100% Employee Ownership Succession for Founder-Led Businesses",
+  description:
+    "Transition your business to 100% employee ownership. Preserve your legacy, unlock Section 1042 tax benefits, and steward your company's future with Forhemit.",
+  path: "/",
+});
 
 const jsonLd = {
   "@context": "https://schema.org",
