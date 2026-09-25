@@ -289,13 +289,24 @@
   margin: 0 auto 0.75rem;
 }
 
-/* Grouped sections inside the sheet (P1-4) */
+/* Grouped sections inside the sheet (P1-4). Flex column so each link takes a
+   full-width row — the global .touch-target utility declares inline-flex and
+   would otherwise make short labels flow side-by-side into a tag cloud. */
 .nav-sheet-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
   margin-bottom: 0.5rem;
 }
 
 .nav-sheet-group:last-child {
   margin-bottom: 0;
+}
+
+/* Full-width rows, left-aligned text — .touch-target centers content by default */
+.nav-sheet-group .nav-bottom-sheet-item {
+  justify-content: flex-start;
+  width: 100%;
 }
 
 /* Group label — part of the DM Mono eyebrow system */
