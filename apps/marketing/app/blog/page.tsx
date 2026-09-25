@@ -1,13 +1,23 @@
 import { Metadata } from 'next';
 import { PathwaySelector, PathwayContext } from '@/components/ui/PathwaySelector';
 import { BentoGrid } from '@/components/blog/BentoGrid';
+import { fetchIndexPosts } from '@/lib/blog-convex-server';
+import { postDocToListItem, type BlogListItem } from '@/lib/blog-map';
+
+// The index re-fetches published posts on every request so error and empty
+// states reflect the backend's actual condition instead of a stale snapshot.
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Blog',
   description: 'Institutional intelligence for business transitions and legacy preservation.',
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const result = await fetchIndexPosts(50);
+  const initialPosts: BlogListItem[] | null = result.ok
+    ? result.posts.map(postDocToListItem)
+    : null;
   return (
     <main className="pt-20 sm:pt-24 pb-12 sm:pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
@@ -29,7 +39,7 @@ export default function BlogPage() {
 
         {/* Bento Grid */}
         <section aria-label="Articles">
-          <BentoGrid />
+          <BentoGrid initialPosts={initialPosts} />
         </section>
       </div>
     </main>

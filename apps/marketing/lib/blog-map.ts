@@ -25,6 +25,9 @@ const defaultAuthor: Author = {
   nextAvailability: "",
 };
 
+/** Card-grid shape shared by the server-rendered index and the client retry path. */
+export type BlogListItem = ReturnType<typeof postDocToListItem>;
+
 /** Card grid + filters (BentoGrid). */
 export function postDocToListItem(post: Doc<"posts">): {
   id: string;
