@@ -214,10 +214,8 @@ a.hch-path-cta {
   width: 60%;
 }
 
-.hch-hero-cta:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 2px;
-}
+/* Focus ring comes from the single global :focus-visible token in globals.css —
+   the local orange outline was removed (P0-5). */
 
 .hch-hero-cta-primary {
   background-color: var(--hch-ink);
@@ -325,7 +323,7 @@ a.hch-path-cta {
 }
 
 .hch-path-card:focus-visible {
-  outline: 2px solid var(--hch-brass);
+  outline: var(--focus-ring);
   outline-offset: 3px;
 }
 

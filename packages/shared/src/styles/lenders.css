@@ -20,17 +20,8 @@
   top: 0;
 }
 
-/* ── Focus Styles (Accessibility) ── */
-*:focus-visible {
-  outline: 2px solid var(--lenders-accent);
-  outline-offset: 2px;
-}
-
-button:focus-visible,
-a:focus-visible {
-  outline: 2px solid var(--lenders-accent);
-  outline-offset: 2px;
-}
+/* ── Focus Styles (Accessibility) ──
+   Ring comes from the single global :focus-visible token (globals.css). */
 
 /* ── Animation Keyframes ── */
 @keyframes fadeInUp {

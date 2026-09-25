@@ -475,13 +475,9 @@ button,
   padding: 10px; /* generous hit slop for precision */
 }
 
-/* Focus and pressed states for touch targets (Phase 1.4 completion) */
-.touch-target:focus-visible,
-.touch-target-icon:focus-visible {
-  outline: 2px solid var(--color-brand, #c9a227);
-  outline-offset: 2px;
-}
-
+/* Pressed state for touch targets (Phase 1.4 completion).
+   Focus styling comes from the single global :focus-visible ring in globals.css —
+   the former local orange ring override was removed (P0-5). */
 .touch-target:active,
 .touch-target-icon:active {
   transform: scale(0.96);
