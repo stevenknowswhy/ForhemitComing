@@ -89,11 +89,10 @@
 
 /* Left Side - Contact Info */
 .contact-info-section {
-	background: linear-gradient(
-		180deg,
-		var(--color-brand-subtle) 0%,
-		var(--color-brand-hover) 100%
-	);
+	/* P0-2: the old gradient ended in full brand orange — dark body text on it
+	   computed below AA. A flat subtle wash keeps the orange identity while the
+	   existing dark text stays compliant. */
+	background: var(--color-brand-subtle);
 	border-right: 1px solid var(--border-accent);
 	padding: 2.5rem 1.75rem;
 	display: flex;
@@ -356,12 +355,9 @@
 }
 
 .form-btn-primary {
-	background: linear-gradient(
-		135deg,
-		var(--color-brand) 0%,
-		var(--color-brand-hover) 100%
-	);
-	color: var(--text-inverse);
+	/* P0-2: ink ladder (fallback hexes for consumers without the marketing tokens) */
+	background: var(--cta-primary-bg, #1A1A1A);
+	color: var(--cta-primary-fg, #F9F7F2);
 	box-shadow: 0 4px 15px -5px var(--color-brand-subtle);
 	margin-top: 0.5rem;
 }

@@ -265,15 +265,6 @@
   font-style: italic;
 }
 
-.brk-screening-checklist .fmp-btn-primary {
-  background: var(--color-brand);
-  color: var(--bg-primary);
-}
-
-.brk-screening-checklist .fmp-btn-primary:hover {
-  background: var(--color-brand-hover);
-}
-
 #brk-workload .brk-workload-answer-group {
   transition: box-shadow 0.35s ease, border-color 0.28s ease;
 }

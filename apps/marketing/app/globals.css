@@ -76,6 +76,22 @@
   --bg-primary: var(--canvas);
   --text-primary: var(--ink);
   --text-secondary: var(--stone);
+
+  /* ── CTA LADDER & FOCUS (P0-2/P0-5) ──
+     One ladder per the locked spec direction: primary ink, secondary ghost,
+     orange (--color-accent) for badges/eyebrows only. References the manuscript
+     tokens, so the ladder flips automatically if a dark theme ever ships. */
+  --cta-primary-bg: var(--ink);            /* #1A1A1A on light — ≥15:1 with fg */
+  --cta-primary-fg: var(--canvas);         /* paper on ink — ≥15:1 */
+  --cta-primary-hover-bg: #2E2E2E;         /* lifted ink — ≥12:1 with fg */
+  --cta-secondary-bg: transparent;         /* ghost: border + ink text, no fill */
+  --cta-secondary-fg: var(--ink);
+  --cta-secondary-border: var(--border-medium);
+  --color-accent: var(--color-brand);      /* dim orange — ≥4.5:1 when carrying text */
+
+  /* One focus ring for the whole site: ≥3:1 on canvas AND parchment (WCAG 1.4.11). */
+  --focus-ring-color: var(--ink);
+  --focus-ring: 2px solid var(--focus-ring-color);
 }
 
 /* Dark Mode */
@@ -280,9 +296,9 @@ p {
   background: var(--sage-light);
 }
 
-/* Focus states */
+/* Focus states — single global ring (P0-5); local overrides removed */
 :focus-visible {
-  outline: 2px solid var(--sage-light);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }
 
@@ -307,8 +323,8 @@ p {
   --card-foreground: var(--text-primary);
   --popover: var(--bg-card);
   --popover-foreground: var(--text-primary);
-  --primary: var(--color-brand);
-  --primary-foreground: var(--text-inverse);
+  --primary: var(--cta-primary-bg, var(--ink));
+  --primary-foreground: var(--cta-primary-fg, var(--canvas));
   --secondary: var(--bg-secondary);
   --secondary-foreground: var(--text-primary);
   --muted: var(--bg-tertiary);
@@ -319,7 +335,7 @@ p {
   --destructive-foreground: #ffffff;
   --border: var(--border-subtle);
   --input: var(--border-subtle);
-  --ring: var(--color-brand);
+  --ring: var(--focus-ring-color, var(--ink));
   --radius: 0.75rem;
 }
 

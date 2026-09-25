@@ -229,12 +229,12 @@
 }
 
 .brk-contact-btn-primary {
-  background: var(--brk-accent);
-  color: var(--text-inverse);
+  background: var(--cta-primary-bg, var(--ink));
+  color: var(--cta-primary-fg, var(--canvas));
 }
 
 .brk-contact-btn-primary:hover:not(:disabled) {
-  opacity: 0.9;
+  background: var(--cta-primary-hover-bg, #2E2E2E);
 }
 
 .brk-contact-btn-secondary {

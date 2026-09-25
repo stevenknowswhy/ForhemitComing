@@ -1073,8 +1073,8 @@
 }
 
 .fmp-btn-primary {
-  background: var(--color-brand);
-  color: var(--text-inverse);
+  background: var(--cta-primary-bg, var(--ink));
+  color: var(--cta-primary-fg, var(--canvas));
 }
 
 .fmp-btn-secondary {

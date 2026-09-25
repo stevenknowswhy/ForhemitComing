@@ -3,8 +3,13 @@
 
 :root {
   /* ========== BRAND COLORS (Orange Theme) ========== */
-  --color-brand: #FF6B00;
-  --color-brand-hover: #FF8533;
+  /* P0-2: orange is demoted to accent-only (badges/eyebrows/borders). #FF6B00
+     with white text computed 2.86:1 (AA needs 4.5:1); #BC3E0A computes 5.48:1
+     with white, 5.12:1 as text on canvas and 4.62:1 on parchment — compliant on
+     every surface it pairs with. Primary CTAs consume the ink ladder
+     (--cta-primary-*) instead; see globals.css. */
+  --color-brand: #BC3E0A;
+  --color-brand-hover: #9A3412;
   --color-brand-subtle: rgba(255, 107, 0, 0.1);
   --color-brand-border: rgba(255, 107, 0, 0.3);
 
