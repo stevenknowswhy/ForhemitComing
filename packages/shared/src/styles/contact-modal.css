@@ -317,6 +317,13 @@
 	outline-offset: 2px;
 }
 
+/* Explicit author ring — without it Chromium's UA default (gray, 1px offset)
+   surfaces on the submit button even though the global :focus-visible applies. */
+.form-btn:focus-visible {
+	outline: var(--focus-ring);
+	outline-offset: 2px;
+}
+
 .form-select {
 	cursor: pointer;
 	appearance: none;
