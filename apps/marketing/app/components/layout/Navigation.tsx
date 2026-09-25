@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ThemeToggle } from "../ui/ThemeToggle";
 import "./navigation.css";
 
 interface NavigationProps {
@@ -158,9 +157,6 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
       className={`minimal-nav ${variant === "light" ? "light-nav" : ""}`}
       ref={menuRef}
     >
-      {/* Theme Toggle */}
-      <ThemeToggle />
-
       {/* Hamburger Menu Button */}
       <button
         className={`hamburger-btn touch-target-icon ${isOpen ? "open" : ""}`}
