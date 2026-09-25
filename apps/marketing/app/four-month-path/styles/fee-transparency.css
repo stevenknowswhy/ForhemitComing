@@ -264,7 +264,7 @@
 }
 
 .ft-state-select:focus {
-  outline: 2px solid var(--color-brand);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }
 

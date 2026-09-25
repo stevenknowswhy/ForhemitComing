@@ -83,10 +83,7 @@
   transform: scale(0.95);
 }
 
-.sitemap-modal-close:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 2px;
-}
+/* Ring comes from the single global :focus-visible token (globals.css). */
 
 /* Header - Visual hierarchy with tightened letter spacing */
 .sitemap-header {
@@ -202,10 +199,7 @@
   transform: translateX(4px) scale(0.98);
 }
 
-.sitemap-section a:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: -2px;
-}
+/* Ring comes from the single global :focus-visible token (globals.css). */
 
 /* Mobile Accordion - Hidden on desktop */
 .sitemap-accordion-mobile {

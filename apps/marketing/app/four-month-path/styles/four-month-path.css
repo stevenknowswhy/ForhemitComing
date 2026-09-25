@@ -168,7 +168,7 @@
 }
 
 .fmp-phase-shell:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: var(--focus-ring);
   outline-offset: 3px;
 }
 
@@ -555,7 +555,7 @@
 
 .fmp-cta-shell > button:focus-visible,
 .fmp-cta-shell > a:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: var(--focus-ring);
   outline-offset: 2px;
 }
 

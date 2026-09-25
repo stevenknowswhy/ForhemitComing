@@ -81,7 +81,7 @@
 }
 
 .scorecardPath a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -189,7 +189,7 @@
 }
 
 .freeResource a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: 4px;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .purchaseTrust a:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: 3px;
 }
 
@@ -318,7 +318,7 @@
 }
 
 .directoryProof:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: var(--focus-ring);
   outline-offset: 4px;
 }
 

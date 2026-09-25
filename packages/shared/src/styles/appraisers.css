@@ -404,7 +404,7 @@
 }
 
 .calculator-slider:focus-visible {
-  outline: 2px solid var(--color-brand);
+  outline: var(--focus-ring);
   outline-offset: 4px;
 }
 
