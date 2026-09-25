@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function ProblemSolutionSection() {
   return (
     <section className="about-section-problem-solution">
@@ -12,10 +14,13 @@ export function ProblemSolutionSection() {
               <h2>A Better Option</h2>
             </div>
             <div className="about-highlight">
-              <img
+              <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
                 alt="Employee ownership collaboration"
                 className="highlight-image"
+                width={2034}
+                height={1637}
+                sizes="(max-width: 900px) 100vw, 50vw"
               />
               <span className="highlight-text">100% Employee Owned</span>
             </div>

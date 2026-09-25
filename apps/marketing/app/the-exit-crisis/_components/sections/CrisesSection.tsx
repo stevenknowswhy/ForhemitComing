@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function CrisesSection() {
   return (
     <section className="about-section about-section-dark">
@@ -9,10 +11,13 @@ export function CrisesSection() {
         {/* Row 1: Image Left, Text Right */}
         <div className="crisis-row">
           <div className="crisis-image-wrapper">
-            <img
+            <Image
               src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDnRzU88SNaoHZhcXfKi2B3O8YTR0lmArFCIVG"
               alt="The Retirement Cliff"
               className="crisis-image"
+              width={5760}
+              height={3840}
+              sizes="(max-width: 900px) 100vw, 50vw"
             />
           </div>
           <div className="crisis-content">
@@ -36,10 +41,13 @@ export function CrisesSection() {
             </p>
           </div>
           <div className="crisis-image-wrapper">
-            <img
+            <Image
               src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDyGimuSRi39FVNAWGTBJoRwhjb8XIcPd21tnr"
               alt="The Workforce Crisis"
               className="crisis-image"
+              width={6000}
+              height={4000}
+              sizes="(max-width: 900px) 100vw, 50vw"
             />
           </div>
         </div>
@@ -47,10 +55,13 @@ export function CrisesSection() {
         {/* Row 3: Image Left, Text Right */}
         <div className="crisis-row">
           <div className="crisis-image-wrapper">
-            <img
+            <Image
               src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDLlhK7BU5RqmliJOUfha4pgWxoQEH2FLYC7wM"
               alt="The Community Collapse"
               className="crisis-image"
+              width={3130}
+              height={2075}
+              sizes="(max-width: 900px) 100vw, 50vw"
             />
           </div>
           <div className="crisis-content">

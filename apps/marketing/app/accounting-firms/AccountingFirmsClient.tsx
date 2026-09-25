@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import "./accounting-firms.css";
 
 // Scroll reveal hook
@@ -225,9 +226,12 @@ export function AccountingFirmsClient() {
                 </Link>
               </div>
               <div className="tsunami-image">
-                <img 
-                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD836AM0RQkVahrcQmOXG3UgxiZ2BuI795jYpy" 
+                <Image
+                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD836AM0RQkVahrcQmOXG3UgxiZ2BuI795jYpy"
                   alt="Business succession planning"
+                  width={4679}
+                  height={7019}
+                  sizes="(max-width: 900px) 100vw, 50vw"
                 />
               </div>
             </div>

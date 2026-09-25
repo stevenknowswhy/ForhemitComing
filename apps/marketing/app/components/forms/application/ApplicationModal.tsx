@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useMutation, useAction } from "convex/react";
 import { api } from "@/convex/_generated/api";
@@ -160,8 +161,7 @@ export function ApplicationModal({ isOpen, onClose }: ApplicationModalProps) {
 
       <div className={`modal-grid ${step === 2 ? 'image-top' : ''}`}>
         <div className="modal-image-side">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img"/>
+          <Image src="/recruit-face.jpg" alt="Join Forhemit" className="portrait-img" width={6000} height={4000} sizes="(max-width: 768px) 100vw, 400px" />
         </div>
 
         <div className="modal-form-side">

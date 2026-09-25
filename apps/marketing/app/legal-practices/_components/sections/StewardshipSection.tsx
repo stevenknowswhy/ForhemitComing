@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function StewardshipSection() {
   return (
     <section className="legal-section stewardship-section">
@@ -14,9 +16,12 @@ export function StewardshipSection() {
         <div className="comparison-blocks">
           <div className="comparison-block traditional" data-animate="slide-right">
             <div className="comparison-image">
-              <img
+              <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDnNRRtzSNaoHZhcXfKi2B3O8YTR0lmArFCIVG"
                 alt="Traditional M&A corporate takeover"
+                width={1220}
+                height={639}
+                sizes="(max-width: 900px) 100vw, 50vw"
               />
               <div className="comparison-image-overlay" />
             </div>
@@ -35,9 +40,12 @@ export function StewardshipSection() {
 
           <div className="comparison-block stewardship" data-animate="slide-left">
             <div className="comparison-image">
-              <img
+              <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD5DFKeJbJdhlvXzTciIMfp3OgtnGQKqaU1H5j"
                 alt="Employee ownership collaboration"
+                width={1315}
+                height={637}
+                sizes="(max-width: 900px) 100vw, 50vw"
               />
               <div className="comparison-image-overlay" />
             </div>

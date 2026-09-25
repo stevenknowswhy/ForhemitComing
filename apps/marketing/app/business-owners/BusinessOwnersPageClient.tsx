@@ -4,6 +4,7 @@ import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
 
 import { lazy, Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import { ClientOnly } from "@/components/ClientOnly";
 import {
   BusinessOwnersClosingSections,
@@ -114,9 +115,13 @@ export function BusinessOwnersPageClient() {
               <div className="bo-glow-shell bo-glow-shell--hero-img">
                 <div className="bo-glow-shell__glow" aria-hidden />
                 <div className="bo-glow-inner">
-                  <img
+                  <Image
                     src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDfemQfPYOIdcXFC34obyDPLkhgQVTv7ERqewA"
                     alt="Business succession planning"
+                    width={2033}
+                    height={1156}
+                    sizes="(max-width: 900px) 100vw, 650px"
+                    priority
                   />
                 </div>
               </div>
@@ -149,9 +154,12 @@ export function BusinessOwnersPageClient() {
                 </ul>
               </div>
               <div className="luxury-image">
-                <img 
-                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDZKoRg4zMdXfDn1J0ilT8SKbAWux5a7pqNCcH" 
-                  alt="Business owner enjoying freedom after succession planning" 
+                <Image
+                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDZKoRg4zMdXfDn1J0ilT8SKbAWux5a7pqNCcH"
+                  alt="Business owner enjoying freedom after succession planning"
+                  width={1376}
+                  height={768}
+                  sizes="(max-width: 900px) 100vw, 50vw"
                 />
               </div>
             </div>
@@ -299,9 +307,12 @@ export function BusinessOwnersPageClient() {
                 <div className="bo-glow-shell__glow" aria-hidden />
                 <div className="bo-glow-inner comparison-card negative">
                 <div className="comparison-image">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz" 
+                  <Image
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz"
                     alt="Chaotic business transition"
+                    width={2787}
+                    height={1267}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <div className="comparison-header">
@@ -325,9 +336,12 @@ export function BusinessOwnersPageClient() {
                 <div className="bo-glow-shell__glow" aria-hidden />
                 <div className="bo-glow-inner comparison-card positive">
                 <div className="comparison-image">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDmGV07k85Eem6OqKGFXsI071p4dSijCb2oYcR" 
+                  <Image
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDmGV07k85Eem6OqKGFXsI071p4dSijCb2oYcR"
                     alt="Peaceful business succession"
+                    width={2816}
+                    height={1345}
+                    sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 </div>
                 <div className="comparison-header">
@@ -367,9 +381,12 @@ export function BusinessOwnersPageClient() {
                 <div className="bo-glow-inner">
                   <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDm9zJtzP85Eem6OqKGFXsI071p4dSijCb2oYc" 
+                  <Image
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDm9zJtzP85Eem6OqKGFXsI071p4dSijCb2oYc"
                     alt="Business owner"
+                    width={3712}
+                    height={5568}
+                    sizes="(max-width: 900px) 100vw, 33vw"
                   />
                   <div className="stakeholder-overlay">
                     <h3>For the Owner (You)</h3>
@@ -391,9 +408,12 @@ export function BusinessOwnersPageClient() {
                 <div className="bo-glow-inner">
                   <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF" 
+                  <Image
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
                     alt="Employees collaborating"
+                    width={2034}
+                    height={1637}
+                    sizes="(max-width: 900px) 100vw, 33vw"
                   />
                   <div className="stakeholder-overlay">
                     <h3>For the Employees</h3>
@@ -415,9 +435,12 @@ export function BusinessOwnersPageClient() {
                 <div className="bo-glow-inner">
                   <div className="stakeholder-card hover-reveal">
                 <div className="stakeholder-image">
-                  <img 
-                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDH6KI9uFakxJUPrlnIVYC9XNH5uEWetF2KO67" 
+                  <Image
+                    src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDH6KI9uFakxJUPrlnIVYC9XNH5uEWetF2KO67"
                     alt="Advisory team meeting"
+                    width={1024}
+                    height={844}
+                    sizes="(max-width: 900px) 100vw, 33vw"
                   />
                   <div className="stakeholder-overlay">
                     <h3>For Your Advisory Team</h3>

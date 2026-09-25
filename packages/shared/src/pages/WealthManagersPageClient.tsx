@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 // Animated counter hook
 function useCountUp(end: number, duration: number = 2000, startOnView: boolean = true) {
@@ -543,9 +544,12 @@ export function WealthManagersPageClient() {
               </div>
 
               <div className="reluctant-visual" data-animate="slide-left">
-                <img 
-                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz" 
-                  alt="Trusted advisor consultation" 
+                <Image
+                  src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz"
+                  alt="Trusted advisor consultation"
+                  width={2787}
+                  height={1267}
+                  sizes="(max-width: 900px) 100vw, 50vw"
                 />
                 <div className="visual-overlay">
                   <div className="overlay-stat">
