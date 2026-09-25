@@ -70,6 +70,7 @@ import type * as migrations_backfillClientSummary from "../migrations/backfillCl
 import type * as migrations_crmRefocus from "../migrations/crmRefocus.js";
 import type * as notes from "../notes.js";
 import type * as notifications from "../notifications.js";
+import type * as notifySignups from "../notifySignups.js";
 import type * as phoneMessages from "../phoneMessages.js";
 import type * as pipelinePhases from "../pipelinePhases.js";
 import type * as posts from "../posts.js";
@@ -150,6 +151,7 @@ declare const fullApi: ApiFromModules<{
   "migrations/crmRefocus": typeof migrations_crmRefocus;
   notes: typeof notes;
   notifications: typeof notifications;
+  notifySignups: typeof notifySignups;
   phoneMessages: typeof phoneMessages;
   pipelinePhases: typeof pipelinePhases;
   posts: typeof posts;
