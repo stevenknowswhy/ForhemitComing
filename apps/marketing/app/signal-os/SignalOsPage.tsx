@@ -95,8 +95,12 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           {tiers.map((tier) => (
             <article className={styles.card} key={tier.id}>
               <h3>{tier.name}</h3>
-              <p className={styles.priceLabel}>{foundingActive ? "Founding price" : "Current pricing"}</p>
-              <p className={styles.price}>{foundingActive ? tier.price : "See Stripe Checkout"}</p>
+              <p className={styles.priceLabel}>
+                {foundingActive
+                  ? "Founding price"
+                  : "Founding pricing has ended — current price shown."}
+              </p>
+              <p className={styles.price}>{tier.price}</p>
               <p>{tier.fit}</p>
               <ul className={styles.features}>
                 {tier.features.map((feature) => <li key={feature}>{feature}</li>)}
