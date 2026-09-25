@@ -1,0 +1,82 @@
+/* ── FORHEMIT MARKETING BRAND TOKENS — single source of truth (P1-5) ──
+   One CTA ladder, one focus treatment, one body ink, one accent role, plus
+   the shared eyebrow/chip patterns. Pages CONSUME these custom properties;
+   page CSS folders never define their own primary colors or focus styles.
+
+   Lives in the marketing app (not @forhemit/shared) because every token
+   aliases the manuscript palette defined in app/globals.css — the admin app
+   and shared-package consumers must not inherit marketing brand roles.
+
+   Imported FIRST by globals.css so later layers (theme.css, buttons.css,
+   page CSS) resolve against it. Custom-property aliases resolve at
+   use-time, so the dark-theme flips in globals.css propagate automatically.
+
+   Contrast values computed per WCAG 2.x relative luminance (see the PR's
+   contrast-check script); re-verify when touching a value:
+     --cta-primary-fg on --cta-primary-bg ......... 16.26:1 (AA 4.5:1)
+     --cta-primary-fg on --cta-primary-hover-bg ... 12.68:1 (AA 4.5:1)
+     --color-accent on canvas ..................... 5.12:1  (AA 4.5:1)
+     --color-accent on parchment .................. 4.62:1  (AA 4.5:1)
+     --body-ink on canvas ......................... 6.44:1  (AA 4.5:1)
+     --body-ink on parchment ...................... 5.81:1  (AA 4.5:1)
+     --focus-ring-color on canvas/parchment ....... 16.26/14.67:1 (non-text 3:1) */
+
+:root {
+  /* ── CTA LADDER ──
+     primary: ink fill, paper text. secondary: ghost — border + ink text, no
+     fill. accent: dim orange for badges, eyebrows, and highlight borders
+     ONLY — never a primary CTA fill. */
+  --cta-primary-bg: var(--ink);            /* #1A1A1A on light — ≥15:1 with fg */
+  --cta-primary-fg: var(--canvas);         /* paper on ink — ≥15:1 */
+  --cta-primary-hover-bg: #2E2E2E;         /* lifted ink — ≥12:1 with fg */
+  --cta-primary-shadow: 0 4px 20px -6px rgba(26, 26, 26, 0.35);
+  --cta-primary-shadow-hover: 0 8px 28px -8px rgba(26, 26, 26, 0.45);
+  --cta-secondary-bg: transparent;         /* ghost: border + ink text, no fill */
+  --cta-secondary-fg: var(--ink);
+  --cta-secondary-border: var(--border-medium);
+
+  /* ── ACCENT ── dim orange, AA-compliant when carrying text (see theme.css
+     for the --color-brand value and its WCAG note). */
+  --color-accent: var(--color-brand);
+
+  /* ── BODY INK ── long-form text ≥4.5:1 on canvas and parchment. */
+  --body-ink: var(--stone);
+
+  /* ── FOCUS ── one ring for the whole site: ≥3:1 non-text on canvas AND
+     parchment (WCAG 1.4.11). --input-focus-halo is the matching soft halo
+     for text fields whose borders go ring-colored on focus. */
+  --focus-ring-color: var(--ink);
+  --focus-ring: 2px solid var(--focus-ring-color);
+  --input-focus-halo: 0 0 0 3px rgba(26, 26, 26, 0.1);
+
+  /* ── SHARED PATTERN FONT ── the DM Mono eyebrow system. */
+  --eyebrow-font: var(--font-dm-mono), 'DM Mono', monospace;
+}
+
+/* Eyebrow: DM Mono kicker above headings — the canonical manuscript system.
+   Accent color carries the AA-compliant dim orange. */
+.eyebrow {
+  display: block;
+  font-family: var(--eyebrow-font);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* Chip: small pill label — accent-tinted badge per the ladder. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-brand-border);
+  background: var(--color-brand-subtle);
+  color: var(--color-accent);
+  font-family: var(--eyebrow-font);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
