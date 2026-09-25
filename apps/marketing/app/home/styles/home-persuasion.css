@@ -3,6 +3,12 @@
    Uses same token system as home-hero.css (--hch-*)
    Enhanced with business-owners micro-interaction patterns */
 
+/* ── Reveal contract ──
+   Hidden/unrevealed states are gated behind `html.js`, set by an inline
+   script in app/layout.tsx before first paint. Without JS — and in print —
+   every section renders fully visible: no content depends on JS to exist.
+   Reveals animate from hidden TO visible only when JS is confirmed. */
+
 /* ── Animation Keyframes ── */
 @keyframes hps-border-spin {
   to {
@@ -164,10 +170,13 @@
   padding: 2rem 2rem 2.5rem;
   border-top: 2px solid var(--hch-brass);
   border-bottom: 1px solid var(--hch-line);
-  opacity: 0;
-  transform: translateY(12px);
   transition: opacity 0.6s ease, transform 0.6s ease;
   position: relative;
+}
+
+html.js .hps-trust:not(.hps-revealed) {
+  opacity: 0;
+  transform: translateY(12px);
 }
 
 .hps-trust::after {
@@ -180,11 +189,6 @@
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--hch-brass), transparent);
   opacity: 0.5;
-}
-
-.hps-trust.hps-revealed {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .hps-trust-row {
@@ -208,12 +212,15 @@
   display: flex;
   align-items: center;
   gap: 0.45rem;
+}
+
+html.js .hps-trust .hps-trust-badge {
   opacity: 0;
   animation: hps-trust-badge-reveal 0.5s ease forwards;
   animation-play-state: paused;
 }
 
-.hps-trust.hps-revealed .hps-trust-badge {
+html.js .hps-trust.hps-revealed .hps-trust-badge {
   animation-play-state: running;
 }
 
@@ -305,14 +312,12 @@
 }
 
 .hps-compare .hps-inner {
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.hps-compare.hps-revealed .hps-inner {
-  opacity: 1;
-  transform: translateY(0);
+html.js .hps-compare:not(.hps-revealed) .hps-inner {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
 .hps-cards {
@@ -329,12 +334,15 @@
   border-radius: 14px;
   background: var(--hch-line);
   transition: background 0.35s ease, transform 0.4s ease;
+}
+
+html.js .hps-compare .hps-glow-shell {
   opacity: 0;
   animation: hps-fade-in-scale 0.6s ease forwards;
   animation-play-state: paused;
 }
 
-.hps-compare.hps-revealed .hps-glow-shell {
+html.js .hps-compare.hps-revealed .hps-glow-shell {
   animation-play-state: running;
 }
 
@@ -606,14 +614,12 @@
 }
 
 .hps-waiting .hps-inner {
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.hps-waiting.hps-revealed .hps-inner {
-  opacity: 1;
-  transform: translateY(0);
+html.js .hps-waiting:not(.hps-revealed) .hps-inner {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
 .hps-stats {
@@ -629,13 +635,16 @@
   gap: 0.35rem;
   border-left: 2px solid var(--hch-brass);
   padding-left: 1rem;
-  opacity: 0;
-  animation: hps-stat-reveal 0.6s ease forwards;
-  animation-play-state: paused;
   transition: transform 0.3s ease;
 }
 
-.hps-waiting.hps-revealed .hps-stat {
+html.js .hps-waiting .hps-stat {
+  opacity: 0;
+  animation: hps-stat-reveal 0.6s ease forwards;
+  animation-play-state: paused;
+}
+
+html.js .hps-waiting.hps-revealed .hps-stat {
   animation-play-state: running;
 }
 
@@ -813,14 +822,12 @@
 }
 
 .hps-prattfall .hps-inner {
-  opacity: 0;
-  transform: translateY(16px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
-.hps-prattfall.hps-revealed .hps-inner {
-  opacity: 1;
-  transform: translateY(0);
+html.js .hps-prattfall:not(.hps-revealed) .hps-inner {
+  opacity: 0;
+  transform: translateY(16px);
 }
 
 /* NFY List Glow Shell */
@@ -897,9 +904,6 @@
   font-size: 0.98rem;
   font-weight: 400;
   color: var(--hch-ink-soft);
-  opacity: 0;
-  animation: hps-list-item-reveal 0.5s ease forwards;
-  animation-play-state: paused;
   transition: 
     background 0.3s ease,
     color 0.3s ease,
@@ -907,7 +911,13 @@
     padding-left 0.3s ease;
 }
 
-.hps-prattfall.hps-revealed .hps-nfy-item {
+html.js .hps-prattfall .hps-nfy-item {
+  opacity: 0;
+  animation: hps-list-item-reveal 0.5s ease forwards;
+  animation-play-state: paused;
+}
+
+html.js .hps-prattfall.hps-revealed .hps-nfy-item {
   animation-play-state: running;
 }
 
@@ -1166,20 +1176,22 @@
    REDUCED MOTION
    ═══════════════════════════════════ */
 
+/* html.js-prefixed variants keep these overrides ahead of the gated
+   unrevealed states above (equal specificity, later in source order). */
 @media (prefers-reduced-motion: reduce) {
-  .hps-trust,
-  .hps-compare .hps-inner,
-  .hps-waiting .hps-inner,
-  .hps-prattfall .hps-inner {
+  html.js .hps-trust:not(.hps-revealed),
+  html.js .hps-compare:not(.hps-revealed) .hps-inner,
+  html.js .hps-waiting:not(.hps-revealed) .hps-inner,
+  html.js .hps-prattfall:not(.hps-revealed) .hps-inner {
     opacity: 1;
     transform: none;
     transition: none;
   }
 
-  .hps-trust-badge,
-  .hps-glow-shell,
-  .hps-stat,
-  .hps-nfy-item {
+  html.js .hps-trust .hps-trust-badge,
+  html.js .hps-compare .hps-glow-shell,
+  html.js .hps-waiting .hps-stat,
+  html.js .hps-prattfall .hps-nfy-item {
     animation: none;
     opacity: 1;
   }
@@ -1201,5 +1213,22 @@
   .hps-nfy-item:hover,
   .hps-stat:hover {
     transform: none;
+  }
+}
+
+/* ── PRINT ──
+   Content must survive print regardless of reveal state or JS. */
+@media print {
+  html.js .hps-trust,
+  html.js .hps-compare .hps-inner,
+  html.js .hps-waiting .hps-inner,
+  html.js .hps-prattfall .hps-inner,
+  html.js .hps-trust .hps-trust-badge,
+  html.js .hps-compare .hps-glow-shell,
+  html.js .hps-waiting .hps-stat,
+  html.js .hps-prattfall .hps-nfy-item {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }

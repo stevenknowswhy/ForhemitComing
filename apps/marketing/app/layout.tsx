@@ -122,6 +122,14 @@ export default function RootLayout({
   return (
     <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth" style={{ colorScheme: "light" }}>
       <head>
+        {/* Marks JS availability before first paint: reveal-hidden styles in
+            app/home/styles/home-persuasion.css apply only under html.js, so
+            no-JS, print, and crawler contexts never lose content. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("js");`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
