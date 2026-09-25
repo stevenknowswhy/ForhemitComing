@@ -56,3 +56,29 @@ jobs:
           SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
           SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
         run: npx @sentry/cli upload-sourcemaps apps/admin/.next --release ${{ github.sha }}
+
+  e2e-overflow-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_PUBLIC_CONVEX_URL: "https://placeholder.convex.cloud"
+      NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: "pk_test_placeholder"
+      RESEND_API_KEY: "re_placeholder"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter forhemit-coming-soon exec playwright install --with-deps chromium
+
+      - name: Run 390px viewport overflow guard
+        run: pnpm --filter forhemit-coming-soon exec playwright test e2e/viewport-overflow.spec.ts
