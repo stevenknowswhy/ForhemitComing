@@ -31,12 +31,6 @@ export function BlogHeader() {
               Blog
             </Link>
             <Link 
-              href="/about" 
-              className="text-sm font-medium text-ink hover:text-sage transition-colors"
-            >
-              About
-            </Link>
-            <Link 
               href="/?early=true" 
               className="text-sm font-medium text-sage hover:text-sage/80 transition-colors"
             >
@@ -108,13 +102,6 @@ export function BlogHeader() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Blog
-              </Link>
-              <Link 
-                href="/about" 
-                className="text-sm font-medium text-ink hover:text-sage"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
               </Link>
               <Link 
                 href="/?early=true" 

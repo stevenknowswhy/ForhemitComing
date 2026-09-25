@@ -30,11 +30,6 @@ export function BlogFooter() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-sm text-stone hover:text-sage transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
                 <Link href="/?early=true" className="text-sm text-stone hover:text-sage transition-colors">
                   Get Early Access
                 </Link>

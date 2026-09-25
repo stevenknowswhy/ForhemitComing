@@ -5,14 +5,12 @@ const baseUrl = 'https://www.forhemit.com';
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
-    '/about',
     '/blog',
     '/introduction',
     '/faq',
     '/business-owners',
     '/brokers',
     '/lenders',
-    '/accounting-firms',
     '/legal-practices',
     '/wealth-managers',
     '/appraisers',

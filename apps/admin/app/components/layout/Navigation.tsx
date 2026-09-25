@@ -13,7 +13,6 @@ interface NavigationProps {
 // Primary navigation items (hide current page)
 const navItems = [
   { href: "/", label: "Home" },
-  { href: "/about", label: "About" },
   { href: "/business-owners", label: "For Business Owners" },
 ];
 
