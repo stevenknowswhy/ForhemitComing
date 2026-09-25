@@ -12,18 +12,6 @@ import "@forhemit/shared/styles/introduction.css";
 // Sub-options for Business Introductions
 const businessSubOptions = [
   {
-    id: "accounting",
-    title: "Accounting Firms",
-    description: "Connect with us to explore partnership opportunities for financial and accounting services",
-    icon: (
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-      </svg>
-    ),
-    hasSubMenu: false,
-    href: "/accounting-firms",
-  },
-  {
     id: "legal",
     title: "Legal Practices",
     description: "Connect with us to explore how we can work together on legal and advisory services",

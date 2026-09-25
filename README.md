@@ -16,8 +16,6 @@ Monorepo for Forhemit's public marketing site and the internal admin application
 └── docs/             # Architecture decisions, deployment guides, project status
 ```
 
-> Note: some public marketing pages (e.g. `/about`, `/accounting-firms`) currently live in `apps/admin` and likely belong in `apps/marketing`. Moving them is a planned follow-up.
-
 ## Free AI visibility resource
 
 - [AI Visibility Audit Evidence Log](resources/ai-visibility-audit-evidence-log/) — Free, ungated 18-field CSV template with 12 neutral buyer-prompt starters for recording AI answer-engine mentions, citations, competitors, and factual accuracy.

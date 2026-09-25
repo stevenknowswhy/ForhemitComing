@@ -1,7 +1,7 @@
 "use client";
 
 import { useGlobalScrollReveal } from "@forhemit/shared/hooks/useIntersectionObserver";
-import "../about/about-page.css";
+import "@forhemit/shared/styles/about-page.css";
 import "@forhemit/shared/styles/faq-page.css";
 
 import {
