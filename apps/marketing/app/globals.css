@@ -352,7 +352,11 @@ p {
   }
 }
 
-/* ── NOT FOUND (404) — inlined to avoid a separate route CSS chunk / preload warnings ── */
+/* ── NOT FOUND (404) — manuscript-dialect restyle for the light canvas.
+   The old block referenced undefined vars (--color-primary-orange/-red,
+   --color-text-primary/-muted), which collapsed the "Go Home" gradient to
+   transparent and left white text on cream. Styles use manuscript tokens
+   directly; page-scoped, does not redefine any token. ── */
 .not-found-hero {
   min-height: calc(100vh - 200px);
   display: flex;
@@ -360,6 +364,7 @@ p {
   justify-content: center;
   text-align: center;
   padding: 4rem 1.5rem;
+  background: var(--canvas);
 }
 
 .not-found-content {
@@ -373,24 +378,21 @@ p {
   font-weight: 300;
   line-height: 1;
   margin: 0;
-  background: linear-gradient(135deg, var(--color-primary-orange) 0%, var(--color-primary-red) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--ink);
 }
 
 .not-found-title {
   font-family: var(--font-cormorant);
   font-size: clamp(1.5rem, 4vw, 2.5rem);
   font-weight: 400;
-  color: var(--color-text-primary);
+  color: var(--ink);
   margin: 1rem 0;
 }
 
 .not-found-message {
-  font-family: var(--font-outfit);
+  font-family: var(--font-inter);
   font-size: 1.125rem;
-  color: var(--color-text-muted);
+  color: var(--stone);
   margin-bottom: 2.5rem;
   line-height: 1.6;
 }
@@ -408,7 +410,7 @@ p {
   align-items: center;
   gap: 0.5rem;
   padding: 0.875rem 1.75rem;
-  font-family: var(--font-outfit);
+  font-family: var(--font-inter);
   font-size: 0.9375rem;
   font-weight: 500;
   border-radius: 8px;
@@ -418,36 +420,44 @@ p {
   border: none;
 }
 
+/* Primary recovery: ink on canvas (≈15:1), per the approved CTA ladder. */
 .not-found-button.primary {
-  background: linear-gradient(135deg, var(--color-primary-orange) 0%, var(--color-primary-red) 100%);
-  color: white;
+  background: var(--ink);
+  color: var(--canvas);
 }
 
 .not-found-button.primary:hover {
+  background: var(--sage);
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 107, 0, 0.3);
+  box-shadow: var(--shadow-hover);
 }
 
-.not-found-button.secondary {
+/* Ghost secondary: sage border (≥3:1 non-text on canvas) + ink text, no fill. */
+.not-found-button.ghost {
   background: transparent;
-  color: var(--color-text-primary);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--ink);
+  border: 1px solid var(--sage);
 }
 
-.not-found-button.secondary:hover {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.05);
+.not-found-button.ghost:hover {
+  background: rgba(44, 62, 45, 0.06);
+}
+
+.not-found-button:focus-visible,
+.not-found-nav a:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 2px;
 }
 
 .not-found-links {
   padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border-light);
 }
 
 .not-found-hint {
-  font-family: var(--font-outfit);
+  font-family: var(--font-inter);
   font-size: 0.875rem;
-  color: var(--color-text-muted);
+  color: var(--stone);
   margin-bottom: 1rem;
 }
 
@@ -461,13 +471,16 @@ p {
 .not-found-nav a {
   font-family: var(--font-dm-mono);
   font-size: 0.875rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
+  color: var(--stone);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-medium);
   transition: color 0.2s ease;
 }
 
 .not-found-nav a:hover {
-  color: var(--color-primary-orange);
+  color: var(--sage);
+  text-decoration-color: var(--sage);
 }
 
 @media (max-width: 480px) {
