@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 export function QuestionsSection() {
   return (
     <section className="legal-section questions-section">
@@ -13,9 +15,12 @@ export function QuestionsSection() {
           {/* Question 1 - Image Left, Text Right */}
           <div className="question-row" data-animate="fade-up">
             <div className="question-image">
-              <img
+              <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDeEk3OSLE239wP7JIxTHYvlCMa8pdWbngVFGq"
                 alt="Business owner considering sale"
+                width={3389}
+                height={5088}
+                sizes="(max-width: 900px) 100vw, 50vw"
               />
               <div className="question-image-overlay" />
             </div>
@@ -44,9 +49,12 @@ export function QuestionsSection() {
               </p>
             </div>
             <div className="question-image">
-              <img
+              <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdGxJ5CeLAZPcI2XFHu8ORonq6MaQyfrGUBxS"
                 alt="Private equity meeting"
+                width={1835}
+                height={2725}
+                sizes="(max-width: 900px) 100vw, 50vw"
               />
               <div className="question-image-overlay" />
             </div>

@@ -4,6 +4,7 @@ import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 import "@forhemit/shared/styles/lenders.css";
 
@@ -414,9 +415,12 @@ export function LendersPageClient() {
 
 							<div className="coop-visual" data-animate="slide-left">
 								<div className="coop-image-container">
-									<img
+									<Image
 										src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
 										alt="COOP operational continuity framework"
+										width={2034}
+										height={1637}
+										sizes="(max-width: 900px) 100vw, 50vw"
 									/>
 									<div className="coop-overlay">
 										<div className="coop-card-overlay">
@@ -587,9 +591,12 @@ export function LendersPageClient() {
 									</p>
 								</div>
 								<div className="benefit-image">
-									<img
+									<Image
 										src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdGxJ5CeLAZPcI2XFHu8ORonq6MaQyfrGUBxS"
 										alt="Financial monitoring dashboard"
+										width={1835}
+										height={2725}
+										sizes="(max-width: 900px) 100vw, 50vw"
 									/>
 								</div>
 							</div>
@@ -606,9 +613,12 @@ export function LendersPageClient() {
 									</p>
 								</div>
 								<div className="benefit-image">
-									<img
+									<Image
 										src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDmGV07k85Eem6OqKGFXsI071p4dSijCb2oYcR"
 										alt="Cybersecurity monitoring"
+										width={2816}
+										height={1345}
+										sizes="(max-width: 900px) 100vw, 50vw"
 									/>
 								</div>
 							</div>
@@ -625,9 +635,12 @@ export function LendersPageClient() {
 									</p>
 								</div>
 								<div className="benefit-image">
-									<img
+									<Image
 										src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD9Ng4TJ32pSgTBVY98K3GtlLfwieHEIvuUMxF"
 										alt="Real-time monitoring systems"
+										width={2034}
+										height={1637}
+										sizes="(max-width: 900px) 100vw, 50vw"
 									/>
 								</div>
 							</div>

@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { PathwayBadge } from './CustomBadge';
 
@@ -70,21 +71,23 @@ export function ArticleCard({
       <Card className="h-full flex flex-col overflow-hidden">
         {imageUrl && variant === 'featured' && (
           <div className="w-full relative h-[300px] mb-5 -mx-5 sm:-mx-6 -mt-5 sm:-mt-6 border-b border-border-light overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={imageUrl} 
+            <Image
+              src={imageUrl}
               alt={title}
-              className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
         )}
         {imageUrl && variant !== 'featured' && (
           <div className="w-full relative h-[200px] mb-5 -mx-5 sm:-mx-6 -mt-5 sm:-mt-6 border-b border-border-light overflow-hidden">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={imageUrl} 
+            <Image
+              src={imageUrl}
               alt={title}
-              className="object-cover w-full h-full hover:scale-105 transition-transform duration-500"
+              fill
+              sizes="(max-width: 768px) 100vw, 33vw"
+              className="object-cover hover:scale-105 transition-transform duration-500"
             />
           </div>
         )}

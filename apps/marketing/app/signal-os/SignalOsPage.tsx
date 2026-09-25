@@ -1,3 +1,4 @@
+import Image from "next/image";
 import styles from "./signal-os.module.css";
 import { tiers } from "./constants";
 import type { SignalOsPageProps } from "./types";
@@ -144,11 +145,13 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           rel="noopener"
           title="Featured on PromptFrenzy AI Directory"
         >
-          <img
+          <Image
             src="/promptfrenzy-directory.svg"
             alt="Featured on PromptFrenzy AI Directory"
-            width="220"
-            height="44"
+            width={220}
+            height={44}
+            sizes="220px"
+            unoptimized
             loading="lazy"
           />
         </a>
