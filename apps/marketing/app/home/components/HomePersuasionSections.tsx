@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * HomePersuasionSections - Below-the-fold psychological trigger sections.
  *
@@ -9,9 +7,12 @@
  * - Prattfall Effect ("Who This Is Not For")
  * - Pre-Suasion trust anchors
  * - Enhanced micro-interactions from business-owners patterns
+ *
+ * Server component: all markup renders on the server. The scroll-reveal
+ * behavior lives in the RevealSection client wrapper and the assessment CTAs
+ * in the AssessmentCta island — the content itself never hydrates.
  */
 
-import { useEffect, useRef, useState } from "react";
 import {
   ClipboardCheck,
   Landmark,
@@ -19,10 +20,8 @@ import {
   Scale,
   type LucideIcon,
 } from "lucide-react";
-
-export type HomePersuasionSectionsProps = {
-  onStartTwoMinuteCheck?: () => void;
-};
+import { AssessmentCta } from "./AssessmentCta";
+import { RevealSection } from "./RevealSection";
 
 /* ── Decoy Effect data ── */
 const EXIT_PATHS = [
@@ -110,46 +109,11 @@ const TRUST_ANCHORS: ReadonlyArray<{ icon: LucideIcon; text: string }> = [
   { icon: Landmark, text: "Lender-Ready Packaging" },
 ];
 
-/* ── Intersection Observer hook for reveal animations ── */
-function useRevealObserver() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isRevealed, setIsRevealed] = useState(false);
-
-  useEffect(() => {
-    const element = ref.current;
-    if (!element) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsRevealed(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15, rootMargin: "0px 0px -50px 0px" }
-    );
-
-    observer.observe(element);
-    return () => observer.disconnect();
-  }, []);
-
-  return { ref, isRevealed };
-}
-
-export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasionSectionsProps) {
-  const trustRef = useRevealObserver();
-  const compareRef = useRevealObserver();
-  const waitingRef = useRevealObserver();
-  const prattfallRef = useRevealObserver();
-
+export function HomePersuasionSections() {
   return (
     <div className="hps-wrap">
       {/* ── 1. Trust Anchors (Pre-Suasion) ── */}
-      <section 
-        ref={trustRef.ref}
-        className={`hps-trust ${trustRef.isRevealed ? "hps-revealed" : ""}`} 
-        aria-label="Trust indicators"
-      >
+      <RevealSection className="hps-trust" ariaLabel="Trust indicators">
         <div className="hps-trust-row">
           {TRUST_ANCHORS.map((a, i) => {
             const Icon = a.icon;
@@ -167,14 +131,10 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             );
           })}
         </div>
-      </section>
+      </RevealSection>
 
       {/* ── 2. Decoy Effect - Exit Path Comparison ── */}
-      <section 
-        ref={compareRef.ref}
-        className={`hps-compare ${compareRef.isRevealed ? "hps-revealed" : ""}`} 
-        aria-label="Compare your exit options"
-      >
+      <RevealSection className="hps-compare" ariaLabel="Compare your exit options">
         <div className="hps-inner">
           <div className="hps-section-header">
             <span className="hps-section-number">01 - Compare</span>
@@ -217,14 +177,10 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             ))}
           </div>
         </div>
-      </section>
+      </RevealSection>
 
       {/* ── 3. Omission Bias - Cost of Waiting ── */}
-      <section 
-        ref={waitingRef.ref}
-        className={`hps-waiting ${waitingRef.isRevealed ? "hps-revealed" : ""}`} 
-        aria-label="Cost of waiting"
-      >
+      <RevealSection className="hps-waiting" ariaLabel="Cost of waiting">
         <div className="hps-inner">
           <div className="hps-section-header">
             <span className="hps-section-number">02 - Urgency</span>
@@ -240,8 +196,8 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
 
           <div className="hps-stats">
             {WAITING_STATS.map((s, i) => (
-              <div 
-                key={s.figure} 
+              <div
+                key={s.figure}
                 className="hps-stat"
                 style={{ animationDelay: `${i * 0.15}s` }}
               >
@@ -254,23 +210,15 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
 
           <span className="hps-cta-shell">
             <span className="hps-cta-shell__glow" aria-hidden />
-            <button
-              type="button"
-              className="hps-cta"
-              onClick={onStartTwoMinuteCheck}
-            >
+            <AssessmentCta className="hps-cta">
               Start Your Free Assessment →
-            </button>
+            </AssessmentCta>
           </span>
         </div>
-      </section>
+      </RevealSection>
 
       {/* ── 4. Prattfall Effect - "Who This Is NOT For" ── */}
-      <section 
-        ref={prattfallRef.ref}
-        className={`hps-prattfall ${prattfallRef.isRevealed ? "hps-revealed" : ""}`} 
-        aria-label="Who this is not for"
-      >
+      <RevealSection className="hps-prattfall" ariaLabel="Who this is not for">
         <div className="hps-inner">
           <div className="hps-section-header">
             <span className="hps-section-number">03 - Filter</span>
@@ -290,8 +238,8 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
             <div className="hps-nfy-glow-shell__glow" aria-hidden />
             <ul className="hps-nfy-list">
               {NOT_FOR_YOU.map((item) => (
-                <li 
-                  key={item.text} 
+                <li
+                  key={item.text}
                   className="hps-nfy-item"
                   style={{ animationDelay: `${item.delay * 0.1}s` }}
                 >
@@ -311,16 +259,12 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
 
           <span className="hps-cta-shell">
             <span className="hps-cta-shell__glow" aria-hidden />
-            <button
-              type="button"
-              className="hps-cta hps-cta-outline"
-              onClick={onStartTwoMinuteCheck}
-            >
+            <AssessmentCta className="hps-cta hps-cta-outline">
               Start Your Free Assessment →
-            </button>
+            </AssessmentCta>
           </span>
         </div>
-      </section>
+      </RevealSection>
       {/* ── 5. Final CTA Banner ── */}
       <section className="hps-final-cta" aria-label="Get started">
         <div className="hps-inner">
@@ -328,13 +272,9 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
           <p className="hps-final-cta-sub">Start with a free, confidential assessment. Takes 2 minutes.</p>
           <span className="hps-cta-shell">
             <span className="hps-cta-shell__glow" aria-hidden />
-            <button
-              type="button"
-              className="hps-cta"
-              onClick={onStartTwoMinuteCheck}
-            >
+            <AssessmentCta className="hps-cta">
               Start Your Free Assessment →
-            </button>
+            </AssessmentCta>
           </span>
         </div>
       </section>
