@@ -39,6 +39,11 @@
      for the --color-brand value and its WCAG note). */
   --color-accent: var(--color-brand);
 
+  /* ── GOLD ── the manuscript gold of the canonical home dialect (hero
+     sections carry the same value as the scoped --hch-brass). Icons and
+     hairline dividers only; never CTA text or fills. */
+  --color-gold: #9A7540;
+
   /* ── BODY INK ── long-form text ≥4.5:1 on canvas and parchment. */
   --body-ink: var(--stone);
 
