@@ -1,28 +1,52 @@
 "use client";
 
-import { useState, useEffect, Suspense, lazy } from "react";
+import {
+  createContext,
+  lazy,
+  Suspense,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { EarlyAccessForm } from "./components/forms/EarlyAccessForm";
+import { EarlyAccessForm } from "../../components/forms/EarlyAccessForm";
 import { ClientOnly } from "@/components/ClientOnly";
-import { HomeHeroSection, HomePersuasionSections } from "./home";
-import type { IntakeRole } from "./home/intake";
-import "./styles/home-page.css";
+import { ClassificationIntakeModal, TwoMinuteCheckModal } from "../intake";
+import type { IntakeRole } from "../intake";
+import "../../styles/home-page.css";
 
 const ApplicationModal = lazy(() =>
-  import("./components/forms/application/ApplicationModal").then((mod) => ({
+  import("../../components/forms/application/ApplicationModal").then((mod) => ({
     default: mod.ApplicationModal,
   }))
 );
 
-const ClassificationIntakeModal = lazy(() =>
-  import("./home/intake").then((mod) => ({ default: mod.ClassificationIntakeModal }))
-);
+export type HomeModalsContextValue = {
+  /** Opens the 2-Minute Check qualifier modal. */
+  openTwoMinuteCheck: () => void;
+  /** Opens classification intake modal for the given role. */
+  openIntake: (role: IntakeRole) => void;
+};
 
-const TwoMinuteCheckModal = lazy(() =>
-  import("./home/intake").then((mod) => ({ default: mod.TwoMinuteCheckModal }))
-);
+const HomeModalsContext = createContext<HomeModalsContextValue | null>(null);
 
-export function HomeClient() {
+/** Access the home modal openers from within server-rendered CTA islands. */
+export function useHomeModals(): HomeModalsContextValue {
+  const ctx = useContext(HomeModalsContext);
+  if (!ctx) {
+    throw new Error("useHomeModals must be used within HomeModalProvider");
+  }
+  return ctx;
+}
+
+/**
+ * Client island wrapping the home page: owns modal state and exposes openers
+ * to the server-rendered sections via context. The static marketing content
+ * passes through as `children` and never re-renders on the client — only the
+ * modals and the early-access slot hydrate.
+ */
+export function HomeModalProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const joinParam = searchParams?.get("join");
@@ -39,38 +63,23 @@ export function HomeClient() {
     setShowEmailInput(earlyParam === "true");
   }, [joinParam, earlyParam]);
 
-  // Hide the server-rendered static content once client hydrates
-  useEffect(() => {
-    const serverRendered = document.querySelector("[data-ssr-fallback]");
-    if (serverRendered) {
-      (serverRendered as HTMLElement).style.display = "none";
-    }
-  }, []);
+  const openTwoMinuteCheck = () => setShowTwoMinuteCheck(true);
+  const openIntake = (role: IntakeRole) => {
+    setClassificationRole(role);
+    setShowClassificationIntake(true);
+  };
 
   return (
-    <>
-      {/* Interactive version: replaces static content on hydration */}
-      <div className="home-wrapper home-wrapper--interactive">
-        <div className="background-mesh" />
+    <HomeModalsContext.Provider value={{ openTwoMinuteCheck, openIntake }}>
+      {children}
 
-        <HomeHeroSection
-          onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)}
-          onStartIntake={(role) => {
-            setClassificationRole(role);
-            setShowClassificationIntake(true);
-          }}
-        />
-
-        <HomePersuasionSections onStartTwoMinuteCheck={() => setShowTwoMinuteCheck(true)} />
-
-        {showEmailInput && (
-          <section className="home-inline-early" aria-label="Early access">
-            <ClientOnly fallback={<div style={{ height: "48px" }} />}>
-              <EarlyAccessForm variant="inline" onClose={() => setShowEmailInput(false)} />
-            </ClientOnly>
-          </section>
-        )}
-      </div>
+      {showEmailInput && (
+        <section className="home-inline-early" aria-label="Early access">
+          <ClientOnly fallback={<div style={{ height: "48px" }} />}>
+            <EarlyAccessForm variant="inline" onClose={() => setShowEmailInput(false)} />
+          </ClientOnly>
+        </section>
+      )}
 
       <ClientOnly fallback={null}>
         {showApplicationModal && (
@@ -106,6 +115,6 @@ export function HomeClient() {
           </Suspense>
         )}
       </ClientOnly>
-    </>
+    </HomeModalsContext.Provider>
   );
 }

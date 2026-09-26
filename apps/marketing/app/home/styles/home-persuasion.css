@@ -1119,6 +1119,21 @@ html.js .hps-prattfall.hps-revealed .hps-nfy-item {
 }
 
 /* ═══════════════════════════════════
+   WIDE-SCREEN REBALANCE (P2-6)
+   At ≥1440px the 700px container starves the card/stat grids — three
+   ~210px-wide cards against a full-bleed section reads as squeezed-and-empty
+   (audit P2-6). Grid sections widen to use the available canvas; text-only
+   sections keep the reading measure. The hero and the corner watermark
+   labels already sit correctly at this width.
+   ═══════════════════════════════════ */
+@media (min-width: 1440px) {
+  .hps-compare .hps-inner,
+  .hps-waiting .hps-inner {
+    max-width: 1100px;
+  }
+}
+
+/* ═══════════════════════════════════
    FINAL CTA BANNER
    ═══════════════════════════════════ */
 

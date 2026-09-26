@@ -2,7 +2,8 @@
 
 /* ── Shared design tokens ── */
 .hch-hero-section,
-.home-classification-hero {
+.home-classification-hero,
+.hps-wrap {
   --hch-ink: #1c1510;
   --hch-ink-muted: rgba(28, 21, 16, 0.5);
   --hch-ink-soft: rgba(28, 21, 16, 0.45);

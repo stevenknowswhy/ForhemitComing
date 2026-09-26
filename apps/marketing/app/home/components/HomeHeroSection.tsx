@@ -1,22 +1,12 @@
-"use client";
-
 import Link from "next/link";
-import {
-  HomePathSelectionSection,
-  type HomePathRole,
-} from "./HomePathSelectionSection";
+import { AssessmentCta } from "./AssessmentCta";
+import { HomePathSelectionBridge } from "./HomePathSelectionBridge";
 
 /** Set to true to show the "I am a ..." owner / broker path cards below the hero. */
 const SHOW_HOME_PATH_SELECTION = false;
 
-export type HomeHeroSectionProps = {
-  /** Opens the 2-Minute Check qualifier (owner primary CTA). */
-  onStartTwoMinuteCheck?: () => void;
-  /** Opens classification intake modal for the path the user expanded (owner vs broker). */
-  onStartIntake?: (role: HomePathRole) => void;
-};
-
-export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHeroSectionProps) {
+/** Fully static hero markup; the CTA is the only hydrated island. */
+export function HomeHeroSection() {
   return (
     <>
       {/* ── Full-viewport hero ── */}
@@ -36,16 +26,9 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
-              <button
-                type="button"
-                className="hch-hero-cta hch-hero-cta-primary"
-                onClick={() => {
-                  if (onStartTwoMinuteCheck) onStartTwoMinuteCheck();
-                  else onStartIntake?.("owner");
-                }}
-              >
+              <AssessmentCta className="hch-hero-cta hch-hero-cta-primary">
                 Start Your Free Assessment
-              </button>
+              </AssessmentCta>
               <Link href="/brokers" className="hch-hero-cta-link">
                 I&apos;m a Broker →
               </Link>
@@ -73,9 +56,7 @@ export function HomeHeroSection({ onStartTwoMinuteCheck, onStartIntake }: HomeHe
         </div>
       </section>
 
-      {SHOW_HOME_PATH_SELECTION ? (
-        <HomePathSelectionSection onStartIntake={onStartIntake} />
-      ) : null}
+      {SHOW_HOME_PATH_SELECTION ? <HomePathSelectionBridge /> : null}
     </>
   );
 }
