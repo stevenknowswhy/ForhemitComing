@@ -1,7 +1,17 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
+import { ogMetadata } from "@/lib/og";
 import "../styles/home-page.css";
 import "./coming-soon.css";
 import { ComingSoonGate } from "./ComingSoonGate";
+
+export const metadata: Metadata = ogMetadata({
+  file: "og-coming-soon.png",
+  title: "Coming Soon",
+  description:
+    "Forhemit, a Public Benefit Corporation — 100% employee ownership succession for founder-led businesses.",
+  path: "/coming-soon",
+});
 
 function ComingSoonFallback() {
   return (

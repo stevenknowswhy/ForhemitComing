@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { ogMetadata } from "@/lib/og";
 import { AboutPageClient } from "./AboutPageClient";
 
 const title = "About Forhemit | Employee Ownership Succession";
@@ -8,10 +9,12 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
-  openGraph: {
+  ...ogMetadata({
+    file: "og-about.png",
     title,
     description,
-  },
+    path: "/about",
+  }),
 };
 
 export default function AboutPage() {
