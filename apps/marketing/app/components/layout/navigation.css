@@ -68,42 +68,6 @@
   width: 100%;
 }
 
-/* Theme Toggle Button */
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
-  position: relative;
-}
-
-.theme-toggle:hover {
-  background: var(--bg-glass);
-}
-
-/* Underline animation for theme toggle */
-.theme-toggle::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 1px;
-  background: var(--color-brand);
-  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.theme-toggle:hover::after {
-  width: 60%;
-}
-
 /* Hamburger Button */
 .hamburger-btn {
   background: none;
@@ -222,10 +186,6 @@
   background: var(--color-brand);
 }
 
-.light-nav .theme-toggle {
-  color: var(--text-primary);
-}
-
 .light-nav .hamburger-line {
   background: var(--text-primary);
 }
@@ -272,15 +232,6 @@
   }
   
   /* Keep touch targets >=44px even while using small visual icons (utility class on elements provides the min + centering; these rules keep visuals compact) */
-  .theme-toggle {
-    padding: 10px;
-  }
-  
-  .theme-toggle svg {
-    width: 18px;
-    height: 18px;
-  }
-  
   .hamburger-btn {
     padding: 10px;
     gap: 4px;
@@ -336,6 +287,37 @@
   opacity: 0.4;
   border-radius: 2px;
   margin: 0 auto 0.75rem;
+}
+
+/* Grouped sections inside the sheet (P1-4). Flex column so each link takes a
+   full-width row — the global .touch-target utility declares inline-flex and
+   would otherwise make short labels flow side-by-side into a tag cloud. */
+.nav-sheet-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  margin-bottom: 0.5rem;
+}
+
+.nav-sheet-group:last-child {
+  margin-bottom: 0;
+}
+
+/* Full-width rows, left-aligned text — .touch-target centers content by default */
+.nav-sheet-group .nav-bottom-sheet-item {
+  justify-content: flex-start;
+  width: 100%;
+}
+
+/* Group label — part of the DM Mono eyebrow system */
+.nav-sheet-group-label {
+  font-family: var(--font-dm-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone);
+  padding: 0.5rem 1rem 0.25rem;
+  margin: 0;
 }
 
 .nav-bottom-sheet-item {
