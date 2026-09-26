@@ -73,7 +73,7 @@
 }
 
 .fmp-fee-disclosure-eyebrow {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -105,7 +105,7 @@
 }
 
 .fmp-fee-disclosure-btn {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -204,7 +204,7 @@
 .ft-tag {
   display: inline-block;
   flex-shrink: 0;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.56rem;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -241,7 +241,7 @@
 }
 
 .ft-state-label {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -251,7 +251,7 @@
 }
 
 .ft-state-select {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.82rem;
   padding: 0.55rem 0.85rem;
   border: 1px solid var(--border-subtle);
@@ -278,7 +278,7 @@
 }
 
 .ft-state-note-headline {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -340,7 +340,7 @@
 }
 
 .ft-phase-label {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -435,7 +435,7 @@
 }
 
 .ft-totals-label {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -487,7 +487,7 @@
   border: none;
   cursor: pointer;
   text-align: left;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -524,7 +524,7 @@
 
 .ft-dual-track-item-label {
   display: block;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.12em;
@@ -570,7 +570,7 @@
   justify-content: center;
   gap: 0.35rem;
   padding: 0.75rem 1.35rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.14em;
@@ -597,7 +597,7 @@
   font-size: 0.65rem;
   line-height: 1.55;
   color: var(--text-muted);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   letter-spacing: 0.04em;
 }
 

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Analytics } from '@vercel/analytics/react'
-import { Cormorant_Garamond, DM_Mono, Outfit, Inter } from 'next/font/google'
+import { Cormorant_Garamond, DM_Mono, Inter } from 'next/font/google'
 import './globals.css'
 import { Navigation } from './components/layout/Navigation'
 import { GlobalHeader } from './components/layout/GlobalHeader'
@@ -23,13 +23,6 @@ const dmMono = DM_Mono({
   subsets: ['latin'],
   weight: ['300', '400', '500'],
   variable: '--font-dm-mono',
-  display: 'swap',
-})
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500'],
-  variable: '--font-outfit',
   display: 'swap',
 })
 
@@ -120,7 +113,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${outfit.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth" style={{ colorScheme: "light" }}>
+    <html lang="en" data-theme="light" className={`${cormorant.variable} ${dmMono.variable} ${inter.variable}`} suppressHydrationWarning data-scroll-behavior="smooth" style={{ colorScheme: "light" }}>
       <head>
         {/* Marks JS availability before first paint: reveal-hidden styles in
             app/home/styles/home-persuasion.css apply only under html.js, so

@@ -116,7 +116,7 @@
 }
 
 .accounting-section h2 {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-2xl);
   font-weight: 600;
   color: var(--af-text-primary);
@@ -126,7 +126,7 @@
 }
 
 .accounting-section h3 {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-xl);
   font-weight: 600;
   color: var(--af-text-primary);
@@ -162,7 +162,7 @@
   padding: 1rem 2rem;
   background: var(--af-accent);
   color: #fff;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-sm);
   font-weight: 600;
   text-decoration: none;
@@ -209,7 +209,7 @@
 }
 
 .accounting-firms-logo-text {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: 0.1em;

@@ -43,7 +43,7 @@
 
 .tsunami-cta-link {
   display: inline-block;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-lg);
   font-weight: 600;
   color: #ffffff;
@@ -157,7 +157,7 @@
 }
 
 .stat-number {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: clamp(1.75rem, 4vw, 2.5rem);
   font-weight: 700;
   color: var(--af-accent);
@@ -165,7 +165,7 @@
 }
 
 .stat-icon {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--af-text-muted);

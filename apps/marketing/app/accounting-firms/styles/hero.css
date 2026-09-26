@@ -57,7 +57,7 @@
 /* ── Eyebrow Text ── */
 .accounting-eyebrow {
   display: inline-block;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-xs);
   font-weight: 500;
   text-transform: uppercase;
@@ -79,7 +79,7 @@
 
 /* ── Main Title ── */
 .accounting-title {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 700;
   line-height: 1.2;
   color: var(--af-text-primary);
@@ -109,7 +109,7 @@
 
 /* ── Lead Paragraph ── */
 .accounting-lead {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: var(--text-base);
   font-weight: 400;
   color: var(--af-text-secondary);

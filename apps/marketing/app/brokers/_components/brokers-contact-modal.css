@@ -32,7 +32,7 @@
 
 .brk-contact-eyebrow {
   margin: 0 0 0.45rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -68,7 +68,7 @@
 
 .brk-contact-progress-label {
   margin: 0 0 0.5rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -120,7 +120,7 @@
 }
 
 .brk-contact-field span {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.58rem;
   font-weight: 600;
   letter-spacing: 0.16em;
@@ -211,7 +211,7 @@
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.7rem 1.15rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.14em;
