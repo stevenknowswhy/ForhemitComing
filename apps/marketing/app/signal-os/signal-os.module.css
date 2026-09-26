@@ -39,7 +39,7 @@
   max-width: 760px;
   margin: 34px 0 0;
   color: var(--muted);
-  font: 300 clamp(1.08rem, 2vw, 1.38rem)/1.65 var(--font-outfit), sans-serif;
+  font: 300 clamp(1.08rem, 2vw, 1.38rem)/1.65 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .actions {
@@ -70,7 +70,7 @@
 .scorecardPath {
   margin: 16px 0 0;
   color: var(--muted);
-  font: 300 0.92rem/1.5 var(--font-outfit), sans-serif;
+  font: 300 0.92rem/1.5 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .scorecardPath a {
@@ -120,7 +120,7 @@
   gap: 16px;
   padding: 20px 0;
   border-bottom: 1px solid var(--line);
-  font: 300 1.06rem/1.55 var(--font-outfit), sans-serif;
+  font: 300 1.06rem/1.55 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .steps li::before {
@@ -159,7 +159,7 @@
 .sampleCard dd {
   margin: 0;
   color: var(--muted);
-  font: 300 1rem/1.6 var(--font-outfit), sans-serif;
+  font: 300 1rem/1.6 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .sampleBody { min-width: 0; }
@@ -167,7 +167,7 @@
 .freeResource {
   margin: 20px 0 0;
   color: var(--muted);
-  font: 300 0.96rem/1.6 var(--font-outfit), sans-serif;
+  font: 300 0.96rem/1.6 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .freeResource > span {
@@ -210,7 +210,7 @@
 .purchaseTrust p {
   margin: 0;
   color: var(--muted);
-  font: 300 0.94rem/1.65 var(--font-outfit), sans-serif;
+  font: 300 0.94rem/1.65 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .purchaseTrust p + p { margin-top: 10px; }
@@ -241,7 +241,7 @@
 
 .card p {
   color: var(--muted);
-  font: 300 0.98rem/1.6 var(--font-outfit), sans-serif;
+  font: 300 0.98rem/1.6 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .card .price {
@@ -269,7 +269,7 @@
   position: relative;
   padding-left: 18px;
   color: var(--muted);
-  font: 300 0.9rem/1.5 var(--font-outfit), sans-serif;
+  font: 300 0.9rem/1.5 var(--font-inter), system-ui, sans-serif, sans-serif;
 }
 
 .features li + li { margin-top: 8px; }

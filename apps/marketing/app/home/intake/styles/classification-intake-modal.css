@@ -83,7 +83,7 @@
 }
 
 .ci-hd-step {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 300;
   letter-spacing: 0.15em;
@@ -142,7 +142,7 @@
 }
 
 .ci-q-eyebrow {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -180,7 +180,7 @@
   text-align: left;
   gap: 1.5rem;
   position: relative;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   color: var(--ci-off);
 }
 
@@ -244,7 +244,7 @@
 }
 
 .ci-hint {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -264,7 +264,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.15em;
@@ -282,7 +282,7 @@
   background: none;
   border: 1px solid var(--ci-brass);
   color: var(--ci-brass);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.18em;
@@ -315,7 +315,7 @@
 }
 
 .ci-ft-note {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 300;
   letter-spacing: 0.08em;
@@ -366,7 +366,7 @@
 }
 
 .ci-load-sub {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 300;
   letter-spacing: 0.12em;
@@ -419,7 +419,7 @@
 }
 
 .ci-r-type {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 400;
   letter-spacing: 0.2em;
@@ -438,7 +438,7 @@
 }
 
 .ci-r-sub {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.82rem;
   font-weight: 300;
   line-height: 1.75;
@@ -468,7 +468,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--ci-muted);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-r-meta-val {
@@ -502,7 +502,7 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ci-muted);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-r-station.ci-lender {
@@ -516,7 +516,7 @@
 }
 
 .ci-r-note {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 300;
   color: var(--ci-muted);
@@ -544,7 +544,7 @@
   font-size: 0.55rem;
   letter-spacing: 0.2em;
   color: var(--ci-brass);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-pc-id {
@@ -597,7 +597,7 @@
   border-bottom: 1px solid var(--ci-line);
   font-size: 0.72rem;
   font-weight: 300;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-pc-row-status {
@@ -606,7 +606,7 @@
   text-transform: uppercase;
   width: 58px;
   flex-shrink: 0;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-pc-row-status.ci-done {
@@ -657,14 +657,14 @@
   text-transform: uppercase;
   color: var(--ci-muted);
   margin-bottom: 0.25rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-pc-cell-val {
   font-size: 0.78rem;
   font-weight: 300;
   color: var(--ci-off);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
 }
 
 .ci-r-actions {
@@ -679,7 +679,7 @@
   border: none;
   padding: 1rem 1.5rem;
   cursor: pointer;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 500;
   letter-spacing: 0.16em;
@@ -705,7 +705,7 @@ a.ci-cta-primary {
   color: var(--ci-off);
   padding: 0.9rem 1.5rem;
   cursor: pointer;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.16em;
@@ -725,7 +725,7 @@ a.ci-cta-primary {
   background: none;
   border: none;
   cursor: pointer;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 300;
   letter-spacing: 0.12em;

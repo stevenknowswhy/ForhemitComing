@@ -346,7 +346,11 @@ p {
   display: none;
 }
 
-/* Ensure adequate touch targets on mobile */
+/* Ensure adequate touch targets on mobile. Standalone controls keep the
+   44px box; inline text links keep natural paragraph rhythm and expand
+   their tap target with an invisible ::before overlay instead — the old
+   blunt min-height forced every prose link into a 44px inline-flex box,
+   distorting line rhythm mid-paragraph (audit P2-4). */
 @media (max-width: 640px) {
   button,
   [role="tab"],
@@ -354,6 +358,34 @@ p {
     min-height: 44px;
     display: inline-flex;
     align-items: center;
+  }
+
+  p a,
+  h1 a,
+  h2 a,
+  h3 a,
+  h4 a,
+  h5 a,
+  h6 a,
+  figcaption a {
+    display: inline;
+    min-height: 0;
+    position: relative;
+  }
+
+  p a::before,
+  h1 a::before,
+  h2 a::before,
+  h3 a::before,
+  h4 a::before,
+  h5 a::before,
+  h6 a::before,
+  figcaption a::before {
+    content: "";
+    position: absolute;
+    /* 19px inline line box + 24px vertical reach ≈ 44px tap height
+       (WCAG 2.5.8 AA is 24px; this targets the site's 44px control size). */
+    inset: -12px -8px;
   }
 }
 

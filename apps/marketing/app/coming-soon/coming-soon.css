@@ -89,7 +89,7 @@
 
 .coming-soon-cta {
   margin-top: 2rem;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -193,7 +193,7 @@
 }
 
 .coming-soon-submit {
-  font-family: "Outfit", sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.04em;

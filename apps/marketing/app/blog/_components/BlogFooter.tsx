@@ -48,10 +48,10 @@ export function BlogFooter() {
             <ul className="space-y-2">
               <li>
                 <a 
-                  href="mailto:hello@forhemit.com" 
+                  href="mailto:contact@forhemit.com" 
                   className="text-sm text-stone hover:text-sage transition-colors"
                 >
-                  hello@forhemit.com
+                  contact@forhemit.com
                 </a>
               </li>
               <li className="text-sm text-stone">

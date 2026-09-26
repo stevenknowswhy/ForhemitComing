@@ -15,7 +15,7 @@
 }
 
 .fmp-floating-nav__title {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.56rem;
   font-weight: 700;
   letter-spacing: 0.22em;
@@ -36,7 +36,7 @@
 .fmp-floating-nav__link {
   display: block;
   padding: 0.38rem 0.75rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 400;
   letter-spacing: 0.02em;
@@ -376,7 +376,7 @@
 }
 
 .fmp-money-title {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -455,7 +455,7 @@
 }
 
 .fmp-privacy-card-title {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -494,7 +494,7 @@
 }
 
 .fmp-cost-of {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -528,7 +528,7 @@
   width: 100%;
   text-align: center;
   padding: 0.85rem 1rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -721,7 +721,7 @@
 }
 
 .fmp-call-step-title {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.04em;
@@ -746,7 +746,7 @@
 }
 
 .fmp-call-prepare-label {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.14em;

@@ -26,7 +26,7 @@
 }
 
 .fmp-hero-eyebrow {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.22em;
@@ -290,7 +290,7 @@
 }
 
 .fmp-phase-title--front {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: clamp(0.62rem, 1.9vw, 0.72rem);
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -302,7 +302,7 @@
 }
 
 .fmp-phase-checkpoint--front {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -332,7 +332,7 @@
 }
 
 .fmp-flip-back-label {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -587,7 +587,7 @@
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   margin-bottom: 0.5rem;
 }
 
@@ -603,7 +603,7 @@
   display: block;
   width: 100%;
   text-align: center;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.14em;
@@ -737,7 +737,7 @@
 }
 
 .fmp-checkpoint-name {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.1em;
@@ -980,7 +980,7 @@
 
 .fmp-role-after-setup {
   margin: 0 0 0.65rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -1055,7 +1055,7 @@
   width: 100%;
   text-align: center;
   padding: 1rem 1.25rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.12em;

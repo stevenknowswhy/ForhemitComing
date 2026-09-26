@@ -81,8 +81,8 @@ export function SignalOsPage({ foundingActive, productJsonLd }: SignalOsPageProp
           <p>
             <strong>Signal OS is sold and fulfilled by Forhemit PBC.</strong>{" "}
             Product and purchase support:{" "}
-            <a href="mailto:signal-os-concierge@agentmail.to?subject=Signal%20OS%20purchase%20support">
-              signal-os-concierge@agentmail.to
+            <a href="mailto:contact@forhemit.com?subject=Signal%20OS%20purchase%20support">
+              contact@forhemit.com
             </a>.
           </p>
           <p>

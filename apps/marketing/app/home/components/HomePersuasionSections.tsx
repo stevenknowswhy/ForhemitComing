@@ -12,6 +12,13 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import {
+  ClipboardCheck,
+  Landmark,
+  Lock,
+  Scale,
+  type LucideIcon,
+} from "lucide-react";
 
 export type HomePersuasionSectionsProps = {
   onStartTwoMinuteCheck?: () => void;
@@ -94,13 +101,14 @@ const NOT_FOR_YOU = [
   { text: "Unwilling to support the transition through the handoff period", delay: 4 },
 ] as const;
 
-/* ── Trust anchors (Pre-Suasion) ── */
-const TRUST_ANCHORS = [
-  { icon: "🔒", text: "Secure & Confidential" },
-  { icon: "📋", text: "DOL / IRS Compliant" },
-  { icon: "⚖️", text: "Independent Valuation" },
-  { icon: "🏦", text: "Lender-Ready Packaging" },
-] as const;
+/* ── Trust anchors (Pre-Suasion) — single-stroke Lucide icons in the
+      manuscript gold (audit P2-1: platform emoji render off-palette) ── */
+const TRUST_ANCHORS: ReadonlyArray<{ icon: LucideIcon; text: string }> = [
+  { icon: Lock, text: "Secure & Confidential" },
+  { icon: ClipboardCheck, text: "DOL / IRS Compliant" },
+  { icon: Scale, text: "Independent Valuation" },
+  { icon: Landmark, text: "Lender-Ready Packaging" },
+];
 
 /* ── Intersection Observer hook for reveal animations ── */
 function useRevealObserver() {
@@ -143,18 +151,21 @@ export function HomePersuasionSections({ onStartTwoMinuteCheck }: HomePersuasion
         aria-label="Trust indicators"
       >
         <div className="hps-trust-row">
-          {TRUST_ANCHORS.map((a, i) => (
-            <span 
-              key={a.text} 
-              className="hps-trust-badge"
-              style={{ animationDelay: `${i * 0.1}s` }}
-            >
-              <span className="hps-trust-icon" aria-hidden>
-                {a.icon}
+          {TRUST_ANCHORS.map((a, i) => {
+            const Icon = a.icon;
+            return (
+              <span
+                key={a.text}
+                className="hps-trust-badge"
+                style={{ animationDelay: `${i * 0.1}s` }}
+              >
+                <span className="hps-trust-icon" aria-hidden>
+                  <Icon size={14} strokeWidth={1.5} aria-hidden />
+                </span>
+                <span className="hps-trust-label">{a.text}</span>
               </span>
-              <span className="hps-trust-label">{a.text}</span>
-            </span>
-          ))}
+            );
+          })}
         </div>
       </section>
 

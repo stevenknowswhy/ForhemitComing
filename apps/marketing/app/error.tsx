@@ -128,7 +128,7 @@ export default function Error({
         }
 
         .error-message {
-          font-family: var(--font-outfit);
+          font-family: var(--font-inter), system-ui, sans-serif;
           font-size: 1.0625rem;
           color: var(--color-text-muted);
           margin-bottom: 1rem;
@@ -175,7 +175,7 @@ export default function Error({
           align-items: center;
           gap: 0.5rem;
           padding: 0.875rem 1.75rem;
-          font-family: var(--font-outfit);
+          font-family: var(--font-inter), system-ui, sans-serif;
           font-size: 0.9375rem;
           font-weight: 500;
           border-radius: 8px;
@@ -212,7 +212,7 @@ export default function Error({
         }
 
         .error-help-text {
-          font-family: var(--font-outfit);
+          font-family: var(--font-inter), system-ui, sans-serif;
           font-size: 0.875rem;
           color: var(--color-text-muted);
           margin-bottom: 0.75rem;
@@ -222,7 +222,7 @@ export default function Error({
           display: inline-flex;
           align-items: center;
           gap: 0.5rem;
-          font-family: var(--font-outfit);
+          font-family: var(--font-inter), system-ui, sans-serif;
           font-size: 0.9375rem;
           color: var(--color-primary-orange);
           text-decoration: none;
