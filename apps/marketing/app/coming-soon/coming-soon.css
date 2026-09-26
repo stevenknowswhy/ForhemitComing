@@ -9,14 +9,7 @@
 }
 
 .coming-soon-text {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.875rem, 2vw, 1.1rem);
-  font-weight: 400;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--color-brand);
   margin-bottom: 1.5rem;
-  opacity: 0.9;
   animation: fadeInDown 1s ease-out;
 }
 
@@ -26,7 +19,7 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-brand),
+    var(--color-accent),
     transparent
   );
   margin: 2rem auto;
@@ -52,7 +45,7 @@
     transform: translateY(-20px);
   }
   to {
-    opacity: 0.9;
+    opacity: 1;
     transform: translateY(0);
   }
 }
@@ -101,20 +94,20 @@
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--cta-primary-fg, var(--canvas));
-  background: var(--cta-primary-bg, var(--ink));
+  color: var(--cta-primary-fg);
+  background: var(--cta-primary-bg);
   border: none;
   border-radius: 999px;
   padding: 0.9rem 1.75rem;
   cursor: pointer;
-  box-shadow: 0 4px 20px -6px var(--color-brand-subtle);
+  box-shadow: var(--cta-primary-shadow);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   animation: fadeInUp 1s ease-out 1s both;
 }
 
 .coming-soon-cta:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 28px -8px var(--color-brand-subtle);
+  box-shadow: var(--cta-primary-shadow-hover);
 }
 
 .coming-soon-code-form,
@@ -142,7 +135,7 @@
 }
 
 .coming-soon-secondary:hover {
-  color: var(--color-brand);
+  color: var(--color-accent);
 }
 
 .coming-soon-success {
@@ -181,14 +174,14 @@
 
 .coming-soon-input:focus {
   outline: none;
-  border-color: var(--color-brand);
-  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.12);
+  border-color: var(--focus-ring-color);
+  box-shadow: var(--input-focus-halo);
 }
 
 .coming-soon-error {
   font-family: "Inter", sans-serif;
   font-size: 0.85rem;
-  color: #ef4444;
+  color: var(--color-error);
   margin: 0 0 0.75rem;
   text-align: center;
 }
@@ -204,8 +197,8 @@
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
-  color: var(--cta-primary-fg, var(--canvas));
-  background: var(--cta-primary-bg, var(--ink));
+  color: var(--cta-primary-fg);
+  background: var(--cta-primary-bg);
   border: none;
   border-radius: 12px;
   padding: 0.85rem 1.25rem;
@@ -230,7 +223,7 @@
 }
 
 .coming-soon-back:hover {
-  color: var(--color-brand);
+  color: var(--color-accent);
 }
 
 .coming-soon-footer {
