@@ -8,51 +8,46 @@ export type TwoMinuteCheckStepId =
 export type TwoMinuteCheckStep = {
   id: TwoMinuteCheckStepId;
   question: string;
-  hint: string;
-  /** Shown when this question is the first "No" in the flow */
-  noThresholdPhrase: string;
+  /**
+   * Why this criterion exists. Shown under the question while answering
+   * and, when the answer is "No", in the result's list of what would
+   * need to change.
+   */
+  fix: string;
 };
 
 export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
   {
     id: "revenue",
-    question: "Does your business make at least $3 million per year?",
-    hint: "Hard floor for the math to work—below this, closing costs eat the deal",
-    noThresholdPhrase: "at least $3 million in annual revenue",
+    question: "Does your company generate $3M or more in annual revenue?",
+    fix: "Revenue of $3M or more — the structure's fixed costs need that scale to pay off for you.",
   },
   {
     id: "headcount",
-    question: "Do you have at least 20 people working for you?",
-    hint: "Need enough participants for the ownership structure; 15 is absolute minimum, 20 is safe",
-    noThresholdPhrase: "at least about 20 employees for a viable ESOP bench",
+    question: "Does your company have 20 or more employees?",
+    fix: "A team of 20 or more — the ownership and trustee structure needs a broader base.",
   },
   {
     id: "profitability",
-    question: "Does your business make steady profit every year—not just breaking even?",
-    hint: "The business must afford loan payments to buy you out. If it's not profitable, banks won't finance it",
-    noThresholdPhrase: "consistent annual profitability",
+    question: "Is your company profitable?",
+    fix: "Consistent profitability — the acquisition is financed from the company's future earnings.",
   },
   {
     id: "timeline",
-    question: "Can you wait about 4 months to close the deal and get paid?",
-    hint: 'Separates "I need cash this week" from "I\'m ready to sell." Filters out distressed liquidation',
-    noThresholdPhrase: "about 4 months to close—not an emergency or same-week liquidity need",
+    question: "Can you allow four months for the transition to be structured and closed?",
+    fix: "A four-month runway — a compliant, well-financed close cannot be rushed into 30 days.",
   },
   {
     id: "transition",
-    question: "Are you willing to stick around for at least 12 months after selling to help the new owners learn the ropes?",
-    hint: "Banks and buyers require seller transition. If you want to disappear immediately, this doesn't work",
-    noThresholdPhrase: "willingness to stay at least 12 months post-close to support transition",
+    question: "Are you willing to stay involved for at least 12 months after closing to support the handoff?",
+    fix: "Your commitment to stay at least 12 months after closing — your endorsement carries the transition.",
   },
 ];
 
-export function getFirstNoStep(
+export function getFailedSteps(
   answers: Partial<Record<TwoMinuteCheckStepId, "yes" | "no">>
-): TwoMinuteCheckStep | null {
-  for (const step of TWO_MINUTE_CHECK_STEPS) {
-    if (answers[step.id] === "no") return step;
-  }
-  return null;
+): TwoMinuteCheckStep[] {
+  return TWO_MINUTE_CHECK_STEPS.filter((s) => answers[s.id] === "no");
 }
 
 export function allYes(answers: Partial<Record<TwoMinuteCheckStepId, "yes" | "no">>): boolean {

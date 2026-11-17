@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     template: '%s | Forhemit',
   },
   description:
-    'Transition your business to 100% employee ownership. Preserve your legacy, unlock Section 1042 tax benefits, and steward your company\'s future with Forhemit.',
+    'Transition your business to 100% employee ownership. Preserve your legacy and steward your company\'s future with Forhemit — Section 1042 tax-deferred treatment may be available to qualifying sellers.',
   keywords: [
     'ESOP succession',
     'employee ownership transition',
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: 'Forhemit PBC',
     title: 'Forhemit | 100% Employee Ownership Succession',
-    description: 'Transition your business to 100% employee ownership. Preserve your legacy and unlock Section 1042 tax benefits.',
+    description: 'Transition your business to 100% employee ownership. Preserve your legacy — Section 1042 tax-deferred treatment may be available to qualifying sellers.',
     images: [
       {
         url: `${baseUrl}/og-image.png`,
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Forhemit | 100% Employee Ownership Succession',
-    description: 'Transition your business to 100% employee ownership. Preserve your legacy and unlock Section 1042 tax benefits.',
+    description: 'Transition your business to 100% employee ownership. Preserve your legacy — Section 1042 tax-deferred treatment may be available to qualifying sellers.',
     images: [`${baseUrl}/og-image.png`],
     creator: '@forhemit',
   },

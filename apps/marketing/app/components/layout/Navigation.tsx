@@ -26,36 +26,32 @@ interface NavGroup {
  */
 const navGroups: NavGroup[] = [
   {
-    label: "Product",
-    items: [{ href: "/signal-os", label: "Signal OS" }],
-  },
-  {
-    label: "For Business Owners",
+    label: "For Owners",
     items: [
-      { href: "/business-owners", label: "Business Owners Overview" },
+      { href: "/business-owners", label: "For Owners" },
+      { href: "/four-month-path", label: "How It Works" },
       { href: "/financial-accounting", label: "Financial & Accounting" },
     ],
   },
   {
-    label: "For Professional Partners",
+    label: "For Professionals",
     items: [
+      { href: "/legal-practices", label: "Attorneys" },
       { href: "/brokers", label: "Brokers" },
-      { href: "/broker-screening", label: "Broker Deal Screening" },
-      { href: "/accounting-firms", label: "Accounting Firms" },
-      { href: "/legal-practices", label: "Legal Practices" },
+      { href: "/accounting-firms", label: "CPAs" },
       { href: "/wealth-managers", label: "Wealth Managers" },
+      { href: "/broker-screening", label: "Broker Deal Screening" },
       { href: "/appraisers", label: "Appraisers" },
       { href: "/lenders", label: "Lenders" },
     ],
   },
   {
-    label: "Resources",
+    label: "Insights",
     items: [
-      { href: "/blog", label: "Blog" },
-      { href: "/faq", label: "FAQ" },
-      { href: "/four-month-path", label: "Four Month Path" },
       { href: "/the-exit-crisis", label: "The Exit Crisis" },
       { href: "/beyond-the-balance-sheet", label: "Beyond the Balance Sheet" },
+      { href: "/faq", label: "FAQ" },
+      { href: "/blog", label: "Blog" },
       { href: "/introduction", label: "Introduction Hub" },
     ],
   },
@@ -66,6 +62,10 @@ const navGroups: NavGroup[] = [
       { href: "/about", label: "About" },
       { href: "/contact", label: "Contact" },
     ],
+  },
+  {
+    label: "Product",
+    items: [{ href: "/signal-os", label: "Signal OS" }],
   },
 ];
 
