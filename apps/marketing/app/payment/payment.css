@@ -1,0 +1,87 @@
+/* Payment routes (/pay, /payment/success, /payment/cancel) — unlinked,
+   noindexed pages reached only from an approval email or from Stripe.
+   Uses the site tokens from globals.css. */
+
+.pm-shell {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3xl, 4rem) var(--space-md, 1rem);
+  background: var(--canvas);
+}
+
+.pm-card {
+  max-width: 560px;
+  width: 100%;
+  background: var(--parchment);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-subtle);
+  padding: var(--space-2xl, 2.5rem);
+  text-align: left;
+}
+
+.pm-eyebrow {
+  font-family: var(--font-inter);
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sage);
+  margin: 0 0 var(--space-sm, 0.75rem);
+}
+
+.pm-title {
+  font-family: var(--font-cormorant);
+  font-weight: 600;
+  font-size: 2.2rem;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0 0 var(--space-md, 1rem);
+}
+
+.pm-body {
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--stone);
+  margin: 0 0 var(--space-md, 1rem);
+}
+
+.pm-steps {
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--stone);
+  margin: 0 0 var(--space-lg, 1.5rem);
+  padding-left: 1.25rem;
+}
+
+.pm-steps li {
+  margin-bottom: var(--space-xs, 0.5rem);
+}
+
+.pm-button {
+  display: inline-block;
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--sage);
+  border-radius: 8px;
+  padding: 0.85rem 1.6rem;
+  text-decoration: none;
+  margin-top: var(--space-sm, 0.75rem);
+}
+
+.pm-button:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.pm-note {
+  font-family: var(--font-inter);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--stone);
+  margin-top: var(--space-lg, 1.5rem);
+}
