@@ -11,31 +11,32 @@ export function BrokersQualificationSection() {
   const count = useMemo(() => Object.values(checked).filter(Boolean).length, [checked]);
 
   const hasInteracted = count > 0;
+  const total = BROKER_QUALIFICATION_CRITERIA.length;
+  const gatesPass = count === total;
 
   let summaryText = "";
   let summaryClass = "";
 
-  if (count >= 5) {
-    summaryText = `This listing matches ${count} of ${BROKER_QUALIFICATION_CRITERIA.length} signals—usually a strong dual-track candidate.`;
+  if (gatesPass) {
+    summaryText =
+      "Eligible on the qualification standard — all six hard gates are met. This is a first screen, not a determination.";
     summaryClass = "fmp-elig-summary--strong";
-  } else if (count >= 3) {
-    summaryText = `${count} of ${BROKER_QUALIFICATION_CRITERIA.length} match—worth a confidential call to size the ESOP path.`;
-    summaryClass = "fmp-elig-summary--possible";
   } else if (hasInteracted) {
-    summaryText = `${count} of ${BROKER_QUALIFICATION_CRITERIA.length} match—may still work; we can narrow quickly on a short call.`;
+    summaryText = `Not currently eligible — ${count} of ${total} hard gates met, and a business must meet every one. Until every hard gate is met, readiness does not change the result; if a criterion is close, bring it to a first call.`;
     summaryClass = "fmp-elig-summary--explore";
   }
 
   return (
     <section id="brk-qualify" className="fmp-section" aria-labelledby="brk-qualify-heading">
       <h2 id="brk-qualify-heading" className="fmp-section-title">
-        Listings that fit dual-track best
+        The qualification standard
       </h2>
       <p className="fmp-section-lead">
-        Toggle what applies to the business you have in mind. These are practical signals for SBA-style ESOP
-        financing and a ~90–120 day execution—not a legal test.
+        The six qualification criteria are hard gates: a business must meet every one. Toggle
+        what applies to the business you have in mind. For the full screen — the six gates
+        plus the two readiness groups — use the 18-point check below.
       </p>
-      <ul className="fmp-elig-list" role="group" aria-label="Qualification signals">
+      <ul className="fmp-elig-list" role="group" aria-label="Qualification criteria">
         {BROKER_QUALIFICATION_CRITERIA.map((c) => (
           <li key={c.id} className="fmp-elig-item">
             <button

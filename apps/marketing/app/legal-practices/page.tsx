@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { LegalPracticesClient } from "./LegalPracticesClient";
 
-const title = "For Legal Practices | ESOP Advisory Partnership";
+const title = "For Attorneys | Forhemit";
 const description =
-  "Partner with Forhemit to offer ESOP succession services to your clients. Legal expertise meets structured employee ownership transitions.";
+  "For attorneys: raise employee ownership before a broker or buyer sets the terms. How Forhemit works with the attorney who makes the introduction.";
 
 export const metadata: Metadata = {
   title,

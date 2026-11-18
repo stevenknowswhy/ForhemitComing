@@ -1,18 +1,11 @@
-"use client";
-
-import { useState } from "react";
-import { BrokerFirstCallChecklistPdfLink } from "../BrokerFirstCallChecklistPdfLink";
-import { BrokerScreeningModal } from "../BrokerScreeningModal";
-
 export function BrokersFirstCallSection() {
-  const [isScreeningOpen, setIsScreeningOpen] = useState(false);
   return (
     <section id="brk-first-call" className="fmp-section" aria-labelledby="brk-first-call-heading">
       <h2 id="brk-first-call-heading" className="fmp-section-title">
         What happens on the first call
       </h2>
       <p className="fmp-section-lead">
-        Short, practical, and confidential. We are not here to pitch your listing to “our buyers.”
+        Short, practical, and confidential — and no client name is needed.
       </p>
 
       <div className="fmp-call-steps">
@@ -21,10 +14,11 @@ export function BrokersFirstCallSection() {
             1
           </span>
           <div>
-            <h3 className="fmp-call-step-title">You describe the deal</h3>
+            <h3 className="fmp-call-step-title">You describe the business</h3>
             <p>
-              Revenue band, EBITDA or net income range, employee count, entity type, and where you are in
-              market. If you already have a data room, we align on what we need in parallel.
+              The business and the situation — the listing&apos;s history, the buyers the founder
+              has refused, where things stand. No name needed, and nothing about your client is
+              required for that first conversation.
             </p>
           </div>
         </div>
@@ -33,10 +27,11 @@ export function BrokersFirstCallSection() {
             2
           </span>
           <div>
-            <h3 className="fmp-call-step-title">We sanity-check ESOP fit</h3>
+            <h3 className="fmp-call-step-title">We screen it together</h3>
             <p>
-              Bankability, timing, and whether dual-track is worth the effort for this seller. If it is not,
-              we will say so—your credibility with the client matters.
+              Against the qualification standard on this page — the same 18-point check. If it is
+              not a fit, you hear that fast, with the reasons, in terms you can take back to your
+              client.
             </p>
           </div>
         </div>
@@ -47,8 +42,8 @@ export function BrokersFirstCallSection() {
           <div>
             <h3 className="fmp-call-step-title">Clear next steps</h3>
             <p>
-              NDAs, who joins the next call (owner, CFO), and how we keep your buyer process and our ESOP
-              build from stepping on each other.
+              Only then is your client approached — with you in the room, and the option
+              presented as what it is: a buyer they already know.
             </p>
           </div>
         </div>
@@ -57,50 +52,26 @@ export function BrokersFirstCallSection() {
       <div className="fmp-call-prepare">
         <p className="fmp-call-prepare-label">Have handy</p>
         <p>
-          High-level financials, headcount, ownership cap table summary, and your timeline with buyers—if
-          any.
+          Nothing formal. If you have already run the business against the 18-point check above,
+          bring the result — it is the fastest way into the conversation.
         </p>
       </div>
 
       <div className="brk-first-call-checklist">
         <p className="brk-first-call-checklist-note">
-          Want a prep list you can forward to your seller before the call?
+          Haven&apos;t screened the business yet?
         </p>
         <span className="fmp-cta-shell fmp-cta-shell--block">
           <span className="fmp-cta-shell__glow" aria-hidden />
-          <BrokerFirstCallChecklistPdfLink
-            surface="brokers_first_call_checklist"
-            className="fmp-btn fmp-btn-secondary"
-          >
-            Open first-call preparation checklist (PDF)
-          </BrokerFirstCallChecklistPdfLink>
-        </span>
-      </div>
-
-      <div className="brk-first-call-checklist brk-screening-checklist" style={{ marginTop: "16px" }}>
-        <p className="brk-first-call-checklist-note">
-          Want to pre-qualify your client before reaching out?
-        </p>
-        <span className="fmp-cta-shell fmp-cta-shell--block">
-          <span className="fmp-cta-shell__glow" aria-hidden />
-          <button
-            className="fmp-btn fmp-btn-primary"
-            onClick={() => setIsScreeningOpen(true)}
-          >
-            Open client qualification form
-          </button>
+          <a href="#brk-screening" className="fmp-btn fmp-btn-primary">
+            Run the 18-point check
+          </a>
         </span>
         <p className="brk-screening-description">
-          This is the same checklist Forhemit uses internally to evaluate every deal submission. 
-          Work through it with your client&apos;s listing in front of you — no personal information 
-          is collected or stored. Use this for transparency and clarity on what we look for.
+          The same screen we run on a first call — six hard gates plus the two readiness groups.
+          Nothing you check is collected or stored.
         </p>
       </div>
-
-      <BrokerScreeningModal
-        isOpen={isScreeningOpen}
-        onClose={() => setIsScreeningOpen(false)}
-      />
     </section>
   );
 }

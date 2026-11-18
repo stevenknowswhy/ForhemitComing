@@ -4,11 +4,10 @@ export function BrokersProcessSection() {
   return (
     <section id="brk-process" className="fmp-section" aria-labelledby="brk-process-heading">
       <h2 id="brk-process-heading" className="fmp-section-title">
-        How the parallel process runs
+        How an introduction works
       </h2>
       <p className="fmp-section-lead">
-        We are not asking you to pause marketing. We ask for coordination—shared NDAs, aligned data
-        requests, and one honest timeline so your seller is not torn between two sloppy processes.
+        Four steps, and nothing happens behind your back.
       </p>
       <div className="fmp-call-steps">
         {BROKER_PROCESS_STEPS.map((s) => (

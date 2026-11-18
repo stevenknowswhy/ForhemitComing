@@ -8,9 +8,9 @@ export function StewardshipSection() {
       <div className="container">
         <div className="stewardship-intro" data-animate="fade-up">
           <h2>
-            There <em>is</em> a structurally different path
+            Two ways the story ends
           </h2>
-          <p className="stewardship-subtitle">Stewardship-based ESOP transitions</p>
+          <p className="stewardship-subtitle">What happens to the client relationship at closing</p>
         </div>
 
         <div className="comparison-blocks">
@@ -18,7 +18,7 @@ export function StewardshipSection() {
             <div className="comparison-image">
               <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDnNRRtzSNaoHZhcXfKi2B3O8YTR0lmArFCIVG"
-                alt="Traditional M&A corporate takeover"
+                alt="A train station"
                 width={1220}
                 height={639}
                 sizes="(max-width: 900px) 100vw, 50vw"
@@ -26,11 +26,12 @@ export function StewardshipSection() {
               <div className="comparison-image-overlay" />
             </div>
             <div className="comparison-content">
-              <h3>Traditional M&A</h3>
+              <h3>Traditional M&amp;A</h3>
               <p className="comparison-desc">
-                Built to consolidate control — including control of legal relationships.
+                A third-party sale ends the story: the company is someone else&apos;s, and so
+                is the client.
               </p>
-              <div className="comparison-result negative">You&apos;re often replaced</div>
+              <div className="comparison-result negative">The relationship ends at the closing table</div>
             </div>
           </div>
 
@@ -52,16 +53,16 @@ export function StewardshipSection() {
             <div className="comparison-content">
               <h3>Employee Ownership</h3>
               <p className="comparison-desc">
-                Built to <strong>preserve</strong> what matters most.
+                An employee-ownership transition <strong>continues</strong> it.
               </p>
               <ul className="preserve-list">
-                <li>The business</li>
-                <li>The jobs</li>
-                <li>The culture</li>
-                <li>The founder&apos;s legacy</li>
-                <li>The existing professional relationships</li>
+                <li>The company keeps its name</li>
+                <li>The team stays intact</li>
+                <li>The founder stays in it, on call, for 4 to 12 months</li>
+                <li>The legal work recurs instead of concluding</li>
+                <li>Counsel of record stays counsel of record</li>
               </ul>
-              <div className="comparison-result positive">You remain at the center</div>
+              <div className="comparison-result positive">Still counsel of record. You.</div>
             </div>
           </div>
         </div>

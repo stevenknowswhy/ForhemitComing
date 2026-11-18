@@ -2,83 +2,59 @@ import { FAQ } from "@/types";
 
 export const legalFaqs: FAQ[] = [
   {
-    question: "Are you a law firm? Do you compete with us?",
+    question: "What does our firm get for an introduction?",
     answer: (
       <>
         <p>
-          No. We&apos;re a <strong>public benefit holding company and stewardship management firm</strong>, not a law practice.
+          We are asked, fairly, what a partner gets for an introduction. We do not receive any
+          money or anything else of value — monetary or non-monetary — from any of our
+          professional partners. We do not pay referral fees or anything else of value for
+          introductions, and we do not promise reciprocal referrals.
         </p>
         <p>
-          We do not draft corporate or estate documents for your clients, and we do not solicit their legal work. We rely on firms like yours as essential partners.
+          What we offer is a clean handoff, a client who stays yours, and a partner who is
+          kept informed at every phase.
         </p>
       </>
     ),
   },
   {
-    question: "What if we don't have ESOP experience?",
+    question: "Is Forhemit a law firm? Do you compete with us?",
     answer: (
       <>
         <p>
-          That&apos;s fine. We bring the <strong>ESOP and employee-ownership expertise</strong>. You bring:
+          No. Forhemit is not a law firm, provides no legal services, and enters into no
+          referral-fee or fee-splitting arrangements. You stay counsel of record; we
+          coordinate the transition around your counsel, never instead of it.
         </p>
-        <ul>
-          <li>Deep knowledge of the client&apos;s business and history</li>
-          <li>The existing trust relationship</li>
-          <li>Your corporate, tax, employment, and estate-planning capabilities</li>
-        </ul>
-        <p>You&apos;ll learn the ESOP-specific pieces alongside us, at a pace that makes sense for you.</p>
-      </>
-    ),
-  },
-  {
-    question: "Will working with you mean we lose potential M&A work?",
-    answer: (
-      <>
-        <p>In practice, the opposite.</p>
-        <p>Without a stewardship alternative, many founder-led businesses either:</p>
-        <ul>
-          <li>
-            <strong>Never find a qualified buyer</strong>, or
-          </li>
-          <li>
-            <strong>Sell to PE or a strategic buyer</strong>, where you often <em>don&apos;t</em> lead the deal and <em>do</em> lose ongoing work
-          </li>
-        </ul>
         <p>
-          A Stewardship ESOP gives you a transaction you are much more likely to help lead, and a stronger, longer-lived post-transaction client.
+          We coordinate — never replace — the legal work of an ESOP transition: plan and
+          trust documents with ERISA counsel, transaction documents, and the compliance
+          calendar for DOL and IRS requirements.
         </p>
       </>
     ),
   },
   {
-    question: "What kinds of clients are the best fit?",
+    question: "How quickly will we know whether a client fits?",
     answer: (
       <>
-        <p>We&apos;re generally a fit for:</p>
-        <ul>
-          <li>
-            Privately held businesses with <strong>stable cash flows</strong>, strong culture, and material employee bases
-          </li>
-          <li>
-            Owners who care about <strong>legacy, employees, and community</strong>, not just top-dollar valuation
-          </li>
-          <li>Companies large enough for an ESOP or similar structure to make economic sense</li>
-        </ul>
         <p>
-          We&apos;re less likely to be a fit for purely speculative or asset-light startups, or owners solely focused on maximizing short-term price with no other priorities.
+          Fast. If a business you send us is not a fit, we say so quickly and say why, in
+          terms you can take back to your client, along with what would have to change. The
+          standard we screen against is published on this page.
         </p>
       </>
     ),
   },
   {
-    question: "How are you compensated?",
+    question: "What does our client pay?",
     answer: (
       <>
         <p>
-          We earn our return primarily through a <strong>stewardship management agreement around 2–3%</strong>, not by taking a cut of your legal fees.
-        </p>
-        <p>
-          You bill your work to the client as you normally would. Where other specialists (ESOP valuation, independent trustees, etc.) are required, we help coordinate them. All fees for services are separate and independent of each other.
+          One transition fee: total transition fees typically run 3 to 5% of the valuation,
+          agreed in advance. The full breakdown is on our How It Works page, so you can
+          answer your client&apos;s question before they ever talk to us.
         </p>
       </>
     ),

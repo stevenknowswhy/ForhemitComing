@@ -7,30 +7,21 @@ export function CTASection() {
     <section className="legal-section cta-section" id="consultation">
       <div className="container">
         <div className="cta-content" data-animate="fade-up">
-          <h2>Take the next step</h2>
+          <h2>Start with a conversation between professionals</h2>
 
           <div className="cta-options">
             <div className="cta-option primary" data-animate="slide-right">
-              <div className="cta-option-badge">Recommended</div>
-              <h3>Schedule a confidential Stewardship consultation</h3>
+              <h3>Talk to us first</h3>
               <p>
-                Spend 60–90 minutes with us mapping which of your clients are most vulnerable to
-                transition risk and where a stewardship ESOP could be realistic.
+                If you are an attorney, the first step is a direct conversation:
+                contact@forhemit.com, (510) 768-7588, or the contact page. No client needs to
+                be involved, and nothing about your client is needed, for that first call.
               </p>
-              <Link href="/introduction" className="cta-button magnetic">
-                Request a Stewardship Consultation
-              </Link>
-              <span className="cta-note">Limited new firm partnerships each quarter</span>
-            </div>
-
-            <div className="cta-option secondary" data-animate="slide-left">
-              <h3>Get your Client Transition Risk Snapshot</h3>
-              <p>
-                Start with a brief framework to categorize your top clients by age, intent, and
-                vulnerability — and identify where you face the greatest concentration and exit risk.
-              </p>
-              <Link href="/introduction" className="cta-button outline magnetic">
-                Request a Client Risk Snapshot
+              <Link
+                href="/contact?contactType=partner&interest=legal"
+                className="cta-button magnetic"
+              >
+                Start a Conversation
               </Link>
             </div>
           </div>
@@ -40,14 +31,14 @@ export function CTASection() {
               <h3>Who we are</h3>
               <p className="pbc-badge">California Public Benefit Corporation</p>
               <p className="stewardship-desc">
-                We partner with law firms to convert closely held businesses into employee-owned
-                companies, providing stewardship management and expertise as a{" "}
-                <strong>long-term fiduciary partner, not a short-term flipper</strong>.
+                Forhemit structures 100% employee-ownership transitions for founder-led
+                businesses — and coordinates the work around your counsel, never instead of
+                it.
               </p>
               <div className="key-points">
                 <span className="key-point">Not a law firm</span>
-                <span className="key-point">Don&apos;t compete for legal work</span>
-                <span className="key-point accent">Your role is protected</span>
+                <span className="key-point">No legal services</span>
+                <span className="key-point accent">No referral-fee or fee-splitting arrangements</span>
               </div>
             </div>
           </div>

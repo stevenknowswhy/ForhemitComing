@@ -26,6 +26,23 @@ function useScrollReveal(threshold = 0.1) {
   return { ref, isVisible };
 }
 
+const SECTION_1042_CONDITIONS = [
+  "The company is a C corporation at the time of the sale",
+  "The ESOP owns at least 30% of the company after the sale",
+  "The seller has held the stock for at least three years",
+  "The seller reinvests the proceeds in qualified replacement property within the statutory replacement window",
+  "The seller makes the §1042 election",
+];
+
+const SCREEN_CRITERIA = [
+  "Annual revenue of $3M or more",
+  "20 or more verifiable U.S. employees",
+  "Profitable, with a consistent track record",
+  "The owner holds 51% or more of the company",
+  "The owner can allow a full four months for the transition",
+  "The owner is willing to be available to the company for a transition period of 4 to 12 months after closing — on call for agreed check-ins, introductions, and questions, not working hands-on",
+];
+
 export function AccountingFirmsClient() {
   const { ref: realityRef, isVisible: realityVisible } = useScrollReveal(0.2);
 
@@ -59,18 +76,22 @@ export function AccountingFirmsClient() {
           <div className="container">
             <div className="accounting-hero-content">
               <span className="accounting-eyebrow" data-animate="fade-up">
-                The Partner-Centric Approach
+                For CPAs &amp; accounting firms
               </span>
               <h1 className="accounting-title" data-animate="fade-up" data-delay="100">
-                <span className="title-line-1">The Retention Crisis:</span>
-                <span className="title-line-2">Are You at Risk of <span className="highlight">Losing Your Best Clients?</span></span>
+                You see the succession problem first.{" "}
+                <span className="highlight">Now you can offer the answer.</span>
               </h1>
               <p className="accounting-lead" data-animate="fade-up" data-delay="200">
-                How to Defend Your AUM and Billable Hours Against the Silver Tsunami.
+                You see it in the returns years before anyone says the word exit: an owner in
+                their sixties, no successor in the business, no plan on paper. Traditionally, the
+                founder then talks to a broker or a buyer, and you are handed a finished deal to
+                react to. This page is about a different order — you raise the option while
+                the tax planning can still shape it, and the client stays yours.
               </p>
               <div className="accounting-hero-cta" data-animate="fade-up" data-delay="300">
                 <Link href="#contact" className="cta-button magnetic">
-                  Contact Our Stewardship Team
+                  Start a Conversation
                 </Link>
               </div>
             </div>
@@ -84,26 +105,35 @@ export function AccountingFirmsClient() {
           </div>
         </section>
 
-        {/* The Silver Tsunami Section */}
+        {/* The way it usually goes */}
         <section className="accounting-section tsunami-section">
           <div className="container">
             <div className="tsunami-grid" data-animate="fade-up">
               <div className="tsunami-text">
+                <h2>The call that comes after the letter of intent</h2>
                 <p className="tsunami-lead">
-                  If your practice serves baby-boomer business owners, your biggest asset—and your biggest risk—is sitting on your books right now. 
-                  Over the next decade, a historic transfer of wealth will take place as the majority of owners over 55 exit their companies.
+                  Traditionally, when a founder is ready to sell, they talk to a broker first
+                  — or a private equity firm, or a buyer. The deal takes shape without you.
+                  Your phone rings when the terms are already set, and the tax planning that
+                  could have changed the outcome is compressed into whatever window is left
+                  before closing. You are asked to catch a train that is already leaving the
+                  station.
                 </p>
                 <p className="tsunami-question">
-                  The question isn&apos;t <em>if</em> your clients will transition, but <strong>who will control the outcome</strong>.
+                  And the sale puts your file at risk too. A buyer or a private equity firm
+                  arrives with its own accountants, and the client whose returns you have
+                  prepared for twenty years can become someone else&apos;s client — not
+                  because you failed them, but because you were brought in at the end of a
+                  process that was never designed to keep you.
                 </p>
                 <Link href="#contact" className="tsunami-cta-link">
-                  Will you be left behind, or will you become the architect of their legacy?
+                  Raise it first — start with a conversation
                 </Link>
               </div>
               <div className="tsunami-image">
                 <Image
                   src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfD836AM0RQkVahrcQmOXG3UgxiZ2BuI795jYpy"
-                  alt="Business succession planning"
+                  alt="An aerial view of a crosswalk and long shadows"
                   width={4679}
                   height={7019}
                   sizes="(max-width: 900px) 100vw, 50vw"
@@ -113,227 +143,154 @@ export function AccountingFirmsClient() {
           </div>
         </section>
 
-        {/* Stark Reality Section */}
+        {/* Raise it first */}
         <section className="accounting-section reality-section" ref={realityRef}>
           <div className="container">
-            <h2 data-animate="fade-up">The Stark Reality of the Wealth Transfer</h2>
+            <h2 data-animate="fade-up">Raise it first, and the planning is yours to do</h2>
             <p className="section-context" data-animate="fade-up">
-              Statistics show that the default outcome of a business sale is bad for your firm.
+              An employee-ownership transition is the one exit where the tax work rewards being
+              early. Where Section 1042 applies, the founder&apos;s gain is tax-deferred —
+              and whether it applies, and how much it defers, is modelling you do properly when
+              the structure is still open, not arithmetic you squeeze in after a broker has set
+              the terms.
             </p>
 
             <div className={`reality-grid ${realityVisible ? "visible" : ""}`}>
               <div className="reality-card" data-animate="fade-up">
                 <div className="reality-stat">
-                  <span className="stat-number">70%</span>
-                  <span className="stat-label">of heirs switch advisors</span>
+                  <span className="stat-number">§1042</span>
+                  <span className="stat-label">tax-deferred, never tax-free</span>
                 </div>
                 <div className="reality-content">
-                  <h3>You Lose the Wealth</h3>
-                  <p>70% of heirs switch financial advisors after inheriting wealth. (Cerulli Associates)</p>
+                  <h3>The tax work rewards being early</h3>
+                  <p>Bring the option to your client before anyone brings them a buyer, and the timeline works for the planning instead of against it.</p>
                 </div>
               </div>
 
               <div className="reality-card" data-animate="fade-up" data-delay="100">
                 <div className="reality-stat">
-                  <span className="stat-icon">✕</span>
-                  <span className="stat-label">consolidated out</span>
+                  <span className="stat-number">100%</span>
+                  <span className="stat-label">sold to the employees</span>
                 </div>
                 <div className="reality-content">
-                  <h3>You Lose the Entity</h3>
-                  <p>Private equity buyers consolidate vendors, cutting long-standing advisory relationships out of the equation.</p>
+                  <h3>The shape of it</h3>
+                  <p>Your client sells 100% of the company to their employees, at a full price set by an independent appraiser who works for neither side. The transition closes in about four months.</p>
                 </div>
               </div>
 
               <div className="reality-card" data-animate="fade-up" data-delay="200">
                 <div className="reality-stat">
-                  <span className="stat-number">23.8%</span>
-                  <span className="stat-label">lost to taxes</span>
+                  <span className="stat-number">4–12 mo</span>
+                  <span className="stat-label">on-call transition</span>
                 </div>
                 <div className="reality-content">
-                  <h3>Your Client Loses to Taxes</h3>
-                  <p>In a traditional sale, founders can pay up to 23.8% in federal capital gains taxes on their proceeds (long-term rate plus net investment income tax, before state taxes).</p>
+                  <h3>The work stays where it has always been</h3>
+                  <p>The founder is available to the company for a transition period of 4 to 12 months after close — on call, not working hands-on — and the company&apos;s tax and accounting work stays where it has always been, because nothing about the company has left.</p>
                 </div>
               </div>
             </div>
 
             <div className="reality-conclusion" data-animate="fade-up">
-              <p>You spend decades building relationships. <strong>Don&apos;t let a single transaction erase your AUM and billable hours.</strong></p>
+              <p>Forhemit structures employee-ownership transitions. <strong>We are not an accounting firm, and we do not provide tax or accounting services.</strong></p>
             </div>
           </div>
         </section>
 
-        {/* CPA Practice Multiplier Section */}
+        {/* Section 1042 conditions */}
         <section className="accounting-section multiplier-section">
           <div className="container">
             <div className="multiplier-header" data-animate="fade-up">
-              <span className="section-eyebrow">The Revenue Opportunity</span>
-              <h2>The CPA Practice Multiplier: 5-Year Revenue Comparison</h2>
+              <span className="section-eyebrow">Section 1042</span>
+              <h2>What makes the deferral available</h2>
               <p className="multiplier-context">
-                Let&apos;s look at a typical 20-employee business with $10M in revenue in the San Francisco market.
+                Section 1042 deferral is conditional, and the conditions are exactly the kind a
+                CPA will want named. In outline:
               </p>
             </div>
 
-            <div className="comparison-table-wrapper" data-animate="fade-up">
-              <div className="comparison-table">
-                <div className="table-header">
-                  <div className="table-col metric-col">Revenue Metric</div>
-                  <div className="table-col terminal-col">
-                    <span className="col-title">Terminal Scenario</span>
-                    <span className="col-subtitle">Business Closes / PE Sale</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="col-title">The Forhemit Transition</span>
-                    <span className="col-subtitle">ESOP + Resilience Model</span>
-                  </div>
-                  <div className="table-col why-col">Why It Explodes</div>
-                </div>
-
-                <div className="table-row">
-                  <div className="table-col metric-col">
-                    <span className="metric-name">Corporate Tax & Advisory</span>
-                  </div>
-                  <div className="table-col terminal-col">
-                    <span className="amount zero">$0</span>
-                    <span className="note">(Client Lost)</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="amount">$175,000</span>
-                    <span className="note">($35k/yr x 5)</span>
-                  </div>
-                  <div className="table-col why-col">
-                    <span className="why-text">The entity remains local and loyal to the CPA firm.</span>
+            <div className="superior-path-grid" data-animate="fade-up">
+              {SECTION_1042_CONDITIONS.map((item) => (
+                <div className="path-item" key={item}>
+                  <span className="path-check">✓</span>
+                  <div>
+                    <strong>{item}</strong>
                   </div>
                 </div>
-
-                <div className="table-row">
-                  <div className="table-col metric-col">
-                    <span className="metric-name">New Individual Tax Revenue</span>
-                  </div>
-                  <div className="table-col terminal-col">
-                    <span className="amount zero">$0</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="amount">$112,500</span>
-                    <span className="note">(15 Owners x $1,500/yr x 5)</span>
-                  </div>
-                  <div className="table-col why-col">
-                    <span className="why-text">Employee-owners need complex K-1 tax filings.</span>
-                  </div>
-                </div>
-
-                <div className="table-row">
-                  <div className="table-col metric-col">
-                    <span className="metric-name">Advisory & Succession Fees</span>
-                  </div>
-                  <div className="table-col terminal-col">
-                    <span className="amount zero">$0</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="amount">$50,000</span>
-                    <span className="note">(One-time Transition Fee)</span>
-                  </div>
-                  <div className="table-col why-col">
-                    <span className="why-text">Strategic consulting shared with the CPA partner.</span>
-                  </div>
-                </div>
-
-                <div className="table-row">
-                  <div className="table-col metric-col">
-                    <span className="metric-name">Asset Management Referrals</span>
-                  </div>
-                  <div className="table-col terminal-col">
-                    <span className="amount zero">$0</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="amount highlight">High Potential</span>
-                    <span className="note">15 new HNW clients</span>
-                  </div>
-                  <div className="table-col why-col">
-                    <span className="why-text">15 new high-net-worth clients for the CPA&apos;s wealth arm.</span>
-                  </div>
-                </div>
-
-                <div className="table-row total-row">
-                  <div className="table-col metric-col">
-                    <span className="metric-name total">TOTAL 5-YEAR FIRM VALUE</span>
-                  </div>
-                  <div className="table-col terminal-col">
-                    <span className="amount total-zero">$0</span>
-                  </div>
-                  <div className="table-col stefano-col">
-                    <span className="amount total-amount">$337,500+</span>
-                  </div>
-                  <div className="table-col why-col">
-                    <span className="why-text total-why">A 100% Retention Rate vs. 0%.</span>
-                  </div>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="ghost-practice-callout" data-animate="fade-up">
-              <div className="callout-icon">👻</div>
+              <div className="callout-icon">§</div>
               <div className="callout-content">
-                <h3>The &quot;Ghost Practice&quot; Problem</h3>
+                <h3>Deferral — conditional, and worth modelling early</h3>
                 <blockquote>
-                  &quot;Right now, your firm is facing a &apos;Ghost Practice&apos; problem. <strong>80% of your business-owner clients have no succession plan.</strong> When they retire, your billable revenue vanishes with them. I am offering you a way to lock in the Lifetime Value (LTV) of that business for the next 20 years. Instead of one aging client, I&apos;m giving you 15 new, younger clients who are just starting their journey as owners—and they will need you for decades.&quot;
+                  Where those conditions are met and the election is made, the gain on the sale
+                  is tax-deferred. Whether they are met in a given case is a determination for
+                  you and your client — which is precisely why the conversation has to
+                  start while the structure is still open.
                 </blockquote>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Build a Moat Section */}
+        {/* After the close */}
         <section className="accounting-section moat-section">
           <div className="container">
             <div className="moat-header" data-animate="fade-up">
-              <h2>Build a Moat Around Your Best Clients</h2>
+              <h2>After the close</h2>
               <p>
-                <strong>Forhemit</strong> is a California Public Benefit Corporation. We partner with businesses to transition them into 
-                employee ownership (ESOPs) using a framework designed for continuity. By introducing this model to your clients, 
-                you don&apos;t just facilitate a sale; you <strong>secure your future role as their indispensable advisor</strong>.
+                A sale to a stranger ends the engagement. An employee-ownership transition does
+                the opposite. The founder&apos;s on-call transition availability runs 4 to 12
+                months after close, and the company is monitored against agreed warning
+                indicators for 24 months — with your firm still in the room, because the
+                company is still independent, still local, and still served by the accountants
+                it already trusts.
               </p>
             </div>
 
             <div className="moat-delivers" data-animate="fade-up">
-              <p className="delivers-lead">Here is exactly what the Stewardship model delivers for your firm:</p>
+              <p className="delivers-lead">The client who stays — and a company that keeps needing its accountants:</p>
             </div>
 
-            {/* For Wealth Managers */}
             <div className="deliverable-card" data-animate="slide-right">
               <div className="deliverable-number">01</div>
               <div className="deliverable-content">
-                <h3>For Wealth Managers: Capture and Grow the Liquidity Event</h3>
+                <h3>Work that recurs every year</h3>
                 <p className="deliverable-hook">
-                  When a C-Corporation founder sells to an ESOP, they can utilize <strong>IRC Section 1042</strong> to defer 100% of their capital gains taxes.
+                  An employee-owned company is not a closed file.
                 </p>
                 <ul className="deliverable-benefits">
                   <li>
-                    <strong>Retain and Manage the Windfall:</strong> The proceeds must be reinvested into Qualified Replacement Property (QRP). 
-                    This gives you the mandate to build and manage a substantial portfolio, capturing AUM that would otherwise walk out the door.
+                    <strong>Annual independent valuation</strong> and annual plan filings, every
+                    year of the company&apos;s life.
                   </li>
                   <li>
-                    <strong>Offer a Superior Strategy:</strong> You position yourself as the expert who saved them hundreds of thousands 
-                    (or millions) in taxes—a value proposition few competitors can match.
+                    <strong>A repurchase obligation</strong> that grows as employee-owners vest
+                    and eventually retire — forecasting and compliance work that recurs,
+                    sitting with the accountants the company already trusts.
                   </li>
                 </ul>
               </div>
             </div>
 
-            {/* For CPAs */}
             <div className="deliverable-card" data-animate="slide-left">
               <div className="deliverable-number">02</div>
               <div className="deliverable-content">
-                <h3>For CPAs: Deepen the Relationship and Increase Billables</h3>
+                <h3>A stake the employees never had before</h3>
                 <p className="deliverable-hook">
-                  When we transition a company via an ESOP, the business stays <strong>intact, local, and independent</strong>.
+                  For the employees themselves, ownership brings a kind of security they never
+                  knew was possible.
                 </p>
                 <ul className="deliverable-benefits">
                   <li>
-                    <strong>Retain Corporate Work:</strong> You keep the corporate tax returns, audit work, and day-to-day accounting.
+                    <strong>A stake in the company they work in,</strong> held for their
+                    retirement.
                   </li>
                   <li>
-                    <strong>Unlock Specialized Recurring Revenue:</strong> ESOPs require annual valuations, complex trust returns, 
-                    and ongoing compliance reporting. This creates a new, high-margin revenue stream for your firm that wasn&apos;t there before.
+                    <strong>One founder brought you this client.</strong> The transition keeps
+                    the company — and the recurring work it generates — with the
+                    accountants it already trusts.
                   </li>
                 </ul>
               </div>
@@ -341,105 +298,128 @@ export function AccountingFirmsClient() {
           </div>
         </section>
 
-        {/* Window Closing Section */}
+        {/* The qualification standard */}
         <section className="accounting-section window-section">
           <div className="container">
-            <h2 data-animate="fade-up">The Window of Opportunity is Closing</h2>
-            
+            <h2 data-animate="fade-up">The qualification standard</h2>
+
             <div className="window-content" data-animate="fade-up">
               <p className="window-warning">
-                Your clients are being contacted by traditional private equity buyers <strong>right now</strong>. 
-                If they accept that offer, your relationship is effectively over. The buyer controls the wealth and the transition.
+                The standard we screen against on a first call. If a client of yours clears it,
+                the conversation is worth having; if they do not, we will tell you quickly and
+                say why.
               </p>
 
-              <p className="window-path-intro">By presenting the Stewardship option first, you give your clients a superior path:</p>
+              <p className="window-path-intro">The clients this fits:</p>
 
               <div className="superior-path-grid">
-                <div className="path-item" data-animate="fade-up">
-                  <span className="path-check">✓</span>
-                  <div>
-                    <strong>Tax Efficiency</strong>
-                    <p>They keep more of what they built.</p>
+                {SCREEN_CRITERIA.map((item, i) => (
+                  <div className="path-item" data-animate="fade-up" data-delay={i * 50} key={item}>
+                    <span className="path-check">✓</span>
+                    <div>
+                      <strong>{item}</strong>
+                    </div>
                   </div>
-                </div>
-                <div className="path-item" data-animate="fade-up" data-delay="100">
-                  <span className="path-check">✓</span>
-                  <div>
-                    <strong>Legacy Protection</strong>
-                    <p>Their employees become owners, preserving company culture.</p>
-                  </div>
-                </div>
-                <div className="path-item" data-animate="fade-up" data-delay="200">
-                  <span className="path-check">✓</span>
-                  <div>
-                    <strong>Independence</strong>
-                    <p>The business remains a local entity.</p>
-                  </div>
-                </div>
-                <div className="path-item highlight" data-animate="fade-up" data-delay="300">
-                  <span className="path-check">✓</span>
-                  <div>
-                    <strong>Your Security</strong>
-                    <p>Their wealth stays under your management, and their corporate work stays in your firm.</p>
-                  </div>
-                </div>
+                ))}
               </div>
+
+              <p className="window-path-intro">
+                Want the fuller screen?{" "}
+                <Link href="/brokers#brk-screening">Run the full 18-point screen</Link> —
+                the interactive checklist lives on our Brokers page.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Key Hooks Section */}
+        {/* The money, plainly */}
         <section className="accounting-section hooks-section">
           <div className="container">
             <div className="hooks-header" data-animate="fade-up">
-              <span className="section-eyebrow">Strategic Advantages</span>
-              <h2>Why Your Clients Stay With You</h2>
+              <span className="section-eyebrow">The money, plainly</span>
+              <h2>No surprises, and nothing between firms</h2>
             </div>
 
             <div className="hooks-grid">
               <div className="hook-card" data-animate="slide-right">
                 <div className="hook-number">01</div>
-                <div className="hook-icon">🔒</div>
-                <h3>The &quot;Accountant of Record&quot; Lock</h3>
+                <div className="hook-icon">§</div>
+                <h3>No surprises on price.</h3>
                 <p>
-                  In a traditional sale (to PE or a competitor), the new buyer almost always fires the old CPA 
-                  and brings in their own &quot;Big 4&quot; or regional firm.
+                  Your client pays one transition fee: total transition fees typically run 3 to
+                  5% of the valuation, agreed in advance.
                 </p>
                 <div className="hook-difference">
                   <span className="difference-arrow">→</span>
-                  <span className="difference-text">With our ESOP model, <strong>the CPA stays</strong> because the ownership stays local.</span>
+                  <span className="difference-text">The full breakdown is on our <strong>How It Works</strong> page.</span>
                 </div>
               </div>
 
               <div className="hook-card" data-animate="slide-left">
                 <div className="hook-number">02</div>
-                <div className="hook-icon">⚡</div>
-                <h3>Capacity Control</h3>
-                <p className="capacity-quote">
-                  &quot;I only do three of these a quarter because I refuse to let a business fail due to poor structure. 
-                  I want those three to be your best clients so we can secure your firm&apos;s revenue while we save their legacy.&quot;
+                <div className="hook-icon">0</div>
+                <h3>Nothing between firms.</h3>
+                <p>
+                  We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals.
                 </p>
                 <div className="hook-benefit">
-                  <span className="benefit-tag">Exclusive Partnership</span>
-                  <span className="benefit-text">Limited quarterly capacity ensures quality and attention.</span>
+                  <span className="benefit-tag">No referral fees</span>
+                  <span className="benefit-text">Nothing of value moves between firms — in either direction.</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Architect Section */}
+        {/* How an introduction works */}
         <section className="accounting-section architect-section">
           <div className="container">
             <div className="architect-content" data-animate="fade-up">
-              <h2>Be the Architect of Their Legacy</h2>
+              <h2>How an introduction works</h2>
               <p className="architect-choice">
-                You have a choice. You can wait for the retirement announcement and hope they remember you. 
-                Or, you can initiate the conversation today that <strong>locks in your AUM, secures your corporate billables, 
-                and cements your role as their most trusted advisor</strong>.
+                <strong>Start in the abstract.</strong> A first conversation needs no client
+                name, we will not contact or identify your client on the basis of a preliminary
+                conversation, and your client stays unidentified until you authorise an
+                introduction. <strong>Screen it together.</strong> We screen the business
+                against the standard above, together. If it does not fit, you hear that fast,
+                with the reasons, in terms you can take back to your client, along with what
+                would have to change. A slow yes would spend your credibility; we will not do
+                that.
               </p>
               <p className="architect-call">
-                Don&apos;t let your best clients exit your portfolio. <span className="highlight">Help them exit their business instead.</span>
+                <strong>Stay informed at every phase.</strong> Named introductions happen only
+                when you are ready, and always with you present. With your client&apos;s
+                authorisation, you are told when the introduction lands, when the business is
+                screened, when the structure is set, and when it closes. Talk to us first,
+                before any client is involved:{" "}
+                <span className="highlight">contact@forhemit.com · (510) 768-7588</span>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Founder block */}
+        <section className="accounting-section architect-section">
+          <div className="container">
+            <div className="architect-content" data-animate="fade-up">
+              <h2>Who you are trusting</h2>
+              <p className="architect-choice">
+                <strong>The person you are trusting with your client.</strong> Stefano Stokes
+                — Founder &amp; CEO. I&apos;m the person you speak with first, the person
+                who leads your client&apos;s transition, and the person accountable for
+                coordinating the work through closing and handover. Forhemit has one principal.
+                You work directly with me, supported by independent specialists where the
+                transaction requires them.
+              </p>
+              <p className="architect-choice">
+                Forhemit is a California Public Benefit Corporation, based in San Francisco and
+                working with founder-led businesses nationally. Every transition is
+                stress-tested before it is structured under our Resilience Framework, and
+                monitored for 24 months after close under our 24-Month Early Warning System, so
+                the client you send us is looked after after the signing, not just up to it.
+              </p>
+              <p className="architect-call">
+                <strong>Forhemit was founded in 2026. We are new, and we say so.</strong>
               </p>
             </div>
           </div>
@@ -449,12 +429,24 @@ export function AccountingFirmsClient() {
         <section className="accounting-section cta-section" id="contact">
           <div className="container">
             <div className="cta-content" data-animate="fade-up">
-              <Link href="/introduction" className="cta-button magnetic">
-                Contact Our Stewardship Team
+              <h2>Start with a conversation between professionals</h2>
+              <Link
+                href="/contact?contactType=partner&interest=accounting"
+                className="cta-button magnetic"
+              >
+                Start a Conversation
               </Link>
               <p className="cta-subtitle">
-                Identify which clients are at risk and how we can structure a transition that benefits them, 
-                their employees, and your practice.
+                Use the contact page and say you are a CPA, not a founder. No client needs to
+                be involved, and nothing about your client is needed, for the first call. Talk
+                to us first, before any client is involved: contact@forhemit.com · (510)
+                768-7588.
+              </p>
+              <p className="cta-subtitle">
+                For the other professionals in your client&apos;s corner:{" "}
+                <Link href="/legal-practices">Attorneys</Link> ·{" "}
+                <Link href="/brokers">Brokers</Link> ·{" "}
+                <Link href="/wealth-managers">Wealth Managers</Link>
               </p>
             </div>
           </div>

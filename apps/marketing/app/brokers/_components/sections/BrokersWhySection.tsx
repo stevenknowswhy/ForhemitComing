@@ -4,11 +4,11 @@ export function BrokersWhySection() {
   return (
     <section id="brk-why" className="fmp-section fmp-why" aria-labelledby="brk-why-heading">
       <h2 id="brk-why-heading" className="fmp-section-title">
-        What&apos;s in it for you
+        The broker&apos;s arithmetic
       </h2>
       <p className="fmp-section-lead">
-        You are paid when transactions close. A credible ESOP track reduces last-minute failure, protects
-        your fee, and gives your client a fair, bank-backed alternative—not a hollow listing story.
+        You are paid at the closing table, or not at all. That is the structure of your business,
+        and it shapes everything.
       </p>
       <div className="fmp-pillars-grid">
         {BROKER_PILLARS.map((p) => (
@@ -24,6 +24,10 @@ export function BrokersWhySection() {
           </div>
         ))}
       </div>
+      <p className="fmp-section-lead">
+        This page is about the listings where that shape is the problem — and the one buyer
+        who does not need to be found.
+      </p>
     </section>
   );
 }

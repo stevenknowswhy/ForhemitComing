@@ -3,7 +3,7 @@
 import { CheckpointsSection } from "@/app/four-month-path/components/CheckpointsSection";
 import { RoadmapPanel } from "@/app/four-month-path/components/RoadmapPanel";
 import { TimelineRealismSection } from "@/app/four-month-path/components/TimelineRealismSection";
-import { EsopTransactionCalendar } from "@/app/esop-transaction-calendar";
+import { BrokerScreeningChecklist } from "./_components/BrokerScreeningChecklist";
 import "@/app/home/intake/styles/classification-intake-modal.css";
 import "@/app/four-month-path/styles/four-month-path.css";
 import "@/app/four-month-path/styles/sections.css";
@@ -40,22 +40,24 @@ export function BrokersPathClient() {
 
           <DualTrackOutcomesSection />
 
-          <section id="brk-timeline" className="fmp-section" aria-labelledby="brk-timeline-heading">
-            <h2 id="brk-timeline-heading" className="fmp-section-title">
-              The four-month path (broker view)
+          <section id="brk-screening" className="fmp-section" aria-labelledby="brk-screening-heading">
+            <h2 id="brk-screening-heading" className="fmp-section-title">
+              Broker screening: the 18-point check
             </h2>
             <p className="fmp-section-lead">
-              Same phased rhythm we use with sellers—written so you can see where your listing sits relative
-              to lender, trustee, and documentation work.
+              Screen the business before you bring it. Run the business you have in mind against
+              the same standard we apply on a first call. If a business you bring us is not a fit,
+              we say so quickly and say why, in terms you can take back to your client, along with
+              what would have to change.
             </p>
-            <EsopTransactionCalendar variant="embedded" />
+            <BrokerScreeningChecklist />
           </section>
 
           <TimelineRealismSection
             sectionId="brk-realism"
             headingId="brk-realism-heading"
-            title="What brokers ask about parallel tracks"
-            lead="Dual-track should make you faster and safer—not add chaos. Here is how we talk about it with intermediaries."
+            title="What to realistically expect"
+            lead="The questions brokers ask us most, answered straight."
             faqItems={BROKER_REALISM_FAQ}
             faqBodyIdPrefix="brk-faq-body"
           />
@@ -65,22 +67,22 @@ export function BrokersPathClient() {
               Share the roadmap with your seller
             </h2>
             <p className="fmp-section-lead">
-              One interactive roadmap your client (and their attorney or CPA) can open in-browser with all
-              milestones, checkpoints, and professional roles spelled out.
+              The same 120-Day Roadmap your client receives at the assessment — the four months,
+              phase by phase, in one document you can forward.
             </p>
             <RoadmapPanel
               surface="brokers_inline"
               ariaLabel="Open ESOP roadmap HTML"
               eyebrow="For your seller & advisors"
-              question="Want the same 120-day timeline we use on the owner page?"
+              question="Want the four months in one document?"
               bullets={[
-                "Month-by-month milestones and checkpoints",
-                "How bank, trustee, and appraiser sequence",
-                "Plain-English glossary for non-ESOP counsel",
-                "Print to PDF or forward under your cover email",
+                "Month 1: readiness review and independent valuation",
+                "Month 2: structure designed and financing placed",
+                "Month 3: legal documents and compliance completed",
+                "Month 4: closing executed and handover begun",
               ]}
               filenameNote="Opens in a new tab as HTML. Use browser print to save a PDF copy if needed."
-              ctaLabel="Open: Complete 120-Day ESOP Roadmap (HTML)"
+              ctaLabel="Open the 120-Day Roadmap (HTML)"
             />
           </section>
 
@@ -88,8 +90,8 @@ export function BrokersPathClient() {
             checkpoints={BROKER_CHECKPOINTS}
             sectionId="brk-checkpoints"
             headingId="brk-checkpoints-heading"
-            title="Four checkpoints before a clean close"
-            lead="No surprises at the wire: these are the same gates we use with sellers—expressed for how you manage buyer expectations in parallel."
+            title="The checkpoints on the path"
+            lead="Four checkpoints, one per month — the same ones we commit to with the founder."
           />
 
           <BrokersProcessSection />

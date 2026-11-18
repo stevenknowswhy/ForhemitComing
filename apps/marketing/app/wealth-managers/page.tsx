@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "@forhemit/shared/styles/wealth-managers.css";
 import { WealthManagersPageClient } from "@forhemit/shared/pages/WealthManagersPageClient";
 
-const title = "For Wealth Managers | ESOP Client Opportunities";
+const title = "For Wealth Managers | Forhemit";
 const description =
-  "Help your business-owner clients explore 100% employee ownership as a tax-advantaged exit strategy with Forhemit's ESOP structuring and stewardship.";
+  "For wealth managers: raise succession before someone else sets the terms. How Forhemit works with the advisor who makes the introduction.";
 
 export const metadata: Metadata = {
   title,
