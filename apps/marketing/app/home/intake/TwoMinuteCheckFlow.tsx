@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import {
   TWO_MINUTE_CHECK_STEPS,
   allYes,
@@ -9,6 +11,80 @@ import {
   type TwoMinuteCheckStep,
   type TwoMinuteCheckStepId,
 } from "./lib/twoMinuteCheck";
+
+/* ── Anonymous metadata questions (spec 2026-11-18) ──────────────────────
+   Asked before the five criteria. The answers are recorded anonymously —
+   see the footer note and packages/convex/convex/checkResponses.ts.
+   No name, email, phone, company name, or free text is ever collected
+   by this flow. */
+
+type CheckRole = "founder" | "professional";
+type ProfessionalType = "broker" | "cpa" | "attorney" | "wealth_manager" | "other";
+type Industry =
+  | "construction"
+  | "manufacturing"
+  | "healthcare"
+  | "professional_services"
+  | "retail_food_hospitality"
+  | "technology"
+  | "transportation_logistics"
+  | "other";
+
+type MetaAnswers = {
+  role?: CheckRole;
+  professionalType?: ProfessionalType;
+  industry?: Industry;
+};
+
+type MetaOption = { value: string; label: string; sub?: string };
+type MetaStep = {
+  id: "role" | "professionalType" | "industry";
+  question: string;
+  options: MetaOption[];
+};
+
+const ROLE_STEP: MetaStep = {
+  id: "role",
+  question: "Are you a founder or a professional?",
+  options: [
+    { value: "founder", label: "Founder", sub: "I own the business" },
+    { value: "professional", label: "Professional", sub: "I advise business owners" },
+  ],
+};
+
+const PROFESSIONAL_TYPE_STEP: MetaStep = {
+  id: "professionalType",
+  question: "Which best describes you?",
+  options: [
+    { value: "broker", label: "Broker" },
+    { value: "cpa", label: "CPA" },
+    { value: "attorney", label: "Attorney" },
+    { value: "wealth_manager", label: "Wealth Manager" },
+    { value: "other", label: "Other" },
+  ],
+};
+
+const INDUSTRY_STEP: MetaStep = {
+  id: "industry",
+  question: "What industry is the business in?",
+  options: [
+    { value: "construction", label: "Construction & specialty trades" },
+    { value: "manufacturing", label: "Manufacturing" },
+    { value: "healthcare", label: "Healthcare" },
+    { value: "professional_services", label: "Professional services" },
+    { value: "retail_food_hospitality", label: "Retail, food & hospitality" },
+    { value: "technology", label: "Technology" },
+    { value: "transportation_logistics", label: "Transportation & logistics" },
+    { value: "other", label: "Other" },
+  ],
+};
+
+function metaStepsFor(role: CheckRole | undefined): MetaStep[] {
+  const steps: MetaStep[] = [ROLE_STEP];
+  if (role === "professional") steps.push(PROFESSIONAL_TYPE_STEP);
+  steps.push(INDUSTRY_STEP);
+  return steps;
+}
 
 type Props = {
   onRequestClose: () => void;
@@ -27,6 +103,10 @@ const ANALYSIS_LABELS = [
 ] as const;
 
 export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
+  const [stage, setStage] = useState<"meta" | "criteria">("meta");
+  const [metaIdx, setMetaIdx] = useState(0);
+  const [metaSel, setMetaSel] = useState<string | null>(null);
+  const [meta, setMeta] = useState<MetaAnswers>({});
   const [idx, setIdx] = useState(0);
   const [sel, setSel] = useState<"yes" | "no" | null>(null);
   const [answers, setAnswers] = useState<Partial<Record<TwoMinuteCheckStepId, "yes" | "no">>>({});
@@ -37,12 +117,24 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
   const [phase, setPhase] = useState<Phase>("questions");
   const [analysisIdx, setAnalysisIdx] = useState(0);
 
-  const step: TwoMinuteCheckStep | undefined = TWO_MINUTE_CHECK_STEPS[idx];
+  const recordResponse = useMutation(api.checkResponses.record);
+
+  const metaSteps = metaStepsFor(meta.role);
+  const metaStep: MetaStep | undefined = stage === "meta" ? metaSteps[metaIdx] : undefined;
+  const step: TwoMinuteCheckStep | undefined =
+    stage === "criteria" ? TWO_MINUTE_CHECK_STEPS[idx] : undefined;
 
   useEffect(() => {
     if (!step) return;
     setSel(answers[step.id] ?? null);
   }, [idx, step, answers]);
+
+  useEffect(() => {
+    if (stage !== "meta") return;
+    const s = metaSteps[metaIdx];
+    if (s) setMetaSel(meta[s.id] ?? null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stage, metaIdx, meta]);
 
   /* Hard Effect — cycle analysis labels then transition to result */
   useEffect(() => {
@@ -61,6 +153,10 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
   }, [phase]);
 
   function reset() {
+    setStage("meta");
+    setMetaIdx(0);
+    setMetaSel(null);
+    setMeta({});
     setIdx(0);
     setSel(null);
     setAnswers({});
@@ -74,11 +170,32 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
       reset();
       return;
     }
+    if (stage === "meta") {
+      if (metaIdx > 0) {
+        setMetaIdx((i) => i - 1);
+      } else {
+        onRequestClose();
+      }
+      return;
+    }
     if (idx > 0) {
       setIdx((i) => i - 1);
     } else {
-      onRequestClose();
+      setStage("meta");
+      setMetaIdx(metaSteps.length - 1);
     }
+  };
+
+  const advanceMeta = () => {
+    if (!metaStep || !metaSel) return;
+    const nextMeta = { ...meta, [metaStep.id]: metaSel } as MetaAnswers;
+    setMeta(nextMeta);
+    const steps = metaStepsFor(nextMeta.role);
+    if (metaIdx >= steps.length - 1) {
+      setStage("criteria");
+      return;
+    }
+    setMetaIdx((i) => i + 1);
   };
 
   const advance = () => {
@@ -87,6 +204,24 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
     if (idx >= TWO_MINUTE_CHECK_STEPS.length - 1) {
       setAnswers(nextAnswers);
       setResultAnswers(nextAnswers);
+      /* Anonymous metadata capture (spec 2026-11-18): fire-and-forget —
+         a failed write must never block or delay the result. */
+      const failed = getFailedSteps(nextAnswers);
+      void recordResponse({
+        role: meta.role ?? "founder",
+        ...(meta.role === "professional" && meta.professionalType
+          ? { professionalType: meta.professionalType }
+          : {}),
+        industry: meta.industry ?? "other",
+        answers: {
+          revenue: nextAnswers.revenue === "yes",
+          headcount: nextAnswers.headcount === "yes",
+          profitability: nextAnswers.profitability === "yes",
+          timeline: nextAnswers.timeline === "yes",
+          transition: nextAnswers.transition === "yes",
+        },
+        result: failed.length === 0 ? ("pass" as const) : failed.map((s) => s.id),
+      }).catch(() => undefined);
       setAnalysisIdx(0);
       setPhase("analyzing");
       return;
@@ -99,17 +234,24 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
   const passed = phase === "result" && allYes(outcome);
   const failedSteps = phase === "result" ? getFailedSteps(outcome) : [];
 
+  const totalSteps = metaSteps.length + TWO_MINUTE_CHECK_STEPS.length;
+  const globalPos = stage === "meta" ? metaIdx : metaSteps.length + idx;
+  const segments = Array.from({ length: totalSteps }, (_, i) => i);
+
   const headerStepLabel =
     phase === "result"
       ? "Complete"
       : phase === "analyzing"
         ? "Analyzing"
-        : step
-          ? `${idx + 1} / ${TWO_MINUTE_CHECK_STEPS.length}`
-          : "";
+        : `${globalPos + 1} / ${totalSteps}`;
 
   const isLastStep = idx === TWO_MINUTE_CHECK_STEPS.length - 1;
   const btnLabel = isLastStep ? "See results" : "Continue";
+
+  const metaHint =
+    metaStep?.id === "industry" && meta.role === "professional"
+      ? "Answer for the business you're thinking of — the five questions after this are about that business too."
+      : undefined;
 
   return (
     <div className="ci-flow">
@@ -119,13 +261,57 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
       </header>
 
       <div className="ci-body">
-        {phase === "questions" && step && (
+        {phase === "questions" && stage === "meta" && metaStep && (
+          <div className="ci-frame" key={metaStep.id}>
+            <div className="ci-prog">
+              {segments.map((i) => (
+                <div
+                  key={i}
+                  className={`ci-prog-seg ${i < globalPos ? "ci-done" : i === globalPos ? "ci-active" : ""}`}
+                />
+              ))}
+            </div>
+
+            <p className="ci-q-eyebrow">2-Minute Check</p>
+            <h2 className="ci-q-text">{metaStep.question}</h2>
+
+            <div className="ci-opts">
+              {metaStep.options.map((o) => (
+                <button
+                  key={o.value}
+                  type="button"
+                  className={`ci-opt ${metaSel === o.value ? "ci-sel" : ""}`}
+                  onClick={() => setMetaSel(o.value)}
+                >
+                  <span className="ci-opt-left">
+                    <span className="ci-opt-label">{o.label}</span>
+                    {o.sub && <span className="ci-opt-sub">{o.sub}</span>}
+                  </span>
+                  <span className="ci-opt-arrow">{metaSel === o.value ? "→" : "↗"}</span>
+                </button>
+              ))}
+            </div>
+
+            {metaHint && <p className="ci-hint">{metaHint}</p>}
+
+            <div className="ci-nav">
+              <button type="button" className="ci-btn-back" onClick={back}>
+                ← Back
+              </button>
+              <button type="button" className="ci-btn-go" disabled={!metaSel} onClick={advanceMeta}>
+                Continue
+              </button>
+            </div>
+          </div>
+        )}
+
+        {phase === "questions" && stage === "criteria" && step && (
           <div className="ci-frame" key={step.id}>
             <div className="ci-prog">
-              {TWO_MINUTE_CHECK_STEPS.map((s, i) => (
+              {segments.map((i) => (
                 <div
-                  key={s.id}
-                  className={`ci-prog-seg ${i < idx ? "ci-done" : i === idx ? "ci-active" : ""}`}
+                  key={i}
+                  className={`ci-prog-seg ${i < globalPos ? "ci-done" : i === globalPos ? "ci-active" : ""}`}
                 />
               ))}
             </div>
@@ -240,7 +426,7 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
       </div>
 
       <footer className="ci-ft">
-        <span className="ci-ft-note">Confidential. Your answers are used only to show your result — never sold, never shared, never added to a marketing list.</span>
+        <span className="ci-ft-note">We don&apos;t collect anything that identifies you — no name, no email, no phone. We do record anonymous information: whether you&apos;re a founder or a professional, the kind of work you do, your industry, and your answers — so we can understand who this check serves. Nothing here can be traced back to you or your company.</span>
         <span className="ci-ft-note">© Forhemit</span>
       </footer>
     </div>
