@@ -4,17 +4,17 @@ export function CTASection() {
   return (
     <section className="about-cta">
       <div className="container">
-        <h2>Let&apos;s Talk About Your Legacy</h2>
+        <h2>Find out where you stand</h2>
         <p>
-          It&apos;s an option you may not have known existed. We&apos;d love to talk about whether
-          it&apos;s the right one for you.
+          Five Yes/No questions. Two minutes. Free and confidential — we only ask for your contact
+          details at the end if you want your results.
         </p>
         <div className="about-cta-actions">
-          <a href="/introduction" className="cta-button">
-            Schedule a Discussion
-          </a>
           <a href="/contact" className="cta-button">
-            Get in Touch →
+            Start Your Free Assessment
+          </a>
+          <a href="/four-month-path" className="cta-button">
+            See How It Works →
           </a>
         </div>
       </div>

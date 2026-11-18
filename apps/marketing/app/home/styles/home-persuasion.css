@@ -249,6 +249,10 @@ html.js .hps-trust.hps-revealed .hps-trust-badge {
   .hps-trust-label {
     font-size: 0.68rem;
     letter-spacing: 0.08em;
+    /* The ruled plain-language anchor labels are longer than the originals;
+       let them wrap inside the badge on small screens instead of overflowing. */
+    white-space: normal;
+    text-align: center;
   }
 }
 

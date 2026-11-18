@@ -18,7 +18,7 @@ const jsonLd = {
   name: "Forhemit PBC",
   url: "https://www.forhemit.com",
   description:
-    "Forhemit helps founder-led businesses pursue 100% employee-ownership succession with ESOP structuring and post-close stewardship support.",
+    "Forhemit helps founder-led businesses pursue 100% employee-ownership succession with ESOP structuring and post-close support.",
   "@id": "https://www.forhemit.com/#organization",
   sameAs: [],
   areaServed: "US",

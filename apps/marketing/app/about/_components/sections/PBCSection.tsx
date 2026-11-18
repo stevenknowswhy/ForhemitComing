@@ -11,7 +11,7 @@ const duties = [
   },
   {
     icon: Users,
-    title: "To the Employees in Our Stewardship",
+    title: "To Our Employees",
     description:
       "Lead with dignity and stability, protecting the human capital that makes the business run.",
   },

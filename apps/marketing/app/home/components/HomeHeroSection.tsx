@@ -15,14 +15,16 @@ export function HomeHeroSection() {
           <div className="hch-hero-inner hch-hero-inner--centered">
             <p className="hch-hero-eyebrow">
               <span className="hch-hero-eyebrow-line" aria-hidden />
-              Beyond the Balance Sheet™ · Employee ownership transitions
+              Employee-Ownership Succession · For Founder-Led Businesses
             </p>
 
-            <h1 className="hch-hero-headline">Founder Succession Without Selling Out</h1>
+            <h1 className="hch-hero-headline">Sell Your Business to Your Employees</h1>
 
             <p className="hch-hero-sub">
-              Forhemit structures 100% employee-ownership transitions for founder-led businesses
-              and stays involved after close to protect continuity.
+              Turn your profitable company — 20+ employees, $3M+ in revenue — into a 100%
+              employee-owned business in about four months. The purchase is structured and
+              financed, so your employees don&apos;t need the cash to buy it. Section 1042
+              tax-deferred treatment may be available to qualifying sellers.
             </p>
 
             <div className="hch-hero-ctas" role="group" aria-label="Primary actions">
