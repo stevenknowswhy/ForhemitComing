@@ -4,32 +4,32 @@ import { useState } from "react";
 
 const AFTER_ITEMS = [
   {
-    id: "advisory",
-    title: "Advisory period",
-    summary: "6\u201312 months, flexible hours",
+    id: "transition",
+    title: "Your transition period",
+    summary: "4\u201312 months, on call \u2014 agreed in writing",
     detail:
-      "You help the team learn the ropes \u2014 typically 10\u201315 hours per week, declining over time. Compensation for the advisory period is negotiated as part of the deal, not an afterthought.",
+      "You are available for a transition period of 4 to 12 months after close, on call in a role agreed in writing before closing: reachable for agreed check-ins, introductions, and questions as the new owners settle in, not working hands-on \u2014 lending the transition your credibility.",
   },
   {
-    id: "noncompete",
-    title: "Non-compete",
-    summary: "Typically 1\u20132 years, limited scope",
+    id: "monitoring",
+    title: "Monitoring for 24 months",
+    summary: "Warning indicators agreed with you up front",
     detail:
-      "Standard ESOP non-competes are limited to your industry and geography. Terms are negotiable and transparent \u2014 we help you understand every restriction before you sign.",
+      "For 24 months after close the company is monitored against warning indicators agreed with you up front, reported on a schedule agreed with you \u2014 so problems surface while they are still small enough to fix. The company you built keeps being cared for.",
   },
   {
     id: "employees",
     title: "Employee impact",
-    summary: "Same roles, same pay, same benefits",
+    summary: "Shares in the company, held in the ESOP trust",
     detail:
-      "On closing day, your employees\u2019 jobs don\u2019t change. They keep the same roles, pay, and benefits. The ownership transition happens in the background through the trust structure.",
+      "Your employees receive shares in the company, held in the ESOP trust and allocated to their individual accounts over time, on top of their regular pay. They do not buy in and they do not take on the company\u2019s debts. As the company performs and the acquisition financing is repaid, the value of what they hold grows.",
   },
   {
-    id: "freedom",
-    title: "Your freedom",
-    summary: "After advisory, you\u2019re fully free",
+    id: "after",
+    title: "After the transition period",
+    summary: "The shape of your involvement is yours to choose",
     detail:
-      "No board seat requirements, no continued obligations. Many sellers consult, travel, or start something new. The business is designed to run without you \u2014 that\u2019s what Month 3 proves.",
+      "This commitment is part of the standard, not an imposition: employees believe in the change because you visibly stand behind it. After that period, the shape of your involvement is yours to choose.",
   },
 ];
 
@@ -39,11 +39,11 @@ export function AfterCloseSection() {
   return (
     <section id="fmp-after-close" className="fmp-section" aria-labelledby="fmp-after-heading">
       <h2 id="fmp-after-heading" className="fmp-section-title">
-        Post-Close Stewardship: We Stay When Others Leave
+        After the close
       </h2>
       <p className="fmp-section-lead">
-        The deal is done—but our work continues. While others disappear at closing, 
-        we steward your legacy through the critical first 24 months.
+        Your transition period, and after. Most advisors disappear at
+        closing; Forhemit stays &mdash; that is the product.
       </p>
       <div className="fmp-after-grid">
         {AFTER_ITEMS.map((item) => {

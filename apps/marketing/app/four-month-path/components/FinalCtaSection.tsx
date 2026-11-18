@@ -12,7 +12,7 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
   return (
     <section id="fmp-get-started" className="fmp-section fmp-final-cta" aria-labelledby="fmp-final-cta-heading">
       <h2 id="fmp-final-cta-heading" className="fmp-final-cta-headline">
-        Start Your Succession Plan While You Still Have Options
+        Four months from now, this could be finished.
       </h2>
       <div className="fmp-final-cta-actions fmp-final-cta-actions--row">
         <span className="fmp-cta-shell">
@@ -46,7 +46,7 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
         <span className="fmp-cta-shell fmp-cta-shell--block">
           <span className="fmp-cta-shell__glow" aria-hidden />
           <RoadmapLink surface="four_month_path_footer_secondary" className="fmp-btn fmp-btn-secondary">
-            Open the Full 120-Day Timeline (HTML) - Share with Your Advisor
+            Open the 120-Day Roadmap (HTML)
           </RoadmapLink>
         </span>
       </div>

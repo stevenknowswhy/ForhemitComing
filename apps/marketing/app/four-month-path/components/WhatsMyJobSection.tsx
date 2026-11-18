@@ -16,10 +16,10 @@ export function WhatsMyJobSection() {
               <h3 className="fmp-role-title">What you do</h3>
             </div>
             <ul className="fmp-role-list">
-              <li>Answer questions about your business (2–3 meetings, ~30 minutes each)</li>
-              <li>Provide last 3 years of financials (tax returns, P&amp;Ls)</li>
-              <li>Keep running the business normally (don&apos;t let it slide)</li>
-              <li>Be willing to offer guidance for 6 - 12 months</li>
+              <li>Share your financials, headcount, and ownership structure for a confidential review</li>
+              <li>Work through the tax treatment with your own tax advisor before anything is signed</li>
+              <li>Keep running the business while the structure is built</li>
+              <li>Be available on call for 4 to 12 months after close — check-ins, introductions, and questions, not working hands-on</li>
             </ul>
           </div>
         </div>
@@ -31,10 +31,10 @@ export function WhatsMyJobSection() {
               <p className="fmp-role-kicker">Everything else.</p>
             </div>
             <ul className="fmp-role-list fmp-role-list--forhemit">
-              <li>Coordinate with banks and lenders on your behalf</li>
-              <li>Run employee training and readiness</li>
-              <li>Manage legal documents end to end</li>
-              <li>Build the operations plan that shows the business can run without you</li>
+              <li>Commission the independent valuation from a qualified third-party appraiser</li>
+              <li>Design the ESOP structure with ERISA counsel</li>
+              <li>Prepare and place the lender-ready financing package</li>
+              <li>Coordinate counsel, trustee, and appraiser through closing</li>
             </ul>
           </div>
         </div>
@@ -52,8 +52,8 @@ export function WhatsMyJobSection() {
                 After everything is set up:
               </p>
               <ul className="fmp-role-list" aria-labelledby="fmp-role-employees-after-label">
-                <li>Attend 2 training sessions on how their ownership works</li>
-                <li>Elect a trustee to represent them in the deal</li>
+                <li>Become owners — shares are held in the ESOP trust and allocated to their individual accounts over time</li>
+                <li>Receive a clear explanation of what they now hold, at closing</li>
               </ul>
             </div>
           </div>

@@ -17,17 +17,17 @@ export function CostGlanceSection() {
       <div className="fmp-cost-card">
         <div className="fmp-cost-card-inner">
           <p className="fmp-cost-range">3&ndash;5%</p>
-          <p className="fmp-cost-of">of total deal value</p>
-          <p className="fmp-cost-note">Typical total professional fees across all parties</p>
+          <p className="fmp-cost-of">of valuation</p>
+          <p className="fmp-cost-note">Total transition fees</p>
           <ul className="fmp-cost-points">
-            <li>Most fees are paid by the company or trust &mdash; not you personally</li>
-            <li>Your direct cost as seller: a fixed advisory fee agreed upfront</li>
-            <li>No success fee, no percentage of the purchase price from your pocket</li>
+            <li>One figure, covering the whole transition, set in writing before you sign anything</li>
+            <li>That is the all-in total: Forhemit&apos;s work plus the third-party charges the transaction requires</li>
+            <li>Itemized in the fee document, with who receives each charge</li>
           </ul>
           <span className="fmp-cta-shell fmp-cta-shell--inline">
             <span className="fmp-cta-shell__glow" aria-hidden />
             <a href="#fmp-fees" className="fmp-cost-detail-link" onClick={scrollToFees}>
-              See detailed fee breakdown &rarr;
+              See what the total covers &rarr;
             </a>
           </span>
         </div>

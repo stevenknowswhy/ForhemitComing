@@ -1,10 +1,9 @@
 import { RoadmapLink } from "./RoadmapLink";
 
 const DEFAULT_BULLETS = [
-  "Exact dates and legal milestones",
-  "The 9 team seats you need to fill",
-  "Technical requirements for lenders",
-  "For professional advisors",
+  "The week-by-week version of the four-month path",
+  "Owners named for every step",
+  "Provided at assessment — so you can hold us to it",
 ];
 
 type Props = {
@@ -23,10 +22,10 @@ export function RoadmapPanel({
   variant = "inline",
   ariaLabel = "Open roadmap HTML in new tab",
   eyebrow = "For your attorney or CPA",
-  question = "Need the detailed timeline for your attorney or CPA?",
+  question = "The 120-Day Roadmap",
   bullets = DEFAULT_BULLETS,
   filenameNote = "Opens in a new tab as an interactive HTML roadmap. Use your browser print dialog to save a PDF copy if needed.",
-  ctaLabel = "Open: Complete 120-Day ESOP Roadmap (HTML)",
+  ctaLabel = "Open the 120-Day Roadmap (HTML)",
 }: Props) {
   return (
     <aside

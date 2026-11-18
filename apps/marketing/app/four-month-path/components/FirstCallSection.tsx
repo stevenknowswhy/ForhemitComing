@@ -2,40 +2,45 @@ export function FirstCallSection() {
   return (
     <section id="fmp-first-call" className="fmp-section" aria-labelledby="fmp-call-heading">
       <h2 id="fmp-call-heading" className="fmp-section-title">
-        What happens on your first call
+        What happens first
       </h2>
       <p className="fmp-section-lead">
-        The 20-minute call isn&apos;t a sales pitch. Here&apos;s exactly what happens.
+        No sales pitch. The path starts with the free assessment &mdash;
+        here&apos;s exactly what happens.
       </p>
 
       <div className="fmp-call-steps">
         <div className="fmp-call-step">
           <span className="fmp-call-step-num" aria-hidden>1</span>
           <div>
-            <h3 className="fmp-call-step-title">We ask about your business</h3>
+            <h3 className="fmp-call-step-title">Start with the free assessment</h3>
             <p>
-              Revenue range, employee count, ownership structure, and your timeline for selling.
-              About 5 minutes.
+              Five yes/no questions against the standard &mdash; the same
+              screen we apply to every business. Two minutes, and an honest
+              answer about whether your business fits the path.
             </p>
           </div>
         </div>
         <div className="fmp-call-step">
           <span className="fmp-call-step-num" aria-hidden>2</span>
           <div>
-            <h3 className="fmp-call-step-title">We share a preliminary price range</h3>
+            <h3 className="fmp-call-step-title">See the documents before you sign anything</h3>
             <p>
-              Based on comparable ESOP transactions, we give you a realistic range &mdash; not a
-              promise, but a grounded starting point.
+              Our one-page fee document &mdash; every charge, who receives
+              it, and when &mdash; and the 120-Day Roadmap are provided at
+              assessment, so you can hold us to both.
             </p>
           </div>
         </div>
         <div className="fmp-call-step">
           <span className="fmp-call-step-num" aria-hidden>3</span>
           <div>
-            <h3 className="fmp-call-step-title">You decide if it&apos;s worth exploring</h3>
+            <h3 className="fmp-call-step-title">Month 1 tells you if the fit is real</h3>
             <p>
-              No commitment, no retainer, no follow-up pressure. If the numbers make sense, we
-              discuss next steps. If not, we&apos;ll tell you why and what alternatives exist.
+              A confidential review of financials, headcount, and ownership
+              structure, ending in a plain-language feasibility summary you
+              can share with your own advisors. If the fit is wrong, we say
+              so now, not in month three.
             </p>
           </div>
         </div>
@@ -44,8 +49,9 @@ export function FirstCallSection() {
       <div className="fmp-call-prepare">
         <p className="fmp-call-prepare-label">What to have ready</p>
         <p>
-          Last year&apos;s revenue, approximate EBITDA or net income, employee count, and your
-          ownership percentage. That&apos;s all we need for the first conversation.
+          Nothing for the assessment. For Month 1: your financials, headcount,
+          and ownership structure &mdash; shared under NDA, in a confidential
+          review.
         </p>
       </div>
     </section>

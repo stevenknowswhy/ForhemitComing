@@ -1,27 +1,27 @@
 const PILLARS = [
   {
-    id: "post-close",
+    id: "fit",
     icon: "◈",
-    title: "Post-close stewardship",
-    body: "The only exit advisor that stays after the wire hits. We steward your legacy through the critical first 24 months—not just planning your exit, but ensuring your business survives it.",
+    title: "We tell you if it's not a fit.",
+    body: "If your business doesn't meet the standard, we say so at the start — and name what would have to change.",
   },
   {
-    id: "owner-first",
+    id: "price",
     icon: "◆",
-    title: "Owner-first design",
-    body: "Every decision is filtered through one question: does this protect the seller? From fair price guarantees to escrow-free closings paired with §1042/§1045 tax advantages, the structure exists to get you paid — fully and on time.",
+    title: "The price is set independently.",
+    body: "An independent appraiser sets fair market value — one who works for neither side. Neither Forhemit nor the owner sets the price.",
   },
   {
-    id: "transparency",
+    id: "fee",
     icon: "◇",
-    title: "Full transparency",
-    body: "No hidden fees, no surprise retainers, no jargon. You see every cost, every timeline, and every risk before you sign anything. This page is proof of that philosophy.",
+    title: "Our fee is agreed in advance.",
+    body: "Total transition fees typically run 3–5% of valuation — one figure, covering the whole transition, set in writing before you sign anything.",
   },
   {
-    id: "one-team",
+    id: "stay",
     icon: "▣",
-    title: "One coordinated team",
-    body: "Instead of hiring five separate firms and hoping they talk to each other, Forhemit quarterbacks the entire deal — bank, attorney, trustee, appraiser, and operations plan — so you have one point of contact.",
+    title: "We stay after the close.",
+    body: "After closing, we're available on call for 4 to 12 months — check-ins, introductions, and questions — while the new employee-owners settle in.",
   },
 ];
 
@@ -29,11 +29,11 @@ export function WhyForhemitSection() {
   return (
     <section id="fmp-why" className="fmp-section fmp-why" aria-labelledby="fmp-why-heading">
       <h2 id="fmp-why-heading" className="fmp-section-title">
-        Beyond the Balance Sheet™: Why owners choose Forhemit
+        Why owners choose Forhemit
       </h2>
       <p className="fmp-section-lead">
-        We don&apos;t just plan your exit. We ensure your business survives it. 
-        While others disappear at closing, we steward your legacy through the critical first 24 months.
+        Four commitments, each with a cost attached. If we cannot keep one, we
+        would rather lose the engagement than break it quietly.
       </p>
       <div className="fmp-pillars-grid">
         {PILLARS.map((p) => (

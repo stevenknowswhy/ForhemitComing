@@ -17,8 +17,8 @@ export function BusinessOwnersClosingSections() {
       <TimelineRealismSection
         sectionId="bo-path-realism"
         headingId="bo-path-realism-heading"
-        title="What to expect on the way to closing"
-        lead="Roughly four months from first numbers to a funded close is realistic for many owners—when you are ready to sell. Here are the questions we hear most before the wire hits."
+        title="What to realistically expect"
+        lead="Four months is the plan, not a guarantee — here is what the timeline honestly depends on."
         faqBodyIdPrefix="bo-path-realism-body"
       />
 

@@ -52,12 +52,14 @@ export function FourMonthPathClient() {
       <div className="fmp-bg" aria-hidden />
 
       <header className="fmp-hero">
-        <p className="fmp-hero-eyebrow">Beyond the Balance Sheet™ · The 4-Month Path</p>
-        <h1 className="fmp-hero-title">The Fastest Path to a Funded Exit That Preserves Your Legacy</h1>
+        <p className="fmp-hero-eyebrow">How it works</p>
+        <h1 className="fmp-hero-title">The Four-Month Path</h1>
         <p className="fmp-hero-sub">
-          Traditional sale: 12–18 months. Forhemit ESOP: <strong>4 months</strong>. 
-          Below is the same timeline we walk owners through—plain English, no jargon. 
-          While others disappear at closing, we steward your legacy through the critical first 24 months.
+          This is the whole route from first review to a company your
+          employees own outright: four months, in four defined stages, with
+          the fee and the tax treatment stated in writing before you commit.
+          The clock starts at the first working session in Month 1 and ends
+          at the closing table in Month 4.
         </p>
         <p className="fmp-hero-alternate">
           Haven&apos;t taken the 2-Minute Check yet?{" "}
@@ -74,11 +76,13 @@ export function FourMonthPathClient() {
 
           <section id="fmp-timeline" className="fmp-section" aria-labelledby="fmp-timeline-heading">
             <h2 id="fmp-timeline-heading" className="fmp-section-title">
-              Traditional Sale: 12–18 Months. Forhemit ESOP: 4 Months.
+              Four phases, from first review to the closing table.
             </h2>
             <p className="fmp-section-lead">
-              Four phases from first numbers to check in hand. Your team clears a checkpoint at each stage so
-              there are no surprises at closing. The only exit advisor that stays after the wire hits.
+              A traditional sale commonly takes 12–18 months. This path is
+              deliberately shorter, because the buyer is already inside the
+              building and the structure is decided before the clock starts,
+              not negotiated while it runs.
             </p>
             <FourPhaseTimeline phases={FOUR_PHASE_BLOCKS} />
           </section>

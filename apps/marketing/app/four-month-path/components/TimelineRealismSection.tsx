@@ -12,22 +12,22 @@ const DEFAULT_FAQ_ITEMS: TimelineFaqItem[] = [
   {
     id: "realistic",
     q: "Is four months really realistic?",
-    a: "Yes, for well-prepared businesses. The median ESOP closes in 90\u2013150 days once engaged. The biggest factor is how quickly you can provide clean financials. If your books are audited or review-quality, we can often hit 90 days.",
+    a: "Four months is the plan. A traditional sale commonly takes 12\u201318 months; this path is deliberately shorter, because the buyer is already inside the building and the structure is decided before the clock starts, not negotiated while it runs.",
   },
   {
     id: "delays",
-    q: "What typically causes delays?",
-    a: "Three things: messy financials (add 2\u20134 weeks), lender underwriting questions (add 2\u20133 weeks), and owner indecision on deal terms (variable). We front-load the financial review to catch problems in Month 1, not Month 3.",
+    q: "What can stretch it?",
+    a: "The plan depends on things no advisor fully controls: how quickly a lender moves, the trustee\u2019s independent review, and how fast decisions and documents come back on your side.",
   },
   {
-    id: "bank-no",
-    q: "What if the bank says no?",
-    a: "We pre-qualify the deal before Month 1 formally starts. If a lender declines, we have relationships with multiple ESOP-experienced banks and can pivot quickly. If no lender will fund the deal, we\u2019ll tell you \u2014 that\u2019s information worth having, even if it\u2019s not the answer you wanted.",
+    id: "fit",
+    q: "What if the fit is wrong?",
+    a: "We start by understanding the business you have built \u2014 its financials, its people, its culture, and what you want the next chapter to look like. If the fit is wrong, we say so now, not in month three, and stopping here costs you nothing but the conversation.",
   },
   {
-    id: "dual-track",
-    q: "Can I run a PE process at the same time?",
-    a: "Absolutely. Many owners do. An ESOP in your back pocket is insurance: if a private buyer walks at the eleventh hour, your ESOP closing is already funded and ready. We coordinate the timelines so they don\u2019t conflict.",
+    id: "slips",
+    q: "What happens if the timeline slips?",
+    a: "If the timeline stretches, you hear it from us first, with the reason and the new date. What we will not do is protect the four-month headline by cutting a step the law requires.",
   },
 ];
 
