@@ -24,13 +24,13 @@ export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
   },
   {
     id: "headcount",
-    question: "Does your company have 20 or more employees?",
-    fix: "A team of 20 or more — the ownership and trustee structure needs a broader base.",
+    question: "Does your company have 20 or more verifiable U.S. employees — people on U.S. payroll (W-2), not contractors or overseas staff?",
+    fix: "A team of 20 or more verifiable U.S. employees (W-2 payroll, not contractors or overseas staff) — the ownership and trustee structure needs a broader base, and the count has to be documentable.",
   },
   {
     id: "profitability",
-    question: "Is your company profitable?",
-    fix: "Consistent profitability — the acquisition is financed from the company's future earnings.",
+    question: "Has your company been profitable for 3 years or more?",
+    fix: "Profitable for at least 3 years — the purchase is financed from the company's earnings, and lenders underwrite a track record, not a good year.",
   },
   {
     id: "timeline",
@@ -39,8 +39,8 @@ export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
   },
   {
     id: "transition",
-    question: "Are you willing to stay involved for at least 12 months after closing to support the handoff?",
-    fix: "Your commitment to stay at least 12 months after closing — your endorsement carries the transition.",
+    question: "After the sale closes, can you be available to the company for a transition period of 4 to 12 months — not working hands-on, but reachable for agreed check-ins, introductions, and questions as the new owners settle in?",
+    fix: "Some availability after closing — 4 to 12 months on call for check-ins, introductions, and questions. Zero availability is the only fail: the new owners need a bridge to you, not your daily presence.",
   },
 ];
 
