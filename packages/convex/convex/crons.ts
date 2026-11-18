@@ -56,6 +56,18 @@ crons.daily(
 	internal.journalBox.syncAllChecklists,
 );
 
+// ============================================
+// Sheets sync — every 15 minutes
+// POSTs new form submissions to the Google Sheet webhook
+// (no-ops quietly until SHEETS_SYNC_WEBHOOK_URL is set)
+// ============================================
+
+crons.interval(
+	"sheetsSync",
+	{ minutes: 15 },
+	internal.sheetsSync.run,
+);
+
 export default crons;
 
 // ============================================
