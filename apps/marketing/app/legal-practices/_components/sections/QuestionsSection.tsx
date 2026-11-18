@@ -7,8 +7,11 @@ export function QuestionsSection() {
     <section className="legal-section questions-section">
       <div className="container">
         <div className="section-header" data-animate="fade-up">
-          <h2>Two Scenarios Worth Considering</h2>
-          <p className="section-intro">Hard questions about continuity, control, and your firm&apos;s future.</p>
+          <h2>Raise it first, and the whole option set is open</h2>
+          <p className="section-intro">
+            Put succession on the table before any broker, buyer, or letter of intent exists,
+            and the conversation is a different one.
+          </p>
         </div>
 
         <div className="questions-visual">
@@ -25,13 +28,15 @@ export function QuestionsSection() {
               <div className="question-image-overlay" />
             </div>
             <div className="question-content">
-              <span className="question-label">Scenario One</span>
+              <span className="question-label">The option founders never hear</span>
               <p className="question-text">
-                If your largest privately held client signed a letter of intent to sell tomorrow,{" "}
+                Employee ownership is the option most founders never hear:{" "}
                 <strong>
-                  would you be leading the deal — or reading about it in a press release drafted by
-                  someone else?
-                </strong>
+                  the employees buy 100% of the company, at a full price set by an independent
+                  appraiser who works for neither side, in about four months.
+                </strong>{" "}
+                Where the transaction qualifies, §1042 can provide tax-deferred treatment for
+                eligible capital gains.
               </p>
             </div>
           </div>
@@ -39,19 +44,24 @@ export function QuestionsSection() {
           {/* Question 2 - Text Left, Image Right */}
           <div className="question-row reverse" data-animate="fade-up" data-delay="150">
             <div className="question-content">
-              <span className="question-label">Scenario Two</span>
+              <span className="question-label">On the founder&apos;s timing</span>
               <p className="question-text">
-                If a private equity buyer walks in,{" "}
                 <strong>
-                  how much of that client&apos;s legal work will follow their preferred counsel out the
-                  door?
+                  Your client can get some of their exit money now, be available to the company
+                  for a transition of 4 to 12 months after close — and after that, leave on
+                  their own timing, not a buyer&apos;s.
                 </strong>
+              </p>
+              <p className="question-text">
+                We coordinate — never replace — the legal work of an ESOP transition: plan and
+                trust documents with ERISA counsel, transaction documents, and the compliance
+                calendar for DOL and IRS requirements.
               </p>
             </div>
             <div className="question-image">
               <Image
                 src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDdGxJ5CeLAZPcI2XFHu8ORonq6MaQyfrGUBxS"
-                alt="Private equity meeting"
+                alt="A business meeting"
                 width={1835}
                 height={2725}
                 sizes="(max-width: 900px) 100vw, 50vw"

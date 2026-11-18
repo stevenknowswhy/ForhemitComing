@@ -18,10 +18,10 @@ const differentiators = [
         <circle cx="24" cy="12" r="2" fill="currentColor" />
       </svg>
     ),
-    title: "Public Benefit Corporation",
+    title: "A fast no, with the reasons",
     description:
-      "Our charter legally requires us to consider employees, communities, and long-term resilience — not just financial returns.",
-    highlight: "Hardwired to care about the same stakeholders your client does.",
+      "If a business you send us is not a fit, we say so quickly and say why, in terms you can take back to your client, along with what would have to change.",
+    highlight: "Quickly — and in terms you can take back to your client.",
   },
   {
     icon: (
@@ -42,10 +42,10 @@ const differentiators = [
         />
       </svg>
     ),
-    title: "Principal steward, not just advisor",
+    title: "No surprises on price",
     description:
-      "We provide fiduciary oversight and become a long-term partner. That aligns us with the company's future, not just the closing date.",
-    highlight: "Your client isn't a test case.",
+      "Your client pays one transition fee: total transition fees typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our How It Works page, so you can answer your client's question before they ever talk to us.",
+    highlight: "3 to 5% of the valuation, agreed in advance.",
   },
   {
     icon: (
@@ -60,38 +60,18 @@ const differentiators = [
         <path d="M16 24L22 30L32 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
-    title: "Deep resilience expertise",
+    title: "No fees for introductions",
     description:
-      "Our founder's background is in disaster planning and continuity of operations. We've adapted those frameworks to mid-market businesses.",
-    highlight: "Proprietary stress-testing systems for multi-threat events.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="20" r="8" stroke="currentColor" strokeWidth="2" />
-        <circle cx="32" cy="20" r="8" stroke="currentColor" strokeWidth="2" />
-        <path d="M22 26C22 26 24 28 26 26" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        <path
-          d="M8 36C8 36 12 32 16 32C20 32 22 34 24 36C26 34 28 32 32 32C36 32 40 36 40 36"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
-    ),
-    title: "Designed to preserve YOUR role",
-    description:
-      'Most ESOP specialists view existing counsel as a variable. We designed our model so that you are a constant.',
-    highlight: "We actively expand your engagement scope.",
-  },
+      "We are asked, fairly, what a partner gets for an introduction. We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals. What we offer is a clean handoff, a client who stays yours, and a partner who is kept informed at every phase.",
+    highlight: "A clean handoff — nothing between firms.",
+  }
 ];
 
 export function WhyDifferentSection() {
   return (
     <section className="legal-section why-different-section">
       <div className="container">
-        <h2 data-animate="fade-up">Why Stewardship is different</h2>
+        <h2 data-animate="fade-up">What we owe you, continued</h2>
 
         <div className="differentiator-rows">
           {differentiators.map((diff, index) => (

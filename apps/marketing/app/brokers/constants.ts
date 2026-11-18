@@ -13,204 +13,201 @@ export type BrokerTimelineFaqItem = {
 
 export const BROKER_PILLARS = [
   {
-    id: "close",
+    id: "closing-table",
     icon: "◆",
-    title: "A more assured closing",
-    body: "Parallel ESOP work means your seller is not hanging on a single buyer’s timeline. When diligence drags or a strategic walks, the employee track is already financed and moving—so you are less likely to lose the fee to “no deal.”",
+    title: "Paid at the closing table, or not at all",
+    body: "An exclusive listing runs six months, a year — valuation, memorandum, buyer screening, site visits, negotiation — and every hour of it is fronted against a single closing. When a listing expires, the work does not convert. It evaporates.",
   },
   {
-    id: "price",
+    id: "market-odds",
     icon: "◇",
-    title: "Full fair value at close",
-    body: "The structure is built around an independent valuation and bank-backed financing—cash to the seller at closing, not a vague earn-out story. Your client gets a real number and a real wire, aligned with how ESOP purchases are typically funded.",
+    title: "Only 20 to 30% of listings sell",
+    body: "Only about 20 to 30% of businesses that go to market actually sell (Exit Planning Institute). And the deals that do find a buyer can still die on the way — in diligence, on the buyer's financing, or in the founder's own second thoughts.",
   },
   {
-    id: "commission",
+    id: "buyer-already-there",
     icon: "▣",
-    title: "You stay the broker of record",
-    body: "We are not shopping the business on the buy side. We quarterback ESOP execution—lender, trustee, appraiser, ERISA counsel—while you keep the relationship and a standard success fee when the transaction closes.",
+    title: "One buyer does not need to be found",
+    body: "None of that is a failure of effort. It is the shape of a market where the buyer has to be found, financed, and kept enthusiastic for months. The employees are already there.",
   },
 ] as const;
 
 export const BROKER_QUALIFICATION_CRITERIA = [
-  { id: "revenue", label: "Listing at roughly $3M+ revenue (bankable scale)" },
-  { id: "employees", label: "At least about 20 employees (viable internal bench)" },
-  { id: "profitable", label: "Profitable recent history (underwriting-friendly)" },
-  { id: "ownership", label: "Seller owns a controlling stake (or clear path to 100%)" },
-  { id: "operable", label: "Business can run without the owner—or owner will transition" },
-  { id: "entity", label: "C-Corp or S-Corp (ESOP-feasible entity)" },
-  { id: "market", label: "You are open to running or allowing a parallel ESOP track" },
+  { id: "revenue", label: "Annual revenue of $3M or more" },
+  { id: "employees", label: "20 or more verifiable U.S. employees" },
+  { id: "profitable", label: "Profitable, with a consistent track record" },
+  { id: "ownership", label: "The owner holds 51% or more of the company" },
+  { id: "timeline", label: "The owner can allow a full four months for the transition" },
+  { id: "availability", label: "The owner is willing to be available for 4 to 12 months after closing — on call, not working hands-on" },
 ] as const;
 
 export const BROKER_PHASE_BLOCKS: PhaseBlock[] = [
   {
     id: "brk-phase-1",
-    monthLabel: "MONTH 1: QUALIFY THE LISTING & BUILD THE FILE",
-    dayRange: "Days 1–30",
+    monthLabel: "MONTH 1: READINESS & VALUATION",
+    dayRange: "Month 1 of 4",
     bullets: [
-      "NDAs and engagement: you keep the broker relationship; we align on what the seller can share",
-      "Lender starts credit narrative—your client sees early signal on financeability",
-      "Operations map: who runs what post-close so underwriting does not stall on “key person” risk",
+      "Confidential review of the business you bring us, screened against the published standard",
+      "Independent valuation: the price is set by an appraiser who works for neither side",
+      "Readiness: the transition is stress-tested before the transaction is structured",
     ],
-    checkpoint: "Checkpoint: Independent indication of fair value (appraiser path kicked off)",
+    checkpoint: "Checkpoint: Independent valuation in hand",
   },
   {
     id: "brk-phase-2",
-    monthLabel: "MONTH 2: LOCK TERMS",
-    dayRange: "Days 31–60",
+    monthLabel: "MONTH 2: STRUCTURE & FINANCING",
+    dayRange: "Month 2 of 4",
     bullets: [
-      "Letter of intent level economics for the ESOP purchase—your seller knows the number",
-      "Bank moves toward commitment—parallel to any buyer LOIs you are negotiating",
-      "Quality of earnings / financial package tightened so Month 3 is paperwork, not archaeology",
+      "The employee-ownership structure is designed and its financing placed",
+      "The fee document and the 120-Day Roadmap are already in the founder's hands from the assessment",
+      "You are kept informed at the phase gate, with the founder's authorisation",
     ],
-    checkpoint: "Checkpoint: Lender commitment directionally clear",
+    checkpoint: "Checkpoint: Financing placed",
   },
   {
     id: "brk-phase-3",
-    monthLabel: "MONTH 3: DOCUMENTS & TRUSTEE",
-    dayRange: "Days 61–90",
+    monthLabel: "MONTH 3: LEGAL & COMPLIANCE",
+    dayRange: "Month 3 of 4",
     bullets: [
-      "Purchase agreement and ESOP plan documents—coordinated with your deal timeline",
-      "Trustee diligence: employees as buyers must be protected; that protects everyone at close",
-      "Employee communications staged so the market process is not disrupted prematurely",
+      "Plan and trust documents, transaction documents, and the DOL/IRS compliance calendar — coordinated, never improvised",
+      "Employee communication happens at the right moment, agreed in advance",
     ],
-    checkpoint: "Checkpoint: Trustee comfortable the company runs without the seller at the desk",
+    checkpoint: "Checkpoint: Compliance documented",
   },
   {
     id: "brk-phase-4",
-    monthLabel: "MONTH 4: CLOSE & PAY SELLER",
-    dayRange: "Days 91–120",
+    monthLabel: "MONTH 4: CLOSE & HANDOVER",
+    dayRange: "Month 4 of 4",
     bullets: [
-      "Sign, fund, wire—seller paid consistent with the ESOP structure (typically largely upfront)",
-      "You invoice your success fee on the closed transaction like any other closing",
-      "If a private buyer won earlier, you already benefited from leverage; if not, you still have a close",
+      "Closing is executed and the employees own the company",
+      "The founder's on-call transition period of 4 to 12 months begins",
+      "The company is monitored for 24 months after close",
     ],
-    checkpoint: "Result: funded transaction—broker fee event, seller exit, employees own the company",
+    checkpoint: "Checkpoint: Closing executed",
   },
 ];
 
 export const BROKER_CHECKPOINTS: CheckpointRow[] = [
   {
-    title: "Valuation checkpoint",
-    day: "~Day 45",
-    body: "Independent appraisal supports a fair price to the ESOP—credible with lenders and defensible for your seller.",
+    title: "Independent valuation",
+    day: "Month 1",
+    body: "The price rests on an independent appraisal — set by an appraiser who works for neither side, so you can defend it to your client.",
   },
   {
-    title: "Bank checkpoint",
-    day: "~Day 60",
-    body: "Lender commitment in view so you are not selling a fantasy—your parallel buyer conversations sit on real financing.",
+    title: "Financing placed",
+    day: "Month 2",
+    body: "The structure and its financing are in place before legal work begins — not hoped for at the closing table.",
   },
   {
-    title: "Financial health checkpoint",
-    day: "~Day 75",
-    body: "Trailing performance still supports the deal—reduces eleventh-hour reprices that kill M&A and ESOP alike.",
+    title: "Compliance documented",
+    day: "Month 3",
+    body: "Plan documents, transaction documents, and the compliance calendar are complete and coordinated with the founder's own counsel.",
   },
   {
-    title: "Operations checkpoint",
-    day: "~Day 90",
-    body: "Evidence the business runs without the owner in the chair—what banks and trustees need for a clean close.",
+    title: "Closing executed",
+    day: "Month 4",
+    body: "The employees own the company, and the founder's on-call transition period begins.",
   },
 ];
 
 export const BROKER_REALISM_FAQ: BrokerTimelineFaqItem[] = [
   {
-    id: "parallel",
-    q: "Will a parallel ESOP track scare off my buyers?",
-    a: "Done well, it signals your seller has a serious alternative—not desperation. Many intermediaries use a funded Plan B to reduce re-trades. We coordinate messaging and NDAs so your process stays orderly.",
-  },
-  {
     id: "timeline",
-    q: "Is 90–120 days realistic while I am in market?",
-    a: "For listings with clean financials and responsive sellers, yes—similar to a well-run SBA-backed path. Messy books or slow data add weeks; we surface that in Month 1 so you can set expectations with buyers and the seller.",
+    q: "How long does the process take?",
+    a: "About four months from first review to the closing table — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
   },
   {
-    id: "fee",
-    q: "Do I still get paid if the ESOP closes?",
-    a: "Yes—when you are broker of record on the closed transaction, your success fee is part of the closing economics like any other sale. We do not compete for your commission.",
+    id: "not-a-fit",
+    q: "What if my client doesn't qualify?",
+    a: "You hear it fast, with the reasons — in terms you can take back to your client, along with what would have to change. The standard we screen against is published on this page, so there are no surprises in either direction.",
   },
   {
-    id: "if-buyer-wins",
-    q: "What if a private buyer wins first?",
-    a: "Your seller had negotiating strength while the ESOP track was real. Some ESOP-specific costs may be sunk—similar to other broken-deal costs in M&A—but that is often small relative to saving a fee when buyers ghost at the end.",
+    id: "introduction-earns",
+    q: "What does an introduction earn me?",
+    a: "We are asked, fairly, what a broker gets for an introduction. We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals. What we offer is a clean handoff, a founder who actually transacts, and a broker who is kept informed at every phase.",
+  },
+  {
+    id: "deal-team",
+    q: "Do you work with my client's existing deal team?",
+    a: "Yes — alongside them, never instead of them. The founder's attorney, CPA, and wealth manager stay in their roles; we coordinate the transition work with them and keep you informed at every phase, with your client's authorisation.",
   },
 ];
 
 export const BROKER_OUTCOME_CARDS = [
   {
-    id: "private-wins",
+    id: "waiting",
     icon: "A",
-    title: "Private buyer wins",
-    subtitle: "Best-case for a strategic/PE offer you love",
+    title: "Waiting",
+    subtitle: "The market's buyer, on the market's timing",
     bullets: [
-      "Your seller had a credible ESOP alternative—often firmer on price and terms.",
-      "You close M&A as planned and earn your success fee on that transaction.",
-      "Some parallel ESOP costs may not be recovered—treat like deal insurance, not a second fee stack.",
+      "Relist and hope the next round of buyers is different.",
+      "Cut the price and ask the founder to accept less for the same company.",
+      "Wait for a buyer the founder will actually accept — while the founder gets older, the file gets staler, and the exclusive term runs down.",
     ],
   },
   {
-    id: "batna",
+    id: "making",
     icon: "B",
-    title: "While you are negotiating",
-    subtitle: "ESOP as leverage, not chaos",
+    title: "Making it happen",
+    subtitle: "The buyer who is already there",
     bullets: [
-      "Buyers sense a financed internal path—fewer late “haircuts” and less slow-walking.",
-      "You keep the process professional: one data room discipline, aligned timelines.",
-      "If the buyer tries to re-trade, your seller can walk toward the employee track without starting from zero.",
+      "The founder sells 100% of the company to its employees, at a price set by an independent appraiser who works for neither side.",
+      "Where the transaction qualifies, Section 1042 provides tax-deferred treatment for the founder.",
+      "The founder is available to the company for a transition period of 4 to 12 months after close — on call, not working hands-on.",
     ],
   },
   {
-    id: "esop-closes",
+    id: "founders-terms",
     icon: "C",
-    title: "No buyer / buyer walked",
-    subtitle: "The ESOP completes",
+    title: "The founder's terms",
+    subtitle: "Some founders aren't refusing to sell. They're refusing to sell to them.",
     bullets: [
-      "Seller still exits with a bank-backed purchase—typically ~90–120 days when the file is clean.",
-      "You earn your fee on the closed ESOP transaction as broker of record.",
-      "Employees are the buyers through the trust; legacy and jobs stay intact—strong referral story for you.",
+      "The business is sound, the price is defensible, and the offers are real — from buyers the founder does not trust with people they have employed for twenty years.",
+      "The employees are the buyer this founder can say yes to: continuity rather than absorption.",
+      "The conversation can only start with you — the founder called the broker first.",
     ],
   },
 ] as const;
 
-/** What we ask of the broker; paired with “no extra sell-side process” messaging on the page. */
+/** What we ask of the broker in the division of work. */
 export const BROKER_NEEDS_FROM_YOU = [
-  "A clear broker-of-record relationship and permission for us to engage the seller under your NDA (or a tri-party letter)—so nothing happens behind your back.",
-  "Access to the same financial narrative you are already using for buyers: P&Ls, balance sheets, cap table, and data-room materials. We only ask for ESOP- or lender-specific items when underwriting needs them—not a second full QoE by default.",
-  "A single coordination point: typically you, unless you want us copied with the seller on ESOP-only topics. Short syncs (often weekly early on, then at checkpoints) instead of ad-hoc chaos.",
-  "Visibility into your process calendar—IOIs, management meetings, LOI targets—so we never blind-side a buyer or break a process letter.",
-  "Help getting the seller’s attention for signatures and quick decisions at standard milestones (engagement, bank, trustee). That is usually minutes, not new projects for you.",
+  "You bring the founder, and everything you already know about the business — the knowledge no memorandum fully holds.",
+  "You are in the room when your client is first approached about the option.",
+  "You describe the business on a first call — no client name needed — and we screen it together against the published standard.",
+  "You stay the founder's broker: nothing happens behind your back, and you are kept informed as it proceeds.",
 ] as const;
 
-/** Same pattern as “No duplicate auction.” rows in the workload answer group. */
+/** Division-of-work rows: what Forhemit carries. */
 export const BROKER_WORKLOAD_MEANING_ROWS = [
   {
-    lead: "Closing Certainty.",
-    body: "You can be confident there is still a path to close when there are no outside buyers—or when a buyer fails late. The parallel ESOP track is real financing and real milestones, not a placeholder—so you are not rebuilding a deal from scratch.",
+    lead: "Structure and financing.",
+    body: "The independent valuation the price rests on, the structure, and its financing — carried by Forhemit, end to end.",
   },
   {
-    lead: "Negotiating Strength.",
-    body: "Your seller gains negotiating leverage: a credible Plan B means they can reject a weak private offer or push back on a bad re-trade without bluffing. Buyers treat a funded employee path differently than an empty threat.",
+    lead: "After close.",
+    body: "The founder's on-call transition availability runs 4 to 12 months, and the company is monitored for 24 months under our Early Warning System, against indicators agreed with the founder up front.",
   },
 ] as const;
 
 export const BROKER_PROCESS_STEPS = [
   {
     num: "1",
-    title: "Intro & listing fit",
-    body: "You introduce the seller (or we align under your NDA). We confirm headcount, profitability, and whether dual-track is worth the effort.",
+    title: "A short first call",
+    body: "You describe the business — no name needed — and the situation: the listing's history, the buyers the founder has refused, where things stand.",
   },
   {
     num: "2",
-    title: "Parallel planning",
-    body: "You run your buyer process; we build lender, trustee, and appraiser workstreams. Status updates stay coordinated so the seller is not double-booked.",
+    title: "We screen it together",
+    body: "Against the qualification standard on this page. If it is not a fit, you hear that fast, with the reasons.",
   },
   {
     num: "3",
-    title: "Checkpoint cadence",
-    body: "Same rhythm as our four-month path: valuation, bank, financials, operations—no surprise failures at the closing table.",
+    title: "Your client is approached — with you in the room",
+    body: "Only then, and the option is presented as what it is: a buyer they already know.",
   },
   {
     num: "4",
-    title: "Close one path",
-    body: "If a buyer wins, you close M&A. If not, we close the ESOP—you are still the intermediary on the transaction that funds.",
+    title: "We carry it to close",
+    body: "If the founder proceeds, Forhemit structures the transition and carries it toward close in about four months, and you are kept informed at every phase.",
   },
 ] as const;

@@ -5,28 +5,18 @@ import { ProcessStep } from "@/types";
 const processSteps: ProcessStep[] = [
   {
     num: "01",
-    title: "Confidential strategy session",
-    desc: "We meet with your key partners to map out your highest-value, highest-risk clients and identify where a stewardship ESOP might be a serious alternative to traditional M&A.",
+    title: "A conversation between professionals",
+    desc: "Reach out directly at contact@forhemit.com or (510) 768-7588, or through our contact page, and say you are an attorney, not a founder. No client needs to be involved — and no client name is needed — for a first conversation.",
   },
   {
     num: "02",
-    title: "Client risk mapping",
-    desc: "Together we select 5–15 priority clients for exit-planning conversations in the next 12–36 months, developing a plan for how you will raise the topic naturally.",
+    title: "Screen it together, against a published standard",
+    desc: "We screen the business against the standard on this page, together. If a client of yours clears it, the conversation is worth having. If they do not, you will hear that from us fast, with the reasons.",
   },
   {
     num: "03",
-    title: "Joint client conversations",
-    desc: "When appropriate, you introduce us as a specialized, values-aligned fiduciary partner. We listen first. If there isn't a fit, your relationship is still stronger for having brought a thoughtful option.",
-  },
-  {
-    num: "04",
-    title: "Structuring and execution",
-    desc: "If there's alignment, we move into feasibility analysis and structure design. Your firm plays the lead role on corporate and estate planning.",
-  },
-  {
-    num: "05",
-    title: "Long-term stewardship",
-    desc: "Post-transaction, we serve as long-term fiduciary and steward. Your firm maintains or expands its role as outside general counsel with recurring ESOP governance work.",
+    title: "A joint introduction, when you and your client are ready",
+    desc: "Named introductions happen only when you say so, on a joint call if you want one, with you in the room and counsel of record from the first conversation to the last.",
   },
 ];
 
@@ -34,10 +24,9 @@ export function ProcessSection() {
   return (
     <section className="legal-section process-section">
       <div className="container">
-        <h2 data-animate="fade-up">How a partnership actually works</h2>
+        <h2 data-animate="fade-up">How an introduction works</h2>
         <p className="process-subtitle" data-animate="fade-up">
-          You don&apos;t need to become an ESOP expert to start. You just need to know your own client
-          base.
+          Three steps, and your client stays unidentified until you say otherwise.
         </p>
 
         <div className="process-steps">

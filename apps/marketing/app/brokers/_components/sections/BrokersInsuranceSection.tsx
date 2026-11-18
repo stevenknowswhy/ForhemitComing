@@ -2,18 +2,20 @@ export function BrokersInsuranceSection() {
   return (
     <section id="brk-insurance" className="fmp-section" aria-labelledby="brk-insurance-heading">
       <h2 id="brk-insurance-heading" className="fmp-section-title">
-        Think of the ESOP track as deal insurance—not a second success fee
+        The money, plainly
       </h2>
       <p className="fmp-section-lead">
-        Setting up a serious employee path has a cost. Relative to a blown fee from a buyer that ghosts
-        after nine months—or a brutal last-minute re-trade—that cost is often modest. You are buying{" "}
-        <strong>optionality</strong>: a shorter path to a funded closing if the market does not cooperate,
-        and <strong>leverage</strong> if it does.
+        <strong>No surprises on price.</strong> Your client pays total transition fees that
+        typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our
+        How It Works page.
       </p>
       <p className="fmp-section-lead">
-        If a private buyer wins, some ESOP-specific spend may not be recovered (similar to other broken-deal
-        costs in M&amp;A). Many teams still take that trade because the alternative is no close at all—or a
-        weaker price because the seller had nowhere else to go.
+        <strong>What an introduction earns.</strong> We are asked, fairly, what a broker gets for
+        an introduction. We do not receive any money or anything else of value — monetary or
+        non-monetary — from any of our professional partners. We do not pay referral fees or
+        anything else of value for introductions, and we do not promise reciprocal referrals.
+        What we offer is a clean handoff, a founder who actually transacts, and a broker who is
+        kept informed at every phase.
       </p>
     </section>
   );

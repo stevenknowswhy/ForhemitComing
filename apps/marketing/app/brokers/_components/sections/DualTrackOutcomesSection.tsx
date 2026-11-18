@@ -4,12 +4,10 @@ export function DualTrackOutcomesSection() {
   return (
     <section id="brk-outcomes" className="fmp-section fmp-why" aria-labelledby="brk-outcomes-heading">
       <h2 id="brk-outcomes-heading" className="fmp-section-title">
-        Three outcomes you can explain to your seller
+        The choice
       </h2>
       <p className="fmp-section-lead">
-        Dual-track is not “pick ESOP or M&amp;A.” It is <strong>run the market</strong> while{" "}
-        <strong>a financed employee purchase is ready</strong> if the market disappoints—or while you use it
-        as leverage while buyers behave.
+        Waiting, or making it happen.
       </p>
       <div className="fmp-pillars-grid">
         {BROKER_OUTCOME_CARDS.map((card) => (
@@ -30,6 +28,10 @@ export function DualTrackOutcomesSection() {
           </div>
         ))}
       </div>
+      <p className="fmp-section-lead">
+        You cannot manufacture a buyer the founder will accept. But you can be the broker who
+        stopped waiting for one.
+      </p>
     </section>
   );
 }

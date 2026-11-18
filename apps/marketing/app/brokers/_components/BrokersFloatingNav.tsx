@@ -3,18 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
-  { id: "brk-why", label: "Why Forhemit" },
-  { id: "brk-workload", label: "Your Time" },
-  { id: "brk-qualify", label: "Who Qualifies" },
+  { id: "brk-why", label: "The Arithmetic" },
+  { id: "brk-workload", label: "Division of Work" },
+  { id: "brk-qualify", label: "Qualification" },
   { id: "brk-buyer", label: "Who Is the Buyer" },
-  { id: "brk-outcomes", label: "Dual-Track Outcomes" },
-  { id: "brk-timeline", label: "The Timeline" },
+  { id: "brk-outcomes", label: "The Choice" },
+  { id: "brk-screening", label: "18-Point Check" },
   { id: "brk-realism", label: "Realistic Timing" },
   { id: "brk-pdf", label: "Roadmap HTML" },
   { id: "brk-checkpoints", label: "Checkpoints" },
-  { id: "brk-process", label: "How It Runs" },
-  { id: "brk-insurance", label: "Insurance Mindset" },
-  { id: "brk-first-call", label: "First Conversation" },
+  { id: "brk-process", label: "Introductions" },
+  { id: "brk-insurance", label: "Fees, Plainly" },
+  { id: "brk-first-call", label: "First Call" },
+  { id: "brk-founder", label: "Who You Are Trusting" },
   { id: "brk-get-started", label: "Get Started" },
 ];
 

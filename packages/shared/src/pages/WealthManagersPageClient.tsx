@@ -92,66 +92,6 @@ function FAQItem({ question, answer, isOpen, onClick }: {
   );
 }
 
-// Tax Comparison Calculator Component
-function TaxComparisonCalculator() {
-  const [saleAmount, setSaleAmount] = useState(10);
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-
-  const federalCapGainsRate = 0.238; // up to 23.8% federal LTCG + NIIT (illustrative)
-  const traditionalNet =
-    Math.round(saleAmount * (1 - federalCapGainsRate) * 100) / 100;
-  const esopNet = saleAmount; // 0% with 1042 (illustrative)
-  const difference = Math.round((esopNet - traditionalNet) * 100) / 100;
-
-  return (
-    <div ref={ref} className={`tax-calculator ${isVisible ? 'visible' : ''}`}>
-      <div className="calculator-header">
-        <span className="calculator-label">Adjust Sale Amount</span>
-        <span className="calculator-value">${saleAmount}M</span>
-      </div>
-      <input
-        type="range"
-        min="2"
-        max="50"
-        value={saleAmount}
-        onChange={(e) => setSaleAmount(Number(e.target.value))}
-        className="calculator-slider"
-      />
-      <div className="calculator-results">
-        <div className="result-item traditional">
-          <span className="result-label">Traditional Sale</span>
-          <span className="result-value">${traditionalNet}M</span>
-          <span className="result-note">After up to 23.8% federal capital gains</span>
-        </div>
-        <div className="result-divider">
-          <span className="vs">VS</span>
-          <span className="diff">+${difference}M</span>
-        </div>
-        <div className="result-item esop">
-          <span className="result-label">ESOP + 1042</span>
-          <span className="result-value">${esopNet}M</span>
-          <span className="result-note">Tax-deferred reinvestment</span>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 // Benefit Card with hover effect
 function BenefitCard({ number, title, description, icon, delay = 0 }: {
   number: string;
@@ -220,6 +160,23 @@ function PartnershipStep({ step, title, description, side }: {
   );
 }
 
+const SECTION_1042_CONDITIONS = [
+  "The company is a C corporation at the time of the sale",
+  "The ESOP owns at least 30% of the company after the sale",
+  "The seller has held the stock for at least three years",
+  "The seller makes the §1042 election",
+  "The seller reinvests the proceeds in qualified replacement property within the statutory replacement period",
+];
+
+const SCREEN_CRITERIA = [
+  "Profitable, founder-led, with a consistent track record",
+  "Annual revenue of $3M or more",
+  "20 or more verifiable U.S. employees",
+  "The owner holds a controlling stake (51% or more)",
+  "The owner can allow about four months for the transition",
+  "The owner is willing to be available to the company for a transition period of 4 to 12 months after closing — on call for agreed check-ins, introductions, and questions, not working hands-on",
+];
+
 export function WealthManagersPageClient() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [scrollY, setScrollY] = useState(0);
@@ -255,32 +212,24 @@ export function WealthManagersPageClient() {
     return () => observer.disconnect();
   }, []);
 
-  const aumStat = useCountUp(3, 2000);
+  const studyStat = useCountUp(96, 2000);
 
   const faqs = [
     {
-      question: "How does the Section 1042 rollover actually work?",
-      answer: "Section 1042 of the Internal Revenue Code allows sellers of stock to an ESOP to defer capital gains taxes indefinitely, provided the proceeds are reinvested in Qualified Replacement Property (QRP) within 12 months. QRP includes stocks and bonds of operating companies incorporated in the U.S. As the wealth manager, you construct and manage this QRP portfolio—dramatically expanding your AUM while providing the founder with tax-efficient wealth preservation."
+      question: "What does an introduction earn me?",
+      answer: "Nothing between firms. There are no referral fees or compensation arrangements for introductions. " + "We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals." + " What we offer is a clean handoff, a client who stays yours, and a partner who is kept informed at every phase."
     },
     {
-      question: "What happens to my relationship if the founder passes away?",
-      answer: "The ESOP structure actually strengthens your position. The founder's QRP portfolio transfers to their estate, where you continue managing it. Meanwhile, the ESOP Trust requires ongoing institutional asset management, and the growing employee-owners become your next generation of clients. Rather than a single relationship ending, you gain multiple enduring ones."
+      question: "Do you manage assets, or compete for my client?",
+      answer: "No. Forhemit does not manage assets, and does not provide investment, legal, tax, or accounting advice: we do not compete for the relationship you built, and we do not solicit it. The wealth relationship continues through the transition and beyond it — with you."
     },
     {
-      question: "How do you handle the 'Legacy Bond' seller note?",
-      answer: "The Legacy Bond is a carefully structured promissory note from the company to the selling founder, typically yielding 8-12% over 5-10 years. We structure it with appropriate collateral and covenants, then you integrate the income stream into the founder's estate plan. It's predictable, high-yield fixed income that creates ongoing touchpoints with your client."
+      question: "What is Section 1042, in one paragraph?",
+      answer: "Where Section 1042 applies, a qualifying sale into employee ownership can provide tax-deferred treatment for the seller's gain — deferral, not forgiveness, and never automatic. The deferral is not forgiveness: the deferred gain reduces the seller's basis in the qualified replacement property, and tax comes due when that property is sold. Eligibility itself stays where it belongs: with you and your client's tax and legal professionals. Forhemit coordinates; it does not give tax advice."
     },
     {
-      question: "Do I need ESOP expertise to introduce this to clients?",
-      answer: "No. You bring the client relationship and wealth management expertise; we bring the ESOP structuring and transaction execution. We handle the regulatory complexity, valuation coordination, and legal architecture. Your role is to identify suitable candidates and guide their personal financial planning—we handle the rest."
-    },
-    {
-      question: "What types of businesses work best for this model?",
-      answer: "Ideal candidates have $3M–$15M in EBITDA, stable cash flows, strong company culture, and founders aged 55-70 who care about legacy. Professional services, manufacturing, distribution, and niche service companies tend to transition especially well. The key factor is a founder who values their people and community as much as the purchase price."
-    },
-    {
-      question: "How is this different from other ESOP advisors?",
-      answer: "Most ESOP advisors focus narrowly on the transaction. Forhemit—a California public benefit corporation—stays involved for years post-close, ensuring the business thrives under employee ownership. For you, this means the client relationship doesn't end at closing—it evolves into ongoing governance work, employee wealth management, and multi-generational planning."
+      question: "Which of my clients fit?",
+      answer: "The standard we screen against is published on this page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow about four months and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change."
     }
   ];
 
@@ -298,37 +247,38 @@ export function WealthManagersPageClient() {
         <section className="wealth-hero">
           <div className="container">
             <div className="wealth-hero-content">
-              <span className="wealth-eyebrow" data-animate="fade-up">For Wealth Advisors</span>
+              <span className="wealth-eyebrow" data-animate="fade-up">For wealth managers</span>
               <h1 className="wealth-title" data-animate="fade-up" data-delay="100">
-                Transform Your Client&apos;s Exit Into
-                <br />
-                <span className="highlight">Your Greatest AUM Opportunity</span>
+                Raise succession before someone else sets the terms.
               </h1>
               <p className="wealth-lead" data-animate="fade-up" data-delay="200">
-                When founders sell to traditional buyers, taxes destroy wealth and relationships evaporate. 
-                The ESOP alternative defers capital gains, multiplies your assets under management, 
-                and creates a legacy that endures.
+                Traditionally, your founder client talks to a broker, a private equity firm, or a
+                buyer first — and calls you when the terms are already set. Raise succession
+                first, and the structure, the timing, and the tax planning are still open when
+                you sit down to plan them. This page is about that order: you bring the option
+                while there is still time to plan it, with a firm that structures the transition
+                and leaves the wealth relationship exactly where it belongs — with you.
               </p>
               <div className="wealth-hero-cta" data-animate="fade-up" data-delay="300">
                 <Link
                   href="/contact?contactType=partner&interest=wealth"
                   className="cta-button magnetic"
                 >
-                  Schedule an Advisor Partnership Call
+                  Start a Conversation
                 </Link>
               </div>
             </div>
             
-            {/* Floating AUM Stat */}
+            {/* Floating study stat */}
             <div 
               className="floating-stat" 
               data-animate="fade-up" 
               data-delay="400"
               style={{ transform: `translateY(${scrollY * -0.05}px)` }}
             >
-              <div className="stat-ring" ref={aumStat.ref}>
-                <span className="stat-number">{aumStat.count}x</span>
-                <span className="stat-label">AUM Potential</span>
+              <div className="stat-ring" ref={studyStat.ref}>
+                <span className="stat-number">{studyStat.count}%</span>
+                <span className="stat-label">of owners in a 2025 study were open to leaving their advisor after a sale</span>
               </div>
             </div>
           </div>
@@ -338,19 +288,29 @@ export function WealthManagersPageClient() {
             <div className="scroll-mouse">
               <div className="scroll-wheel"></div>
             </div>
-            <span>Discover the opportunity</span>
+            <span>Scroll to explore</span>
           </div>
         </section>
 
-        {/* The Liquidity Event Warning */}
+        {/* The catch-up problem */}
         <section className="wealth-section warning-section">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">The Hidden Risk</span>
-              <h2>The Liquidity Event Trap</h2>
+              <span className="section-eyebrow">The catch-up problem</span>
+              <h2>Catching a train that&apos;s already leaving the station</h2>
               <p className="section-intro">
-                When a successful business owner decides to sell, wealth managers face a crisis 
-                disguised as a celebration. The traditional path destroys more value than it creates.
+                When a founder decides to sell, the first calls usually go to a broker, a private
+                equity firm, or a buyer. The wealth manager is brought in after — when the
+                structure is chosen, the timeline is fixed, and the tax picture is whatever the
+                deal left behind. You are asked to plan the largest wealth event of your
+                client&apos;s life around decisions you had no part in.
+              </p>
+              <p className="section-intro">
+                In one 2025 national study of 750 business owners, 96% said they were open to
+                leaving their financial advisor after selling their business — and the most
+                common reason was that the advisor never started the conversation about what came
+                next. (Cornerstone Business Services, 2025 National Study on Selling Your
+                Business.)
               </p>
             </div>
 
@@ -358,28 +318,28 @@ export function WealthManagersPageClient() {
               <div className="warning-path traditional">
                 <div className="path-header">
                   <span className="path-icon">⚠</span>
-                  <h3>Traditional Sale</h3>
+                  <h3>The deal framed without you</h3>
                 </div>
                 <div className="path-flow">
                   <div className="flow-step">
-                    <span className="step-label">Sale</span>
-                    <span className="step-value">$10M</span>
+                    <span className="step-label">First call</span>
+                    <span className="step-value">Broker or buyer</span>
                   </div>
                   <div className="flow-arrow">→</div>
                   <div className="flow-step loss">
-                    <span className="step-label">Taxes</span>
-                    <span className="step-value">-$2.38M</span>
+                    <span className="step-label">Terms</span>
+                    <span className="step-value">Already set</span>
                   </div>
                   <div className="flow-arrow">→</div>
                   <div className="flow-step final">
-                    <span className="step-label">You Manage</span>
-                    <span className="step-value">$7.62M</span>
+                    <span className="step-label">Your role</span>
+                    <span className="step-value">Plan around it</span>
                   </div>
                 </div>
                 <div className="path-consequence">
                   <span className="consequence-label">Plus:</span>
-                  <span className="consequence-item">PE firm brings their own advisors</span>
-                  <span className="consequence-item">Relationship ends within 18 months</span>
+                  <span className="consequence-item">A buyer arrives with its own professionals</span>
+                  <span className="consequence-item">The relationship can end at the moment it was about to matter most</span>
                 </div>
               </div>
 
@@ -390,217 +350,225 @@ export function WealthManagersPageClient() {
               <div className="warning-path esop">
                 <div className="path-header">
                   <span className="path-icon">✓</span>
-                  <h3>Forhemit ESOP Path</h3>
+                  <h3>Raise it first</h3>
                 </div>
                 <div className="path-flow">
                   <div className="flow-step">
-                    <span className="step-label">Sale</span>
-                    <span className="step-value">$10M</span>
+                    <span className="step-label">First call</span>
+                    <span className="step-value">You</span>
                   </div>
                   <div className="flow-arrow">→</div>
                   <div className="flow-step gain">
-                    <span className="step-label">1042 Rollover</span>
-                    <span className="step-value">$0 Tax</span>
+                    <span className="step-label">Terms</span>
+                    <span className="step-value">Still open</span>
                   </div>
                   <div className="flow-arrow">→</div>
                   <div className="flow-step final">
-                    <span className="step-label">You Manage</span>
-                    <span className="step-value">$10M+</span>
+                    <span className="step-label">Your role</span>
+                    <span className="step-value">Plan it</span>
                   </div>
                 </div>
                 <div className="path-benefits">
                   <span className="benefit-label">Plus:</span>
-                  <span className="benefit-item">ESOP Trust management fees</span>
-                  <span className="benefit-item">Growing employee client base</span>
-                  <span className="benefit-item">Multi-generational relationship</span>
+                  <span className="benefit-item">§1042 timing coordinated with your reinvestment window</span>
+                  <span className="benefit-item">The wealth relationship continues through the transition</span>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Three Benefits Section */}
+        {/* What changes */}
         <section className="wealth-section benefits-section section-alt">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">The Catalyst</span>
-              <h2>Why ESOP Transitions Multiply Your Practice</h2>
+              <span className="section-eyebrow">What changes</span>
+              <h2>Making something happen</h2>
               <p className="section-intro">
-                An ESOP sale isn&apos;t just a transaction—it&apos;s structural tax arbitrage 
-                that requires your expertise at every turn.
+                Advisors who raise the option early are the advisors still in the room when the
+                proceeds need a plan.
               </p>
             </div>
 
             <div className="benefits-grid">
               <BenefitCard
                 number="01"
-                title="The 1042 Tax Deferral"
-                description="Maximize investable capital. Instead of managing diminished post-tax proceeds, you construct and oversee a Qualified Replacement Property portfolio equal to the entire pre-tax sale price."
-                icon="📈"
+                title="You bring the option first"
+                description="Your client hears about employee ownership from the professional they already trust, while timing, structure, and tax planning are still open — not after a broker or a buyer has set them."
+                icon="◆"
                 delay={0}
               />
               <BenefitCard
                 number="02"
-                title="The Legacy Bond"
-                description="Create predictable income. The seller note provides your client with a high-yield, fixed-income stream over 5-10 years—integrated into their estate plan under your management."
-                icon="🔗"
+                title="The founder sells to the people who already work there"
+                description="A 100% employee-ownership transition at a full-price exit, at a price set by an independent appraiser who works for neither side, closing in about four months."
+                icon="◇"
                 delay={100}
               />
               <BenefitCard
                 number="03"
-                title="Expanding Client Roster"
-                description="Grow with the company. The ESOP Trust needs institutional management. Employee-owners build equity and need financial planning. One relationship becomes many."
-                icon="👥"
+                title="Your planning starts before the clock does"
+                description="Where Section 1042 applies, we coordinate timing and documentation so your qualified replacement property strategy can be executed without a scramble at closing — and closing dates are set with your reinvestment window in mind."
+                icon="▣"
                 delay={200}
               />
             </div>
 
-            {/* Interactive Tax Calculator */}
+            {/* Section 1042 note */}
             <div className="calculator-section" data-animate="fade-up">
-              <h3>See the Capital Retention Difference</h3>
-              <TaxComparisonCalculator />
+              <h3>A note on Section 1042</h3>
+              <p>
+                Where Section 1042 applies, a qualifying sale into employee ownership can provide
+                tax-deferred treatment for the seller&apos;s gain — deferral, not
+                forgiveness, and never automatic. The deferral is available only where the
+                statutory conditions are met:
+              </p>
+              <ul className="role-list">
+                {SECTION_1042_CONDITIONS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p>
+                The deferral is not forgiveness: the deferred gain reduces the seller&apos;s
+                basis in the qualified replacement property, and tax comes due when that property
+                is sold. §1042 rewards the advisor who is in the room early: the election,
+                the holding period, and the reinvestment window are all set before the closing
+                date is.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* Partnership Roles Section */}
+        {/* After the exit */}
         <section className="wealth-section roles-section">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">Partnership</span>
-              <h2>How We Work Together</h2>
+              <span className="section-eyebrow">After the exit</span>
+              <h2>One founder becomes a company of owners</h2>
               <p className="section-intro">
-                We are operators and continuity engineers. You are the trusted confidant. 
-                Together, we engineer the most tax-efficient, wealth-generating transition possible.
+                A traditional sale ends your relationship twice over: the founder leaves, and the
+                company passes to owners who bring their own professionals. An employee-ownership
+                transition runs the other way.
               </p>
             </div>
 
             <div className="roles-visualization" data-animate="fade-up">
               <div className="role-card advisor">
-                <div className="role-icon">💼</div>
-                <h3>Your Role</h3>
+                <div className="role-icon">◆</div>
+                <h3>Your client</h3>
                 <ul className="role-list">
-                  <li>Guide personal financial goals</li>
-                  <li>Construct the QRP portfolio</li>
-                  <li>Manage the liquid wealth</li>
-                  <li>Lead estate planning strategy</li>
+                  <li>Available to the company for 4 to 12 months after close — on call, not working hands-on</li>
+                  <li>After that, leaves on their own timing, not a buyer&apos;s</li>
+                  <li>The proceeds of a full-price exit need the plan only you can build</li>
+                  <li>The wealth relationship continues through the transition and beyond it</li>
                 </ul>
               </div>
 
               <div className="partnership-connector">
                 <div className="connector-line" />
                 <div className="connector-center">
-                  <span className="partnership-icon">🤝</span>
-                  <span className="partnership-label">Partnership</span>
+                  <span className="partnership-icon">✓</span>
+                  <span className="partnership-label">After the exit</span>
                 </div>
               </div>
 
               <div className="role-card forhemit">
-                <div className="role-icon">🏛️</div>
-                <h3>Our Role</h3>
+                <div className="role-icon">◇</div>
+                <h3>The company now</h3>
                 <ul className="role-list">
-                  <li>Structure ESOP transaction financing</li>
-                  <li>Architect the ESOP structure</li>
-                  <li>Install COOP resilience systems</li>
-                  <li>Ensure operational continuity</li>
+                  <li>Belongs to its employees — 20 or more new owners</li>
+                  <li>They hold ownership statements and retirement accounts</li>
+                  <li>They face financial questions they have never had before</li>
+                  <li>And you are the professional the founder already trusts inside it</li>
                 </ul>
               </div>
             </div>
+
+            <p className="section-intro" data-animate="fade-up">
+              Whether any of them become your clients is their choice and yours, and nothing here
+              promises it. But the room you are standing in is no longer one founder. It is the
+              whole company. Forhemit does not manage assets, and does not provide investment,
+              legal, tax, or accounting advice: we do not compete for the relationship you built,
+              and we do not solicit it.
+            </p>
           </div>
         </section>
 
-        {/* The Reluctant Seller Section */}
+        {/* The qualification standard */}
         <section className="wealth-section reluctant-section section-alt">
           <div className="container">
             <div className="reluctant-grid">
               <div className="reluctant-content" data-animate="slide-right">
-                <span className="section-eyebrow">The Opportunity</span>
-                <h2>The &quot;Reluctant Seller&quot;</h2>
+                <span className="section-eyebrow">The qualification standard</span>
+                <h2>The clients this fits</h2>
                 <p className="reluctant-lead">
-                  You likely have clients past retirement age who refuse to sell. They fear that 
-                  traditional private equity will strip their company, fire their loyal employees, 
-                  and destroy the legacy they spent a lifetime building.
+                  The standard we screen against on a first call, so you can judge a client
+                  against it before you ever raise our name:
                 </p>
+                <ul className="role-list">
+                  {SCREEN_CRITERIA.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
                 <p>
-                  We are the solution you can bring to them. By introducing the Forhemit 
-                  model, you are no longer just asking about their retirement timeline—you are bringing 
-                  a sophisticated structural solution.
+                  If a client of yours clears this standard, a first conversation costs nothing
+                  and commits no one. If they don&apos;t, we will tell you quickly — and
+                  tell you what would have to change.
                 </p>
-
-                <div className="protection-pillars">
-                  <div className="pillar">
-                    <span className="pillar-icon">🛡️</span>
-                    <span className="pillar-label">Protects Their People</span>
-                  </div>
-                  <div className="pillar">
-                    <span className="pillar-icon">💰</span>
-                    <span className="pillar-label">Protects Their Wealth</span>
-                  </div>
-                  <div className="pillar">
-                    <span className="pillar-icon">⭐</span>
-                    <span className="pillar-label">Protects Their Legacy</span>
-                  </div>
-                </div>
               </div>
 
               <div className="reluctant-visual" data-animate="slide-left">
                 <Image
                   src="https://618ukecvpc.ufs.sh/f/ZsUJalzMdXfDic78W35OPVhC3q4RatBL86y71kFW9UM2vGrz"
-                  alt="Trusted advisor consultation"
+                  alt="A founder in conversation with an advisor"
                   width={2787}
                   height={1267}
                   sizes="(max-width: 900px) 100vw, 50vw"
                 />
-                <div className="visual-overlay">
-                  <div className="overlay-stat">
-                    <span className="overlay-number">85%</span>
-                    <span className="overlay-label">of founders prefer legacy preservation over maximum price</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Process Section */}
+        {/* How an introduction works */}
         <section className="wealth-section process-section">
           <div className="container">
             <div className="section-header" data-animate="fade-up">
-              <span className="section-eyebrow">The Journey</span>
-              <h2>From Introduction to Partnership</h2>
+              <span className="section-eyebrow">How an introduction works</span>
+              <h2>How an introduction works</h2>
             </div>
 
             <div className="partnership-timeline">
               <PartnershipStep
                 step={1}
-                title="Confidential Discussion"
-                description="We meet to understand your practice, your client base, and how ESOP transitions might fit your advisory approach."
+                title="Start without a name"
+                description="One call to align on the client's timeline and tax picture — no client name needed, and nothing about your client is required for that first conversation. You can describe a situation without giving us the client's name, and we will not contact or identify your client on the basis of that conversation."
                 side="left"
               />
               <PartnershipStep
                 step={2}
-                title="Client Opportunity Mapping"
-                description="Together, we identify which of your clients fit the stewardship model—founders aged 55-70 with $3M–$15M EBITDA who value legacy."
+                title="A named introduction, when you are ready"
+                description="A named introduction happens only when you and your client are ready, with you in the room if you want to be."
                 side="right"
               />
               <PartnershipStep
                 step={3}
-                title="Joint Client Meeting"
-                description="You introduce us as a specialized partner. We listen first. If there's alignment, we proceed; if not, your relationship is stronger for the thoughtful introduction."
+                title="Kept informed at every phase"
+                description="With your client's authorisation, we keep you informed at each phase gate — when the introduction lands, when the business is screened, when the structure is set, and when it closes — and closing dates are set with your reinvestment window in mind."
                 side="left"
               />
-              <PartnershipStep
-                step={4}
-                title="Structure & Execute"
-                description="We handle the ESOP architecture and transaction execution. You lead the QRP portfolio construction and personal wealth strategy."
-                side="right"
-              />
-              <PartnershipStep
-                step={5}
-                title="Ongoing Stewardship"
-                description="Post-close, we manage operational continuity. You expand your role with the ESOP Trust, employee financial planning, and multi-generational estate work."
-                side="left"
-              />
+            </div>
+
+            <div className="section-header" data-animate="fade-up">
+              <h3>No surprises on price.</h3>
+              <p className="section-intro">
+                Your client pays total transition fees that typically run 3 to 5% of the
+                valuation, agreed in advance. The full breakdown is on our How It Works page.
+              </p>
+              <h3>Nothing between firms.</h3>
+              <p className="section-intro">
+                We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals.
+              </p>
             </div>
           </div>
         </section>
@@ -610,7 +578,7 @@ export function WealthManagersPageClient() {
           <div className="container">
             <div className="section-header" data-animate="fade-up">
               <span className="section-eyebrow">Questions</span>
-              <h2>Common Questions from Advisors</h2>
+              <h2>Common questions from wealth managers</h2>
             </div>
 
             <div className="faq-container" data-animate="fade-up">
@@ -627,40 +595,68 @@ export function WealthManagersPageClient() {
           </div>
         </section>
 
+        {/* Founder block */}
+        <section className="wealth-section warning-section">
+          <div className="container">
+            <div className="section-header" data-animate="fade-up">
+              <span className="section-eyebrow">Who you are trusting</span>
+              <h2>The person you are trusting with your client</h2>
+              <p className="section-intro">
+                Stefano Stokes — Founder &amp; CEO. I&apos;m the person you speak with
+                first, the person who leads your client&apos;s transition, and the person
+                accountable for coordinating the work through closing and handover. Forhemit has
+                one principal. You work directly with me, supported by independent specialists
+                where the transaction requires them.
+              </p>
+              <p className="section-intro">
+                Forhemit is a California Public Benefit Corporation, based in San Francisco and
+                working with founder-led businesses nationally. Every transition is stress-tested
+                during readiness, before the transaction is structured, under our Resilience
+                Framework, and the founder sees the results in writing. After close, the company
+                is monitored for 24 months under our 24-Month Early Warning System, on indicators
+                agreed with the founder up front, and reported on a schedule agreed with the
+                founder — so the client you send us is looked after after the signing, not
+                just up to it.
+              </p>
+              <p className="section-intro">
+                <strong>Forhemit was founded in 2026. We are new, and we say so.</strong>
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="wealth-section cta-section" id="contact">
           <div className="container">
             <div className="cta-content" data-animate="fade-up">
-              <span className="cta-eyebrow">Let&apos;s Discuss Your Clients</span>
-              <h2>Preserve Their Legacy. Secure Your Future.</h2>
+              <span className="cta-eyebrow">The first step</span>
+              <h2>Start with a conversation between professionals</h2>
               <p className="cta-subtitle">
-                You don&apos;t need to be an ESOP expert to present this option—that&apos;s what we&apos;re here for. 
-                If you have a client generating $3M–$15M in EBITDA who is concerned about taxes, 
-                employee welfare, and their legacy, let&apos;s talk.
+                Use the contact page and say you are a wealth manager, not a founder. No client
+                needs to be involved, and nothing about your client is needed, for the first call.
+                You can also reach Stefano directly: contact@forhemit.com · (510) 768-7588.
               </p>
               
               <div className="cta-options">
                 <div className="cta-option primary" data-animate="slide-right">
-                  <div className="cta-option-badge">Recommended</div>
-                  <h3>Schedule an Advisor Partnership Call</h3>
-                  <p>A confidential discussion about your client base and how we might work together.</p>
-                  <Link href="/introduction?join=true" className="cta-button magnetic">
-                    Book Your Call
-                  </Link>
-                </div>
-                
-                <div className="cta-option secondary" data-animate="slide-left">
-                  <h3>Download the 1042 QRP Guide</h3>
-                  <p>A detailed guide for wealth managers on structuring Qualified Replacement Property portfolios.</p>
-                  <Link href="/introduction" className="cta-button secondary">
-                    Request the Guide
+                  <h3>Talk to us first</h3>
+                  <p>A direct conversation — no client involved, and nothing about your client needed.</p>
+                  <Link
+                    href="/contact?contactType=partner&interest=wealth"
+                    className="cta-button magnetic"
+                  >
+                    Start a Conversation
                   </Link>
                 </div>
               </div>
 
               <div className="cta-contact" data-animate="fade-up">
-                <p>Or contact us directly:</p>
-                <a href="mailto:advisors@forhemit.com" className="cta-email">advisors@forhemit.com</a>
+                <p>
+                  For the other professionals in your client&apos;s corner:{" "}
+                  <Link href="/legal-practices">Attorneys</Link> ·{" "}
+                  <Link href="/brokers">Brokers</Link> ·{" "}
+                  <Link href="/accounting-firms">CPAs</Link>
+                </p>
               </div>
             </div>
           </div>

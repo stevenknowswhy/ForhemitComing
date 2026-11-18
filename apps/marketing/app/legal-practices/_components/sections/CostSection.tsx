@@ -1,23 +1,28 @@
 "use client";
 
 const costData = [
-  { value: "$1M–$5M", label: "Net present value of a good mid-market client over time" },
-  { value: "3–5", label: "Comparable clients needed to replace that book" },
-  { value: "5–10", label: "Years to develop equivalent relationships" },
-  { value: "∞", label: "Competitors now hold the inside track with that buyer" },
+  { value: "✓", label: "Profitable and founder-led" },
+  { value: "✓", label: "$3M or more in revenue" },
+  { value: "✓", label: "20 or more verifiable U.S. employees" },
+  { value: "✓", label: "The owner holds a controlling stake of 51% or more" },
+  { value: "✓", label: "The owner can allow about four months for the transition" },
+  { value: "✓", label: "The owner is willing to be available for 4 to 12 months after closing — on call, not working hands-on" },
 ];
 
 export function CostSection() {
   return (
     <section className="legal-section cost-section">
       <div className="container">
-        <h2 data-animate="fade-up">What losing one mid-market client actually costs your firm</h2>
+        <h2 data-animate="fade-up">Screen it together, against a published standard</h2>
 
         <div className="cost-reality" data-animate="fade-up">
           <p className="behind-doors">
-            Behind closed doors, partners will say: &quot;We can always go win more clients.&quot;
+            The businesses Forhemit can serve meet every one of these:
           </p>
-          <p className="on-paper">On paper, maybe. In reality:</p>
+          <p className="on-paper">
+            If a client of yours clears that standard, the conversation is worth having. If
+            they do not, you will hear that from us fast, with the reasons.
+          </p>
         </div>
 
         <div className="cost-cards">

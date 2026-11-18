@@ -1,61 +1,35 @@
 "use client";
 
-import { useRef } from "react";
-import { useCountUp } from "@forhemit/shared/hooks/useCountUp";
-
 export function StatsSection() {
-  const statsRef = useRef<HTMLDivElement>(null);
-
-  const stat1 = useCountUp({ end: 79, duration: 2000 });
-  const stat2 = useCountUp({ end: 60, duration: 2000 });
-  const stat3 = useCountUp({ end: 33, duration: 2000 });
-  const stat4 = useCountUp({ end: 85, duration: 2000 });
-
   return (
-    <section className="legal-section stats-section" ref={statsRef}>
+    <section className="legal-section stats-section">
       <div className="container">
-        <div className="stats-intro">
-          <p className="stats-context">
-            Over the next decade, the clients that built your practice are going to exit. State-backed
-            research for the California Employee Ownership Act found that:
+        <div className="section-header" data-animate="fade-up">
+          <h2>The catch-up problem</h2>
+          <p className="section-intro">
+            The train is already moving when counsel is called.
           </p>
         </div>
 
-        <div className="stats-grid">
-          <div className="stat-card" ref={stat1.ref}>
-            <div className="stat-number">
-              {stat1.count}
-              <span>%</span>
-            </div>
-            <p className="stat-label">of business owners want to retire within 10 years</p>
-          </div>
-          <div className="stat-card" ref={stat2.ref}>
-            <div className="stat-number">
-              {stat2.count}
-              <span>%</span>
-            </div>
-            <p className="stat-label">plan to do it in less than 5</p>
-          </div>
-          <div className="stat-card" ref={stat3.ref}>
-            <div className="stat-number">
-              {stat3.count}
-              <span>%</span>
-            </div>
-            <p className="stat-label">are aiming to exit within 3</p>
-          </div>
-          <div className="stat-card warning" ref={stat4.ref}>
-            <div className="stat-number">
-              {stat4.count}
-              <span>%</span>
-            </div>
-            <p className="stat-label">of work migrates to buyer-aligned counsel</p>
-          </div>
-        </div>
-
-        <div className="stats-realization">
+        <div data-animate="fade-up">
           <p>
-            That&apos;s not a market trend &quot;out there.&quot; That&apos;s your firm&apos;s{" "}
-            <strong>top 10–20 closely held business clients</strong>.
+            You know the sequence, because your own profession&apos;s advice is written against
+            it: engage counsel before the letter of intent, because the terms agreed there are
+            hard to change later. Yet the call usually comes after. A broker has the listing,
+            or a buyer has made an approach, and the LOI has already anchored the price, the
+            structure, and the exclusivity. What is left for the founder&apos;s counsel is to
+            paper a deal shaped by other people, on a clock set by other people.
+          </p>
+          <p>
+            And when that deal closes, it takes the client with it. A buyer or a private equity
+            firm arrives with its own counsel and its own advisors, and keeps them. The
+            relationship you built with the founder — in many practices, a client of decades —
+            ends at the closing table, because the client no longer owns a company. You were
+            not out-lawyered. You were out-sequenced.
+          </p>
+          <p>
+            And the third-party path is not a sure thing: only about 20–30% of businesses
+            taken to market actually sell (Exit Planning Institute).
           </p>
         </div>
       </div>

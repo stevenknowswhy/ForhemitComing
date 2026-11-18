@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./accounting-firms.css";
 import { AccountingFirmsClient } from "@forhemit/shared/pages/AccountingFirmsClient";
 
-const title = "For Accounting Firms | ESOP Advisory Services";
+const title = "For CPAs & Accounting Firms | Forhemit";
 const description =
-	"Partner with Forhemit to offer ESOP succession planning to your business-owner clients. Tax-advantaged employee ownership transitions with post-close stewardship.";
+	"For CPAs: you see the succession problem first. Now you can offer the answer — how Forhemit works with the CPA who makes the introduction.";
 
 export const metadata: Metadata = {
 	title,
