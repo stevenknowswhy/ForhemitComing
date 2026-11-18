@@ -157,6 +157,27 @@ export default defineSchema({
 		lastId: v.string(),
 	}).index("by_table", ["table"]),
 
+	// Self Guided Transition Service payments (stripeCheckout.ts): one record
+	// per approved application, created at approval. The Stripe Checkout
+	// Session is bound to this record; the signature-verified webhook flips
+	// status to "paid". No card or payer details are ever stored here —
+	// Stripe holds those.
+	selfServicePayments: defineTable({
+		companyName: v.string(),
+		applicantEmail: v.string(),
+		status: v.union(v.literal("awaiting_payment"), v.literal("paid")),
+		stripeSessionId: v.optional(v.string()),
+		stripeSessionExpiresAt: v.optional(v.number()), // Stripe epoch seconds
+		stripePaymentIntent: v.optional(v.string()),
+		amountTotal: v.optional(v.number()), // cents, from the verified webhook
+		currency: v.optional(v.string()),
+		paidAt: v.optional(v.number()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_stripeSessionId", ["stripeSessionId"])
+		.index("by_status", ["status"]),
+
 	// Early access email signups
 	earlyAccessSignups: defineTable({
 		email: v.string(),
