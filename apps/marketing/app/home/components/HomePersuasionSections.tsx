@@ -27,67 +27,67 @@ import { RevealSection } from "./RevealSection";
 const EXIT_PATHS = [
   {
     id: "liquidation",
-    label: "Complete Liquidation",
-    tag: "Worst outcome",
+    label: "Liquidation",
+    tag: "The wind-down",
     tagClass: "hps-tag-red",
     featured: false,
     points: [
-      "Fire sale of assets",
-      "Employees lose jobs",
-      "Massive capital gains tax hit",
-      "Legacy destroyed",
-      "3–6 months to wind down",
+      "Price: whatever the assets bring at sale — the business itself is gone",
+      "Team: your employees lose their jobs",
+      "Name: the business name and legacy end",
+      "Your role: you run the wind-down, then you're done",
+      "Timeline: months to sell assets and close the doors",
     ],
-    summary: "Walk away with the least. Pay the most in taxes.",
+    summary: "An ending, not a succession.",
   },
   {
     id: "pe",
-    label: "Private Equity Sale",
-    tag: "Uncertain",
+    label: "Private Equity",
+    tag: "The outside buyer",
     tagClass: "hps-tag-amber",
     featured: false,
     points: [
-      "Loss of operational control",
-      "Culture gutted in 12–18 months",
-      "Buyer can walk at any time",
-      "Financial contingencies",
-      "Reps & warranties exposure",
+      "Price: set by the buyer's model — often with part of it deferred or contingent",
+      "Team: the buyer decides who stays and how the place runs",
+      "Name: usually kept, but under the buyer's direction",
+      "Your role: you answer to the buyer through the transition, then exit on their timetable",
+      "Timeline: a brokered sale typically takes 12–18 months, and many never close",
     ],
-    summary: "Highest risk. No guarantees.",
+    summary: "A real path — if a buyer appears, and the deal holds together.",
   },
   {
     id: "esop",
-    label: "Founder Succession Through Employee Ownership",
-    tag: "Recommended",
+    label: "Employee Ownership via Forhemit",
+    tag: "The continuity path",
     tagClass: "hps-tag-brass",
     featured: true,
     points: [
-      "Independent valuation and structured financing",
-      "Potential Section 1042 tax deferral when eligible",
-      "Employees become owners instead of an outside buyer taking over",
-      "Post-close stewardship built into the model",
-      "A practical succession path for qualified founder-led companies",
+      "Price: a full-price exit at independent fair market value",
+      "Team: your employees buy 100% of the business",
+      "Name: the business and its name carry on",
+      "Your role: available on call for 4 to 12 months after close — not hands-on — then you leave on your own timing",
+      "Timeline: about four months, structured from valuation to close",
     ],
-    summary: "Continuity, employee ownership, and post-close stewardship.",
+    summary: "Continuity for the business, ownership for your people, a full-price exit for you.",
   },
 ] as const;
 
 /* ── Cost of Waiting stats ── */
 const WAITING_STATS = [
   {
-    figure: "50:1",
-    label: "sellers for every qualified buyer",
-    detail: "Succession planning gets harder when owners wait until the market is crowded.",
+    figure: "92%",
+    label: "of U.S. business exits in 2022 closed without a sale",
+    detail: "Of roughly 510,000 exits that year, 92% closed and only 5% sold. (McKinsey Institute for Economic Mobility.)",
   },
   {
-    figure: "30–40%",
-    label: "of listed businesses never sell",
-    detail: "A founder needs more than a listing plan; they need a real continuity path.",
+    figure: "20–30%",
+    label: "of businesses taken to market actually sell",
+    detail: "The rest never close. (Exit Planning Institute.)",
   },
   {
     figure: "4 months",
-    label: "vs. 12–18 months traditional sale",
-    detail: "When a company is prepared, an ESOP transition can move faster than a traditional buyer process.",
+    label: "for a Forhemit transition, vs. 12–18 months brokered",
+    detail: "Most brokered sales take 12–18 months, and many never close. A Forhemit transition is structured to close in about four months.",
   },
 ] as const;
 
@@ -96,17 +96,18 @@ const NOT_FOR_YOU = [
   { text: "Revenue under $3M annually", delay: 0 },
   { text: "Pre-profit or revenue declining", delay: 1 },
   { text: "Fewer than 20 employees", delay: 2 },
-  { text: "Need cash within 30 days", delay: 3 },
-  { text: "Unwilling to support the transition through the handoff period", delay: 4 },
+  { text: "You need cash within 30 days", delay: 3 },
+  { text: "You hold less than 51% of the company", delay: 4 },
+  { text: "You can't be available at all after closing — not even on call", delay: 5 },
 ] as const;
 
 /* ── Trust anchors (Pre-Suasion) — single-stroke Lucide icons in the
       manuscript gold (audit P2-1: platform emoji render off-palette) ── */
 const TRUST_ANCHORS: ReadonlyArray<{ icon: LucideIcon; text: string }> = [
   { icon: Lock, text: "Secure & Confidential" },
-  { icon: ClipboardCheck, text: "DOL / IRS Compliant" },
-  { icon: Scale, text: "Independent Valuation" },
-  { icon: Landmark, text: "Lender-Ready Packaging" },
+  { icon: ClipboardCheck, text: "Structured for Department of Labor and IRS compliance" },
+  { icon: Scale, text: "Independent valuation at fair market value" },
+  { icon: Landmark, text: "Packaged so lenders can say yes" },
 ];
 
 export function HomePersuasionSections() {
@@ -144,7 +145,7 @@ export function HomePersuasionSections() {
             </p>
             <div className="hps-section-divider" />
           </div>
-          <h2 className="hps-headline">Three paths founders consider at succession.</h2>
+          <h2 className="hps-headline">Three Paths. Three Different Outcomes.</h2>
           <p className="hps-sub">
             The right path depends on your goals, but employee ownership can preserve continuity
             in a way liquidation or a conventional outside sale often cannot.
@@ -186,12 +187,12 @@ export function HomePersuasionSections() {
             <span className="hps-section-number">02 - Urgency</span>
             <p className="hps-eyebrow">
               <span className="hps-eyebrow-line" aria-hidden />
-              The Exit Crisis
+              Cost of Waiting
             </p>
             <div className="hps-section-divider" />
           </div>
           <h2 className="hps-headline">
-            Succession becomes harder when owners wait for the perfect moment.
+            What does another year of waiting cost?
           </h2>
 
           <div className="hps-stats">
@@ -253,8 +254,8 @@ export function HomePersuasionSections() {
           </div>
 
           <p className="hps-nfy-coda">
-            If none of that describes you, you&apos;re likely an excellent fit. Start with our free
-            2-minute assessment to find out.
+            The free assessment applies these same six questions to your numbers. If it&apos;s not
+            yet a fit, it tells you so directly, and names what would have to change.
           </p>
 
           <span className="hps-cta-shell">
@@ -269,7 +270,13 @@ export function HomePersuasionSections() {
       <section className="hps-final-cta" aria-label="Get started">
         <div className="hps-inner">
           <h2 className="hps-final-cta-headline">Ready to explore employee ownership?</h2>
-          <p className="hps-final-cta-sub">Start with a free, confidential assessment. Takes 2 minutes.</p>
+          <p className="hps-final-cta-sub">
+            Five Yes/No questions. Two minutes. Free and confidential — we only ask for your
+            contact details at the end if you want your results. Stefano reviews every assessment
+            personally: if your business fits, he&apos;ll reach out to schedule a first
+            conversation; if it doesn&apos;t, you&apos;ll hear exactly why, and what would have
+            to change.
+          </p>
           <span className="hps-cta-shell">
             <span className="hps-cta-shell__glow" aria-hidden />
             <AssessmentCta className="hps-cta">

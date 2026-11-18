@@ -6,7 +6,7 @@ export function MissionSection() {
       <div className="container">
         <div className="mission-grid">
           <div className="mission-content">
-            <span className="about-eyebrow">Senior Managing Partner</span>
+            <span className="about-eyebrow">Founder & CEO</span>
             <h2>Our Mission is Our Mandate</h2>
             <p className="lead">
               Stefano&apos;s background isn&apos;t traditional investment banking. It&apos;s disaster

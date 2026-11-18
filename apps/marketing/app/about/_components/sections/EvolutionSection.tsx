@@ -9,7 +9,7 @@ const milestones = [
   {
     period: "2025",
     description:
-      "Strategic pivot toward private markets with a deliberate focus on employee ownership and long-horizon stewardship.",
+      "Strategic pivot toward private markets with a deliberate focus on employee ownership and long-horizon continuity.",
   },
   {
     period: "March 2026",
@@ -33,8 +33,8 @@ export function EvolutionSection() {
               Forhemit began with a focus on AI technology and digital infrastructure for municipal
               disaster response. Through that work, we gained deep operational expertise and saw
               firsthand how employee ownership drives better outcomes. Today, as{" "}
-              <strong>Forhemit</strong>, we&apos;ve evolved to apply that same stewardship
-              mindset to stewarding ESOP transitions and post-close operations.
+              <strong>Forhemit</strong>, we&apos;ve evolved to apply that same discipline
+              to leading ESOP transitions and supporting them after close.
             </p>
           </header>
 

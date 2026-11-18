@@ -1,7 +1,7 @@
 "use client";
 
 import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
-import { visionFaqs, financialsFaqs, operationalFaqs, legacyFaqs } from "../../_data/faqs";
+import { aboutFaqs } from "../../_data/faqs";
 
 interface AboutFAQItemProps {
   question: string;
@@ -24,58 +24,15 @@ function AboutFAQItem({ question, answer, isOpen, onClick }: AboutFAQItemProps) 
   );
 }
 
-interface FAQSectionBlockProps {
-  title: string;
-  subtitle: string;
-  sectionNum: string;
-  faqs: { question: string; answer: React.ReactNode }[];
-  openFaq: string | null;
-  onToggle: (id: string) => void;
-  sectionPrefix: string;
-}
-
-function FAQSectionBlock({
-  title,
-  subtitle,
-  sectionNum,
-  faqs,
-  openFaq,
-  onToggle,
-  sectionPrefix,
-}: FAQSectionBlockProps) {
-  return (
-    <div className="faq-section">
-      <h3 className="faq-section-title">
-        <span className="section-num">{sectionNum}</span>
-        {title}
-        <span className="section-subtitle">{subtitle}</span>
-      </h3>
-
-      {faqs.map((faq, index) => {
-        const id = `${sectionPrefix}-${index}`;
-        return (
-          <AboutFAQItem
-            key={id}
-            question={faq.question}
-            answer={faq.answer}
-            isOpen={openFaq === id}
-            onClick={() => onToggle(id)}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
 export function FAQSection() {
-  const [openFaq, toggleFaq] = useFaqToggle<string>("vision-0");
+  const [openFaq, toggleFaq] = useFaqToggle<string>("faq-0");
 
   return (
     <section className="about-section about-section-faq">
       <div className="container">
         <div className="faq-header">
           <span className="about-eyebrow">Common Questions</span>
-          <h2>Understanding the Forhemit Model</h2>
+          <h2>Asked by founders, answered straight.</h2>
           <p className="faq-intro">
             The transition to employee ownership is a significant decision. Here are answers to the
             questions owners ask most.
@@ -83,45 +40,20 @@ export function FAQSection() {
         </div>
 
         <div className="faq-container">
-          <FAQSectionBlock
-            title="The Vision & The Model"
-            subtitle=""
-            sectionNum="01"
-            faqs={visionFaqs}
-            openFaq={openFaq}
-            onToggle={toggleFaq}
-            sectionPrefix="vision"
-          />
-
-          <FAQSectionBlock
-            title="Financials & Risk Mitigation"
-            subtitle=""
-            sectionNum="02"
-            faqs={financialsFaqs}
-            openFaq={openFaq}
-            onToggle={toggleFaq}
-            sectionPrefix="financials"
-          />
-
-          <FAQSectionBlock
-            title="Operational Resilience"
-            subtitle=""
-            sectionNum="03"
-            faqs={operationalFaqs}
-            openFaq={openFaq}
-            onToggle={toggleFaq}
-            sectionPrefix="operational"
-          />
-
-          <FAQSectionBlock
-            title="Legacy & The Transition"
-            subtitle=""
-            sectionNum="04"
-            faqs={legacyFaqs}
-            openFaq={openFaq}
-            onToggle={toggleFaq}
-            sectionPrefix="legacy"
-          />
+          <div className="faq-section">
+            {aboutFaqs.map((faq, index) => {
+              const id = `faq-${index}`;
+              return (
+                <AboutFAQItem
+                  key={id}
+                  question={faq.question}
+                  answer={faq.answer}
+                  isOpen={openFaq === id}
+                  onClick={() => toggleFaq(id)}
+                />
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

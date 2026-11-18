@@ -2,64 +2,36 @@
 
 import { Users, Building, Wallet, Truck, Shield } from "lucide-react";
 
-const comparisonData = [
-  {
-    feature: "Focus",
-    standard: "Financial review (P&L analysis).",
-    forhemit: "Operational Monitoring (Leading indicators).",
-  },
-  {
-    feature: "Timing",
-    standard: "Lagging indicators (Quarterly reports).",
-    forhemit: "Early Warning (Real-time operational pulse).",
-  },
-  {
-    feature: "Deliverable",
-    standard: "Compliance verification.",
-    forhemit: "Continuity of Operations (COOP) Plans & Impact Assessments.",
-  },
-  {
-    feature: "Role",
-    standard: "Passive reviewer.",
-    forhemit: "Active operational partner to stakeholders.",
-  },
-  {
-    feature: "Goal",
-    standard: 'Verify the "books."',
-    forhemit: "Protect the balance sheet from operational shocks.",
-  },
-];
-
 const resilienceDomains = [
   {
     icon: Users,
     title: "People",
     description:
-      'We monitor "key person" dependencies and ensure "tribal knowledge" is codified. If the operations manager leaves, we ensure the successor plan is active, preventing a productivity collapse.',
+      'We map "key person" dependencies and check whether tribal knowledge is written down. If the operations manager left tomorrow, the successor plan should already exist.',
   },
   {
     icon: Building,
     title: "Property",
     description:
-      'We audit physical assets for "Black Swan" vulnerabilities. We flag facility risks before they disrupt production.',
+      "We look at physical assets for single points of failure — facility risks that could disrupt production.",
   },
   {
     icon: Wallet,
     title: "Financial Operations",
     description:
-      "We track the operational triggers that impact cash flow (e.g., vendor payment terms, customer concentration), alerting stakeholders to liquidity risks months before they appear on financial statements.",
+      "We look at the operational triggers that hit cash flow — vendor payment terms, customer concentration — and where liquidity could tighten.",
   },
   {
     icon: Truck,
     title: "Vendors",
     description:
-      'We verify supply chain redundancy. If a primary supplier fails, we ensure the "Plan B" playbook is ready to execute, protecting revenue continuity.',
+      'We check supply-chain redundancy: if a primary supplier failed, is there a "Plan B" ready to execute?',
   },
   {
     icon: Shield,
     title: "Technology",
     description:
-      'We ensure the digital "keys to the kingdom" are secure and transferable, preventing data loss or security breaches during the transition.',
+      'We check that the digital "keys to the kingdom" are documented and transferable, so access never leaves with one person.',
   },
 ];
 
@@ -67,17 +39,17 @@ const stewardshipPoints = [
   {
     title: "The 24-Month Early Warning System",
     description:
-      "We remain engaged for the critical two-year window post-close. We monitor the operational layer and issue alerts to the board, lender, or seller before a disruption hits the financials. We provide the \"breathing room\" needed to course-correct.",
+      "For 24 months after close, the company is monitored against warning indicators agreed with the founder up front, reported on a schedule agreed with the founder — so problems surface while they are still small enough to fix.",
   },
   {
-    title: "Performance-Based Alignment",
+    title: "Our fee is agreed in advance",
     description:
-      "We are confident in our ability to spot risks. We operate on a Reverse Management Fee model: 40% of our fee is contingent on stability metrics. If the company suffers preventable operational shocks during the transition, we share in that loss. We only succeed if the transition is smooth.",
+      "Total transition fees typically run 3–5% of valuation — one figure, covering the whole transition, set in writing before you sign anything.",
   },
   {
     title: "A Legal Mandate for Independence",
     description:
-      "Forhemit is structured as a Public Benefit Corporation. This legally mandates us to prioritize the resilience of the enterprise over short-term extraction. We serve as an objective \"operational auditor,\" ensuring the business remains a going concern for the benefit of the employee-owners.",
+      "Forhemit is structured as a Public Benefit Corporation. That legally requires us to balance profit with the durability of the enterprise — we are built to protect the company's continuity for its employee-owners, not to extract from it.",
   },
 ];
 
@@ -88,74 +60,36 @@ export function WhyWeExistSection() {
         {/* Header */}
         <div className="why-header">
           <span className="about-eyebrow">Our Purpose</span>
-          <h2>
-            Why We Exist:<br />
-            Eliminating the &quot;Transition Blind Spot&quot;
-          </h2>
+          <h2>Why I built Forhemit</h2>
           <div className="why-intro">
             <p>
-              The first 24 months after an ESOP transaction are the most critical—and the most
-              dangerous. When a founder exits, the company often loses its &quot;institutional
-              radar.&quot; Critical operational knowledge leaves with the seller, and new management
-              teams are often unprepared for the shocks that follow.
-            </p>
-            <p>
-              Standard lenders and trustees rely on lagging indicators—quarterly financial
-              statements that tell you what happened three months ago. By the time a problem hits
-              the balance sheet, it is often a crisis.
+              I built Forhemit because the usual exit asks founders to betray what they built.
+              I spent years in disaster planning and policy for the City of San Francisco, where
+              the work was continuity: making sure the city kept running when something went
+              wrong. A founder&apos;s exit is the same kind of event for a company. Handled by
+              reaction, it is expensive and often fatal. Handled by preparation, the company, its
+              people, and its name carry on.
             </p>
             <p className="why-mission">
-              <strong>Forhemit exists to solve this visibility gap.</strong> We are not managers; we
-              are stewards of continuity. We function as an independent Early Warning System,
-              monitoring the operational &quot;pulse&quot; of the company to ensure that everyday
-              disruptions don&apos;t become balance sheet disasters.
+              <strong>Reacting is expensive. Planning is not.</strong> Preparation determines how
+              well people come through a transition — so Forhemit plans the whole exit before it
+              starts: the valuation, the structure, the financing, and the first two years after
+              close.
             </p>
           </div>
         </div>
 
-        {/* Comparison Section */}
+        {/* One accountable lead */}
         <div className="comparison-section">
           <div className="comparison-header">
-            <h3>The Forhemit Difference</h3>
-            <p className="comparison-subtitle">
-              Operational Visibility vs. Financial Reporting
-            </p>
+            <h3>One accountable lead, not five vendors</h3>
           </div>
           <p className="comparison-intro">
-            For Brokers, Lenders, and CPAs, recommending Forhemit provides a layer of risk
-            mitigation that standard due diligence cannot. We don&apos;t run the business; we ensure
-            the business doesn&apos;t run off the rails.
+            An ESOP transition requires independent checks, by law and by design: an independent
+            appraiser who works for neither side, an independent trustee, ESOP counsel, and
+            accountants. Forhemit coordinates all of it under one accountable lead, so you are
+            never managing five vendors on your own — and every check stays independent.
           </p>
-
-          {/* Comparison Table */}
-          <div className="comparison-table-wrapper">
-            <div className="comparison-header-row">
-              <span>How We Compare:</span>
-            </div>
-            <div className="comparison-grid">
-              {/* Header Row */}
-              <div className="comp-header">Feature</div>
-              <div className="comp-header">Standard Post-Close Oversight</div>
-              <div className="comp-header">
-                <span className="comp-highlight">The Forhemit Stewardship Model</span>
-              </div>
-              
-              {/* Data Rows */}
-              {comparisonData.map((row) => (
-                <div key={row.feature} className="comp-row" style={{ display: 'contents' }}>
-                  <div className="comp-cell comp-feature">
-                    {row.feature}
-                  </div>
-                  <div className="comp-cell">
-                    {row.standard}
-                  </div>
-                  <div className="comp-cell">
-                    {row.forhemit}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Resilience Framework */}
@@ -164,9 +98,10 @@ export function WhyWeExistSection() {
             <span className="about-eyebrow">Our Methodology</span>
             <h3>The Resilience Framework</h3>
             <p>
-              We do not manage the company. Instead, we equip the new leadership with the
-              &quot;playbooks&quot; they need and monitor the execution. We draw on municipal
-              disaster preparedness protocols to audit and track five critical operational domains:
+              Before any transaction is structured, we run a stress test during readiness,
+              drawing on municipal disaster preparedness protocols across five critical
+              operational domains. You see the results in writing, and they shape how the
+              transition is planned:
             </p>
           </div>
 
@@ -186,13 +121,13 @@ export function WhyWeExistSection() {
           </div>
         </div>
 
-        {/* Mission-Locked Stewardship */}
+        {/* After the close */}
         <div className="stewardship-section">
           <div className="stewardship-header">
-            <h3>Mission-Locked Stewardship</h3>
+            <h3>After the close</h3>
             <p>
-              Our role is to protect the interests of the Stakeholders—the Lender, the Seller (often
-              holding a note), and the ESOP Trust.
+              Closing is not the end of our work. Three commitments carry through the transition
+              and the two years after it.
             </p>
           </div>
 
