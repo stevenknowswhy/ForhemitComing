@@ -23,7 +23,7 @@ export function OnePagerClient() {
 
         <div className="op-offers">
           <div className="op-offer">
-            <h2>Self-Service — $3,000 one-time</h2>
+            <h2>Self Guided Transition Service — $3,000 one-time</h2>
             <p>
               You run your own transition, with the complete toolkit: your personalized
               120-Day Roadmap, vetted Preferred Partners introduced at each stage, financing
@@ -69,7 +69,7 @@ export function OnePagerClient() {
 
         <h2 className="op-h2">How we make money — and how we don't</h2>
         <p className="op-body">
-          We make money two ways: the $3,000 Self-Service price, and the Custom Services fee.
+          We make money two ways: the $3,000 Self Guided Transition Service price, and the Custom Services fee.
           That is all. We do not receive any money or anything else of value — monetary or
           non-monetary — from any of our professional partners. We do not pay referral fees
           or anything else of value for introductions, and we do not promise reciprocal

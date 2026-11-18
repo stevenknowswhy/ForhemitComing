@@ -69,7 +69,7 @@ const PARTNER_CATEGORIES = [
 const FAQS: { q: string; a: React.ReactNode }[] = [
   {
     q: "How does the Upgrade Credit work?",
-    a: "Buy Self-Service and start Custom Services within 12 months, and the full $3,000 is credited toward the Custom Services fee. After 12 months, the credit no longer applies.",
+    a: "Buy the Self Guided Transition Service and start Custom Services within 12 months, and the full $3,000 is credited toward the Custom Services fee. After 12 months, the credit no longer applies.",
   },
   {
     q: "What happens if Forhemit declines my application?",
@@ -97,7 +97,7 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
     a: "Only after your application is approved — never before. The check and Company Fit are free and anonymous; identifying details begin only at the application, under an NDA.",
   },
   {
-    q: "What does Self-Service never include?",
+    q: "What does the Self Guided Transition Service never include?",
     a: "A dedicated lead, or Forhemit performing the transition steps — that is Custom Services. Legal, tax, or valuation work itself — partners do that work under their own engagements. Any guarantee of financing, valuation, or closing — the guarantee in this product is the money-back guarantee, and it is about our fee, not the deal's outcome. And holding client funds, in any amount, at any stage.",
   },
 ];
@@ -125,7 +125,7 @@ export function PricingPageClient() {
         <h2 className="pr-h2">The two offers, in the open.</h2>
         <div className="pr-cards">
           <article className="pr-card">
-            <p className="pr-card-eyebrow">Self-Service</p>
+            <p className="pr-card-eyebrow">Self Guided Transition Service</p>
             <p className="pr-price">
               $3,000 <span className="pr-price-note">one-time</span>
             </p>
@@ -179,7 +179,7 @@ export function PricingPageClient() {
               valuation — the appraiser works for neither side.
             </p>
             <p className="pr-credit">
-              Start with Self-Service and the full $3,000 is credited toward Custom Services if
+              Start with the Self Guided Transition Service and the full $3,000 is credited toward Custom Services if
               you start within 12 months.
             </p>
           </article>
@@ -195,14 +195,14 @@ export function PricingPageClient() {
       <section className="pr-section" id="which">
         <h2 className="pr-h2">Which offer is for you?</h2>
         <p className="pr-body pr-narrow">
-          Choose Self-Service if you have the time to run your own transition and want the
+          Choose the Self Guided Transition Service if you have the time to run your own transition and want the
           toolkit, the partners, and the plan. Choose Custom Services if you want a dedicated
           lead running the four months with you.
         </p>
-        <div className="pr-contrast" role="table" aria-label="Self-Service compared with Custom Services">
+        <div className="pr-contrast" role="table" aria-label="Self Guided Transition Service compared with Custom Services">
           <div className="pr-contrast-head" role="row">
             <span role="columnheader" aria-label="Compared point" />
-            <span role="columnheader">Self-Service</span>
+            <span role="columnheader">Self Guided Transition Service</span>
             <span role="columnheader">Custom Services</span>
           </div>
           {CONTRAST_ROWS.map((row) => (
@@ -215,9 +215,9 @@ export function PricingPageClient() {
         </div>
       </section>
 
-      {/* ── What's inside Self-Service ── */}
+      {/* ── What's inside the Self Guided Transition Service ── */}
       <section className="pr-section" id="inside">
-        <h2 className="pr-h2">What's inside Self-Service.</h2>
+        <h2 className="pr-h2">What's inside the Self Guided Transition Service.</h2>
         <p className="pr-body pr-narrow">
           Five deliverables, spelled out — including what each one does not include.
         </p>
@@ -251,7 +251,7 @@ export function PricingPageClient() {
           <article className="pr-deliverable">
             <h3 className="pr-h3">2. Preferred Partners</h3>
             <p className="pr-body">
-              The named professionals and firms a self-service client needs and does not know
+              The named professionals and firms a Self Guided Transition Service client needs and does not know
               how to find — vetted by Forhemit, introduced through the portal when your roadmap
               reaches their stage. You are never handed a cold list and left to guess the
               order.
@@ -338,7 +338,7 @@ export function PricingPageClient() {
         </div>
 
         <div className="pr-never">
-          <h3 className="pr-h3">What Self-Service never includes</h3>
+          <h3 className="pr-h3">What the Self Guided Transition Service never includes</h3>
           <ul className="pr-list">
             <li>A dedicated lead, or Forhemit performing the transition steps — that is Custom Services.</li>
             <li>Legal, tax, or valuation work itself — partners do that work under their own engagements.</li>
@@ -356,7 +356,7 @@ export function PricingPageClient() {
       <section className="pr-section" id="money">
         <h2 className="pr-h2">How we make money — and how we don't.</h2>
         <p className="pr-body pr-narrow">
-          We make money two ways: the $3,000 Self-Service price, and the Custom Services fee of
+          We make money two ways: the $3,000 Self Guided Transition Service price, and the Custom Services fee of
           3–5% of valuation. That is all.
         </p>
         <p className="pr-body pr-narrow">{PARTNER_COMPENSATION_DISCLAIMER}</p>
