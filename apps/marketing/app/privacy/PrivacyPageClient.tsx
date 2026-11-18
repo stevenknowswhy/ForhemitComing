@@ -21,16 +21,21 @@ export function PrivacyPageClient() {
 							<p>
 								Forhemit is an employee-ownership succession advisory firm. This
 								website collects only what you choose to send us. The assessment
-								asks five yes-or-no questions about your business — whether it has
-								$3M or more in revenue, 20 or more verifiable U.S. employees, has
-								been profitable for 3 years or more, can allow four months for a
-								transition, and whether you can be available to the company for a
-								transition period of 4 to 12 months after closing — on call for
-								check-ins, introductions, and questions, not working hands-on —
-								and then asks for your name, email address, and company name. We
-								save your answers together with the result the assessment gives
-								you, so we can respond to you personally. The contact form
-								collects your name, email address, and your message.
+								first asks whether you are a founder or a professional, the kind
+								of work you do, and your industry — then five yes-or-no questions
+								about your business — whether it has $3M or more in revenue, 20 or
+								more verifiable U.S. employees, has been profitable for 3 years or
+								more, can allow four months for a transition, and whether you can
+								be available to the company for a transition period of 4 to 12
+								months after closing — on call for check-ins, introductions, and
+								questions, not working hands-on. We record those answers
+								anonymously, together with the result the assessment gives you.
+								The record holds no name, email address, or anything else that
+								identifies you or your company, and we use it only to understand
+								who the assessment serves. If you choose to continue after your
+								result, we ask for your name, email address, and company name,
+								and save those details so we can respond to you personally. The
+								contact form collects your name, email address, and your message.
 							</p>
 
 							<h2>How we use it</h2>

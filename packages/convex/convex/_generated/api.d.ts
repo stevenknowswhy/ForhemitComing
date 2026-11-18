@@ -19,6 +19,7 @@ import type * as boxLogSessions from "../boxLogSessions.js";
 import type * as brokerEmails from "../brokerEmails.js";
 import type * as businessLog from "../businessLog.js";
 import type * as businessLogInteractions from "../businessLogInteractions.js";
+import type * as checkResponses from "../checkResponses.js";
 import type * as clientEmails from "../clientEmails.js";
 import type * as clientJournals from "../clientJournals.js";
 import type * as companyFinancials from "../companyFinancials.js";
@@ -100,6 +101,7 @@ declare const fullApi: ApiFromModules<{
   brokerEmails: typeof brokerEmails;
   businessLog: typeof businessLog;
   businessLogInteractions: typeof businessLogInteractions;
+  checkResponses: typeof checkResponses;
   clientEmails: typeof clientEmails;
   clientJournals: typeof clientJournals;
   companyFinancials: typeof companyFinancials;

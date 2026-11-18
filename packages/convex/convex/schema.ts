@@ -102,6 +102,52 @@ export default defineSchema({
 		.index("by_contactType", ["contactType"])
 		.index("by_createdAt", ["createdAt"]),
 
+	// Anonymous metadata from the 2-Minute Check (spec 2026-11-18).
+	// HARD RULE: no PII in this table — no name, email, phone, company name,
+	// IP-derived identity, or free-text fields.
+	checkResponses: defineTable({
+		role: v.union(v.literal("founder"), v.literal("professional")),
+		professionalType: v.optional(
+			v.union(
+				v.literal("broker"),
+				v.literal("cpa"),
+				v.literal("attorney"),
+				v.literal("wealth_manager"),
+				v.literal("other"),
+			),
+		),
+		industry: v.union(
+			v.literal("construction"),
+			v.literal("manufacturing"),
+			v.literal("healthcare"),
+			v.literal("professional_services"),
+			v.literal("retail_food_hospitality"),
+			v.literal("technology"),
+			v.literal("transportation_logistics"),
+			v.literal("other"),
+		),
+		answers: v.object({
+			revenue: v.boolean(),
+			headcount: v.boolean(),
+			profitability: v.boolean(),
+			timeline: v.boolean(),
+			transition: v.boolean(),
+		}),
+		result: v.union(
+			v.literal("pass"),
+			v.array(
+				v.union(
+					v.literal("revenue"),
+					v.literal("headcount"),
+					v.literal("profitability"),
+					v.literal("timeline"),
+					v.literal("transition"),
+				),
+			),
+		),
+		createdAt: v.number(),
+	}).index("by_createdAt", ["createdAt"]),
+
 	// Early access email signups
 	earlyAccessSignups: defineTable({
 		email: v.string(),
