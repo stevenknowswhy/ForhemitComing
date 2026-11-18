@@ -27,6 +27,7 @@ const sitemapSections: SitemapSection[] = [
     links: [
       { label: "Home", href: "/" },
       { label: "About", href: "/about" },
+      { label: "Pricing", href: "/pricing" },
       { label: "Contact", href: "/contact" },
       { label: "How It Works", href: "/four-month-path" },
       { label: "FAQ", href: "/faq" },
