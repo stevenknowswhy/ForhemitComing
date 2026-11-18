@@ -8,7 +8,7 @@ export const metadata: Metadata = ogMetadata({
   title:
     "Forhemit | 100% Employee Ownership Succession for Founder-Led Businesses",
   description:
-    "Transition your business to 100% employee ownership. Preserve your legacy, unlock Section 1042 tax benefits, and steward your company's future with Forhemit.",
+    "Transition your business to 100% employee ownership. Preserve your legacy and steward your company's future with Forhemit — Section 1042 tax-deferred treatment may be available to qualifying sellers.",
   path: "/",
 });
 

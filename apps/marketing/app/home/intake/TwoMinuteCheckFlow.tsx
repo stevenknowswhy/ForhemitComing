@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import {
   TWO_MINUTE_CHECK_STEPS,
   allYes,
-  getFirstNoStep,
+  getFailedSteps,
   type TwoMinuteCheckStep,
   type TwoMinuteCheckStepId,
 } from "./lib/twoMinuteCheck";
@@ -20,10 +20,10 @@ type Phase = "questions" | "analyzing" | "result";
 
 /** Hard Effect — rotating analysis labels to show perceived work */
 const ANALYSIS_LABELS = [
-  "Evaluating tax advantages…",
-  "Analyzing EBITDA multiples…",
-  "Checking lender eligibility…",
-  "Generating custom ESOP assessment…",
+  "Reviewing your answers…",
+  "Checking the five criteria…",
+  "Confirming the details…",
+  "Preparing your result…",
 ] as const;
 
 export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
@@ -97,7 +97,7 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
 
   const outcome = resultAnswers ?? {};
   const passed = phase === "result" && allYes(outcome);
-  const pendingFirstNo = phase === "result" ? getFirstNoStep(outcome) : null;
+  const failedSteps = phase === "result" ? getFailedSteps(outcome) : [];
 
   const headerStepLabel =
     phase === "result"
@@ -156,7 +156,7 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
               </button>
             </div>
 
-            <p className="ci-hint">{step.hint}</p>
+            <p className="ci-hint">{step.fix}</p>
 
             <div className="ci-nav">
               <button type="button" className="ci-btn-back" onClick={back}>
@@ -187,11 +187,14 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
               <>
                 {/* Peak-End Rule: celebratory result */}
                 <div className="ci-r-check" aria-hidden>✓</div>
-                <h2 className="ci-r-headline">You qualify for a tax-free exit.</h2>
+                <h2 className="ci-r-headline">You may qualify for a Section 1042 tax-deferred exit.</h2>
                 <p className="ci-r-sub">
-                  Based on your answers, your business is an excellent fit for an ESOP transition.
-                  You could close in about four months. Next, see the same
-                  month-by-month path we use with owners — plain English, no surprises.
+                  Your answers meet every element of the Forhemit standard. A full
+                  review — independent valuation, financing, your own advisors —
+                  confirms it. Section 1042 is a tax deferral, not an exemption;
+                  your tax advisor confirms how it applies to you. Next, see the
+                  same month-by-month path we use with owners — plain English, no
+                  surprises.
                 </p>
                 <div className="ci-r-actions">
                   <button type="button" className="ci-cta-primary" onClick={onPassProceed}>
@@ -204,16 +207,24 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
               </>
             ) : (
               <>
-                <h2 className="ci-r-headline">
-                  This path works best for businesses with{" "}
-                  <span className="ci-brass">
-                    {pendingFirstNo?.noThresholdPhrase ?? "these qualifiers"}
-                  </span>
-                  . You may need a traditional sale.
-                </h2>
+                <h2 className="ci-r-headline">Not yet a fit — and here is exactly why.</h2>
+                <p className="ci-r-sub">
+                  An employee-ownership transition would not serve your business
+                  today. What would need to change:
+                </p>
+                {failedSteps.map((s) => (
+                  <p key={s.id} className="ci-r-sub">
+                    — {s.fix}
+                  </p>
+                ))}
+                <p className="ci-r-sub">
+                  Circumstances change. If yours do, run the check again — or
+                  contact us, and we will keep the door open. No pressure, and no
+                  list.
+                </p>
                 <div className="ci-r-actions">
-                  <Link href="/brokers" className="ci-cta-primary">
-                    Find a Broker →
+                  <Link href="/contact" className="ci-cta-primary">
+                    Contact us →
                   </Link>
                   <button type="button" className="ci-cta-secondary" onClick={onRequestClose}>
                     Close
@@ -229,7 +240,7 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
       </div>
 
       <footer className="ci-ft">
-        <span className="ci-ft-note">Your answers stay private and are not stored unless you continue.</span>
+        <span className="ci-ft-note">Confidential. Your answers are used only to show your result — never sold, never shared, never added to a marketing list.</span>
         <span className="ci-ft-note">© Forhemit</span>
       </footer>
     </div>
