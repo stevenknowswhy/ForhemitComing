@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { TermsPageClient } from "./TermsPageClient";
 
-const title = "Terms of Service | Forhemit";
+const title = "Terms of Use | Forhemit";
 const description =
-  "Forhemit's terms of service governing the use of our website and employee ownership succession services.";
+  "The terms governing use of the Forhemit website.";
 
 export const metadata: Metadata = {
   title,

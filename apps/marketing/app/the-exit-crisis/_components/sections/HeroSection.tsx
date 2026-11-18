@@ -9,9 +9,14 @@ export function HeroSection() {
       }}
     >
       <div className="container">
-        <span className="about-eyebrow about-eyebrow-hero">Beyond the Balance Sheet™</span>
+        <span className="about-eyebrow about-eyebrow-hero">Essay</span>
         <h1 className="about-title">The Exit Crisis</h1>
-        <p className="about-subtitle">What your broker isn&apos;t telling you. Silver Tsunami Alert: 50 sellers for every qualified buyer.</p>
+        <p className="about-subtitle">
+          A generation of founders is reaching retirement with no successor and
+          too few buyers. Most businesses taken to market never sell at all —
+          and the founders who learn that late have the fewest options left.
+        </p>
+        <p className="about-eyebrow">By Stefano Stokes, Founder &amp; CEO of Forhemit</p>
       </div>
     </section>
   );

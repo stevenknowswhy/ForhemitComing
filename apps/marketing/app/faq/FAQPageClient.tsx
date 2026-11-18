@@ -6,10 +6,7 @@ import "@forhemit/shared/styles/faq-page.css";
 
 import {
   HeroSection,
-  IntroSection,
-  ComparisonSection,
   FAQSections,
-  ValuePropositionsSection,
   CTASection,
 } from "./_components/sections";
 
@@ -22,10 +19,7 @@ export function FAQPageClient() {
 
       <main className="about-main">
         <HeroSection />
-        <IntroSection />
-        <ComparisonSection />
         <FAQSections />
-        <ValuePropositionsSection />
         <CTASection />
       </main>
     </div>

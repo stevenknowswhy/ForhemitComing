@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { BeyondBalanceSheetPageClient } from "./BeyondBalanceSheetPageClient";
 
-const title = "Beyond the Balance Sheet | Employee Ownership Transitions";
+const title = "Beyond the Balance Sheet | Forhemit";
 const description =
-  "Forhemit's approach to employee ownership goes beyond financial structuring. Post-close stewardship ensures continuity for founders, employees, and communities.";
+  "The most valuable things in a founder-led company — trust, craft, reputation, the people themselves — appear nowhere in its financial statements. The right exit is the one that prices them anyway.";
 
 export const metadata: Metadata = {
   title,

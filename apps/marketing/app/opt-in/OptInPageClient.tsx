@@ -356,7 +356,7 @@ export function OptInPageClient() {
                   <ul>
                     <li><strong>Text Messages:</strong> Reply <strong>STOP</strong> to any SMS you receive</li>
                     <li><strong>Emails:</strong> Click the <strong>Unsubscribe</strong> link in any email</li>
-                    <li><strong>Phone:</strong> Call us at +1 (800) 555-0199</li>
+                    <li><strong>Phone:</strong> Call us at (510) 768-7588</li>
                   </ul>
                   <p>
                     <strong>Note:</strong> You will receive a confirmation of your opt-out request. 
@@ -388,8 +388,8 @@ export function OptInPageClient() {
                 </div>
                 <p className="rights-contact">
                   To exercise these rights, contact us at{" "}
-                  <a href="mailto:privacy@forhemit.com">privacy@forhemit.com</a> or{" "}
-                  call <a href="tel:+18005550199">+1 (800) 555-0199</a>
+                  <a href="mailto:contact@forhemit.com">contact@forhemit.com</a> or{" "}
+                  call <a href="tel:+15107687588">(510) 768-7588</a>
                 </p>
               </div>
             </div>

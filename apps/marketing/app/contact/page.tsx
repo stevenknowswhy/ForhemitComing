@@ -3,9 +3,9 @@ import { Suspense } from "react";
 import { ContactPageClient } from "./ContactPageClient";
 
 export const metadata: Metadata = {
-  title: "Contact",
+  title: "Contact | Forhemit",
   description:
-    "Reach the Forhemit team about ESOP transitions, partnerships, or general inquiries. We typically respond within 24–48 hours.",
+    "Start the free assessment or send a message. Your answers are confidential, saved for review by Stefano Stokes, and never shared.",
 };
 
 export default function ContactPage() {

@@ -11,7 +11,7 @@ export function ProblemSolutionSection() {
           <div className="problem-solution-column solution-column solution-only">
             <div className="solution-header">
               <span className="about-eyebrow">The Alternative</span>
-              <h2>A Better Option</h2>
+              <h2>The third option was there all along</h2>
             </div>
             <div className="about-highlight">
               <Image
@@ -26,16 +26,21 @@ export function ProblemSolutionSection() {
             </div>
             <div className="solution-content">
               <p>
-                But there is a better option. A buyer who already knows your business, your
-                customers, and your culture. Because you hired them.
+                Employee ownership through an ESOP answers each failure of the
+                market in turn. The buyers are already inside the building, so
+                there is no market search at all. The transaction is structured
+                and financed in advance, so it closes on a four-month timeline
+                instead of expiring. The price is set by independent appraisal,
+                not by a buyer&apos;s opportunism. And Congress, recognizing
+                exactly this problem, attached serious tax incentives —
+                including the Section 1042 deferral — to founders who choose it.
               </p>
               <p>
-                We help you transition your company to 100% employee ownership. You get the payout
-                you&apos;ve earned. They get the future they deserve.
-              </p>
-              <p>
-                And the company you spent your life building doesn&apos;t end with a &quot;Closed&quot;
-                sign. It begins your legacy.
+                The exit crisis is real, but it is a crisis of imagination as
+                much as of markets. The founders who navigate it best are the
+                ones who learn, early enough to act, that &quot;sell the
+                company&quot; and &quot;sell out&quot; were never the same
+                sentence.
               </p>
             </div>
           </div>
