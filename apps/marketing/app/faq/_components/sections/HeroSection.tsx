@@ -16,7 +16,6 @@ export function HeroSection() {
           FAQ
         </Badge>
         <h1 className="about-title">Frequently Asked Questions</h1>
-        <p className="about-subtitle">The Forhemit Approach</p>
       </div>
     </section>
   );

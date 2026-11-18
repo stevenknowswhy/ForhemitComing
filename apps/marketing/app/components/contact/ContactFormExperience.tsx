@@ -49,10 +49,10 @@ function ContactInfoSidebar() {
 	return (
 		<div className="contact-info-section">
 			<div className="contact-info-header">
-				<h2 className="contact-info-title">Let&apos;s Connect</h2>
+				<h2 className="contact-info-title">Get in Touch</h2>
 				<p className="contact-info-subtitle">
-					Ready to explore partnership opportunities? We&apos;re here to
-					help.
+					Not ready for the assessment? Choose &apos;Just a question,&apos; or
+					email or call directly.
 				</p>
 			</div>
 
@@ -65,12 +65,12 @@ function ContactInfoSidebar() {
 				<ContactInfoItem
 					icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>}
 					label="Location"
-					value={<span className="contact-info-value">55 9th St., San Francisco, CA</span>}
+					value={<span className="contact-info-value">55 9th Street, San Francisco, CA</span>}
 				/>
 				<ContactInfoItem
 					icon={<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>}
 					label="Phone"
-					value={<a href="tel:+14242534019" className="contact-info-link">424-253-4019</a>}
+					value={<a href="tel:+15107687588" className="contact-info-link">(510) 768-7588</a>}
 				/>
 			</div>
 
@@ -78,9 +78,12 @@ function ContactInfoSidebar() {
 
 			<div className="contact-info-note">
 				<p>
-					Whether you&apos;re a business owner exploring ESOP transitions, a
-					professional seeking partnership opportunities, or simply curious
-					about our stewardship model — we&apos;d love to hear from you.
+					Partners: introducing a client? Choose &quot;Just a question&quot; and
+					tell us who you are and the nature of the introduction.
+				</p>
+				<p>
+					Lenders and valuation appraisers: the same first conversation
+					applies.
 				</p>
 			</div>
 		</div>
@@ -278,7 +281,7 @@ export function ContactFormExperience({
 			setIsSubmitting(false);
 			setShowPreview(false);
 			setRevealedSection("success");
-			success("Message sent successfully! We'll get back to you shortly.");
+			success("Message sent successfully!");
 		} catch (err) {
 			setIsSubmitting(false);
 			const errorMessage =
@@ -367,7 +370,8 @@ export function ContactFormExperience({
 							</div>
 							<h3 className="contact-success-title">Message Sent!</h3>
 							<p className="contact-success-message">
-								Thank you for reaching out. We&apos;ll get back to you shortly.
+								Your message has been saved and will be reviewed personally by
+								Stefano Stokes. Expect a reply at the email you provided.
 							</p>
 							<button
 								className="form-btn form-btn-success-close"

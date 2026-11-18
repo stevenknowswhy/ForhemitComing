@@ -15,100 +15,106 @@ export const faqSections: FAQSection[] = [
     eyebrow: "Selling Your Business",
     items: [
       {
-        question: "What makes Forhemit different from a traditional private equity buyer?",
+        question: "Do I have to sell 100% of the company?",
         answer:
-          'Traditional private equity built its reputation on leverage and liquidation—buying companies, cutting costs to the bone, and flipping them a few years later. Forhemit is a California public benefit corporation built on Continuity of Operations (COOP). We structure employee-ownership (ESOP) transitions and post-close stewardship—not a quick flip. Your team becomes the buyer through the plan; we help harden operations so the business lasts for generations.',
+          "Forhemit's model is a 100% transition — the full company moves into employee ownership. That completeness is what unlocks the strongest tax treatment, the cleanest financing, and an unambiguous new chapter for the business. If a partial sale fits you better, we will tell you honestly and point you to advisors who do that work.",
       },
       {
-        question: "What happens to my employees after I sell?",
+        question: "How is the price for my company set?",
         answer:
-          "They become the owners. We utilize an Employee Stock Ownership Plan (ESOP) to transition the equity of the company to the people who helped you build it. We believe the highest valuation of a company is unlocked when everyone is in the game. Your team keeps their jobs, your leadership pipeline is preserved, and your employees gain a powerful wealth-building tool that protects them against economic shifts.",
+          "By an independent, qualified appraiser engaged for the transaction — never by Forhemit and never by you alone. The trustee reviews the valuation on behalf of employees and must conclude the price is no more than fair market value. That independence protects you as much as it protects them: the price can be defended to the IRS, the DOL, and your own family.",
       },
       {
-        question: "Will I be forced to walk away immediately?",
+        question: "What is the Section 1042 deferral, in plain terms?",
         answer:
-          'No. A proper handover is a delicate architectural process, not an abrupt liquidity event. We view departing founders as strategic architects. We work with you to institutionalize your "tribal knowledge" and build a seamless succession plan. Depending on the structure of the sale, mechanisms like our Legacy Bond align our financial success with your mentorship, ensuring you get paid as the company proves it can thrive under the newly empowered team.',
+          "If your company is a C corporation and the ESOP ends up owning at least 30% of the company, Section 1042 of the tax code lets you defer the capital-gains tax on the sale — potentially indefinitely — by reinvesting the proceeds in qualified replacement property. On a lifetime's worth of gains, that deferral can be worth more than a nominally higher offer from a taxable buyer. Your tax advisor confirms how it applies to you; we structure the deal so it can.",
       },
       {
-        question: "Will my company be relocated or rebranded?",
+        question: "Am I personally guaranteeing anything?",
         answer:
-          "Your brand, culture, and community roots are the very assets we are investing in. We do not absorb your company into a faceless corporate conglomerate or relocate your facilities to save a few pennies. We operate as a holding company that provides top-tier resilience systems, disaster preparedness frameworks, and financial training, all while keeping your company's local identity entirely intact.",
+          "No. Sellers in a Forhemit transition do not put personal guarantees or personal assets at risk to finance the sale. Financing is carried by the transaction structure and the company's future earnings — that is precisely why the business must be profitable and of sufficient scale to qualify.",
       },
       {
-        question:
-          "My business is highly complex and operates under strict regulatory and compliance requirements. Are you equipped to handle that level of operational difficulty?",
+        question: "What do my employees actually receive?",
         answer:
-          "Complexity and compliance are where we are most at home. Our founder, Stefano, built his career in disaster policy planning and response for the City and County of San Francisco. In that role, he engineered continuity of operations and emergency frameworks not just for a 40,000-person municipal workforce, but for the city's 800,000 residents. When you are responsible for the survival and resilience of a major city under crisis conditions, navigating strict regulatory environments, multi-agency compliance, and massive operational complexity becomes second nature. We bring that exact municipal-grade precision and systems-level thinking to your business. We don't shy away from heavily regulated or complicated industries—we actively seek them out because our entire model is built to master, manage, and protect them.",
+          "Shares in the company, held in the ESOP trust and allocated to their individual accounts over time, on top of their regular pay. They do not buy in and they do not take on the company's debts. As the company performs and the acquisition financing is repaid, the value of what they hold grows — which is the point: the people doing the work share in what the work creates.",
       },
       {
-        question:
-          'This sounds like an overwhelming amount of work. How can we possibly plan for every single black swan event or disaster?',
+        question: "What does Forhemit charge?",
         answer:
-          "You don't have to. In fact, trying to write a specific plan for every possible crisis is the biggest trap in disaster preparedness. If you try to predict every specific scenario—a facility fire, a cyberattack, a frozen bank account, or the sudden departure of a key executive—you will exhaust your team and still be unprepared for the one thing you didn't predict. Our Continuity of Operations (COOP) framework does not plan for the incident; we plan for the impact. We focus purely on fortifying the six critical pillars of your business: your Financials, People, Place (Facilities), Technology, Tools, and Vendors. It doesn't matter why your technology went down, or why your facility is temporarily inaccessible. What matters is that we have a pre-engineered system to keep your business running when any of those six pillars are compromised. By focusing on the operational impact rather than the infinite causes, we build a hardened, highly efficient system without overwhelming your day-to-day operations.",
+          "Total transition fees typically run 3–5% of valuation — one figure, covering the whole transition, set in writing before you sign anything.",
       },
     ],
   },
   {
-    title: "For Lenders, Brokers, & Capital Partners",
-    eyebrow: "Partnership",
+    title: "For Brokers",
+    eyebrow: "Introductions",
     items: [
       {
-        question: "What is your core investment thesis?",
+        question: "How long does the process take?",
         answer:
-          "We invest in the continuity of profitable, lower-middle-market, founder-led businesses. By converting these acquisitions into 100% S-Corp ESOPs, we unlock a powerful structural tax arbitrage: the operating company pays zero federal income tax. This creates a massive free-cash-flow shield, allowing for safer debt service, higher operational reinvestment, and superior downside protection compared to highly leveraged traditional buyouts.",
+          "About four months from first review to the closing table — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
       },
       {
-        question: "How does Forhemit mitigate operational risk post-close?",
+        question: "What if my client doesn't qualify?",
         answer:
-          "We approach risk through the lens of municipal-grade disaster preparedness. Traditional PE relies on financial engineering; we rely on resilience engineering. Every company in our portfolio undergoes a rigorous Continuity of Operations (COOP) implementation. We institutionalize succession planning, secure IT and supply chain vulnerabilities, and maintain a 24-hour audit-ready data room. We de-risk the asset by ensuring it can survive economic shocks, leadership changes, and systemic disruptions.",
+          "You hear it fast, with the reasons — in terms you can take back to your client, along with what would have to change. The standard we screen against is published on our Brokers page, so there are no surprises in either direction.",
       },
       {
-        question: "What is your target acquisition profile?",
+        question: "What does an introduction earn me?",
         answer:
-          'We look for stable, proven businesses with $2M to $10M in EBITDA, typically facing a founder succession cliff. We are not turnaround investors betting on lottery tickets; we invest in the "fortress." We want companies with strong local roots, dedicated workforces, and consistent cash flows that can be optimized through the alignment of employee ownership.',
+          "We are asked, fairly, what a broker gets for an introduction. We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals. What we offer is a clean handoff, a founder who actually transacts, and a broker who is kept informed at every phase.",
       },
       {
-        question: "How do you align incentives between labor and capital?",
+        question: "Do you work with my client's existing deal team?",
         answer:
-          "As a Public Benefit Corporation, our mandate is to prove that when workers win, investors win. We utilize dedicated C-suite oversight at the holding-company level whose sole focus is maintaining the social contract and ownership culture within our portfolio. By tying management success metrics directly to employee retention and wage stability, we eliminate agency risk and build a deeply aligned, low-turnover workforce that protects our lenders' and LPs' capital.",
-      },
-      {
-        question:
-          "Aren't you just an additional layer on an already complex deal? What exactly do you bring to the table for a lender?",
-        answer:
-          "Financial models are critical, but they are ultimately lagging indicators—they only tell you what has already happened. By the time an operational issue finally bleeds into the balance sheet or financial statements, the damage is already done and your options to correct it are severely limited. What we bring to the table is a proactive operational layer that engages with risks long before they reach the P&L. We act as your early warning system on the ground. By applying our Continuity of Operations (COOP) frameworks, we identify and resolve structural vulnerabilities—such as a single point of failure in the supply chain, an undocumented process, or a gap in succession planning—while you still have every option available. It is the operational equivalent of extinguishing a spark instead of fighting a four-alarm fire. We don't just add a layer of management; we engineer the on-the-ground resilience that protects your capital.",
-      },
-      {
-        question:
-          "Won't bringing you in just complicate the deal for my seller? I'm just trying to get this business sold.",
-        answer:
-          "We actually make your job easier by giving your seller the ultimate negotiating leverage. We do this through a two-prong strategy. First, we don't stop you from doing what you do best: taking the company to the open market to hunt for the highest possible bidder. What we provide is your Option B: a rock-solid, market-rate floor offer. Because our employee-ownership model comes with significant structural tax advantages for the seller, our 'floor' offer often nets out just as strong—if not stronger—than a traditional buyer's premium. This gives your seller absolute power at the negotiating table. When they sit down with a traditional buyer, they never have to accept bad terms out of desperation, because they know they already have a guaranteed, legacy-preserving exit in hand. And if the broader market dries up, or if a traditional buyer falls through at the 11th hour, your seller is completely protected. They still get to exit on their terms, the employees are taken care of, and you still get the deal closed.",
+          "Yes — alongside them, never instead of them. The founder's attorney, CPA, and wealth manager stay in their roles; we coordinate the transition work with them and keep you informed at every phase, with your client's authorisation.",
       },
     ],
   },
   {
-    title: "For Employees",
-    eyebrow: "Your Future",
+    title: "For Attorneys, CPAs & Wealth Managers",
+    eyebrow: "Advisors",
     items: [
       {
-        question: "What does it mean that Forhemit acquired our company?",
+        question: "What does our firm get for an introduction?",
         answer:
-          'It means your future just became much more secure. Unlike traditional buyouts that often look for "synergies" (which usually means layoffs), Forhemit buys companies specifically to transition them to employee ownership. Our goal is to protect the legacy of the founder by empowering the people who actually run the business every day: you.',
+          "We are asked, fairly, what a partner gets for an introduction. We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals. What we offer is a clean handoff, a client who stays yours, and a partner who is kept informed at every phase.",
       },
       {
-        question: "Will there be mass layoffs or new management coming in to tell us what to do?",
+        question: "Is Forhemit a law firm? Do you compete with us?",
         answer:
-          "No. We assume the company is already successful, which is why we bought it. We don't bring in 'new blood' to fix what isn't broken, and we don't believe in cutting staff to inflate short-term profits. Our job is to support your existing management team and provide the tools, training, and systems needed to make your jobs easier and more secure.",
+          "No. Forhemit is not a law firm, provides no legal services, and enters into no referral-fee or fee-splitting arrangements. You stay counsel of record; we coordinate the transition around your counsel, never instead of it. We coordinate — never replace — the legal work of an ESOP transition: plan and trust documents with ERISA counsel, transaction documents, and the compliance calendar for DOL and IRS requirements.",
       },
       {
-        question: 'What does it mean to be an "Employee Owner"?',
+        question: "How quickly will we know whether a client fits?",
         answer:
-          "Through our Employee Stock Ownership Plan (ESOP), you will earn a genuine stake in the financial success of the company. As the company grows and succeeds, so does the value of your shares. This isn't something you have to buy into with your own savings; it is a benefit earned through your continued dedication and hard work. It transforms your daily effort from just earning a paycheck into building long-term personal wealth.",
+          "Fast. If a business you send us is not a fit, we say so quickly and say why, in terms you can take back to your client, along with what would have to change. The standard we screen against is published on our Attorneys page.",
       },
       {
-        question: "Will my day-to-day job change?",
+        question: "What does our client pay?",
         answer:
-          "Your core responsibilities will remain the same, but the culture will evolve. We practice open-book management and prioritize financial literacy. We want to teach you how the business makes money, how your specific role impacts the bottom line, and how to think like an owner. You can expect more transparency, more communication, and a much larger voice in the future of the place you work.",
+          "One transition fee: total transition fees typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our How It Works page, so you can answer your client's question before they ever talk to us.",
+      },
+      {
+        question: "What does an introduction earn me?",
+        answer:
+          "Nothing between firms. There are no referral fees or compensation arrangements for introductions. We do not receive any money or anything else of value — monetary or non-monetary — from any of our professional partners. We do not pay referral fees or anything else of value for introductions, and we do not promise reciprocal referrals. What we offer is a clean handoff, a client who stays yours, and a partner who is kept informed at every phase.",
+      },
+      {
+        question: "Do you manage assets, or compete for my client?",
+        answer:
+          "No. Forhemit does not manage assets, and does not provide investment, legal, tax, or accounting advice: we do not compete for the relationship you built, and we do not solicit it. The wealth relationship continues through the transition and beyond it — with you.",
+      },
+      {
+        question: "What is Section 1042, in one paragraph?",
+        answer:
+          "Where Section 1042 applies, a qualifying sale into employee ownership can provide tax-deferred treatment for the seller's gain — deferral, not forgiveness, and never automatic. The deferral is not forgiveness: the deferred gain reduces the seller's basis in the qualified replacement property, and tax comes due when that property is sold. Eligibility itself stays where it belongs: with you and your client's tax and legal professionals. Forhemit coordinates; it does not give tax advice.",
+      },
+      {
+        question: "Which of my clients fit?",
+        answer:
+          "The standard we screen against is published on our Wealth Managers page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow about four months and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change.",
       },
     ],
   },

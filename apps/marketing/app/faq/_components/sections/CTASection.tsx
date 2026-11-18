@@ -20,7 +20,7 @@ export function CTASection() {
               tailored to your specific situation.
             </p>
             <Button asChild size="lg" className="faq-cta-button">
-              <Link href="/introduction">Contact Us</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </CardContent>
         </Card>

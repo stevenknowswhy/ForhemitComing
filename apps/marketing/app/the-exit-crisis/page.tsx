@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { TheExitCrisisPageClient } from "./TheExitCrisisPageClient";
 
-const title = "The Exit Crisis | Why Founders Need a Succession Plan";
+const title = "The Exit Crisis | Forhemit";
 const description =
-  "With 50 sellers for every qualified buyer and 30-40% of businesses never selling, founders need a real succession path. Explore the exit crisis and employee ownership alternative.";
+  "A generation of founders is reaching retirement with no successor and too few buyers. Most businesses taken to market never sell at all — and the founders who learn that late have the fewest options left.";
 
 export const metadata: Metadata = {
   title,

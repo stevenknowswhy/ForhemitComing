@@ -52,3 +52,41 @@
 .contact-page-footnote a:hover {
   text-decoration-color: var(--body-ink);
 }
+
+.contact-page-header {
+  max-width: 900px;
+  margin: 0 auto 1.5rem;
+}
+
+.contact-page-eyebrow {
+  font-family: Inter, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--body-ink);
+  opacity: 0.65;
+  margin: 0;
+}
+
+.contact-page-title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  line-height: 1.08;
+  font-weight: 600;
+  color: var(--body-ink);
+  margin: 0.6rem 0 1rem;
+}
+
+.contact-page-intro {
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--body-ink);
+  max-width: 640px;
+  margin: 0;
+}
+
+.contact-page-assessment-btn {
+  margin-top: 1.25rem;
+}
