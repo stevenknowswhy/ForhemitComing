@@ -148,6 +148,15 @@ export default defineSchema({
 		createdAt: v.number(),
 	}).index("by_createdAt", ["createdAt"]),
 
+	// Watermark for the Convex -> Google Sheet sync (sheetsSync.ts):
+	// one row per synced table, advanced ONLY after the Sheet webhook
+	// confirms success, so a failed run retries the same rows.
+	syncState: defineTable({
+		table: v.string(),
+		lastCreationTime: v.number(),
+		lastId: v.string(),
+	}).index("by_table", ["table"]),
+
 	// Early access email signups
 	earlyAccessSignups: defineTable({
 		email: v.string(),

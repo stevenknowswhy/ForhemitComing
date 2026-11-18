@@ -77,6 +77,7 @@ import type * as pipelinePhases from "../pipelinePhases.js";
 import type * as posts from "../posts.js";
 import type * as seed from "../seed.js";
 import type * as seedStageRequirements from "../seedStageRequirements.js";
+import type * as sheetsSync from "../sheetsSync.js";
 import type * as stages from "../stages.js";
 import type * as testBusinessLog from "../testBusinessLog.js";
 import type * as triggers from "../triggers.js";
@@ -159,6 +160,7 @@ declare const fullApi: ApiFromModules<{
   posts: typeof posts;
   seed: typeof seed;
   seedStageRequirements: typeof seedStageRequirements;
+  sheetsSync: typeof sheetsSync;
   stages: typeof stages;
   testBusinessLog: typeof testBusinessLog;
   triggers: typeof triggers;
