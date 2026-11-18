@@ -4,7 +4,7 @@ import { BusinessOwnersPageClient } from "./BusinessOwnersPageClient";
 
 const title = "For Business Owners | 100% Employee Ownership Succession";
 const description =
-  "Transition your business to 100% employee ownership. Preserve your legacy, unlock Section 1042 tax benefits, and steward your company's future with Forhemit.";
+  "For founders weighing what comes next: who qualifies, how the Section 1042 tax-deferred treatment works, what you risk, and what your life looks like after close.";
 
 export const metadata: Metadata = {
   title,

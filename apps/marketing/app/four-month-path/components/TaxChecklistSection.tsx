@@ -3,11 +3,10 @@
 import { useState, useMemo } from "react";
 
 const TAX_CRITERIA = [
-  { id: "ccorp", label: "Company is (or can convert to) a C-Corporation" },
-  { id: "pct30", label: "ESOP buys at least 30% of outstanding shares" },
-  { id: "held3yr", label: "You\u2019ve held the stock for at least 3 years" },
-  { id: "qrp", label: "You\u2019ll reinvest proceeds in Qualified Replacement Property (QRP) within 12 months" },
-  { id: "filing", label: "You file the \u00A71042 election with your tax return for the year of sale" },
+  { id: "ccorp", label: "Your company is a closely held C corporation. S corporation stock does not qualify under current law." },
+  { id: "pct30", label: "The ESOP owns at least 30% of the company immediately after the sale. Every Forhemit transition is 100%, so this condition is met by design." },
+  { id: "held3yr", label: "You have held your stock for at least three years." },
+  { id: "qrp", label: "You reinvest the proceeds within the window, which opens three months before the sale and closes twelve months after it." },
 ];
 
 export function TaxChecklistSection() {
@@ -27,11 +26,13 @@ export function TaxChecklistSection() {
   return (
     <section id="fmp-1042" className="fmp-section" aria-labelledby="fmp-1042-heading">
       <h2 id="fmp-1042-heading" className="fmp-section-title">
-        &sect;1042 tax election &mdash; are you eligible?
+        &sect;1042 eligibility &mdash; the four conditions
       </h2>
       <p className="fmp-section-lead">
-        The &sect;1042 election lets you defer <strong>100% of capital gains tax</strong> on the sale.
-        It has specific requirements &mdash; check the ones that apply.
+        When you sell to an ESOP, federal law may let you defer the capital
+        gains tax on the sale. Deferral is not forgiveness, and it is not
+        automatic &mdash; it applies only when every one of these holds.
+        Check the ones that apply.
       </p>
       <ul className="fmp-elig-list" role="group" aria-label="§1042 eligibility criteria">
         {TAX_CRITERIA.map((c) => (
@@ -58,11 +59,14 @@ export function TaxChecklistSection() {
         >
           <p className="fmp-elig-summary-text">
             {allChecked
-              ? "You likely qualify for \u00A71042 \u2014 your CPA confirms eligibility during Month 1."
-              : `You meet ${count} of ${TAX_CRITERIA.length} requirements. If you don\u2019t qualify for \u00A71042, you still benefit from ESOP pricing \u2014 you\u2019d just pay capital gains tax normally. Your CPA confirms eligibility during Month 1.`}
+              ? "Every condition holds on your answers. Whether Section 1042 fits your situation is settled with your own tax advisor in Month 2, not on a website."
+              : `You meet ${count} of ${TAX_CRITERIA.length} conditions. Section 1042 applies only when every one of them holds \u2014 your own tax advisor settles the question in Month 2.`}
           </p>
         </div>
       )}
+      <p className="fmp-section-lead">
+        What we will never call it is tax-free.
+      </p>
     </section>
   );
 }

@@ -1,27 +1,27 @@
 const PRIVACY_POINTS = [
   {
-    id: "nda",
+    id: "confidential",
     icon: "\uD83D\uDD12",
-    title: "NDAs first, always",
-    body: "Non-disclosure agreements are signed before any business information is shared with any party.",
+    title: "Confidential from the first step",
+    body: "Your inquiry is confidential. Nothing is shared with your employees, lenders, or anyone else.",
   },
   {
-    id: "timing",
-    icon: "\uD83D\uDCC5",
-    title: "Employees learn in Month 3",
-    body: "Your team learns about the ESOP only after financing is secured and the deal is effectively locked in.",
-  },
-  {
-    id: "external",
+    id: "nda",
     icon: "\uD83D\uDEE1",
-    title: "No outside contact",
-    body: "Competitors, customers, and vendors are never contacted during the process. The deal is between you, the bank, and the trust.",
+    title: "An NDA before details",
+    body: "You sign an NDA with us before you upload anything that identifies your company.",
   },
   {
-    id: "docs",
+    id: "review",
     icon: "\uD83D\uDCC1",
-    title: "Secure document handling",
-    body: "All sensitive financials are shared through encrypted document rooms \u2014 never via unprotected email attachments.",
+    title: "A confidential review",
+    body: "Month 1 begins with a confidential review of financials, headcount, and ownership structure.",
+  },
+  {
+    id: "comms",
+    icon: "\uD83D\uDCC5",
+    title: "Employee communication is planned",
+    body: "What is said to employees, when, and by whom is prepared as a plan in Month 3 \u2014 not improvised.",
   },
 ];
 

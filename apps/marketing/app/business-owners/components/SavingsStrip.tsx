@@ -2,29 +2,29 @@ export function SavingsStrip() {
   return (
     <div className="bo-savings-strip">
       <div className="bo-savings-item">
-        <div className="bo-savings-num">$0</div>
-        <div className="bo-savings-label">Broker commission</div>
+        <div className="bo-savings-num">3&ndash;5%</div>
+        <div className="bo-savings-label">Total transition fees</div>
         <div className="bo-savings-sub">
-          We aren&rsquo;t brokers. We coordinate the transaction&mdash;saving you
-          4&ndash;8% of your sale price at closing.
+          Of valuation &mdash; one figure, covering the whole transition, set
+          in writing before you sign anything. That is the all-in total.
         </div>
       </div>
       <div className="bo-savings-item">
-        <div className="bo-savings-num">$0</div>
-        <div className="bo-savings-label">Capital gains tax (&sect;1042)</div>
+        <div className="bo-savings-num">&sect;1042</div>
+        <div className="bo-savings-label">Tax-deferred, never tax-free</div>
         <div className="bo-savings-sub">
-          C-corp sellers who reinvest proceeds into QRS securities pay no
-          federal capital gains. On a $10M deal, that&rsquo;s $2.38M+ back in
-          your pocket.
+          Section 1042 may let you defer the capital gains tax on the sale
+          when every condition holds &mdash; deferral is not forgiveness, and
+          it is not automatic.
         </div>
       </div>
       <div className="bo-savings-item">
         <div className="bo-savings-num">4 mo</div>
-        <div className="bo-savings-label">vs. 12–18 months traditional</div>
+        <div className="bo-savings-label">The four-month path</div>
         <div className="bo-savings-sub">
-          The fastest path to a funded exit that preserves your legacy. 
-          No contingency drama. The ESOP trust is the buyer—deal certainty 
-          is structurally higher once the numbers work.
+          A traditional sale commonly takes 12&ndash;18 months. This path is
+          deliberately shorter, because the buyer is already inside the
+          building.
         </div>
       </div>
     </div>

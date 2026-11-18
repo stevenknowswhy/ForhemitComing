@@ -19,48 +19,55 @@ export type PhaseBlock = {
 export const FOUR_PHASE_BLOCKS: PhaseBlock[] = [
   {
     id: "phase-1",
-    monthLabel: "MONTH 1: VALUATION (Competitors take 3–6 months)",
-    dayRange: "Days 1–30",
+    monthLabel: "MONTH 1: READINESS & VALUATION",
+    dayRange: "Month 1 of 4",
     bullets: [
-      "Sign NDAs and Retainer Agreement",
-      "Bank starts reviewing your business for the loan",
-      "We map who runs what after you leave (backup plan for every key person)",
+      "Confidential review of financials, headcount, and ownership structure",
+      "Qualification check against the $3M+ revenue / 20+ verifiable U.S. employees / profitable / 51%+ controlling-stake standard",
+      "Independent valuation commissioned from a qualified third-party appraiser",
+      "A plain-language feasibility summary you can share with your own advisors",
     ],
-    checkpoint: "Checkpoint: Fair price confirmed by independent appraiser",
+    checkpoint:
+      "Checkpoint: A plain-language feasibility summary you can share with your own advisors",
   },
   {
     id: "phase-2",
-    monthLabel: "MONTH 2: LOCK IN THE DEAL",
-    dayRange: "Days 31–60",
+    monthLabel: "MONTH 2: STRUCTURE & FINANCING",
+    dayRange: "Month 2 of 4",
     bullets: [
-      "You sign the Letter of Intent (price locked in)",
-      'Bank issues formal commitment letter ("yes, we\'ll lend")',
-      "Final numbers check: Does the business still look healthy?",
+      "ESOP structure design with ERISA counsel",
+      "Lender-ready financing package prepared and placed with ESOP-experienced lenders",
+      "Seller financing terms modeled in full, so you see the payment schedule before you commit",
+      "Repurchase-obligation forecast so the plan is sustainable from day one",
     ],
-    checkpoint: "Checkpoint: Bank commitment secured",
+    checkpoint:
+      "Checkpoint: Seller financing terms modeled in full — you see the payment schedule before you commit",
   },
   {
     id: "phase-3",
-    monthLabel: "MONTH 3: FINAL APPROVALS & PAPERWORK",
-    dayRange: "Days 61–90",
+    monthLabel: "MONTH 3: LEGAL & COMPLIANCE",
+    dayRange: "Month 3 of 4",
     bullets: [
-      "Lawyers draft the purchase agreement",
-      'Independent trustee confirms: "This business won\'t die when the owner leaves" (operations ready)',
-      "Employees get trained on how ownership works",
+      "Plan and trust documents drafted and reviewed",
+      "Independent trustee appointed to represent employees' interests",
+      "DOL and IRS compliance requirements documented step by step",
+      "Employee communication plan prepared — what is said, when, and by whom",
     ],
-    checkpoint: "Checkpoint: Trustee sign-off—business ready to run without you",
+    checkpoint:
+      "Checkpoint: Independent trustee appointed to represent employees' interests",
   },
   {
     id: "phase-4",
-    monthLabel: "MONTH 4: CLOSE & STEWARD YOUR LEGACY",
-    dayRange: "Days 91–120",
+    monthLabel: "MONTH 4: CLOSE & HANDOVER",
+    dayRange: "Month 4 of 4",
     bullets: [
-      "Final document signing",
-      "Bank wires the money—you get paid (usually 60–80% upfront, remainder via seller note)",
-      "Employees officially take over and become owners",
-      "We stay as fiduciary bridge—stewarding your legacy through the critical first 24 months",
+      "Closing executed with trustee, lender, and counsel at one table",
+      "Employees welcomed as owners with a clear explanation of what they now hold",
+      "Your 4-to-12-month post-close availability begins exactly as agreed in writing — on call for check-ins, introductions, and questions, not working hands-on",
+      "Ongoing governance, culture, and repurchase planning under Forhemit stewardship",
     ],
-    checkpoint: "Result: You sold your business. Check in hand. Legacy protected.",
+    checkpoint:
+      "Result: Your employees own the company — and your transition availability begins, exactly as agreed in writing",
   },
 ];
 
@@ -72,23 +79,23 @@ export type CheckpointRow = {
 
 export const FOUR_CHECKPOINTS: CheckpointRow[] = [
   {
-    title: "Price Check",
-    day: "Day 45",
-    body: "Independent expert confirms the price is fair to the employees (protects you from future lawsuits)",
+    title: "Independent valuation",
+    day: "Month 1",
+    body: "A qualified third-party appraiser sets the price. The trustee reviews the valuation on behalf of employees and must conclude the price is no more than fair market value.",
   },
   {
-    title: "Bank Check",
-    day: "Day 60",
-    body: "Lender officially commits the money to buy you out",
+    title: "Financing placed",
+    day: "Month 2",
+    body: "A lender-ready financing package is prepared and placed with ESOP-experienced lenders, and the seller financing terms are modeled in full.",
   },
   {
-    title: "Numbers Check",
-    day: "Day 75",
-    body: "Final financial review confirms business health hasn't changed",
+    title: "Compliance documented",
+    day: "Month 3",
+    body: "Plan and trust documents are drafted and reviewed, the independent trustee is appointed, and DOL and IRS requirements are documented step by step.",
   },
   {
-    title: "Operations Check",
-    day: "Day 90",
-    body: "Expert confirms the business can run without you (Forhemit delivers this)",
+    title: "Closing executed",
+    day: "Month 4",
+    body: "The sale closes with trustee, lender, and counsel at one table — and employees are welcomed as owners, with a clear explanation of what they now hold.",
   },
 ];

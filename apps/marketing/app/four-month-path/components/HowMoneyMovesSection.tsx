@@ -4,36 +4,36 @@ import { useState } from "react";
 
 const MONEY_ITEMS = [
   {
-    id: "cash",
-    pct: "60\u201380%",
-    title: "Cash at close",
-    summary: "Lump sum wire on closing day",
+    id: "price",
+    pct: "FMV",
+    title: "The price",
+    summary: "Set by an independent appraiser",
     detail:
-      "The bank funds a loan to the ESOP trust, which buys your shares. Most sellers receive 60\u201380% of the purchase price as a single wire transfer on closing day. No waiting, no conditions.",
+      "By an independent, qualified appraiser engaged for the transaction \u2014 never by Forhemit and never by you alone. The trustee reviews the valuation on behalf of employees and must conclude the price is no more than fair market value.",
   },
   {
-    id: "note",
-    pct: "20\u201340%",
-    title: "Seller note (if any)",
-    summary: "A percentage might have to be held until loan is fully repaid",
+    id: "fees",
+    pct: "3\u20135%",
+    title: "Total transition fees",
+    summary: "Of valuation \u2014 the all-in total",
     detail:
-      "In most deals, you carry a seller note \u2014 typically 20\u201340% of the price. This portion is held until the SBA loan is fully repaid. The terms are negotiated upfront and agreed before you sign the Letter of Intent. It is not sprung on you at closing.",
+      "Total transition fees typically run 3\u20135% of valuation \u2014 one figure, covering the whole transition, set in writing before you sign anything. That is the all-in total: Forhemit\u2019s work plus the third-party charges the transaction requires, itemized in the fee document with who receives each charge.",
   },
   {
-    id: "earnout",
-    pct: "0%",
-    title: "Earnouts",
-    summary: "None. ESOP price is locked.",
+    id: "tax",
+    pct: "\u00A71042",
+    title: "The tax treatment",
+    summary: "Deferral \u2014 never tax-free",
     detail:
-      "Unlike PE deals, an ESOP has no earnout. The price is locked at the Letter of Intent. No \u2018hit these revenue targets for the next 3 years\u2019 conditions. The independent appraiser sets the fair price, and that\u2019s what you receive.",
+      "When you sell to an ESOP, federal law may let you defer the capital gains tax on the sale. That provision is Section 1042. Deferral is not forgiveness, and it is not automatic \u2014 whether it fits your situation is settled with your own tax advisor, not on a website.",
   },
   {
-    id: "escrow",
-    pct: "0%",
-    title: "Escrow holdbacks",
-    summary: "Typically none in ESOP deals",
+    id: "guarantees",
+    pct: "None",
+    title: "Personal guarantees",
+    summary: "Your assets are not collateral",
     detail:
-      "ESOP transactions typically don\u2019t require escrow holdbacks or reps-and-warranty insurance. The purchase price is the purchase price \u2014 no portion withheld for potential claims.",
+      "Your house, your savings, and your family\u2019s security are not collateral in a Forhemit transition. The financing rests on the business itself. Founders tell us this is the term that lets them sleep during the four months \u2014 and it is non-negotiable in our structure.",
   },
 ];
 
@@ -43,11 +43,13 @@ export function HowMoneyMovesSection() {
   return (
     <section id="fmp-money" className="fmp-section" aria-labelledby="fmp-money-heading">
       <h2 id="fmp-money-heading" className="fmp-section-title">
-        How the money moves
+        The money, stated plainly
       </h2>
       <p className="fmp-section-lead">
-        Every seller wants to know: how much cash do I actually receive, and when?
-        Here&apos;s the typical ESOP deal structure.
+        What we can state plainly is the price, the fee, and the tax treatment
+        &mdash; each set in writing before you commit. How the proceeds
+        themselves are structured is worked out in Month 2, with your own tax
+        advisor.
       </p>
       <div className="fmp-money-grid">
         {MONEY_ITEMS.map((item) => {
@@ -72,8 +74,9 @@ export function HowMoneyMovesSection() {
       </div>
       <div className="fmp-money-note">
         <p>
-          <strong>No personal guarantees required from you.</strong> The loan is between the bank
-          and the ESOP trust. Your personal assets are not collateral.
+          <strong>ESOP Fee Transparency.</strong> Our one-page fee document
+          &mdash; every charge, who receives it, and when &mdash; is shared in
+          full during the first assessment call, before you sign anything.
         </p>
       </div>
     </section>

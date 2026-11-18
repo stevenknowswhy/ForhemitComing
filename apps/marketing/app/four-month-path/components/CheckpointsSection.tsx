@@ -12,8 +12,8 @@ export function CheckpointsSection({
   checkpoints,
   sectionId = "fmp-checkpoints",
   headingId = "fmp-checkpoints-heading",
-  title = "The 4 checkpoints that must clear",
-  lead = "Instead of hard gates, think of these as the four checkpoints everyone needs to see before closing. If any checkpoint fails, we pause and fix it—no surprises at closing.",
+  title = "The checkpoints on the path",
+  lead = "Four things must be true before the closing table: the price is independently set, the financing is placed, the documents satisfy the Department of Labor and the IRS, and the closing is executed with trustee, lender, and counsel at one table.",
 }: Props) {
   return (
     <section id={sectionId} className="fmp-section fmp-checkpoints" aria-labelledby={headingId}>

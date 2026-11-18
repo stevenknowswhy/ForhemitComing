@@ -3,13 +3,12 @@
 import { useState, useMemo } from "react";
 
 const CRITERIA = [
+  { id: "founder", label: "Founder-led, and operating for at least 3 years" },
   { id: "revenue", label: "Annual revenue of $3M or more" },
-  { id: "employees", label: "At least 20 full-time employees" },
-  { id: "profitable", label: "Profitable for the last 2–3 years" },
+  { id: "employees", label: "20 or more verifiable U.S. employees — on U.S. payroll (W-2), not contractors or overseas staff" },
+  { id: "profitable", label: "Profitable for 3 years or more" },
   { id: "ownership", label: "You own 51% or more of the company" },
-  { id: "operable", label: "Business can operate without you (or you're willing to transition)" },
-  { id: "entity", label: "Structured as a corporation (C-Corp or S-Corp)" },
-  { id: "advisory", label: "You're open to staying on 6–12 months as an advisor" },
+  { id: "availability", label: "You can be available for 4 to 12 months after close — on call, not working hands-on" },
 ];
 
 export function EligibilitySection() {
@@ -24,18 +23,19 @@ export function EligibilitySection() {
   );
 
   const hasInteracted = count > 0;
+  const meetsAll = count === CRITERIA.length;
 
   let summaryText = "";
   let summaryClass = "";
 
-  if (count >= 5) {
-    summaryText = `You match ${count} of ${CRITERIA.length} — your business is likely a strong ESOP candidate.`;
+  if (meetsAll) {
+    summaryText = `You meet all ${CRITERIA.length} — the same standard the free assessment applies to your numbers.`;
     summaryClass = "fmp-elig-summary--strong";
   } else if (count >= 3) {
-    summaryText = `You match ${count} of ${CRITERIA.length} — worth a conversation to explore further.`;
+    summaryText = `You match ${count} of ${CRITERIA.length} — every one of the six is required, so the honest next step is the free assessment, which names exactly what would have to change.`;
     summaryClass = "fmp-elig-summary--possible";
   } else if (hasInteracted) {
-    summaryText = `You match ${count} of ${CRITERIA.length} — an ESOP may still work, but let\u2019s talk through the details.`;
+    summaryText = `You match ${count} of ${CRITERIA.length} — every one of the six is required. The free assessment applies the same six to your numbers and tells you directly where you stand.`;
     summaryClass = "fmp-elig-summary--explore";
   }
 
@@ -45,7 +45,8 @@ export function EligibilitySection() {
         Is this the right fit?
       </h2>
       <p className="fmp-section-lead">
-        Not every business is a good ESOP candidate. Check the items that apply to your situation.
+        The standard is six criteria, and a business must meet every one.
+        Check the items that apply to your situation.
       </p>
       <ul className="fmp-elig-list" role="group" aria-label="Eligibility criteria">
         {CRITERIA.map((c) => (
