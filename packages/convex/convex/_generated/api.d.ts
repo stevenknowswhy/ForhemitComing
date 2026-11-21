@@ -79,6 +79,7 @@ import type * as seed from "../seed.js";
 import type * as seedStageRequirements from "../seedStageRequirements.js";
 import type * as sheetsSync from "../sheetsSync.js";
 import type * as stages from "../stages.js";
+import type * as stripeCheckout from "../stripeCheckout.js";
 import type * as testBusinessLog from "../testBusinessLog.js";
 import type * as triggers from "../triggers.js";
 import type * as workflowService from "../workflowService.js";
@@ -162,6 +163,7 @@ declare const fullApi: ApiFromModules<{
   seedStageRequirements: typeof seedStageRequirements;
   sheetsSync: typeof sheetsSync;
   stages: typeof stages;
+  stripeCheckout: typeof stripeCheckout;
   testBusinessLog: typeof testBusinessLog;
   triggers: typeof triggers;
   workflowService: typeof workflowService;

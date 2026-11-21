@@ -1,12 +1,13 @@
 import { httpRouter } from "convex/server";
 import { httpAction } from "./_generated/server";
-import { api } from "./_generated/api";
+import { api, internal } from "./_generated/api";
 
 // Declare process.env for Convex runtime (Node.js types not in tsconfig)
 declare const process: {
 	env: {
 		RESEND_API_KEY?: string;
 		BOX_WEBHOOK_PRIMARY_KEY?: string;
+		STRIPE_WEBHOOK_SECRET?: string;
 		CORS_ALLOWED_ORIGINS?: string;
 	};
 };
@@ -318,6 +319,159 @@ http.route({
 			});
 		} catch (error: unknown) {
 			const message = error instanceof Error ? error.message : "Unknown error";
+			return new Response(JSON.stringify({ success: false, error: message }), {
+				status: 500,
+				headers: JSON_HEADERS,
+			});
+		}
+	}),
+});
+
+/**
+ * POST /stripe-webhook
+ * ────────────────────
+ * Stripe Checkout webhooks for the Self Guided Transition Service
+ * (STRIPE-CHECKOUT-SPEC-2026-11-18.md). Verifies the Stripe signature
+ * (HMAC-SHA256 over "<timestamp>.<raw body>" with STRIPE_WEBHOOK_SECRET,
+ * 5-minute tolerance) before trusting anything in the event.
+ *   checkout.session.completed — mark the bound record paid (idempotent),
+ *     then fire the existing admin notification path.
+ *   checkout.session.expired — state hygiene on the stored session.
+ * Logs event types and session IDs only — never payer details.
+ */
+http.route({
+	path: "/stripe-webhook",
+	method: "POST",
+	handler: httpAction(async (ctx, request) => {
+		const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+		if (!webhookSecret) {
+			return new Response(
+				JSON.stringify({ error: "Stripe webhook not configured" }),
+				{ status: 500, headers: JSON_HEADERS },
+			);
+		}
+		try {
+			const rawBody = await request.text();
+			const signatureHeader = request.headers.get("stripe-signature");
+			if (!signatureHeader) {
+				return new Response(
+					JSON.stringify({ error: "Missing stripe-signature header" }),
+					{ status: 400, headers: JSON_HEADERS },
+				);
+			}
+
+			// Parse the Stripe signature header: t=<ts>,v1=<hex>[,v1=<hex>...]
+			let timestamp = "";
+			const signatures: string[] = [];
+			for (const part of signatureHeader.split(",")) {
+				const [key, value] = part.split("=");
+				if (key === "t") timestamp = value;
+				if (key === "v1") signatures.push(value);
+			}
+			if (!timestamp || signatures.length === 0) {
+				return new Response(
+					JSON.stringify({ error: "Malformed stripe-signature header" }),
+					{ status: 400, headers: JSON_HEADERS },
+				);
+			}
+			if (Math.abs(Date.now() / 1000 - Number(timestamp)) > 300) {
+				return new Response(
+					JSON.stringify({ error: "Signature timestamp outside tolerance" }),
+					{ status: 400, headers: JSON_HEADERS },
+				);
+			}
+
+			const encoder = new TextEncoder();
+			const cryptoKey = await crypto.subtle.importKey(
+				"raw",
+				encoder.encode(webhookSecret),
+				{ name: "HMAC", hash: "SHA-256" },
+				false,
+				["sign"],
+			);
+			const mac = await crypto.subtle.sign(
+				"HMAC",
+				cryptoKey,
+				encoder.encode(`${timestamp}.${rawBody}`),
+			);
+			const expected = Array.from(new Uint8Array(mac))
+				.map((b) => b.toString(16).padStart(2, "0"))
+				.join("");
+			const matches = signatures.some((sig) => {
+				if (sig.length !== expected.length) return false;
+				let diff = 0;
+				for (let i = 0; i < sig.length; i++) {
+					diff |= sig.charCodeAt(i) ^ expected.charCodeAt(i);
+				}
+				return diff === 0;
+			});
+			if (!matches) {
+				return new Response(
+					JSON.stringify({ error: "Invalid signature" }),
+					{ status: 400, headers: JSON_HEADERS },
+				);
+			}
+
+			const event = JSON.parse(rawBody);
+			const session = event?.data?.object ?? {};
+			console.log("stripe webhook", event?.type, session.id);
+
+			if (event?.type === "checkout.session.completed") {
+				let paymentId = session.metadata?.convex_payment_id;
+				if (!paymentId && session.id) {
+					const record = await ctx.runQuery(
+						internal.stripeCheckout.getPaymentBySession,
+						{ sessionId: session.id },
+					);
+					paymentId = record?._id;
+				}
+				if (!paymentId) {
+					return new Response(
+						JSON.stringify({ received: true, warning: "no bound record" }),
+						{ status: 200, headers: JSON_HEADERS },
+					);
+				}
+				const result = await ctx.runMutation(
+					internal.stripeCheckout.markPaid,
+					{
+						paymentId,
+						sessionId: session.id,
+						paymentIntent:
+							typeof session.payment_intent === "string"
+								? session.payment_intent
+								: undefined,
+						amountTotal:
+							typeof session.amount_total === "number"
+								? session.amount_total
+								: undefined,
+						currency:
+							typeof session.currency === "string"
+								? session.currency
+								: undefined,
+					},
+				);
+				if (result?.ok && !result.alreadyPaid) {
+					await ctx.runAction(
+						internal.stripeCheckout.notifyPaymentReceived,
+						{ paymentId },
+					);
+				}
+			} else if (event?.type === "checkout.session.expired") {
+				if (session.id) {
+					await ctx.runMutation(
+						internal.stripeCheckout.markSessionExpired,
+						{ sessionId: session.id },
+					);
+				}
+			}
+
+			return new Response(JSON.stringify({ received: true }), {
+				status: 200,
+				headers: JSON_HEADERS,
+			});
+		} catch (error: unknown) {
+			const message = error instanceof Error ? error.message : "Unknown error";
+			console.error("stripe webhook error", message);
 			return new Response(JSON.stringify({ success: false, error: message }), {
 				status: 500,
 				headers: JSON_HEADERS,
