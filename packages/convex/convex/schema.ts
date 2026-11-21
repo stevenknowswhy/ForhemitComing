@@ -275,6 +275,7 @@ export default defineSchema({
 			v.literal("contactSubmission"),
 			v.literal("earlyAccessSignup"),
 			v.literal("notifySignup"),
+			v.literal("communicationPreference"),
 			v.literal("jobApplication"),
 			v.literal("generatedDocument"),
 			v.literal("agentJob"),
