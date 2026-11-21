@@ -42,17 +42,11 @@ export function HomeHeroSection() {
 
             <nav className="hch-hero-pro-links" aria-label="Professional audiences">
               <span className="hch-hero-pro-label">For professionals:</span>
-              <Link href="/lenders">Lenders</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/legal-practices">Legal</Link>
               <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/wealth-managers">Wealth</Link>
               <span className="hch-hero-pro-sep" aria-hidden>·</span>
-              <Link href="/appraisers">Appraisers</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>·</span>
               <Link href="/accounting-firms">Accounting</Link>
-              <span className="hch-hero-pro-sep" aria-hidden>·</span>
-              <Link href="/financial-accounting">Finance</Link>
             </nav>
           </div>
         </div>
