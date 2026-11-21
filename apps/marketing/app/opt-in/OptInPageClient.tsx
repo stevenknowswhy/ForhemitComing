@@ -2,10 +2,29 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
 import { useToast } from "../hooks/useToast";
 import { ToastContainer } from "../components/ui/Toast";
 import "@forhemit/shared/styles/privacy-page.css";
 import "@forhemit/shared/styles/opt-in-page.css";
+
+/** Race a mutation against a 15s timeout (A1/A3 fix, 2026-11-21) so a
+ * stalled call can never leave a button stuck on its busy label. */
+function withTimeout<T>(promise: Promise<T>): Promise<T> {
+	const timeout = new Promise<never>((_, reject) =>
+		setTimeout(
+			() =>
+				reject(
+					new Error(
+						"The request timed out — please try again, or email contact@forhemit.com.",
+					),
+				),
+			15000,
+		),
+	);
+	return Promise.race([promise, timeout]);
+}
 
 /** Opt-out form — extracted to reduce main component verbosity */
 function OptOutForm({
@@ -14,6 +33,7 @@ function OptOutForm({
 	withdrawTypes, handleWithdrawTypeChange,
 	isWithdrawing, handleWithdraw,
 	handlePhoneChange,
+	withdrawSuccess,
 }: {
 	withdrawEmail: string; setWithdrawEmail: (v: string) => void;
 	withdrawPhone: string; setWithdrawPhone: (v: string) => void;
@@ -21,6 +41,7 @@ function OptOutForm({
 	handleWithdrawTypeChange: (key: "email" | "sms" | "phone") => void;
 	isWithdrawing: boolean; handleWithdraw: (e: React.FormEvent) => void;
 	handlePhoneChange: (e: React.ChangeEvent<HTMLInputElement>, setter: (v: string) => void) => void;
+	withdrawSuccess: string | null;
 }) {
 	return (
                 <form onSubmit={handleWithdraw} className="opt-out-form">
@@ -91,19 +112,32 @@ function OptOutForm({
                     </label>
                   </div>
 
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="opt-out-btn"
                     disabled={isWithdrawing}
                   >
                     {isWithdrawing ? "Processing..." : "Opt Out of Selected Communications"}
                   </button>
+
+                  {withdrawSuccess && (
+                    <div className="sms-disclosure" role="status">
+                      <p>{withdrawSuccess}</p>
+                    </div>
+                  )}
                 </form>
 	);
 }
 
 export function OptInPageClient() {
   const { toasts, removeToast, success, error: showError } = useToast();
+  // A3 fix (2026-11-21): these forms were a simulation — nothing was
+  // saved and no email was sent. They now call the real
+  // communicationPreferences mutations.
+  const submitPreferences = useMutation(api.communicationPreferences.submit);
+  const withdrawPreferences = useMutation(api.communicationPreferences.withdraw);
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+  const [withdrawSuccess, setWithdrawSuccess] = useState<string | null>(null);
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [consents, setConsents] = useState({
@@ -163,15 +197,37 @@ export function OptInPageClient() {
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    success("Thank you! Your preferences have been saved.");
-    setEmail("");
-    setPhone("");
-    setConsents({ marketingEmail: false, marketingSms: false, educational: false, opportunities: false });
-    setIsSubmitting(false);
+    setSubmitSuccess(null);
+
+    try {
+      await withTimeout(
+        submitPreferences({
+          email: email.trim().toLowerCase(),
+          phone: phone.trim() || undefined,
+          marketingEmail: consents.marketingEmail,
+          marketingSms: consents.marketingSms,
+          educational: consents.educational,
+          opportunities: consents.opportunities,
+          sourcePage: "/opt-in",
+        }),
+      );
+
+      // Persistent on-page confirmation (not toast-only): this line
+      // stays visible after the toast dismisses.
+      setSubmitSuccess("Thank you! Your preferences have been saved.");
+      success("Thank you! Your preferences have been saved.");
+      setEmail("");
+      setPhone("");
+      setConsents({ marketingEmail: false, marketingSms: false, educational: false, opportunities: false });
+    } catch (err) {
+      showError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong saving your preferences. Please try again.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleWithdraw = async (e: React.FormEvent) => {
@@ -188,15 +244,35 @@ export function OptInPageClient() {
     }
 
     setIsWithdrawing(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    success("Opt-out request received. You will be removed from the selected communications within 10 business days.");
-    setWithdrawEmail("");
-    setWithdrawPhone("");
-    setWithdrawTypes({ email: false, sms: false, phone: false });
-    setIsWithdrawing(false);
+    setWithdrawSuccess(null);
+
+    try {
+      await withTimeout(
+        withdrawPreferences({
+          email: withdrawEmail.trim().toLowerCase() || undefined,
+          phone: withdrawPhone.trim() || undefined,
+          optOutEmail: withdrawTypes.email,
+          optOutSms: withdrawTypes.sms,
+          optOutPhone: withdrawTypes.phone,
+          sourcePage: "/opt-in",
+        }),
+      );
+
+      const message = "Opt-out request received. You will be removed from the selected communications within 10 business days.";
+      setWithdrawSuccess(message);
+      success(message);
+      setWithdrawEmail("");
+      setWithdrawPhone("");
+      setWithdrawTypes({ email: false, sms: false, phone: false });
+    } catch (err) {
+      showError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong recording your opt-out. Please try again.",
+      );
+    } finally {
+      setIsWithdrawing(false);
+    }
   };
 
   return (
@@ -317,13 +393,19 @@ export function OptInPageClient() {
                     </div>
                   )}
 
-                  <button 
-                    type="submit" 
+                  <button
+                    type="submit"
                     className="opt-in-submit"
                     disabled={isSubmitting}
                   >
                     {isSubmitting ? "Saving..." : "Update Preferences"}
                   </button>
+
+                  {submitSuccess && (
+                    <div className="sms-disclosure" role="status">
+                      <p>{submitSuccess}</p>
+                    </div>
+                  )}
                 </form>
 
                 <p className="opt-in-disclaimer">
@@ -349,6 +431,7 @@ export function OptInPageClient() {
 						withdrawTypes={withdrawTypes} handleWithdrawTypeChange={handleWithdrawTypeChange}
 						isWithdrawing={isWithdrawing} handleWithdraw={handleWithdraw}
 						handlePhoneChange={handlePhoneChange}
+						withdrawSuccess={withdrawSuccess}
 					/>
 
                 <div className="opt-out-help">

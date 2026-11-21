@@ -9,6 +9,7 @@ import {
 	CONTACT_TELEGRAM_TYPE_LABELS,
 	CONTACT_TELEGRAM_INTEREST_LABELS,
 	ADMIN_EMAIL,
+	NOTIFICATION_RECIPIENTS,
 } from "./emailCore";
 
 /** Fired when a new submission is stored so Telegram alerts do not depend on the public site calling an action. */
@@ -156,6 +157,136 @@ This email was sent from the Forhemit website contact form.
 			email: emailResult,
 			telegram: telegramResult,
 		};
+	},
+});
+
+
+/**
+ * Internal contact-form email notification (A1/A2 fix, 2026-11-21).
+ * Scheduled by contactSubmissions.submit so the notification email no
+ * longer depends on the public site calling the authenticated
+ * sendContactFormNotification action above — that action rejects every
+ * anonymous visitor, so no contact email could ever be sent from the
+ * public site. Runs in scheduler context with no identity (same shape
+ * as notifyContactSubmissionTelegram above and notifySignups.notifyAdmin).
+ * Sends to NOTIFICATION_RECIPIENTS (Stefano + Muse), reply-to = the
+ * visitor. Telegram is not repeated here: the mutation already schedules
+ * the Telegram alert separately. sendAndLogEmail fail-softs on a missing
+ * RESEND_API_KEY or a Resend error, so a failed email never fails the
+ * visitor's submission.
+ */
+export const notifyContactSubmissionEmail = internalAction({
+	args: {
+		firstName: v.string(),
+		lastName: v.string(),
+		email: v.string(),
+		phone: v.optional(v.string()),
+		company: v.optional(v.string()),
+		contactType: v.string(),
+		interest: v.optional(v.string()),
+		message: v.string(),
+		source: v.optional(v.string()),
+	},
+	handler: async (ctx, args) => {
+		const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+        <h2 style="color: #F0562E; border-bottom: 2px solid #F0562E; padding-bottom: 10px;">
+          New Contact Form Submission
+        </h2>
+
+        <div style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #333;">Contact Information</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <tr>
+              <td style="padding: 8px 0; color: #666; width: 120px;"><strong>Name:</strong></td>
+              <td style="padding: 8px 0;">${args.firstName} ${args.lastName}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Email:</strong></td>
+              <td style="padding: 8px 0;"><a href="mailto:${args.email}">${args.email}</a></td>
+            </tr>
+            ${
+							args.phone
+								? `
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Phone:</strong></td>
+              <td style="padding: 8px 0;">${args.phone}</td>
+            </tr>
+            `
+								: ""
+						}
+            ${
+							args.company
+								? `
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Company:</strong></td>
+              <td style="padding: 8px 0;">${args.company}</td>
+            </tr>
+            `
+								: ""
+						}
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Type:</strong></td>
+              <td style="padding: 8px 0;">${CONTACT_TELEGRAM_TYPE_LABELS[args.contactType] || args.contactType}</td>
+            </tr>
+            ${
+							args.interest
+								? `
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Interest:</strong></td>
+              <td style="padding: 8px 0;">${CONTACT_TELEGRAM_INTEREST_LABELS[args.interest] || args.interest}</td>
+            </tr>
+            `
+								: ""
+						}
+            <tr>
+              <td style="padding: 8px 0; color: #666;"><strong>Source:</strong></td>
+              <td style="padding: 8px 0;">${args.source || "Website"}</td>
+            </tr>
+          </table>
+        </div>
+
+        <div style="background: #fff; border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="margin-top: 0; color: #333;">Message</h3>
+          <p style="white-space: pre-wrap; line-height: 1.6; color: #444;">${args.message.replace(/\n/g, "<br>")}</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px;">
+          <p>This email was sent from the Forhemit website contact form.</p>
+          <p>&copy; ${new Date().getFullYear()} Forhemit. All rights reserved.</p>
+        </div>
+      </div>
+    `;
+
+		const text = `
+New Contact Form Submission
+
+Contact Information:
+-------------------
+Name: ${args.firstName} ${args.lastName}
+Email: ${args.email}
+${args.phone ? `Phone: ${args.phone}\n` : ""}${args.company ? `Company: ${args.company}\n` : ""}Type: ${CONTACT_TELEGRAM_TYPE_LABELS[args.contactType] || args.contactType}
+${args.interest ? `Interest: ${CONTACT_TELEGRAM_INTEREST_LABELS[args.interest] || args.interest}\n` : ""}Source: ${args.source || "Website"}
+
+Message:
+--------
+${args.message}
+
+---
+This email was sent from the Forhemit website contact form.
+&copy; ${new Date().getFullYear()} Forhemit. All rights reserved.
+    `.trim();
+		return await sendAndLogEmail(
+			ctx,
+			{
+				to: NOTIFICATION_RECIPIENTS,
+				subject: `New Contact Form: ${args.firstName} ${args.lastName} - ${CONTACT_TELEGRAM_TYPE_LABELS[args.contactType] || args.contactType}`,
+				html,
+				text,
+				replyTo: args.email,
+			},
+			{ templateId: "contact-form" },
+		);
 	},
 });
 

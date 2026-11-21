@@ -10,6 +10,7 @@ declare const process: {
 		RESEND_API_KEY?: string;
 		FROM_EMAIL?: string;
 		ADMIN_EMAIL?: string;
+		MUSE_INBOX?: string;
 		TELEGRAM_BOT_TOKEN?: string;
 		TELEGRAM_CHAT_ID?: string;
 	};
@@ -19,10 +20,19 @@ declare const process: {
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const FROM_EMAIL = process.env.FROM_EMAIL || "contact@forhemit.com";
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "stefano.stokes@forhemit.com";
+const MUSE_INBOX = process.env.MUSE_INBOX || "ah-yeon-94103@muse.ai";
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 export { ADMIN_EMAIL, FROM_EMAIL };
+
+/**
+ * Everyone who must receive a copy of a public form notification
+ * (checklist A2, ruled by Stefano 2026-11-21): Stefano at ADMIN_EMAIL
+ * and Muse at MUSE_INBOX, so Muse can read and answer enquiries.
+ * Single source of truth — form notify actions send to this list.
+ */
+export const NOTIFICATION_RECIPIENTS = [ADMIN_EMAIL, MUSE_INBOX];
 
 export interface EmailPayload {
 	to: string | string[];

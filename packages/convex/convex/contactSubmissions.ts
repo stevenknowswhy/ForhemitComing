@@ -96,11 +96,31 @@ export const submit = mutation({
       source: args.source,
     });
 
+    // A1/A2 fix (2026-11-21): the notification email is scheduled here,
+    // server-side and fire-and-forget, instead of being called by the
+    // public frontend — the old frontend-called action requires auth and
+    // rejected every anonymous visitor, so no notification email was
+    // ever sent. The visitor's submit no longer depends on the email step.
+    await ctx.scheduler.runAfter(0, internal.emails.notifyContactSubmissionEmail, {
+      firstName: args.firstName,
+      lastName: args.lastName,
+      email: args.email,
+      phone: args.phone,
+      company: args.company,
+      contactType: args.contactType,
+      interest: args.interest,
+      message: args.message,
+      source: args.source,
+    });
+
     return { success: true, id: submissionId };
   },
 });
 
 // Get all contact submissions (for admin dashboard)
+// A4 fix (2026-11-21): admin-guarded like update/remove below — this
+// query returns names, emails and messages and was previously callable
+// by anyone who knew the deployment URL.
 export const list = query({
   args: {
     status: v.optional(v.union(
@@ -110,8 +130,11 @@ export const list = query({
       v.literal("closed")
     )),
     limit: v.optional(v.number()),
+    adminToken: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx, args.adminToken);
+
     const limit = args.limit ?? 300;
     if (args.status) {
       const rows = await ctx.db
@@ -336,10 +359,15 @@ export const remove = mutation({
   },
 });
 
-// Get submission by ID
+// Get submission by ID (A4 fix, 2026-11-21: admin-guarded, as list above)
 export const getById = query({
-  args: { id: v.id("contactSubmissions") },
+  args: {
+    id: v.id("contactSubmissions"),
+    adminToken: v.optional(v.string()),
+  },
   handler: async (ctx, args) => {
+    await requireAdmin(ctx, args.adminToken);
+
     return await ctx.db.get(args.id);
   },
 });
