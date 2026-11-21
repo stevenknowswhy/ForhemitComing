@@ -22,7 +22,7 @@ export function HomeHeroSection() {
 
             <p className="hch-hero-sub">
               Turn your profitable company — 20+ employees, $3M+ in revenue — into a 100%
-              employee-owned business in about four months. The purchase is structured and
+              employee-owned business in 120 days from Documents-Ready. The purchase is structured and
               financed, so your employees don&apos;t need the cash to buy it. Section 1042
               tax-deferred treatment may be available to qualifying sellers.
             </p>

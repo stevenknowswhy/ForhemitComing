@@ -37,7 +37,7 @@ export const BROKER_QUALIFICATION_CRITERIA = [
   { id: "employees", label: "20 or more verifiable U.S. employees" },
   { id: "profitable", label: "Profitable, with a consistent track record" },
   { id: "ownership", label: "The owner holds 51% or more of the company" },
-  { id: "timeline", label: "The owner can allow a full four months for the transition" },
+  { id: "timeline", label: "The owner can allow the full 120 days for the transition" },
   { id: "availability", label: "The owner is willing to be available for 4 to 12 months after closing — on call, not working hands-on" },
 ] as const;
 
@@ -114,7 +114,7 @@ export const BROKER_REALISM_FAQ: BrokerTimelineFaqItem[] = [
   {
     id: "timeline",
     q: "How long does the process take?",
-    a: "About four months from first review to the closing table — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
+    a: "120 days from Documents-Ready to the closing table — the clock starts when your client's documents are complete and accepted — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
   },
   {
     id: "not-a-fit",
@@ -208,6 +208,6 @@ export const BROKER_PROCESS_STEPS = [
   {
     num: "4",
     title: "We carry it to close",
-    body: "If the founder proceeds, Forhemit structures the transition and carries it toward close in about four months, and you are kept informed at every phase.",
+    body: "If the founder proceeds, Forhemit structures the transition and carries it toward close in 120 days from Documents-Ready, and you are kept informed at every phase.",
   },
 ] as const;

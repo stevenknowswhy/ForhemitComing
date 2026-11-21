@@ -44,7 +44,7 @@ const stewardshipPoints = [
   {
     title: "Our fee is agreed in advance",
     description:
-      "Total transition fees typically run 3–5% of valuation — one figure, covering the whole transition, set in writing before you sign anything.",
+      "Our fee: 3–5% of valuation, in writing after independent valuation. Professional partners are paid by you directly, at estimates you approve first — the full cost picture is on our Pricing page.",
   },
   {
     title: "A Legal Mandate for Independence",

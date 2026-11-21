@@ -18,16 +18,16 @@ export function CostGlanceSection() {
         <div className="fmp-cost-card-inner">
           <p className="fmp-cost-range">3&ndash;5%</p>
           <p className="fmp-cost-of">of valuation</p>
-          <p className="fmp-cost-note">Total transition fees</p>
+          <p className="fmp-cost-note">Forhemit&apos;s Custom Services fee</p>
           <ul className="fmp-cost-points">
-            <li>One figure, covering the whole transition, set in writing before you sign anything</li>
-            <li>That is the all-in total: Forhemit&apos;s work plus the third-party charges the transaction requires</li>
-            <li>Itemized in the fee document, with who receives each charge</li>
+            <li>Our fee for running the transition, set in a written fee document after independent valuation</li>
+            <li>Professional partners are engaged and paid by you directly, at written estimates you approve first</li>
+            <li>The full cost picture — our fee plus typical partner costs — is on our Pricing page</li>
           </ul>
           <span className="fmp-cta-shell fmp-cta-shell--inline">
             <span className="fmp-cta-shell__glow" aria-hidden />
             <a href="#fmp-fees" className="fmp-cost-detail-link" onClick={scrollToFees}>
-              See what the total covers &rarr;
+              See the full cost picture &rarr;
             </a>
           </span>
         </div>

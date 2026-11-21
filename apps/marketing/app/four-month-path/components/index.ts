@@ -1,5 +1,6 @@
 export { AfterCloseSection } from "./AfterCloseSection";
 export { CheckpointsSection } from "./CheckpointsSection";
+export { ClockDefinitionSection } from "./ClockDefinitionSection";
 export { ConfidentialitySection } from "./ConfidentialitySection";
 export { CostGlanceSection } from "./CostGlanceSection";
 export { DealComparisonSection } from "./DealComparisonSection";

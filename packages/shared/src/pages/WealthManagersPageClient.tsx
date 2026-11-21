@@ -173,7 +173,7 @@ const SCREEN_CRITERIA = [
   "Annual revenue of $3M or more",
   "20 or more verifiable U.S. employees",
   "The owner holds a controlling stake (51% or more)",
-  "The owner can allow about four months for the transition",
+  "The owner can allow the full 120 days for the transition",
   "The owner is willing to be available to the company for a transition period of 4 to 12 months after closing — on call for agreed check-ins, introductions, and questions, not working hands-on",
 ];
 
@@ -229,7 +229,7 @@ export function WealthManagersPageClient() {
     },
     {
       question: "Which of my clients fit?",
-      answer: "The standard we screen against is published on this page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow about four months and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change."
+      answer: "The standard we screen against is published on this page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow the 120 days for the transition and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change."
     }
   ];
 
@@ -401,7 +401,7 @@ export function WealthManagersPageClient() {
               <BenefitCard
                 number="02"
                 title="The founder sells to the people who already work there"
-                description="A 100% employee-ownership transition at a full-price exit, at a price set by an independent appraiser who works for neither side, closing in about four months."
+                description="A 100% employee-ownership transition at a full-price exit, at a price set by an independent appraiser who works for neither side, closing in 120 days from Documents-Ready."
                 icon="◇"
                 delay={100}
               />
@@ -562,8 +562,7 @@ export function WealthManagersPageClient() {
             <div className="section-header" data-animate="fade-up">
               <h3>No surprises on price.</h3>
               <p className="section-intro">
-                Your client pays total transition fees that typically run 3 to 5% of the
-                valuation, agreed in advance. The full breakdown is on our How It Works page.
+                Our fee: 3 to 5% of the valuation, in writing after independent valuation. Professional partners are paid by your client directly, at estimates they approve first. The full cost picture is on our Pricing page.
               </p>
               <h3>Nothing between firms.</h3>
               <p className="section-intro">

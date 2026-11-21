@@ -11,8 +11,8 @@ export type TimelineFaqItem = {
 const DEFAULT_FAQ_ITEMS: TimelineFaqItem[] = [
   {
     id: "realistic",
-    q: "Is four months really realistic?",
-    a: "Four months is the plan. A traditional sale commonly takes 12\u201318 months; this path is deliberately shorter, because the buyer is already inside the building and the structure is decided before the clock starts, not negotiated while it runs.",
+    q: "Is 120 days really realistic?",
+    a: "120 days from Documents-Ready is the plan \u2014 the clock starts when your documents are complete and accepted, not when you first talk to us. A traditional sale commonly takes 12\u201318 months; this path is deliberately shorter, because the buyer is already inside the building and the structure is decided before the clock starts, not negotiated while it runs.",
   },
   {
     id: "delays",
@@ -27,7 +27,7 @@ const DEFAULT_FAQ_ITEMS: TimelineFaqItem[] = [
   {
     id: "slips",
     q: "What happens if the timeline slips?",
-    a: "If the timeline stretches, you hear it from us first, with the reason and the new date. What we will not do is protect the four-month headline by cutting a step the law requires.",
+    a: "If the timeline stretches, you hear it from us first, with the reason and the new date. What we will not do is protect the 120-day headline by cutting a step the law requires.",
   },
 ];
 
@@ -44,7 +44,7 @@ export function TimelineRealismSection({
   sectionId = "fmp-realism",
   headingId = "fmp-realism-heading",
   title = "What to realistically expect",
-  lead = "Four months is our target, not a guarantee. Here are the questions owners ask most.",
+  lead = "120 days from Documents-Ready is our target, not a guarantee. Here are the questions owners ask most.",
   faqItems = DEFAULT_FAQ_ITEMS,
   faqBodyIdPrefix = "fmp-faq-body",
 }: Props) {
