@@ -1,9 +1,10 @@
+# 2026-11-21: the "downloads" and "*.pdf" exclusions were removed — they dated from the
+# non-Git deploy era and were excluding apps/marketing/public/downloads/ (the site's
+# 120-Day Roadmap and fee PDFs) from the deployment, so every /downloads/ link 404ed.
 node_modules
 .git
 tmp
-downloads
 *.log
-*.pdf
 gap-analysis
 ForhemitLegal
 ForhemitTemplates
@@ -13,8 +14,6 @@ ForhemitTemplates
 node_modules
 .git
 tmp
-downloads
-*.pdf
 *.log
 gap-analysis
 ForhemitLegal
