@@ -44,6 +44,18 @@ const nextConfig = {
     ],
     formats: ['image/avif', 'image/webp'],
   },
+  async redirects() {
+    // Retired routes (PR-6, ruled 2026-11-17/18): permanent, single-hop.
+    return [
+      { source: '/signal-os', destination: '/contact', permanent: true },
+      { source: '/lenders', destination: '/contact', permanent: true },
+      { source: '/appraisers', destination: '/contact', permanent: true },
+      { source: '/broker-screening', destination: '/brokers', permanent: true },
+      { source: '/financial-accounting', destination: '/accounting-firms', permanent: true },
+      { source: '/introduction', destination: '/', permanent: true },
+      { source: '/for-partners', destination: '/legal-practices', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

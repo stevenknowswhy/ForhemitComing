@@ -38,7 +38,6 @@ export default function NotFound() {
         <div className="not-found-links">
           <p className="not-found-hint">Or explore:</p>
           <nav className="not-found-nav" aria-label="Core pages">
-            <Link href="/signal-os">Signal OS</Link>
             <Link href="/business-owners">Business Owners</Link>
             <Link href="/about">About</Link>
             <Link href="/contact">Contact</Link>
