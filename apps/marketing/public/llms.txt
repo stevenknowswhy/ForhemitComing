@@ -1,24 +1,38 @@
-# Forhemit PBC
+# Forhemit
 
-> Forhemit PBC publishes Signal OS, a manual, local-first workstation for evidence-based AEO and GEO audits.
+> Forhemit helps founders sell their business to their employees — 100% employee ownership (ESOP) succession at full price, on a four-month path. Founded 2026, based in San Francisco, serving founders nationally.
 
-Last updated: 2026-08-02
+## Who it is for
 
-## Product
+Founders of profitable, founder-led companies with $3M+ revenue and 20+ verifiable U.S. employees, who hold 51% or more and can be available for 4 to 12 months after close, on call. And the brokers, attorneys, CPAs, and wealth managers who advise them.
 
-- [Signal OS](https://www.forhemit.com/signal-os): A one-time-purchase, offline workstation for consultants and agencies to capture AI answers, prompts, cited sources, dates, findings, and next actions, then assemble client-ready reports.
-- Editions: Solo, Agency, and Studio. The Studio edition supports up to five internal team users.
-- Scope: Signal OS is a manual evidence workstation. It is not continuous monitoring and does not automate rankings.
-- Outcomes: No citation, ranking, traffic, lead, sales, or revenue result is guaranteed. Buyers should use the storefront as the current source of truth for pricing and included materials.
+## Key pages
 
-## Free resource
+- [Home](https://www.forhemit.com/): Sell your business to your employees.
+- [About](https://www.forhemit.com/about): Who Forhemit is — Stefano Stokes, Founder & CEO, one accountable lead.
+- [For Business Owners](https://www.forhemit.com/business-owners): Who qualifies, how the Section 1042 tax-deferred treatment works, and what life looks like after close.
+- [The Four-Month Path](https://www.forhemit.com/four-month-path): How the transition works month by month, and the money in plain terms.
+- [Pricing](https://www.forhemit.com/pricing): The Self Guided Transition Service ($3,000 one-time) and Custom Services (total transition fees 3–5% of valuation). Payment only after an approved application.
+- [Insights](https://www.forhemit.com/blog): Essays — The Exit Crisis and Beyond the Balance Sheet.
+- [FAQ](https://www.forhemit.com/faq): Answers for owners, brokers, attorneys, CPAs, and wealth managers.
+- [Contact](https://www.forhemit.com/contact): Start with the free 2-Minute Check.
 
-- [15-minute AI Visibility Scorecard](https://signal-os-evidence.stefano94103.chatgpt.site/15-minute-ai-visibility-scorecard): A free, no-purchase-required scorecard for running a small evidence-based AI visibility check before deciding whether Signal OS fits.
+## For professionals
 
-## Purchase and support
+- [Brokers](https://www.forhemit.com/brokers)
+- [Attorneys](https://www.forhemit.com/legal-practices)
+- [CPAs](https://www.forhemit.com/accounting-firms)
+- [Wealth Managers](https://www.forhemit.com/wealth-managers)
 
-- Seller: Forhemit PBC.
-- Checkout: Secure Stripe checkout with private ZIP access after payment verification.
-- Support: signal-os-concierge@agentmail.to
-- [Terms](https://www.forhemit.com/terms)
-- [Privacy](https://www.forhemit.com/privacy)
+Forhemit does not pay referral fees or anything else of value for introductions, and receives nothing of value from its professional partners.
+
+## Contact
+
+- contact@forhemit.com
+- (510) 768-7588
+- 55 9th Street, San Francisco, CA
+
+## Legal
+
+- [Terms of Use](https://www.forhemit.com/terms)
+- [Privacy Policy](https://www.forhemit.com/privacy)

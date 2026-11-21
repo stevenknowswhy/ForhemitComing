@@ -37,7 +37,6 @@ const sitemapSections: SitemapSection[] = [
     title: "For Owners",
     links: [
       { label: "For Owners", href: "/business-owners" },
-      { label: "Financial & Accounting", href: "/financial-accounting" },
     ],
   },
   {
@@ -47,9 +46,6 @@ const sitemapSections: SitemapSection[] = [
       { label: "Brokers", href: "/brokers" },
       { label: "CPAs", href: "/accounting-firms" },
       { label: "Wealth Managers", href: "/wealth-managers" },
-      { label: "Broker Deal Screening", href: "/broker-screening" },
-      { label: "Appraisers", href: "/appraisers" },
-      { label: "Lenders", href: "/lenders" },
     ],
   },
   {
@@ -58,7 +54,6 @@ const sitemapSections: SitemapSection[] = [
       { label: "The Exit Crisis", href: "/the-exit-crisis" },
       { label: "Beyond the Balance Sheet", href: "/beyond-the-balance-sheet" },
       { label: "Blog", href: "/blog" },
-      { label: "Introduction Hub", href: "/introduction" },
     ],
   },
   {

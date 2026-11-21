@@ -21,8 +21,7 @@ interface NavGroup {
 
 /**
  * Grouped menu sheet covering every public marketing page (P1-4) — mirrors
- * the footer sitemap's information architecture with the product and
- * resources surfaced in the header instead of modal-only.
+ * the footer sitemap's information architecture.
  */
 const navGroups: NavGroup[] = [
   {
@@ -30,7 +29,6 @@ const navGroups: NavGroup[] = [
     items: [
       { href: "/business-owners", label: "For Owners" },
       { href: "/four-month-path", label: "How It Works" },
-      { href: "/financial-accounting", label: "Financial & Accounting" },
     ],
   },
   {
@@ -40,9 +38,6 @@ const navGroups: NavGroup[] = [
       { href: "/brokers", label: "Brokers" },
       { href: "/accounting-firms", label: "CPAs" },
       { href: "/wealth-managers", label: "Wealth Managers" },
-      { href: "/broker-screening", label: "Broker Deal Screening" },
-      { href: "/appraisers", label: "Appraisers" },
-      { href: "/lenders", label: "Lenders" },
     ],
   },
   {
@@ -52,7 +47,6 @@ const navGroups: NavGroup[] = [
       { href: "/beyond-the-balance-sheet", label: "Beyond the Balance Sheet" },
       { href: "/faq", label: "FAQ" },
       { href: "/blog", label: "Blog" },
-      { href: "/introduction", label: "Introduction Hub" },
     ],
   },
   {
@@ -63,10 +57,6 @@ const navGroups: NavGroup[] = [
       { href: "/pricing", label: "Pricing" },
       { href: "/contact", label: "Contact" },
     ],
-  },
-  {
-    label: "Product",
-    items: [{ href: "/signal-os", label: "Signal OS" }],
   },
 ];
 
@@ -148,7 +138,7 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     return null;
   }
 
-  // Per-group current-page filter; drop groups left empty (e.g. Product on /signal-os)
+  // Per-group current-page filter; drop groups left empty
   const visibleGroups = navGroups
     .map((group) => filterNavGroup(group, pathname))
     .filter((group): group is NavGroup => group !== null);

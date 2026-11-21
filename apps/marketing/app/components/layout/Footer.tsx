@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import "./footer.css";
 
 interface FooterProps {
@@ -20,13 +19,6 @@ export function Footer({ onLegalClick, onSitemapClick, variant = "sticky" }: Foo
         <span className="footer-dot" />
         <span className="footer-text">All Rights Reserved</span>
         <span className="footer-dot" />
-        <Link
-          href="/signal-os?utm_source=forhemit&utm_medium=owned_site&utm_campaign=founding72&utm_content=global_footer"
-          className="footer-link"
-        >
-          Signal OS
-        </Link>
-        
         {onSitemapClick && (
           <>
             <span className="footer-dot" />
