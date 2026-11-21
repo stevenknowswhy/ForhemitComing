@@ -23,6 +23,7 @@ import type * as checkResponses from "../checkResponses.js";
 import type * as clientEmails from "../clientEmails.js";
 import type * as clientJournals from "../clientJournals.js";
 import type * as companyFinancials from "../companyFinancials.js";
+import type * as communicationPreferences from "../communicationPreferences.js";
 import type * as contactSubmissions from "../contactSubmissions.js";
 import type * as crm_companies_index from "../crm/companies/index.js";
 import type * as crm_companies_mutations from "../crm/companies/mutations.js";
@@ -107,6 +108,7 @@ declare const fullApi: ApiFromModules<{
   clientEmails: typeof clientEmails;
   clientJournals: typeof clientJournals;
   companyFinancials: typeof companyFinancials;
+  communicationPreferences: typeof communicationPreferences;
   contactSubmissions: typeof contactSubmissions;
   "crm/companies/index": typeof crm_companies_index;
   "crm/companies/mutations": typeof crm_companies_mutations;

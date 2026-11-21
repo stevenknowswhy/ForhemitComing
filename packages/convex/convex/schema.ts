@@ -199,6 +199,29 @@ export default defineSchema({
 		.index("by_email", ["email"])
 		.index("by_createdAt", ["createdAt"]),
 
+	// Communication preferences from the /opt-in page (A3 fix, 2026-11-21):
+	// the real consent records behind the opt-in / opt-out forms
+	// (communicationPreferences.ts). One row per person, upserted on
+	// submit; an opt-out patches the matching row (or records the request
+	// on its own row when no opt-in row exists). email is optional because
+	// an opt-out may be made by phone number only.
+	communicationPreferences: defineTable({
+		email: v.optional(v.string()), // normalized: lowercase + trimmed
+		phone: v.optional(v.string()),
+		marketingEmail: v.boolean(),
+		marketingSms: v.boolean(),
+		educational: v.boolean(),
+		opportunities: v.boolean(),
+		sourcePage: v.string(), // page the record came from, e.g. "/opt-in"
+		withdrawnChannels: v.optional(v.array(v.string())), // e.g. ["email", "sms"]
+		withdrawnAt: v.optional(v.number()),
+		createdAt: v.number(),
+		updatedAt: v.number(),
+	})
+		.index("by_email", ["email"])
+		.index("by_phone", ["phone"])
+		.index("by_createdAt", ["createdAt"]),
+
 	// Job applications
 	jobApplications: defineTable({
 		// Personal information

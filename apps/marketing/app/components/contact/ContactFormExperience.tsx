@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useMutation, useAction } from "convex/react";
+import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useToast } from "../../hooks/useToast";
 import { ToastContainer } from "../ui/Toast";
@@ -126,9 +126,10 @@ export function ContactFormExperience({
 	const { toasts, removeToast, success, error: showError } = useToast();
 
 	const submitContact = useMutation(api.contactSubmissions.submit);
-	const sendEmailNotification = useAction(
-		api.emails.sendContactFormNotification,
-	);
+	// A1/A2 fix (2026-11-21): no frontend email call anymore. The submit
+	// mutation itself schedules the notification email server-side; the
+	// old useAction call here required auth and rejected every public
+	// visitor (silently — its failure was swallowed by a catch).
 
 	useEffect(() => {
 		const qs = searchParams.toString();
@@ -223,18 +224,33 @@ export function ContactFormExperience({
 				!formData.message
 			) {
 				showError("Please fill in all required fields");
-				setIsSubmitting(false);
 				return;
 			}
 
 			const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 			if (!emailRegex.test(formData.email)) {
 				showError("Please enter a valid email address");
-				setIsSubmitting(false);
 				return;
 			}
 
-			await submitContact({
+			// A1 fix (2026-11-21): 15s timeout + finally below. Previously
+			// isSubmitting cleared only after every await settled, with no
+			// timeout — one stalled call left the button on "Sending…"
+			// forever.
+			const timeout = new Promise<never>((_, reject) =>
+				setTimeout(
+					() =>
+						reject(
+							new Error(
+								"The request timed out — please try again, or email contact@forhemit.com.",
+							),
+						),
+					15000,
+				),
+			);
+
+			await Promise.race([
+				submitContact({
 				contactType: formData.contactType as
 					| "business-owner"
 					| "partner"
@@ -260,30 +276,14 @@ export function ContactFormExperience({
 						| undefined) || undefined,
 				message: formData.message.trim(),
 				source,
-			});
+				}),
+				timeout,
+			]);
 
-			try {
-				await sendEmailNotification({
-					firstName: formData.firstName.trim(),
-					lastName: formData.lastName.trim(),
-					email: formData.email.trim().toLowerCase(),
-					phone: formData.phone.trim() || undefined,
-					company: formData.company.trim() || undefined,
-					contactType: formData.contactType,
-					interest: formData.interest || undefined,
-					message: formData.message.trim(),
-					source,
-				});
-			} catch {
-				console.error("Failed to send email notification");
-			}
-
-			setIsSubmitting(false);
 			setShowPreview(false);
 			setRevealedSection("success");
 			success("Message sent successfully!");
 		} catch (err) {
-			setIsSubmitting(false);
 			const errorMessage =
 				err instanceof Error
 					? err.message
@@ -296,6 +296,8 @@ export function ContactFormExperience({
 			} else {
 				showError(errorMessage);
 			}
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
