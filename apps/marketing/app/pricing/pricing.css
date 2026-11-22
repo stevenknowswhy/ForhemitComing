@@ -183,6 +183,23 @@
 .pr-card-foot {
   margin-top: auto;
   padding-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The button sits at the very bottom of the foot so both cards' buttons
+   share a baseline; the notes read above it. */
+.pr-card-foot .pr-btn {
+  order: 3;
+  margin-top: 0.75rem;
+}
+
+.pr-card-foot .pr-under-cta {
+  order: 1;
+}
+
+.pr-card-foot .pr-credit {
+  order: 2;
 }
 
 .pr-hero-cta {
