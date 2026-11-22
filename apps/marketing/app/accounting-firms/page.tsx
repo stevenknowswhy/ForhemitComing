@@ -7,7 +7,7 @@ const description =
 	"For CPAs: you see the succession problem first. Now you can offer the answer — how Forhemit works with the CPA who makes the introduction.";
 
 export const metadata: Metadata = {
-	title,
+	title: "For CPAs & Accounting Firms",
 	description,
 	openGraph: {
 		title,

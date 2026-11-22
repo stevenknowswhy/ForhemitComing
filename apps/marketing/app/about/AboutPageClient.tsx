@@ -7,7 +7,6 @@ import "./about-page.css";
 import { HeroSection } from "./_components/sections/HeroSection";
 import { MissionSection } from "./_components/sections/MissionSection";
 import { TeamSection } from "./_components/sections/TeamSection";
-import { EvolutionSection } from "./_components/sections/EvolutionSection";
 import { WhyWeExistSection } from "./_components/sections/WhyWeExistSection";
 import { PBCSection } from "./_components/sections/PBCSection";
 import { FAQSection } from "./_components/sections/FAQSection";
@@ -26,7 +25,6 @@ export function AboutPageClient() {
         <PBCSection />
         <MissionSection />
         <TeamSection />
-        <EvolutionSection />
         <WhyWeExistSection />
         <FAQSection />
         <CTASection />
