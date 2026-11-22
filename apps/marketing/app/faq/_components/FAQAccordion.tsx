@@ -26,7 +26,7 @@ export function FAQAccordion({ items }: FAQAccordionProps) {
           <AccordionTrigger className="faq-accordion-question">
             {item.question}
           </AccordionTrigger>
-          <AccordionContent className="faq-accordion-answer">
+          <AccordionContent forceMount className="faq-accordion-answer">
             <p>{item.answer}</p>
           </AccordionContent>
         </AccordionItem>

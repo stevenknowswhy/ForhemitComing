@@ -74,11 +74,15 @@ export function TimelineRealismSection({
                   {isOpen ? "\u2212" : "+"}
                 </span>
               </button>
-              {isOpen && (
-                <div id={bodyId} className="fmp-faq-body" role="region">
-                  <p>{item.a}</p>
-                </div>
-              )}
+              <div
+                key={`${bodyId}-${isOpen ? "open" : "closed"}`}
+                id={bodyId}
+                className="fmp-faq-body"
+                role="region"
+                hidden={!isOpen}
+              >
+                <p>{item.a}</p>
+              </div>
             </div>
           );
         })}

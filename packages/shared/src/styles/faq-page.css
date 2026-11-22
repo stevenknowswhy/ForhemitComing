@@ -184,6 +184,8 @@
 }
 .faq-accordion-item[data-state="open"] .faq-accordion-question svg { background: var(--color-brand); border-color: var(--color-brand); color: var(--bg-primary); }
 .faq-accordion-answer { padding: 0 1.5rem 1.5rem !important; }
+/* Answers stay in the server-rendered HTML (forceMount); closed items are display:none. */
+.faq-accordion [data-state="closed"] > .faq-accordion-answer { display: none; }
 .faq-accordion-answer p { font-size: 0.9rem; font-weight: 300; color: var(--text-secondary); line-height: 1.7; margin: 0; }
 
 /* ── SHADCN TABS OVERRIDES ── */
