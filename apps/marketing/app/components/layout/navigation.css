@@ -366,3 +366,11 @@
     display: none; /* deprecated in favor of bottom sheet */
   }
 }
+
+/* Desktop: the inline GlobalHeader nav carries the destinations;
+   the hamburger sheet is the small-screen pattern. */
+@media (min-width: 1024px) {
+  .minimal-nav {
+    display: none;
+  }
+}
