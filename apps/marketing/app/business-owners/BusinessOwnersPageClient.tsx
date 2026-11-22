@@ -4,6 +4,7 @@ import { useFaqToggle } from "@forhemit/shared/hooks/useFaqToggle";
 
 import { lazy, Suspense, useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import Image from "next/image";
 import { ClientOnly } from "@/components/ClientOnly";
 import {
@@ -87,13 +88,12 @@ export function BusinessOwnersPageClient() {
                 >
                   Start your free assessment
                 </button>
-                <button
-                  type="button"
+                <Link
+                  href="/four-month-path"
                   className="hch-hero-cta hch-hero-cta-secondary"
-                onClick={() => setShowTwoMinuteCheck(true)}
                 >
-                Start your free assessment
-                </button>
+                  See the Four-Month Path
+                </Link>
               </div>
             </div>
             <div className="hero-image">
@@ -520,13 +520,9 @@ export function BusinessOwnersPageClient() {
               >
                 Begin Confidential Intake
               </button>
-              <button
-                type="button"
-                className="cta-button-ghost touch-target"
-                onClick={() => openIntake("nda")}
-              >
-                Begin Confidential Intake
-              </button>
+              <Link href="/pricing" className="cta-button-ghost touch-target">
+                See pricing and the guarantee
+              </Link>
             </div>
           </div>
         </section>
