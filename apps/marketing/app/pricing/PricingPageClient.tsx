@@ -118,6 +118,9 @@ export function PricingPageClient() {
           have Forhemit run it with you, month by month. Either way, the destination is the same:
           your employees own 100% of the company.
         </p>
+        <button type="button" className="pr-btn pr-btn-primary pr-hero-cta" onClick={openCheck}>
+          Start the 2-Minute Check
+        </button>
       </section>
 
       {/* ── The two offers ── */}
@@ -143,16 +146,18 @@ export function PricingPageClient() {
               Partner fees are separate, paid by you directly to the professional — you receive a
               written estimate and approve it before any work starts.
             </p>
-            <button type="button" className="pr-btn pr-btn-primary" onClick={openCheck}>
-              Check if you qualify
-            </button>
-            <p className="pr-under-cta">
-              Covered by the money-back guarantee below: full refund before your roadmap is
-              delivered, and for 14 days after.
-            </p>
-            <p className="pr-credit">
-              Start Custom Services within 12 months and the full $3,000 is credited toward it.
-            </p>
+            <div className="pr-card-foot">
+              <button type="button" className="pr-btn pr-btn-primary" onClick={openCheck}>
+                Check if you qualify
+              </button>
+              <p className="pr-under-cta">
+                Covered by the money-back guarantee below: full refund before your roadmap is
+                delivered, and for 14 days after.
+              </p>
+              <p className="pr-credit">
+                Start Custom Services within 12 months and the full $3,000 is credited toward it.
+              </p>
+            </div>
           </article>
 
           <article className="pr-card">
@@ -168,16 +173,18 @@ export function PricingPageClient() {
               partners, financing, and closing, with Forhemit doing the running: scheduling,
               chasing, coordinating, and keeping the sequence in order.
             </p>
-            <Link href="/contact" className="pr-btn pr-btn-secondary">
-              Book a call
-            </Link>
-            <p className="pr-under-cta">
-              No figure is agreed until you have seen it in writing, after an independent
-              valuation — the appraiser works for neither side.
-            </p>
-            <p className="pr-credit">
-              Start with Self Guided and the full $3,000 is credited toward Custom Services if you start within 12 months.
-            </p>
+            <div className="pr-card-foot">
+              <Link href="/contact" className="pr-btn pr-btn-secondary">
+                Book a call
+              </Link>
+              <p className="pr-under-cta">
+                No figure is agreed until you have seen it in writing, after an independent
+                valuation — the appraiser works for neither side.
+              </p>
+              <p className="pr-credit">
+                Start with Self Guided and the full $3,000 is credited toward Custom Services if you start within 12 months.
+              </p>
+            </div>
           </article>
         </div>
         <p className="pr-onepager-line">

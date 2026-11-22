@@ -171,8 +171,22 @@
 }
 
 .pr-btn-primary {
-  background: var(--sage);
+  background: #1a1a1a;
+  border-color: #1a1a1a;
   color: var(--canvas);
+}
+
+.pr-btn-primary:hover {
+  color: var(--color-brand);
+}
+
+.pr-card-foot {
+  margin-top: auto;
+  padding-top: 1.25rem;
+}
+
+.pr-hero-cta {
+  margin-top: 1.5rem;
 }
 
 .pr-btn-secondary {
