@@ -185,6 +185,57 @@
   margin-bottom: 2.2rem;
 }
 
+/* D9 (panel rulings 2026-11-22): promise line + supporting bullets +
+   plain-words Documents-Ready definition, replacing the single dense sub. */
+.hch-hero-promise {
+  margin-bottom: 1.1rem;
+}
+
+.hch-hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 1.1rem;
+  max-width: 560px;
+  text-align: left;
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(28, 21, 16, 0.78);
+}
+
+.hch-hero-bullets li {
+  position: relative;
+  padding: 0.3rem 0 0.3rem 1.4rem;
+}
+
+.hch-hero-bullets li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--hch-brass);
+}
+
+.hch-hero-def {
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(28, 21, 16, 0.78);
+  background: rgba(154, 117, 64, 0.08);
+  border: 1px solid var(--hch-card-border);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  max-width: 620px;
+  margin: 0 auto 2.2rem;
+  text-align: left;
+}
+
+[data-theme="dark"] .hch-hero-bullets,
+[data-theme="dark"] .hch-hero-def {
+  color: rgba(245, 240, 232, 0.72);
+}
+
 .hch-hero-ctas {
   display: flex;
   align-items: center;

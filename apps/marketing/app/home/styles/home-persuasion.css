@@ -1236,6 +1236,142 @@ html.js .hps-prattfall.hps-revealed .hps-nfy-item {
   }
 }
 
+/* ═══════════════════════════════════
+   PANEL RULINGS 2026-11-22 — Candour (D1/D8), Process (D7),
+   Pricing (D5), and per-section visuals (D7)
+   ═══════════════════════════════════ */
+
+.hps-candour,
+.hps-process,
+.hps-pricing {
+  padding: 5rem 0;
+  position: relative;
+  border-top: 1px solid var(--hch-line);
+}
+
+.hps-visual {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--hch-card-border);
+  border-radius: 12px;
+  padding: 1.1rem;
+  margin: 0 0 2rem;
+  text-align: center;
+}
+
+.hps-visual svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.hps-visual .v-brass-fill {
+  fill: var(--hch-brass);
+}
+
+.hps-visual .v-brass-line {
+  stroke: var(--hch-brass);
+  stroke-width: 3;
+  fill: none;
+}
+
+.hps-visual .v-ink-fill {
+  fill: var(--hch-ink);
+}
+
+.hps-visual .v-ink-line {
+  stroke: var(--hch-ink);
+  stroke-width: 3;
+}
+
+.hps-visual .v-faint-line {
+  stroke: var(--hch-ink-soft);
+  stroke-width: 3;
+  fill: none;
+  opacity: 0.55;
+}
+
+.hps-visual .v-faint-fill {
+  fill: var(--hch-ink-soft);
+  opacity: 0.55;
+}
+
+.hps-visual .v-red-line {
+  stroke: #a94442;
+  fill: none;
+}
+
+.hps-visual .v-line-wide {
+  stroke-width: 4;
+}
+
+.hps-visual .v-ink-boxes {
+  stroke: var(--hch-ink);
+  stroke-width: 3;
+  fill: none;
+}
+
+.hps-visual .v-tag-shape {
+  fill: var(--hch-cream);
+  stroke: var(--hch-brass);
+  stroke-width: 3;
+}
+
+.hps-visual .v-tag-hole {
+  fill: #ffffff;
+  stroke: var(--hch-brass);
+  stroke-width: 3;
+}
+
+.hps-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.hps-step {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--hch-card-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.1rem;
+}
+
+.hps-step-number {
+  font-family: var(--font-dm-mono), monospace;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--hch-brass);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+
+.hps-step-title {
+  font-family: var(--font-cormorant), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--hch-ink);
+  margin: 0 0 0.45rem;
+}
+
+.hps-step-text {
+  font-family: var(--font-inter, system-ui, sans-serif);
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.55;
+  color: var(--hch-ink-soft);
+  margin: 0;
+}
+
+[data-theme="dark"] .hps-visual,
+[data-theme="dark"] .hps-step {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .hps-visual .v-tag-hole {
+  fill: transparent;
+}
+
 /* ── PRINT ──
    Content must survive print regardless of reveal state or JS. */
 @media print {

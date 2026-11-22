@@ -20,11 +20,23 @@ export function HomeHeroSection() {
 
             <h1 className="hch-hero-headline">Sell Your Business to Your Employees</h1>
 
-            <p className="hch-hero-sub">
-              Turn your profitable company — 20+ employees, $3M+ in revenue — into a 100%
-              employee-owned business in 120 days from Documents-Ready. The purchase is structured and
-              financed, so your employees don&apos;t need the cash to buy it. Section 1042
-              tax-deferred treatment may be available to qualifying sellers.
+            <p className="hch-hero-sub hch-hero-promise">
+              Your profitable company becomes a 100% employee-owned business in 120 days from
+              Documents-Ready.
+            </p>
+
+            <ul className="hch-hero-bullets">
+              <li>Built for founder-led businesses with 20+ employees and $3M+ in revenue</li>
+              <li>
+                The purchase is structured and financed, so your employees don&apos;t need the cash
+                to buy it
+              </li>
+              <li>Section 1042 tax-deferred treatment may be available to qualifying sellers</li>
+            </ul>
+
+            <p className="hch-hero-def">
+              <strong>Documents-Ready, in plain words:</strong> your company&apos;s documents are
+              complete and accepted — that acceptance is what starts the 120-day clock.
             </p>
 
             <p className="hch-hero-trust-note">
