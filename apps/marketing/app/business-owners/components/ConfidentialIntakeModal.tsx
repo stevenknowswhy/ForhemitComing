@@ -10,6 +10,9 @@ import {
 	SituationStep,
 	DoneStep,
 } from "./intake-steps";
+import { useEffect } from "react";
+import { track } from "@vercel/analytics";
+
 import { useIntakeForm } from "./useIntakeForm";
 
 interface ConfidentialIntakeModalProps {
@@ -45,6 +48,11 @@ export function ConfidentialIntakeModal({
 		submitIntake,
 	} = useIntakeForm(defaultPath);
 
+	/* W8 funnel: the modal mounting open is the application starting. */
+	useEffect(() => {
+		if (isOpen) track("application_started");
+	}, [isOpen]);
+
 	const steps = state.path === "nda" ? NDA_STEPS : NON_NDA_STEPS;
 	const currentStep = steps[state.stepIdx];
 	const currentStepId = currentStep?.id;
@@ -57,7 +65,10 @@ export function ConfidentialIntakeModal({
 	const advance = async () => {
 		if (state.stepIdx >= steps.length - 1) return;
 		const nextStep = steps[state.stepIdx + 1];
-		if (nextStep?.id === "done") await submitIntake();
+		if (nextStep?.id === "done") {
+			await submitIntake();
+			track("application_submitted");
+		}
 		setState((s) => ({ ...s, stepIdx: s.stepIdx + 1 }));
 	};
 

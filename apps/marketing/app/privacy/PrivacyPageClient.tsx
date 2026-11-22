@@ -72,12 +72,17 @@ export function PrivacyPageClient() {
 
 							<h2>Tracking and analytics</h2>
 							<p>
-								This website sells nothing and processes no payments. It sets no
-								advertising trackers, and no other party collects information
-								about your activity across other websites through this site. No
-								analytics run on this site today. Because the site does not
-								track you across other websites, it does not respond to browser
-								&quot;Do Not Track&quot; signals.
+								We use Vercel Analytics to understand how this site is used — which
+								pages are read, and whether the steps toward an application are
+								completed. It is cookieless, it does not identify you, and it
+								does not follow you across other websites. We set no advertising
+								trackers, and no other party collects information about your
+								activity across other websites through this site. If you buy the
+								Self Guided Transition Service, payment is handled by Stripe on
+								its own pages — your card details go to Stripe and never touch
+								our systems. Because the site does not track you across other
+								websites, it does not respond to browser &quot;Do Not Track&quot;
+								signals.
 							</p>
 
 							<h2>Changes to this policy</h2>
