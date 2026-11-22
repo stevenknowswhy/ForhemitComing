@@ -14,12 +14,8 @@ import {
   FirstCallSection,
   FloatingNav,
   FourPhaseTimeline,
-  HowMoneyMovesSection,
   RoadmapPanel,
   TaxChecklistSection,
-  TimelineRealismSection,
-  WhatsMyJobSection,
-  WhyForhemitSection,
 } from "./components";
 import { FOUR_CHECKPOINTS, FOUR_PHASE_BLOCKS } from "./constants";
 import { ConfidentialIntakeModal } from "@/app/business-owners/components";
@@ -68,7 +64,21 @@ export function FourMonthPathClient() {
 
       <div className="fmp-layout">
         <div className="fmp-main-col">
-          <WhyForhemitSection />
+          <section id="fmp-owners" className="fmp-section" aria-labelledby="fmp-owners-heading">
+            <h2 id="fmp-owners-heading" className="fmp-section-title">
+              The owner&apos;s view, kept in one place
+            </h2>
+            <p className="fmp-section-lead">
+              Why owners choose Forhemit, what to realistically expect, how the money moves,
+              and what your own job is across the 120 days — that material lives on the
+              Business Owners page, so it stays in one place and says one thing.
+            </p>
+            <p className="fmp-section-lead">
+              <a href="/business-owners" className="fmp-hero-alternate-link">
+                Read it on the Business Owners page →
+              </a>
+            </p>
+          </section>
 
           <EligibilitySection />
 
@@ -85,17 +95,11 @@ export function FourMonthPathClient() {
             <FourPhaseTimeline phases={FOUR_PHASE_BLOCKS} />
           </section>
 
-          <TimelineRealismSection />
-
           <ClockDefinitionSection />
 
           <RoadmapPanel surface="four_month_path_inline" variant="inline" />
 
           <CheckpointsSection checkpoints={FOUR_CHECKPOINTS} />
-
-          <HowMoneyMovesSection />
-
-          <WhatsMyJobSection />
 
           <ConfidentialitySection />
 
