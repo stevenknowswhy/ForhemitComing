@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { track } from "@vercel/analytics";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import {
@@ -119,6 +120,11 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
 
   const recordResponse = useMutation(api.checkResponses.record);
 
+  /* W8 funnel: the flow only mounts when the check is opened. */
+  useEffect(() => {
+    track("check_started");
+  }, []);
+
   const metaSteps = metaStepsFor(meta.role);
   const metaStep: MetaStep | undefined = stage === "meta" ? metaSteps[metaIdx] : undefined;
   const step: TwoMinuteCheckStep | undefined =
@@ -207,6 +213,12 @@ export function TwoMinuteCheckFlow({ onRequestClose, onPassProceed }: Props) {
       /* Anonymous metadata capture (spec 2026-11-18): fire-and-forget —
          a failed write must never block or delay the result. */
       const failed = getFailedSteps(nextAnswers);
+      /* W8 funnel: anonymous outcome only — same fields as the metadata
+         capture, nothing that identifies the visitor or the company. */
+      track("check_completed", {
+        result: failed.length === 0 ? "pass" : "not_yet",
+        role: meta.role ?? "founder",
+      });
       void recordResponse({
         role: meta.role ?? "founder",
         ...(meta.role === "professional" && meta.professionalType

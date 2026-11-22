@@ -56,7 +56,7 @@ export default async function PayPage({
           it out — no charge has been made.
         </p>
         <p className="pm-note">
-          Contact us at contact@forhemit.com or (510) 768-7588 and mention
+          Contact us at contact@forhemit.com or (510) 405-4330 and mention
           that your payment link isn&rsquo;t active.
         </p>
       </div>

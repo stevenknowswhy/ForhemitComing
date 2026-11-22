@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../payment.css";
+import { TrackPaymentCompleted } from "../TrackPaymentCompleted";
 
 export const metadata: Metadata = {
   title: "Payment received | Forhemit",
@@ -15,6 +16,7 @@ export const metadata: Metadata = {
 export default function PaymentSuccessPage() {
   return (
     <main className="pm-shell">
+      <TrackPaymentCompleted />
       <div className="pm-card">
         <p className="pm-eyebrow">Payment received</p>
         <h1 className="pm-title">You&rsquo;re in. Here&rsquo;s what happens next.</h1>
