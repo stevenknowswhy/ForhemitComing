@@ -46,8 +46,8 @@ export function HomeHeroSection() {
               <Image
                 src="/images/home/hero-encounter.webp"
                 alt="A founder reviewing a document with his advisor at a table in a professional office"
-                width={2048}
-                height={1152}
+                width={1400}
+                height={787}
                 priority
                 sizes="(max-width: 760px) 100vw, 700px"
               />
