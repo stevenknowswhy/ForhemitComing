@@ -50,6 +50,7 @@ export function TeamSection() {
                 src={lead.image}
                 alt={`Picture of ${lead.name}`}
                 fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 className="object-cover object-top rounded-t-lg"
               />
             </div>

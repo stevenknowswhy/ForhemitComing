@@ -7,7 +7,7 @@ const description =
   "For wealth managers: raise succession before someone else sets the terms. How Forhemit works with the advisor who makes the introduction.";
 
 export const metadata: Metadata = {
-  title,
+  title: "For Wealth Managers",
   description,
   openGraph: {
     title,

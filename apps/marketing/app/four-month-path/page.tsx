@@ -6,7 +6,7 @@ const description =
   "The whole route from first review to a company your employees own outright: 120 days from Documents-Ready, in four defined stages, with the fee and the tax treatment stated in writing before you commit.";
 
 export const metadata: Metadata = {
-  title,
+  title: "The Four-Month Path",
   description,
   openGraph: {
     title,

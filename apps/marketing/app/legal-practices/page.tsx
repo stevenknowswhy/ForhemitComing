@@ -6,7 +6,7 @@ const description =
   "For attorneys: raise employee ownership before a broker or buyer sets the terms. How Forhemit works with the attorney who makes the introduction.";
 
 export const metadata: Metadata = {
-  title,
+  title: "For Attorneys",
   description,
   openGraph: {
     title,

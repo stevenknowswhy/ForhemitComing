@@ -181,8 +181,7 @@ export function BusinessOwnersPageClient() {
               <div className="step-item" data-step="1">
                 <div className="step-badge">
                   <span className="step-num">01</span>
-                  <div className="step-icon">🔍</div>
-                </div>
+                                  </div>
                 <div className="bo-glow-shell bo-glow-shell--step">
                   <div className="bo-glow-shell__glow" aria-hidden />
                   <div className="bo-glow-inner step-card">
@@ -207,8 +206,7 @@ export function BusinessOwnersPageClient() {
               <div className="step-item" data-step="2">
                 <div className="step-badge">
                   <span className="step-num">02</span>
-                  <div className="step-icon">📐</div>
-                </div>
+                                  </div>
                 <div className="bo-glow-shell bo-glow-shell--step">
                   <div className="bo-glow-shell__glow" aria-hidden />
                   <div className="bo-glow-inner step-card">
@@ -234,8 +232,7 @@ export function BusinessOwnersPageClient() {
               <div className="step-item" data-step="3">
                 <div className="step-badge">
                   <span className="step-num">03</span>
-                  <div className="step-icon">⚡</div>
-                </div>
+                                  </div>
                 <div className="bo-glow-shell bo-glow-shell--step">
                   <div className="bo-glow-shell__glow" aria-hidden />
                   <div className="bo-glow-inner step-card">
@@ -260,8 +257,7 @@ export function BusinessOwnersPageClient() {
               <div className="step-item" data-step="4">
                 <div className="step-badge">
                   <span className="step-num">04</span>
-                  <div className="step-icon">✨</div>
-                </div>
+                                  </div>
                 <div className="bo-glow-shell bo-glow-shell--step">
                   <div className="bo-glow-shell__glow" aria-hidden />
                   <div className="bo-glow-inner step-card final">

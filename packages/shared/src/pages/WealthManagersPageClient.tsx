@@ -212,7 +212,6 @@ export function WealthManagersPageClient() {
     return () => observer.disconnect();
   }, []);
 
-  const studyStat = useCountUp(96, 2000);
 
   const faqs = [
     {
@@ -269,18 +268,6 @@ export function WealthManagersPageClient() {
               </div>
             </div>
             
-            {/* Floating study stat */}
-            <div 
-              className="floating-stat" 
-              data-animate="fade-up" 
-              data-delay="400"
-              style={{ transform: `translateY(${scrollY * -0.05}px)` }}
-            >
-              <div className="stat-ring" ref={studyStat.ref}>
-                <span className="stat-number">{studyStat.count}%</span>
-                <span className="stat-label">of owners in a 2025 study were open to leaving their advisor after a sale</span>
-              </div>
-            </div>
           </div>
           
           {/* Scroll indicator */}
