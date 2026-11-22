@@ -3,13 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 const NAV_ITEMS = [
-  { id: "fmp-why", label: "Why Forhemit" },
+  { id: "fmp-owners", label: "The Owner's View" },
   { id: "fmp-eligibility", label: "Is This for Me?" },
   { id: "fmp-timeline", label: "The Timeline" },
-  { id: "fmp-realism", label: "Realistic Timing" },
   { id: "fmp-checkpoints", label: "Checkpoints" },
-  { id: "fmp-money", label: "The Money, Plainly" },
-  { id: "fmp-roles", label: "Your Role" },
   { id: "fmp-privacy", label: "Your Privacy" },
   { id: "fmp-comparison", label: "Section 1042" },
   { id: "fmp-1042", label: "§1042 Conditions" },
