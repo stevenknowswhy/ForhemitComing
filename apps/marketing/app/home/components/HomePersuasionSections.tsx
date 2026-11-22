@@ -66,7 +66,7 @@ const EXIT_PATHS = [
       "Team: your employees buy 100% of the business",
       "Name: the business and its name carry on",
       "Your role: available on call for 4 to 12 months after close — not hands-on — then you leave on your own timing",
-      "Timeline: about four months, structured from valuation to close",
+      "Timeline: 120 days from Documents-Ready — the clock starts when your documents are complete and accepted",
     ],
     summary: "Continuity for the business, ownership for your people, a full-price exit for you.",
   },
@@ -85,9 +85,9 @@ const WAITING_STATS = [
     detail: "The rest never close. (Exit Planning Institute.)",
   },
   {
-    figure: "4 months",
+    figure: "120 days",
     label: "for a Forhemit transition, vs. 12–18 months brokered",
-    detail: "Most brokered sales take 12–18 months, and many never close. A Forhemit transition is structured to close in about four months.",
+    detail: "Most brokered sales take 12–18 months, and many never close. A Forhemit transition is structured to close in 120 days from Documents-Ready.",
   },
 ] as const;
 

@@ -18,7 +18,7 @@ export function BusinessOwnersClosingSections() {
         sectionId="bo-path-realism"
         headingId="bo-path-realism-heading"
         title="What to realistically expect"
-        lead="Four months is the plan, not a guarantee — here is what the timeline honestly depends on."
+        lead="120 days from Documents-Ready is the plan, not a guarantee — here is what the timeline honestly depends on."
         faqBodyIdPrefix="bo-path-realism-body"
       />
 

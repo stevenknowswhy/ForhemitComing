@@ -38,8 +38,7 @@ export const aboutFaqs: FAQ[] = [
     question: "Am I personally guaranteeing anything?",
     answer: (
       <p>
-        No. Your house, your savings, and your family&apos;s security are not collateral in a
-        Forhemit transition. The financing rests on the business itself and its future earnings.
+        Our standard is no personal guarantees &mdash; a term sheet demanding one is flagged as off-standard. The financing rests on the business itself and its future earnings.
       </p>
     ),
   },

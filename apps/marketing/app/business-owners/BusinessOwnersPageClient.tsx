@@ -50,7 +50,7 @@ export function BusinessOwnersPageClient() {
     {
       id: "guarantees",
       question: "Am I personally guaranteeing anything?",
-      answer: "No. Sellers in a Forhemit transition do not put personal guarantees or personal assets at risk to finance the sale. Financing is carried by the transaction structure and the company's future earnings \u2014 that is precisely why the business must be profitable and of sufficient scale to qualify."
+      answer: "Our standard is no personal guarantees \u2014 a term sheet demanding one is flagged as off-standard. Financing is carried by the transaction structure and the company's future earnings \u2014 that is precisely why the business must be profitable and of sufficient scale to qualify."
     },
     {
       id: "employees",
@@ -167,7 +167,7 @@ export function BusinessOwnersPageClient() {
         <section className="business-owners-section section-dark">
           <div className="container">
             <div className="section-header">
-              <h2>Four months, in four defined stages</h2>
+              <h2>120 days, in four defined stages</h2>
               <p className="section-intro">
                 The whole route from first review to a company your employees
                 own outright — with the fee and the tax treatment stated in
@@ -350,7 +350,7 @@ export function BusinessOwnersPageClient() {
                   <li><strong>Price:</strong> A full-price exit at independent fair market value.</li>
                   <li><strong>Employees:</strong> They become the owners — the team stays intact, and so does everything it knows.</li>
                   <li><strong>Legacy:</strong> The name, the customers, and the culture continue under the people who built them.</li>
-                  <li><strong>Timeline:</strong> About four months, structured from valuation to close.</li>
+                  <li><strong>Timeline:</strong> 120 days from Documents-Ready — the clock starts when your documents are complete and accepted.</li>
                 </ul>
                 </div>
               </div>

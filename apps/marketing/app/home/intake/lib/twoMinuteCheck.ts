@@ -34,8 +34,8 @@ export const TWO_MINUTE_CHECK_STEPS: TwoMinuteCheckStep[] = [
   },
   {
     id: "timeline",
-    question: "Can you allow four months for the transition to be structured and closed?",
-    fix: "A four-month runway — a compliant, well-financed close cannot be rushed into 30 days.",
+    question: "Can you allow 120 days for the transition to be structured and closed?",
+    fix: "A 120-day runway — a compliant, well-financed close cannot be rushed into 30 days.",
   },
   {
     id: "transition",

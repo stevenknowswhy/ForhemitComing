@@ -3,10 +3,9 @@ export function SavingsStrip() {
     <div className="bo-savings-strip">
       <div className="bo-savings-item">
         <div className="bo-savings-num">3&ndash;5%</div>
-        <div className="bo-savings-label">Total transition fees</div>
+        <div className="bo-savings-label">Our fee</div>
         <div className="bo-savings-sub">
-          Of valuation &mdash; one figure, covering the whole transition, set
-          in writing before you sign anything. That is the all-in total.
+          Of valuation &mdash; Forhemit&rsquo;s fee, set in a written fee document after independent valuation. Professional partners are paid by you directly, at estimates you approve first.
         </div>
       </div>
       <div className="bo-savings-item">
@@ -19,8 +18,8 @@ export function SavingsStrip() {
         </div>
       </div>
       <div className="bo-savings-item">
-        <div className="bo-savings-num">4 mo</div>
-        <div className="bo-savings-label">The four-month path</div>
+        <div className="bo-savings-num">120 days</div>
+        <div className="bo-savings-label">Documents-Ready to close</div>
         <div className="bo-savings-sub">
           A traditional sale commonly takes 12&ndash;18 months. This path is
           deliberately shorter, because the buyer is already inside the

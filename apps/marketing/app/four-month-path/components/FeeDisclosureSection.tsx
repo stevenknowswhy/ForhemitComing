@@ -21,14 +21,13 @@ export function FeeDisclosureSection() {
             Every sale has fees. Here&apos;s exactly what to expect.
           </p>
           <p className="fmp-fee-disclosure-body">
-            Total transition fees typically run 3&ndash;5% of valuation &mdash; one figure, covering the
-            whole transition, set in writing before you sign anything. Here is what the total covers.
+            Our fee: 3–5% of valuation, in writing after independent valuation. Professional partners are paid by you directly, at estimates you approve first. Here is what our fee covers.
           </p>
         </div>
         <span className="fmp-cta-shell fmp-cta-shell--inline">
           <span className="fmp-cta-shell__glow" aria-hidden />
           <button type="button" className="fmp-fee-disclosure-btn" onClick={() => setIsOpen(true)}>
-            See What the Total Covers
+            See What Our Fee Covers
           </button>
         </span>
       </div>

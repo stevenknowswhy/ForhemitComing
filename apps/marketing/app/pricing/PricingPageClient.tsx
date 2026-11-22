@@ -47,7 +47,7 @@ const CONTRAST_ROWS: { label: string; self: string; custom: string }[] = [
   {
     label: "Support",
     self: "Portal messaging answered within one business day, plus one kickoff call",
-    custom: "Your lead, throughout the four months",
+    custom: "Your lead, throughout the 120 days",
   },
   {
     label: "If it goes wrong",
@@ -69,7 +69,7 @@ const PARTNER_CATEGORIES = [
 const FAQS: { q: string; a: React.ReactNode }[] = [
   {
     q: "How does the Upgrade Credit work?",
-    a: "Buy Self-Service and start Custom Services within 12 months, and the full $3,000 is credited toward the Custom Services fee. After 12 months, the credit no longer applies.",
+    a: "Buy Self Guided and start Custom Services within 12 months, and the full $3,000 is credited toward the Custom Services fee. After 12 months, the credit no longer applies.",
   },
   {
     q: "What happens if Forhemit declines my application?",
@@ -97,7 +97,7 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
     a: "Only after your application is approved — never before. The check and Company Fit are free and anonymous; identifying details begin only at the application, under an NDA.",
   },
   {
-    q: "What does Self-Service never include?",
+    q: "What does Self Guided never include?",
     a: "A dedicated lead, or Forhemit performing the transition steps — that is Custom Services. Legal, tax, or valuation work itself — partners do that work under their own engagements. Any guarantee of financing, valuation, or closing — the guarantee in this product is the money-back guarantee, and it is about our fee, not the deal's outcome. And holding client funds, in any amount, at any stage.",
   },
 ];
@@ -125,15 +125,14 @@ export function PricingPageClient() {
         <h2 className="pr-h2">The two offers, in the open.</h2>
         <div className="pr-cards">
           <article className="pr-card">
-            <p className="pr-card-eyebrow">Self-Service</p>
+            <p className="pr-card-eyebrow">Self Guided Transition Service</p>
             <p className="pr-price">
               $3,000 <span className="pr-price-note">one-time</span>
             </p>
             <p className="pr-card-body">
               Why $3,000: everything a transition needs except the person running it — the roadmap,
               the partners, the financing help, the document system, and closing coordination. A
-              led engagement costs 3–5% of valuation because a dedicated lead runs the four months
-              with you.
+              led engagement costs 3–5% of valuation because a dedicated lead runs the 120 days with you.
             </p>
             <ul className="pr-list">
               {SELF_SERVICE_SHORT_LIST.map((item) => (
@@ -162,9 +161,7 @@ export function PricingPageClient() {
               3–5% <span className="pr-price-note">of valuation</span>
             </p>
             <p className="pr-card-body">
-              Total transition fees run 3–5% of valuation — the exact figure is set in a written
-              fee document after independent valuation. On a $2M valuation, that is total
-              transition fees of $60,000–$100,000.
+              Forhemit's Custom Services fee is 3–5% of the independent valuation, set in a written fee document after that valuation. It is our fee for running your transition. The independent professionals your transition needs — attorney, valuation firm, trustee, lender, administrator — are engaged by you directly and paid by you directly, each after a written estimate you approve. Their fees are not included in our 3–5%, and we publish what they typically add, below, because you should see the whole cost before you start, not after.
             </p>
             <p className="pr-card-body">
               What it adds: a dedicated lead runs the Four-Month Path with you — the same roadmap,
@@ -179,8 +176,7 @@ export function PricingPageClient() {
               valuation — the appraiser works for neither side.
             </p>
             <p className="pr-credit">
-              Start with Self-Service and the full $3,000 is credited toward Custom Services if
-              you start within 12 months.
+              Start with Self Guided and the full $3,000 is credited toward Custom Services if you start within 12 months.
             </p>
           </article>
         </div>
@@ -191,18 +187,101 @@ export function PricingPageClient() {
         </p>
       </section>
 
+      {/* ── What the whole transition costs (P0 D1/D2) ── */}
+      <section className="pr-section" id="costs">
+        <h2 className="pr-h2">What the whole transition costs.</h2>
+        <p className="pr-body pr-narrow">
+          Our fee is only one part of the cost of selling to an ESOP. On market ranges published
+          by the National Center for Employee Ownership (2026), the professional work around a
+          transition typically adds: legal $50,000–$150,000; independent valuation
+          $20,000–$50,000; trustee $25,000–$70,000; and, if a formal feasibility study is
+          required, $25,000–$50,000. Simpler transactions can come in below these ranges.
+        </p>
+        <table className="pr-cost-table">
+          <thead>
+            <tr>
+              <th scope="col">Professional component</th>
+              <th scope="col">Market range</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Legal</td>
+              <td>$50,000–$150,000</td>
+            </tr>
+            <tr>
+              <td>Independent valuation</td>
+              <td>$20,000–$50,000</td>
+            </tr>
+            <tr>
+              <td>Trustee</td>
+              <td>$25,000–$70,000</td>
+            </tr>
+            <tr>
+              <td>Feasibility study, if required</td>
+              <td>$25,000–$50,000</td>
+            </tr>
+            <tr className="pr-cost-total">
+              <td>Components in total</td>
+              <td>$120,000–$320,000</td>
+            </tr>
+          </tbody>
+        </table>
+        <p className="pr-note">
+          Market ranges — National Center for Employee Ownership (2026). These are market
+          ranges, not Forhemit partner prices; named partner estimates replace them when those
+          are published.
+        </p>
+        <p className="pr-body pr-narrow">
+          At a $5M valuation, a realistic all-in cost — our fee included — is roughly
+          $270,000–$570,000, in line with the $250,000–$500,000 NCEO reports for most ESOP
+          deals. At a $2M valuation those same fixed costs are a much larger share of the price,
+          and for some companies an ESOP does not pencil at all. Our Company Fit check tests
+          that before you pay anything, and if the numbers do not work we will tell you so — you
+          pay nothing unless your application is approved.
+        </p>
+      </section>
+
+      {/* ── Feasibility comparison + boundary (P0 D7 — always together) ── */}
+      <section className="pr-section" id="feasibility">
+        <h2 className="pr-h2">Why this costs $3,000, not $25,000.</h2>
+        <p className="pr-body pr-narrow">
+          A standalone ESOP feasibility study typically costs $25,000–$50,000 (National Center
+          for Employee Ownership, 2026). The Self Guided Transition Service is not that study —
+          read the boundary below before you compare them. What the $3,000 buys is the plan and
+          the machinery around it: your personalised 120-Day Roadmap built from your own
+          company's answers and documents, introductions to vetted professionals at the right
+          stage, your financing package brought to lender standard, the document vault, and
+          closing coordination — with a full refund before your roadmap is delivered and for 14
+          days after, and the full $3,000 credited toward Custom Services if you start within 12
+          months.
+        </p>
+        <div className="pr-boundary">
+          <h3 className="pr-h3">What a formal feasibility study adds — and who provides it.</h3>
+          <p className="pr-body">
+            A formal feasibility study models your transaction before you commit: an estimated
+            transaction price, after-tax cash flow to you as seller, your financing options, a
+            C-corp vs S-corp recommendation, and expected costs and timeline. If your lender,
+            trustee, or your own advisors require one, it is provided by a qualified partner —
+            market range $25,000–$50,000 — and, like every partner engagement, you receive a
+            written estimate and approve it before any work starts. The roadmap directs your
+            transition; it does not replace a study your deal's parties require.
+          </p>
+        </div>
+      </section>
+
       {/* ── Which offer ── */}
       <section className="pr-section" id="which">
         <h2 className="pr-h2">Which offer is for you?</h2>
         <p className="pr-body pr-narrow">
-          Choose Self-Service if you have the time to run your own transition and want the
+          Choose Self Guided if you have the time to run your own transition and want the
           toolkit, the partners, and the plan. Choose Custom Services if you want a dedicated
-          lead running the four months with you.
+          lead running the 120 days with you.
         </p>
-        <div className="pr-contrast" role="table" aria-label="Self-Service compared with Custom Services">
+        <div className="pr-contrast" role="table" aria-label="Self Guided compared with Custom Services">
           <div className="pr-contrast-head" role="row">
             <span role="columnheader" aria-label="Compared point" />
-            <span role="columnheader">Self-Service</span>
+            <span role="columnheader">Self Guided</span>
             <span role="columnheader">Custom Services</span>
           </div>
           {CONTRAST_ROWS.map((row) => (
@@ -215,9 +294,9 @@ export function PricingPageClient() {
         </div>
       </section>
 
-      {/* ── What's inside Self-Service ── */}
+      {/* ── What's inside Self Guided ── */}
       <section className="pr-section" id="inside">
-        <h2 className="pr-h2">What's inside Self-Service.</h2>
+        <h2 className="pr-h2">What's inside Self Guided.</h2>
         <p className="pr-body pr-narrow">
           Five deliverables, spelled out — including what each one does not include.
         </p>
@@ -237,8 +316,7 @@ export function PricingPageClient() {
               <li>It lives in the portal as a tracker, and exports as a single document you can hand to your CPA, attorney, or co-owners.</li>
             </ul>
             <p className="pr-note">
-              The roadmap is a plan built from your own documents — about four months when
-              documents and partners move on time. It is a plan, not a promise of outcome.
+              The roadmap is a plan built from your own documents — 120 days from Documents-Ready when documents and partners move on time. It is a plan, not a promise of outcome.
             </p>
             <p className="pr-not-included">
               Not included: Forhemit does not perform the steps that belong to you or your
@@ -251,7 +329,7 @@ export function PricingPageClient() {
           <article className="pr-deliverable">
             <h3 className="pr-h3">2. Preferred Partners</h3>
             <p className="pr-body">
-              The named professionals and firms a self-service client needs and does not know
+              The named professionals and firms a Self Guided client needs and does not know
               how to find — vetted by Forhemit, introduced through the portal when your roadmap
               reaches their stage. You are never handed a cold list and left to guess the
               order.
@@ -338,7 +416,7 @@ export function PricingPageClient() {
         </div>
 
         <div className="pr-never">
-          <h3 className="pr-h3">What Self-Service never includes</h3>
+          <h3 className="pr-h3">What Self Guided never includes</h3>
           <ul className="pr-list">
             <li>A dedicated lead, or Forhemit performing the transition steps — that is Custom Services.</li>
             <li>Legal, tax, or valuation work itself — partners do that work under their own engagements.</li>
@@ -356,8 +434,7 @@ export function PricingPageClient() {
       <section className="pr-section" id="money">
         <h2 className="pr-h2">How we make money — and how we don't.</h2>
         <p className="pr-body pr-narrow">
-          We make money two ways: the $3,000 Self-Service price, and the Custom Services fee of
-          3–5% of valuation. That is all.
+          We make money two ways: the $3,000 Self Guided price, and the Custom Services fee of 3–5% of valuation. That is all.
         </p>
         <p className="pr-body pr-narrow">{PARTNER_COMPENSATION_DISCLAIMER}</p>
         <p className="pr-body pr-narrow">
@@ -445,6 +522,49 @@ export function PricingPageClient() {
         <p className="pr-body pr-narrow">
           On a refund, portal access closes and live services end. Documents already delivered
           stay yours; your uploads are exportable, then deleted from our side.
+        </p>
+        <p className="pr-body pr-narrow">
+          <strong>If we miss a date that is ours, it costs us, not you.</strong> If a milestone
+          Forhemit controls slips by more than ten business days, Self Guided clients may take a
+          full $3,000 refund — the roadmap already delivered stays yours — and Custom Services
+          clients receive a $3,000 credit against the fee for each such milestone, and may end
+          the engagement at the next stage gate with fees only for stages already completed.
+        </p>
+      </section>
+
+      {/* ── The clock (P0 D4/D5) ── */}
+      <section className="pr-section" id="clock">
+        <h2 className="pr-h2">120 days from Documents-Ready.</h2>
+        <p className="pr-body pr-narrow">
+          The clock starts the day your documents are complete and accepted — not the day you
+          first talk to us. Most ESOPs take six to twelve months. Ours is built to run in 120
+          days because the four tracks run in parallel and the gates come first, before you pay.
+        </p>
+        <h3 className="pr-h3">When the clock starts.</h3>
+        <p className="pr-body pr-narrow">
+          Documents-Ready means three things have happened: (1) your application is approved;
+          (2) every CORE item on your document checklist is Accepted, or waived in writing by
+          Forhemit; (3) your kickoff call has been held and your roadmap issued. Day 1 is the
+          first business day after all three. You can see your clock, and what it is waiting on,
+          in your portal at any time.
+        </p>
+        <h3 className="pr-h3">The four tracks run in parallel.</h3>
+        <p className="pr-body pr-narrow">
+          Days 1–30: valuation instructed and running; financing package assembled. Days 31–60:
+          valuation delivered; lender term sheets compared; structure and legal drafting under
+          way. Days 61–90: legal documents completed; trustee review; employee communication
+          prepared (your employees learn of the transition in this window, on the schedule you
+          approved). Days 91–120: closing checklist walked to zero; signatures; handover
+          schedule set in writing.
+        </p>
+        <h3 className="pr-h3">When the clock pauses.</h3>
+        <p className="pr-body pr-narrow">
+          The clock pauses — visibly, in your portal, with the reason named — when it is waiting
+          on: documents requested from you that are outstanding more than five business days; a
+          valuation question that needs information only you or your CPA hold; a lender or
+          trustee queue beyond the window they stated when engaged; a hold you ask for; or a
+          regulatory or filing delay outside any party's control.{" "}
+          <strong>The clock never pauses for a delay that is Forhemit's.</strong>
         </p>
       </section>
 

@@ -354,3 +354,45 @@
     padding: 1.5rem;
   }
 }
+
+/* P0 fix pack (2026-11-21): cost-stack table + feasibility boundary box */
+.pr-cost-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0 var(--space-4);
+  font-size: 1rem;
+}
+
+.pr-cost-table th,
+.pr-cost-table td {
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  border: 1px solid var(--border-light);
+}
+
+.pr-cost-table th {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--parchment);
+}
+
+.pr-cost-table td:last-child,
+.pr-cost-table th:last-child {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.pr-cost-table .pr-cost-total td {
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--parchment);
+}
+
+.pr-boundary {
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  background: var(--parchment);
+  padding: var(--space-6);
+  margin-top: var(--space-8);
+  max-width: 760px;
+}

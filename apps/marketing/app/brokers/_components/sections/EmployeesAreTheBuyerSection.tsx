@@ -12,8 +12,7 @@ export function EmployeesAreTheBuyerSection() {
       <div className="fmp-elig-summary fmp-elig-summary--strong" role="note">
         <p className="fmp-elig-summary-text">
           <strong>Plain English:</strong> The buyer was never missing. The buyer is the team
-          already running the business — structured, financed, and able to close in about
-          four months.
+          already running the business — structured, financed, and able to close in 120 days from Documents-Ready.
         </p>
       </div>
     </section>

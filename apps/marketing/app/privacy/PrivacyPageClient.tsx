@@ -25,7 +25,7 @@ export function PrivacyPageClient() {
 								of work you do, and your industry — then five yes-or-no questions
 								about your business — whether it has $3M or more in revenue, 20 or
 								more verifiable U.S. employees, has been profitable for 3 years or
-								more, can allow four months for a transition, and whether you can
+								more, can allow 120 days for a transition, and whether you can
 								be available to the company for a transition period of 4 to 12
 								months after closing — on call for check-ins, introductions, and
 								questions, not working hands-on. We record those answers

@@ -32,7 +32,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "Am I personally guaranteeing anything?",
         answer:
-          "No. Sellers in a Forhemit transition do not put personal guarantees or personal assets at risk to finance the sale. Financing is carried by the transaction structure and the company's future earnings — that is precisely why the business must be profitable and of sufficient scale to qualify.",
+          "Our standard is no personal guarantees — a term sheet demanding one is flagged as off-standard. Financing is carried by the transaction structure and the company's future earnings — that is precisely why the business must be profitable and of sufficient scale to qualify.",
       },
       {
         question: "What do my employees actually receive?",
@@ -42,7 +42,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "What does Forhemit charge?",
         answer:
-          "Total transition fees typically run 3–5% of valuation — one figure, covering the whole transition, set in writing before you sign anything.",
+          "Our fee: 3–5% of valuation, in writing after independent valuation. Professional partners are paid by you directly, at estimates you approve first — the full cost picture is on our Pricing page.",
       },
     ],
   },
@@ -53,7 +53,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "How long does the process take?",
         answer:
-          "About four months from first review to the closing table — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
+          "120 days from Documents-Ready to the closing table — the clock starts when your documents are complete and accepted — against the 12 to 18 months a traditional sale process commonly runs, when it closes at all. What can stretch it is readiness: the work in Month 1 exists to surface that early, not at the closing table.",
       },
       {
         question: "What if my client doesn't qualify?",
@@ -94,7 +94,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "What does our client pay?",
         answer:
-          "One transition fee: total transition fees typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our How It Works page, so you can answer your client's question before they ever talk to us.",
+          "Our fee: 3 to 5% of the valuation, in writing after independent valuation. Professional partners are paid by your client directly, at estimates they approve first. The full cost picture is on our Pricing page, so you can answer your client's question before they ever talk to us.",
       },
       {
         question: "What does an introduction earn me?",
@@ -114,7 +114,7 @@ export const faqSections: FAQSection[] = [
       {
         question: "Which of my clients fit?",
         answer:
-          "The standard we screen against is published on our Wealth Managers page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow about four months and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change.",
+          "The standard we screen against is published on our Wealth Managers page: profitable and founder-led, $3M or more in revenue, 20 or more verifiable U.S. employees, an owner holding 51% or more who can allow the 120 days for the transition and be available on call for 4 to 12 months after close. If a client of yours clears this standard, a first conversation costs nothing and commits no one. If they don't, we will tell you quickly — and tell you what would have to change.",
       },
     ],
   },

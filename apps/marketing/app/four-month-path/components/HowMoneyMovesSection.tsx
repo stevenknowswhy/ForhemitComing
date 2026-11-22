@@ -14,10 +14,10 @@ const MONEY_ITEMS = [
   {
     id: "fees",
     pct: "3\u20135%",
-    title: "Total transition fees",
-    summary: "Of valuation \u2014 the all-in total",
+    title: "Our fee",
+    summary: "Of valuation \u2014 Forhemit\u2019s fee only",
     detail:
-      "Total transition fees typically run 3\u20135% of valuation \u2014 one figure, covering the whole transition, set in writing before you sign anything. That is the all-in total: Forhemit\u2019s work plus the third-party charges the transaction requires, itemized in the fee document with who receives each charge.",
+      "Forhemit\u2019s fee typically runs 3\u20135% of valuation \u2014 set in a written fee document after independent valuation. It covers Forhemit\u2019s work running your transition. The independent professionals the transaction requires are engaged by you directly and paid by you directly, each after a written estimate you approve \u2014 their fees are not included in our 3\u20135%. The full cost picture is on our Pricing page.",
   },
   {
     id: "tax",
@@ -29,11 +29,11 @@ const MONEY_ITEMS = [
   },
   {
     id: "guarantees",
-    pct: "None",
+    pct: "Standard",
     title: "Personal guarantees",
-    summary: "Your assets are not collateral",
+    summary: "No personal guarantees",
     detail:
-      "Your house, your savings, and your family\u2019s security are not collateral in a Forhemit transition. The financing rests on the business itself. Founders tell us this is the term that lets them sleep during the four months \u2014 and it is non-negotiable in our structure.",
+      "Our standard is no personal guarantees \u2014 a term sheet demanding one is flagged as off-standard. The financing is structured to rest on the business itself, not on your house, your savings, or your family\u2019s security.",
   },
 ];
 

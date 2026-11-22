@@ -39,7 +39,7 @@ const SCREEN_CRITERIA = [
   "20 or more verifiable U.S. employees",
   "Profitable, with a consistent track record",
   "The owner holds 51% or more of the company",
-  "The owner can allow a full four months for the transition",
+  "The owner can allow the full 120 days for the transition",
   "The owner is willing to be available to the company for a transition period of 4 to 12 months after closing — on call for agreed check-ins, introductions, and questions, not working hands-on",
 ];
 
@@ -174,7 +174,7 @@ export function AccountingFirmsClient() {
                 </div>
                 <div className="reality-content">
                   <h3>The shape of it</h3>
-                  <p>Your client sells 100% of the company to their employees, at a full price set by an independent appraiser who works for neither side. The transition closes in about four months.</p>
+                  <p>Your client sells 100% of the company to their employees, at a full price set by an independent appraiser who works for neither side. The transition closes in 120 days from Documents-Ready.</p>
                 </div>
               </div>
 
@@ -346,12 +346,11 @@ export function AccountingFirmsClient() {
                 <div className="hook-icon">§</div>
                 <h3>No surprises on price.</h3>
                 <p>
-                  Your client pays one transition fee: total transition fees typically run 3 to
-                  5% of the valuation, agreed in advance.
+                  Our fee: 3 to 5% of the valuation, in writing after independent valuation. Professional partners are paid by your client directly, at estimates they approve first.
                 </p>
                 <div className="hook-difference">
                   <span className="difference-arrow">→</span>
-                  <span className="difference-text">The full breakdown is on our <strong>How It Works</strong> page.</span>
+                  <span className="difference-text">The full cost picture is on our <strong>Pricing</strong> page.</span>
                 </div>
               </div>
 

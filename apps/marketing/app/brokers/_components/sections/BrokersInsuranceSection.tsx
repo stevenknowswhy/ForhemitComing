@@ -5,9 +5,7 @@ export function BrokersInsuranceSection() {
         The money, plainly
       </h2>
       <p className="fmp-section-lead">
-        <strong>No surprises on price.</strong> Your client pays total transition fees that
-        typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our
-        How It Works page.
+        <strong>No surprises on price.</strong> Our fee: 3 to 5% of the valuation, in writing after independent valuation. Professional partners are paid by your client directly, at estimates they approve first. The full breakdown is on our Pricing page.
       </p>
       <p className="fmp-section-lead">
         <strong>What an introduction earns.</strong> We are asked, fairly, what a broker gets for

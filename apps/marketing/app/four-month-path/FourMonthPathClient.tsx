@@ -4,6 +4,7 @@ import { lazy, Suspense, useState } from "react";
 import {
   AfterCloseSection,
   CheckpointsSection,
+  ClockDefinitionSection,
   ConfidentialitySection,
   CostGlanceSection,
   DealComparisonSection,
@@ -56,10 +57,7 @@ export function FourMonthPathClient() {
         <h1 className="fmp-hero-title">The Four-Month Path</h1>
         <p className="fmp-hero-sub">
           This is the whole route from first review to a company your
-          employees own outright: four months, in four defined stages, with
-          the fee and the tax treatment stated in writing before you commit.
-          The clock starts at the first working session in Month 1 and ends
-          at the closing table in Month 4.
+          employees own outright: 120 days from Documents-Ready, in four defined stages, with the fee and the tax treatment stated in writing before you commit. The clock starts when your documents are complete and accepted — what that means, and when the clock pauses, is set out in the clock section below.
         </p>
         <p className="fmp-hero-alternate">
           Haven&apos;t taken the 2-Minute Check yet?{" "}
@@ -88,6 +86,8 @@ export function FourMonthPathClient() {
           </section>
 
           <TimelineRealismSection />
+
+          <ClockDefinitionSection />
 
           <RoadmapPanel surface="four_month_path_inline" variant="inline" />
 

@@ -33,7 +33,7 @@ export function QuestionsSection() {
                 Employee ownership is the option most founders never hear:{" "}
                 <strong>
                   the employees buy 100% of the company, at a full price set by an independent
-                  appraiser who works for neither side, in about four months.
+                  appraiser who works for neither side, in 120 days from Documents-Ready.
                 </strong>{" "}
                 Where the transaction qualifies, §1042 can provide tax-deferred treatment for
                 eligible capital gains.
