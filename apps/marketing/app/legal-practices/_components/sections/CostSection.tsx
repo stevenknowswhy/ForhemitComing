@@ -5,7 +5,7 @@ const costData = [
   { value: "✓", label: "$3M or more in revenue" },
   { value: "✓", label: "20 or more verifiable U.S. employees" },
   { value: "✓", label: "The owner holds a controlling stake of 51% or more" },
-  { value: "✓", label: "The owner can allow about four months for the transition" },
+  { value: "✓", label: "The owner can allow the full 120 days for the transition" },
   { value: "✓", label: "The owner is willing to be available for 4 to 12 months after closing — on call, not working hands-on" },
 ];
 

@@ -44,7 +44,7 @@ const differentiators = [
     ),
     title: "No surprises on price",
     description:
-      "Your client pays one transition fee: total transition fees typically run 3 to 5% of the valuation, agreed in advance. The full breakdown is on our How It Works page, so you can answer your client's question before they ever talk to us.",
+      "Our fee: 3 to 5% of the valuation, in writing after independent valuation. Professional partners are paid by your client directly, at estimates they approve first. The full cost picture is on our Pricing page, so you can answer your client's question before they ever talk to us.",
     highlight: "3 to 5% of the valuation, agreed in advance.",
   },
   {

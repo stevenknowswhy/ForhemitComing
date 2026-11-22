@@ -23,7 +23,7 @@ export function BrokersWorkloadSection() {
             where every transition is stress-tested under our Resilience Framework before the
             transaction is structured and the founder sees the results in writing; the
             independent valuation the price rests on; the structure and its financing; and the
-            path to close in about four months.
+            path to close in 120 days from Documents-Ready.
           </p>
         </div>
         {BROKER_WORKLOAD_MEANING_ROWS.map((row) => (

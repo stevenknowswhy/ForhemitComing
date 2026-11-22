@@ -10,7 +10,7 @@ const SCREENING: { group: string; items: string[] }[] = [
       "20 or more verifiable U.S. employees",
       "Profitable, with a consistent track record",
       "The owner holds 51% or more of the company",
-      "The owner can allow a full four months for the transition",
+      "The owner can allow the full 120 days for the transition",
       "The owner is willing to be available to the company for a transition period of 4 to 12 months after closing — on call for agreed check-ins, introductions, and questions, not working hands-on",
     ],
   },

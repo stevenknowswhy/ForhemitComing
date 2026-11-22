@@ -1,7 +1,7 @@
 const WHERE_THE_TOTAL_GOES = [
-  "Transition oversight across all four months",
+  "Transition oversight across the 120 days",
   "ESOP implementation and coordination of counsel, trustee, and appraiser",
-  "The third-party charges the transaction requires \u2014 valuation, trustee, and ESOP counsel \u2014 itemized in the same figure, with who receives each one",
+  "Coordination of the third-party professionals the transaction requires \u2014 valuation, trustee, and ESOP counsel \u2014 whose fees you agree with them directly, after a written estimate you approve",
   "Fiduciary governance setup for the new ownership structure",
   "Ownership culture \u2014 helping employees understand and value what they own",
   "Repurchase planning so future obligations never surprise the company",
@@ -16,18 +16,14 @@ export function FeeTransparencyContent() {
       <div className="ft-context">
         <h3 className="ft-context-title">What it costs, said plainly.</h3>
         <p className="ft-context-body">
-          Total transition fees typically run 3&ndash;5% of valuation &mdash;
-          one figure, covering the whole transition, set in writing before you
-          sign anything. That is the all-in total: Forhemit&rsquo;s work plus
-          the third-party charges the transaction requires, itemized in the
-          fee document with who receives each charge.
+          Forhemit&rsquo;s Custom Services fee is 3&ndash;5% of the independent valuation, set in a written fee document after that valuation. It is our fee for running your transition. The independent professionals your transition needs &mdash; attorney, valuation firm, trustee, lender, administrator &mdash; are engaged by you directly and paid by you directly, each after a written estimate you approve. Their fees are not included in our 3&ndash;5%, and we publish what they typically add on our Pricing page, because you should see the whole cost before you start, not after.
         </p>
       </div>
 
       <div className="ft-phases">
         <div className="ft-phase ft-phase--open">
           <div className="ft-phase-hd-text">
-            <span className="ft-phase-label">Where the total goes</span>
+            <span className="ft-phase-label">Where our fee goes</span>
           </div>
           <div className="ft-phase-body">
             {WHERE_THE_TOTAL_GOES.map((item) => (
@@ -48,8 +44,7 @@ export function FeeTransparencyContent() {
           full during the first assessment call, before you sign anything.
         </p>
         <p className="ft-totals-note">
-          <strong>The 120-Day Roadmap.</strong> The week-by-week version of
-          the four-month path, with owners named for every step, is likewise
+          <strong>The 120-Day Roadmap.</strong> The week-by-week version of the 120-day path, with owners named for every step, is likewise
           provided at assessment &mdash; so you can hold us to it.
         </p>
       </div>
