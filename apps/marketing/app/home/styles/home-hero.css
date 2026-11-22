@@ -82,6 +82,20 @@
   justify-content: center;
 }
 
+.hch-hero-photo {
+  margin: 2.75rem 0 0;
+  width: 100%;
+}
+
+.hch-hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid var(--hch-card-border);
+  box-shadow: 0 24px 48px rgba(28, 21, 16, 0.14);
+}
+
 .hch-hero-pro-links {
   margin-top: 1.25rem;
   max-width: 100%;
