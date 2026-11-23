@@ -6,7 +6,7 @@ const processSteps: ProcessStep[] = [
   {
     num: "01",
     title: "A conversation between professionals",
-    desc: "Reach out directly at contact@forhemit.com or (510) 768-7588, or through our contact page, and say you are an attorney, not a founder. No client needs to be involved — and no client name is needed — for a first conversation.",
+    desc: "Reach out directly at contact@forhemit.com or (510) 405-4330, or through our contact page, and say you are an attorney, not a founder. No client needs to be involved — and no client name is needed — for a first conversation.",
   },
   {
     num: "02",

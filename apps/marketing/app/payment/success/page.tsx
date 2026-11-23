@@ -43,7 +43,7 @@ export default function PaymentSuccessPage() {
           Covered by the money-back guarantee: a full refund at any time
           before your roadmap is delivered, and for 14 days after. Questions
           before your portal email arrives? contact@forhemit.com or
-          (510) 768-7588.
+          (510) 405-4330.
         </p>
       </div>
     </main>

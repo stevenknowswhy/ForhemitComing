@@ -81,7 +81,7 @@ export function OnePagerClient() {
             Stefano Stokes, Founder &amp; CEO.
           </p>
           <p>
-            contact@forhemit.com · (510) 768-7588 · Full details:{" "}
+            contact@forhemit.com · (510) 405-4330 · Full details:{" "}
             <Link href="/pricing">forhemit.com/pricing</Link>
           </p>
         </footer>

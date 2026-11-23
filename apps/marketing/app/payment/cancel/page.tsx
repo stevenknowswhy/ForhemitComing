@@ -40,7 +40,7 @@ export default async function PaymentCancelPage({
           </Link>
         )}
         <p className="pm-note">
-          Questions? contact@forhemit.com or (510) 768-7588.
+          Questions? contact@forhemit.com or (510) 405-4330.
         </p>
       </div>
     </main>

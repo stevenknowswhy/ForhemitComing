@@ -391,7 +391,7 @@ export function AccountingFirmsClient() {
                 authorisation, you are told when the introduction lands, when the business is
                 screened, when the structure is set, and when it closes. Talk to us first,
                 before any client is involved:{" "}
-                <span className="highlight">contact@forhemit.com · (510) 768-7588</span>.
+                <span className="highlight">contact@forhemit.com · (510) 405-4330</span>.
               </p>
             </div>
           </div>
@@ -439,7 +439,7 @@ export function AccountingFirmsClient() {
                 Use the contact page and say you are a CPA, not a founder. No client needs to
                 be involved, and nothing about your client is needed, for the first call. Talk
                 to us first, before any client is involved: contact@forhemit.com · (510)
-                768-7588.
+                405-4330.
               </p>
               <p className="cta-subtitle">
                 For the other professionals in your client&apos;s corner:{" "}

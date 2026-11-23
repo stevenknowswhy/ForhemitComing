@@ -43,7 +43,7 @@ export function BrokersFinalCtaSection() {
         <p className="fmp-section-lead">
           Use the contact page and say you are a broker, not a founder. No client needs to be
           involved, and no client name is needed, for the first call. Or reach us directly:
-          contact@forhemit.com · (510) 768-7588.
+          contact@forhemit.com · (510) 405-4330.
         </p>
         <div className="fmp-final-cta-actions">
           <span className="fmp-cta-shell fmp-cta-shell--block">

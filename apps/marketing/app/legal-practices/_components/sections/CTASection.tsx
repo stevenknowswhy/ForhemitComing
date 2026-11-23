@@ -14,7 +14,7 @@ export function CTASection() {
               <h3>Talk to us first</h3>
               <p>
                 If you are an attorney, the first step is a direct conversation:
-                contact@forhemit.com, (510) 768-7588, or the contact page. No client needs to
+                contact@forhemit.com, (510) 405-4330, or the contact page. No client needs to
                 be involved, and nothing about your client is needed, for that first call.
               </p>
               <Link
