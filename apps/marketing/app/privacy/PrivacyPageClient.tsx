@@ -98,7 +98,7 @@ export function PrivacyPageClient() {
 								Corporation, 55 9th Street, San Francisco, CA. Questions about
 								this policy:{" "}
 								<a href="mailto:contact@forhemit.com">contact@forhemit.com</a>{" "}
-								or <a href="tel:+15107687588">(510) 768-7588</a>.
+								or <a href="tel:+15104054330">(510) 405-4330</a>.
 							</p>
 						</div>
 					</div>

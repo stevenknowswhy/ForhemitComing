@@ -620,7 +620,7 @@ export function WealthManagersPageClient() {
               <p className="cta-subtitle">
                 Use the contact page and say you are a wealth manager, not a founder. No client
                 needs to be involved, and nothing about your client is needed, for the first call.
-                You can also reach Stefano directly: contact@forhemit.com · (510) 768-7588.
+                You can also reach Stefano directly: contact@forhemit.com · (510) 405-4330.
               </p>
               
               <div className="cta-options">
