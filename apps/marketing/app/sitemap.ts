@@ -17,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/wealth-managers",
     "/the-exit-crisis",
     "/beyond-the-balance-sheet",
+    "/how-employees-pay-for-the-company",
     "/privacy",
     "/terms",
     "/opt-in",

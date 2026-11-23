@@ -117,6 +117,22 @@ export function BusinessOwnersPageClient() {
         {/* Savings Strip */}
         <SavingsStrip />
 
+        {/* W13 retrofit (ruled 2026-11-22): the sell-to-employees answer block */}
+        <section className="business-owners-section">
+          <div className="container">
+            <div className="section-header">
+              <h2>How do I sell my business to my employees?</h2>
+              <p className="section-intro">
+                You sell to your employees by selling to a trust created for them — an
+                ESOP. An independent valuation sets the price. A bank lends part of it,
+                you carry a note for the rest, and the company repays both from its own
+                profits. Your people never write personal checks. Forhemit builds the
+                whole purchase in 120 days from Documents-Ready.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Timeline Section */}
         <section className="business-owners-section luxury-section">
           <div className="container">

@@ -17,6 +17,7 @@ export function HeroSection() {
           and the founders who learn that late have the fewest options left.
         </p>
         <p className="about-eyebrow">By Stefano Stokes, Founder &amp; CEO of Forhemit</p>
+        <p className="about-eyebrow">Published April 6, 2026</p>
       </div>
     </section>
   );

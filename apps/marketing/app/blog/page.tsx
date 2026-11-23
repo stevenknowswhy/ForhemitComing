@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Insights',
   description:
-    "Two essays by Stefano Stokes, Forhemit's founder, on the exit crisis facing retiring founders and the philosophy that answers it.",
+    "Essays by Stefano Stokes, Forhemit's founder, on the exit crisis facing retiring founders, the philosophy that answers it, and how employees actually pay for the company.",
 };
 
 const ESSAYS = [
@@ -12,6 +12,7 @@ const ESSAYS = [
     href: '/the-exit-crisis',
     sequenceLabel: 'Start here · The problem',
     readTime: '8 minute read',
+    date: 'April 6, 2026',
     title: 'The Exit Crisis',
     standfirst:
       'A generation of founders is reaching retirement with no successor and too few buyers. Most businesses taken to market never sell at all — and the founders who learn that late have the fewest options left.',
@@ -20,9 +21,19 @@ const ESSAYS = [
     href: '/beyond-the-balance-sheet',
     sequenceLabel: 'Read next · The philosophy',
     readTime: '7 minute read',
+    date: 'April 6, 2026',
     title: 'Beyond the Balance Sheet',
     standfirst:
       'The most valuable things in a founder-led company — trust, craft, reputation, the people themselves — appear nowhere in its financial statements. The right exit is the one that prices them anyway.',
+  },
+  {
+    href: '/how-employees-pay-for-the-company',
+    sequenceLabel: 'Then · The mechanics',
+    readTime: '5 minute read',
+    date: 'November 22, 2026',
+    title: 'How Do Your Employees Actually Pay for the Company?',
+    standfirst:
+      'Your employees don\'t pay out of pocket, and they don\'t take personal loans. The buyer is an ESOP trust, created for them, and the company repays the purchase from its own future profits.',
   },
 ];
 
@@ -38,9 +49,10 @@ export default function BlogPage() {
             Thinking for founders at the succession crossroads.
           </h1>
           <p className="text-stone text-base sm:text-xl max-w-2xl mb-5 sm:mb-6">
-            Two essays by Stefano Stokes, Forhemit&apos;s founder, frame everything
+            Three essays by Stefano Stokes, Forhemit&apos;s founder, frame everything
             the firm does. Start with the structural crisis facing retiring
-            founders. Then read the philosophy that answers it.
+            founders. Then read the philosophy that answers it — and the
+            mechanics of how employees pay for the company.
           </p>
         </header>
 
@@ -61,6 +73,7 @@ export default function BlogPage() {
                 <p className="mt-2 text-sm font-medium text-stone">
                   By Stefano Stokes, Founder &amp; CEO
                 </p>
+                <p className="mt-1 text-xs text-stone">Published {essay.date}</p>
                 <p className="mt-4 flex-1 text-base text-stone">{essay.standfirst}</p>
                 <Link
                   href={essay.href}

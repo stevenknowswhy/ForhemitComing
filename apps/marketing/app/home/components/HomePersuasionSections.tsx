@@ -357,6 +357,30 @@ export function HomePersuasionSections() {
         </div>
       </RevealSection>
 
+      {/* ── W13 retrofit (ruled 2026-11-22): the retire-without-PE answer block ── */}
+      <RevealSection className="hps-answer" ariaLabel="Retiring without selling to a competitor or private equity">
+        <div className="hps-inner">
+          <div className="hps-section-header">
+            <p className="hps-eyebrow">
+              <span className="hps-eyebrow-line" aria-hidden />
+              A Straight Answer
+            </p>
+            <div className="hps-section-divider" />
+          </div>
+          <h2 className="hps-headline">
+            I want to retire without selling to a competitor or private equity — what are my
+            options?
+          </h2>
+          <p className="hps-sub">
+            You can retire without selling to a competitor or a private-equity fund: sell the
+            company to your own employees. A trust created for them buys it at a price set by
+            independent valuation, financed by a bank loan and a note you carry, repaid from
+            the company&apos;s profits. Your people keep their jobs, and you get the full
+            price, paid over time.
+          </p>
+        </div>
+      </RevealSection>
+
       {/* ── 4. Process (D7, panel rulings 2026-11-22) ── */}
       <RevealSection className="hps-process" ariaLabel="How employee ownership works">
         <div className="hps-inner">
