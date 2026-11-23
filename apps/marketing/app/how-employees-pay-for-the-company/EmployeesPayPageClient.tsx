@@ -156,7 +156,9 @@ export function EmployeesPayPageClient() {
               </p>
               <p>
                 Forhemit&apos;s fee for building the purchase — our Custom Services — is
-                3–5% of the company&apos;s valuation. That is our fee, and only our fee.
+                a fixed engagement fee set by your company&apos;s size: $75,000,
+                $100,000, or $125,000, paid in milestones as the roadmap&apos;s gates
+                clear. That is our fee, and only our fee.
               </p>
               <p>
                 The transaction also needs partners: lawyers, the independent
