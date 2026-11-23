@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { trackScheduleCallClick } from "@/lib/analytics/highIntent";
-import { RoadmapLink } from "@/app/four-month-path/components/RoadmapLink";
 import { BrokersContactModal } from "../BrokersContactModal";
 
 export function BrokersFinalCtaSection() {
@@ -62,9 +61,9 @@ export function BrokersFinalCtaSection() {
           </span>
           <span className="fmp-cta-shell fmp-cta-shell--block">
             <span className="fmp-cta-shell__glow" aria-hidden />
-            <RoadmapLink surface="brokers_footer_secondary" className="fmp-btn fmp-btn-secondary">
-              Open the 120-Day Roadmap (HTML)
-            </RoadmapLink>
+            <Link href="/four-month-path" className="fmp-btn fmp-btn-secondary">
+              See the Four-Month Path
+            </Link>
           </span>
         </div>
         <p className="fmp-section-lead" style={{ marginTop: 24 }}>

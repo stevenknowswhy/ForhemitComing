@@ -10,7 +10,6 @@ const NAV_ITEMS = [
   { id: "brk-outcomes", label: "The Choice" },
   { id: "brk-screening", label: "18-Point Check" },
   { id: "brk-realism", label: "Realistic Timing" },
-  { id: "brk-pdf", label: "Roadmap HTML" },
   { id: "brk-checkpoints", label: "Checkpoints" },
   { id: "brk-process", label: "Introductions" },
   { id: "brk-insurance", label: "Fees, Plainly" },

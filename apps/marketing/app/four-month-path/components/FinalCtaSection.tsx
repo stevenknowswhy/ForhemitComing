@@ -1,7 +1,6 @@
 "use client";
 
 import { trackBeginIntakeClick, trackTwoMinuteCheckClick } from "@/lib/analytics/highIntent";
-import { RoadmapLink } from "./RoadmapLink";
 
 interface FinalCtaSectionProps {
   onStartTwoMinuteCheck: () => void;
@@ -40,14 +39,6 @@ export function FinalCtaSection({ onStartTwoMinuteCheck, onBeginIntake }: FinalC
           >
             Begin Confidential Intake
           </button>
-        </span>
-      </div>
-      <div className="fmp-final-cta-actions fmp-final-cta-actions--secondary">
-        <span className="fmp-cta-shell fmp-cta-shell--block">
-          <span className="fmp-cta-shell__glow" aria-hidden />
-          <RoadmapLink surface="four_month_path_footer_secondary" className="fmp-btn fmp-btn-secondary">
-            Open the 120-Day Roadmap (HTML)
-          </RoadmapLink>
         </span>
       </div>
     </section>

@@ -14,7 +14,6 @@ import {
   FirstCallSection,
   FloatingNav,
   FourPhaseTimeline,
-  RoadmapPanel,
   TaxChecklistSection,
 } from "./components";
 import { FOUR_CHECKPOINTS, FOUR_PHASE_BLOCKS } from "./constants";
@@ -96,8 +95,6 @@ export function FourMonthPathClient() {
           </section>
 
           <ClockDefinitionSection />
-
-          <RoadmapPanel surface="four_month_path_inline" variant="inline" />
 
           <CheckpointsSection checkpoints={FOUR_CHECKPOINTS} />
 
