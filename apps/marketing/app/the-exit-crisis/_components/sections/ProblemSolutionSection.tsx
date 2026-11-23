@@ -29,7 +29,7 @@ export function ProblemSolutionSection() {
                 Employee ownership through an ESOP answers each failure of the
                 market in turn. The buyers are already inside the building, so
                 there is no market search at all. The transaction is structured
-                and financed in advance, so it closes on a four-month timeline
+                and financed in advance, so it closes in 120 days from Documents-Ready
                 instead of expiring. The price is set by independent appraisal,
                 not by a buyer&apos;s opportunism. And Congress, recognizing
                 exactly this problem, attached serious tax incentives —

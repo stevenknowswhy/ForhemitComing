@@ -44,6 +44,9 @@ export function BeyondBalanceSheetPageClient() {
             <p className="bbs-subhead" style={{ fontSize: "1rem", marginTop: "1rem" }}>
               By Stefano Stokes, Founder &amp; CEO of Forhemit
             </p>
+            <p className="bbs-subhead" style={{ fontSize: "1rem", marginTop: "0.5rem" }}>
+              Published April 6, 2026
+            </p>
           </div>
         </section>
 
