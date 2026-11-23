@@ -1,9 +1,3 @@
-/** Interactive roadmap HTML */
-export const ROADMAP_PDF_HREF = "/downloads/Forhemit-120-Day-Roadmap.html";
-
-/** Printable companion to the fee transparency modal; regenerate via `npm run generate:fee-pdf` */
-export const FEE_TRANSPARENCY_PDF_HREF = "/downloads/Forhemit-ESOP-Fee-Transparency.pdf";
-
 /** Replace with Calendly or booking URL when available */
 export const SCHEDULE_20_MIN_HREF =
   "mailto:contact@forhemit.com?subject=20-Minute%20Call%20%E2%80%94%20Get%20My%20Price%20Range";

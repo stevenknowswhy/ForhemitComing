@@ -1,7 +1,6 @@
 "use client";
 
 import { CheckpointsSection } from "@/app/four-month-path/components/CheckpointsSection";
-import { RoadmapPanel } from "@/app/four-month-path/components/RoadmapPanel";
 import { TimelineRealismSection } from "@/app/four-month-path/components/TimelineRealismSection";
 import { BrokerScreeningChecklist } from "./_components/BrokerScreeningChecklist";
 import "@/app/home/intake/styles/classification-intake-modal.css";
@@ -62,28 +61,6 @@ export function BrokersPathClient() {
             faqBodyIdPrefix="brk-faq-body"
           />
 
-          <section id="brk-pdf" className="fmp-section" aria-labelledby="brk-pdf-heading">
-            <h2 id="brk-pdf-heading" className="fmp-section-title">
-              Share the roadmap with your seller
-            </h2>
-            <p className="fmp-section-lead">
-              The same 120-Day Roadmap your client receives at the assessment — the 120 days, phase by phase, in one document you can forward.
-            </p>
-            <RoadmapPanel
-              surface="brokers_inline"
-              ariaLabel="Open ESOP roadmap HTML"
-              eyebrow="For your seller & advisors"
-              question="Want the 120 days in one document?"
-              bullets={[
-                "Month 1: readiness review and independent valuation",
-                "Month 2: structure designed and financing placed",
-                "Month 3: legal documents and compliance completed",
-                "Month 4: closing executed and handover begun",
-              ]}
-              filenameNote="Opens in a new tab as HTML. Use browser print to save a PDF copy if needed."
-              ctaLabel="Open the 120-Day Roadmap (HTML)"
-            />
-          </section>
 
           <CheckpointsSection
             checkpoints={BROKER_CHECKPOINTS}
