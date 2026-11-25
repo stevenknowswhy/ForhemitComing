@@ -97,7 +97,7 @@ async function adminAuthResponse(
   return NextResponse.redirect(url);
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const accept = request.headers.get('accept') || ''
   const { pathname } = request.nextUrl;
 
