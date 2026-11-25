@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { DailyViewData } from "../types";
+import type { DailyViewData, SyncHealthRow } from "../types";
 import { formatPt } from "../lib/queries";
 
 // Presentational blocks for the /admin daily view. Styling follows the
@@ -10,8 +10,8 @@ const h2: CSSProperties = { fontSize: 20, fontWeight: 600, margin: "0 0 8px" };
 const dim: CSSProperties = { opacity: 0.75, fontSize: 14 };
 const row: CSSProperties = { padding: "6px 0", borderBottom: "1px solid rgba(127,127,127,0.25)", fontSize: 15 };
 
-export function SyncHealthLine({ data }: { data: DailyViewData }) {
-  const h = data.syncHealth;
+export function SyncHealthLine({ health }: { health: SyncHealthRow | null }) {
+  const h = health;
   if (!h) return <p style={dim}>Sync health: no sync record yet.</p>;
   const stale =
     h.last_ok_at && Date.now() - new Date(h.last_ok_at).getTime() > 30 * 60 * 1000;

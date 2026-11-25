@@ -34,6 +34,13 @@ export function formatPt(iso: string | null): string {
   return iso ? ptTime(iso) : "never";
 }
 
+// Spine sync-health read, shared by the daily view and the admin shell's
+// sync-health slot (same query either way — the shell just needs it standalone).
+export async function getSyncHealth(): Promise<SyncHealthRow | null> {
+  const rows = await sbGet<SyncHealthRow[]>("sync_health?select=*&source=eq.spine");
+  return rows[0] ?? null;
+}
+
 // "Done" = spine audit events from today + yesterday (Pacific), per spec:
 // done is proven from the audit log, never typed into the UI.
 function buildDone(events: AuditEventRow[]): DailyViewData["done"] {
@@ -69,7 +76,7 @@ export async function getDailyViewData(): Promise<DailyViewData> {
         "outreach_contacts?select=packet_id,company,founder,grade,tof1_status,reply_status,check_completed,intro_call_booked&order=packet_id",
       ),
       sbGet<ManualLogRow[]>("manual_log?select=*&done=eq.false&order=at.desc"),
-      sbGet<SyncHealthRow[]>("sync_health?select=*&source=eq.spine"),
+      getSyncHealth(),
     ]);
 
   const countsByCase = new Map<string, { total: number; reviewed: number; awaitingReview: number; open: number }>();
@@ -93,7 +100,7 @@ export async function getDailyViewData(): Promise<DailyViewData> {
   const researched = contacts.filter((c) => c.company);
 
   return {
-    syncHealth: health[0] ?? null,
+    syncHealth: health,
     awaitingReview: awaiting.map((i) => ({
       caseId: i.case_id,
       code: i.code,
