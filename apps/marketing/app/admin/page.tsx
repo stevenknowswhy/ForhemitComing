@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DailyView from "./daily-view";
 
 export default function AdminPage() {
   return (
@@ -22,10 +23,12 @@ export default function AdminPage() {
         </a>
       </div>
       <h1 style={{ fontSize: 28, fontWeight: 600, marginBottom: 8 }}>Admin</h1>
-      <p style={{ opacity: 0.8, marginBottom: 16 }}>
-        Choose an admin area.
-      </p>
 
+      <DailyView />
+
+      <h2 style={{ fontSize: 20, fontWeight: 600, margin: "24px 0 8px" }}>
+        Admin areas
+      </h2>
       <ul style={{ display: "grid", gap: 12, padding: 0, listStyle: "none" }}>
         <li>
           <Link href="/admin/crm" style={{ textDecoration: "underline" }}>
@@ -46,4 +49,3 @@ export default function AdminPage() {
     </main>
   );
 }
-
