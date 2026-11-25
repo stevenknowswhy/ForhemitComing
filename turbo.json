@@ -10,7 +10,9 @@
         "CONVEX_URL",
         "NEXT_PUBLIC_CONVEX_URL",
         "NEXT_PUBLIC_CONVEX_SITE_URL",
-        "CONVEX_DEPLOY_KEY"
+        "CONVEX_DEPLOY_KEY",
+        "SUPABASE_URL",
+        "SUPABASE_SERVICE_ROLE_KEY"
       ]
     },
     "dev": {
