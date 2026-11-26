@@ -243,7 +243,7 @@ export function CrmClient({ initial, notice = null }: CrmClientProps) {
   return (
     <div className="flex min-h-screen flex-col bg-[#F2F5F9] text-foreground">
       {/* Topbar */}
-      <div className="sticky top-0 z-30 flex h-14 flex-wrap items-center gap-2 border-b border-border bg-card px-4 md:h-13 md:flex-nowrap md:px-6">
+      <div className="sticky top-0 z-30 flex min-h-14 flex-wrap items-center gap-2 border-b border-border bg-card px-4 py-1.5 md:h-13 md:min-h-0 md:flex-nowrap md:px-6 md:py-0">
         <h1 className="font-serif text-base text-foreground">CRM</h1>
 
         {/* View switch */}
@@ -278,7 +278,7 @@ export function CrmClient({ initial, notice = null }: CrmClientProps) {
           </button>
         </div>
 
-        <div className="relative ml-auto">
+        <div className="relative order-last w-full md:order-none md:ml-auto md:w-auto">
           <Search className="absolute left-2.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
@@ -286,7 +286,7 @@ export function CrmClient({ initial, notice = null }: CrmClientProps) {
             onChange={(event) => setSearchQuery(event.target.value)}
             placeholder="Search records…"
             aria-label="Search records"
-            className="h-9 w-44 rounded-full border border-border bg-muted/40 pl-8 pr-3 text-xs text-foreground transition-all focus:border-primary focus:outline-none focus:w-56"
+            className="h-9 w-full rounded-full border border-border bg-muted/40 pl-8 pr-3 text-xs text-foreground transition-all focus:border-primary focus:outline-none md:w-44 md:focus:w-56"
           />
         </div>
 
