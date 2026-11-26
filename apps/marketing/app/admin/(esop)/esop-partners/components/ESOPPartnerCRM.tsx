@@ -205,7 +205,7 @@ export function ESOPPartnerCRM() {
 		<div className="flex flex-1 flex-col min-w-0">
 			<div className="flex-1 flex flex-col min-w-0">
 				{/* Topbar */}
-				<div className="bg-white border-b border-[#E8EDF5] px-4 md:px-6 py-2 flex flex-col gap-2 sticky top-0 z-50">
+				<div className="bg-white border-b border-[#E8EDF5] px-4 md:px-6 py-2 flex flex-col gap-2 sticky top-0 z-30">
 					<div className="flex items-center gap-3 flex-wrap">
 					<h1 className="font-serif text-base text-[#0E1C2F] flex-1">
 						{currentType ? `${currentType}s` : VIEW_TITLES[currentView]}
