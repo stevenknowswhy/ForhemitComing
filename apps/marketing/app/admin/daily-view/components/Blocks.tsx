@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import type { DailyViewData, SyncHealthRow } from "../types";
+import type { DailyViewData, OutreachContactView, SyncHealthRow } from "../types";
 import { formatPt } from "../lib/queries";
+import { LogTouchButton } from "./LogTouchButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -194,6 +195,30 @@ export function NeedsYou({ data }: { data: DailyViewData }) {
 
 const OUTREACH_VISIBLE = 5;
 
+/** One researched-contact line: identity, touch history, one-tap log button. */
+function OutreachRow({ c }: { c: OutreachContactView }) {
+  const next = c.touchDue.nextTouch;
+  return (
+    <li className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <span>
+        <span className="font-medium">{c.packet_id}</span> · {c.company}
+        {c.founder ? <span> — {c.founder}</span> : null}
+        {c.grade != null ? <span className="text-muted-foreground"> · grade {c.grade}</span> : null}
+        {c.tof1_status ? <span className="text-muted-foreground"> · {c.tof1_status}</span> : null}
+        {c.touches.map((t) => (
+          <span key={t.id} className="text-muted-foreground">
+            {" "}· T{t.touch_no} {formatPt(t.sent_at)}
+          </span>
+        ))}
+        {c.touchDue.state === "complete" ? (
+          <span className="text-muted-foreground"> · all touches sent</span>
+        ) : null}
+      </span>
+      {next != null ? <LogTouchButton contactId={c.id} touchNo={next} /> : null}
+    </li>
+  );
+}
+
 export function OutreachToday({ data }: { data: DailyViewData }) {
   const o = data.outreach;
   const visible = o.researched.slice(0, OUTREACH_VISIBLE);
@@ -202,22 +227,47 @@ export function OutreachToday({ data }: { data: DailyViewData }) {
     <SummaryCard
       title="Outreach today"
       count={`${o.researched.length}/${o.totalSlots}`}
-      pill={<Pill tone="steady">In progress</Pill>}
+      pill={
+        <Pill tone={o.touchDue.length > 0 ? "alert" : "steady"}>
+          {o.touchDue.length > 0 ? `${o.touchDue.length} touch${o.touchDue.length === 1 ? "" : "es"} due` : "In progress"}
+        </Pill>
+      }
     >
       <p className={emptyText}>
         {o.researched.length} researched of {o.totalSlots} pilot slots ·{" "}
         {o.replies} replies · {o.checksCompleted} checks completed ·{" "}
         {o.introCallsBooked} intro calls booked
       </p>
+      {o.touchDue.length > 0 && (
+        <div className="mt-3">
+          <p className="text-sm font-medium">Touch due</p>
+          <ul className="mt-1 space-y-1 text-sm">
+            {o.touchDue.map((c) => (
+              <li key={c.id} className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <Pill tone="alert">{c.touchDue.state === "overdue" ? "Overdue" : "Due"}</Pill>
+                <span>
+                  <span className="font-medium">{c.packet_id}</span> · {c.company} — Touch{" "}
+                  {c.touchDue.nextTouch}
+                  {c.touchDue.daysSinceFirstTouch != null ? (
+                    <span className="text-muted-foreground">
+                      {" "}· day {c.touchDue.daysSinceFirstTouch} since Touch 1
+                    </span>
+                  ) : (
+                    <span className="text-muted-foreground"> · not started</span>
+                  )}
+                </span>
+                {c.touchDue.nextTouch != null ? (
+                  <LogTouchButton contactId={c.id} touchNo={c.touchDue.nextTouch} />
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {visible.length > 0 && (
         <ul className="mt-3 space-y-1 text-sm">
           {visible.map((c) => (
-            <li key={c.packet_id}>
-              <span className="font-medium">{c.packet_id}</span> · {c.company}
-              {c.founder ? <span> — {c.founder}</span> : null}
-              {c.grade != null ? <span className="text-muted-foreground"> · grade {c.grade}</span> : null}
-              {c.tof1_status ? <span className="text-muted-foreground"> · {c.tof1_status}</span> : null}
-            </li>
+            <OutreachRow key={c.packet_id} c={c} />
           ))}
         </ul>
       )}
@@ -225,19 +275,11 @@ export function OutreachToday({ data }: { data: DailyViewData }) {
         <ViewAllDetails label={`View all ${o.researched.length} researched contacts`}>
           <ul className="mt-2 space-y-1 text-sm">
             {rest.map((c) => (
-              <li key={c.packet_id}>
-                <span className="font-medium">{c.packet_id}</span> · {c.company}
-                {c.founder ? <span> — {c.founder}</span> : null}
-                {c.grade != null ? <span className="text-muted-foreground"> · grade {c.grade}</span> : null}
-                {c.tof1_status ? <span className="text-muted-foreground"> · {c.tof1_status}</span> : null}
-              </li>
+              <OutreachRow key={c.packet_id} c={c} />
             ))}
           </ul>
         </ViewAllDetails>
       )}
-      <p className={`mt-3 ${emptyText}`}>
-        Touch-due computation (Day 4–5 / Day 12–14) arrives in Step 6.
-      </p>
     </SummaryCard>
   );
 }

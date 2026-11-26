@@ -1,4 +1,5 @@
 import { sbGet } from "./supabase";
+import { computeTouchDue } from "./touch-due";
 import type {
   AuditEventRow,
   CaseRow,
@@ -6,6 +7,7 @@ import type {
   DailyViewData,
   ManualLogRow,
   OutreachContactRow,
+  OutreachTouchRow,
   SyncHealthRow,
 } from "../types";
 
@@ -62,7 +64,7 @@ function buildDone(events: AuditEventRow[]): DailyViewData["done"] {
 }
 
 export async function getDailyViewData(): Promise<DailyViewData> {
-  const [cases, allItems, awaiting, events, contacts, manualOpen, health] =
+  const [cases, allItems, awaiting, events, contacts, touches, manualOpen, health] =
     await Promise.all([
       sbGet<CaseRow[]>("cases?select=*&order=id"),
       sbGet<Pick<ChecklistItemRow, "case_id" | "status">[]>(
@@ -73,7 +75,11 @@ export async function getDailyViewData(): Promise<DailyViewData> {
       ),
       sbGet<AuditEventRow[]>("audit_events?select=*&order=at.desc&limit=500"),
       sbGet<OutreachContactRow[]>(
-        "outreach_contacts?select=packet_id,company,founder,grade,tof1_status,reply_status,check_completed,intro_call_booked&order=packet_id",
+        "outreach_contacts?select=id,packet_id,company,founder,grade,tof1_status,reply_status,check_completed,intro_call_booked&order=packet_id",
+      ),
+      // Step 6: every recorded touch, oldest first, grouped by contact below.
+      sbGet<OutreachTouchRow[]>(
+        "outreach_touches?select=id,contact_id,touch_no,sent_at,channel,outcome&order=sent_at.asc",
       ),
       sbGet<ManualLogRow[]>("manual_log?select=*&done=eq.false&order=at.desc"),
       getSyncHealth(),
@@ -97,7 +103,28 @@ export async function getDailyViewData(): Promise<DailyViewData> {
   }
   gateFailures.sort((a, b) => (a.at < b.at ? 1 : -1));
 
-  const researched = contacts.filter((c) => c.company);
+  const touchesByContact = new Map<string, OutreachTouchRow[]>();
+  for (const t of touches) {
+    const list = touchesByContact.get(t.contact_id) ?? [];
+    list.push(t);
+    touchesByContact.set(t.contact_id, list);
+  }
+  const now = new Date();
+  const researched = contacts
+    .filter((c) => c.company)
+    .map((c) => {
+      const own = touchesByContact.get(c.id) ?? [];
+      return { ...c, touches: own, touchDue: computeTouchDue(own, now) };
+    });
+  const touchDue = researched
+    .filter((c) => c.touchDue.state === "due" || c.touchDue.state === "overdue")
+    .sort((a, b) =>
+      a.touchDue.state === b.touchDue.state
+        ? (b.touchDue.daysSinceFirstTouch ?? 0) - (a.touchDue.daysSinceFirstTouch ?? 0)
+        : a.touchDue.state === "overdue"
+          ? -1
+          : 1
+    );
 
   return {
     syncHealth: health,
@@ -113,6 +140,7 @@ export async function getDailyViewData(): Promise<DailyViewData> {
     outreach: {
       totalSlots: contacts.length,
       researched,
+      touchDue,
       replies: contacts.filter((c) => c.reply_status).length,
       checksCompleted: contacts.filter((c) => c.check_completed).length,
       introCallsBooked: contacts.filter((c) => c.intro_call_booked).length,
