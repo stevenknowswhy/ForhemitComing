@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import {
 	Users,
 	Plus,
@@ -14,7 +14,7 @@ import {
 	RotateCcw,
 } from "lucide-react";
 import { usePartnerCRM } from "@forhemit/shared/features/esop-partners";
-import { Sidebar } from "./Sidebar";
+import { useEsopRailSections } from "../../(esop)/AdminChrome";
 import { Metrics } from "./Metrics";
 import { ContactCard } from "./ContactCard";
 import { ContactList } from "./ContactList";
@@ -121,13 +121,34 @@ export function ESOPPartnerCRM() {
 		return () => document.removeEventListener("keydown", handleKeyDown);
 	}, [isModalOpen, isDetailOpen]);
 
-	const handleSetView = (view: ViewMode) => {
-		setFilter(view, null);
-	};
+	const handleSetView = useCallback(
+		(view: ViewMode) => {
+			setFilter(view, null);
+		},
+		[setFilter],
+	);
 
-	const handleFilterType = (type: string | null) => {
-		setFilter("all", type);
-	};
+	const handleFilterType = useCallback(
+		(type: string | null) => {
+			setFilter("all", type);
+		},
+		[setFilter],
+	);
+
+	// OD-12: the navy rail is owned by the shared (esop) chrome, so this page
+	// registers its live Views / Partner-types sections (counts + handlers)
+	// upward instead of rendering its own Sidebar.
+	const esopRailSections = useMemo(
+		() => ({
+			currentView,
+			currentType,
+			contactCounts,
+			onSetView: handleSetView,
+			onFilterType: handleFilterType,
+		}),
+		[currentView, currentType, contactCounts, handleSetView, handleFilterType],
+	);
+	useEsopRailSections(esopRailSections);
 
 	const handleSelectContact = (contact: PartnerContact) => {
 		setSelectedContactId(contact.id);
@@ -192,15 +213,7 @@ export function ESOPPartnerCRM() {
 		.join(", ");
 
 	return (
-		<div className="flex min-h-screen bg-[#F2F5F9]">
-			<Sidebar
-				currentView={currentView}
-				currentType={currentType}
-				contactCounts={contactCounts}
-				onSetView={handleSetView}
-				onFilterType={handleFilterType}
-			/>
-
+		<div className="flex flex-1 flex-col min-w-0">
 			<div className="flex-1 flex flex-col min-w-0">
 				{/* Topbar */}
 				<div className="bg-white border-b border-[#E8EDF5] px-6 h-13 flex items-center gap-3 sticky top-0 z-50">
