@@ -14,7 +14,7 @@ import {
 	RotateCcw,
 } from "lucide-react";
 import { usePartnerCRM } from "@forhemit/shared/features/esop-partners";
-import { useEsopRailSections } from "../../AdminChrome";
+import { ViewTabs, TypeChips } from "./ViewControls";
 import { Metrics } from "./Metrics";
 import { ContactCard } from "./ContactCard";
 import { ContactList } from "./ContactList";
@@ -135,20 +135,9 @@ export function ESOPPartnerCRM() {
 		[setFilter],
 	);
 
-	// OD-12: the navy rail is owned by the shared (esop) chrome, so this page
-	// registers its live Views / Partner-types sections (counts + handlers)
-	// upward instead of rendering its own Sidebar.
-	const esopRailSections = useMemo(
-		() => ({
-			currentView,
-			currentType,
-			contactCounts,
-			onSetView: handleSetView,
-			onFilterType: handleFilterType,
-		}),
-		[currentView, currentType, contactCounts, handleSetView, handleFilterType],
-	);
-	useEsopRailSections(esopRailSections);
+	// OD-13: views and partner types render in-page (ViewTabs / TypeChips);
+	// the rail is the shared admin chrome on every admin route, so nothing is
+	// registered upward anymore.
 
 	const handleSelectContact = (contact: PartnerContact) => {
 		setSelectedContactId(contact.id);
@@ -216,7 +205,8 @@ export function ESOPPartnerCRM() {
 		<div className="flex flex-1 flex-col min-w-0">
 			<div className="flex-1 flex flex-col min-w-0">
 				{/* Topbar */}
-				<div className="bg-white border-b border-[#E8EDF5] px-6 h-13 flex items-center gap-3 sticky top-0 z-50">
+				<div className="bg-white border-b border-[#E8EDF5] px-4 md:px-6 py-2 flex flex-col gap-2 sticky top-0 z-50">
+					<div className="flex items-center gap-3 flex-wrap">
 					<h1 className="font-serif text-base text-[#0E1C2F] flex-1">
 						{currentType ? `${currentType}s` : VIEW_TITLES[currentView]}
 					</h1>
@@ -266,6 +256,15 @@ export function ESOPPartnerCRM() {
 						<Printer className="w-3.5 h-3.5" />
 						Print
 					</button>
+					</div>
+
+					{/* Views: page-level tabs under the title (OD-13) */}
+					<ViewTabs
+						currentView={currentView}
+						currentType={currentType}
+						contactCounts={contactCounts}
+						onSetView={handleSetView}
+					/>
 				</div>
 
 				{/* Main Content */}
@@ -386,7 +385,14 @@ export function ESOPPartnerCRM() {
 										);
 									})}
 
-									<div className="flex-1" />
+						{/* Partner types: second filter group beside the stage chips (OD-13) */}
+						<TypeChips
+							currentType={currentType}
+							contactCounts={contactCounts}
+							onFilterType={handleFilterType}
+						/>
+
+						<div className="flex-1" />
 
 									<div className="flex border border-[#D0D9E6] rounded-lg overflow-hidden">
 										<button
