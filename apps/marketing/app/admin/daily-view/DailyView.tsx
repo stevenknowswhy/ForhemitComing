@@ -28,7 +28,7 @@ export default async function DailyView() {
     );
   }
   return (
-    <div>
+    <div className="space-y-6">
       <NeedsYou data={data} />
       <OutreachToday data={data} />
       <Pipeline data={data} />
