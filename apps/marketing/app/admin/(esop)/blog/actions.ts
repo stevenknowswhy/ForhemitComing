@@ -4,6 +4,7 @@ import { fetchMutation, fetchQuery } from "convex/nextjs";
 import { revalidatePath } from "next/cache";
 import { api } from "@/convex/_generated/api";
 import type { Doc, Id } from "@/convex/_generated/dataModel";
+import { EMPTY_TIPTAP_DOC, titleToSlug } from "./slug";
 
 function adminToken(): string {
   const t = process.env.ADMIN_TOKEN;
@@ -61,6 +62,35 @@ export async function deleteBlogPost(id: Id<"posts">) {
     adminToken: adminToken(),
   });
   revalidateBlog();
+}
+
+/**
+ * Create a draft from a title alone (slug derived, empty TipTap body) and
+ * return the new post id so the caller can route straight to the editor.
+ */
+export async function createDraftPost(title: string): Promise<string> {
+  const trimmed = title.trim();
+  if (!trimmed) {
+    throw new Error("Title is required");
+  }
+
+  // Slug must be unique; on collision retry with a numeric suffix. adminList
+  // covers up to 500 recent posts — plenty for an editorial back-catalog.
+  const posts = await loadAdminPosts();
+  const taken = new Set(posts.map((p) => p.slug));
+  const base = titleToSlug(trimmed);
+  let slug = base;
+  for (let n = 2; taken.has(slug); n += 1) {
+    slug = `${base}-${n}`;
+  }
+
+  return await fetchMutation(api.posts.create, {
+    title: trimmed,
+    slug,
+    content: EMPTY_TIPTAP_DOC,
+    status: "draft",
+    adminToken: adminToken(),
+  });
 }
 
 type PathwayOpt =
