@@ -12,15 +12,18 @@ export default async function EditBlogPostPage({ params }: PageProps) {
 
   if (!process.env.ADMIN_TOKEN?.length) {
     return (
-      <main style={{ padding: 24, maxWidth: 640, margin: "0 auto" }}>
-        <p style={{ marginBottom: 16 }}>
+      <div>
+        <Link
+          href="/admin/blog"
+          className="text-sm font-medium text-stone underline underline-offset-4 hover:text-ink"
+        >
+          ← All posts
+        </Link>
+        <p className="mt-6 border bg-white p-4 text-sm text-ink">
           Set <code>ADMIN_TOKEN</code> in the marketing app environment to load
           and edit posts.
         </p>
-        <Link href="/admin/blog" style={{ textDecoration: "underline" }}>
-          ← Back to blog admin
-        </Link>
-      </main>
+      </div>
     );
   }
 

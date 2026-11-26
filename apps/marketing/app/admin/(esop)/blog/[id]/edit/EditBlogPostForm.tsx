@@ -1,37 +1,10 @@
 "use client";
 
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { updateBlogPost } from "../../actions";
-
-const btnStyle: CSSProperties = {
-  padding: "8px 12px",
-  borderRadius: 6,
-  border: "1px solid rgba(255,255,255,0.25)",
-  background: "transparent",
-  color: "inherit",
-  cursor: "pointer",
-  textDecoration: "none",
-  display: "inline-block",
-};
-
-const inputStyle: CSSProperties = {
-  marginTop: 4,
-  padding: 8,
-  borderRadius: 6,
-  border: "1px solid rgba(255,255,255,0.2)",
-  width: "100%",
-  boxSizing: "border-box",
-};
-
-const labelStyle: CSSProperties = {
-  display: "flex",
-  flexDirection: "column",
-  fontSize: 14,
-};
 
 interface Props {
   post: Doc<"posts">;
@@ -45,6 +18,27 @@ const relatedPathwayOptions = [
   { value: "cpas", label: "CPAs" },
   { value: "employees", label: "Employees" },
 ] as const;
+
+// Shared field idioms (kept as constants so the two forms stay visually
+// identical without a runtime dependency).
+const inputClass =
+  "w-full border border-stone bg-white px-3 py-2 text-ink placeholder:text-stone-light focus:border-[#0E1C2F] focus:outline-none";
+
+const labelClass = "block text-sm font-medium text-ink";
+
+const groupLegend =
+  "text-xs font-semibold uppercase tracking-[0.2em] text-stone";
+
+function statusChipClass(status: Doc<"posts">["status"]): string {
+  switch (status) {
+    case "published":
+      return "border border-[#0E1C2F] bg-[#0E1C2F] text-white";
+    case "scheduled":
+      return "border border-dashed border-[#0E1C2F]/60 bg-white text-ink";
+    default:
+      return "border border-stone bg-white text-stone";
+  }
+}
 
 export function EditBlogPostForm({ post, configError }: Props) {
   const router = useRouter();
@@ -64,56 +58,52 @@ export function EditBlogPostForm({ post, configError }: Props) {
   const relatedSet = new Set(post.relatedPathways ?? []);
 
   return (
-    <main style={{ padding: 24, maxWidth: 720, margin: "0 auto" }}>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 12,
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 16,
-        }}
-      >
-        <Link href="/admin/blog" style={{ ...btnStyle, fontSize: 14 }}>
+    <div>
+      {/* Header: back, status, preview — everything contextual, no chrome
+          duplication (Sign out lives in the shell rail). */}
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <Link
+          href="/admin/blog"
+          className="text-sm font-medium text-stone underline underline-offset-4 hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0E1C2F]"
+        >
           ← All posts
         </Link>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+        <div className="flex flex-wrap items-center gap-3">
+          <span
+            className={`px-2 py-0.5 text-[11px] font-semibold uppercase tracking-[0.15em] ${statusChipClass(post.status)}`}
+          >
+            {post.status}
+          </span>
           <Link
             href={`/admin/blog/${post._id}/preview`}
-            style={{ ...btnStyle, fontSize: 14 }}
+            className="min-h-9 border border-stone bg-white px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-[#F2F5F9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0E1C2F]"
           >
             Preview
           </Link>
-          <a href="/admin/logout" style={{ ...btnStyle, fontSize: 14 }}>
-            Sign out
-          </a>
         </div>
       </div>
-      <h1 style={{ fontSize: 26, fontWeight: 600, marginBottom: 8 }}>
-        Edit post
-      </h1>
-      <p style={{ opacity: 0.8, marginBottom: 20, fontSize: 14 }}>
-        Status: <strong>{post.status}</strong> — use the list page to publish
-        or unpublish.
-      </p>
+
+      <header className="mt-6 mb-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone">
+          Insights
+        </p>
+        <h1 className="mt-2 font-serif text-4xl text-ink">Edit post</h1>
+        <p className="mt-2 text-sm text-stone">
+          /blog/{post.slug}
+        </p>
+      </header>
 
       {configError && (
         <div
-          style={{
-            padding: 12,
-            marginBottom: 16,
-            background: "#3d2914",
-            borderRadius: 8,
-            color: "#fde68a",
-          }}
+          role="alert"
+          className="mb-8 border border-red-700 bg-white p-4 text-sm text-red-700"
         >
           {configError}
         </div>
       )}
 
       <form
-        style={{ display: "grid", gap: 12 }}
+        className="flex flex-col gap-10"
         action={async (fd) => {
           setFormError(null);
           try {
@@ -126,220 +116,230 @@ export function EditBlogPostForm({ post, configError }: Props) {
         }}
       >
         <input type="hidden" name="id" value={post._id} />
-        <label style={labelStyle}>
-          Title
-          <input
-            name="title"
-            required
-            style={inputStyle}
-            defaultValue={post.title}
-          />
-        </label>
-        <label style={labelStyle}>
-          Slug
-          <input
-            name="slug"
-            required
-            style={inputStyle}
-            defaultValue={post.slug}
-          />
-        </label>
-        <label style={labelStyle}>
-          Subtitle (optional)
-          <input
-            name="subtitle"
-            style={inputStyle}
-            defaultValue={post.subtitle ?? ""}
-          />
-        </label>
-        <label style={labelStyle}>
-          Excerpt (optional)
-          <textarea
-            name="excerpt"
-            rows={2}
-            style={inputStyle}
-            defaultValue={post.excerpt ?? ""}
-          />
-        </label>
-        <label style={labelStyle}>
-          Category (optional)
-          <input
-            name="category"
-            style={inputStyle}
-            defaultValue={post.category ?? ""}
-          />
-        </label>
-        <label style={labelStyle}>
-          Meta title (optional, SEO)
-          <input
-            name="metaTitle"
-            style={inputStyle}
-            defaultValue={post.metaTitle ?? ""}
-            placeholder="Overrides page title when set"
-          />
-        </label>
-        <label style={labelStyle}>
-          Meta description (optional, SEO)
-          <textarea
-            name="metaDescription"
-            rows={2}
-            style={inputStyle}
-            defaultValue={post.metaDescription ?? ""}
-            placeholder="Search / social snippet"
-          />
-        </label>
-        <label style={labelStyle}>
-          Open Graph image URL (optional)
-          <input
-            name="ogImage"
-            style={inputStyle}
-            defaultValue={post.ogImage ?? ""}
-            placeholder="https://…"
-          />
-        </label>
-        <label style={labelStyle}>
-          Pathway
-          <select
-            name="pathway"
-            style={inputStyle}
-            defaultValue={pathwayDefault}
-          >
-            <option value="founders">Founders</option>
-            <option value="attorneys">Attorneys</option>
-            <option value="lenders">Lenders</option>
-            <option value="cpas">CPAs</option>
-            <option value="employees">Employees</option>
-          </select>
-        </label>
-        <label style={labelStyle}>
-          Depth level
-          <select
-            name="depthLevel"
-            style={inputStyle}
-            defaultValue={post.depthLevel ?? ""}
-          >
-            <option value="">— Not set —</option>
-            <option value="overview">Overview</option>
-            <option value="detailed">Detailed</option>
-            <option value="comprehensive">Comprehensive</option>
-          </select>
-        </label>
-        <fieldset
-          style={{
-            border: "1px solid rgba(255,255,255,0.15)",
-            borderRadius: 8,
-            padding: 12,
-          }}
-        >
-          <legend style={{ fontSize: 14, padding: "0 4px" }}>
-            Also relevant for (optional)
-          </legend>
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: 12,
-              marginTop: 8,
-            }}
-          >
-            {relatedPathwayOptions.map(({ value, label }) => (
-              <label
-                key={value}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 6,
-                  fontSize: 14,
-                }}
-              >
-                <input
-                  type="checkbox"
-                  name="relatedPathways"
-                  value={value}
-                  defaultChecked={relatedSet.has(value)}
-                />
-                {label}
-              </label>
-            ))}
-          </div>
+
+        {/* ── Post ── */}
+        <fieldset className="flex flex-col gap-5">
+          <legend className={groupLegend}>Post</legend>
+          <label className={labelClass}>
+            Title
+            <input
+              name="title"
+              required
+              className={inputClass + " mt-1"}
+              defaultValue={post.title}
+            />
+          </label>
+          <label className={labelClass}>
+            Slug
+            <input
+              name="slug"
+              required
+              className={inputClass + " mt-1"}
+              defaultValue={post.slug}
+            />
+          </label>
+          <label className={labelClass}>
+            Subtitle
+            <input
+              name="subtitle"
+              className={inputClass + " mt-1"}
+              defaultValue={post.subtitle ?? ""}
+            />
+          </label>
+          <label className={labelClass}>
+            Excerpt
+            <textarea
+              name="excerpt"
+              rows={2}
+              className={inputClass + " mt-1"}
+              defaultValue={post.excerpt ?? ""}
+            />
+          </label>
+          <label className={labelClass}>
+            Category
+            <input
+              name="category"
+              className={inputClass + " mt-1"}
+              defaultValue={post.category ?? ""}
+            />
+          </label>
         </fieldset>
-        <label style={labelStyle}>
-          Featured image URL (optional)
-          <input
-            name="featuredImage"
-            style={inputStyle}
-            defaultValue={post.featuredImage ?? ""}
-          />
-        </label>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gap: 8,
-          }}
-        >
-          <label style={labelStyle}>
-            Read (overview sec)
-            <input
-              name="readTimeOverview"
-              type="number"
-              style={inputStyle}
-              defaultValue={post.readTimeOverview ?? ""}
+
+        {/* ── Body ── */}
+        <fieldset className="flex flex-col gap-5">
+          <legend className={groupLegend}>Body</legend>
+          <label className={labelClass}>
+            Content (TipTap document JSON)
+            <textarea
+              name="content"
+              rows={16}
+              className={
+                inputClass + " mt-1 font-mono text-xs leading-relaxed"
+              }
+              defaultValue={contentJson}
             />
           </label>
-          <label style={labelStyle}>
-            Read (deep min)
-            <input
-              name="readTimeDeepDive"
-              type="number"
-              style={inputStyle}
-              defaultValue={post.readTimeDeepDive ?? ""}
+          <p className="text-xs text-stone-light">
+            The body is stored as a TipTap document. Editing it as rich text in
+            this screen is a planned follow-up — for now, adjust the JSON here
+            and check the result with Preview.
+          </p>
+        </fieldset>
+
+        {/* ── Metadata ── */}
+        <fieldset className="flex flex-col gap-5">
+          <legend className={groupLegend}>Metadata</legend>
+          <label className={labelClass}>
+            Pathway
+            <select
+              name="pathway"
+              className={inputClass + " mt-1"}
+              defaultValue={pathwayDefault}
+            >
+              <option value="founders">Founders</option>
+              <option value="attorneys">Attorneys</option>
+              <option value="lenders">Lenders</option>
+              <option value="cpas">CPAs</option>
+              <option value="employees">Employees</option>
+            </select>
+          </label>
+          <label className={labelClass}>
+            Depth level
+            <select
+              name="depthLevel"
+              className={inputClass + " mt-1"}
+              defaultValue={post.depthLevel ?? ""}
+            >
+              <option value="">— Not set —</option>
+              <option value="overview">Overview</option>
+              <option value="detailed">Detailed</option>
+              <option value="comprehensive">Comprehensive</option>
+            </select>
+          </label>
+          <fieldset className="border p-4">
+            <legend className="px-1 text-sm font-medium text-ink">
+              Also relevant for
+            </legend>
+            <div className="flex flex-wrap gap-4">
+              {relatedPathwayOptions.map(({ value, label }) => (
+                <label
+                  key={value}
+                  className="flex items-center gap-2 text-sm text-ink"
+                >
+                  <input
+                    type="checkbox"
+                    name="relatedPathways"
+                    value={value}
+                    defaultChecked={relatedSet.has(value)}
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <label className={labelClass}>
+              Read time — overview (sec)
+              <input
+                name="readTimeOverview"
+                type="number"
+                className={inputClass + " mt-1"}
+                defaultValue={post.readTimeOverview ?? ""}
+              />
+            </label>
+            <label className={labelClass}>
+              Read time — deep dive (min)
+              <input
+                name="readTimeDeepDive"
+                type="number"
+                className={inputClass + " mt-1"}
+                defaultValue={post.readTimeDeepDive ?? ""}
+              />
+            </label>
+            <label className={labelClass}>
+              Read time — methodology (min)
+              <input
+                name="readTimeMethodology"
+                type="number"
+                className={inputClass + " mt-1"}
+                defaultValue={post.readTimeMethodology ?? ""}
+              />
+            </label>
+          </div>
+          <label className={labelClass}>
+            Resilience bullets (one per line)
+            <textarea
+              name="resilienceSummary"
+              rows={4}
+              className={inputClass + " mt-1"}
+              defaultValue={resilienceText}
             />
           </label>
-          <label style={labelStyle}>
-            Read (method min)
+          <label className={labelClass}>
+            Featured image URL
             <input
-              name="readTimeMethodology"
-              type="number"
-              style={inputStyle}
-              defaultValue={post.readTimeMethodology ?? ""}
+              name="featuredImage"
+              className={inputClass + " mt-1"}
+              defaultValue={post.featuredImage ?? ""}
             />
           </label>
-        </div>
-        <label style={labelStyle}>
-          Resilience bullets (one per line)
-          <textarea
-            name="resilienceSummary"
-            rows={4}
-            style={inputStyle}
-            defaultValue={resilienceText}
-          />
-        </label>
-        <label style={labelStyle}>
-          Content (TipTap JSON)
-          <textarea
-            name="content"
-            rows={16}
-            style={{ ...inputStyle, fontFamily: "monospace", fontSize: 12 }}
-            defaultValue={contentJson}
-          />
-        </label>
+        </fieldset>
+
+        {/* ── Search & social ── */}
+        <fieldset className="flex flex-col gap-5">
+          <legend className={groupLegend}>Search &amp; social</legend>
+          <label className={labelClass}>
+            Meta title
+            <input
+              name="metaTitle"
+              className={inputClass + " mt-1"}
+              defaultValue={post.metaTitle ?? ""}
+              placeholder="Overrides page title when set"
+            />
+          </label>
+          <label className={labelClass}>
+            Meta description
+            <textarea
+              name="metaDescription"
+              rows={2}
+              className={inputClass + " mt-1"}
+              defaultValue={post.metaDescription ?? ""}
+              placeholder="Search / social snippet"
+            />
+          </label>
+          <label className={labelClass}>
+            Open Graph image URL
+            <input
+              name="ogImage"
+              className={inputClass + " mt-1"}
+              defaultValue={post.ogImage ?? ""}
+              placeholder="https://…"
+            />
+          </label>
+        </fieldset>
+
         {formError && (
-          <div style={{ color: "#fecaca", fontSize: 14 }}>{formError}</div>
+          <p role="alert" className="text-sm text-red-700">
+            {formError}
+          </p>
         )}
-        <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+
+        <div className="flex flex-wrap gap-4">
           <button
             type="submit"
             disabled={!!configError}
-            style={btnStyle}
+            className="border border-[#0E1C2F] bg-[#0E1C2F] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1C344F] disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0E1C2F]"
           >
             Save changes
           </button>
-          <Link href="/admin/blog" style={btnStyle}>
+          <Link
+            href="/admin/blog"
+            className="flex min-h-9 items-center border border-stone bg-white px-3 py-1.5 text-sm font-medium text-ink transition-colors hover:bg-[#F2F5F9] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0E1C2F]"
+          >
             Cancel
           </Link>
         </div>
       </form>
-    </main>
+    </div>
   );
 }
