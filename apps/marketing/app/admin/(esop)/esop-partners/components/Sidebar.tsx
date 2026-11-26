@@ -2,7 +2,7 @@
 
 import { useMemo } from 'react';
 import type { ViewMode } from '@forhemit/shared/features/esop-partners';
-import { AdminAreaLinks, SignOutLink } from '../../(esop)/admin-nav';
+import { AdminAreaLinks, SignOutLink } from '../../admin-nav';
 import { 
   Users, 
   Star, 

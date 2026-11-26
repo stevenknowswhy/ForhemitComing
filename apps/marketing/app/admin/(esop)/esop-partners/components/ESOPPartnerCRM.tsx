@@ -14,7 +14,7 @@ import {
 	RotateCcw,
 } from "lucide-react";
 import { usePartnerCRM } from "@forhemit/shared/features/esop-partners";
-import { useEsopRailSections } from "../../(esop)/AdminChrome";
+import { useEsopRailSections } from "../../AdminChrome";
 import { Metrics } from "./Metrics";
 import { ContactCard } from "./ContactCard";
 import { ContactList } from "./ContactList";

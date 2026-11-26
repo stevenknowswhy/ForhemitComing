@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { Sidebar, type SidebarProps } from "../esop-partners/components/Sidebar";
+import { Sidebar, type SidebarProps } from "./esop-partners/components/Sidebar";
 import { AdminAreaLinks, SignOutLink } from "./admin-nav";
 
 // Client chrome for the admin: the ESOP Partners navy rail becomes admin-wide
