@@ -7,9 +7,5 @@ import { EngagementTracker } from "./EngagementTracker";
 // ============================================
 
 export default function CRMPage() {
-  return (
-    <div className="h-[calc(100vh-60px)]">
-      <EngagementTracker />
-    </div>
-  );
+  return <EngagementTracker />;
 }

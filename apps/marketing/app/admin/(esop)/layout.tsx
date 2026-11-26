@@ -1,24 +1,24 @@
 import type { ReactNode } from "react";
-import AdminShell from "./AdminShell";
+import AdminChrome from "./AdminChrome";
 import { SyncHealthLine } from "../daily-view/components/Blocks";
 import { getSyncHealth } from "../daily-view/lib/queries";
 import { supabaseConfigured } from "../daily-view/lib/supabase";
 
-// Admin shell for authenticated admin pages (daily view, CRM, blog). Route
-// group only — URLs are unchanged, so the /admin/* middleware gate still
-// applies. /admin/login, /admin/logout and /admin/esop-partners stay outside
-// the group: login renders chrome-free and ESOP keeps its own sidebar.
+// Admin shell for authenticated admin pages (daily view, CRM, blog, ESOP
+// Partners). Route group only — URLs are unchanged, so the /admin/* middleware
+// gate still applies. /admin/login and /admin/logout stay outside the group:
+// login renders chrome-free.
 //
 // Server component: the sync-health read stays server-side (service-role key
 // never reaches the browser) and this layout composes server components, so
 // the daily view's force-dynamic rendering is unaffected.
 //
 // force-dynamic here so the sync-health line renders per-request on every
-// shell page — otherwise statically prerendered children (e.g. /admin/crm,
+// admin page — otherwise statically prerendered children (e.g. /admin/crm,
 // /admin/blog) would bake build-time sync state into the HTML.
 export const dynamic = "force-dynamic";
 
-export default async function AdminShellLayout({ children }: { children: ReactNode }) {
+export default async function AdminEsopLayout({ children }: { children: ReactNode }) {
   let syncLine: ReactNode = null;
 
   if (supabaseConfigured()) {
@@ -37,5 +37,5 @@ export default async function AdminShellLayout({ children }: { children: ReactNo
     syncLine = <p className="text-sm opacity-75">Spine sync: Supabase not configured.</p>;
   }
 
-  return <AdminShell syncLine={syncLine}>{children}</AdminShell>;
+  return <AdminChrome syncLine={syncLine}>{children}</AdminChrome>;
 }

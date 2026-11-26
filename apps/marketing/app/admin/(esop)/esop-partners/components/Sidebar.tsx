@@ -2,6 +2,7 @@
 
 import { useMemo } from 'react';
 import type { ViewMode } from '@forhemit/shared/features/esop-partners';
+import { AdminAreaLinks, SignOutLink } from '../../admin-nav';
 import { 
   Users, 
   Star, 
@@ -16,7 +17,9 @@ import {
   Shield
 } from 'lucide-react';
 
-interface SidebarProps {
+// OD-12: the rail frame is owned by the shared admin chrome; this component
+// renders its sections inside that rail, so it no longer draws its own <nav>.
+export interface SidebarProps {
   currentView: ViewMode;
   currentType: string | null;
   contactCounts: {
@@ -68,7 +71,7 @@ export function Sidebar({
   };
 
   return (
-    <nav className="w-56 bg-[#0E1C2F] min-h-screen flex flex-col shrink-0 sticky top-0 h-screen overflow-y-auto">
+    <div className="flex w-full flex-1 flex-col">
       {/* Logo */}
       <div className="p-5 pb-4 border-b border-white/10">
         <div className="font-serif text-lg text-white leading-tight">
@@ -78,6 +81,10 @@ export function Sidebar({
           CRM · v2.1
         </div>
       </div>
+
+      {/* Admin areas (OD-12: URL-driven cross-area nav, active on this route
+          above the ESOP sections) */}
+      <AdminAreaLinks />
 
       {/* Views Section */}
       <div className="pt-4 pb-2 px-2.5">
@@ -155,9 +162,12 @@ export function Sidebar({
 
       {/* Footer */}
       <div className="mt-auto p-4 border-t border-white/10 text-[10px] text-white/25">
+        <div className="-mx-1.5 mb-2">
+          <SignOutLink />
+        </div>
         ESOP Transaction Forms · 2025<br />
         Auto-saved locally
       </div>
-    </nav>
+    </div>
   );
 }

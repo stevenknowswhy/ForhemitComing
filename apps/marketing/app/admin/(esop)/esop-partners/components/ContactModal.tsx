@@ -6,7 +6,7 @@ import { X, Trash2 } from 'lucide-react';
 import { ALL_STATES, JOURNEY_STEPS } from '@forhemit/shared/features/esop-partners';
 import { getJourneySteps } from '@forhemit/shared/features/esop-partners';
 import { validateEmail as validateEmailFormat } from '@forhemit/shared/features/esop-partners';
-import { ModalDialog } from '../../../components/ui/ModalDialog';
+import { ModalDialog } from '../../../../components/ui/ModalDialog';
 
 interface ContactModalProps {
   isOpen: boolean;
