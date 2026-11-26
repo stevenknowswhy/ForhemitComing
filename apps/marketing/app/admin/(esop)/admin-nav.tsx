@@ -16,6 +16,7 @@ interface NavItem {
 
 const ADMIN_NAV_ITEMS: NavItem[] = [
   { href: "/admin", label: "Daily view", exact: true },
+  { href: "/admin/pipeline", label: "Deal Pipeline" },
   { href: "/admin/crm", label: "CRM" },
   { href: "/admin/esop-partners", label: "ESOP Partners" },
   { href: "/admin/blog", label: "Blog Posts" },
