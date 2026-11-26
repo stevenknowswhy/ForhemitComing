@@ -1,11 +1,11 @@
 import type { DailyViewData } from "./types";
 import { getDailyViewData } from "./lib/queries";
 import { supabaseConfigured } from "./lib/supabase";
-import { DoneToday, NeedsYou, OutreachToday, Pipeline, SyncHealthLine } from "./components/Blocks";
+import { DoneToday, NeedsYou, OutreachToday, Pipeline } from "./components/Blocks";
 
 // Server component: fetches the Supabase mirror server-side and renders the
-// four daily blocks in spec order (Needs you / Outreach / Pipeline / Done),
-// with the sync-health line on top so a silent sync failure is visible.
+// four daily blocks in spec order (Needs you / Outreach / Pipeline / Done).
+// The sync-health line lives in the admin shell (see app/admin/(shell)).
 
 export default async function DailyView() {
   if (!supabaseConfigured()) {
@@ -28,8 +28,7 @@ export default async function DailyView() {
     );
   }
   return (
-    <div>
-      <SyncHealthLine data={data} />
+    <div className="space-y-6">
       <NeedsYou data={data} />
       <OutreachToday data={data} />
       <Pipeline data={data} />
