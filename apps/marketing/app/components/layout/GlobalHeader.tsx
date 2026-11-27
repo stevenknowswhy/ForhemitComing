@@ -24,6 +24,11 @@ export function GlobalHeader() {
     return null;
   }
 
+  // Hide on the ink subpages (they carry the ink pill nav, like the homepage)
+  if (pathname === "/benefits" || pathname === "/how-we-do-it-differently") {
+    return null;
+  }
+
   // Hide on blog pages (blog has its own header)
   if (pathname.startsWith("/blog")) {
     return null;

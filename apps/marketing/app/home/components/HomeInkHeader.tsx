@@ -20,10 +20,10 @@ export function HomeInkHeader() {
             FORHEMIT
           </Link>
           <div className="ink-nav-links">
-            <Link href="#how">How it works</Link>
+            <Link href="/#how">How it works</Link>
             <Link href="/pricing">Pricing</Link>
-            <Link href="#professionals">For Professionals</Link>
-            <Link href="#about">About</Link>
+            <Link href="/#professionals">For Professionals</Link>
+            <Link href="/#about">About</Link>
           </div>
           <AssessmentCta className="ink-nav-cta ink-gold">Take the 2-Minute Check</AssessmentCta>
         </nav>

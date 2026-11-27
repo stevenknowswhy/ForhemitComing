@@ -3,6 +3,7 @@ export { HomePersuasionSections } from "./components/HomePersuasionSections";
 export { HomeInkHeader } from "./components/HomeInkHeader";
 export { HomeInkHero } from "./components/HomeInkHero";
 export { HomeInkSections } from "./components/HomeInkSections";
+export { HomeInkClosing } from "./components/HomeInkClosing";
 export { HomeInkFooter } from "./components/HomeInkFooter";
 export { HomeInkEffects } from "./components/HomeInkEffects";
 export { HOME_HERO_FAQ_BROKER, HOME_HERO_FAQ_OWNER } from "./constants";

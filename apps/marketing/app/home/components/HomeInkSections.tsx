@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { AssessmentCta } from "./AssessmentCta";
+import { HomeInkClosing } from "./HomeInkClosing";
 
 /**
  * Ink homepage body sections, translated 1:1 from the approved prototype:
@@ -255,21 +255,8 @@ export function HomeInkSections() {
         </div>
       </section>
 
-      {/* Closing CTA */}
-      <section className="ink-closing" id="check">
-        <div className="ink-wrap">
-          <h2 className="ink-reveal">Find out if the third option fits.</h2>
-          <div className="ink-closing-cta-row ink-reveal">
-            <p className="ink-closing-free">This is free.</p>
-            <AssessmentCta className="ink-btn ink-closing-btn ink-gold">
-              Take the 2-Minute Check
-            </AssessmentCta>
-          </div>
-          <p className="ink-phone ink-reveal">
-            Prefer to talk? Call <a href="tel:+15104054330">(510) 405-4330</a>
-          </p>
-        </div>
-      </section>
+      {/* Closing CTA — shared pattern, see HomeInkClosing */}
+      <HomeInkClosing />
     </>
   );
 }

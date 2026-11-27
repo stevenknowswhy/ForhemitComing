@@ -32,6 +32,36 @@
 .home-ink ::selection { background: var(--ink-accent); color: #fff; }
 .home-ink a { color: inherit; }
 
+/* ── Headings (F1 fix, 2026-11-27) ─────────────────────────────────────────
+   globals.css sets `h1–h6 { font-family: var(--font-cormorant); color:
+   var(--text-primary) }` as DIRECT element rules. A direct rule always
+   beats the color ink headings previously relied on inheriting from
+   .home-ink / section classes — so on dark surfaces the headings rendered
+   dark charcoal serif on near-black. Every ink heading therefore declares
+   its own family and color here: `.home-ink hN` (specificity 0-1-1) beats
+   the global element rule (0-0-1), and the dark-surface overrides
+   (0-2-1 / 0-3-1) beat both. Default below is the LIGHT-surface color;
+   dark surfaces opt back into paper explicitly. */
+.home-ink h1,
+.home-ink h2,
+.home-ink h3,
+.home-ink h4 {
+  font-family: "Inter", var(--font-inter), system-ui, sans-serif;
+  color: var(--ink-text);
+}
+.home-ink .ink-hero h1 { color: var(--ink-paper); }
+.home-ink .ink-dark h1,
+.home-ink .ink-dark h2,
+.home-ink .ink-dark h3 { color: var(--ink-paper); }
+.home-ink .ink-compare-card.ink-featured h3 { color: var(--ink-paper); }
+.home-ink .ink-statement h1,
+.home-ink .ink-statement h2,
+.home-ink .ink-statement h3 { color: var(--ink-paper); }
+
+/* Anchor targets clear the sticky pill nav (F5). */
+.home-ink section[id],
+.home-ink footer[id] { scroll-margin-top: 96px; }
+
 .ink-wrap { max-width: var(--ink-maxw); margin: 0 auto; padding: 0 32px; }
 
 /* ── Announcement bar ── */
@@ -130,8 +160,12 @@
   flex-direction: column;
   justify-content: flex-end;
   padding: 96px 0 72px;
+  /* F2 fallback: a still frame from the hero video is the hero's CSS
+     background, under the video element — the hero is never a black void
+     even if the video stream fails, is blocked, or is still loading. */
   background:
     radial-gradient(1100px 520px at 82% -10%, rgba(46, 125, 82, 0.16), rgba(46, 125, 82, 0) 60%),
+    url("/images/hero-employees.jpg") center / cover no-repeat,
     var(--ink-bg);
 }
 .ink-hero-video {
@@ -142,7 +176,7 @@
   object-fit: cover;
   z-index: 0;
   opacity: 0;
-  transition: opacity 1.4s ease;
+  transition: opacity 0.8s ease;
 }
 .ink-hero-video.ink-on { opacity: 0.5; }
 .ink-hero::after {
@@ -357,6 +391,19 @@
 .ink-phone { margin-top: 26px; font-size: 16px; color: var(--ink-text-dim); }
 .ink-phone a { font-weight: 600; color: var(--ink-text); text-decoration: none; border-bottom: 1px solid var(--ink-text-line); }
 
+/* ── Ink subpages (/benefits, /how-we-do-it-differently — F4, 2026-11-27) ── */
+.ink-page-hero { background: var(--ink-bg); color: var(--ink-paper); padding: 110px 0 90px; }
+.home-ink .ink-page-hero h1 {
+  color: var(--ink-paper);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  max-width: 16ch;
+}
+.ink-page-hero .ink-section-lede { color: var(--ink-paper-dim); }
+.ink-compare-grid.ink-grid-2 { grid-template-columns: repeat(2, 1fr); }
+
 /* ── Footer ── */
 .ink-footer { background: var(--ink-bg); border-top: 1px solid var(--ink-line); padding: 56px 0 64px; }
 .ink-footer-row { display: flex; flex-wrap: wrap; gap: 24px 48px; align-items: baseline; }
@@ -368,10 +415,14 @@
 .ink-footer-meta a { text-decoration: none; }
 .ink-footer-meta a:hover { color: var(--ink-paper-dim); }
 
-/* ── Motion (muted): staggered per-section reveals, armed only under html.js ── */
-.js .ink-reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.js h1.ink-reveal, .js h2.ink-reveal { transform: translateY(22px); transition: opacity 0.85s ease, transform 0.85s ease; }
-.js .ink-statement p.ink-reveal { transform: translateY(26px); transition: opacity 0.95s ease, transform 0.95s ease; }
+/* ── Motion (muted): staggered per-section reveals, armed only under html.js.
+   F3 fix (2026-11-27): fades shortened to ≤500ms; with the 90ms stagger
+   capped at 540ms in HomeInkEffects, a whole section finishes revealing in
+   ~1.05s worst case. Hero elements skip the observer entirely (effects add
+   .ink-in on mount), so the hero is never held invisible. ── */
+.js .ink-reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.45s ease, transform 0.45s ease; }
+.js h1.ink-reveal, .js h2.ink-reveal { transform: translateY(18px); transition: opacity 0.5s ease, transform 0.5s ease; }
+.js .ink-statement p.ink-reveal { transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
 .js .ink-reveal.ink-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -386,7 +437,7 @@
   .ink-counters-grid { grid-template-columns: repeat(2, 1fr); }
   .ink-counter { padding: 38px 22px 42px; }
   .ink-counter:nth-child(3) { border-left: none; padding-left: 0; }
-  .ink-compare-grid, .ink-proof-grid { grid-template-columns: 1fr; }
+  .ink-compare-grid, .ink-proof-grid, .ink-compare-grid.ink-grid-2 { grid-template-columns: 1fr; }
   .ink-steps { grid-template-columns: repeat(2, 1fr); gap: 28px 0; }
   .ink-step:nth-child(3) { border-left: none; padding-left: 0; }
   .ink-nav-links { display: none; }
