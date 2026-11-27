@@ -128,6 +128,11 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     return null;
   }
 
+  // Hide navigation on the homepage (the ink homepage carries its own pill nav)
+  if (pathname === "/") {
+    return null;
+  }
+
   // Hide navigation on blog pages (blog has its own navigation)
   if (pathname?.startsWith("/blog")) {
     return null;
