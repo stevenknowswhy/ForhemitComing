@@ -9,6 +9,15 @@ import Link from "next/link";
  * grid. Every card carries category • read-time, a large visual, the
  * headline, and a one-line hook — in the site's existing tokens
  * (canvas / parchment / ink / stone / sage), not a new palette.
+ *
+ * Visual standard (ruling P5 A, 2026-11-27): blog visuals are bespoke
+ * diagrams, timeline schematics, charts, and checklists only — no
+ * lifestyle stock photography.
+ *
+ * Filter gating (ruling P2 A, 2026-11-27): an audience pill renders
+ * only when at least one post carries that audience; the "All" pill
+ * always renders. The five audiences stay in the data model — a pill
+ * returns automatically when its first post is added.
  */
 
 export type BlogAudience =
@@ -119,6 +128,14 @@ function CardMeta({ essay }: { essay: BlogEssay }) {
 export function BlogIndex({ essays }: { essays: BlogEssay[] }) {
   const [filter, setFilter] = useState<BlogAudience | "all">("all");
 
+  // P2 A gating: derive the rendered pills from the posts data — a
+  // pill appears only when at least one essay carries that audience.
+  const renderedFilters = FILTERS.filter((f) => {
+    if (f.key === "all") return true;
+    const key = f.key;
+    return essays.some((e) => e.audiences.includes(key));
+  });
+
   const visible =
     filter === "all"
       ? essays
@@ -134,7 +151,7 @@ export function BlogIndex({ essays }: { essays: BlogEssay[] }) {
         role="group"
         aria-label="Filter essays by audience"
       >
-        {FILTERS.map((f) => (
+        {renderedFilters.map((f) => (
           <button
             key={f.key}
             type="button"

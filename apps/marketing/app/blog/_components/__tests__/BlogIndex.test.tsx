@@ -24,19 +24,38 @@ const ESSAYS: BlogEssay[] = [
   },
 ];
 
+const CPA_ESSAY: BlogEssay = {
+  href: "/for-cpas-example",
+  sequenceLabel: "For advisors · The mechanism",
+  readTime: "6 minute read",
+  title: "A CPA Essay",
+  standfirst: "Standfirst three.",
+  audienceLabel: "For CPAs",
+  audiences: ["cpas"],
+};
+
 describe("BlogIndex (D1 A Explora-model home)", () => {
-  it("renders all six audience filter pills", () => {
+  it("renders the All pill plus pills for audiences that have posts", () => {
     render(<BlogIndex essays={ESSAYS} />);
-    for (const label of [
-      "All",
-      "For Owners",
-      "For CPAs",
-      "For Attorneys",
-      "For Brokers",
-      "Costs & Evidence",
-    ]) {
+    for (const label of ["All", "For Owners", "Costs & Evidence"]) {
       expect(screen.getByRole("button", { name: label })).toBeTruthy();
     }
+  });
+
+  it("renders no pill for a category with zero posts (P2 A gating)", () => {
+    render(<BlogIndex essays={ESSAYS} />);
+    for (const label of ["For CPAs", "For Attorneys", "For Brokers"]) {
+      expect(screen.queryByRole("button", { name: label })).toBeNull();
+    }
+  });
+
+  it("shows a category's pill once a post for it is added (P2 A gating)", () => {
+    render(<BlogIndex essays={[...ESSAYS, CPA_ESSAY]} />);
+    const pill = screen.getByRole("button", { name: "For CPAs" });
+    expect(pill).toBeTruthy();
+    fireEvent.click(pill);
+    expect(screen.getByText("A CPA Essay")).toBeTruthy();
+    expect(screen.queryByText("The Exit Crisis")).toBeNull();
   });
 
   it("shows the Editors Pick featured card and the Latest grid by default", () => {
@@ -57,16 +76,14 @@ describe("BlogIndex (D1 A Explora-model home)", () => {
     expect(screen.queryByText("Beyond the Balance Sheet")).toBeNull();
   });
 
-  it("shows the empty state for an audience with no essays yet", () => {
-    render(<BlogIndex essays={ESSAYS} />);
-    fireEvent.click(screen.getByRole("button", { name: "For CPAs" }));
-    expect(screen.getByText(/No essays for For CPAs yet/)).toBeTruthy();
-    expect(screen.queryByText("The Exit Crisis")).toBeNull();
+  it("keeps the honest empty state when there are no essays at all", () => {
+    render(<BlogIndex essays={[]} />);
+    expect(screen.getByText(/No essays for All yet/)).toBeTruthy();
   });
 
   it("restores both essays when returning to All", () => {
     render(<BlogIndex essays={ESSAYS} />);
-    fireEvent.click(screen.getByRole("button", { name: "For Brokers" }));
+    fireEvent.click(screen.getByRole("button", { name: "Costs & Evidence" }));
     fireEvent.click(screen.getByRole("button", { name: "All" }));
     expect(screen.getByText("The Exit Crisis")).toBeTruthy();
     expect(screen.getByText("Beyond the Balance Sheet")).toBeTruthy();
@@ -74,7 +91,7 @@ describe("BlogIndex (D1 A Explora-model home)", () => {
 
   it("marks the active pill with aria-pressed", () => {
     render(<BlogIndex essays={ESSAYS} />);
-    const pill = screen.getByRole("button", { name: "For Attorneys" });
+    const pill = screen.getByRole("button", { name: "For Owners" });
     fireEvent.click(pill);
     expect(pill.getAttribute("aria-pressed")).toBe("true");
   });

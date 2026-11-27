@@ -9,6 +9,12 @@ import { ScrollProgress } from "@/components/blog/ScrollProgress";
 import { TipTapRenderer } from "@/components/blog/TipTapRenderer";
 import { ClosingCheck } from "@/app/blog/_components/ClosingCheck";
 
+/**
+ * Visual standard (ruling P5 A, 2026-11-27): blog post section
+ * visuals are diagrams, timeline schematics, charts, and checklists
+ * only — no lifestyle stock photography.
+ */
+
 type ListItem = ReturnType<typeof postDocToListItem>;
 
 interface BlogArticleViewProps {
@@ -21,7 +27,7 @@ interface BlogArticleViewProps {
    * "standard" (default) is the calm editorial template. "flagship"
    * is reserved for evidence pieces (Evidence Register, cost report,
    * annual report): it renders the post's own resilience-summary
-   * points as a Key evidence stat grid instead of the standard
+   * points as a Key Structure & Terms stat grid instead of the standard
    * summary block. No content is invented for the variant — it only
    * re-presents fields the post already carries.
    */
@@ -133,11 +139,11 @@ export function BlogArticleView({
             {variant === "flagship" &&
               article.resilienceSummary.length > 0 && (
                 <section
-                  aria-label="Key evidence"
+                  aria-label="Key Structure & Terms"
                   className="mb-8 sm:mb-10 border border-border-light bg-parchment p-6 sm:p-8"
                 >
                   <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-stone mb-5">
-                    Key evidence
+                    Key Structure &amp; Terms
                   </h2>
                   <div className="grid gap-4 sm:grid-cols-2">
                     {article.resilienceSummary.map((point) => (

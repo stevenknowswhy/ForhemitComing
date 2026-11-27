@@ -3,7 +3,7 @@ import { AssessPageClient } from "./AssessPageClient";
 
 const title = "ESOP Feasibility Assessment | Free 2-Minute Check";
 const description =
-  "Take Forhemit's free ESOP feasibility assessment. Find out if your business qualifies for a tax-free employee ownership transition in 2 minutes.";
+  "Take Forhemit's free ESOP feasibility assessment. Find out if your business qualifies for a tax-deferred (Section 1042) employee ownership transition in 2 minutes.";
 
 export const metadata: Metadata = {
   title,
