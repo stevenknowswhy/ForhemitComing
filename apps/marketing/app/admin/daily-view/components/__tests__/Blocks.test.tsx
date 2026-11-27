@@ -1,7 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { render, screen, within } from "@testing-library/react";
 import { DoneToday, NeedsYou, OutreachToday, Pipeline } from "../Blocks";
 import type { DailyViewData } from "../../types";
+
+// Step 6: LogTouchButton (rendered inside OutreachToday) uses the app
+// router to refresh after logging; stub it for jsdom renders.
+vi.mock("next/navigation", () => ({
+  useRouter: () => ({ refresh: () => {} }),
+}));
 
 // Render guard for the OD-11 D3 restyle: pins the exception-first structure
 // (pill labels, count badges, table row counts) so a styling change cannot
@@ -21,13 +27,14 @@ function sampleData(): DailyViewData {
     ],
     outreach: {
       totalSlots: 8,
+      touchDue: [],
       researched: [
-        { packet_id: "P-1", company: "Acme", founder: "A", grade: 3, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
-        { packet_id: "P-2", company: "Beta", founder: "B", grade: 2, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
-        { packet_id: "P-3", company: "Gamma", founder: "C", grade: 4, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
-        { packet_id: "P-4", company: "Delta", founder: "D", grade: 3, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
-        { packet_id: "P-5", company: "Epsilon", founder: "E", grade: 1, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
-        { packet_id: "P-6", company: "Zeta", founder: "F", grade: 2, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false },
+        { id: "contact-1", packet_id: "P-1", company: "Acme", founder: "A", grade: 3, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
+        { id: "contact-2", packet_id: "P-2", company: "Beta", founder: "B", grade: 2, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
+        { id: "contact-3", packet_id: "P-3", company: "Gamma", founder: "C", grade: 4, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
+        { id: "contact-4", packet_id: "P-4", company: "Delta", founder: "D", grade: 3, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
+        { id: "contact-5", packet_id: "P-5", company: "Epsilon", founder: "E", grade: 1, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
+        { id: "contact-6", packet_id: "P-6", company: "Zeta", founder: "F", grade: 2, tof1_status: "researched", reply_status: null, check_completed: false, intro_call_booked: false, touches: [], touchDue: { nextTouch: 1, state: "due", daysSinceFirstTouch: null } },
       ],
       replies: 1,
       checksCompleted: 1,
@@ -83,6 +90,21 @@ describe("Daily view blocks (OD-11 D3)", () => {
     expect(screen.getByText("Outreach today")).toBeInTheDocument();
     expect(screen.getByText("6/8")).toBeInTheDocument();
     expect(screen.getByText("In progress")).toBeInTheDocument();
+  });
+
+  it("OutreachToday (Step 6) renders the touch-due list with a Log Touch button per due contact", () => {
+    const data = sampleData();
+    const due = data.outreach.researched[0]!;
+    due.touches = [
+      { id: "t-1", contact_id: due.id, touch_no: 1, sent_at: "2026-11-22T18:00:00Z", channel: "email", outcome: "sent" },
+    ];
+    due.touchDue = { nextTouch: 2, state: "due", daysSinceFirstTouch: 4 };
+    data.outreach.touchDue = [due];
+    render(<OutreachToday data={data} />);
+
+    expect(screen.getByText("Touch due")).toBeInTheDocument();
+    expect(screen.getByText("1 touch due")).toBeInTheDocument();
+    expect(screen.getAllByRole("button", { name: "Log Touch 2" }).length).toBeGreaterThan(0);
   });
 
   it("Pipeline renders one table row per case with the phase pill and an Open action", () => {

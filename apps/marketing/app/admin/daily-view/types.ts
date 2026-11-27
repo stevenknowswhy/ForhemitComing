@@ -37,6 +37,10 @@ export interface AuditEventRow {
 }
 
 export interface OutreachContactRow {
+  // Step 6: `id` (uuid PK) is now selected — outreach_touches.contact_id
+  // references it, and one-tap logging posts against it. packet_id remains
+  // the human-facing key.
+  id: string;
   packet_id: string;
   company: string | null;
   founder: string | null;
@@ -45,6 +49,36 @@ export interface OutreachContactRow {
   reply_status: string | null;
   check_completed: boolean;
   intro_call_booked: boolean;
+}
+
+export interface OutreachTouchRow {
+  id: string;
+  contact_id: string;
+  touch_no: number; // 1..3, UNIQUE(contact_id, touch_no) in Supabase
+  sent_at: string;
+  channel: string | null;
+  outcome: string | null;
+}
+
+// Touch-due model (Step 6, see lib/touch-due.ts for the full rules):
+// - "due": the next touch is inside its window today.
+// - "overdue": the window has passed and the touch still has not been sent.
+// - "waiting": a next touch exists but its window has not opened yet.
+// - "complete": all three touches have been sent.
+export type TouchDueState = "due" | "overdue" | "waiting" | "complete";
+
+export interface TouchDueInfo {
+  /** Next touch to send (1..3), or null when the sequence is complete. */
+  nextTouch: number | null;
+  state: TouchDueState;
+  /** Whole Pacific days since Touch 1 was sent; null before Touch 1. */
+  daysSinceFirstTouch: number | null;
+}
+
+/** A researched contact enriched with its touches + computed due state. */
+export interface OutreachContactView extends OutreachContactRow {
+  touches: OutreachTouchRow[];
+  touchDue: TouchDueInfo;
 }
 
 export interface ManualLogRow {
@@ -102,7 +136,9 @@ export interface DailyViewData {
   manualOpen: ManualLogRow[];
   outreach: {
     totalSlots: number;
-    researched: OutreachContactRow[];
+    researched: OutreachContactView[];
+    /** Researched contacts whose next touch is due or overdue (Step 6). */
+    touchDue: OutreachContactView[];
     replies: number;
     checksCompleted: number;
     introCallsBooked: number;
