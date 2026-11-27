@@ -295,3 +295,42 @@ describe("HomeInkEffects (reduced motion)", () => {
     vi.unstubAllGlobals();
   });
 });
+
+describe("Panel fixes 2026-11-27 (P1/P2/P3/P5)", () => {
+  // Same stylesheet resolution as the fix-pass block above.
+  const cssPath = [
+    join(process.cwd(), "app/home/styles/home-ink.css"),
+    join(process.cwd(), "apps/marketing/app/home/styles/home-ink.css"),
+  ].find((p) => existsSync(p));
+  if (!cssPath) throw new Error("home-ink.css not found from cwd " + process.cwd());
+  const css = readFileSync(cssPath, "utf-8");
+
+  it("P1: footer carries no prototype credit", () => {
+    const { container } = renderInk();
+    expect(container.textContent).not.toContain("prototype placeholder");
+    expect(container.textContent).not.toContain("Edmond");
+  });
+
+  it("P2: gold stays exclusive to the Check — hero owner button is paper", () => {
+    renderInk();
+    const owner = screen.getByRole("button", { name: /I’m a business owner/ });
+    expect(owner.className).toContain("ink-btn-paper");
+    expect(owner.className).not.toContain("ink-btn-accent");
+    expect(owner.className).not.toContain("ink-gold");
+  });
+
+  it("P3: the four counters render inside the hero; the hero is compressed", () => {
+    const { container } = renderInk();
+    expect(container.querySelector(".ink-hero .ink-counters")).not.toBeNull();
+    expect(container.querySelectorAll(".ink-counters").length).toBe(1);
+    expect(css).toMatch(/\.ink-hero h1 {[^}]*clamp\(44px, 6vw, 76px\)/);
+    expect(css).not.toContain("min-height: calc(100vh - 130px)");
+    expect(css).not.toContain("min-height: calc(100vh - 110px)");
+  });
+
+  it("P5: hero fine print is larger and near-full contrast", () => {
+    expect(css).toMatch(
+      /\.ink-hero-fineprint {[^}]*font-size: 14\.5px;[^}]*rgba\(244, 242, 236, 0\.88\)/,
+    );
+  });
+});

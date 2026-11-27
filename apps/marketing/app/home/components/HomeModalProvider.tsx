@@ -4,6 +4,7 @@ import {
   createContext,
   lazy,
   Suspense,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -46,22 +47,44 @@ export function useHomeModals(): HomeModalsContextValue {
  * passes through as `children` and never re-renders on the client — only the
  * modals and the early-access slot hydrate.
  */
+/**
+ * Reads ?join / ?early for the provider. Isolated in its own component
+ * under a Suspense boundary (panel fix P4, 2026-11-27): a bare
+ * useSearchParams in the provider itself made the whole homepage bail
+ * out to client-side rendering — the "Loading..." shell every visitor
+ * saw first. With the reader isolated here, the static sections
+ * server-render and paint immediately; this bridge suspends invisibly
+ * and applies the params as soon as it hydrates.
+ */
+function HomeModalParamsBridge({
+  onParams,
+}: {
+  onParams: (join: boolean, early: boolean) => void;
+}) {
+  const searchParams = useSearchParams();
+  const join = searchParams?.get("join") === "true";
+  const early = searchParams?.get("early") === "true";
+
+  useEffect(() => {
+    onParams(join, early);
+  }, [join, early, onParams]);
+
+  return null;
+}
+
 export function HomeModalProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const joinParam = searchParams?.get("join");
-  const earlyParam = searchParams?.get("early");
 
-  const [showApplicationModal, setShowApplicationModal] = useState(joinParam === "true");
+  const [showApplicationModal, setShowApplicationModal] = useState(false);
   const [showClassificationIntake, setShowClassificationIntake] = useState(false);
   const [classificationRole, setClassificationRole] = useState<IntakeRole | null>(null);
   const [showTwoMinuteCheck, setShowTwoMinuteCheck] = useState(false);
-  const [showEmailInput, setShowEmailInput] = useState(earlyParam === "true");
+  const [showEmailInput, setShowEmailInput] = useState(false);
 
-  useEffect(() => {
-    setShowApplicationModal(joinParam === "true");
-    setShowEmailInput(earlyParam === "true");
-  }, [joinParam, earlyParam]);
+  const applyParams = useCallback((join: boolean, early: boolean) => {
+    setShowApplicationModal(join);
+    setShowEmailInput(early);
+  }, []);
 
   const openTwoMinuteCheck = () => setShowTwoMinuteCheck(true);
   const openIntake = (role: IntakeRole) => {
@@ -71,6 +94,10 @@ export function HomeModalProvider({ children }: { children: ReactNode }) {
 
   return (
     <HomeModalsContext.Provider value={{ openTwoMinuteCheck, openIntake }}>
+      <Suspense fallback={null}>
+        <HomeModalParamsBridge onParams={applyParams} />
+      </Suspense>
+
       {children}
 
       {showEmailInput && (
