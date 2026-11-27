@@ -68,7 +68,10 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/admin
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/admin
 
 # Convex (shared with marketing site)
-NEXT_PUBLIC_CONVEX_URL=https://striped-puma-587.convex.cloud
+# Production deployment — production Vercel builds deploy to it via CONVEX_DEPLOY_KEY
+# (see apps/marketing/scripts/build.mjs). The former striped-puma-587 deployment is retired.
+NEXT_PUBLIC_CONVEX_URL=https://earnest-dinosaur-711.convex.cloud
+NEXT_PUBLIC_CONVEX_SITE_URL=https://earnest-dinosaur-711.convex.site
 ```
 
 ---
