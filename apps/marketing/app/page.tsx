@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { ogMetadata } from "@/lib/og";
 import { HomeModalProvider } from "./home/components/HomeModalProvider";
-import { HomeHeroSection, HomePersuasionSections } from "./home";
+import {
+  HomeInkEffects,
+  HomeInkFooter,
+  HomeInkHeader,
+  HomeInkHero,
+  HomeInkSections,
+} from "./home";
+import "./home/styles/home-ink.css";
 
 export const metadata: Metadata = ogMetadata({
   file: "og-home.png",
@@ -51,13 +58,19 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
       />
-      {/* Static sections render on the server and appear in view-source; the
-          provider hydrates only the modal islands and CTA openers. */}
+      {/* DeepBook-ink homepage (2026-11-27): static sections render on the
+          server and appear in view-source; the provider hydrates only the
+          modal islands and CTA openers, and HomeInkEffects runs the muted
+          motion system. The global header/nav/footer hide on "/" (blog /
+          admin pattern) — HomeInkHeader/HomeInkFooter are this page's
+          chrome. */}
       <HomeModalProvider>
-        <div className="home-wrapper home-wrapper--interactive">
-          <div className="background-mesh" />
-          <HomeHeroSection />
-          <HomePersuasionSections />
+        <div className="home-ink">
+          <HomeInkHeader />
+          <HomeInkHero />
+          <HomeInkSections />
+          <HomeInkFooter />
+          <HomeInkEffects />
         </div>
       </HomeModalProvider>
     </>

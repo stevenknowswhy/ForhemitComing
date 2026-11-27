@@ -1,5 +1,10 @@
 export { HomeHeroSection } from "./components/HomeHeroSection";
 export { HomePersuasionSections } from "./components/HomePersuasionSections";
+export { HomeInkHeader } from "./components/HomeInkHeader";
+export { HomeInkHero } from "./components/HomeInkHero";
+export { HomeInkSections } from "./components/HomeInkSections";
+export { HomeInkFooter } from "./components/HomeInkFooter";
+export { HomeInkEffects } from "./components/HomeInkEffects";
 export { HOME_HERO_FAQ_BROKER, HOME_HERO_FAQ_OWNER } from "./constants";
 export type { HomeHeroFaqItem } from "./constants";
 export { ClassificationIntakeModal, TwoMinuteCheckModal } from "./intake";

@@ -22,6 +22,11 @@ export function GlobalFooter() {
     return null;
   }
 
+  // Hide footer on the homepage (the ink homepage carries its own footer)
+  if (pathname === "/") {
+    return null;
+  }
+
   // Hide footer on blog pages (blog has its own footer)
   if (pathname?.startsWith("/blog")) {
     return null;

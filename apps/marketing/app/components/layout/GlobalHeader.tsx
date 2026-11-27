@@ -19,6 +19,11 @@ export function GlobalHeader() {
     return null;
   }
 
+  // Hide on the homepage (the ink homepage carries its own pill nav)
+  if (pathname === "/") {
+    return null;
+  }
+
   // Hide on blog pages (blog has its own header)
   if (pathname.startsWith("/blog")) {
     return null;
