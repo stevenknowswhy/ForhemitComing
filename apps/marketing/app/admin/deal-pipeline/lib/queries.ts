@@ -1,17 +1,25 @@
-// Server-side reads + board assembly for the full deal pipeline.
-// Reads only: this module never writes to Supabase. Stage derivation is the
-// pure logic in ./stage; this file only fetches rows and groups them.
+// Server-side reads + board assembly for the full deal pipeline (v2).
+// Reads only: this module never writes to Supabase. Stage derivation is
+// the pure logic in ./stage, the action queue is ./queue; this file
+// only fetches rows and groups them.
 
 import { sbGet } from "./supabase";
 import {
+  FUNNEL_STEPS,
   PIPELINE_BANDS,
   PIPELINE_STAGES,
+  deriveCaseNextAction,
   deriveCaseSideStates,
   deriveCaseStage,
+  deriveClockDay,
+  deriveContactNextAction,
   deriveContactSideStates,
   deriveContactStage,
+  deriveStewardshipRow,
   deriveTouchDue,
+  wholeDaysBetween,
 } from "./stage";
+import { deriveActionQueue } from "./queue";
 import type {
   CaseDeal,
   CaseRow,
@@ -38,7 +46,9 @@ function buildContactDeal(
   const stage = deriveContactStage(contact, touches);
   if (!stage) return null;
   const sorted = [...touches].sort((a, b) => (a.sent_at < b.sent_at ? -1 : 1));
-  return {
+  const touchDue = deriveTouchDue(touches, now);
+  const sideStates = deriveContactSideStates(contact, touches);
+  const deal: ContactDeal = {
     kind: "contact",
     key: `contact:${contact.packet_id}`,
     stage,
@@ -52,32 +62,47 @@ function buildContactDeal(
     introCallBooked: contact.intro_call_booked,
     touchCount: touches.length,
     lastTouchAt: sorted.length ? sorted[sorted.length - 1].sent_at : null,
-    touchDue: deriveTouchDue(touches, now),
-    sideStates: deriveContactSideStates(contact, touches),
+    touchDue,
+    sideStates,
+    nextAction: deriveContactNextAction({
+      introCallBooked: contact.intro_call_booked,
+      sideStates,
+      touchDue,
+    }),
     updatedAt: contact.updated_at,
+    updatedDaysAgo: wholeDaysBetween(contact.updated_at, now),
   };
+  return deal;
 }
 
 function buildCaseDeal(
   kase: CaseRow,
   counts: { total: number; reviewed: number; awaitingReview: number; open: number },
+  now: Date,
 ): CaseDeal {
   const gateResults = Object.entries(kase.gate_status?.gates ?? {})
     .map(([gate, g]) => ({ gate, result: g.result, at: g.at }))
     .sort((a, b) => (a.at < b.at ? 1 : -1));
+  const gateFailures = gateResults.filter((g) => g.result === "FAIL").length;
   return {
     kind: "case",
     key: `case:${kase.id}`,
-    stage: deriveCaseStage(kase),
+    stage: deriveCaseStage(kase, now),
     caseId: kase.id,
     clientName: kase.client_name,
     phase: kase.phase,
     path: kase.gate_status?.path ?? null,
     checklist: counts,
     gateResults,
-    gateFailures: gateResults.filter((g) => g.result === "FAIL").length,
+    gateFailures,
     sideStates: deriveCaseSideStates(kase),
+    documentsReadyAt: kase.documents_ready_at ?? null,
+    clockDay: kase.documents_ready_at
+      ? deriveClockDay(kase.documents_ready_at, now)
+      : null,
+    nextAction: deriveCaseNextAction({ gateFailures, checklist: counts }),
     updatedAt: kase.updated_at,
+    updatedDaysAgo: wholeDaysBetween(kase.updated_at, now),
   };
 }
 
@@ -118,6 +143,7 @@ export async function getPipelineData(
   }
 
   const dealsByStage = emptyByStage();
+  const allDeals: Deal[] = [];
   let totalResearched = 0;
   for (const contact of contacts) {
     const deal = buildContactDeal(
@@ -128,6 +154,7 @@ export async function getPipelineData(
     if (!deal) continue;
     totalResearched += 1;
     dealsByStage[deal.stage].push(deal);
+    allDeals.push(deal);
   }
 
   let gateFailures = 0;
@@ -140,10 +167,19 @@ export async function getPipelineData(
         awaitingReview: 0,
         open: 0,
       },
+      now,
     );
     gateFailures += deal.gateFailures;
     dealsByStage[deal.stage].push(deal);
+    allDeals.push(deal);
   }
+
+  const actionQueue = deriveActionQueue(allDeals);
+  const stewardship = allDeals
+    .filter(
+      (d): d is CaseDeal => d.kind === "case" && d.stage.startsWith("d-"),
+    )
+    .map(deriveStewardshipRow);
 
   const perStage = Object.fromEntries(
     PIPELINE_STAGES.map((s) => [s.id, dealsByStage[s.id].length]),
@@ -152,7 +188,10 @@ export async function getPipelineData(
   return {
     bands: PIPELINE_BANDS,
     stages: PIPELINE_STAGES,
+    funnelSteps: FUNNEL_STEPS,
     dealsByStage,
+    actionQueue,
+    stewardship,
     counts: {
       perStage,
       totalDeals: Object.values(perStage).reduce((a, b) => a + b, 0),
@@ -160,6 +199,7 @@ export async function getPipelineData(
       totalSlots: contacts.length,
       activeCases: cases.length,
       gateFailures,
+      actionNeeded: actionQueue.length,
     },
   };
 }

@@ -1,70 +1,177 @@
 import type { CSSProperties } from "react";
 import type { CaseDeal, ContactDeal, Deal } from "../types";
 import { formatPt, pathLabel } from "../lib/format";
+import { INK, LABEL, SECONDARY, chipStyle, pillStyle } from "./tokens";
+import type { PillTone } from "./tokens";
 
 // Summary card only (Stefano's standing rule: summary on the surface,
-// detail behind the click). The full record lives in the daily view / CRM /
-// spine; v1 keeps the card to the fields an operator scans in the morning.
+// detail behind the click), rebuilt to the polish spec's 6-slot anatomy:
+//   1 company (14px semibold)      2 ONE status pill, top-right
+//   3 person line                  4 honest signal line
+//   5 touch dots / progress bar    6 footer: next action + time chip
+// Chrome: white, 1px #E5E8EB border, 10px radius, resting shadow
+// 0 1px 2px rgba(16,24,40,.06); the hover lift lives in Board's
+// <style> block (.dp-card) — inline styles cannot express :hover.
 
 const card: CSSProperties = {
-  border: "1px solid rgba(127,127,127,0.35)",
-  borderRadius: 8,
-  padding: "10px 12px",
-  marginBottom: 10,
-  fontSize: 14,
+  background: "#fff",
+  border: "1px solid #E5E8EB",
+  borderRadius: 10,
+  padding: 12,
+  marginBottom: 8,
+  boxShadow: "0 1px 2px rgba(16,24,40,.06)",
 };
-const dim: CSSProperties = { opacity: 0.75, fontSize: 13 };
-const fail: CSSProperties = { color: "#c0392b", fontWeight: 600 };
+const titleRow: CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  gap: 8,
+};
+const title: CSSProperties = { fontSize: 14, fontWeight: 600, color: INK, lineHeight: 1.35 };
+const person: CSSProperties = { fontSize: 13, color: SECONDARY, marginTop: 2 };
+const signal: CSSProperties = { fontSize: 13, color: SECONDARY, marginTop: 6 };
+const footer: CSSProperties = {
+  display: "flex",
+  justifyContent: "space-between",
+  alignItems: "center",
+  gap: 8,
+  marginTop: 10,
+};
+const nextAction: CSSProperties = { fontSize: 12, color: LABEL };
+const barTrack: CSSProperties = {
+  height: 5,
+  borderRadius: 999,
+  background: "#EEF1F4",
+  display: "flex",
+  overflow: "hidden",
+  marginTop: 6,
+};
+
+function touchChip(deal: ContactDeal): { text: string; tone: PillTone } | null {
+  const td = deal.touchDue;
+  switch (td.state) {
+    case "overdue":
+      return { text: `${td.days}d overdue`, tone: "red" };
+    case "due":
+      return { text: "Due now", tone: "amber" };
+    case "waiting":
+      return { text: `Due in ${td.days}d`, tone: "green" };
+    case "complete":
+      return { text: "Sequence done", tone: "grey" };
+    default:
+      return null; // not-started: no chip — the next action says it
+  }
+}
 
 function ContactCard({ deal }: { deal: ContactDeal }) {
+  // Exactly one pill, by priority: dormant > intro call > replied >
+  // check completed. Touch urgency lives in the footer chip instead.
+  const pill = deal.sideStates.includes("dormant-candidate")
+    ? { text: "Dormant candidate", tone: "grey" as PillTone }
+    : deal.introCallBooked
+      ? { text: "Intro call booked", tone: "green" as PillTone }
+      : deal.replyStatus
+        ? { text: "Replied", tone: "green" as PillTone }
+        : deal.checkCompleted
+          ? { text: "Check completed", tone: "green" as PillTone }
+          : null;
+  const chip = touchChip(deal);
   return (
-    <div style={card}>
-      <div>
-        <strong>{deal.packetId}</strong> · {deal.company}
+    <div style={card} className="dp-card">
+      <div style={titleRow}>
+        <span style={title}>{deal.company}</span>
+        {pill ? <span style={pillStyle(pill.tone)}>{pill.text}</span> : null}
       </div>
-      {deal.founder ? <div style={dim}>{deal.founder}</div> : null}
-      <div style={dim}>
-        {deal.grade != null ? `grade ${deal.grade} · ` : ""}
+      <div style={person}>
+        {deal.packetId}
+        {deal.founder ? ` · ${deal.founder}` : ""}
+      </div>
+      <div style={signal}>
+        {deal.grade != null ? `Grade ${deal.grade} · ` : ""}
         {deal.touchCount > 0
-          ? `${deal.touchCount} touch${deal.touchCount > 1 ? "es" : ""} · ${deal.touchDue.label}`
-          : "no touches yet"}
+          ? `${deal.touchCount} of 3 touches sent`
+          : "No touches yet"}
+        {deal.lastTouchAt ? ` · last ${formatPt(deal.lastTouchAt)}` : ""}
       </div>
-      {deal.replyStatus ? <div style={dim}>reply: {deal.replyStatus}</div> : null}
-      {deal.checkCompleted ? <div style={dim}>2-Minute Check completed</div> : null}
-      {deal.introCallBooked ? <div style={dim}>intro call booked</div> : null}
-      {deal.sideStates.map((st) => (
-        <div key={st} style={dim}>side state: {st}</div>
-      ))}
-      <div style={dim}>updated {formatPt(deal.updatedAt)}</div>
+      <div style={{ marginTop: 6, fontSize: 10, letterSpacing: 3 }} aria-hidden>
+        {[1, 2, 3].map((n) => (
+          <span key={n} style={{ color: n <= deal.touchCount ? "#0F5132" : "#D5DBE1" }}>
+            ●
+          </span>
+        ))}
+      </div>
+      <div style={footer}>
+        <span style={nextAction}>{deal.nextAction}</span>
+        {chip ? <span style={chipStyle(chip.tone)}>{chip.text}</span> : null}
+      </div>
     </div>
   );
 }
 
 function CaseCard({ deal }: { deal: CaseDeal }) {
+  // Exactly one pill, by priority: gate FAIL > on hold > path.
   const path = pathLabel(deal.path);
+  const pill =
+    deal.gateFailures > 0
+      ? { text: "Gate FAIL", tone: "red" as PillTone }
+      : deal.sideStates.includes("on-hold")
+        ? { text: "On hold", tone: "grey" as PillTone }
+        : path
+          ? { text: path, tone: (path === "Managed" ? "green" : "slate") as PillTone }
+          : null;
+  const c = deal.checklist;
+  const latestGate = deal.gateResults[0];
+  const chip =
+    deal.clockDay != null
+      ? deal.clockDay === 0
+        ? { text: "Documents-Ready today", tone: "green" as PillTone }
+        : {
+            text: `Day ${deal.clockDay} of 120`,
+            tone: (deal.clockDay > 120 ? "red" : "grey") as PillTone,
+          }
+      : {
+          text: deal.updatedDaysAgo === 0 ? "Updated today" : `${deal.updatedDaysAgo}d idle`,
+          tone: (deal.updatedDaysAgo > 21
+            ? "red"
+            : deal.updatedDaysAgo >= 7
+              ? "amber"
+              : "green") as PillTone,
+        };
   return (
-    <div style={card}>
-      <div>
-        <strong>{deal.caseId}</strong> · {deal.clientName}
+    <div style={card} className="dp-card">
+      <div style={titleRow}>
+        <span style={title}>{deal.clientName}</span>
+        {pill ? <span style={pillStyle(pill.tone)}>{pill.text}</span> : null}
       </div>
-      <div style={dim}>
-        {deal.phase}
-        {path ? ` · ${path}` : ""}
+      <div style={person}>
+        {deal.caseId} · {deal.phase}
+        {deal.sideStates.includes("on-hold") ? " · clock keeps running" : ""}
       </div>
-      <div style={dim}>
-        checklist: {deal.checklist.reviewed} reviewed /{" "}
-        {deal.checklist.awaitingReview} awaiting review / {deal.checklist.open}{" "}
-        open (of {deal.checklist.total})
+      <div style={signal}>
+        Checklist: {c.reviewed} reviewed · {c.awaitingReview} awaiting ·{" "}
+        {c.open} open of {c.total}
       </div>
-      {deal.gateResults.slice(0, 3).map((g) => (
-        <div key={g.gate} style={g.result === "FAIL" ? fail : dim}>
-          Gate “{g.gate}”: {g.result} · {formatPt(g.at)}
-        </div>
-      ))}
-      {deal.sideStates.map((st) => (
-        <div key={st} style={dim}>side state: {st} — clock keeps running</div>
-      ))}
-      <div style={dim}>updated {formatPt(deal.updatedAt)}</div>
+      <div style={barTrack} role="img" aria-label="Checklist progress">
+        {c.total > 0 ? (
+          <>
+            <div style={{ width: `${(c.reviewed / c.total) * 100}%`, background: "#0F5132" }} />
+            <div style={{ width: `${(c.awaitingReview / c.total) * 100}%`, background: "#9DBEAC" }} />
+          </>
+        ) : null}
+      </div>
+      <div style={signal}>
+        {latestGate ? (
+          <span style={latestGate.result === "FAIL" ? { color: "#B3261E", fontWeight: 600 } : undefined}>
+            Gate “{latestGate.gate}”: {latestGate.result} · {formatPt(latestGate.at)}
+          </span>
+        ) : (
+          "No gate results yet"
+        )}
+      </div>
+      <div style={footer}>
+        <span style={nextAction}>{deal.nextAction}</span>
+        <span style={chipStyle(chip.tone)}>{chip.text}</span>
+      </div>
     </div>
   );
 }
