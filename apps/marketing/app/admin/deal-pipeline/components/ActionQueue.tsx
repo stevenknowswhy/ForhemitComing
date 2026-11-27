@@ -63,7 +63,7 @@ export function ActionQueue({ data }: { data: PipelineData }) {
           dormant candidates, no unproven cases.
         </p>
       ) : (
-        <div style={grid}>
+        <div style={grid} className="dp-queue-grid">
           {queue.map((entry) => (
             <div key={entry.key} style={card} className="dp-card">
               <div style={titleRow}>

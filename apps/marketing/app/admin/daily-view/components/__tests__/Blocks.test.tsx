@@ -117,6 +117,38 @@ describe("Daily view blocks (OD-11 D3)", () => {
     expect(screen.getAllByRole("link", { name: "Open in CRM" })).toHaveLength(2);
   });
 
+  it("Fix pass #5: the CRM action link's visible text is the full 'Open in CRM'", () => {
+    render(<NeedsYou data={sampleData()} />);
+
+    const links = screen.getAllByRole("link", { name: "Open in CRM" });
+    expect(links).toHaveLength(3);
+    for (const link of links) {
+      expect(link.textContent).toBe("Open in CRM");
+      expect(link.className).toContain("whitespace-nowrap");
+    }
+  });
+
+  it("Fix pass #6: phase pills never wrap (whitespace-nowrap)", () => {
+    render(<Pipeline data={sampleData()} />);
+
+    expect(screen.getByText("due_diligence").className).toContain(
+      "whitespace-nowrap",
+    );
+  });
+
+  it("Fix pass #7/#9: outreach text wraps in its own flex cell; the Log Touch button is anchored with a >=40px target", () => {
+    render(<OutreachToday data={sampleData()} />);
+
+    const button = screen.getAllByRole("button", { name: "Log Touch 1" })[0]!;
+    // Button itself carries the tap-target sizing.
+    expect(button.className).toContain("min-h-10");
+    // Its wrapper span is the non-shrinking flex sibling.
+    expect(button.closest("span.flex-none")).not.toBeNull();
+    // The row's text cell is the flexible, shrinkable one.
+    const row = button.closest("li")!;
+    expect(row.querySelector("span.min-w-0.flex-1")).not.toBeNull();
+  });
+
   it("DoneToday renders a Recorded pill and the audit-event summary", () => {
     render(<DoneToday data={sampleData()} />);
 

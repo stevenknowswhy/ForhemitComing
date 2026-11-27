@@ -10,6 +10,12 @@ import type { PillTone } from "./tokens";
 // deliverable due | Fee status. The last three have no source in the
 // mirror today (the stewardship register is Gap G6), so cells render
 // "—" — stated in the empty note rather than filled with invention.
+//
+// Fix pass #1: the table structure renders even with zero rows — a
+// header row above the empty-state note — so Band D reads as a
+// register, not prose. Fix pass #8: the table sits in its own
+// horizontally scrolling container, so at phone widths it scrolls
+// inside the band and never pushes the page sideways.
 
 const table: CSSProperties = {
   width: "100%",
@@ -36,6 +42,7 @@ const td: CSSProperties = {
   verticalAlign: "middle",
 };
 const emptyNote: CSSProperties = { fontSize: 13, color: SECONDARY };
+const scrollBox: CSSProperties = { overflowX: "auto", maxWidth: "100%" };
 
 // Muted, distinct pill tints per S-stage (polish spec: muted only).
 const STAGE_TONES: Record<string, PillTone> = {
@@ -50,29 +57,32 @@ const STAGE_TONES: Record<string, PillTone> = {
 const dash = "—";
 
 export function RegisterTable({ rows }: { rows: StewardshipRow[] }) {
-  if (rows.length === 0) {
-    return (
-      <p style={emptyNote}>
-        No stewardship cases yet — the register fills when the first
-        case closes (Gap G6). Post-close day, next deliverable and fee
-        status show “{dash}” until the stewardship register is mirrored;
-        nothing is estimated.
-      </p>
-    );
-  }
   return (
-    <table style={table}>
-      <thead>
-        <tr>
-          <th style={th}>Company</th>
-          <th style={th}>Stage</th>
-          <th style={th}>Post-close day</th>
-          <th style={th}>Next deliverable due</th>
-          <th style={th}>Fee status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
+    <div style={scrollBox}>
+      <table style={table}>
+        <thead>
+          <tr>
+            <th style={th}>Company</th>
+            <th style={th}>Stage</th>
+            <th style={th}>Post-close day</th>
+            <th style={th}>Next deliverable due</th>
+            <th style={th}>Fee status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.length === 0 ? (
+            <tr>
+              <td style={td} colSpan={5}>
+                <span style={emptyNote}>
+                  No stewardship cases yet — the register fills when the
+                  first case closes (Gap G6). Post-close day, next
+                  deliverable and fee status show “{dash}” until the
+                  stewardship register is mirrored; nothing is estimated.
+                </span>
+              </td>
+            </tr>
+          ) : null}
+          {rows.map((row) => (
           <tr key={row.key}>
             <td style={{ ...td, fontWeight: 600 }}>
               {row.company}
@@ -85,10 +95,11 @@ export function RegisterTable({ rows }: { rows: StewardshipRow[] }) {
             </td>
             <td style={{ ...td, ...NUMERIC }}>{row.postCloseDay ?? dash}</td>
             <td style={td}>{row.nextDeliverable ?? dash}</td>
-            <td style={td}>{row.feeStatus ?? dash}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+              <td style={td}>{row.feeStatus ?? dash}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }

@@ -24,12 +24,26 @@ export default function PipelinePage() {
           marginBottom: 12,
         }}
       >
-        <Link href="/admin" style={{ fontSize: 14, textDecoration: "underline" }}>
+        <Link
+          href="/admin"
+          style={{
+            fontSize: 14,
+            textDecoration: "underline",
+            display: "inline-block",
+            padding: "10px 2px",
+          }}
+        >
           ← Admin
         </Link>
         <a
           href="/admin/logout"
-          style={{ fontSize: 14, textDecoration: "underline", opacity: 0.9 }}
+          style={{
+            fontSize: 14,
+            textDecoration: "underline",
+            opacity: 0.9,
+            display: "inline-block",
+            padding: "10px 2px",
+          }}
         >
           Sign out
         </a>

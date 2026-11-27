@@ -38,7 +38,7 @@ export function FunnelStrip({ steps }: { steps: FunnelStepDef[] }) {
       {steps.map((step, i) => (
         <div key={step.id} style={{ display: "contents" }}>
           {i > 0 ? <span style={arrow}>→</span> : null}
-          <div style={stepBox}>
+          <div style={stepBox} className="dp-funnel-step">
             <div style={stepLabel}>{step.label}</div>
             {step.detail ? <div style={stepDetail}>{step.detail}</div> : null}
           </div>
