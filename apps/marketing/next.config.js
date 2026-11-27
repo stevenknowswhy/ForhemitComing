@@ -73,6 +73,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net",
               "font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://frontend-cdn.perplexity.ai",
               "img-src 'self' data: https: blob:",
+              "media-src 'self' https://videos.pexels.com",
               "connect-src 'self' https://api.convex.dev https://uploadthing.com wss://uploadthing.com https://earnest-dinosaur-711.convex.cloud wss://earnest-dinosaur-711.convex.cloud https://vercel.live https://*.vercel.live",
               "frame-src 'self' https://js.stripe.com",
               "object-src 'none'",
