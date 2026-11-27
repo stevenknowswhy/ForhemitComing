@@ -386,13 +386,24 @@
 .ink-st-link:hover { color: var(--ink-paper); border-color: var(--ink-paper); }
 @media (max-width: 960px) { .ink-statement-grid { grid-template-columns: 1fr; gap: 34px; } }
 
-/* ── Closing CTA ── */
+/* ── Closing CTA ──
+   Centering (2026-11-27 fix): globals.css caps every <p> at
+   max-width: 45rem via a direct element rule, and this block's two
+   paragraphs (.ink-closing-free, .ink-phone) never overrode it. The
+   phone line's capped box hugged the LEFT edge of the content column
+   (up to 1136px wide) while its text centered inside the box, so its
+   visual center sat up to ~200px left of the h2 / CTA-row center.
+   Every piece now declares its own centering: the phone box is
+   centered via margin-inline: auto, the free text drops the global
+   cap, the CTA row spans the full width and centers its combined
+   group, and at phone widths the row stacks as a centered column
+   (see the 560px block) so wrapped pieces center on their own line. */
 .ink-closing { background: var(--ink-light-bg); color: var(--ink-text); padding: 130px 0; text-align: center; }
-.ink-closing h2 { margin: 0 auto; max-width: 22ch; }
-.ink-closing-cta-row { display: flex; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; }
-.ink-closing-free { font-size: 17px; font-weight: 600; color: var(--ink-accent-deep); letter-spacing: 0.01em; }
+.ink-closing h2 { margin: 0 auto; max-width: 22ch; text-align: center; }
+.ink-closing-cta-row { display: flex; width: 100%; align-items: center; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 40px; text-align: center; }
+.ink-closing-free { max-width: none; font-size: 17px; font-weight: 600; color: var(--ink-accent-deep); letter-spacing: 0.01em; }
 .ink-closing-btn { font-weight: 700; }
-.ink-phone { margin-top: 26px; font-size: 16px; color: var(--ink-text-dim); }
+.ink-phone { margin-top: 26px; margin-inline: auto; text-align: center; font-size: 16px; color: var(--ink-text-dim); }
 .ink-phone a { font-weight: 600; color: var(--ink-text); text-decoration: none; border-bottom: 1px solid var(--ink-text-line); }
 
 /* ── Ink subpages (/benefits, /how-we-do-it-differently — F4, 2026-11-27) ── */
@@ -456,6 +467,7 @@
   .ink-nav-cta { padding: 9px 15px; font-size: 13px; }
   .ink-hero { padding: 72px 0 56px; min-height: calc(100vh - 110px); }
   .ink-cta-row .ink-btn { width: 100%; text-align: center; }
+  .ink-closing-cta-row { flex-direction: column; align-items: center; }
   .ink-steps { grid-template-columns: 1fr; }
   .ink-step { border-left: none; padding-left: 0; }
 }

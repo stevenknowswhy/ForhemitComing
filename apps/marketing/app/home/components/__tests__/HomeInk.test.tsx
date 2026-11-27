@@ -237,6 +237,35 @@ describe("Fix pass 2026-11-27 (F1/F4/F5)", () => {
   });
 });
 
+describe("Closing centering fix 2026-11-27", () => {
+  // Same stylesheet resolution as the fix-pass block above.
+  const cssPath = [
+    join(process.cwd(), "app/home/styles/home-ink.css"),
+    join(process.cwd(), "apps/marketing/app/home/styles/home-ink.css"),
+  ].find((p) => existsSync(p));
+  if (!cssPath) throw new Error("home-ink.css not found from cwd " + process.cwd());
+  const css = readFileSync(cssPath, "utf-8");
+
+  it("closing: every piece declares its own centering (globals caps <p> at 45rem)", () => {
+    // The CTA row spans the full width and centers its combined group.
+    expect(css).toMatch(
+      /\.ink-closing-cta-row {[^}]*width: 100%;[^}]*justify-content: center;[^}]*text-align: center;/,
+    );
+    // "This is free." drops the global p max-width cap.
+    expect(css).toMatch(/\.ink-closing-free {[^}]*max-width: none;/);
+    // The phone line's capped box is itself centered, text centered.
+    expect(css).toMatch(/\.ink-phone {[^}]*margin-inline: auto;[^}]*text-align: center;/);
+    // The headline declares its centering rather than relying on inheritance.
+    expect(css).toMatch(/\.ink-closing h2 {[^}]*margin: 0 auto;[^}]*text-align: center;/);
+  });
+
+  it("closing: at phone widths the CTA row stacks as a centered column", () => {
+    expect(css).toMatch(
+      /@media \(max-width: 560px\) {[\s\S]*?\.ink-closing-cta-row { flex-direction: column; align-items: center; }/,
+    );
+  });
+});
+
 describe("HomeInkEffects (reduced motion)", () => {
   it("reveals everything immediately, keeps counter finals, removes the video", () => {
     vi.stubGlobal(
