@@ -12,6 +12,7 @@ import {
   ProblemSolutionSection,
   SolutionsSection,
 } from "./_components/sections";
+import { ClosingCheck } from "../blog/_components/ClosingCheck";
 
 export function TheExitCrisisPageClient() {
   // Initialize scroll reveal animations
@@ -26,6 +27,10 @@ export function TheExitCrisisPageClient() {
         <CrisesSection />
         <ProblemSolutionSection />
         <SolutionsSection />
+        {/* Single closing action at the foot (ruling D2 A, 2026-11-27) */}
+        <div className="container">
+          <ClosingCheck />
+        </div>
       </main>
     </div>
   );
