@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
+import { BlogIndex, type BlogEssay } from './_components/BlogIndex';
 
 export const metadata: Metadata = {
   title: 'Insights',
@@ -7,7 +7,16 @@ export const metadata: Metadata = {
     "Two essays by Stefano Stokes, Forhemit's founder, on the exit crisis facing retiring founders and the philosophy that answers it.",
 };
 
-const ESSAYS = [
+/**
+ * Audience assignments (ruling D1 A filter model, applied 2026-11-27):
+ * both essays are written for founders, so both carry "owners".
+ * The Exit Crisis additionally carries "evidence": it is the
+ * structural-evidence piece (the market arithmetic), as the companion
+ * essay itself describes it. The CPAs / Attorneys / Brokers filters
+ * therefore show the ruled empty state until essays for those
+ * audiences exist — no posts were invented to fill them.
+ */
+const ESSAYS: BlogEssay[] = [
   {
     href: '/the-exit-crisis',
     sequenceLabel: 'Start here · The problem',
@@ -15,6 +24,9 @@ const ESSAYS = [
     title: 'The Exit Crisis',
     standfirst:
       'A generation of founders is reaching retirement with no successor and too few buyers. Most businesses taken to market never sell at all — and the founders who learn that late have the fewest options left.',
+    audienceLabel: 'For Owners',
+    audiences: ['owners', 'evidence'],
+    editorsPick: true,
   },
   {
     href: '/beyond-the-balance-sheet',
@@ -23,6 +35,8 @@ const ESSAYS = [
     title: 'Beyond the Balance Sheet',
     standfirst:
       'The most valuable things in a founder-led company — trust, craft, reputation, the people themselves — appear nowhere in its financial statements. The right exit is the one that prices them anyway.',
+    audienceLabel: 'For Owners',
+    audiences: ['owners'],
   },
 ];
 
@@ -44,37 +58,7 @@ export default function BlogPage() {
           </p>
         </header>
 
-        <section aria-label="Essays">
-          <div className="grid gap-6 md:grid-cols-2">
-            {ESSAYS.map((essay) => (
-              <article
-                key={essay.href}
-                className="flex flex-col border border-stone/20 bg-white p-8"
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-stone">
-                  {essay.sequenceLabel}
-                </p>
-                <p className="mt-2 text-xs font-semibold uppercase tracking-[0.2em] text-stone">
-                  Essay · {essay.readTime}
-                </p>
-                <h2 className="mt-4 font-serif text-3xl text-ink">{essay.title}</h2>
-                <p className="mt-2 text-sm font-medium text-stone">
-                  By Stefano Stokes, Founder &amp; CEO
-                </p>
-                <p className="mt-4 flex-1 text-base text-stone">{essay.standfirst}</p>
-                <Link
-                  href={essay.href}
-                  className="mt-6 self-start text-base font-semibold text-ink underline underline-offset-4"
-                >
-                  Read the essay →
-                </Link>
-              </article>
-            ))}
-          </div>
-          <p className="mt-10 text-center text-sm text-stone">
-            More essays follow as they are written. No schedule, and no filler.
-          </p>
-        </section>
+        <BlogIndex essays={ESSAYS} />
       </div>
     </main>
   );

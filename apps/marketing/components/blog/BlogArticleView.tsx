@@ -1,13 +1,19 @@
 import Link from "next/link";
 import type { Doc } from "@/convex/_generated/dataModel";
 import { postDocToArticle, postDocToListItem } from "@/lib/blog-map";
-import { ArticleSidebar, JourneyCompanion } from "@/components/blog/ArticleSidebar";
+import { ArticleSidebar } from "@/components/blog/ArticleSidebar";
 import { PathwayBadge } from "@/components/ui/CustomBadge";
 import { ReadingTimePills } from "@/components/blog/ReadingTimePills";
 import { ResilienceSummary } from "@/components/blog/ResilienceSummary";
-import { DossierBar } from "@/components/blog/DossierBar";
 import { ScrollProgress } from "@/components/blog/ScrollProgress";
 import { TipTapRenderer } from "@/components/blog/TipTapRenderer";
+import { ClosingCheck } from "@/app/blog/_components/ClosingCheck";
+
+/**
+ * Visual standard (ruling P5 A, 2026-11-27): blog post section
+ * visuals are diagrams, timeline schematics, charts, and checklists
+ * only — no lifestyle stock photography.
+ */
 
 type ListItem = ReturnType<typeof postDocToListItem>;
 
@@ -16,6 +22,16 @@ interface BlogArticleViewProps {
   relatedItems: ListItem[];
   preview?: boolean;
   editHref?: string;
+  /**
+   * Article template variant (rulings D2 A / D3 A, 2026-11-27).
+   * "standard" (default) is the calm editorial template. "flagship"
+   * is reserved for evidence pieces (Evidence Register, cost report,
+   * annual report): it renders the post's own resilience-summary
+   * points as a Key Structure & Terms stat grid instead of the standard
+   * summary block. No content is invented for the variant — it only
+   * re-presents fields the post already carries.
+   */
+  variant?: "standard" | "flagship";
 }
 
 export function BlogArticleView({
@@ -23,6 +39,7 @@ export function BlogArticleView({
   relatedItems,
   preview = false,
   editHref,
+  variant = "standard",
 }: BlogArticleViewProps) {
   const article = postDocToArticle(doc);
 
@@ -119,14 +136,37 @@ export function BlogArticleView({
               </div>
             </header>
 
-            {article.resilienceSummary.length > 0 && (
-              <ResilienceSummary
-                summary={article.resilienceSummary}
-                pathway={article.pathway}
-                author={article.author}
-                reviewedBy={article.reviewedBy}
-              />
-            )}
+            {variant === "flagship" &&
+              article.resilienceSummary.length > 0 && (
+                <section
+                  aria-label="Key Structure & Terms"
+                  className="mb-8 sm:mb-10 border border-border-light bg-parchment p-6 sm:p-8"
+                >
+                  <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-stone mb-5">
+                    Key Structure &amp; Terms
+                  </h2>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    {article.resilienceSummary.map((point) => (
+                      <p
+                        key={point}
+                        className="border border-border-light bg-white p-4 font-serif text-lg leading-snug text-ink"
+                      >
+                        {point}
+                      </p>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+            {variant === "standard" &&
+              article.resilienceSummary.length > 0 && (
+                <ResilienceSummary
+                  summary={article.resilienceSummary}
+                  pathway={article.pathway}
+                  author={article.author}
+                  reviewedBy={article.reviewedBy}
+                />
+              )}
 
             <TipTapRenderer content={doc.content} />
 
@@ -183,13 +223,14 @@ export function BlogArticleView({
                 </div>
               </section>
             )}
-          </article>
 
-          <JourneyCompanion />
+            {/* Single closing action (ruling D2 A): the scroll-triggered
+                DossierBar and the sidebar dossier CTA were removed so
+                this is the only action on the article page. */}
+            <ClosingCheck />
+          </article>
         </div>
       </div>
-
-      <DossierBar pathway={article.pathway} />
     </main>
   );
 }

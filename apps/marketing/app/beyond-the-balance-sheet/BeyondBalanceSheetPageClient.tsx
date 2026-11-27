@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import "@forhemit/shared/styles/beyond-balance-sheet.css";
+import { ClosingCheck } from "../blog/_components/ClosingCheck";
 
 export function BeyondBalanceSheetPageClient() {
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
@@ -153,6 +154,13 @@ export function BeyondBalanceSheetPageClient() {
                 <Link href="/about">More about Stefano and Forhemit →</Link>
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* ⑥ Single closing action at the foot (ruling D2 A, 2026-11-27) */}
+        <section className="bbs-section">
+          <div className="container">
+            <ClosingCheck />
           </div>
         </section>
       </main>

@@ -9,6 +9,14 @@ import { BlogArticleView } from "@/components/blog/BlogArticleView";
 
 export const dynamicParams = true;
 
+/**
+ * Flagship evidence pieces (ruling D3 A, 2026-11-27) render with the
+ * data/evidence article variant. The set is intentionally empty: no
+ * flagship post exists yet, and no content was invented to fill it.
+ * Add a post's slug here when a real flagship piece is published.
+ */
+const FLAGSHIP_SLUGS: ReadonlySet<string> = new Set<string>();
+
 export async function generateStaticParams() {
   return fetchPublishedPostSlugs(200);
 }
@@ -51,5 +59,11 @@ export default async function ArticlePage({ params }: PageProps) {
     .slice(0, 2)
     .map((p) => postDocToListItem(p));
 
-  return <BlogArticleView doc={doc} relatedItems={related} />;
+  return (
+    <BlogArticleView
+      doc={doc}
+      relatedItems={related}
+      variant={FLAGSHIP_SLUGS.has(doc.slug) ? "flagship" : "standard"}
+    />
+  );
 }
