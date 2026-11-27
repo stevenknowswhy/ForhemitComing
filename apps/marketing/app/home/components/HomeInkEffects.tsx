@@ -3,14 +3,22 @@
 import { useEffect } from "react";
 
 /**
- * Motion island for the ink homepage — a direct translation of the
+ * Motion island for the ink pages — a direct translation of the
  * prototype's inline script:
- * - hero video fades in on canplay and is removed under reduced motion;
+ * - hero video fades in once playing and is removed under reduced motion;
+ * - hero text reveals immediately on mount (no observer wait);
  * - each section's .ink-reveal elements get a 90ms reading-order stagger
- *   and reveal once via IntersectionObserver;
+ *   and reveal once via IntersectionObserver, triggered early;
  * - counters tick up once (easeOutCubic, ~1.1s) when the band scrolls in.
  * Content is fully visible without JS: hidden states live behind html.js
  * in home-ink.css and this component only adds the .ink-in class.
+ *
+ * F2/F3 fixes (2026-11-27): the page bails out to client-side rendering,
+ * so React creates the <video> in the DOM — where its `muted` prop sets
+ * the attribute but not the muted IDL property browsers gate autoplay
+ * on. The effect now sets the property explicitly and calls play().
+ * Reveal fades were shortened in CSS (≤500ms) and the observer fires
+ * before sections are well into view, so nothing sits invisible.
  */
 export function HomeInkEffects() {
   useEffect(() => {
@@ -27,9 +35,15 @@ export function HomeInkEffects() {
         heroVideo.pause();
         heroVideo.remove();
       } else {
-        const onCanPlay = () => heroVideo.classList.add("ink-on");
-        heroVideo.addEventListener("canplay", onCanPlay);
+        // React quirk: force the muted PROPERTY (the attribute alone does
+        // not unblock autoplay for client-created elements), then play.
+        heroVideo.muted = true;
+        heroVideo.defaultMuted = true;
+        const onPlaying = () => heroVideo.classList.add("ink-on");
+        heroVideo.addEventListener("playing", onPlaying);
         if (heroVideo.readyState >= 3) heroVideo.classList.add("ink-on");
+        const attempt = heroVideo.play();
+        if (attempt) attempt.catch(() => undefined); // poster + CSS frame carry the hero
       }
     }
 
@@ -81,6 +95,12 @@ export function HomeInkEffects() {
         el.style.transitionDelay = `${Math.min(idx * 90, 540)}ms`;
       });
 
+      // Hero text reveals NOW — it is the first thing on the page and must
+      // never wait on an observer callback (F3).
+      const heroEls = revealEls.filter((el) => el.closest(".ink-hero, .ink-page-hero"));
+      const heroSet = new Set(heroEls);
+      heroEls.forEach((el) => el.classList.add("ink-in"));
+
       const revealObs = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -90,9 +110,13 @@ export function HomeInkEffects() {
             }
           });
         },
-        { threshold: 0.12, rootMargin: "0px 0px -6% 0px" },
+        // Fire as elements approach the viewport, not after they are
+        // already well inside it (F3).
+        { threshold: 0, rootMargin: "0px 0px 30% 0px" },
       );
-      revealEls.forEach((el) => revealObs.observe(el));
+      revealEls
+        .filter((el) => !heroSet.has(el))
+        .forEach((el) => revealObs.observe(el));
       observers.push(revealObs);
 
       const band = root.querySelector(".ink-counters");
@@ -106,7 +130,7 @@ export function HomeInkEffects() {
               }
             });
           },
-          { threshold: 0.25 },
+          { threshold: 0.1, rootMargin: "0px 0px 20% 0px" },
         );
         bandObs.observe(band);
         observers.push(bandObs);

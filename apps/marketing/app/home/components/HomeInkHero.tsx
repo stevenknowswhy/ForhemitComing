@@ -10,12 +10,23 @@ const HERO_VIDEO_SRC =
  * owners (filled accent) open the 2-Minute Check; professionals (outline)
  * route to the footer profession anchor. Video fade-in and the
  * reduced-motion removal live in HomeInkEffects.
+ *
+ * F2 fix (2026-11-27): the live hero never played. The page bails out to
+ * client-side rendering, so React creates this element in the DOM — where
+ * React's `muted` prop sets the attribute but NOT the muted IDL property,
+ * and browsers gate autoplay on the property: autoplay was blocked and,
+ * with no poster, the hero sat on a black first frame that never arrived.
+ * So: `src` sits on the <video> itself (no <source> child to re-resolve),
+ * a still frame from the video is the hero's CSS background in
+ * home-ink.css (data URI — the push route cannot commit binaries), and
+ * HomeInkEffects sets the muted property + calls play() explicitly.
  */
 export function HomeInkHero() {
   return (
     <header className="ink-hero">
       <video
         className="ink-hero-video"
+        src={HERO_VIDEO_SRC}
         autoPlay
         muted
         loop
@@ -23,9 +34,7 @@ export function HomeInkHero() {
         preload="auto"
         aria-hidden="true"
         tabIndex={-1}
-      >
-        <source src={HERO_VIDEO_SRC} type="video/mp4" />
-      </video>
+      />
       <div className="ink-wrap">
         <p className="ink-eyebrow ink-reveal">Employee-Ownership Transitions</p>
         <h1 className="ink-reveal">Sell Your Business to Your Employees</h1>
@@ -34,7 +43,7 @@ export function HomeInkHero() {
         </p>
         <div className="ink-cta-row ink-reveal">
           <AssessmentCta className="ink-btn ink-btn-accent">I&rsquo;m a business owner</AssessmentCta>
-          <a className="ink-btn ink-btn-outline" href="#professionals">
+          <a className="ink-btn ink-btn-outline" href="/#professionals">
             I&rsquo;m a professional
           </a>
         </div>

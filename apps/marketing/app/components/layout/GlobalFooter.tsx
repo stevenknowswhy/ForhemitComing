@@ -27,6 +27,11 @@ export function GlobalFooter() {
     return null;
   }
 
+  // Hide footer on the ink subpages (they carry the ink footer)
+  if (pathname === "/benefits" || pathname === "/how-we-do-it-differently") {
+    return null;
+  }
+
   // Hide footer on blog pages (blog has its own footer)
   if (pathname?.startsWith("/blog")) {
     return null;

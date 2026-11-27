@@ -1,10 +1,14 @@
-import { describe, expect, it, vi } from "vitest";
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { HomeInkHeader } from "../HomeInkHeader";
 import { HomeInkHero } from "../HomeInkHero";
 import { HomeInkSections } from "../HomeInkSections";
 import { HomeInkFooter } from "../HomeInkFooter";
 import { HomeInkEffects } from "../HomeInkEffects";
+import BenefitsPage from "../../../benefits/page";
+import HowWeDoItDifferentlyPage from "../../../how-we-do-it-differently/page";
 
 // The modal provider pulls next/navigation + modal CSS chains; the ink
 // components only need its CTA openers, so stub the hook.
@@ -53,15 +57,18 @@ describe("HomeInk (DeepBook-ink homepage, 2026-11-27)", () => {
     );
     expect(screen.getByRole("button", { name: /I’m a business owner/ })).toBeTruthy();
     expect(screen.getByRole("link", { name: /I’m a professional/ }).getAttribute("href")).toBe(
-      "#professionals",
+      "/#professionals",
     );
     expect(container.textContent).toContain(
       "Free 2-Minute Check · No obligation · No personal guarantee",
     );
-    const source = container.querySelector(".ink-hero-video source");
-    expect(source?.getAttribute("src")).toBe(
+    // F2: src lives on the <video> element itself (no <source> child);
+    // the poster frame is the hero's CSS background (see the F1/F2 CSS test).
+    const video = container.querySelector(".ink-hero-video");
+    expect(video?.getAttribute("src")).toBe(
       "https://videos.pexels.com/video-files/8643577/8643577-hd_1920_1080_24fps.mp4",
     );
+    expect(video?.querySelector("source")).toBeNull();
     // Hero audience CTAs are NOT gold — gold is reserved for the Check buttons.
     const owner = screen.getByRole("button", { name: /I’m a business owner/ });
     expect(owner.className).not.toContain("ink-gold");
@@ -156,6 +163,77 @@ describe("HomeInk (DeepBook-ink homepage, 2026-11-27)", () => {
     const { container } = renderInk();
     expect(container.textContent?.toLowerCase()).not.toContain("tax-free");
     expect(container.textContent?.toLowerCase()).not.toContain("tax free");
+  });
+});
+
+describe("Fix pass 2026-11-27 (F1/F4/F5)", () => {
+  // The subpages mount HomeInkEffects, which reads matchMedia — jsdom has
+  // none, so stub the non-reduced-motion case for this block.
+  beforeEach(() => {
+    vi.stubGlobal(
+      "matchMedia",
+      vi.fn().mockImplementation((query: string) => ({
+        matches: false,
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      })),
+    );
+  });
+  // import.meta.url is not a file URL under this vitest setup; resolve the
+  // stylesheet from whichever cwd the suite runs in (app dir or repo root).
+  const cssPath = [
+    join(process.cwd(), "app/home/styles/home-ink.css"),
+    join(process.cwd(), "apps/marketing/app/home/styles/home-ink.css"),
+  ].find((p) => existsSync(p));
+  if (!cssPath) throw new Error("home-ink.css not found from cwd " + process.cwd());
+  const css = readFileSync(cssPath, "utf-8");
+
+  it("F1: ink headings declare their own family and per-surface colors", () => {
+    // Base rule beats the global dark-serif element rule (0-1-1 > 0-0-1).
+    expect(css).toMatch(/\.home-ink h1,\s*\.home-ink h2,\s*\.home-ink h3,\s*\.home-ink h4\s*{[^}]*font-family:[^}]*color: var\(--ink-text\)/);
+    expect(css).toContain(".home-ink .ink-hero h1 { color: var(--ink-paper); }");
+    expect(css).toMatch(/\.home-ink \.ink-dark h1,\s*\.home-ink \.ink-dark h2,\s*\.home-ink \.ink-dark h3\s*{\s*color: var\(--ink-paper\);/);
+    expect(css).toContain(".home-ink .ink-compare-card.ink-featured h3 { color: var(--ink-paper); }");
+    // Hero carries the poster frame as a CSS background fallback (F2),
+    // shipped as a data URI (the push route cannot commit binaries).
+    expect(css).toContain('url("data:image/jpeg;base64,');
+  });
+
+  it("F3: reveal fades are ≤500ms", () => {
+    const durations = Array.from(css.matchAll(/\.ink-reveal[^{]*{[^}]*transition: opacity (0\.\d+)s/g)).map(
+      (m) => parseFloat(m[1]),
+    );
+    expect(durations.length).toBeGreaterThan(0);
+    durations.forEach((d) => expect(d).toBeLessThanOrEqual(0.5));
+  });
+
+  it("F5: founder statement carries id=about and the nav About link targets it", () => {
+    const { container } = renderInk();
+    expect(container.querySelector(".ink-statement")?.getAttribute("id")).toBe("about");
+    const aboutLinks = screen.getAllByRole("link", { name: "About" });
+    expect(aboutLinks.length).toBeGreaterThan(0);
+    aboutLinks.forEach((l) => expect(l.getAttribute("href")).toBe("/#about"));
+  });
+
+  it("F4: /benefits renders its headline and the closing pattern", () => {
+    const { container } = render(<BenefitsPage />);
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toBe("See why employees love us");
+    expect(container.textContent).toContain("An ownership stake in the company you work for");
+    expect(container.textContent).toContain("Retirement wealth, built at work");
+    expect(container.textContent).toContain("This is free.");
+    expect(container.textContent?.toLowerCase()).not.toContain("tax-free");
+  });
+
+  it("F4: /how-we-do-it-differently renders its headline, fees, and deferral language", () => {
+    const { container } = render(<HowWeDoItDifferentlyPage />);
+    expect(screen.getByRole("heading", { level: 1 }).textContent).toBe(
+      "No gatekeepers. Everything in the open.",
+    );
+    expect(container.textContent).toContain("$3,000");
+    expect(container.textContent).toContain("120-day clock");
+    expect(container.textContent).toContain("tax-deferred");
+    expect(container.textContent?.toLowerCase()).not.toContain("tax-free");
   });
 });
 

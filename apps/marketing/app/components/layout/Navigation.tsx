@@ -133,6 +133,11 @@ export function Navigation({ variant = "dark" }: NavigationProps) {
     return null;
   }
 
+  // Hide navigation on the ink subpages (they carry the ink pill nav)
+  if (pathname === "/benefits" || pathname === "/how-we-do-it-differently") {
+    return null;
+  }
+
   // Hide navigation on blog pages (blog has its own navigation)
   if (pathname?.startsWith("/blog")) {
     return null;

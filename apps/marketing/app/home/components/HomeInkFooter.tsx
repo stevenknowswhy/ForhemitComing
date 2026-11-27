@@ -14,10 +14,10 @@ export function HomeInkFooter() {
             FORHEMIT
           </Link>
           <nav className="ink-footer-nav" aria-label="Footer">
-            <Link href="#how">How it works</Link>
+            <Link href="/#how">How it works</Link>
             <Link href="/pricing">Pricing</Link>
-            <Link href="#professionals">For Professionals</Link>
-            <Link href="#about">About</Link>
+            <Link href="/#professionals">For Professionals</Link>
+            <Link href="/#about">About</Link>
           </nav>
         </div>
         <div className="ink-footer-meta">
