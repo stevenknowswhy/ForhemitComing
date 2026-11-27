@@ -3,7 +3,7 @@ import { HomeInkClosing } from "./HomeInkClosing";
 
 /**
  * Ink homepage body sections, translated 1:1 from the approved prototype:
- * counters band → third-option comparison → proof cards → how it works →
+ * third-option comparison → proof cards → how it works →
  * leave on your own terms → founder statement (three blocks, one row) →
  * closing CTA. Copy is verbatim from the prototype, including Stefano's
  * 2026-11-27 edits ("Four steps. Four Months.", "You keep control", the
@@ -12,42 +12,6 @@ import { HomeInkClosing } from "./HomeInkClosing";
 export function HomeInkSections() {
   return (
     <>
-      {/* Counters band — only the four ruled numbers */}
-      <div className="ink-counters">
-        <div className="ink-wrap">
-          <div className="ink-counters-grid">
-            <div className="ink-counter ink-reveal">
-              <div className="ink-num">
-                <span data-count="120">120</span>
-              </div>
-              <p className="ink-lbl">days, start to close — the transition clock</p>
-            </div>
-            <div className="ink-counter ink-reveal">
-              <div className="ink-num">
-                <span data-count="4">4</span>
-              </div>
-              <p className="ink-lbl">gates, each one verified before the next begins</p>
-            </div>
-            <div className="ink-counter ink-reveal">
-              <div className="ink-num">
-                <span data-count="100">100</span>
-                <span className="ink-unit">%</span>
-              </div>
-              <p className="ink-lbl">employee-owned at close — your people own it all</p>
-            </div>
-            <div className="ink-counter ink-reveal">
-              <div className="ink-num">
-                <span className="ink-unit">$</span>
-                <span data-count="3000" data-format="comma">
-                  3,000
-                </span>
-              </div>
-              <p className="ink-lbl">Self Guided, flat — the map, the documents, the support</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* The third option */}
       <section className="ink-light ink-section-pad" id="options">
         <div className="ink-wrap">

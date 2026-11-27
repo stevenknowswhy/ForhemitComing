@@ -24,7 +24,6 @@ export function HomeInkFooter() {
           <a href="tel:+15104054330">(510) 405-4330</a>
           <a href="mailto:Stefano.stokes@forhemit.com">Stefano.stokes@forhemit.com</a>
           <span>Employee-ownership transitions, done in the open.</span>
-          <span>Hero video: Edmond Dant&egrave;s via Pexels — prototype placeholder.</span>
         </div>
       </div>
     </footer>

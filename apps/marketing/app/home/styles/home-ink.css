@@ -10,7 +10,7 @@
   --ink-bg-raised: #131b17;
   --ink-line: rgba(244, 242, 236, 0.14);
   --ink-paper: #f4f2ec;
-  --ink-paper-dim: rgba(244, 242, 236, 0.62);
+  --ink-paper-dim: rgba(244, 242, 236, 0.72);
   --ink-paper-faint: rgba(244, 242, 236, 0.42);
   --ink-light-bg: #efebe2;
   --ink-text: #14201a;
@@ -155,11 +155,11 @@
 .ink-hero {
   position: relative;
   overflow: hidden;
-  min-height: calc(100vh - 130px);
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 96px 0 72px;
+  justify-content: flex-start;
+  padding: 88px 0 0;
   /* F2 fallback: a still frame from the hero video (extracted at 6s,
      1280w) is the hero's CSS background, under the video element — the
      hero is never a black void even if the video stream fails, is
@@ -203,11 +203,11 @@
   margin-bottom: 28px;
 }
 .ink-hero h1 {
-  font-size: clamp(52px, 8.2vw, 108px);
+  font-size: clamp(44px, 6vw, 76px);
   font-weight: 800;
   line-height: 1.02;
   letter-spacing: -0.025em;
-  max-width: 12ch;
+  max-width: 15ch;
 }
 .ink-subhead {
   margin-top: 28px;
@@ -233,13 +233,15 @@
 }
 .ink-btn:hover { transform: translateY(-1px); }
 .ink-btn-accent { background: var(--ink-accent); color: #fff; }
+.ink-btn-paper { background: var(--ink-paper); color: var(--ink-bg); }
 .ink-btn-accent:hover { background: #35915f; }
 .ink-btn-outline { background: transparent; color: var(--ink-paper); border-color: rgba(244, 242, 236, 0.38); }
 .ink-btn-outline:hover { border-color: var(--ink-paper); }
-.ink-hero-fineprint { margin-top: 26px; font-size: 13.5px; color: var(--ink-paper-faint); letter-spacing: 0.02em; }
+.ink-hero-fineprint { margin-top: 26px; font-size: 14.5px; color: rgba(244, 242, 236, 0.88); letter-spacing: 0.02em; }
 
 /* ── Counters band ── */
 .ink-counters { border-top: 1px solid var(--ink-line); background: var(--ink-bg); }
+.ink-hero .ink-counters { position: relative; z-index: 2; margin-top: 64px; }
 .ink-counters-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; }
 .ink-counter { padding: 52px 28px 56px; border-left: 1px solid var(--ink-line); }
 .ink-counter:first-child { border-left: none; padding-left: 0; }
@@ -465,7 +467,7 @@
   .ink-nav-shell { padding: 10px 12px 0; }
   .ink-nav { padding: 8px 8px 8px 18px; gap: 14px; }
   .ink-nav-cta { padding: 9px 15px; font-size: 13px; }
-  .ink-hero { padding: 72px 0 56px; min-height: calc(100vh - 110px); }
+  .ink-hero { padding: 64px 0 0; min-height: 0; }
   .ink-cta-row .ink-btn { width: 100%; text-align: center; }
   .ink-closing-cta-row { flex-direction: column; align-items: center; }
   .ink-steps { grid-template-columns: 1fr; }

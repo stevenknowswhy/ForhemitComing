@@ -7,7 +7,7 @@ const HERO_VIDEO_SRC =
  * Ink hero: background video (Pexels 8643577, hotlinked — prototype
  * placeholder footage) under an ink gradient, low-anchored ruled headline,
  * third-option subhead, and the dual audience CTAs Stefano ruled:
- * owners (filled accent) open the 2-Minute Check; professionals (outline)
+ * owners (paper-filled) open the 2-Minute Check; professionals (outline)
  * route to the footer profession anchor. Video fade-in and the
  * reduced-motion removal live in HomeInkEffects.
  *
@@ -42,7 +42,7 @@ export function HomeInkHero() {
           <strong>The third option.</strong> Not a broker. Not private equity. Your own people.
         </p>
         <div className="ink-cta-row ink-reveal">
-          <AssessmentCta className="ink-btn ink-btn-accent">I&rsquo;m a business owner</AssessmentCta>
+          <AssessmentCta className="ink-btn ink-btn-paper">I&rsquo;m a business owner</AssessmentCta>
           <a className="ink-btn ink-btn-outline" href="/#professionals">
             I&rsquo;m a professional
           </a>
@@ -50,6 +50,44 @@ export function HomeInkHero() {
         <p className="ink-hero-fineprint ink-reveal">
           Free 2-Minute Check &middot; No obligation &middot; No personal guarantee
         </p>
+      </div>
+
+      {/* Counters band — the four ruled numbers, moved inside the hero
+          (panel fix P3, 2026-11-27) so the proof lands in the first
+          viewport instead of below a full-screen hero. */}
+      <div className="ink-counters">
+        <div className="ink-wrap">
+          <div className="ink-counters-grid">
+            <div className="ink-counter ink-reveal">
+              <div className="ink-num">
+                <span data-count="120">120</span>
+              </div>
+              <p className="ink-lbl">days, start to close — the transition clock</p>
+            </div>
+            <div className="ink-counter ink-reveal">
+              <div className="ink-num">
+                <span data-count="4">4</span>
+              </div>
+              <p className="ink-lbl">gates, each one verified before the next begins</p>
+            </div>
+            <div className="ink-counter ink-reveal">
+              <div className="ink-num">
+                <span data-count="100">100</span>
+                <span className="ink-unit">%</span>
+              </div>
+              <p className="ink-lbl">employee-owned at close — your people own it all</p>
+            </div>
+            <div className="ink-counter ink-reveal">
+              <div className="ink-num">
+                <span className="ink-unit">$</span>
+                <span data-count="3000" data-format="comma">
+                  3,000
+                </span>
+              </div>
+              <p className="ink-lbl">Self Guided, flat — the map, the documents, the support</p>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   );
