@@ -3,9 +3,6 @@ import { AssessmentCta } from "./AssessmentCta";
 const HERO_VIDEO_SRC =
   "https://videos.pexels.com/video-files/8643577/8643577-hd_1920_1080_24fps.mp4";
 
-/** Still frame extracted from the hero video — poster + CSS fallback. */
-const HERO_POSTER_SRC = "/images/hero-employees.jpg";
-
 /**
  * Ink hero: background video (Pexels 8643577, hotlinked — prototype
  * placeholder footage) under an ink gradient, low-anchored ruled headline,
@@ -20,8 +17,9 @@ const HERO_POSTER_SRC = "/images/hero-employees.jpg";
  * and browsers gate autoplay on the property: autoplay was blocked and,
  * with no poster, the hero sat on a black first frame that never arrived.
  * So: `src` sits on the <video> itself (no <source> child to re-resolve),
- * a poster frame is declared, the same frame is the hero's CSS background,
- * and HomeInkEffects sets the muted property + calls play() explicitly.
+ * a still frame from the video is the hero's CSS background in
+ * home-ink.css (data URI — the push route cannot commit binaries), and
+ * HomeInkEffects sets the muted property + calls play() explicitly.
  */
 export function HomeInkHero() {
   return (
@@ -29,7 +27,6 @@ export function HomeInkHero() {
       <video
         className="ink-hero-video"
         src={HERO_VIDEO_SRC}
-        poster={HERO_POSTER_SRC}
         autoPlay
         muted
         loop

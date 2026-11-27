@@ -62,12 +62,12 @@ describe("HomeInk (DeepBook-ink homepage, 2026-11-27)", () => {
     expect(container.textContent).toContain(
       "Free 2-Minute Check · No obligation · No personal guarantee",
     );
-    // F2: src + poster live on the <video> element itself (no <source> child).
+    // F2: src lives on the <video> element itself (no <source> child);
+    // the poster frame is the hero's CSS background (see the F1/F2 CSS test).
     const video = container.querySelector(".ink-hero-video");
     expect(video?.getAttribute("src")).toBe(
       "https://videos.pexels.com/video-files/8643577/8643577-hd_1920_1080_24fps.mp4",
     );
-    expect(video?.getAttribute("poster")).toBe("/images/hero-employees.jpg");
     expect(video?.querySelector("source")).toBeNull();
     // Hero audience CTAs are NOT gold — gold is reserved for the Check buttons.
     const owner = screen.getByRole("button", { name: /I’m a business owner/ });
@@ -195,8 +195,9 @@ describe("Fix pass 2026-11-27 (F1/F4/F5)", () => {
     expect(css).toContain(".home-ink .ink-hero h1 { color: var(--ink-paper); }");
     expect(css).toMatch(/\.home-ink \.ink-dark h1,\s*\.home-ink \.ink-dark h2,\s*\.home-ink \.ink-dark h3\s*{\s*color: var\(--ink-paper\);/);
     expect(css).toContain(".home-ink .ink-compare-card.ink-featured h3 { color: var(--ink-paper); }");
-    // Hero carries the poster frame as a CSS background fallback (F2).
-    expect(css).toContain('url("/images/hero-employees.jpg")');
+    // Hero carries the poster frame as a CSS background fallback (F2),
+    // shipped as a data URI (the push route cannot commit binaries).
+    expect(css).toContain('url("data:image/jpeg;base64,');
   });
 
   it("F3: reveal fades are ≤500ms", () => {
