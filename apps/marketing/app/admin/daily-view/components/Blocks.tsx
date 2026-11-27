@@ -30,7 +30,14 @@ const PILL_VARIANTS: Record<PillTone, "destructive" | "secondary" | "outline"> =
 };
 
 function Pill({ tone, children }: { tone: PillTone; children: ReactNode }) {
-  return <Badge variant={PILL_VARIANTS[tone]}>{children}</Badge>;
+  // Fix pass #6: the shared Badge has no nowrap, so long phase pills
+  // (READY-TO-ENGAGE, CLIENT-ACTIVE) wrapped onto two lines inside
+  // the pill. A pill is one token — it never wraps.
+  return (
+    <Badge variant={PILL_VARIANTS[tone]} className="whitespace-nowrap">
+      {children}
+    </Badge>
+  );
 }
 
 /** Shared card frame: title + count badge, status pill, view-all affordance. */
@@ -69,7 +76,7 @@ function ViewAllLink({ href, label }: { href: string; label: string }) {
   return (
     <Link
       href={href}
-      className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+      className="inline-flex min-h-10 items-center text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
     >
       {label}
     </Link>
@@ -80,7 +87,7 @@ function ViewAllLink({ href, label }: { href: string; label: string }) {
 function ViewAllDetails({ label, children }: { label: string; children: ReactNode }) {
   return (
     <details className="mt-3">
-      <summary className="cursor-pointer text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+      <summary className="inline-flex min-h-10 cursor-pointer items-center text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
         {label}
       </summary>
       {children}
@@ -88,13 +95,18 @@ function ViewAllDetails({ label, children }: { label: string; children: ReactNod
   );
 }
 
+// Fix pass #5: the visible label is the full "Open in CRM" — before,
+// only "Open" rendered (the full phrase existed solely as the
+// aria-label) and the action column was w-16 (64px), too narrow for
+// the full phrase at text-sm regardless. The link is nowrap and the
+// action columns below are w-32, so the whole label is always visible.
 const CRM_ACTION = (
   <Link
     href="/admin/crm"
-    className="text-sm underline-offset-4 hover:underline"
+    className="whitespace-nowrap text-sm underline-offset-4 hover:underline"
     aria-label="Open in CRM"
   >
-    Open
+    Open in CRM
   </Link>
 );
 
@@ -134,7 +146,7 @@ export function NeedsYou({ data }: { data: DailyViewData }) {
               <TableHead>Case / item</TableHead>
               <TableHead className="hidden md:table-cell">Detail</TableHead>
               <TableHead>Updated (PT)</TableHead>
-              <TableHead className="w-16">
+              <TableHead className="w-32">
                 <span className="sr-only">Action</span>
               </TableHead>
             </TableRow>
@@ -199,8 +211,13 @@ const OUTREACH_VISIBLE = 5;
 function OutreachRow({ c }: { c: OutreachContactView }) {
   const next = c.touchDue.nextTouch;
   return (
+    // Fix pass #7: the text lives in its own flex cell (flex-1,
+    // min-w-0) so a long company name wraps inside the cell, and the
+    // log button is a non-shrinking sibling anchored in the row —
+    // before, one un-sized span took the full row width and pushed
+    // the button onto its own orphaned line (TX-05R).
     <li className="flex flex-wrap items-center gap-x-2 gap-y-1">
-      <span>
+      <span className="min-w-0 flex-1">
         <span className="font-medium">{c.packet_id}</span> · {c.company}
         {c.founder ? <span> — {c.founder}</span> : null}
         {c.grade != null ? <span className="text-muted-foreground"> · grade {c.grade}</span> : null}
@@ -214,7 +231,11 @@ function OutreachRow({ c }: { c: OutreachContactView }) {
           <span className="text-muted-foreground"> · all touches sent</span>
         ) : null}
       </span>
-      {next != null ? <LogTouchButton contactId={c.id} touchNo={next} /> : null}
+      {next != null ? (
+        <span className="flex-none">
+          <LogTouchButton contactId={c.id} touchNo={next} />
+        </span>
+      ) : null}
     </li>
   );
 }
@@ -243,9 +264,13 @@ export function OutreachToday({ data }: { data: DailyViewData }) {
           <p className="text-sm font-medium">Touch due</p>
           <ul className="mt-1 space-y-1 text-sm">
             {o.touchDue.map((c) => (
+              // Same fix #7 layout as OutreachRow: text wraps in its
+              // own flex cell; pill and button stay anchored.
               <li key={c.id} className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                <Pill tone="alert">{c.touchDue.state === "overdue" ? "Overdue" : "Due"}</Pill>
-                <span>
+                <span className="flex-none">
+                  <Pill tone="alert">{c.touchDue.state === "overdue" ? "Overdue" : "Due"}</Pill>
+                </span>
+                <span className="min-w-0 flex-1">
                   <span className="font-medium">{c.packet_id}</span> · {c.company} — Touch{" "}
                   {c.touchDue.nextTouch}
                   {c.touchDue.daysSinceFirstTouch != null ? (
@@ -257,7 +282,9 @@ export function OutreachToday({ data }: { data: DailyViewData }) {
                   )}
                 </span>
                 {c.touchDue.nextTouch != null ? (
-                  <LogTouchButton contactId={c.id} touchNo={c.touchDue.nextTouch} />
+                  <span className="flex-none">
+                    <LogTouchButton contactId={c.id} touchNo={c.touchDue.nextTouch} />
+                  </span>
                 ) : null}
               </li>
             ))}
@@ -297,11 +324,11 @@ export function Pipeline({ data }: { data: DailyViewData }) {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-32">Phase</TableHead>
+              <TableHead className="w-44">Phase</TableHead>
               <TableHead>Case</TableHead>
               <TableHead className="hidden md:table-cell">Checklist</TableHead>
               <TableHead>Updated (PT)</TableHead>
-              <TableHead className="w-16">
+              <TableHead className="w-32">
                 <span className="sr-only">Action</span>
               </TableHead>
             </TableRow>

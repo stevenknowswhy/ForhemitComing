@@ -49,7 +49,9 @@ export function LogTouchButton({
         type="button"
         onClick={log}
         disabled={pending}
-        className="rounded border px-2 py-0.5 text-sm hover:bg-muted disabled:opacity-50"
+        // Fix pass #9: min-h-10 keeps the tap target ≥40px tall on
+        // touch devices (was ~24px with py-0.5).
+        className="inline-flex min-h-10 items-center justify-center whitespace-nowrap rounded border px-3 py-0.5 text-sm hover:bg-muted disabled:opacity-50"
       >
         {pending ? "Logging…" : `Log Touch ${touchNo}`}
       </button>

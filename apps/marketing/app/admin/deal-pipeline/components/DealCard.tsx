@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import type { CaseDeal, ContactDeal, Deal } from "../types";
 import { formatPt, pathLabel } from "../lib/format";
-import { INK, LABEL, SECONDARY, chipStyle, pillStyle } from "./tokens";
+import { ACCENT, INK, LABEL, SECONDARY, chipStyle, pillStyle } from "./tokens";
 import type { PillTone } from "./tokens";
 
 // Summary card only (Stefano's standing rule: summary on the surface,
@@ -38,14 +38,21 @@ const footer: CSSProperties = {
   marginTop: 10,
 };
 const nextAction: CSSProperties = { fontSize: 12, color: LABEL };
+// Fix pass #2: the bar is 7px tall and each segment carries a
+// minimum visible width when its count is > 0 — at 2 of 157 reviewed
+// the old 5px bar's ~1.3% fill was effectively invisible.
 const barTrack: CSSProperties = {
-  height: 5,
+  height: 7,
   borderRadius: 999,
   background: "#EEF1F4",
   display: "flex",
   overflow: "hidden",
   marginTop: 6,
 };
+// Fix pass #4: date/time text never wraps mid-date ("Nov 24, 7:32 AM"
+// split across lines on the Onboarding card). Space pressure is taken
+// by the surrounding text, never by breaking the date itself.
+const noWrap: CSSProperties = { whiteSpace: "nowrap" };
 
 function touchChip(deal: ContactDeal): { text: string; tone: PillTone } | null {
   const td = deal.touchDue;
@@ -91,7 +98,11 @@ function ContactCard({ deal }: { deal: ContactDeal }) {
         {deal.touchCount > 0
           ? `${deal.touchCount} of 3 touches sent`
           : "No touches yet"}
-        {deal.lastTouchAt ? ` · last ${formatPt(deal.lastTouchAt)}` : ""}
+        {deal.lastTouchAt ? (
+          <>
+            {" "}· last <span style={noWrap}>{formatPt(deal.lastTouchAt)}</span>
+          </>
+        ) : null}
       </div>
       <div style={{ marginTop: 6, fontSize: 10, letterSpacing: 3 }} aria-hidden>
         {[1, 2, 3].map((n) => (
@@ -154,15 +165,28 @@ function CaseCard({ deal }: { deal: CaseDeal }) {
       <div style={barTrack} role="img" aria-label="Checklist progress">
         {c.total > 0 ? (
           <>
-            <div style={{ width: `${(c.reviewed / c.total) * 100}%`, background: "#0F5132" }} />
-            <div style={{ width: `${(c.awaitingReview / c.total) * 100}%`, background: "#9DBEAC" }} />
+            <div
+              style={{
+                width: `${(c.reviewed / c.total) * 100}%`,
+                minWidth: c.reviewed > 0 ? 6 : 0,
+                background: ACCENT,
+              }}
+            />
+            <div
+              style={{
+                width: `${(c.awaitingReview / c.total) * 100}%`,
+                minWidth: c.awaitingReview > 0 ? 4 : 0,
+                background: "#9DBEAC",
+              }}
+            />
           </>
         ) : null}
       </div>
       <div style={signal}>
         {latestGate ? (
           <span style={latestGate.result === "FAIL" ? { color: "#B3261E", fontWeight: 600 } : undefined}>
-            Gate “{latestGate.gate}”: {latestGate.result} · {formatPt(latestGate.at)}
+            Gate “{latestGate.gate}”: {latestGate.result} ·{" "}
+            <span style={noWrap}>{formatPt(latestGate.at)}</span>
           </span>
         ) : (
           "No gate results yet"

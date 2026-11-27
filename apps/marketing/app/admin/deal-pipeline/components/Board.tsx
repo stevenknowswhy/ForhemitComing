@@ -17,29 +17,71 @@ import { INK, LABEL, SECONDARY, NUMERIC } from "./tokens";
 // No data fetching here — DealPipeline assembles PipelineData
 // server-side, so the service-role key never crosses into client code.
 
-// The one piece of real CSS the board needs: the card hover lift
-// (polish spec — shadow lift + translateY(-2px), 150-200ms ease).
-// Inline styles cannot express :hover, so it rides in this block.
+// The pieces of real CSS the board needs that inline styles cannot
+// express: the card hover lift (polish spec — shadow lift +
+// translateY(-2px), 150-200ms ease), the empty-stage rail label
+// orientation, and the ≤640px mobile rules (fix pass #3/#8): bands
+// stack to a single column, rails expand back to readable rows, and
+// no board element may force horizontal page scroll.
 const BOARD_CSS = `
 .dp-card { transition: box-shadow .18s ease, transform .18s ease; }
 .dp-card:hover { box-shadow: 0 4px 12px rgba(16,24,40,.10); transform: translateY(-2px); }
+.dp-rail-label { writing-mode: vertical-rl; }
+.dp-rail-note { display: none; }
+@media (max-width: 640px) {
+  .dp-lanes { grid-template-columns: minmax(0, 1fr) !important; }
+  .dp-queue-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .dp-rail { flex-direction: row !important; flex-wrap: wrap; align-items: center !important; justify-content: flex-start; padding: 10px !important; }
+  .dp-rail-label { writing-mode: horizontal-tb; }
+  .dp-rail-note { display: block; flex-basis: 100%; }
+  .dp-funnel-step { min-width: 140px !important; flex-basis: 140px !important; }
+}
 `;
 
 const summary: CSSProperties = { fontSize: 15, color: SECONDARY, margin: "0 0 20px" };
 const bandTitle: CSSProperties = { fontSize: 21, fontWeight: 700, color: INK, margin: "30px 0 2px" };
 const bandNote: CSSProperties = { fontSize: 13, color: SECONDARY, marginBottom: 12 };
+// Lane grid columns are computed per band in Board (fix pass #3):
+// populated stages get a full minmax(240px, 1fr) track; empty stages
+// collapse to a 52px rail when a sibling stage holds deals, so a band
+// with one active stage stays one coherent row instead of a ragged
+// grid of full-width empty columns (Band C's Closed column used to
+// wrap onto a second row). When every stage in the band is empty,
+// all stages keep full columns so their empty notes stay readable.
 const lanes: CSSProperties = {
   display: "grid",
-  gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
   gap: 16,
   alignItems: "start",
 };
+const RAIL_TRACK = "52px";
+const FULL_TRACK = "minmax(240px, 1fr)";
 const lane: CSSProperties = {
   minWidth: 0,
   background: "#F9FAFB",
   border: "1px solid #ECEFF2",
   borderRadius: 12,
   padding: 10,
+};
+// Slim rail for an empty stage next to populated siblings: band dot,
+// vertically-written stage name, and the 0 count. The detail/empty
+// note rides along hidden (.dp-rail-note) and reappears when the
+// ≤640px rules expand rails into full-width rows.
+const railLane: CSSProperties = {
+  ...lane,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: 8,
+  padding: "12px 6px",
+};
+const railLabel: CSSProperties = {
+  fontSize: 12,
+  fontWeight: 600,
+  textTransform: "uppercase",
+  letterSpacing: ".04em",
+  color: INK,
+  whiteSpace: "nowrap",
+  margin: 0,
 };
 const headRow: CSSProperties = { display: "flex", justifyContent: "space-between", gap: 8 };
 const stageName: CSSProperties = {
@@ -96,11 +138,29 @@ function stageTotal(
 function StageColumn({
   stage,
   data,
+  rail = false,
 }: {
   stage: PipelineStageDef;
   data: PipelineData;
+  rail?: boolean;
 }) {
   const deals = data.dealsByStage[stage.id];
+  if (rail) {
+    return (
+      <section style={railLane} className="dp-rail">
+        <span style={{ ...dot, background: stage.dot }} />
+        <h3 style={railLabel} className="dp-rail-label">
+          {stage.label}
+        </h3>
+        <div style={count}>0 deals</div>
+        <p style={detail} className="dp-rail-note">
+          {stage.detail ? `${stage.detail} ` : ""}
+          {stage.crmLabel ? `${stage.crmLabel} ` : ""}
+          {stage.emptyNote}
+        </p>
+      </section>
+    );
+  }
   const tot = stageTotal(stage, data);
   return (
     <section style={lane}>
@@ -137,6 +197,11 @@ export function Board({ data }: { data: PipelineData }) {
       <ActionQueue data={data} />
       {data.bands.map((band) => {
         const stages = data.stages.filter((s) => s.band === band.id);
+        // Rails only make sense next to a populated sibling (fix #3);
+        // a fully-empty band keeps full-width columns for its notes.
+        const bandHasDeals = stages.some(
+          (s) => data.dealsByStage[s.id].length > 0,
+        );
         return (
           <div key={band.id}>
             <h2 style={bandTitle}>{band.label}</h2>
@@ -145,9 +210,30 @@ export function Board({ data }: { data: PipelineData }) {
             {band.id === "D" ? (
               <RegisterTable rows={data.stewardship} />
             ) : (
-              <div style={lanes}>
+              <div
+                style={{
+                  ...lanes,
+                  gridTemplateColumns: stages
+                    .map((stage) => {
+                      const isRail =
+                        bandHasDeals &&
+                        data.dealsByStage[stage.id].length === 0;
+                      return isRail ? RAIL_TRACK : FULL_TRACK;
+                    })
+                    .join(" "),
+                }}
+                className="dp-lanes"
+              >
                 {stages.map((stage) => (
-                  <StageColumn key={stage.id} stage={stage} data={data} />
+                  <StageColumn
+                    key={stage.id}
+                    stage={stage}
+                    data={data}
+                    rail={
+                      bandHasDeals &&
+                      data.dealsByStage[stage.id].length === 0
+                    }
+                  />
                 ))}
               </div>
             )}
