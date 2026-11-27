@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 // Configure at: https://resend.com/webhooks
 
 const convex = new ConvexHttpClient(
-	process.env.NEXT_PUBLIC_CONVEX_URL || "https://striped-puma-587.convex.cloud",
+	process.env.NEXT_PUBLIC_CONVEX_URL || "https://earnest-dinosaur-711.convex.cloud",
 );
 
 // Map Resend event types to human-readable labels
